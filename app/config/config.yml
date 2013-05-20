@@ -17,8 +17,23 @@ framework:
         #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_proxies: ~
-    session:         ~
+    session:
+        handler_id:     session.handler.pdo
     fragments:       ~
+
+services:
+    markup.exercise_html_purifier:
+        class: FOS\CommentBundle\Markup\HtmlPurifier
+        arguments: [ @exercise_html_purifier.custom ]
+    pdo:
+        class: PDO
+        arguments:
+            - "mysql:host=%database_host%;port=%database_port%;dbname=%database_name%"
+            - "%database_user%"
+            - "%database_password%"
+    session.handler.pdo:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+        arguments: ["@pdo", "%pdo.db_options%"]
 
 # Twig Configuration
 twig:
@@ -30,6 +45,7 @@ assetic:
     debug:          %kernel.debug%
     use_controller: false
     bundles:        [ "FOSCommentBundle" ]
+    read_from: "%kernel.root_dir%/../../www"
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -85,11 +101,6 @@ fos_user:
     resetting:
         email:
             template: NinjaTookenUserBundle:User:resetting.email.twig
-
-services:
-    markup.exercise_html_purifier:
-        class: FOS\CommentBundle\Markup\HtmlPurifier
-        arguments: [ @exercise_html_purifier.custom ]
 
 fos_comment:
     db_driver: orm
