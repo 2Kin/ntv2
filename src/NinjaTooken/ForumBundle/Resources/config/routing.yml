@@ -1,0 +1,9 @@
+ninja_tooken_forum_homepage:
+    pattern:  /forum/
+    defaults: { _controller: NinjaTookenForumBundle:Default:index }
+
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }

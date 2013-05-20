@@ -1,0 +1,7 @@
+parameters:
+#    ninja_tooken_user.example.class: NinjaTooken\UserBundle\Example
+
+services:
+#    ninja_tooken_user.example:
+#        class: %ninja_tooken_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

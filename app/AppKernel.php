@@ -19,10 +19,25 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+
+			new FOS\UserBundle\FOSUserBundle(),
+			new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
+			new FOS\RestBundle\FOSRestBundle(),
+			new FOS\CommentBundle\FOSCommentBundle(),
+			new JMS\SerializerBundle\JMSSerializerBundle($this),
+            new NinjaTooken\ForumBundle\NinjaTookenForumBundle(),
+            new NinjaTooken\UserBundle\NinjaTookenUserBundle(),
+
+			new Sonata\jQueryBundle\SonatajQueryBundle(),
+			new Sonata\AdminBundle\SonataAdminBundle(),
+			new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+			new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new NinjaTooken\GameBundle\NinjaTookenGameBundle(),
+            new NinjaTooken\ClanBundle\NinjaTookenClanBundle(),
+            new NinjaTooken\CommonBundle\NinjaTookenCommonBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
-            $bundles[] = new Acme\DemoBundle\AcmeDemoBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();

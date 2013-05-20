@@ -1,0 +1,7 @@
+parameters:
+#    ninja_tooken_game.example.class: NinjaTooken\GameBundle\Example
+
+services:
+#    ninja_tooken_game.example:
+#        class: %ninja_tooken_game.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
