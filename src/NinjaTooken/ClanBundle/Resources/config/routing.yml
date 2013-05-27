@@ -1,3 +1,7 @@
-ninja_tooken_clan_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: NinjaTookenClanBundle:Default:index }
+ninja_tooken_clans:
+    pattern:  /clan
+    defaults: { _controller: NinjaTookenClanBundle:Default:liste }
+
+ninja_tooken_clan:
+    pattern:  /clan/{clan_nom}
+    defaults: { _controller: NinjaTookenClanBundle:Default:clan }

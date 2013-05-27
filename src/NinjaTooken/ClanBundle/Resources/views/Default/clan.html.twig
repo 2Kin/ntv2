@@ -1,0 +1,375 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - Clan NinjaTookenTeam [NTT]{% endblock %}
+{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+
+{% block breadcrumbs1 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<span itemprop="title">Communauté</span>
+							</span>  <i class="icon-angle-right"></i> 
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_clans') }}" itemprop="url">
+									<span itemprop="title">Clans</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}" itemprop="url">
+									<span itemprop="title">[NTT] Ninja Tooken Team</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+				<div class="row-fluid">
+					<section class="span8">
+						<div class="main clearfix">
+							<h3>Fondé le 02 avril 2011</h3>
+							<img src="images/kamon.png" class="pull-right">
+							<img src="images/kamon.png" class="pull-left">
+							<p style="text-align:center">
+							C'est à la nuit tombée que sortent les vrais ninjas...<br/><br/><br/>
+							Ninja Tooken<br/>
+							Night Team<br/><br/>
+							No Life Tonight</p>
+							<p>
+							<img src="images/clan_fiche.jpg"><br/>
+							Clan majoritairement Futon Katon Doton<br/><br/>
+							Admission sur proposition d'un membre puis vote des fondateurs<br/><br/>
+							RECLAMER UNE PLACE EST ELIMINATOIRE<br/>
+							Page perso : <a href="http://fr-fr.facebook.com/pages/Ninja-Tooken-Night-Team/266218360063855">http://fr-fr.facebook.com/pages/Ninja-Tooken-Night-Team/266218360063855</a>
+							</p>
+						</div>
+
+						<div class="grade clearfix">
+							<h3>Organisation du clan</h3>
+							<ul class="col4">
+								<li class="first"><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Shishou</a></li>
+								<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Jonin</a>
+									<ul>
+										<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Chunin</a></li>
+										<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Chunin</a></li>
+										<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Chunin</a></li>
+									</ul>
+								</li>
+								<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Jonin</a>
+									<ul>
+										<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Chunin</a>
+											<ul>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+											</ul>
+										</li>
+										<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Chunin</a>
+											<ul>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+											</ul>
+										</li>
+										<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Chunin</a></li>
+									</ul>
+								</li>
+								<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Jonin</a>
+									<ul>
+										<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Chunin</a>
+											<ul>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Jonin</a>
+									<ul>
+										<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Chunin</a></li>
+										<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Chunin</a></li>
+										<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Chunin</a>
+											<ul>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+												<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left"> Casey<br>Genin</a></li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</div>
+
+						<div class="forum">
+							<h4><a href="{{ path('ninja_tooken_topic_ajouter') }}" class="button pull-right">Nouveau topic</a>Topics du clan</h4>
+
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Admission sur proposition d'un membre puis vote des d'un membre puis vote des d'un membre puis vote des fondateurs RECLAMER UNE PLACE EST ELIMINATOIRE</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin en plus long</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin en plus long</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Admission sur proposition d'un membre puis vote des d'un membre puis vote des d'un membre puis vote des fondateurs RECLAMER UNE PLACE EST ELIMINATOIRE</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin en plus long</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin en plus long</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="row-fluid topic">
+								<div class="span6">
+									<h5><a href="{{ path('ninja_tooken_message', {topic_nom:"test", message_nom:"test"}) }}">Pack Webmaster</a></h5>
+								</div>
+								<div class="span3">
+									 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+								<div class="span3">
+									dernier par <a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}">2Kin</a>, le 5 février 2013 à 11:52
+								</div>
+							</div>
+							<div class="pagination">
+								<ul>
+									<li class="disabled"><a href="#">&laquo;</a></li>
+									<li><a href="#">1</a></li>
+									<li><a href="#">2</a></li>
+									<li><a href="#">3</a></li>
+									<li><a href="#">4</a></li>
+									<li><a href="#">5</a></li>
+									<li><a href="#">&raquo;</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+					<aside class="span4">
+						<section>
+							<h3>Les membres</h3>
+							<div class="membre pull-left">
+								<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}">Casey, Shishou</a>
+							</div>
+							<div class="membre pull-left">
+								<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}">Casey, Shunin</a>
+							</div>
+							<div class="membre pull-left">
+								<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}">Casey, Shunin</a>
+							</div>
+							<div class="membre pull-left">
+								<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}">Casey, Shunin</a>
+							</div>
+							<div class="membre pull-left">
+								<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}">Casey, Genin</a>
+							</div>
+							<div class="membre pull-left">
+								<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}">Casey, Genin</a>
+							</div>
+							<br class="clear">
+							<a href="#" class="button mini">Postuler</a><br/><br/>
+						</section>
+
+						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
+
+						<section>
+							<h4>Partenaires</h4>
+							{% include 'NinjaTookenCommonBundle:Default:partenaires.html.twig' %}
+						</section>
+					</aside>
+				</div>
+{% endblock %}

@@ -1,0 +1,967 @@
+@import "vendor/timeline/Theme/Dark.less";
+
+@import "variables.less";
+@import "bootstrap-loader.less";
+@import "vendor/jquery.bracket.less";
+@import "vendor/slickmap.less";
+
+/*!
+ *  Font Awesome 3.1.0
+ *  the iconic font designed for Bootstrap
+ *  -------------------------------------------------------
+ *  The full suite of pictographic icons, examples, and documentation
+ *  can be found at: http://fontawesome.io
+ *
+ *  License
+ *  -------------------------------------------------------
+ *  - The Font Awesome font is licensed under the SIL Open Font License v1.1 -
+ *    http://scripts.sil.org/OFL
+ *  - Font Awesome CSS, LESS, and SASS files are licensed under the MIT License -
+ *    http://opensource.org/licenses/mit-license.html
+ *  - Font Awesome documentation licensed under CC BY 3.0 License -
+ *    http://creativecommons.org/licenses/by/3.0/
+ *  - Attribution is no longer required in Font Awesome 3.0, but much appreciated:
+ *    "Font Awesome by Dave Gandy - http://fontawesome.io"
+
+ *  Contact
+ *  -------------------------------------------------------
+ *  Email: dave@fontawesome.io
+ *  Twitter: http://twitter.com/fortaweso_me
+ *  Work: Lead Product Designer @ http://kyruus.com
+ */
+@import "vendor/fonts-awesome/core.less";
+@import "vendor/fonts-awesome/bootstrap.less";
+@import "vendor/fonts-awesome/extras.less";
+@import "vendor/fonts-awesome/icons.less";
+
+@headFontFamily:"Wonton";
+
+.button(@padding){
+	font-size:(@fontSizeLarge+4);line-height:(@fontSizeLarge+4);font-family:@headFontFamily;text-align:center;color:@textColor;text-shadow:2px 2px 1px @gray;display:block;padding:@padding;
+	background-color:fadeout(@grayDark, 50%);.border-radius(@baseBorderRadius);.box-shadow(1px 1px 1px fadeout(@black, 60%));
+	&:hover{
+		text-decoration:none;background-color:@grayDark;
+	}
+}
+
+/* FONT PATH
+ * -------------------------- */
+@font-face{
+	font-family:@headFontFamily;src:url(../font/Wonton.eot);src:local(@headFontFamily), url(../font/Wonton.ttf) format('opentype');
+}
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('@{FontAwesomePath}/fontawesome-webfont.eot?v=@{FontAwesomeVersion}');
+  src: url('@{FontAwesomePath}/fontawesome-webfont.eot?#iefix&v=@{FontAwesomeVersion}') format('embedded-opentype'),
+    url('@{FontAwesomePath}/fontawesome-webfont.woff?v=@{FontAwesomeVersion}') format('woff'),
+    url('@{FontAwesomePath}/fontawesome-webfont.ttf?v=@{FontAwesomeVersion}') format('truetype'),
+    url('@{FontAwesomePath}/fontawesome-webfont.svg#fontawesomeregular?v=@{FontAwesomeVersion}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+// définitions communes
+h1{
+	font-size:@fontSizeXLarge;line-height:@fontSizeXLarge;font-family:@headFontFamily;margin:0 0 0.5em;
+}
+h2{
+	font-size:@fontSizeLarge;line-height:@fontSizeLarge;font-family:@headFontFamily;margin:0 0 0.2em;
+}
+h3, h4, h5, h6{
+	font-size:@baseFontSize;font-weight:normal;margin:0;
+}
+p{
+	margin:0;
+}
+body{
+	margin:0;font-size:@baseFontSize;line-height:@baseLineHeight;font-family:@baseFontFamily;color:@textColor;background-color:@grayDark;
+}
+a{
+	color:@linkColor;text-decoration:none;.transition(all 0.1s linear);
+	&:hover,
+	&:focus{
+		color:@linkColorHover;.transition(all 0.2s linear)
+	}
+}
+hr{
+	clear:both;float:none;.size(2px, 100%);margin:@baseLineHeight 0;background:@gray;border-top:1px solid @black;border-right:0 none;border-bottom:0 none;border-left:0 none;
+}
+
+// input text
+input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]{
+	border:0 none;.border-radius(@baseBorderRadius);background-color:@grayLight;height:30px;color:@gray;.transition(all 0.2s linear);padding:0 1%;
+	&:focus{
+		background-color:@white;color:@black;.transition(all 0.2s linear);.box-shadow(inset 2px 2px 2px fadeout(@black, 70%));
+	}
+}
+
+// checkboxes et radios
+@inputSize:22px;
+input[type="checkbox"],
+input[type="radio"]{
+	display:none;position:absolute;.opacity(0);
+	& + label:before{
+		vertical-align:middle;content:"";display:inline-block;.size(@inputSize, @inputSize);line-height:@inputSize;margin:0 5px 0 0;background:url(../images/sprite-radio-checkbox.png) no-repeat 0 0;
+	}
+	&:disabled + label{
+		.opacity(50);cursor:default;
+	}
+}
+input[type="checkbox"]{
+	& + label{
+		display:inline-block;min-width:150px;
+	}
+	& + label:before{
+		background-position:0 0;
+	}
+	&:checked + label:before{
+		background-position:0 -@inputSize;
+	}
+}
+input[type="radio"]{
+	& + label{
+		display:inline-block;min-width:150px;
+	}
+	& + label:before{
+		background-position:-@inputSize 0;
+	}
+	&:checked + label:before{
+		background-position:-@inputSize -@inputSize;
+	}
+}
+
+// textarea
+textarea{
+	height:auto;
+}
+
+.textarea{
+	min-height:150px;.border-radius(@baseBorderRadius);background-color:@grayLight;padding:1%;color:@gray;.transition(all 0.2s linear);
+	&:focus{
+		background-color:@white;color:@black;.transition(all 0.2s linear);.box-shadow(inset 2px 2px 2px fadeout(@black, 70%));
+	}
+}
+
+// input submit
+input[type=submit]{
+	border:0px none;.transition(all 0.1s linear);
+	&:hover{
+		.transition(all 0.2s linear);
+	}
+}
+
+// select
+label.select{
+	position:relative;display:inline-block;
+	&:before{
+		position:absolute;z-index:1;content:'';right:6px; top:0px;.size(100%, 20px);background-color:@grayLight;pointer-events:none;display:block;
+	}
+	&:after{
+		position:absolute;z-index:2;right:8px;top:10px;pointer-events:none;.square(0);border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid @gray;content:'';
+	}
+	select{
+		padding:5px 7px 5px 5px;min-width:150px;.border-radius(@baseBorderRadius);background-color:@grayLight;color:@gray;border:none;outline:none;display:inline-block;-webkit-appearance:none;-moz-appearance:none;appearance:none;cursor:pointer;
+		// Targetting Webkit browsers only. FF will show the dropdown arrow with so much padding.
+		@media screen and (-webkit-min-device-pixel-ratio:0){
+			&{
+				padding-right:18px
+			}
+		}
+	}
+}
+
+// les éléments de navigation
+nav, .footer footer{
+	line-height:1em;
+	> ul{
+		list-style:none;padding:0;margin:0;
+		> li{
+			position:relative;display:inline-block;padding:0;margin:0;
+		}
+	}
+}
+
+// le player
+#unityPlayer{
+	.size(600px, 800px);margin-bottom:(@baseLineHeight*5);
+}
+
+// les classes
+.suiton{
+	color:@suiton!important;
+}
+.katon{
+	color:@katon!important;
+}
+.raiton{
+	color:@raiton!important;
+}
+.doton{
+	color:@doton!important;
+}
+.futon{
+	color:@futon!important;
+}
+
+// élements actifs non cliquable
+.actif{
+	cursor:default;pointer-events:none;color:@white;
+}
+
+// jutsus
+.jutsu{
+	display:inline-block;.size(@baseLineHeight, @baseLineHeight);.background-size(cover)
+}
+.acierRenforce{
+	background-image:url(../images/jutsus/acierRenforce.png);
+}
+.chakraVie{
+	background-image:url(../images/jutsus/chakraVie.png);
+}
+.marcherEau{
+	background-image:url(../images/jutsus/marcher.png);
+}
+.phoenix{
+	background-image:url(../images/jutsus/phoenix.png);
+}
+.resistanceExplosion{
+	background-image:url(../images/jutsus/resistance.png);
+}
+.teleportation{
+	background-image:url(../images/jutsus/teleportation.png);
+}
+.vague{
+	background-image:url(../images/jutsus/vague.png);
+}
+.bouclier{
+	background-image:url(../images/jutsus/bouclier.png);
+}
+.deflagration{
+	background-image:url(../images/jutsus/deflagration.png);
+}
+.multishoot{
+	background-image:url(../images/jutsus/multi.png);
+}
+.pieux{
+	background-image:url(../images/jutsus/pieux.png);
+}
+.metamorphose{
+	background-image:url(../images/jutsus/rock.png);
+}
+.tornade{
+	background-image:url(../images/jutsus/tornade.png);
+}
+.boule{
+	background-image:url(../images/jutsus/boule.png);
+}
+.kusanagi{
+	background-image:url(../images/jutsus/kusanagi.png);
+}
+.marcherMur{
+	background-image:url(../images/jutsus/mur.png);
+}
+.protection{
+	background-image:url(../images/jutsus/protection.png);
+}
+.doubleSaut{
+	background-image:url(../images/jutsus/saut.png);
+}
+.transparence{
+	background-image:url(../images/jutsus/transparence.png);
+}
+
+// le bandeau en haut de page
+.top{
+	position:relative;z-index:2;min-height:(@baseLineHeight*3);.box-shadow(0 4px 4px fadeout(@black, 70%));border-bottom:1px solid @grayDark;
+	// header pour tablette
+	.span4{
+		@media (min-width:768px) and (max-width:979px){
+			width:48%;
+		}
+	}
+	.flagSocial{
+		padding-top:(@baseLineHeight/4);
+		line-height:1em;
+		a{
+			display:block;float:left;margin-right:3px;background:transparent url(../images/partenaire.png) no-repeat 0 0;.opacity(50);
+		}
+		a:hover,
+		a.active{
+			.opacity(100);
+		}
+		.french,.english{
+			.size(15px, 20px);
+		}
+		.english{
+			background-position:0 -17px;clear:right;margin-right:20px;
+		}
+		.facebook,
+		.twitch,
+		.youtube,
+		.society6{
+			.square(32px)
+		}
+		.facebook{
+			background-position:-25px 0
+		}
+		.twitch{
+			background-position:-57px 0
+		}
+		.youtube{
+			background-position:-91px 0;
+		}
+		.society6{
+			background-position:-125px 0;
+		}
+	}
+	.gameResume{
+		padding-top:(@baseLineHeight/4);
+		strong{
+			display:block;font-size:@baseFontSize;
+		}
+	}
+	.account{
+		padding-top:(@baseLineHeight*1.25);
+	}
+	.accountLogged{
+		a{
+			height:15px;width:30%;min-width:100px;padding-top:1px;
+		}
+		img{
+			margin-right:10px;max-width:35px;
+		}
+		.pseudo{
+			font-weight:bold;padding:(@baseLineHeight/4) 0;
+			strong{
+				font-size:@fontSizeLarge;
+			}
+		}
+	}
+}
+
+// le header
+header{
+	&>div{
+		text-align:center;margin-top:@baseLineHeight;
+	}
+	// le menu
+	nav{
+		#menuMobile{
+			.button(0 19px 6px 19px);margin-top:(@baseLineHeight/2);
+		}
+		> ul{
+			margin:75px 0 10px 0;
+			> li{
+				padding-right:10px;padding-bottom:@baseLineHeight;
+				&:last-child{
+					padding-right:0;
+					// change l'affichage du sous-menu pour le dernier élément
+					ul{
+						left:auto;right:0;
+						&:before{
+							left:auto;right:25px;
+						}
+					}
+				}
+				> a{
+					.button(0 19px 6px 19px);cursor:pointer;
+				}
+				a.play{
+					background-color:@linkColor;
+				}
+				// permet de faire apparaitre le sous-menu
+				&:hover, &.hover{
+					> a{
+						background-color:@grayDark;
+					}
+					ul{
+						display:block;
+					}
+				}
+				ul{
+					display:none;position:absolute;top:45px;left:0;z-index:1000;background-color:@grayDark;padding:10px;.border-radius(@baseBorderRadius);width:220px;
+					// pour afficher le triangle
+					&:before{
+						position:absolute;left:25px;top:-8px;.square(0);border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:8px solid @grayDark;content:'';
+					}
+					li{
+						display:block;margin:10px 0;
+						a{
+							font-size:@fontSizeLarge;line-height:@fontSizeLarge;font-family:@headFontFamily;color:@textColor;
+						}
+					}
+				}
+
+			}
+			@media screen and (max-width:768px){
+				display:block;width:100%;margin:10px 0 10px 0;
+				> li{
+					float:none;display:block;padding-right:0;
+					ul{
+						position:relative;top:0;width:100%;
+						&:before{
+							content:none;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// la bannière
+.banniere{
+	position:relative;z-index:1;background:@black url(../images/background.jpg) no-repeat center bottom;min-height:230px;
+	// définitions spéciales pour la home
+	&.home{
+		min-height:588px;background-position:center top;
+		.presentation{
+			text-shadow:0px 0px 2px @grayDark, 1px 2px 2px @grayDark;text-align:justify;text-align:center;margin-bottom:@baseLineHeight;
+			h1{
+				text-align:left;
+			}
+			p{
+				text-align:justify;font-size:@fontSizeMedium;
+			}
+			.create{
+				.button(0 20px 0 0);.size(45px, 220px);font-size:@fontSizeLarge;margin-top:(@baseLineHeight*2);white-space:nowrap;.center-block();
+			}
+		}
+		.diaporama{
+			.center-block();
+			ul.bjqs{
+				position:relative;list-style:none;padding:0;margin:0;overflow:hidden;display:none;
+				li.bjqs-slide{
+					position:absolute;display:none;
+					p.bjqs-caption{
+						display:block;width:96%;margin:0;padding:2%;position:absolute;bottom:0;background:fadeout(@black, 50%);
+					}
+				}
+			}
+			ol.bjqs-markers{
+				list-style:none;padding:0;margin:0;width:100%;
+				&.h-centered{
+					text-align:center;
+				}
+				li{
+					display:inline;
+					a{
+						display:inline-block;.size(16px, 16px);background:@grayDark;margin:@baseLineHeight;color:transparent;.border-radius(8px);.opacity(50);
+						@shadow:inset -2px -1px 0px fadeout(@black, 60%), inset 0px 1px 1px fadeout(@white, 70%);
+						.box-shadow(@shadow);
+						&:hover{
+							.opacity(100);
+						}
+					}
+					&.active-marker{
+						a{
+							.opacity(100);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// pour le fil d'ariane
+.breadcrumb{
+	background-color:@black;
+	// désactive le lien sur la page actuelle
+	h1 a{
+		color:@white;cursor:default;pointer-events:none;
+	}
+}
+
+// les ninjas sur le côté gauche
+body>.content:before{
+	@media(min-width:1400px){
+		position:fixed;bottom:0;left:50%;margin-left:-930px;content:"";.size(420px, 305px);background:transparent url(../images/ninjas.png) no-repeat scroll 0 0;
+	}
+}
+// contenu principal de la page
+.content{
+	.pull-left{
+		margin-right:10px;
+	}
+	.pull-right{
+		margin-left:10px;
+	}
+	.clear{
+		clear:both;
+	}
+	.button{
+		font-size:@fontSizeLarge;line-height:@fontSizeLarge;font-family:@headFontFamily;color:@textColor;text-shadow:2px 2px 1px @gray;display:inline-block;padding:5px 25px 10px;
+		background-color:@linkColor;.border-radius(@baseBorderRadius);.box-shadow(1px 1px 1px fadeout(@black, 60%));
+		&:hover{
+			background-color:@black
+		}
+		&.mini{
+			padding:2px 15px 6px;
+		}
+		&.small{
+			font-size:@fontSizeMedium;line-height:@fontSizeMedium;padding:0 15px 2px;text-shadow:1px 1px 1px @gray;
+		}
+	}
+	input[type="submit"].button{
+		padding:0px 25px 5px;
+	}
+
+	// pub vertical
+	.pub{
+		border:0 none;.size(90px, 730px);margin-top:@baseLineHeight;margin-bottom:@baseLineHeight;max-width:100%;.center-block();overflow:hidden;
+	}
+
+	// le chat
+	.chat{
+		border:0 none;.size(650px, 100%);margin-bottom:(@baseLineHeight*5);overflow:auto;
+	}
+
+	// colonne de gauche dans la page "messagerie"
+	.messagerie{
+		padding:8px 8px 8px 13px;
+		&:nth-child(even){
+			background-color:@gray;
+		}
+		a{
+			.text-overflow();
+		}
+		.actif{
+			color:@white;
+		}
+		a.pull-right{
+			font-size:20px;
+		}
+	}
+
+	// filtre
+	.filtre{
+		font-size:@fontSizeMedium;margin-bottom:(2*@baseLineHeight);
+	}
+
+	// bloc de news sur l'accueil, et message dans les autres pages
+	article{
+		padding:10px;margin-bottom:(@baseLineHeight*2);
+		&:nth-child(even){
+			background-color:@gray;
+		}
+		header{
+			h3, h4, time{
+				display:inline;
+			}
+			h3{
+				font-size:@fontSizeLarge;
+			}
+			&>span, time{
+				color:@grayLight;font-size:@fontSizeMedium;
+			}
+		}
+		.content{
+			display:block;color:@grayLight;clear:both;margin:@baseLineHeight 0;clear:both;
+		}
+		footer{
+			clear:both;margin-bottom:(@baseLineHeight/2);min-height:@baseLineHeight;
+		}
+		&.news{
+			&:nth-child(even){
+				background-color:transparent;
+			}
+			.content{
+				height:(10*@baseLineHeight);overflow:hidden;
+			}
+			header{
+				img{
+					max-height:(3*@baseLineHeight);
+				}
+				h3{
+					font-size:@fontSizeMedium;
+				}
+			}
+		}
+		&.clan{
+			.content{
+				height:(2*@baseLineHeight);
+			}
+			header{
+				img{
+					max-height:(4*@baseLineHeight);
+				}
+				h3{
+					display:block;margin-bottom:@baseLineHeight;
+				}
+				.actif{
+					color:@white;
+				}
+			}
+		}
+		&.event{
+			background-color:fadeout(@linkColor, 80%) !important;
+		}
+		// les commentaires d'article
+		section{
+			.comments{
+				font-size:@fontSizeLarge;
+			}
+			article{
+				header{
+					h4{
+						font-size:@fontSizeMedium;
+					}
+					&>span, time{
+						font-size:@baseFontSize;
+					}
+					&>span{
+						img{
+							max-width:(@baseLineHeight*2);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// formatage commun (clan, classement, guide du ninja, faq, amis, parties, pages footer...)
+	.main{
+		margin-bottom:(@baseLineHeight*5);
+		h3, h2{
+			font-size:@fontSizeLarge;font-family:@headFontFamily;padding:6px 0 11px 20px;margin:0 0 20px;clear:both;
+		}
+		h2{
+			font-size:@fontSizeXLarge;
+		}
+		h3{
+			background-color:@gray;font-size:@fontSizeLarge;
+		}
+		h4{
+			font-size:@fontSizeMedium;
+		}
+		h5{
+			color:@white;font-weight:bold;
+		}
+		p{
+			margin-bottom:(@baseLineHeight*2);
+			img{
+				max-width:100%;
+			}
+		}
+		p,
+		span{
+			color:@grayLight;
+		}
+		a{
+			span{
+				color:@linkColor;.transition(all 0.2s linear);
+			}
+			&:hover span{
+				color:@white;.transition(all 0.2s linear);
+			}
+		}
+		label{
+			margin-top:-5px;
+			select{
+				min-width:auto;
+			}
+		}
+		.legend{
+			&:before{
+				content:'';.size(12px, 12px);display:inline-block;margin-right:5px;
+			}
+			&.online:before{
+				background-color:@linkColor;
+			}
+			&.offline:before{
+				background-color:@black;
+			}
+		}
+		.membre{
+			display:inline-block;width:9%;min-width:90px;margin:0 2% 2% 0;text-align:center;
+			img{
+				clear:both;width:100%;border:4px solid @grayLight;
+			}
+			&.online img{
+				border-color:@linkColor;
+			}
+			&.offline img{
+				border-color:@black;
+			}
+		}
+	}
+
+	// liste de topics
+	.forum{
+		margin-bottom:(@baseLineHeight*5);
+		h4{
+			background-color:@grayDark;font-size:@fontSizeLarge;line-height:(@fontSizeLarge+15);padding:10px;
+		}
+		.topic{
+			padding:12px 0 2px 0;
+			&>div{
+				.text-overflow();
+			}
+			&:nth-child(even){
+				background-color:@gray;
+			}
+			h5{
+				margin-left:10px;.text-overflow();
+			}
+		}
+	}
+
+	// les captures d'écran
+	.capture{
+		position:relative;margin:0 1% 1% 0;.size(11.5%, 11.5%);min-width:90px;
+		img{
+			width:100%;
+		}
+		a.view{
+			outline:4px solid transparent;display:block;
+			&:hover{
+				outline-color:@white;
+			}
+		}
+		a.delete{
+			position:absolute;top:3px;right:0;.size(20px, 20px);display:block;background:transparent url(../images/loggued.png) 0 -112px;.opacity(50);font-size:20px;
+			&:hover{
+				.opacity(100);
+			}
+		}
+	}
+
+	// signature du ninja
+	.signature{
+		padding:12px 10px 0px 10px;background-color:fadeout(@black, 70%);.border-radius(@baseBorderRadius);margin:10px 0;border:2px solid transparent;
+		@multiplyColor: multiply(@linkColor, #cc0000);
+		&.moderateur{
+			border-color:@multiplyColor;
+		}
+		&.admin{
+			border-color:@multiplyColor;
+		}
+		span{
+			color:@white;
+		}
+		a{
+			span{
+				color:@linkColor;.transition(all 0.2s linear);
+			}
+			&:hover span{
+				color:@white;.transition(all 0.2s linear);
+			}
+		}
+		.resume{
+			font-weight:bold;font-size:@fontSizeMedium;
+			img{
+				max-height:(@baseLineHeight*5/2);margin-bottom:10px;
+			}
+		}
+		.experience{
+			display:inline-block;line-height:(@baseLineHeight/2);
+			.xp{
+				display:block;
+			}
+			.barre{
+				position:relative;display:inline-block;background-color:@white;.size(4px, 100%);.border-radius(3px);padding:1px;
+				.complete{
+					background-color:@linkColor;.size(4px, auto);.border-radius(2px);
+				}
+			}
+		}
+		.nfo{
+			strong{
+				font-size:@fontSizeMedium;
+			}
+			&.right{
+				@media(min-width: 767px) {
+					text-align:right;
+				}
+			}
+		}
+	}
+
+	// formulaire pleine page
+	form.full{
+		margin-bottom:(@baseLineHeight*5);
+		&.inset{
+			margin-bottom:0;
+		}
+		input[type="text"], input[type="password"], input[type="email"]{
+			width:98%;display:block;
+		}
+		&>div{
+			margin-bottom:@baseLineHeight;
+		}
+		h3{
+			background-color:@gray;font-size:@fontSizeLarge;line-height:@fontSizeLarge;font-family:@headFontFamily;padding:6px 0 11px 20px;margin:0 0 20px;
+		}
+		.note, .warning{
+			position:relative;padding:10px;.border-radius(@baseBorderRadius);margin:0 0 15px;
+			// pour afficher le triangle
+			&:after{
+				position:absolute;left:35px;bottom:-8px;.square(0);border-left:8px solid transparent;border-right:8px solid transparent;content:'';
+			}
+		}
+		.note{
+			background-color:@gray;color:@grayLight;.box-shadow(1px 1px 2px fadeout(@black, 20%));
+			&:after{
+				border-top:8px solid @gray;
+			}
+		}
+		.warning{
+			background-color:multiply(@linkColor, #c00);font-size:@fontSizeMedium;line-height:@fontSizeLarge;font-weight:bold;padding:20px;.box-shadow(1px 1px 2px fadeout(@black, 50%));
+			&:after{
+				border-top:8px solid multiply(@linkColor, #c00);
+			}
+		}
+		// libellé pour les formulaires
+		label.libelle{
+			display:block;font-size:@fontSizeMedium;
+			&.required:after{
+				content:'*';color:@linkColor;padding:0 5px;font-size:@fontSizeLarge;font-family:@monoFontFamily;
+			}
+		}
+	}
+
+	// derniers messages
+	.dernier{
+		margin:@baseLineHeight 0;
+		img{
+			max-height:(2*@baseLineHeight);
+		}
+		h5{
+			.text-overflow();
+		}
+		h6{
+			color:@grayLight;margin:0;
+		}
+	}
+
+	// colonne de droite
+	aside{
+		form{
+			margin-bottom:@baseLineHeight;
+			input[type=submit]{
+				background-color:@linkColor;color:@textColor;.border-radius(@baseBorderRadius);font-weight:bold;height:30px;
+				&:hover{
+					background-color:@black;
+				}
+			}
+		}
+		h3{
+			background-color:@gray;font-size:@fontSizeLarge;font-family:@headFontFamily;padding:6px 0 11px 20px;margin:0 0 20px;
+		}
+		h4{
+			font-size:@fontSizeMedium;margin:10px 0;
+		}
+		section{
+			clear:both;
+		}
+		.membre{
+			display:inline-block;width:87px;height:130px;margin:0 5px 10px 0;text-align:center;
+			img{
+				clear:both;width:100%;
+			}
+		}
+		.pub{
+			.size(600px, 300px);margin:0;overflow:hidden;
+		}
+		.partenaire{
+			list-style:none;padding:0;margin:0;
+		}
+	}
+
+	// système de pagination
+	.pagination{
+		margin:@baseLineHeight 0;padding:0;
+		ul{
+			@shadow:1px 1px 5px fadeout(@black, 50%), -1px -1px 0px fadeout(@black, 60%);
+			display:inline-block;padding:0;.border-radius(@baseBorderRadius);.box-shadow(@shadow);
+			> li{
+				display:inline;
+				> a,
+				> span{
+					float:left;padding:4px 12px;line-height:@baseLineHeight;text-decoration:none;background-color:@gray;border:1px solid @baseBorderRadius;border-left-width:0;
+				}
+				&:first-child > a,
+				&:first-child > span{
+					border-left-width:1px;.border-left-radius(@baseBorderRadius);
+				}
+				&:last-child > a,
+				&:last-child > span{
+					.border-right-radius(@baseBorderRadius);
+				}
+			}
+			> li > a:hover,
+			> li > a:focus,
+			> .active > a,
+			> .active > span{
+				background-color:@linkColor;
+			}
+			> .active > a,
+			> .active > span{
+				color:@grayLight;cursor:default;
+			}
+			> .disabled > span,
+			> .disabled > a,
+			> .disabled > a:hover,
+			> .disabled > a:focus{
+				color:@grayLight;background-color:transparent;cursor:default;
+			}
+		}
+	}
+
+	// tag-it (destinataires d'un message)
+	ul.tagit{
+		list-style:none;.border-radius(@baseBorderRadius);background-color:@grayLight;height:30px;color:@gray;padding:0;width:100%;.transition(all 0.2s linear);margin:0;
+		&.focused{
+			outline:none;background-color:@white;color:@black;.transition(all 0.2s linear);
+			.tag{
+				background-color:@grayLight;
+			}
+		}
+		li{
+			position:relative;display:block;float:left;margin:2px;padding:3px 24px 3px 7px;
+			&.tag{
+				.border-radius(@baseBorderRadius);background-color:@white;color:@gray;
+				.close{
+					position:absolute;cursor:pointer;margin-top:2px;right:5px;font-size:@fontSizeLarge;line-height:17px;
+					&:hover{
+						color:@black;
+					}
+				}
+			}
+			&.tagit-edit-handle{
+				input{
+					.box-sizing(border-box);.box-shadow(none);border:none;outline:none;background:none;padding:0;width:inherit;.transition(none);margin:-5px;
+				}
+				ul{
+					position:absolute;left:0;top:28px;background:@white;color:@linkColor;display:none;width:auto;padding:0;
+					&.open{
+						display:block;
+						li.selected,
+						&:hover li:hover{
+							background:@linkColor;color:@white;
+						}
+						li{
+							position:relative;display:block;cursor:pointer;float:none;margin:0;padding:5px 20px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// le footer
+.footer{
+	background-color:@gray;
+	footer{
+		text-align:center;padding:@baseLineHeight 0;
+		a:after{
+			content:'|';padding:0 10px;color:@white;
+		}
+		ul li:last-child a:after{
+			content:'';
+		}
+	}
+}

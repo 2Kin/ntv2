@@ -1,3 +1,64 @@
-ninja_tooken_user_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: NinjaTookenUserBundle:Default:index }
+ninja_tooken_user_fiche:
+    pattern:  /fiche/{user_nom}
+    defaults: { _controller: NinjaTookenUserBundle:Default:fiche }
+
+ninja_tooken_user_messagerie:
+    pattern:  /compte/messagerie/{$page}
+    defaults: { _controller: NinjaTookenUserBundle:Default:messagerie, page:1 }
+    requirements:
+        page:  \d*
+
+ninja_tooken_user_messagerie_voir:
+    pattern:  /compte/messagerie/{$message_nom}
+    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieVoir }
+
+ninja_tooken_user_messagerie_ajouter:
+    pattern:  /compte/messagerie/ajouter
+    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieAjouter }
+
+ninja_tooken_user_messagerie_supprimer:
+    pattern:  /compte/messagerie/supprimer/{$id}
+    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieSupprimer }
+    requirements:
+        id:  \d*
+
+ninja_tooken_user_messagerie_modifier:
+    pattern:  /compte/messagerie/modifier/{$id}
+    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieModifier }
+    requirements:
+        id:  \d*
+
+ninja_tooken_user_parametres:
+    pattern:  /compte/parametres
+    defaults: { _controller: NinjaTookenUserBundle:Default:parametres }
+
+ninja_tooken_user_parametres_modifier:
+    pattern:  /compte/parametres/modifier
+    defaults: { _controller: NinjaTookenUserBundle:Default:parametresModifier }
+
+ninja_tooken_user_amis:
+    pattern:  /compte/amis/{$page1}/{$page2}
+    defaults: { _controller: NinjaTookenUserBundle:Default:amis, page1:1, page2:1 }
+    requirements:
+        page1:  \d*
+        page2:  \d*
+
+ninja_tooken_user_amis_confirmer:
+    pattern:  /compte/amis/confirmer/{$user_nom}
+    defaults: { _controller: NinjaTookenUserBundle:Default:amisConfirmer }
+
+ninja_tooken_user_amis_bloquer:
+    pattern:  /compte/amis/bloquer/{$user_nom}
+    defaults: { _controller: NinjaTookenUserBundle:Default:amisBloquer }
+
+ninja_tooken_user_captures:
+    pattern:  /compte/captures/{$page}
+    defaults: { _controller: NinjaTookenUserBundle:Default:captures, page:1 }
+    requirements:
+        page:  \d*
+
+ninja_tooken_user_captures_supprimer:
+    pattern:  /compte/captures/supprimer/{$id}
+    defaults: { _controller: NinjaTookenUserBundle:Default:capturesSupprimer }
+    requirements:
+        page:  \d*

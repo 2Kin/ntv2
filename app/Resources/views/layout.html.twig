@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}NinjaTooken{% endblock %}</title>
+        <meta name="description" content="{% block description %}NinjaTooken{% endblock %}">
+        <meta name="keywords" content="{% block keywords %}NinjaTooken{% endblock %}">
+        <meta name="viewport" content="width=device-width">
+	{% stylesheets
+		'bundles/ninjatookencommon/css/main.less'
+		output='css/compiled/main.css' filter='cssrewrite'
+	%}
+	<link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+	<link rel="alternate" type="application/atom+xml" title="Les dernières nouveautés" href="/feed/" />
+
+	<link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+	<link rel="apple-touch-icon" href="{{ asset('touch-icon-iphone.png') }}" />
+	<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('touch-icon-ipad.png') }}" />
+	<link rel="apple-touch-icon" sizes="114x114" href="{{ asset('touch-icon-iphone-retina.png') }}" />
+	<link rel="apple-touch-icon" sizes="144x144" href="{{ asset('touch-icon-ipad-retina.png') }}" />
+	<meta name="msapplication-TileImage" content="{{ asset('windows8.png') }}"/>
+	<meta name="msapplication-TileColor" content="#ff3b00"/>
+    </head>
+    <body>
+        <!--[if lt IE 9]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="top">
+			<div class="container">
+				<section class="row-fluid">
+					<div class="span4 flagSocial clearfix">
+						<a href="#" class="french active"></a>
+						<a href="#" class="english"></a>
+						<a href="https://www.facebook.com/NinjaTooken" target="_blank" class="facebook"></a>
+						<a href="http://fr.twitch.tv/ninjatooken" target="_blank" class="twitch"></a>
+						<a href="http://www.youtube.com/user/ArbitreNT" target="_blank" class="youtube"></a>
+						<a href="http://society6.com/NinjaTooken/" target="_blank" class="society6"></a>
+					</div>
+					<div class="span4 gameResume visible-desktop">
+						<p><strong>Parties en cours</strong>
+						Arène #515, Dojo #22363... <a href="{{ path('ninja_tooken_game_parties') }}">Toutes les parties &raquo;</a></p>
+					</div>
+					<div class="span4">
+						<!--<p class="account">
+						Pas encore inscrit ? <a href="{{ path('fos_user_registration_register') }}">Créer mon Ninja</a> | <a href="{{ path('fos_user_security_login') }}">Mon compte</a>
+						</p>-->
+						<div class="accountLogged">
+							<div class="pseudo"><strong>2Kin</strong> Suiton, Nv 76</div>
+							<img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" class="pull-left" alt="">
+							<nav>
+								<ul>
+									<li><a href="{{ path('ninja_tooken_user_messagerie') }}" class="pull-left"><i class="icon-envelope-alt"></i> 1 message</a></li>
+									<li><a href="{{ path('ninja_tooken_user_amis') }}" class="pull-left"><i class="icon-heart"></i> Amis</a></li>
+									<li><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}" class="pull-left"><i class="icon-ticket"></i> Clan</a></li>
+									<li><a href="{{ path('ninja_tooken_user_parametres') }}" class="pull-left"><i class="icon-cog"></i> Paramètres</a></li>
+									<li><a href="{{ path('ninja_tooken_user_captures') }}" class="pull-left"><i class="icon-picture"></i> Captures</a></li>
+									<li><a href="{{ path('fos_user_security_logout') }}" class="pull-left"><i class="icon-signout"></i> Déconnexion</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</section>
+			</div>
+        </div>
+
+        <div class="banniere home">
+			<div class="container">
+				<header class="row-fluid">
+					<div class="span4">
+						<a href="{{ path('ninja_tooken_homepage') }}" rel="home"><img src="{{ asset('bundles/ninjatookencommon/images/logo.png') }}"></a>
+					</div>
+					<nav class="span8" role="navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+						<a class="visible-phone" id="menuMobile" href="#">Menu</a>
+						<ul class="hidden-phone menu">
+							<li class="hidden-phone">
+								<a href="{{ path('ninja_tooken_jouer') }}" class="play">Jouer</a>
+							</li>
+							<li>
+								<a>Le Jeu</a>
+								<ul>
+									<li><a href="{{ path('ninja_tooken_game_classement') }}">Classement</a></li>
+									<li><a href="{{ path('ninja_tooken_game_parties') }}">Parties en cours</a></li>
+									<li><a href="events.html">Events</a></li>
+								</ul>
+							</li>
+							<li>
+								<a>Manuel du Ninja</a>
+								<ul>
+									<li><a href="{{ path('ninja_tooken_manuel') }}">Guide du débutant</a></li>
+									<li><a href="{{ path('ninja_tooken_game_calculateur') }}">Calculateur jutsus</a></li>
+									<li><a href="{{ path('ninja_tooken_reglement') }}">Règles à respecter</a></li>
+								</ul>
+							</li>
+							<li>
+								<a>Communauté</a>
+								<ul>
+									<li><a href="{{ path('ninja_tooken_forum') }}">Forums</a></li>
+									<li><a href="{{ path('ninja_tooken_clans') }}">Clans</a></li>
+									<li><a href="{{ path('ninja_tooken_chat') }}">Chat</a></li>
+								</ul>
+							</li>
+							<li>
+								<a>FAQ</a>
+								<ul>
+									<li><a href="{{ path('ninja_tooken_faq_generale') }}">Questions générales</a></li>
+									<li><a href="{{ path('ninja_tooken_faq_technique') }}">Problèmes techniques</a></li>
+								</ul>
+							</li>
+						</ul>
+					</nav>
+				</header>
+				<div class="row-fluid">
+					<div class="span4 presentation">
+						<h1>Quel Ninja es-tu ?</h1>
+						<p>
+						NinjaTooken est un <strong>jeu en réseau gratuit</strong> !<br/><br/>
+						Découvre un univers démentiel où les Ninjas s'affrontent sans pitié. <strong>Suiton</strong>, <strong>Futon</strong>, <strong>Raiton</strong>, <strong>Doton</strong>, <strong>Katon</strong>... ils ont chacun leurs pouvoirs, à toi de décider à <strong>quelle classe tu appartiens</strong> !<br/><br/>
+						Crée ton compte pour <strong>sauvegarder ton expérience</strong>, <strong>intégrer un clan</strong>, ou <strong>participer aux tournois</strong> NinjaTooken.
+						</p>
+						<a href="{{ path('fos_user_registration_register') }}" class="create"><img src="{{ asset('bundles/ninjatookencommon/images/create.png') }}"> Crée ton Ninja</a>
+					</div>
+					<div class="span8 visible-desktop">
+						<div id="diaporama" class="diaporama">
+							<ul class="bjqs">
+								<li><iframe src="http://player.vimeo.com/video/24436995?title=0&byline=0&portrait=0&color=ff9933" width="100%" height="100%" frameborder="0"></iframe></li>
+								<li><img src="{{ asset('bundles/ninjatookencommon/images/banner01.jpg') }}" title="Automatically generated caption"></li>
+								<li><img src="{{ asset('bundles/ninjatookencommon/images/banner02.jpg') }}" title="Automatically generated caption"></li>
+								<li><img src="{{ asset('bundles/ninjatookencommon/images/banner03.jpg') }}" title="Automatically generated caption"></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div class="breadcrumb">
+			<div class="container">
+				<div class="row-fluid">
+					<div class="span12">
+						<h2>{% block breadcrumbs1 %}{% endblock %}</h2>
+						<h1>{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_homepage') }}" itemprop="url">
+									<span itemprop="title">Les dernières news</span>
+								</a>
+							</span>
+						{% endblock %}</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div class="content">
+			<div class="container">
+				<script type="text/javascript"><!--
+				google_ad_client = "ca-pub-3085034269626140";
+				/* Top Ban */
+				google_ad_slot = "7441735399";
+				google_ad_width = 728;
+				google_ad_height = 90;
+				//--></script>
+				<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+				{% block body %}{% endblock %}
+			</div>
+		</div>
+
+        <div class="footer">
+            <footer class="container">
+				<ul>
+					<li><a href="{{ path('ninja_tooken_team') }}">Team "Ninja Tooken"</a></li>
+					<li><a href="{{ path('ninja_tooken_reglement') }}">Règlement</a></li>
+					<li><a href="{{ path('ninja_tooken_mentions_legales') }}">Mentions légales</a></li>
+					<li><a href="{{ path('ninja_tooken_contact') }}">Nous contacter</a></li>
+				</ul>
+            </footer>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{{ asset('bundles/ninjatookencommon/js/vendor/jquery-2.0.0.min.js') }}"><\/script>')</script>
+	{% javascripts
+	    '@NinjaTookenCommonBundle/Resources/public/js/vendor/bjqs-1.3.min.js'
+	    '@NinjaTookenCommonBundle/Resources/public/js/vendor/UnityObject2.js'
+	    '@NinjaTookenCommonBundle/Resources/public/js/vendor/jquery.tagit.min.js'
+	    '@NinjaTookenCommonBundle/Resources/public/js/vendor/jquery.bracket.min.js'
+	    '@NinjaTookenCommonBundle/Resources/public/js/vendor/timeline-min.js'
+	    '@NinjaTookenCommonBundle/Resources/public/js/main.js'
+	    output='js/compiled/main.js'
+	%}
+	<script src="{{ asset_url }}"></script>
+	{% endjavascripts %}
+	<script src="{{ asset('bundles/ninjatookencommon/js/vendor/tinymce/jquery.tinymce.min.js') }}"></script>
+        <script>
+            var _gaq=[['_setAccount','UA-2980301-2'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

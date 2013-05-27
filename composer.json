@@ -10,7 +10,7 @@
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "1.2.*",
         "twig/extensions": "1.0.*",
-        "symfony/assetic-bundle": "2.1.*",
+        "symfony/assetic-bundle": "2.3.*",
         "symfony/swiftmailer-bundle": "2.2.*",
         "symfony/monolog-bundle": "2.2.*",
         "sensio/distribution-bundle": "2.2.*",
@@ -21,8 +21,9 @@
 	"friendsofsymfony/user-bundle": "*",
 	"friendsofsymfony/comment-bundle": "*",
 	"exercise/htmlpurifier-bundle": "dev-master",
-	"leafo/lessphp": "0.3.*@dev",
-	"sonata-project/doctrine-orm-admin-bundle": "*"
+	"leafo/lessphp": "@dev",
+	"sonata-project/doctrine-orm-admin-bundle": "*",
+	"stof/doctrine-extensions-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
@@ -44,7 +45,7 @@
     "minimum-stability": "alpha",
     "extra": {
         "symfony-app-dir": "app",
-        "symfony-web-dir": "web",
+        "symfony-web-dir": "www",
         "branch-alias": {
             "dev-master": "2.2-dev"
         }

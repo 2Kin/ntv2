@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet/less" href="css/main.less" />
 		<link rel="alternate" type="application/atom+xml" title="Les dernières nouveautés" href="/feed/" />
 
 		<link rel="shortcut icon" href="/favicon.ico">
@@ -48,12 +48,12 @@
 
 							<nav>
 								<ul>
-									<li><a href="messagerie.html" class="message pull-left"> 1 message</a></li>
-									<li><a href="amis.html" class="ami pull-left"> Amis</a></li>
-									<li><a href="clan.html" class="clan pull-left"> Clan</a></li>
-									<li><a href="parametres.html" class="parametre pull-left"> Paramètres</a></li>
-									<li><a href="captures.html" class="capture pull-left"> Captures</a></li>
-									<li><a href="#" class="deconnection pull-left"> Déconnexion</a></li>
+									<li><a href="messagerie.html" class="pull-left"><i class="icon-envelope-alt"></i> 1 message</a></li>
+									<li><a href="amis.html" class="pull-left"><i class="icon-heart"></i> Amis</a></li>
+									<li><a href="clan.html" class="pull-left"><i class="icon-ticket"></i> Clan</a></li>
+									<li><a href="parametres.html" class="pull-left"><i class="icon-cog"></i> Paramètres</a></li>
+									<li><a href="captures.html" class="pull-left"><i class="icon-picture"></i> Captures</a></li>
+									<li><a href="#" class="pull-left"><i class="icon-signout"></i> Déconnexion</a></li>
 								</ul>
 							</nav>
 						</div>
@@ -118,7 +118,7 @@
 						<h2>
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<span itemprop="title">Communauté</span>
-							</span> &rsaquo; 
+							</span>  <i class="icon-angle-right"></i> 
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="clans.html" itemprop="url">
 									<span itemprop="title">Clans</span>
@@ -512,15 +512,14 @@
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-2.0.0.min.js"><\/script>')</script>
-		<script src="//webplayer.unity3d.com/download_webplayer-3.x/3.0/uo/UnityObject2.js"></script>
-        <script>window.UnityObject2 || document.write('<script src="js/vendor/UnityObject2.js"><\/script>')</script>
+        <script src="js/vendor/less-1.3.3.min.js"></script>
         <script src="js/vendor/bjqs-1.3.min.js"></script>
 		<script src="js/vendor/tinymce/jquery.tinymce.min.js"></script>
+		<script src="js/vendor/tinymce/tinymce.min.js"></script>
+		<script src="js/vendor/UnityObject2.js"></script>
 		<script src="js/vendor/jquery.tagit.min.js"></script>
-		<script src="js/vendor/Chart.min.js"></script>
-		<script src="js/vendor/jquery.bracket.min.js"></script>
+		<script src="js/vendor/jquery.bracket.js"></script>
 		<script src="js/vendor/timeline-min.js"></script>
-		<script src="js/vendor/locale/fr.js"></script>
         <script src="js/main.js"></script>
         <script>
             var _gaq=[['_setAccount','UA-2980301-2'],['_trackPageview']];

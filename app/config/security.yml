@@ -18,10 +18,18 @@ security:
         main:
             pattern: ^/
             form_login:
-                provider: fos_userbundle
                 csrf_provider: form.csrf_provider
-            logout:       true
+                check_path: fos_user_security_check
+                login_path: fos_user_security_login
+                default_target_path: /admin
+                provider: fos_userbundle
+            logout:
+                path:   fos_user_security_logout
+                target: /
             anonymous:    true
+            remember_me:
+                key:    %secret%
+            provider:   fos_userbundle
 
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/

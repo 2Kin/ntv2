@@ -1,0 +1,32 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - Jouer gratuitement{% endblock %}
+{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+
+{% block breadcrumbs1 %}{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_jouer') }}" itemprop="url">
+									<span itemprop="title">Jouer</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+				<div class="row-fluid">
+					<section class="span9">
+						<div id="unityPlayer">
+							<div class="missing">
+								<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
+									<img alt="Unity Web Player. Install now!" src="images/getunity.png" width="193" height="63" />
+								</a>
+							</div>
+						</div>
+					</section>
+					<aside class="span3 module">
+						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
+					</aside>
+				</div>
+{% endblock %}

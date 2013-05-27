@@ -1,0 +1,160 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - Guide du débutant{% endblock %}
+{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+
+{% block breadcrumbs1 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<span itemprop="title">Mon compte</span>
+							</span>
+{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_user_amis') }}" itemprop="url">
+									<span itemprop="title">Amis</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+				<section class="main">
+					<h3>Demande d'amis</h3>
+
+					<div class="membre pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_confirmer', {user_nom:'test'}) }}" class="button small">Confirmer</a>
+					</div>
+					<div class="membre pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_confirmer', {user_nom:'test'}) }}" class="button small">Confirmer</a>
+					</div>
+					<div class="membre pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_confirmer', {user_nom:'test'}) }}" class="button small">Confirmer</a>
+					</div>
+					<div class="membre pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_confirmer', {user_nom:'test'}) }}" class="button small">Confirmer</a>
+					</div>
+
+					<br class="clear">
+					
+					<div class="pagination">
+						<ul>
+							<li class="disabled"><a href="#">&laquo;</a></li>
+							<li><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">&raquo;</a></li>
+						</ul>
+					</div>
+
+					<h3>Mes amis</h3>
+
+					<p><span class="legend online"> En ligne</span>
+					<span class="legend offline"> Hors ligne</span></p>
+
+					<div class="membre online pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre online pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre online pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre online pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre online pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre offline pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre offline pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre offline pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre offline pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre offline pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre offline pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre offline pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre offline pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre offline pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre offline pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre offline pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<div class="membre offline pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					</div>
+
+					<br class="clear">
+
+					<div class="pagination">
+						<ul>
+							<li class="disabled"><a href="#">&laquo;</a></li>
+							<li><a href="#">1</a></li>
+							<li><a href="#">2</a></li>
+							<li><a href="#">3</a></li>
+							<li><a href="#">4</a></li>
+							<li><a href="#">5</a></li>
+							<li><a href="#">&raquo;</a></li>
+						</ul>
+					</div>
+				</section>
+{% endblock %}

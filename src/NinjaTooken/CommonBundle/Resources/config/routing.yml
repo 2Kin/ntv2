@@ -1,3 +1,40 @@
-ninja_tooken_common_homepage:
-    pattern:  /hello/{name}
+ninja_tooken_homepage:
+    pattern:  /
     defaults: { _controller: NinjaTookenCommonBundle:Default:index }
+
+ninja_tooken_jouer:
+    pattern:  /jouer
+    defaults: { _controller: NinjaTookenCommonBundle:Default:jouer }
+
+ninja_tooken_manuel:
+    pattern:  /guide-du-ninja
+    defaults: { _controller: NinjaTookenCommonBundle:Default:manuel }
+
+ninja_tooken_reglement:
+    pattern:  /regles-respecter
+    defaults: { _controller: NinjaTookenCommonBundle:Default:reglement }
+
+ninja_tooken_chat:
+    pattern:  /chat
+    defaults: { _controller: NinjaTookenCommonBundle:Default:chat }
+
+ninja_tooken_faq_generale:
+    pattern:  /faq-generale
+    defaults: { _controller: NinjaTookenCommonBundle:Default:faqGenerale }
+
+ninja_tooken_faq_technique:
+    pattern:  /faq-technique
+    defaults: { _controller: NinjaTookenCommonBundle:Default:faqTechnique }
+
+ninja_tooken_team:
+    pattern:  /team
+    defaults: { _controller: NinjaTookenCommonBundle:Default:team }
+
+ninja_tooken_mentions_legales:
+    pattern:  /mentions-legales
+    defaults: { _controller: NinjaTookenCommonBundle:Default:mentionsLegales }
+
+ninja_tooken_contact:
+    pattern:  /nous-contacter
+    defaults: { _controller: NinjaTookenCommonBundle:Default:contact }
+

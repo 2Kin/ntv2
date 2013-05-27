@@ -1,0 +1,7 @@
+parameters:
+#    ninja_tooken_chat.example.class: NinjaTooken\ChatBundle\Example
+
+services:
+#    ninja_tooken_chat.example:
+#        class: %ninja_tooken_chat.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

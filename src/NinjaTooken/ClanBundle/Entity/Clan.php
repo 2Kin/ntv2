@@ -3,6 +3,7 @@
 namespace NinjaTooken\ClanBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Clan
@@ -20,6 +21,12 @@ class Clan
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @Gedmo\Slug(fields={"nom"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
 
     /**
      * @var string
@@ -240,5 +247,28 @@ class Clan
     public function getOnline()
     {
         return $this->online;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Clan
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

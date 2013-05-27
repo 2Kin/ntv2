@@ -1,0 +1,87 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - Règles à respecter{% endblock %}
+{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+
+{% block breadcrumbs1 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<span itemprop="title">Manuel du ninja</span>
+							</span>
+{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_reglement') }}" itemprop="url">
+									<span itemprop="title">Règles à respecter</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}<div class="row-fluid">
+					<section class="span8 main">
+						<p>En t'inscrivant sur Ninja Tooken, tu t'engages à respecter un certain nombre de règles. Celles-ci ont été créées pour conserver une bonne ambiance de jeu. Tout joueur ne les respectant pas se verra sujet à des sanctions telles que la suppression de son compte sans préavis.
+						Liste non exhaustive des règles à respecter :</p>
+
+						<h3>Comptes et pseudos</h3>
+						<span>Le pseudo de ton ninja doit respecter les quelques règles suivantes :</span>
+						<ul>
+							<li><span>Ne pas être vulgaire ni insultant</span></li>
+							<li><span>Ne pas comporter de connotation sexuelle voire pornographique</span></li>
+							<li><span>Ne pas faire référence à une orientation politique, à une ethnie, une communauté ou une religion</span></li>
+							<li><span>Ne pas copier une marque déposée</span></li>
+							<li><span>Ne pas faire référence à un produit illégal</span></li>
+							<li><span>Ne pas imiter le nom d'un modérateur ou administrateur de Ninja Tooken</span></li>
+						</ul>
+						<p>Il est interdit de prêter son compte, en raison des divers abus possibles (suppression du compte prêté, gain d’xp plus rapide...). En cas de manquement à cette règle, les deux joueurs encourent des sanctions.</p>
+
+						<h3>Chat/Forum/Clans</h3>
+						<ul>
+							<li><span>Le flood, (répétition d’un même message plusieurs fois dans un court délai) n'est pas autorisé.</span></li>
+							<li><span>Il est interdit de faire de la publicité pour un site tiers, y compris ceux en rapport avec Ninja Tooken</span></li>
+							<li><span>Les discours insultants, pornographiques, religieux, xénophobes, homophobes, politiques, incitants à consommer des produits illégaux ou même parlant de Christophe Maé sont strictement interdits.</span></li>
+							<li><span>Respectez au maximum la grammaire Française ! Tout le monde n’en sera que plus heureux.</span></li>
+						</ul><p></p>
+
+						<h3>Respect du jeu</h3>
+						<ul>
+							<li><span>L'usurpation d'identité est interdite, que ce soit celle d'un joueur, d'un modérateur, ou d'un administrateur, et ce peu importe la raison (bonne ou mauvaise).</li>
+							<li><span>Dévoiler les informations personnelles d'un autre joueur est prohibé.</span></li>
+							<li><span>De manière générale, il est interdit de nuire au bon déroulement du jeu.</span></li>
+						</ul><p></p>
+
+						<h3>Commerce</h3>
+						<span>Sont interdits :</span>
+						<ul>
+							<li><span>le commerce ou l’échange de comptes ou de clans.</span></li>
+							<li><span>L’organisation de concours, animations ou tournois payants</span></li>
+						</ul><p></p>
+
+						<h3>Triche</h3>
+						<ul>
+							<li><span>Il est illégal d'abuser d'un bug du jeu. Toute anomalie doit être reportée via le forum (partie Bug et Amélioration) ou via le formulaire de contact.</span></li>
+							<li><span>L'utilisation d'un programme tiers dans le but d'altérer l'usage du jeu est interdit.</span></li>
+							<li><span>Il est autorisé d'avoir plusieurs comptes.</span></li>
+							<li><span>Il est interdit de jouer avec plusieurs comptes dans une même partie.</span></li>
+						</ul><p></p>
+					</section>
+					<aside class="span4">
+						<form action="search.html" method="post" accept-charset="utf-8" class="row-fluid">
+							<input type="text" name="q" value="Chercher" class="span10">
+							<input type="submit" name="s" value="Ok !" class="span2">
+						</form>
+
+						<section>
+							<h4>Derniers messages</h4>
+							{% include 'NinjaTookenForumBundle:Default:derniersMessages.html.twig' %}
+						</section>
+
+						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
+
+						<section>
+							<h4>Partenaires</h4>
+							{% include 'NinjaTookenCommonBundle:Default:partenaires.html.twig' %}
+						</section>
+					</aside>
+				</div>
+{% endblock %}

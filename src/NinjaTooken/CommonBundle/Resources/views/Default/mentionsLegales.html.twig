@@ -1,0 +1,50 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - Mentions légales{% endblock %}
+{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+
+{% block breadcrumbs1 %}{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_mentions_legales') }}" itemprop="url">
+									<span itemprop="title">Mentions légales</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+				<div class="row-fluid">
+					<section class="span8 main">
+						<h3>Accord de confidentialités</h3>
+						<p>La Naruto Constant Team est sensible aux problèmes de confidentialité sur Internet et s'est engagée à protéger votre confidentialité. La NCT prend des mesures utiles afin de protéger toutes les informations de nos visiteurs en ligne contre tout accès et utilisation non autorisés.<br>
+						La NCT recueille uniquement les informations personnelles fournies à titre volontaire par les personnes consultant son site Web. Vous êtes totalement libre en ce qui concerne la communication ou non de ces informations. Si vous avez volontairement fourni certaines informations, cela signifie que vous consentez à ce que nous collections et utilisions vos renseignements personnels en accord avec la présente déclaration de confidentialité.<br>
+						Vous pourrez, une fois inscrit, mettre à jour vos informations personnelles en éditant votre profil.</p>
+
+						<h3>Droits d'auteurs</h3>
+						Le jeu Ninja Tooken est une propriété exclusive de ses créateurs. Eux seuls peuvent le mettre à contribution librement. Toute reproduction partielle ou complète est interdite.</p>
+
+						<h3>Démenti</h3>
+						<p>Malgré de stricts contrôles, nous déclinons toute responsabilité quant aux contenus de liens externes pointant vers Ninja Tooken, ou inversement. L'auteur d'une page web est le seul responsable de son contenu.</p>
+					</section>
+					<aside class="span4">
+						<form action="search.html" method="post" accept-charset="utf-8" class="row-fluid">
+							<input type="text" name="q" value="Chercher" class="span10">
+							<input type="submit" name="s" value="Ok !" class="span2">
+						</form>
+
+						<section>
+							<h4>Derniers messages</h4>
+							{% include 'NinjaTookenForumBundle:Default:derniersMessages.html.twig' %}
+						</section>
+
+						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
+
+						<section>
+							<h4>Partenaires</h4>
+							{% include 'NinjaTookenCommonBundle:Default:partenaires.html.twig' %}
+						</section>
+					</aside>
+				</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+<?php
+
+namespace NinjaTooken\UserBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Friend
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Friend
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     */
+    private $user;
+
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     */
+    private $friend;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_blocked", type="boolean")
+     */
+    private $isBlocked;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_confirmed", type="boolean")
+     */
+    private $isConfirmed;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_ajout", type="datetime")
+     */
+    private $dateAjout;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+}

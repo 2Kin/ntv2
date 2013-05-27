@@ -35,6 +35,8 @@ class AppKernel extends Kernel
             new NinjaTooken\GameBundle\NinjaTookenGameBundle(),
             new NinjaTooken\ClanBundle\NinjaTookenClanBundle(),
             new NinjaTooken\CommonBundle\NinjaTookenCommonBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new NinjaTooken\ChatBundle\NinjaTookenChatBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

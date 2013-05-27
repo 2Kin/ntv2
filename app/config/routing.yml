@@ -1,3 +1,7 @@
+ninja_tooken_chat:
+    resource: "@NinjaTookenChatBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ninja_tooken_common:
     resource: "@NinjaTookenCommonBundle/Resources/config/routing.yml"
     prefix:   /

@@ -1,0 +1,68 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - FAQ Générale{% endblock %}
+{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+
+{% block breadcrumbs1 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<span itemprop="title">F.A.Q.</span>
+							</span>
+{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_faq_generale') }}" itemprop="url">
+									<span itemprop="title">Questions Générales</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+				<div class="row-fluid">
+					<section class="span8 main">
+						<h3 id="q11">Qu'est-ce-que NinjaTooken ?</h3>
+						<p>Ninja Tooken est un FPS ninja multijoueur jouable online. Que dis-je, Ninja Tooken est LE seul FPS sur l'univers ninja. Inspiré de manga, Ninja Tooken te propose de te mettre dans la peau d'un ninja, qui pourra évoluer selon tes désirs. Classes, armes, aptitudes, capacités, tu pourras choisir ta voie. Jouable directement dans ton navigateur favori (Firefox, Chrome, Opera, Christopher Colombus, Safari, et même Internet Explorer), Ninja Tooken est totalement en 3D et fonctionne avec la plupart des ordinateurs (le mien a 5 ans et ça marche !).</p>
+
+						<h3 id="q12">Pourquoi se créer un compte ?</h3>
+						<p>Tu peux jouer sans t'inscrire, seulement ta progression ne sera pas sauvegardée... à noter que le compte de Ninja Tooken, la revanche du ninja R'Din est le même que celui du site n-c-team.com : ton avatar, ta messagerie, tes paramètres : tout est en place.<br>
+						Si tu es déjà inscrit sur la NCT, ne touches à rien, et laisses toi guider par Ninja Tooken.</p>
+
+						<h3 id="q13">Ninja Tooken est-il payant ?</h3>
+						<p>NON, absolument pas ! Ninja Tooken est un jeu entièrement gratuit, il faut juste s'inscrire (mais ça aussi c'est gratuit) ! Nous n'acceptons évidemment pas non plus les dons... Pour payer les serveurs de Ninja Tooken nous comptons sur les publicités présentes sur le site.<br>
+						Mais genre aujourd'hui c'est gratuit, mais dans un mois vous allez nous faire payer, c'est la crise non ?<br>
+						Mais je viens de dire que non ! Ninja Tooken est gratuit est le restera pour toujours ! Aucun soucis à ce sujet alors maintenant arrête de m'embêter avec cette question.</p>
+
+						<h3 id="q14">Qui êtes vous, et pourquoi ce jeu ?</h3>
+						<p>Nous sommes un groupe de passionnés : étudiants, professionnels, ou simples néophytes !<br>
+						Ce jeu permet d'exprimer nos compétences, de les développer, mais également et surtout de nous faire plaisir.</p>
+
+						<h3 id="q15">A quand les prochaines versions ?</h3>
+						<p>Malheureusement le temps est ce qui nous fait le plus défaut : nous travaillons pendant nos heures perdues sans planning et avant tout pour le plaisir.<br>
+						Et comme la création d'un jeu vidéo, aussi humble soit-il, prend énormément de temps, il nous est impossible de donner une autre réponse que : "When it's done" !</p>
+
+						<h3 id="q16">Je peux faire quoi pour vous aider ?</h3>
+						<p>C'est simple, parles en autour de toi ! Dans ton pseudo MSN, sur ton site, ton blog, facebook, twitter... Suffit d'en parler, et ça nous suffit, on n'est pas bien difficiles en fait. Même un petit mot comme « Ninja Tooken : Jeu gratuit multiplayer online : http://www.ninjatooken.com/ »<br>
+						Ca suffit, c'est parfait pour un lien dans les partenaires, pour ton pseudo MSN ou facebook. Après c'est comme tu le sens !</p>
+					</section>
+					<aside class="span4">
+						<section>
+							<ul>
+								<li><a href="#q11">Qu'est-ce-que NinjaTooken ?</a></li>
+								<li><a href="#q12">Pourquoi se créer un compte ?</a></li>
+								<li><a href="#q13">Ninja Tooken est-il payant ?</a></li>
+								<li><a href="#q14">Qui êtes vous, et pourquoi ce jeu ?</a></li>
+								<li><a href="#q15">A quand les prochaines versions ?</a></li>
+								<li><a href="#q16">Je peux faire quoi pour vous aider ?</a></li>
+							</ul>
+						</section>
+
+						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
+
+						<section>
+							<h4>Partenaires</h4>
+							{% include 'NinjaTookenCommonBundle:Default:partenaires.html.twig' %}
+						</section>
+					</aside>
+				</div>
+{% endblock %}

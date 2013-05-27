@@ -1,0 +1,49 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - nous contacter{% endblock %}
+{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+
+{% block breadcrumbs1 %}{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_contact') }}" itemprop="url">
+									<span itemprop="title">Nous contacter</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+				<form action="{{ path('ninja_tooken_contact') }}" method="post" accept-charset="UTF-8" class="full">
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							<label class="libelle required" for="email">Mail</label>
+						</div>
+						<div class="span8">
+							<input type="email" name="email" id="email" value="" required>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							<label class="libelle required" for="sujet">Sujet</label>
+						</div>
+						<div class="span8">
+							<input type="text" name="sujet" id="sujet" value="" required>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							<label class="libelle required" for="content">Message</label>
+						</div>
+						<div class="span8">
+							<div class="textarea" name="content" id="content"></div>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span8 offset4">
+							<input type="submit" value="Envoyer" class="button">
+						</div>
+					</div>
+				</form>
+{% endblock %}

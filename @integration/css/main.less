@@ -5,6 +5,35 @@
 @import "vendor/jquery.bracket.less";
 @import "vendor/slickmap.less";
 
+/*!
+ *  Font Awesome 3.1.0
+ *  the iconic font designed for Bootstrap
+ *  -------------------------------------------------------
+ *  The full suite of pictographic icons, examples, and documentation
+ *  can be found at: http://fontawesome.io
+ *
+ *  License
+ *  -------------------------------------------------------
+ *  - The Font Awesome font is licensed under the SIL Open Font License v1.1 -
+ *    http://scripts.sil.org/OFL
+ *  - Font Awesome CSS, LESS, and SASS files are licensed under the MIT License -
+ *    http://opensource.org/licenses/mit-license.html
+ *  - Font Awesome documentation licensed under CC BY 3.0 License -
+ *    http://creativecommons.org/licenses/by/3.0/
+ *  - Attribution is no longer required in Font Awesome 3.0, but much appreciated:
+ *    "Font Awesome by Dave Gandy - http://fontawesome.io"
+
+ *  Contact
+ *  -------------------------------------------------------
+ *  Email: dave@fontawesome.io
+ *  Twitter: http://twitter.com/fortaweso_me
+ *  Work: Lead Product Designer @ http://kyruus.com
+ */
+@import "vendor/fonts-awesome/core.less";
+@import "vendor/fonts-awesome/bootstrap.less";
+@import "vendor/fonts-awesome/extras.less";
+@import "vendor/fonts-awesome/icons.less";
+
 @headFontFamily:"Wonton";
 
 .button(@padding){
@@ -15,9 +44,22 @@
 	}
 }
 
+/* FONT PATH
+ * -------------------------- */
 @font-face{
-	font-family:@headFontFamily;src:url(../fonts/Wonton.eot);src:local(@headFontFamily), url(../fonts/Wonton.ttf) format('opentype');
+	font-family:@headFontFamily;src:url(../font/Wonton.eot);src:local(@headFontFamily), url(../font/Wonton.ttf) format('opentype');
 }
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('@{FontAwesomePath}/fontawesome-webfont.eot?v=@{FontAwesomeVersion}');
+  src: url('@{FontAwesomePath}/fontawesome-webfont.eot?#iefix&v=@{FontAwesomeVersion}') format('embedded-opentype'),
+    url('@{FontAwesomePath}/fontawesome-webfont.woff?v=@{FontAwesomeVersion}') format('woff'),
+    url('@{FontAwesomePath}/fontawesome-webfont.ttf?v=@{FontAwesomeVersion}') format('truetype'),
+    url('@{FontAwesomePath}/fontawesome-webfont.svg#fontawesomeregular?v=@{FontAwesomeVersion}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 
 // définitions communes
 h1{
@@ -167,23 +209,6 @@ nav, .footer footer{
 	cursor:default;pointer-events:none;color:@white;
 }
 
-// icônes globaux
-.lock,
-.postit,
-.new,
-.delete{
-	display:inline-block;.size(16px, 14px);background:transparent url(../images/loggued.png) no-repeat 0 -128px;padding-left:8px;
-}
-.postit{
-	background-position:0 -144px;
-}
-.new{
-	background-position:0 -96px;
-}
-.delete{
-	background-position:0 -112px;
-}
-
 // jutsus
 .jutsu{
 	display:inline-block;.size(@baseLineHeight, @baseLineHeight);.background-size(cover)
@@ -301,7 +326,7 @@ nav, .footer footer{
 	}
 	.accountLogged{
 		a{
-			background:transparent url(../images/loggued.png) no-repeat 0 0;padding-left:23px;height:15px;width:22%;min-width:80px;padding-top:1px;
+			height:15px;width:30%;min-width:100px;padding-top:1px;
 		}
 		img{
 			margin-right:10px;max-width:35px;
@@ -311,21 +336,6 @@ nav, .footer footer{
 			strong{
 				font-size:@fontSizeLarge;
 			}
-		}
-		.parametre{
-			background-position:0 -16px;
-		}
-		.ami{
-			background-position:0 -32px;
-		}
-		.capture{
-			background-position:0 -48px;
-		}
-		.clan{
-			background-position:0 -64px;
-		}
-		.deconnection{
-			background-position:0 -80px;
 		}
 	}
 }
@@ -520,6 +530,9 @@ body>.content:before{
 		.actif{
 			color:@white;
 		}
+		a.pull-right{
+			font-size:20px;
+		}
 	}
 
 	// filtre
@@ -708,7 +721,7 @@ body>.content:before{
 			}
 		}
 		a.delete{
-			position:absolute;top:5px;right:5px;.size(16px, 19px);display:block;background:transparent url(../images/loggued.png) 0 -112px;.opacity(50);
+			position:absolute;top:3px;right:0;.size(20px, 20px);display:block;background:transparent url(../images/loggued.png) 0 -112px;.opacity(50);font-size:20px;
 			&:hover{
 				.opacity(100);
 			}
