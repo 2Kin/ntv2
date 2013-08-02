@@ -8,8 +8,8 @@
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}" itemprop="url">
-									<span itemprop="title">2Kin</span>
+								<a href="{{ path('ninja_tooken_user_fiche', {user_nom:user.slug}) }}" itemprop="url">
+									<span itemprop="title">{{ user.username }}</span>
 								</a>
 							</span>
 {% endblock %}

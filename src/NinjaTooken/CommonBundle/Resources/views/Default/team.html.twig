@@ -135,10 +135,7 @@
 							<input type="submit" name="s" value="Ok !" class="span2">
 						</form>
 
-						<section>
-							<h4>Derniers messages</h4>
-							{% include 'NinjaTookenForumBundle:Default:derniersMessages.html.twig' %}
-						</section>
+						{{ render(controller('NinjaTookenForumBundle:Default:recentComments', {'max': 10, 'forum': 0})) }}
 
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
 

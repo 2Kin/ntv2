@@ -1,0 +1,70 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}NinjaTooken - Se connecter{% endblock %}
+{% block description %}NinjaTooken - Se connecter{% endblock %}
+{% block keywords %}NinjaTooken - Se connecter{% endblock %}
+
+
+{% block breadcrumbs1 %}{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('fos_user_security_login') }}" itemprop="url">
+									<span itemprop="title">Connection</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+{{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
+
+{% if error %}
+    <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+{% endif %}
+				<form action="{{ path("fos_user_security_check") }}" method="post" accept-charset="UTF-8" class="full">
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							<label class="libelle required" for="pseudo">Pseudo</label>
+						</div>
+						<div class="span8">
+							<input type="text" id="pseudo" name="_username" value="{{ last_username }}" required>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							<label class="libelle required" for="pwd">Mot de passe</label>
+						</div>
+						<div class="span8">
+							<input type="text" name="_password" id="pwd" value="" required>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span8 offset4">
+							<input type="checkbox" name="_remember_me" value="on" id="remember"><label for="remember"> Se souvenir de moi</label>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span8 offset4">
+							<input type="submit" value="Se connecter" class="button">
+							{{ facebook_login_button() }}
+							<p>Mot de passe oublié ? <a href="{{ path('fos_user_resetting_request') }}">Réinitialises-le</a> !</p>
+							<p>Tu n'as pas encore de compte ? <a href="{{ path('fos_user_registration_register') }}">Inscrits toi</a> !</p>
+						</div>
+					</div>
+				</form>
+<script type="text/javascript">
+var authurl = '{{ path('_security_check_facebook') }}';
+function goLogIn(){
+    window.location = authurl;
+}
+
+function onFbInit() {
+    if (typeof(FB) != 'undefined' && FB != null ) {
+	FB.Event.subscribe('auth.statusChange', function(response) {
+	    setTimeout(goLogIn, 500);
+	});
+    }
+}
+</script>
+{% endblock %}

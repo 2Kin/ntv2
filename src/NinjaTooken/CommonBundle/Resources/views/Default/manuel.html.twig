@@ -25,7 +25,7 @@
 						<h3 id="description-generale">Description Générale</h3>
 						<p><img src="{{ asset('bundles/ninjatookencommon/images/guide/fresque.jpg') }}" alt=""><br>
 						Ninja Tooken te transporte dans un univers très japonisant où les ninjas sont sans pitié. Le but du jeu ? Tous les killer !<br><br>
-						Pour commencer, <a href="inscription.html">créé ton compte</a>. Puis, choisis la classe de ton ninja : Katon (le feu), Suiton (l'eau), Futon (le vent), Doton (la terre), Raiton (la foudre).<br>
+						Pour commencer, <a href="{{ path('fos_user_registration_register') }}">créé ton compte</a>. Puis, choisis la classe de ton ninja : Katon (le feu), Suiton (l'eau), Futon (le vent), Doton (la terre), Raiton (la foudre).<br>
 						Ensuite, le principe est simple : plus tu killes, plus tu gagnes des points d'expérience.<br>
 						Ces points te permettront de faire évoluer ton ninja selon ta classe.<br><br>
 						Mais attention chaque élément a son ennemi juré. Par exemple, si tu appartiens à Katon, méfie-toi surtout de Suiton.</p>
@@ -250,7 +250,7 @@
 						<p><img src="{{ asset('bundles/ninjatookencommon/images/guide/classes.jpg') }}" alt="opposition des classes" class="pull-right">Chacune des 5 cinqs classes est prédominante sur une autre. Cela signifie qu'un ninja d'une classe prédominante sur une autre infligera plus de dégât à un ninja de cette classe.<br>
 						Par exemple un ninja Suiton infligera 10% de dégâts de plus des dommages habituels à un ninja Katon. Mais le ninja Katon fera de même sur un ninja Futon. Voici un graphique illustrant la boucle des prédominances :<br>
 						<br>
-						N'oublie pas que tu peux voir les pourcentages de ninja de chaque classe en bas de la <a href="classement.html">page classement</a>. Choisis intelligemment ta classe en fonction des classes présentes dans le jeu (si il y a 50% de ninjas dotons, choisis plutôt raiton !)<br>
+						N'oublie pas que tu peux voir les pourcentages de ninja de chaque classe en bas de la <a href="{{ path('ninja_tooken_game_classement') }}">page classement</a>. Choisis intelligemment ta classe en fonction des classes présentes dans le jeu (si il y a 50% de ninjas dotons, choisis plutôt raiton !)<br>
 						<br>
 						<br>
 						Comme dit en introduction, chaque classe possède deux jutsus qui lui sont propres. Ces jutsus vont probablement déterminer ton choix de classe.
@@ -295,7 +295,7 @@
 
 						<h3 id="amelioration-bug">Demandes d'Améliorations et bugs</h3>
 						<p>Tu joues depuis un certain temps maintenant, et tu as remarqué des bugs, ou tu veux partager tes idées pour améliorer le jeu ?<br>
-						Pour cela, il suffit de nous envoyer un message ici : <a href="message.html" alt="Amélioration et bugs" title="Améliorations et bugs">Forum : Amélioration et bugs</a></p>
+						Pour cela, il suffit de nous envoyer un message ici : <a href="{{ path('ninja_tooken_forum') }}" alt="Amélioration et bugs" title="Améliorations et bugs">Forum : Amélioration et bugs</a></p>
 					</section>
 					<aside class="span4">
 						<section>

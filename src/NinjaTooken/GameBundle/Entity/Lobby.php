@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Lobby
  *
- * @ORM\Table()
+ * @ORM\Table(name="nt_lobby")
  * @ORM\Entity
  */
 class Lobby

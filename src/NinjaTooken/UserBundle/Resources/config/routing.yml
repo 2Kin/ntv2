@@ -3,30 +3,26 @@ ninja_tooken_user_fiche:
     defaults: { _controller: NinjaTookenUserBundle:Default:fiche }
 
 ninja_tooken_user_messagerie:
-    pattern:  /compte/messagerie/{$page}
+    pattern:  /compte/messagerie/{page}
     defaults: { _controller: NinjaTookenUserBundle:Default:messagerie, page:1 }
     requirements:
         page:  \d*
 
 ninja_tooken_user_messagerie_voir:
-    pattern:  /compte/messagerie/{$message_nom}
-    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieVoir }
+    pattern:  /compte/messagerie/{page}/{message_id}
+    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieVoir, page:1 }
+    requirements:
+        page:  \d*
 
 ninja_tooken_user_messagerie_ajouter:
     pattern:  /compte/messagerie/ajouter
     defaults: { _controller: NinjaTookenUserBundle:Default:messagerieAjouter }
 
 ninja_tooken_user_messagerie_supprimer:
-    pattern:  /compte/messagerie/supprimer/{$id}
-    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieSupprimer }
+    pattern:  /compte/messagerie/{page}/{message_id}/supprimer/
+    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieSupprimer, page:1 }
     requirements:
-        id:  \d*
-
-ninja_tooken_user_messagerie_modifier:
-    pattern:  /compte/messagerie/modifier/{$id}
-    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieModifier }
-    requirements:
-        id:  \d*
+        page:  \d*
 
 ninja_tooken_user_parametres:
     pattern:  /compte/parametres
@@ -37,28 +33,39 @@ ninja_tooken_user_parametres_modifier:
     defaults: { _controller: NinjaTookenUserBundle:Default:parametresModifier }
 
 ninja_tooken_user_amis:
-    pattern:  /compte/amis/{$page1}/{$page2}
+    pattern:  /compte/amis/{page1}/{page2}
     defaults: { _controller: NinjaTookenUserBundle:Default:amis, page1:1, page2:1 }
     requirements:
         page1:  \d*
         page2:  \d*
 
 ninja_tooken_user_amis_confirmer:
-    pattern:  /compte/amis/confirmer/{$user_nom}
+    pattern:  /compte/amis/{user_nom}/confirmer/
     defaults: { _controller: NinjaTookenUserBundle:Default:amisConfirmer }
 
 ninja_tooken_user_amis_bloquer:
-    pattern:  /compte/amis/bloquer/{$user_nom}
+    pattern:  /compte/amis/{user_nom}/bloquer/
     defaults: { _controller: NinjaTookenUserBundle:Default:amisBloquer }
 
 ninja_tooken_user_captures:
-    pattern:  /compte/captures/{$page}
+    pattern:  /compte/captures/{page}
     defaults: { _controller: NinjaTookenUserBundle:Default:captures, page:1 }
     requirements:
         page:  \d*
 
 ninja_tooken_user_captures_supprimer:
-    pattern:  /compte/captures/supprimer/{$id}
+    pattern:  /compte/captures/{id}/supprimer/
     defaults: { _controller: NinjaTookenUserBundle:Default:capturesSupprimer }
     requirements:
         page:  \d*
+
+_security_check_facebook:
+    pattern:   /facebook/login_check
+    defaults:  { _controller: NinjaTookenUserBundle:User:loginFb }
+
+_security_facebook_logout:
+  pattern:  /facebook/logout
+
+user_couple_fb_with_account:
+    pattern: /user/couple/facebook
+    defaults: { _controller: NinjaTookenUserBundle:User:connectFacebookWithAccount }

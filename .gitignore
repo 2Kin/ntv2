@@ -3,4 +3,8 @@
 /app/cache/*
 /app/logs/*
 /vendor/
+/www/avatar/*
+/www/bundles/*
+/www/css/*
+/www/js/*
 /app/config/parameters.yml

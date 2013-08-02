@@ -1,0 +1,23 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - Mentions légales{% endblock %}
+{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+
+{% block breadcrumbs1 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<span itemprop="title">Communauté</span>
+							</span>
+{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_chat_homepage') }}" itemprop="url">
+									<span itemprop="title">Chat</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+							<iframe src="{{ path('ninja_tooken_chat_ajax') }}" class="chat"></iframe>
+{% endblock %}

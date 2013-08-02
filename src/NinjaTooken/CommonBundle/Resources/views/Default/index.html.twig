@@ -18,222 +18,41 @@
 				<div class="row-fluid">
 					<section class="span8">
 						<div class="row-fluid">
+						{% for thread in threads %}
 							<div class="span6">
-
-								<article class="news" itemscope itemtype="http://schema.org/Article">
+								<article class="news{% if thread.isEvent %} event{% endif %}" itemscope itemtype="http://schema.org/Article">
 									<header>
 										<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-											<img src="images/avatar.jpg" itemprop="image" class="pull-left" alt="">
-											<a href="utilisateur.html" rel="author" itemprop="url">
-												<span itemprop="name">2Kin</span>
+											{% if thread.author.avatar is empty %}
+												{% if thread.author.sexe == "H" %}
+													{% set avatar = asset('bundles/ninjatookenuser/images/boyz.jpg') %}
+												{% else %}
+													{% set avatar = asset('bundles/ninjatookenuser/images/girlz.jpg') %}
+												{% endif %}
+											{% else %}
+												{% set avatar = asset('avatar/' ~ thread.author.avatar) %}
+											{% endif %}
+											<img src="{{ avatar }}" itemprop="image" class="pull-left" alt="">
+											<a href="{{ path('ninja_tooken_user_fiche', {user_nom:thread.author.usernamecanonical}) }}" rel="author" itemprop="url">
+												<span itemprop="name">{{ thread.author.username }}</span>
 											</a>
 										</span>
-										<time itemprop="datePublished" datetime="2013-02-05T11:52:02+02:00">le 5 février 2013 à 11:52</time><br>
-										<h3 itemprop="headline">Tournoi de capture de sashimono ce dimanche 10 février</h3>
+										<time itemprop="datePublished" datetime="{{ thread.dateAjout|date("Y-m-d\\TH:i:sP") }}">le {{ thread.dateAjout|localizeddate('full', 'none', app.request.locale) }} à {{ thread.dateAjout|localizeddate('none', 'short', app.request.locale) }}</time><br>
+										<h3 itemprop="headline">{{ thread.nom }}</h3>
 									</header>
 									<div class="content" itemprop="articleBody">
-										<p>La lutte était âpre et acharnée. Le terrain gagné le matin était perdu le soir même. Sans risques : pas de gloires, ni de victoires.<br/><br/>
-										Une seule option restait inexplorée. Pour en terminer avec ces luttes sans fins, les maitres de clan projetaient de subtiliser le Sashimono adverse pour saper leur moral.<br/><br/>
-										Et c'est ainsi que ce dimanche 10 février à 16H aura lieu un tournoi par équipe de 3 joueurs chacune, en partie "capture de Sashimono"<br/><br/></p>
+										<p>{{ thread.body|raw|purify('min') }}</p>
 									</div>
 									<footer>
-										<a href="message.html" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
+										<a href="{{ path('ninja_tooken_message', {topic_nom: thread.forum.slug, message_nom:thread.slug}) }}" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
 									</footer>
 								</article>
-
-								<article class="news event" itemscope itemtype="http://schema.org/Article">
-									<header>
-										<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-											<img src="images/avatar.jpg" itemprop="image" class="pull-left" alt="">
-											<a href="utilisateur.html" rel="author" itemprop="url">
-												<span itemprop="name">2Kin</span>
-											</a>
-										</span>
-										<time itemprop="datePublished" datetime="2013-02-05T11:52:02+02:00">le 5 février 2013 à 11:52</time><br>
-										<h3 itemprop="headline">Tournoi de capture de sashimono ce dimanche 10 février</h3>
-									</header>
-									<div class="content" itemprop="articleBody">
-										<p>La lutte était âpre et acharnée. Le terrain gagné le matin était perdu le soir même. Sans risques : pas de gloires, ni de victoires.<br/><br/>
-										Une seule option restait inexplorée. Pour en terminer avec ces luttes sans fins, les maitres de clan projetaient de subtiliser le Sashimono adverse pour saper leur moral.<br/><br/>
-										Et c'est ainsi que ce dimanche 10 février à 16H aura lieu un tournoi par équipe de 3 joueurs chacune, en partie "capture de Sashimono"<br/><br/></p>
-									</div>
-									<footer>
-										<a href="tournoi.html" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
-									</footer>
-								</article>
-
-								<article class="news" itemscope itemtype="http://schema.org/Article">
-									<header>
-										<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-											<img src="images/avatar.jpg" itemprop="image" class="pull-left" alt="">
-											<a href="utilisateur.html" rel="author" itemprop="url">
-												<span itemprop="name">2Kin</span>
-											</a>
-										</span>
-										<time itemprop="datePublished" datetime="2013-02-05T11:52:02+02:00">le 5 février 2013 à 11:52</time><br>
-										<h3 itemprop="headline">Tournoi de capture de sashimono ce dimanche 10 février</h3>
-									</header>
-									<div class="content" itemprop="articleBody">
-										<p>La lutte était âpre et acharnée. Le terrain gagné le matin était perdu le soir même. Sans risques : pas de gloires, ni de victoires.<br/><br/>
-										Une seule option restait inexplorée. Pour en terminer avec ces luttes sans fins, les maitres de clan projetaient de subtiliser le Sashimono adverse pour saper leur moral.<br/><br/>
-										Et c'est ainsi que ce dimanche 10 février à 16H aura lieu un tournoi par équipe de 3 joueurs chacune, en partie "capture de Sashimono"<br/><br/></p>
-									</div>
-									<footer>
-										<a href="message.html" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
-									</footer>
-								</article>
-
-								<article class="news" itemscope itemtype="http://schema.org/Article">
-									<header>
-										<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-											<img src="images/avatar.jpg" itemprop="image" class="pull-left" alt="">
-											<a href="utilisateur.html" rel="author" itemprop="url">
-												<span itemprop="name">2Kin</span>
-											</a>
-										</span>
-										<time itemprop="datePublished" datetime="2013-02-05T11:52:02+02:00">le 5 février 2013 à 11:52</time><br>
-										<h3 itemprop="headline">Tournoi de capture de sashimono ce dimanche 10 février</h3>
-									</header>
-									<div class="content" itemprop="articleBody">
-										<p>La lutte était âpre et acharnée. Le terrain gagné le matin était perdu le soir même. Sans risques : pas de gloires, ni de victoires.<br/><br/>
-										Une seule option restait inexplorée. Pour en terminer avec ces luttes sans fins, les maitres de clan projetaient de subtiliser le Sashimono adverse pour saper leur moral.<br/><br/>
-										Et c'est ainsi que ce dimanche 10 février à 16H aura lieu un tournoi par équipe de 3 joueurs chacune, en partie "capture de Sashimono"<br/><br/></p>
-									</div>
-									<footer>
-										<a href="message.html" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
-									</footer>
-								</article>
-
-								<article class="news" itemscope itemtype="http://schema.org/Article">
-									<header>
-										<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-											<img src="images/avatar.jpg" itemprop="image" class="pull-left" alt="">
-											<a href="utilisateur.html" rel="author" itemprop="url">
-												<span itemprop="name">2Kin</span>
-											</a>
-										</span>
-										<time itemprop="datePublished" datetime="2013-02-05T11:52:02+02:00">le 5 février 2013 à 11:52</time><br>
-										<h3 itemprop="headline">Tournoi de capture de sashimono ce dimanche 10 février</h3>
-									</header>
-									<div class="content" itemprop="articleBody">
-										<p>La lutte était âpre et acharnée. Le terrain gagné le matin était perdu le soir même. Sans risques : pas de gloires, ni de victoires.<br/><br/>
-										Une seule option restait inexplorée. Pour en terminer avec ces luttes sans fins, les maitres de clan projetaient de subtiliser le Sashimono adverse pour saper leur moral.<br/><br/>
-										Et c'est ainsi que ce dimanche 10 février à 16H aura lieu un tournoi par équipe de 3 joueurs chacune, en partie "capture de Sashimono"<br/><br/></p>
-									</div>
-									<footer>
-										<a href="message.html" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
-									</footer>
-								</article>
-
 							</div>
-							<div class="span6">
-
-								<article class="news event" itemscope itemtype="http://schema.org/Article">
-									<header>
-										<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-											<img src="images/avatar.jpg" itemprop="image" class="pull-left" alt="">
-											<a href="utilisateur.html" rel="author" itemprop="url">
-												<span itemprop="name">2Kin</span>
-											</a>
-										</span>
-										<time itemprop="datePublished" datetime="2013-02-05T11:52:02+02:00">le 5 février 2013 à 11:52</time><br>
-										<h3 itemprop="headline">Tournoi de capture de sashimono ce dimanche 10 février</h3>
-									</header>
-									<div class="content" itemprop="articleBody">
-										<p>La lutte était âpre et acharnée. Le terrain gagné le matin était perdu le soir même. Sans risques : pas de gloires, ni de victoires.<br/><br/>
-										Une seule option restait inexplorée. Pour en terminer avec ces luttes sans fins, les maitres de clan projetaient de subtiliser le Sashimono adverse pour saper leur moral.<br/><br/>
-										Et c'est ainsi que ce dimanche 10 février à 16H aura lieu un tournoi par équipe de 3 joueurs chacune, en partie "capture de Sashimono"<br/><br/></p>
-									</div>
-									<footer>
-										<a href="tournoi.html" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
-									</footer>
-								</article>
-
-								<article class="news event" itemscope itemtype="http://schema.org/Article">
-									<header>
-										<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-											<img src="images/avatar.jpg" itemprop="image" class="pull-left" alt="">
-											<a href="utilisateur.html" rel="author" itemprop="url">
-												<span itemprop="name">2Kin</span>
-											</a>
-										</span>
-										<time itemprop="datePublished" datetime="2013-02-05T11:52:02+02:00">le 5 février 2013 à 11:52</time><br>
-										<h3 itemprop="headline">Tournoi de capture de sashimono ce dimanche 10 février</h3>
-									</header>
-									<div class="content" itemprop="articleBody">
-										<p>La lutte était âpre et acharnée. Le terrain gagné le matin était perdu le soir même. Sans risques : pas de gloires, ni de victoires.<br/><br/>
-										Une seule option restait inexplorée. Pour en terminer avec ces luttes sans fins, les maitres de clan projetaient de subtiliser le Sashimono adverse pour saper leur moral.<br/><br/>
-										Et c'est ainsi que ce dimanche 10 février à 16H aura lieu un tournoi par équipe de 3 joueurs chacune, en partie "capture de Sashimono"<br/><br/></p>
-									</div>
-									<footer>
-										<a href="tournoi.html" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
-									</footer>
-								</article>
-
-								<article class="news" itemscope itemtype="http://schema.org/Article">
-									<header>
-										<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-											<img src="images/avatar.jpg" itemprop="image" class="pull-left" alt="">
-											<a href="utilisateur.html" rel="author" itemprop="url">
-												<span itemprop="name">2Kin</span>
-											</a>
-										</span>
-										<time itemprop="datePublished" datetime="2013-02-05T11:52:02+02:00">le 5 février 2013 à 11:52</time><br>
-										<h3 itemprop="headline">Tournoi de capture de sashimono ce dimanche 10 février</h3>
-									</header>
-									<div class="content" itemprop="articleBody">
-										<p>La lutte était âpre et acharnée. Le terrain gagné le matin était perdu le soir même. Sans risques : pas de gloires, ni de victoires.<br/><br/>
-										Une seule option restait inexplorée. Pour en terminer avec ces luttes sans fins, les maitres de clan projetaient de subtiliser le Sashimono adverse pour saper leur moral.<br/><br/>
-										Et c'est ainsi que ce dimanche 10 février à 16H aura lieu un tournoi par équipe de 3 joueurs chacune, en partie "capture de Sashimono"<br/><br/></p>
-									</div>
-									<footer>
-										<a href="message.html" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
-									</footer>
-								</article>
-
-								<article class="news" itemscope itemtype="http://schema.org/Article">
-									<header>
-										<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-											<img src="images/avatar.jpg" itemprop="image" class="pull-left" alt="">
-											<a href="utilisateur.html" rel="author" itemprop="url">
-												<span itemprop="name">2Kin</span>
-											</a>
-										</span>
-										<time itemprop="datePublished" datetime="2013-02-05T11:52:02+02:00">le 5 février 2013 à 11:52</time><br>
-										<h3 itemprop="headline">Tournoi de capture de sashimono ce dimanche 10 février</h3>
-									</header>
-									<div class="content" itemprop="articleBody">
-										<p>La lutte était âpre et acharnée. Le terrain gagné le matin était perdu le soir même. Sans risques : pas de gloires, ni de victoires.<br/><br/>
-										Une seule option restait inexplorée. Pour en terminer avec ces luttes sans fins, les maitres de clan projetaient de subtiliser le Sashimono adverse pour saper leur moral.<br/><br/>
-										Et c'est ainsi que ce dimanche 10 février à 16H aura lieu un tournoi par équipe de 3 joueurs chacune, en partie "capture de Sashimono"<br/><br/></p>
-									</div>
-									<footer>
-										<a href="message.html" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
-									</footer>
-								</article>
-
-								<article class="news" itemscope itemtype="http://schema.org/Article">
-									<header>
-										<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-											<img src="images/avatar.jpg" itemprop="image" class="pull-left" alt="">
-											<a href="utilisateur.html" rel="author" itemprop="url">
-												<span itemprop="name">2Kin</span>
-											</a>
-										</span>
-										<time itemprop="datePublished" datetime="2013-02-05T11:52:02+02:00">le 5 février 2013 à 11:52</time><br>
-										<h3 itemprop="headline">Tournoi de capture de sashimono ce dimanche 10 février</h3>
-									</header>
-									<div class="content" itemprop="articleBody">
-										<p>La lutte était âpre et acharnée. Le terrain gagné le matin était perdu le soir même. Sans risques : pas de gloires, ni de victoires.<br/><br/>
-										Une seule option restait inexplorée. Pour en terminer avec ces luttes sans fins, les maitres de clan projetaient de subtiliser le Sashimono adverse pour saper leur moral.<br/><br/>
-										Et c'est ainsi que ce dimanche 10 février à 16H aura lieu un tournoi par équipe de 3 joueurs chacune, en partie "capture de Sashimono"<br/><br/></p>
-									</div>
-									<footer>
-										<a href="message.html" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
-									</footer>
-								</article>
-
-							</div>
+						{% if loop.index is divisibleby(2) and not loop.last %}
+						</div>
+						<div class="row-fluid">
+						{% endif %}
+						{% endfor %}
 						</div>
 					</section>
 					<aside class="span4">
@@ -242,10 +61,7 @@
 							<input type="submit" name="s" value="Ok !" class="span2">
 						</form>
 
-						<section>
-							<h4>Derniers messages</h4>
-							{% include 'NinjaTookenForumBundle:Default:derniersMessages.html.twig' %}
-						</section>
+						{{ render(controller('NinjaTookenForumBundle:Default:recentComments', {'max': 10, 'forum': 0})) }}
 
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
 

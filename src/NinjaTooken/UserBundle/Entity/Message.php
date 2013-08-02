@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Message
  *
- * @ORM\Table()
+ * @ORM\Table(name="nt_message")
  * @ORM\Entity
  */
 class Message
@@ -20,6 +20,13 @@ class Message
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="old_id", type="integer")
+     */
+    private $old_id;
 
     /**
      * @var string
@@ -180,5 +187,28 @@ class Message
     public function getHasDeleted()
     {
         return $this->hasDeleted;
+    }
+
+    /**
+     * Set old_id
+     *
+     * @param integer $oldId
+     * @return Message
+     */
+    public function setOldId($oldId)
+    {
+        $this->old_id = $oldId;
+
+        return $this;
+    }
+
+    /**
+     * Get old_id
+     *
+     * @return integer 
+     */
+    public function getOldId()
+    {
+        return $this->old_id;
     }
 }

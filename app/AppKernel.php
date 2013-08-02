@@ -22,9 +22,6 @@ class AppKernel extends Kernel
 
 			new FOS\UserBundle\FOSUserBundle(),
 			new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
-			new FOS\RestBundle\FOSRestBundle(),
-			new FOS\CommentBundle\FOSCommentBundle(),
-			new JMS\SerializerBundle\JMSSerializerBundle($this),
             new NinjaTooken\ForumBundle\NinjaTookenForumBundle(),
             new NinjaTooken\UserBundle\NinjaTookenUserBundle(),
 
@@ -37,6 +34,7 @@ class AppKernel extends Kernel
             new NinjaTooken\CommonBundle\NinjaTookenCommonBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new NinjaTooken\ChatBundle\NinjaTookenChatBundle(),
+            new FOS\FacebookBundle\FOSFacebookBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Clan
  *
- * @ORM\Table()
+ * @ORM\Table(name="nt_clan")
  * @ORM\Entity(repositoryClass="NinjaTooken\ClanBundle\Entity\ClanRepository")
  */
 class Clan
@@ -21,6 +21,18 @@ class Clan
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="old_id", type="integer")
+     */
+    private $old_id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="NinjaTooken\ClanBundle\Entity\ClanUtilisateur", mappedBy="clan", cascade={"persist", "remove"})
+     */
+    private $membres;
 
     /**
      * @Gedmo\Slug(fields={"nom"})
@@ -270,5 +282,68 @@ class Clan
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set old_id
+     *
+     * @param integer $oldId
+     * @return Clan
+     */
+    public function setOldId($oldId)
+    {
+        $this->old_id = $oldId;
+
+        return $this;
+    }
+
+    /**
+     * Get old_id
+     *
+     * @return integer 
+     */
+    public function getOldId()
+    {
+        return $this->old_id;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->membres = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add membres
+     *
+     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $membres
+     * @return Clan
+     */
+    public function addMembre(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $membres)
+    {
+        $this->membres[] = $membres;
+
+        return $this;
+    }
+
+    /**
+     * Remove membres
+     *
+     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $membres
+     */
+    public function removeMembre(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $membres)
+    {
+        $this->membres->removeElement($membres);
+    }
+
+    /**
+     * Get membres
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMembres()
+    {
+        return $this->membres;
     }
 }

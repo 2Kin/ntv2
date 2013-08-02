@@ -2,27 +2,60 @@
 namespace NinjaTooken\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\CommentBundle\Entity\Thread as BaseThread;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
- * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
+ * @ORM\Table(name="nt_thread")
  */
-class Thread extends BaseThread
+class Thread
 {
     /**
-     * @var string $id
+     * @var integer
      *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\Column(type="string")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="old_id", type="integer")
+     */
+    private $old_id;
+
+    /**
+     * Tells if the thread is viewable on top of list
+     *
+     * @var bool
+     *
+     * @ORM\Column(name="is_postit", type="boolean")
+     */
+    private $isPostit = false;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_event", type="boolean")
+     */
+    private $isEvent;
+
+    /**
+     * Tells if new comments can be added in this thread
+     *
+     * @var bool
+     *
+     * @ORM\Column(name="is_commentable", type="boolean")
+     */
+    private $isCommentable = true;
 
     /**
      * forum
      *
      * @var Forum
+     *
      * @ORM\ManyToOne(targetEntity="Forum")
      */
     private $forum;
@@ -33,6 +66,13 @@ class Thread extends BaseThread
      * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_ajout", type="datetime")
+     */
+    private $dateAjout;
 
     /**
      * @Gedmo\Slug(fields={"nom"})
@@ -56,22 +96,43 @@ class Thread extends BaseThread
     private $urlVideo;
 
     /**
-     * Set id
-     *
-     * @param string $id
-     * @return Thread
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
+    * Author of the comment
+    *
+    * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+    * @var User
+    */
+    private $author;
 
-        return $this;
-    }
+    /**
+     * Denormalized number of comments
+     *
+     * @var integer
+     *
+     * @ORM\Column(name="num_comments", type="integer")
+     */
+    private $numComments = 0;
+
+    /**
+     * Denormalized date of the last comment
+     *
+     * @var DateTime
+     *
+     * @ORM\Column(name="last_comment_at", type="datetime")
+     */
+    private $lastCommentAt = null;
+
+    /**
+     * Denormalized author of the last comment
+     *
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     * @var User
+     */
+    private $lastCommentBy = null;
 
     /**
      * Get id
      *
-     * @return string 
+     * @return integer 
      */
     public function getId()
     {
@@ -191,5 +252,207 @@ class Thread extends BaseThread
     public function getUrlVideo()
     {
         return $this->urlVideo;
+    }
+
+    /**
+     * Set old_id
+     *
+     * @param integer $oldId
+     * @return Thread
+     */
+    public function setOldId($oldId)
+    {
+        $this->old_id = $oldId;
+
+        return $this;
+    }
+
+    /**
+     * Get old_id
+     *
+     * @return integer 
+     */
+    public function getOldId()
+    {
+        return $this->old_id;
+    }
+
+    /**
+     * Set dateAjout
+     *
+     * @param \DateTime $dateAjout
+     * @return Forum
+     */
+    public function setDateAjout($dateAjout)
+    {
+        $this->dateAjout = $dateAjout;
+
+        return $this;
+    }
+
+    /**
+     * Get dateAjout
+     *
+     * @return \DateTime 
+     */
+    public function getDateAjout()
+    {
+        return $this->dateAjout;
+    }
+
+    /**
+     * Set isEvent
+     *
+     * @param boolean $isEvent
+     * @return Forum
+     */
+    public function setIsEvent($isEvent)
+    {
+        $this->isEvent = $isEvent;
+
+        return $this;
+    }
+
+    /**
+     * Get isEvent
+     *
+     * @return boolean 
+     */
+    public function getIsEvent()
+    {
+        return $this->isEvent;
+    }
+
+    /**
+    * Set author's name
+    * 
+    * @param UserInterface $author 
+    */
+    public function setAuthor(\NinjaTooken\UserBundle\Entity\User $author)
+    {
+        $this->author = $author;
+    }
+
+    /**
+    * Get author's name
+    * 
+    * @return type 
+    */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+
+    /**
+     * Set isPostit
+     *
+     * @param boolean $isPostit
+     * @return Thread
+     */
+    public function setIsPostit($isPostit)
+    {
+        $this->isPostit = $isPostit;
+
+        return $this;
+    }
+
+    /**
+     * Get isPostit
+     *
+     * @return boolean 
+     */
+    public function getIsPostit()
+    {
+        return $this->isPostit;
+    }
+
+    /**
+     * Set lastCommentBy
+     *
+     * @param \NinjaTooken\UserBundle\Entity\User $lastCommentBy
+     * @return Thread
+     */
+    public function setLastCommentBy(\NinjaTooken\UserBundle\Entity\User $lastCommentBy = null)
+    {
+        $this->lastCommentBy = $lastCommentBy;
+
+        return $this;
+    }
+
+    /**
+     * Get lastCommentBy
+     *
+     * @return \NinjaTooken\UserBundle\Entity\User 
+     */
+    public function getLastCommentBy()
+    {
+        return $this->lastCommentBy;
+    }
+
+    /**
+     * Gets the number of comments
+     *
+     * @return integer
+     */
+    public function getNumComments()
+    {
+        return $this->numComments;
+    }
+
+    /**
+     * Sets the number of comments
+     *
+     * @param integer $numComments
+     */
+    public function setNumComments($numComments)
+    {
+        $this->numComments = intval($numComments);
+    }
+
+    /**
+     * Increments the number of comments by the supplied
+     * value.
+     *
+     * @param  integer $by Value to increment comments by
+     * @return integer The new comment total
+     */
+    public function incrementNumComments($by = 1)
+    {
+        return $this->numComments += intval($by);
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getLastCommentAt()
+    {
+        return $this->lastCommentAt;
+    }
+
+    /**
+     * @param  DateTime
+     * @return null
+     */
+    public function setLastCommentAt($lastCommentAt)
+    {
+        $this->lastCommentAt = $lastCommentAt;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCommentable()
+    {
+        return $this->isCommentable;
+    }
+
+    /**
+     * @param  bool
+     * @return null
+     */
+    public function setCommentable($isCommentable)
+    {
+        $this->isCommentable = (bool) $isCommentable;
     }
 }

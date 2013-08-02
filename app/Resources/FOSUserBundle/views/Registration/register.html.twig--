@@ -1,0 +1,72 @@
+{% form_theme form _self %}
+
+{% block form_widget_compound %}
+{% spaceless %}
+	{% if form.parent is empty %}
+	    {{ form_errors(form) }}
+	{% endif %}
+	{{ block('form_rows') }}
+	{{ form_rest(form) }}
+{% endspaceless %}
+{% endblock form_widget_compound %}
+
+{% block choice_widget_expanded %}
+{% spaceless %}
+    {% for child in form %}
+	{{ form_widget(child) }}
+	{{ form_label(child) }}
+    {% endfor %}
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+
+{% block checkbox_widget %}
+{% spaceless %}
+    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    <label  for="{{ id }}">{{ label|trans }}</label>
+{% endspaceless %}
+{% endblock checkbox_widget %}
+
+{% block form_row %}
+    <div class="row-fluid">
+	<div class="span3 offset1">
+	{{ form_label(form) }}
+	</div>
+	<div class="span8">
+	{{ form_widget(form) }}
+	{{ form_errors(form) }}
+	</div>
+    </div>
+{% endblock form_row %}
+
+{% extends "::layout.html.twig" %}
+
+{% block title %}NinjaTooken - Créer mon ninja{% endblock %}
+{% block description %}NinjaTooken - Créer mon ninja{% endblock %}
+{% block keywords %}NinjaTooken - Créer mon ninja{% endblock %}
+
+
+{% block breadcrumbs1 %}{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('fos_user_registration_register') }}" itemprop="url">
+									<span itemprop="title">Crée ton ninja</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+				<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full">
+					<h3>Créé ton compte pour sauvegarder ton expérience, intégrer un clan, ou participer aux tournois NinjaTooken.</h3>
+
+					{{ form_widget(form) }}
+
+
+					<div class="row-fluid">
+						<div class="span8 offset4">
+							<input type="submit" value="Jouer" class="button">
+						</div>
+					</div>
+				</form>
+{% endblock %}

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * MessageUser
  *
- * @ORM\Table()
+ * @ORM\Table(name="nt_messageuser")
  * @ORM\Entity
  */
 class MessageUser
@@ -20,6 +20,13 @@ class MessageUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var Message
+     *
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\Message")
+     */
+    private $message;
 
     /**
      * @var User
@@ -120,5 +127,28 @@ class MessageUser
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set message
+     *
+     * @param \NinjaTooken\UserBundle\Entity\Message $message
+     * @return MessageUser
+     */
+    public function setMessage(\NinjaTooken\UserBundle\Entity\Message $message = null)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    /**
+     * Get message
+     *
+     * @return \NinjaTooken\UserBundle\Entity\Message 
+     */
+    public function getMessage()
+    {
+        return $this->message;
     }
 }

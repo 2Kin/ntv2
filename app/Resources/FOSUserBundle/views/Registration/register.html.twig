@@ -1,0 +1,88 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}NinjaTooken - Créer mon ninja{% endblock %}
+{% block description %}NinjaTooken - Créer mon ninja{% endblock %}
+{% block keywords %}NinjaTooken - Créer mon ninja{% endblock %}
+
+
+{% block breadcrumbs1 %}{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('fos_user_registration_register') }}" itemprop="url">
+									<span itemprop="title">Crée ton ninja</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+				<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full">
+					<h3>Créé ton compte pour sauvegarder ton expérience, intégrer un clan, ou participer aux tournois NinjaTooken.</h3>
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							<label class="libelle required" for="pseudo">Pseudo</label>
+						</div>
+						<div class="span8">
+							<input type="text" name="fos_user_registration_form[username]" id="pseudo" value="" required>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							<label class="libelle required" for="pwd">Mot de passe</label>
+						</div>
+						<div class="span8">
+							<input type="text" name="fos_user_registration_form[plainPassword][first]" id="pwd" value="" required>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							<label class="libelle required" for="pwdRepeat">Répéter</label>
+						</div>
+						<div class="span8">
+							<input type="text" name="fos_user_registration_form[plainPassword][second]" id="pwdRepeat" value="" required>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							<label class="libelle required" for="mail">Mail</label>
+						</div>
+						<div class="span8">
+							<input type="email" name="fos_user_registration_form[email]" id="mail" value="" required>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							<label class="libelle required">Sexe</label>
+						</div>
+						<div class="span8">
+							<input type="radio" name="fos_user_registration_form[sexe]" value="H" id="input_sexe_h" checked><label for="input_sexe_h"> Homme</label>
+							<input type="radio" name="fos_user_registration_form[sexe]" value="F" id="input_sexe_f"><label for="input_sexe_f"> Femme</label>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							<label class="libelle required">Langue</label>
+						</div>
+						<div class="span8">
+							<input type="radio" name="fos_user_registration_form[langue]" value="fr" id="input_langue_fr" checked><label for="input_langue_fr"> Français</label>
+							<input type="radio" name="fos_user_registration_form[langue]" value="en" id="input_langue_en"><label for="input_langue_en"> English</label>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span8 offset4">
+							<input type="checkbox" name="fos_user_registration_form[receive_newsletter]" value="1" id="input_news"><label for="input_news"> J'accepte de recevoir par mail les news du site</label>
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span8 offset4">
+							<input type="checkbox" name="fos_user_registration_form[receive_avertissement]" value="1" id="input_mail"><label for="input_mail"> Je souhaite être averti par mail de l'arrivée de nouveaux messages</label>
+						</div>
+					</div>
+					{{ form_widget(form._token) }}
+					<div class="row-fluid">
+						<div class="span8 offset4">
+							<input type="submit" value="Jouer" class="button">
+						</div>
+					</div>
+				</form>
+{% endblock %}

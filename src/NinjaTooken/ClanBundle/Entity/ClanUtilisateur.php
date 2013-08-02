@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ClanUtilisateur
  *
- * @ORM\Table()
+ * @ORM\Table(name="nt_clanutilisateur")
  * @ORM\Entity
  */
 class ClanUtilisateur
@@ -22,18 +22,19 @@ class ClanUtilisateur
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", cascade={"persist"}, inversedBy="clan")
+     * @var User
      */
-    private $user;
+    private $membre;
 
     /**
-    * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
-    * @var User
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", cascade={"persist"}, inversedBy="recruteur")
+     * @var User
      */
     private $recruteur;
 
     /**
-     * @ORM\OneToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan", cascade={"persist"})
      */
     private $clan;
 
@@ -116,49 +117,56 @@ class ClanUtilisateur
     }
 
     /**
-     * Set user
+     * Set canEditClan
      *
-     * @param \NinjaTooken\UserBundle\Entity\User $user
+     * @param boolean $canEditClan
      * @return ClanUtilisateur
      */
-    public function setUser(\NinjaTooken\UserBundle\Entity\User $user = null)
+    public function setCanEditClan($canEditClan)
     {
-        $this->user = $user;
+        $this->canEditClan = $canEditClan;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get canEditClan
      *
-     * @return \NinjaTooken\UserBundle\Entity\User 
+     * @return boolean 
      */
-    public function getUser()
+    public function getCanEditClan()
     {
-        return $this->user;
+        return $this->canEditClan;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->recruteurs = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Set recruteur
+     * Set membre
      *
-     * @param \NinjaTooken\UserBundle\Entity\User $recruteur
+     * @param \NinjaTooken\UserBundle\Entity\User $membre
      * @return ClanUtilisateur
      */
-    public function setRecruteur(\NinjaTooken\UserBundle\Entity\User $recruteur = null)
+    public function setMembre(\NinjaTooken\UserBundle\Entity\User $membre = null)
     {
-        $this->recruteur = $recruteur;
+        $this->membre = $membre;
 
         return $this;
     }
 
     /**
-     * Get recruteur
+     * Get membre
      *
      * @return \NinjaTooken\UserBundle\Entity\User 
      */
-    public function getRecruteur()
+    public function getMembre()
     {
-        return $this->recruteur;
+        return $this->membre;
     }
 
     /**
@@ -185,25 +193,25 @@ class ClanUtilisateur
     }
 
     /**
-     * Set canEditClan
+     * Set recruteur
      *
-     * @param boolean $canEditClan
+     * @param \NinjaTooken\UserBundle\Entity\User $recruteur
      * @return ClanUtilisateur
      */
-    public function setCanEditClan($canEditClan)
+    public function setRecruteur(\NinjaTooken\UserBundle\Entity\User $recruteur = null)
     {
-        $this->canEditClan = $canEditClan;
+        $this->recruteur = $recruteur;
 
         return $this;
     }
 
     /**
-     * Get canEditClan
+     * Get recruteur
      *
-     * @return boolean 
+     * @return \NinjaTooken\UserBundle\Entity\User 
      */
-    public function getCanEditClan()
+    public function getRecruteur()
     {
-        return $this->canEditClan;
+        return $this->recruteur;
     }
 }

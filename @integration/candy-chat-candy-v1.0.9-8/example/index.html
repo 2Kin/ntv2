@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Candy - Chats are not dead yet</title>
+	<link rel="shortcut icon" href="../res/img/favicon.png" type="image/gif" />
+	<link rel="stylesheet" type="text/css" href="../res/default.css" />
+	
+	<script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+	<script src="../libs/libs.bundle.js"></script>
+	<script src="../candy.bundle.js"></script>
+	<script>
+		$(document).ready(function() {
+			Candy.init('http://chat.jabberfr.org/bind/', {
+				core: {
+					debug: false,
+					autojoin: [
+						'test@chat.jabberfr.org'/*,
+						'jabberfr@chat.jabberfr.org',
+						'debian-fr@chat.jabberfr.org',
+						'apinc@chat.jabberfr.org'*/
+					]
+				},
+				view: {
+					resources: '../res/',
+					language: 'fr'
+				}
+			});
+			
+			//Candy.Core.connect();
+			Candy.Core.connect('im.apinc.org', null, 'test2');
+		});
+	</script>
+</head>
+<body>
+	<div id="candy"></div>
+</body>
+</html>

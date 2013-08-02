@@ -4,11 +4,26 @@ namespace NinjaTooken\CommonBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use NinjaTooken\GameBundle\NinjaTookenGameBundle;
+
 class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('NinjaTookenCommonBundle:Default:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+
+        $repo1 = $em->getRepository('NinjaTookenForumBundle:Thread');
+        $repo2 = $em->getRepository('NinjaTookenForumBundle:Forum');
+
+        $forum = $repo2->findOneBy(array('slug' => 'nouveautes'));
+
+        $threads = $repo1->findBy(
+            array('forum' => $forum),
+            array('dateAjout' => 'DESC'),
+            10,0
+        );
+
+        return $this->render('NinjaTookenCommonBundle:Default:index.html.twig', array('threads' => $threads));
     }
 
     public function jouerAction()

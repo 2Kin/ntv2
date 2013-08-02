@@ -1,0 +1,67 @@
+{% set is_admin = false %}
+{% for role in user.getRoles() %} 
+    {% if role == 'ROLE_ADMIN' %}{% set is_admin = true %}{% endif %}
+    {% if role == 'ROLE_SUPER_ADMIN' %}{% set is_admin = true %}{% endif %}
+{% endfor %}
+<div class="signature{% if is_admin %} admin{% endif %}" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+	<div class="row-fluid">
+		<div class="resume span4">
+			{% if user.avatar is empty %}
+				{% if user.sexe == "H" %}
+					{% set avatar = asset('bundles/ninjatookenuser/images/boyz.jpg') %}
+				{% else %}
+					{% set avatar = asset('bundles/ninjatookenuser/images/girlz.jpg') %}
+				{% endif %}
+			{% else %}
+				{% set avatar = asset('avatar/' ~ user.avatar) %}
+			{% endif %}
+			<img src="{{ avatar }}" itemprop="image" class="pull-left" alt="">
+			<a href="{{ path('ninja_tooken_user_fiche', {user_nom:user.slug}) }}" rel="author" itemprop="url"><span itemprop="name">{{ user.username }}</span></a><br>
+			<span class="suiton">{{ class[user.ninja.classe] }}</span>{% if user.ninja.grade>0 %} - <span itemprop="award">{{ user.ninja.grade }}° dan</span>{% endif %}
+		</div>
+		<div class="span8">
+			<div class="row-fluid">
+				<div class="experience span7">
+					<div class="xp">
+						lvl.{{ user.level }}<span class="pull-right">{{ user.ninja.experience|number_format(0, '', '.') }} xp</span>
+					</div>
+					<div class="barre"><div class="complete" style="width:{{ '%.2f'|format(user.ratio) }}%"></div></div>
+				</div>
+				<div class="nfo right span5">
+					<strong>{{ user.classement }}°</strong> sur {{ user.total }} ninjas
+				</div>
+			</div>
+			{% if user.ninja.jutsuAcierRenforce>0 %}<i class="jutsu acierRenforce"></i>{% endif %}
+			{% if user.ninja.jutsuChakraVie>0 %}<i class="jutsu chakraVie"></i>{% endif %}
+			{% if user.ninja.jutsuMarcherEau>0 %}<i class="jutsu marcherEau"></i>{% endif %}
+			{% if user.ninja.jutsuPhoenix>0 %}<i class="jutsu phoenix"></i>{% endif %}
+			{% if user.ninja.jutsuResistanceExplosion>0 %}<i class="jutsu resistanceExplosion"></i>{% endif %}
+			{% if user.ninja.jutsuTeleportation>0 %}<i class="jutsu teleportation"></i>{% endif %}
+			{% if user.ninja.jutsuVague>0 %}<i class="jutsu vague"></i>{% endif %}
+			{% if user.ninja.jutsuBouclier>0 %}<i class="jutsu bouclier"></i>{% endif %}
+			{% if user.ninja.jutsuDeflagration>0 %}<i class="jutsu deflagration"></i>{% endif %}
+			{% if user.ninja.jutsuMultishoot>0 %}<i class="jutsu multishoot"></i>{% endif %}
+			{% if user.ninja.jutsuPieux>0 %}<i class="jutsu pieux"></i>{% endif %}
+			{% if user.ninja.jutsuMetamorphose>0 %}<i class="jutsu metamorphose"></i>{% endif %}
+			{% if user.ninja.jutsuTornade>0 %}<i class="jutsu tornade"></i>{% endif %}
+			{% if user.ninja.jutsuBoule>0 %}<i class="jutsu boule"></i>{% endif %}
+			{% if user.ninja.jutsuKusanagi>0 %}<i class="jutsu kusanagi"></i>{% endif %}
+			{% if user.ninja.jutsuMarcherMur>0 %}<i class="jutsu marcherMur"></i>{% endif %}
+			{% if user.ninja.jutsuAcierRenforce>0 %}<i class="jutsu protection"></i>{% endif %}
+			{% if user.ninja.jutsuDoubleSaut>0 %}<i class="jutsu doubleSaut"></i>{% endif %}
+			{% if user.ninja.jutsuInvisibilite>0 %}<i class="jutsu transparence"></i>{% endif %}
+		</div>
+	</div>
+	<div class="row-fluid">
+		{% if user.clan is not empty %}
+		<div class="nfo span6" itemprop="memberOf" itemtype="http://schema.org/Organization">
+			 <a href="{{ path('ninja_tooken_clan', {clan_nom:user.clan.clan.slug}) }}" itemprop="url"><span itemprop="name">{{ user.clan.clan.nom }}</span></a> - <strong itemprop="jobTitle">{{ user.clan.droit }}</strong>
+		</div>
+		<div class="nfo right span6" itemprop="award">
+		{% else %}
+		<div class="nfo right span12" itemprop="award">
+		{% endif %}
+			<strong>{{ user.ninja.missionCourse }}</strong> courses<strong> / {{ user.ninja.missionAssassinnat }}</strong> assassinats
+		</div>
+	</div>
+</div>

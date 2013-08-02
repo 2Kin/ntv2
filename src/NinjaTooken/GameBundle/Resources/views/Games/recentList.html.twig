@@ -1,0 +1,10 @@
+                        <p><strong>Parties en cours</strong>
+			{% if games is not empty %}
+			{% for game in games %}
+			{{ game.carte }} #{{ game.partie }}{% if not loop.last %},{% endif %}
+			{% endfor %}
+                        ... <a href="{{ path('ninja_tooken_game_parties') }}">Toutes les parties &raquo;</a>
+			{% else %}
+			Il n'y a actuellement pas de partie.
+			{% endif %}
+			</p>

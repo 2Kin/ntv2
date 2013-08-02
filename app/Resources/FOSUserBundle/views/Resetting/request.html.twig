@@ -1,0 +1,39 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}NinjaTooken - Créer mon ninja{% endblock %}
+{% block description %}NinjaTooken - Créer mon ninja{% endblock %}
+{% block keywords %}NinjaTooken - Créer mon ninja{% endblock %}
+
+
+{% block breadcrumbs1 %}{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('fos_user_resetting_request') }}" itemprop="url">
+									<span itemprop="title">Mot de passe oublié</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+				<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" accept-charset="UTF-8" class="full">
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							{% if invalid_username is defined %}
+								<p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
+							{% endif %}
+							<label class="libelle required" for="username">{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}</label>
+						</div>
+						<div class="span8">
+							<p class="note">Tu as oublié ton mot de passe ? Entre ton pseudo ou ton adresse email ci-dessous, et on t'enverra un mail te permettant de le réinitialiser.</p>
+							<input type="text" id="username" name="username" required="required" />
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span8 offset4">
+							<input type="submit" value="Réinitialiser" class="button">
+							<p>Tu n'as pas encore de compte ? <a href="{{ path('fos_user_registration_register') }}">Inscrits toi</a> !</p>
+						</div>
+					</div>
+				</form>
+{% endblock %}

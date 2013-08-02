@@ -24,94 +24,24 @@
 					<aside class="span4">
 						<a href="{{ path('ninja_tooken_user_messagerie_ajouter') }}" class="button mini">Nouveau Message</a><br><br>
 						<h3><i class="icon-inbox"></i> Boîte <a href="#" class="actif">Réception</a> - <a href="#"><i class="icon-reply"></i> Envoie</a></h3>
-
+						{% if messages is not empty %}
+							{% set dateActu = '' %}
+							{% for message in messages %}
+								{% if dateActu|date("m/d/Y") != message.dateAjout|date("m/d/Y") %}
+									{% set dateActu = message.dateAjout %}
+									{% if dateActu|date("m/d/Y") == "now"|date("m/d/Y") %}
 						<h4>Aujourd'hui</h4>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-
+									{% elseif dateActu|date("m/d/Y") == "yesterday"|date("m/d/Y") %}
 						<h4>Hier</h4>
+									{% else %}
+						<h4>{{ dateActu|localizeddate('full', 'none', app.request.locale) }}</h4>
+									{% endif %}
+								{% endif %}
 						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
+							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {message_id:message.id}) }}" class="pull-right"><i class="icon-trash"></i></a>
+							<a href="{{ path('ninja_tooken_user_messagerie_voir', {message_id:message.id}) }}"{% if app.request.requesturi==path('ninja_tooken_user_messagerie_voir', {message_id:message.id}) %} class="actif"{% endif %}><i class="icon-eye-open"></i> {{ message.dateAjout|localizeddate('none', 'short', app.request.locale) }} {{ message.user.username }}, {{ message.nom }}</a>
 						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-
-						<h4>Jeudi 16 avril 2013</h4>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-
-						<h4>Mardi 14 avril 2013</h4>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {id:0}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {id:0}) }}" class="actif"><i class="icon-eye-open"></i> 19:30 2Kin, Re : salut</a>
-						</div>
+							{% endfor %}
 
 						<div class="pagination">
 							<ul>
@@ -124,6 +54,9 @@
 								<li><a href="#">&raquo;</a></li>
 							</ul>
 						</div>
+						{% else %}
+						<h4>Vous n'avez pas reçu de message</h4>
+						{% endif %}
 					</aside>
 					<section class="span8">
 						<article itemscope itemtype="http://schema.org/Article">

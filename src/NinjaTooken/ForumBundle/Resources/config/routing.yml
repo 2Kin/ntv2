@@ -1,3 +1,7 @@
+ninja_tooken_event:
+    pattern:  /event
+    defaults: { _controller: NinjaTookenForumBundle:Default:event }
+
 ninja_tooken_forum:
     pattern:  /forum
     defaults: { _controller: NinjaTookenForumBundle:Default:forum }
@@ -9,15 +13,15 @@ ninja_tooken_topic:
         page:  \d*
 
 ninja_tooken_topic_ajouter:
-    pattern:  /forum/ajouter
+    pattern:  /forum/{topic_nom}/ajouter/
     defaults: { _controller: NinjaTookenForumBundle:Default:topicAjouter }
 
 ninja_tooken_topic_modifier:
-    pattern:  /forum/modifier/{topic_nom}
+    pattern:  /forum/{topic_nom}/modifier/
     defaults: { _controller: NinjaTookenForumBundle:Default:topicModifier }
 
 ninja_tooken_topic_supprimer:
-    pattern:  /forum/supprimer/{topic_nom}
+    pattern:  /forum/{topic_nom}/supprimer/
     defaults: { _controller: NinjaTookenForumBundle:Default:topicSupprimer }
 
 ninja_tooken_message:
@@ -27,19 +31,13 @@ ninja_tooken_message:
         page:  \d*
 
 ninja_tooken_message_ajouter:
-    pattern:  /forum/ajouter/{topic_nom}
+    pattern:  /forum/{topic_nom}/ajouter/
     defaults: { _controller: NinjaTookenForumBundle:Default:messageAjouter }
 
 ninja_tooken_message_modifier:
-    pattern:  /forum/modifier/{topic_nom}/{message_nom}
+    pattern:  /forum/{topic_nom}/{message_nom}/modifier/
     defaults: { _controller: NinjaTookenForumBundle:Default:messageModifier }
 
 ninja_tooken_message_supprimer:
     pattern:  /forum/supprimer/{topic_nom}/{message_nom}
     defaults: { _controller: NinjaTookenForumBundle:Default:messageSupprimer }
-
-fos_comment_api:
-    type: rest
-    resource: "@FOSCommentBundle/Resources/config/routing.yml"
-    prefix: /forum/api
-    defaults: { _format: html }

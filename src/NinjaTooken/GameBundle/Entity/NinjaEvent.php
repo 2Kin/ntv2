@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * NinjaEvent
  *
- * @ORM\Table()
+ * @ORM\Table(name="nt_ninjaevent")
  * @ORM\Entity
  */
 class NinjaEvent

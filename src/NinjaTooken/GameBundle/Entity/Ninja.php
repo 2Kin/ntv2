@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Ninja
  *
- * @ORM\Table()
+ * @ORM\Table(name="nt_ninja")
  * @ORM\Entity
  */
 class Ninja
@@ -24,7 +24,7 @@ class Ninja
     /**
     * user of the ninja
     *
-    * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+    * @ORM\OneToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", inversedBy="ninja")
     * @var User
     */
     private $user;

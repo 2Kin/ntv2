@@ -2,17 +2,12 @@
 namespace NinjaTooken\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\CommentBundle\Model\SignedCommentInterface;
-use FOS\CommentBundle\Model\RawCommentInterface;
-use FOS\CommentBundle\Entity\Comment as BaseComment;
-use Symfony\Component\Security\Core\User\UserInterface;
-use NinjaTooken\UserBundle\Entity\User;
 
 /**
  * @ORM\Entity
- * @ORM\ChangeTrackingPolicy("DEFERRED_EXPLICIT")
+ * @ORM\Table(name="nt_comment")
  */
-class Comment extends BaseComment implements SignedCommentInterface, RawCommentInterface
+class Comment
 {
     /**
      * @ORM\Id
@@ -25,15 +20,25 @@ class Comment extends BaseComment implements SignedCommentInterface, RawCommentI
      * Thread of this comment
      *
      * @var Thread
-     * @ORM\ManyToOne(targetEntity="Thread")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\ForumBundle\Entity\Thread")
      */
-    protected $thread;
+    private $thread;
 
     /**
-     * @ORM\Column(name="rawBody", type="text", nullable=true)
-     * @var string
+     * @var DateTime
+     *
+     * @ORM\Column(name="date_ajout", type="datetime")
      */
-    protected $rawBody;
+    private $dateAjout;
+
+    /**
+     * Comment text
+     *
+     * @var string
+     *
+     * @ORM\Column(name="body", type="text")
+     */
+    private $body;
 
     /**
     * Author of the comment
@@ -41,7 +46,12 @@ class Comment extends BaseComment implements SignedCommentInterface, RawCommentI
     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
     * @var User
     */
-    protected $author;
+    private $author;
+
+    public function __construct()
+    {
+        $this->dateAjout = new DateTime();
+    }
 
     /**
     * Set author's name
@@ -78,20 +88,54 @@ class Comment extends BaseComment implements SignedCommentInterface, RawCommentI
     }
 
     /**
-     * Gets the raw processed html.
-     *
      * @return string
      */
-    public function getRawBody(){
-		return $this->rawBody;
-	}
+    public function getBody()
+    {
+        return $this->body;
+    }
 
     /**
-     * Sets the processed body with raw html.
-     *
-     * @param string $rawBody
+     * @param  string
+     * @return null
      */
-    public function setRawBody($rawBody){
-		$this->rawBody = $rawBody;
-	}
+    public function setBody($body)
+    {
+        $this->body = $body;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDateAjout()
+    {
+        return $this->dateAjout;
+    }
+
+    /**
+     * Sets the creation date
+     * @param DateTime $dateAjout
+     */
+    public function setDateAjout(DateTime $dateAjout)
+    {
+        $this->dateAjout = $dateAjout;
+    }
+
+    /**
+     * @return NinjaTooken\ForumBundle\Entity\Thread
+     */
+    public function getThread()
+    {
+        return $this->thread;
+    }
+
+    /**
+     * @param ThreadInterface $thread
+     *
+     * @return void
+     */
+    public function setThread(NinjaTooken\ForumBundle\Entity\Thread $thread)
+    {
+        $this->thread = $thread;
+    }
 }

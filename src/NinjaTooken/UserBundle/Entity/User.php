@@ -7,7 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(name="nt_fos_user")
  */
 class User extends BaseUser
 {
@@ -17,6 +17,35 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\OneToOne(targetEntity="NinjaTooken\GameBundle\Entity\Ninja", mappedBy="user")
+     */
+    private $ninja;
+
+    /**
+     * @ORM\OneToOne(targetEntity="NinjaTooken\ClanBundle\Entity\ClanUtilisateur", mappedBy="membre", cascade={"persist", "remove"})
+     */
+    private $clan;
+
+    /**
+     * @ORM\OneToMany(targetEntity="NinjaTooken\ClanBundle\Entity\ClanUtilisateur", mappedBy="recruteurs", cascade={"persist", "remove"})
+     */
+    private $recruteur;
+
+   /**
+     * @var string
+     *
+     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
+     */
+    private $facebookId;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="old_id", type="integer")
+     */
+    private $old_id;
 
     /**
      * @Gedmo\Slug(fields={"username"})
@@ -58,6 +87,20 @@ class User extends BaseUser
      * @ORM\Column(name="avatar", type="string", length=255)
      */
     private $avatar;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="receive_newsletter", type="boolean")
+     */
+    private $receive_newsletter;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="receive_avertissement", type="boolean")
+     */
+    private $receive_avertissement;
 
     /**
      * @var string
@@ -241,5 +284,211 @@ class User extends BaseUser
     public function getOldUsername()
     {
         return $this->oldUsername;
+    }
+
+    /**
+     * Set receive_newsletter
+     *
+     * @param boolean $receiveNewsletter
+     * @return User
+     */
+    public function setReceiveNewsletter($receiveNewsletter)
+    {
+        $this->receive_newsletter = $receiveNewsletter;
+
+        return $this;
+    }
+
+    /**
+     * Get receive_newsletter
+     *
+     * @return boolean 
+     */
+    public function getReceiveNewsletter()
+    {
+        return $this->receive_newsletter;
+    }
+
+    /**
+     * Set receive_avertissement
+     *
+     * @param boolean $receiveAvertissement
+     * @return User
+     */
+    public function setReceiveAvertissement($receiveAvertissement)
+    {
+        $this->receive_avertissement = $receiveAvertissement;
+
+        return $this;
+    }
+
+    /**
+     * Get receive_avertissement
+     *
+     * @return boolean 
+     */
+    public function getReceiveAvertissement()
+    {
+        return $this->receive_avertissement;
+    }
+
+    /**
+     * Set old_id
+     *
+     * @param integer $oldId
+     * @return User
+     */
+    public function setOldId($oldId)
+    {
+        $this->old_id = $oldId;
+
+        return $this;
+    }
+
+    /**
+     * Get old_id
+     *
+     * @return integer 
+     */
+    public function getOldId()
+    {
+        return $this->old_id;
+    }
+
+
+    public function serialize()
+    {
+        return serialize(array($this->facebookId, parent::serialize()));
+    }
+
+    public function unserialize($data)
+    {
+        list($this->facebookId, $parentData) = unserialize($data);
+        parent::unserialize($parentData);
+    }
+
+    /**
+     * Get the full name of the user (first + last name)
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->getFirstname() . ' ' . $this->getLastname();
+    }
+
+    /**
+     * @param string $facebookId
+     * @return void
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebookId = $facebookId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFacebookId()
+    {
+        return $this->facebookId;
+    }
+
+    /**
+     * @param Array
+     */
+    public function setFBData($fbdata)
+    {
+        if (isset($fbdata['id'])) {
+            $this->setFacebookId($fbdata['id']);
+            $this->addRole('ROLE_FACEBOOK');
+        }
+        if (isset($fbdata['first_name'])) {
+            $this->setFirstname($fbdata['first_name']);
+        }
+        if (isset($fbdata['last_name'])) {
+            $this->setSurname($fbdata['last_name']);
+        }
+        if (isset($fbdata['email'])) {
+            $this->setEmail($fbdata['email']);
+        }
+    }
+
+    /**
+     * Set ninja
+     *
+     * @param \NinjaTooken\GameBundle\Entity\Ninja $ninja
+     * @return User
+     */
+    public function setNinja(\NinjaTooken\GameBundle\Entity\Ninja $ninja = null)
+    {
+        $this->ninja = $ninja;
+
+        return $this;
+    }
+
+    /**
+     * Get ninja
+     *
+     * @return \NinjaTooken\GameBundle\Entity\Ninja 
+     */
+    public function getNinja()
+    {
+        return $this->ninja;
+    }
+
+    /**
+     * Set clan
+     *
+     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $clan
+     * @return User
+     */
+    public function setClan(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $clan = null)
+    {
+        $this->clan = $clan;
+
+        return $this;
+    }
+
+    /**
+     * Get clan
+     *
+     * @return \NinjaTooken\ClanBundle\Entity\ClanUtilisateur 
+     */
+    public function getClan()
+    {
+        return $this->clan;
+    }
+
+    /**
+     * Add recruteur
+     *
+     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $recruteur
+     * @return User
+     */
+    public function addRecruteur(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $recruteur)
+    {
+        $this->recruteur[] = $recruteur;
+
+        return $this;
+    }
+
+    /**
+     * Remove recruteur
+     *
+     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $recruteur
+     */
+    public function removeRecruteur(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $recruteur)
+    {
+        $this->recruteur->removeElement($recruteur);
+    }
+
+    /**
+     * Get recruteur
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRecruteur()
+    {
+        return $this->recruteur;
     }
 }

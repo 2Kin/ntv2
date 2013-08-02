@@ -3,37 +3,63 @@
 namespace NinjaTooken\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use NinjaTooken\UserBundle\Entity\User;
+use NinjaTooken\UserBundle\Entity\Message;
 
 class DefaultController extends Controller
 {
-    public function ficheAction($user_nom)
+    /**
+     * @ParamConverter("user", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     */
+    public function ficheAction(User $user)
     {
-        return $this->render('NinjaTookenUserBundle:Default:fiche.html.twig');
+        return $this->render('NinjaTookenUserBundle:Default:fiche.html.twig', array('user' => $user));
     }
 
-    public function messagerieAction($page)
-    {
-        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig');
+    public function listMessageAction($page=1){
+        $user = $this->get('security.context')->getToken()->getUser();
+        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Message');
+
+        $num = 20;
+        $page = max(1, $page);
+
+        $q = $repo->createQueryBuilder('a')
+            ->orderBy('a.dateAjout', 'DESC')
+            ->leftJoin('NinjaTookenUserBundle:MessageUser', 't', 'WITH', 'a.id = t.message')
+            ->where('t.user = :user')
+            ->setParameter('user', $user);
+
+        return $q->getQuery()
+            ->setFirstResult(($page-1)*$num)
+            ->setMaxResults($num)
+            ->getResult();
     }
 
-    public function messagerieVoirAction($message_nom)
+    public function messagerieAction($page=1)
     {
-        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig');
+        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array('messages' => $this->listMessageAction($page)));
+    }
+
+    /**
+     * @ParamConverter("message", class="NinjaTookenUserBundle:Message", options={"mapping": {"message_id":"id"}})
+     */
+    public function messagerieVoirAction(Message $message, $page=1)
+    {
+        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array('messages' => $this->listMessageAction($page)));
     }
 
     public function messagerieAjouterAction()
     {
-        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig');
+        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array('messages' => $this->listMessageAction(1)));
     }
 
-    public function messagerieModifierAction($id)
+    /**
+     * @ParamConverter("message", class="NinjaTookenUserBundle:Message", options={"mapping": {"message_id":"id"}})
+     */
+    public function messagerieSupprimerAction(Message $message, $page=1)
     {
-        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig');
-    }
-
-    public function messagerieSupprimerAction($id)
-    {
-        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig');
+        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array('messages' => $this->listMessageAction($page)));
     }
 
     public function parametresAction()
@@ -51,12 +77,18 @@ class DefaultController extends Controller
         return $this->render('NinjaTookenUserBundle:Default:amis.html.twig');
     }
 
-    public function amisConfirmerAction($user_nom)
+    /**
+     * @ParamConverter("user", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     */
+    public function amisConfirmerAction(User $user)
     {
         return $this->render('NinjaTookenUserBundle:Default:amis.html.twig');
     }
 
-    public function amisBloquerAction($user_nom)
+    /**
+     * @ParamConverter("user", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     */
+    public function amisBloquerAction(User $user)
     {
         return $this->render('NinjaTookenUserBundle:Default:amis.html.twig');
     }

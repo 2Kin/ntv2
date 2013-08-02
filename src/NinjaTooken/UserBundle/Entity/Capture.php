@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Capture
  *
- * @ORM\Table()
+ * @ORM\Table(name="nt_capture")
  * @ORM\Entity
  */
 class Capture

@@ -8,7 +8,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Forum
  *
- * @ORM\Table()
+ * @ORM\Table(name="nt_forum")
  * @ORM\Entity
  */
 class Forum
@@ -23,11 +23,11 @@ class Forum
     private $id;
 
     /**
-     * @var boolean
+     * @var int
      *
-     * @ORM\Column(name="is_event", type="boolean")
+     * @ORM\Column(name="old_id", type="integer")
      */
-    private $isEvent;
+    private $old_id;
 
     /**
      * @var string
@@ -190,25 +190,25 @@ class Forum
     }
 
     /**
-     * Set isEvent
+     * Set old_id
      *
-     * @param boolean $isEvent
+     * @param integer $oldId
      * @return Forum
      */
-    public function setIsEvent($isEvent)
+    public function setOldId($oldId)
     {
-        $this->isEvent = $isEvent;
+        $this->old_id = $oldId;
 
         return $this;
     }
 
     /**
-     * Get isEvent
+     * Get old_id
      *
-     * @return boolean 
+     * @return integer 
      */
-    public function getIsEvent()
+    public function getOldId()
     {
-        return $this->isEvent;
+        return $this->old_id;
     }
 }

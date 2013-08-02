@@ -13,19 +13,31 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
+        chainprovider:
+            chain:
+                providers: [fos_userbundle, fos_facebook_provider]
+        fos_facebook_provider:
+            id: fos_facebook.user.login
 
     firewalls:
         main:
             pattern: ^/
+            fos_facebook:
+                app_url: "http://apps.facebook.com/this-is-my-awesome-app"
+                server_url: "http://www.ninjatooken.com"
+                login_path: /user/login
+                check_path: /facebook/login_check
+                provider: fos_facebook_provider
+                default_target_path: ninja_tooken_user_messagerie
             form_login:
                 csrf_provider: form.csrf_provider
                 check_path: fos_user_security_check
                 login_path: fos_user_security_login
-                default_target_path: /admin
+                default_target_path: ninja_tooken_user_messagerie
                 provider: fos_userbundle
             logout:
                 path:   fos_user_security_logout
-                target: /
+                target: ninja_tooken_homepage
             anonymous:    true
             remember_me:
                 key:    %secret%

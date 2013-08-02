@@ -2,6 +2,16 @@ parameters:
 #    ninja_tooken_user.example.class: NinjaTooken\UserBundle\Example
 
 services:
-#    ninja_tooken_user.example:
-#        class: %ninja_tooken_user.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    ninjatooken_user.registration.form.type:
+        class: NinjaTooken\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: ninjatooken_user_registration }
+
+    fos_facebook.user.login:
+        class: NinjaTooken\UserBundle\Security\User\Provider\FacebookProvider
+        arguments:
+            facebook: "@fos_facebook.api"
+            userManager: "@fos_user.user_manager"
+            validator: "@validator"
+            container: "@service_container"

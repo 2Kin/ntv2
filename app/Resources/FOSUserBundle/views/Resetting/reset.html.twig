@@ -1,0 +1,25 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}NinjaTooken - Créer mon ninja{% endblock %}
+{% block description %}NinjaTooken - Créer mon ninja{% endblock %}
+{% block keywords %}NinjaTooken - Créer mon ninja{% endblock %}
+
+
+{% block breadcrumbs1 %}{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('fos_user_resetting_request') }}" itemprop="url">
+									<span itemprop="title">reset</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+<form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}" />
+    </div>
+</form>
+{% endblock %}

@@ -51,7 +51,7 @@
 						<ul>
 							<li><span>tu n'as pas encore validé ton compte utilisateur : un mail a dû t'être envoyé comportant un lien de validation. Clique dessus, et connectes toi !</span></li>
 							<li><span>si tu as oublié ton mot de passe, il te suffit de cliquer sur le lien en haut de page "mot de passe oublié ?", un nouveau mot de passe te sera envoyé par mail</span></li>
-							<li><span>ton pseudo ou ton mot de passe comporte des caractères non latin (tu as voulu faire le malin en écrivant en japonais?). Pour corriger le problème, <a href="contact.html" alt="nous contacter" title="nous-contacter">contacts-nous</a> !</span></li>
+							<li><span>ton pseudo ou ton mot de passe comporte des caractères non latin (tu as voulu faire le malin en écrivant en japonais?). Pour corriger le problème, <a href="{{ path('ninja_tooken_contact') }}" alt="nous contacter" title="nous-contacter">contacts-nous</a> !</span></li>
 							<li><span>le serveur est surchargé : pas de miracles, il te faut patienter!</span></li>
 						</ul><p></p>
 
@@ -63,7 +63,7 @@
 
 						<h3 id="q27">Le jeu ram, je fais quoi ?</h3>
 						<p>Si le jeu ram (ralentissements), tu peux aller diminuer la qualité graphique du jeu dans le menu : "options" puis "graphiques".<br>
-						Plus d'informations sont disponibles dans le <a href="guide.html#parametrage-video" title="Paramétrage de la vidéo et du son">manuel du ninja : "Paramétrage de la vidéo et du son"</a>.<br>
+						Plus d'informations sont disponibles dans le <a href="{{ path('ninja_tooken_manuel') }}#parametrage-video" title="Paramétrage de la vidéo et du son">manuel du ninja : "Paramétrage de la vidéo et du son"</a>.<br>
 						Tu peux également diminuer la résolution système pour améliorer les performances en mode "plein écran".</p>
 
 						<h3 id="q28">Une fois en jeu, la souris ne répond plus, que faire ?</h3>
