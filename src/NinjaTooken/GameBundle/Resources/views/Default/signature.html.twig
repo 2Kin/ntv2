@@ -1,24 +1,23 @@
+{% import "avatar.html.twig" as avatar %}
 {% set is_admin = false %}
+{% set is_moderator = false %}
 {% for role in user.getRoles() %} 
-    {% if role == 'ROLE_ADMIN' %}{% set is_admin = true %}{% endif %}
-    {% if role == 'ROLE_SUPER_ADMIN' %}{% set is_admin = true %}{% endif %}
+	{% if role == 'ROLE_ADMIN' or role == 'ROLE_SUPER_ADMIN' %}
+		{% set is_admin = true %}
+	{% elseif role == 'ROLE_MODERATOR' %}
+		{% set is_moderator = true %}
+	{% endif %}
 {% endfor %}
-<div class="signature{% if is_admin %} admin{% endif %}" itemprop="creator" itemscope itemtype="http://schema.org/Person">
+<div class="signature{% if is_admin %} admin{% elseif is_moderator %} moderateur{% endif %}" itemprop="creator" itemscope itemtype="http://schema.org/Person">
 	<div class="row-fluid">
 		<div class="resume span4">
-			{% if user.avatar is empty %}
-				{% if user.sexe == "H" %}
-					{% set avatar = asset('bundles/ninjatookenuser/images/boyz.jpg') %}
-				{% else %}
-					{% set avatar = asset('bundles/ninjatookenuser/images/girlz.jpg') %}
-				{% endif %}
-			{% else %}
-				{% set avatar = asset('avatar/' ~ user.avatar) %}
-			{% endif %}
-			<img src="{{ avatar }}" itemprop="image" class="pull-left" alt="">
+			<img src="{{ avatar.getUrl(user) }}" itemprop="image" class="pull-left" alt="">
 			<a href="{{ path('ninja_tooken_user_fiche', {user_nom:user.slug}) }}" rel="author" itemprop="url"><span itemprop="name">{{ user.username }}</span></a><br>
-			<span class="suiton">{{ class[user.ninja.classe] }}</span>{% if user.ninja.grade>0 %} - <span itemprop="award">{{ user.ninja.grade }}° dan</span>{% endif %}
+		{% if user.ninja is not empty and user.ninja is defined %}
+			{% if user.ninja.classe is not empty %}<span class="{{ class[user.ninja.classe]|lower }}">{{ class[user.ninja.classe] }}</span>{% endif %}{% if user.ninja.grade>0 %} - <span itemprop="award">{{ user.ninja.grade }}° dan</span>{% endif %}
+		{% endif %}
 		</div>
+		{% if user.ninja is not empty and user.ninja is defined %}
 		<div class="span8">
 			<div class="row-fluid">
 				<div class="experience span7">
@@ -51,7 +50,9 @@
 			{% if user.ninja.jutsuDoubleSaut>0 %}<i class="jutsu doubleSaut"></i>{% endif %}
 			{% if user.ninja.jutsuInvisibilite>0 %}<i class="jutsu transparence"></i>{% endif %}
 		</div>
+		{% endif %}
 	</div>
+	{% if user.ninja is not empty and user.ninja is defined %}
 	<div class="row-fluid">
 		{% if user.clan is not empty %}
 		<div class="nfo span6" itemprop="memberOf" itemtype="http://schema.org/Organization">
@@ -64,4 +65,5 @@
 			<strong>{{ user.ninja.missionCourse }}</strong> courses<strong> / {{ user.ninja.missionAssassinnat }}</strong> assassinats
 		</div>
 	</div>
+	{% endif %}
 </div>

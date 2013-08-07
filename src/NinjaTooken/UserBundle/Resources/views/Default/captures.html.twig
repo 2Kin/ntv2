@@ -21,146 +21,23 @@
 
 {% block body %}
 				<section>
+				{% if captures is not empty %}
+					{% for capture in captures %}
 					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
+						<a href="{{ capture.url }}" target="_blank" class="view"><img src="{{ capture.urlTmb }}"></a>
+						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:capture.id}) }}" class="delete"><i class="icon-trash"></i></a>
 					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
-					<div class="capture pull-left">
-						<a href="#voir" class="view"><img src="http://i.imgur.com/fnBays.jpg"></a>
-						<a href="{{ path('ninja_tooken_user_captures_supprimer', {id:0}) }}" class="delete"><i class="icon-trash"></i></a>
-					</div>
+					{% endfor %}
 					<br class="clear">
-					
-					<div class="pagination">
-						<ul>
-							<li class="disabled"><a href="#">&laquo;</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&raquo;</a></li>
-						</ul>
-					</div>
+					{% include 'pagination.html.twig' with {
+						currentPage: page,
+						paginationPath: path('ninja_tooken_user_captures', {'page':''}),
+						paginationAfter: '',
+						lastPage: nombrePage
+					} only %}
+				{% else %}
+					Pas de captures pour l'instant.
+				{% endif %}
+					<br class="clear">
 				</section>
 {% endblock %}

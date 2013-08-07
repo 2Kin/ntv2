@@ -1,6 +1,6 @@
 					<div class="row-fluid topic">
 						<div class="span6">
-							<h5><a href="{{ path('ninja_tooken_message', {topic_nom: forum.slug, message_nom:thread.slug}) }}">{% if thread.isCommentable =='0' %}<i class="icon-lock"></i> {% endif %}{% if thread.isPostit =='1' %}<i class="icon-pushpin"></i> {% endif %}{% if date(thread.lastCommentAt) > date('-2days') %}<i class="icon-eye-open"></i> {% endif %}{{ thread.nom }}</a></h5>
+							<h5><a href="{{ path('ninja_tooken_message', {topic_nom: forum.slug, message_nom:thread.slug, page:1}) }}">{% if thread.isCommentable =='0' %}<i class="icon-lock"></i> {% endif %}{% if thread.isPostit =='1' %}<i class="icon-pushpin"></i> {% endif %}{% if date(thread.lastCommentAt) > date('-1days') %}<i class="icon-eye-open"></i> {% endif %}{{ thread.nom }}</a></h5>
 						</div>
 						<div class="span3">
 							 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:thread.author.slug}) }}">{{ thread.author.username }}</a>, {{ thread.dateAjout|localizeddate('medium', 'none', app.request.locale) }} à {{ thread.dateAjout|localizeddate('none', 'short', app.request.locale) }}

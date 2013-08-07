@@ -23,7 +23,7 @@
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_message', {topic_nom:forum.slug, message_nom:thread.slug}) }}" itemprop="url">
-									<span itemprop="title">{{ thread.nom }}</span>
+									<span itemprop="title">{% if thread.isCommentable =='0' %}<i class="icon-lock"></i> {% endif %}{% if thread.isPostit =='1' %}<i class="icon-pushpin"></i> {% endif %}{% if date(thread.lastCommentAt) > date('-1days') %}<i class="icon-eye-open"></i> {% endif %}{{ thread.nom }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -48,20 +48,16 @@
 									<input type="submit" value="Répondre" class="button">
 								</div>
 							</form>
+							{% if nombreComment > 0 %}
 							<hr>
 							<section>
-								<span class="comments">Commentaires</span>
-								<div class="pagination">
-									<ul>
-										<li class="disabled"><a href="#">&laquo;</a></li>
-										<li><a href="#">1</a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#">4</a></li>
-										<li><a href="#">5</a></li>
-										<li><a href="#">&raquo;</a></li>
-									</ul>
-								</div>
+								<span class="comments">{{ nombreComment }} commentaire{% if nombreComment>1 %}s{% endif %}</span>
+								{% include 'pagination.html.twig' with {
+									currentPage: page,
+									paginationPath: path('ninja_tooken_message', {topic_nom: forum.slug, message_nom:thread.slug, 'page': ''}),
+									paginationAfter: '',
+									lastPage: nombrePage
+								} only %}
 								{% for comment in comments %}
 								<article itemprop="comment" itemscope itemtype="http://schema.org/UserComments" id="c{{ loop.index }}">
 									<link itemprop="url" href="#c{{ loop.index }}">
@@ -70,23 +66,19 @@
 										<time itemprop="commentTime" datetime="{{ comment.dateAjout|date("Y-m-d\\TH:i:sP") }}">Le {{ comment.dateAjout|localizeddate('medium', 'none', app.request.locale) }} à {{ comment.dateAjout|localizeddate('none', 'short', app.request.locale) }}</time>
 									</header>
 									<div class="content clearfix" itemprop="commentText">
-										<p>{{ comment.body|raw }}</p>
+										<p>{{ comment.body|raw|purify('full') }}</p>
 									</div>
 									<p class="clearfix"><a href="#" class="button mini pull-right answer">Répondre</a></p>
 								</article>
 								{% endfor %}
-								<div class="pagination">
-									<ul>
-										<li class="disabled"><a href="#">&laquo;</a></li>
-										<li><a href="#">1</a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#">4</a></li>
-										<li><a href="#">5</a></li>
-										<li><a href="#">&raquo;</a></li>
-									</ul>
-								</div>
+								{% include 'pagination.html.twig' with {
+									currentPage: page,
+									paginationPath: path('ninja_tooken_message', {topic_nom: forum.slug, message_nom:thread.slug, 'page': ''}),
+									paginationAfter: '',
+									lastPage: nombrePage
+								} only %}
 							</section>
+							{% endif %}
 						</article>
 					</div>
 					<aside class="span4">

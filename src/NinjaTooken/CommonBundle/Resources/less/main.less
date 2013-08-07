@@ -528,13 +528,13 @@ body>.content:before{
 			background-color:@gray;
 		}
 		a{
-			.text-overflow();
+			.text-overflow();width:calc(100% e(-) 30px);display:inline-block;
 		}
 		.actif{
 			color:@white;
 		}
 		a.pull-right{
-			font-size:20px;
+			font-size:20px;width:auto;
 		}
 	}
 
@@ -678,9 +678,9 @@ body>.content:before{
 			}
 		}
 		.membre{
-			display:inline-block;width:9%;min-width:90px;margin:0 2% 2% 0;text-align:center;
+			display:inline-block;width:9%;min-width:90px;margin:0 2% 2% 0;text-align:center;height:180px;
 			img{
-				clear:both;width:100%;border:4px solid @grayLight;
+				clear:both;width:100%;border:4px solid @grayLight;display:block;height:106px;width:106px;
 			}
 			&.online img{
 				border-color:@linkColor;
@@ -734,12 +734,11 @@ body>.content:before{
 	// signature du ninja
 	.signature{
 		padding:12px 10px 0px 10px;background-color:fadeout(@black, 70%);.border-radius(@baseBorderRadius);margin:10px 0;border:2px solid transparent;
-		@multiplyColor: multiply(@linkColor, #cc0000);
 		&.moderateur{
-			border-color:@multiplyColor;
+			border-color:multiply(@linkColor, #990000);
 		}
 		&.admin{
-			border-color:@multiplyColor;
+			border-color:multiply(@linkColor, #cc0000);
 		}
 		span{
 			color:@white;
@@ -860,9 +859,9 @@ body>.content:before{
 			clear:both;
 		}
 		.membre{
-			display:inline-block;width:87px;height:130px;margin:0 5px 10px 0;text-align:center;
+			display:inline-block;width:87px;min-height:130px;margin:0 5px 10px 0;text-align:center;
 			img{
-				clear:both;width:100%;
+				clear:both;width:87px;height:87px;
 			}
 		}
 		.pub{

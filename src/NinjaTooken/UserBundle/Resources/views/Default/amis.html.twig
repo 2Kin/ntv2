@@ -1,4 +1,5 @@
 {% extends '::layout.html.twig' %}
+{% import "avatar.html.twig" as avatar %}
 
 {% block title %}NinjaTooken - Guide du débutant{% endblock %}
 {% block description %}NinjaTooken - jouer gratuitement{% endblock %}
@@ -22,139 +23,48 @@
 				<section class="main">
 					<h3>Demande d'amis</h3>
 
+					{% if demandes is not empty %}
+					{% for demande in demandes %}
 					<div class="membre pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_confirmer', {user_nom:'test'}) }}" class="button small">Confirmer</a>
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:demande.friend.slug}) }}"><img src="{{ avatar.getUrl(demande.friend) }}">{{ demande.friend.username }}</a>
+						<a href="{{ path('ninja_tooken_user_amis_confirmer', {user_nom:demande.friend.slug}) }}" class="button small">Confirmer</a>
 					</div>
-					<div class="membre pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_confirmer', {user_nom:'test'}) }}" class="button small">Confirmer</a>
-					</div>
-					<div class="membre pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_confirmer', {user_nom:'test'}) }}" class="button small">Confirmer</a>
-					</div>
-					<div class="membre pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_confirmer', {user_nom:'test'}) }}" class="button small">Confirmer</a>
-					</div>
+					{% endfor %}
+					{% else %}
+					Pas de demandes pour l'instant.
+					<br class="clear">
+					{% endif %}
 
 					<br class="clear">
-					
-					<div class="pagination">
-						<ul>
-							<li class="disabled"><a href="#">&laquo;</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&raquo;</a></li>
-						</ul>
-					</div>
+					{% include 'pagination.html.twig' with {
+						currentPage: page1,
+						paginationPath: path('ninja_tooken_user_amis', {'page1':'','page2': page2}),
+						paginationAfter: '',
+						lastPage: nombrePage1
+					} only %}
 
 					<h3>Mes amis</h3>
 
 					<p><span class="legend online"> En ligne</span>
 					<span class="legend offline"> Hors ligne</span></p>
 
-					<div class="membre online pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
+					{% if friends is not empty %}
+					{% for friend in friends %}
+					<div class="membre pull-left">
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:friend.friend.slug}) }}"><img src="{{ avatar.getUrl(friend.friend) }}">{{ friend.friend.username }}</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:friend.friend.slug}) }}" class="button small">Bloquer</a>
 					</div>
-
-					<div class="membre online pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre online pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre online pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre online pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre offline pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre offline pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre offline pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre offline pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre offline pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre offline pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre offline pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre offline pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre offline pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre offline pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre offline pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
-
-					<div class="membre offline pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:"test"}) }}"><img src="images/avatar.jpg">Casey</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:'test'}) }}" class="button small">Bloquer</a>
-					</div>
+					{% endfor %}
+					{% else %}
+					Pas encore d'amis.
+					{% endif %}
 
 					<br class="clear">
-
-					<div class="pagination">
-						<ul>
-							<li class="disabled"><a href="#">&laquo;</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&raquo;</a></li>
-						</ul>
-					</div>
+					{% include 'pagination.html.twig' with {
+						currentPage: page2,
+						paginationPath: path('ninja_tooken_user_amis', {'page1':page1,'page2': ''}),
+						paginationAfter: '',
+						lastPage: nombrePage2
+					} only %}
 				</section>
 {% endblock %}

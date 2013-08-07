@@ -89,6 +89,13 @@ class Clan
      */
     private $online;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_recruting", type="boolean")
+     */
+    private $isRecruting;
+
 
     /**
      * Get id
@@ -345,5 +352,28 @@ class Clan
     public function getMembres()
     {
         return $this->membres;
+    }
+
+    /**
+     * Set isRecruting
+     *
+     * @param boolean $isRecruting
+     * @return Clan
+     */
+    public function setIsRecruting($isRecruting)
+    {
+        $this->isRecruting = $isRecruting;
+
+        return $this;
+    }
+
+    /**
+     * Get isRecruting
+     *
+     * @return boolean 
+     */
+    public function getIsRecruting()
+    {
+        return $this->isRecruting;
     }
 }

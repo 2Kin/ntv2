@@ -39,29 +39,7 @@
                     </div>
                     <div class="span4">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                        <div class="accountLogged">
-                            <div class="pseudo"><strong>{{ app.user.username }}</strong> Suiton, Nv 76</div>
-			{% if app.user.avatar is empty %}
-				{% if app.user.sexe == "H" %}
-					{% set avatar = asset('bundles/ninjatookenuser/images/boyz.jpg') %}
-				{% else %}
-					{% set avatar = asset('bundles/ninjatookenuser/images/girlz.jpg') %}
-				{% endif %}
-			{% else %}
-				{% set avatar = asset('avatar/' ~ app.user.avatar) %}
-			{% endif %}
-                            <img src="{{ avatar }}" class="pull-left" alt="">
-                            <nav>
-                                <ul>
-                                    <li><a href="{{ path('ninja_tooken_user_messagerie') }}" class="pull-left"><i class="icon-envelope-alt"></i> 1 message</a></li>
-                                    <li><a href="{{ path('ninja_tooken_user_amis') }}" class="pull-left"><i class="icon-heart"></i> Amis</a></li>
-                                    <li><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}" class="pull-left"><i class="icon-ticket"></i> Clan</a></li>
-                                    <li><a href="{{ path('ninja_tooken_user_parametres') }}" class="pull-left"><i class="icon-cog"></i> Paramètres</a></li>
-                                    <li><a href="{{ path('ninja_tooken_user_captures') }}" class="pull-left"><i class="icon-picture"></i> Captures</a></li>
-                                    <li><a href="{{ path('fos_user_security_logout') }}" class="pull-left"><i class="icon-signout"></i> Déconnexion</a></li>
-                                </ul>
-                            </nav>
-                        </div>
+			{{ render(controller('NinjaTookenUserBundle:Default:connected', {'user': app.user})) }}
 			{% else %}
 			<p class="account">
                         Pas encore inscrit ? <a href="{{ path('fos_user_registration_register') }}">Créer mon Ninja</a> | <a href="{{ path('fos_user_security_login') }}">Mon compte</a>

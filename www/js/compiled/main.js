@@ -728,6 +728,11 @@ $(document).ready(function(){
 		new Chart($("#"+_classe.attr("id")+"_chart").get(0).getContext("2d")).Doughnut(_data);
 	}
 
+	// page de clan
+	$('select[name="clan"]').on('change', function(){
+		document.location.href = document.location.pathname+'?order='+$(this).find('option:selected').val();
+	});
+
 	// réponses
 	var _answers = $("a.answer");
 	if(_answers.length>0){
@@ -755,17 +760,25 @@ $(document).ready(function(){
 	// tag-it (champ destinataires)
 	var _destination = $("#destinations");
 	if(_destination.length>0){
+		var request = _destination.attr('data-find');
 		_destination.tagit({
 			tags: function(input, autocomplete) {
 				if(_destination.query)
 					_destination.query.abort();
 				_destination.query = $.ajax({
 					dataType:'json',
-					url:'xml/destination.json?q='+input.toLowerCase(),
+					url:request+'?q='+input.toLowerCase(),
 					complete:function(result){
+						var users = [];
+						var json = result.responseJSON;
+						if(typeof json != "undefined"){
+							for(var i=0;i<json.length;i++){
+								users.push(json[i].username);
+							}
+						}
 						_destination.tagit(
 							"autocomplete",
-							eval(result.responseText),
+							users,
 							autocomplete
 						);
 					}

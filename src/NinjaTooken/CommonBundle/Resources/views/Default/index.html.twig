@@ -1,4 +1,5 @@
 {% extends '::layout.html.twig' %}
+{% import "avatar.html.twig" as avatar %}
 
 {% block title %}NinjaTooken{% endblock %}
 {% block description %}NinjaTooken - jouer gratuitement{% endblock %}
@@ -23,16 +24,7 @@
 								<article class="news{% if thread.isEvent %} event{% endif %}" itemscope itemtype="http://schema.org/Article">
 									<header>
 										<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-											{% if thread.author.avatar is empty %}
-												{% if thread.author.sexe == "H" %}
-													{% set avatar = asset('bundles/ninjatookenuser/images/boyz.jpg') %}
-												{% else %}
-													{% set avatar = asset('bundles/ninjatookenuser/images/girlz.jpg') %}
-												{% endif %}
-											{% else %}
-												{% set avatar = asset('avatar/' ~ thread.author.avatar) %}
-											{% endif %}
-											<img src="{{ avatar }}" itemprop="image" class="pull-left" alt="">
+											<img src="{{ avatar.getUrl(thread.author) }}" itemprop="image" class="pull-left" alt="">
 											<a href="{{ path('ninja_tooken_user_fiche', {user_nom:thread.author.usernamecanonical}) }}" rel="author" itemprop="url">
 												<span itemprop="name">{{ thread.author.username }}</span>
 											</a>

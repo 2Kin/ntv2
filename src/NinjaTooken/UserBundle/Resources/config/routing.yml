@@ -24,6 +24,10 @@ ninja_tooken_user_messagerie_supprimer:
     requirements:
         page:  \d*
 
+ninja_tooken_user_find:
+    pattern:  /compte/messagerie/user/find
+    defaults: { _controller: NinjaTookenUserBundle:Default:userFind }
+
 ninja_tooken_user_parametres:
     pattern:  /compte/parametres
     defaults: { _controller: NinjaTookenUserBundle:Default:parametres }

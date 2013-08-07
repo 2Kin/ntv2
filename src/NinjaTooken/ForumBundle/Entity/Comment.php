@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\Table(name="nt_comment")
+ * @ORM\Entity(repositoryClass="NinjaTooken\ForumBundle\Entity\CommentRepository")
  */
 class Comment
 {

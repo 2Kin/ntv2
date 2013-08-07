@@ -17,18 +17,43 @@ class DefaultController extends Controller
     public function forumAction()
     {
         $repo_forum = $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Forum');
-        $repo_thread = $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Thread');
 
-
-        $forums = $repo_forum->createQueryBuilder('a')->orderBy('a.ordre', 'DESC')->getQuery()->getResult();
-        foreach($forums as $forum){
-            $forum->threads = $repo_thread->findBy(
-                array('forum' => $forum),
-                array('lastCommentAt' => 'desc'),
-                5,0
-            );
+        $allForums = $repo_forum->createQueryBuilder('f')
+            ->orderBy('f.ordre', 'DESC')
+            ->where('f.type = :type')
+            ->setParameter('type', 'forum')
+            ->getQuery()->getResult();
+        $forums = array();
+        foreach($allForums as $forum){
+            $threads = $this->getDoctrine()
+                         ->getManager()
+                         ->getRepository('NinjaTookenForumBundle:Thread')
+                         ->getThreads($forum, 5, 1);
+            if(count($threads)>0){
+                $forum->threads = $threads;
+                $forums[] = $forum;
+            }
         }
-     
+
+        return $this->render('NinjaTookenForumBundle:Default:forum.html.twig', array('forums' => $forums));
+    }
+
+    public function forumSearchAction()
+    {
+        $repo_forum = $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Forum');
+
+        $allForums = $repo_forum->createQueryBuilder('a')->orderBy('a.ordre', 'DESC')->getQuery()->getResult();
+        $forums = array();
+        foreach($allForums as $forum){
+            $threads = $this->getDoctrine()
+                         ->getManager()
+                         ->getRepository('NinjaTookenForumBundle:Thread')
+                         ->getThreads($forum, 5, 1);
+            if(count($threads)>0){
+                $forum->threads = $threads;
+                $forums[] = $forum;
+            }
+        }
 
         return $this->render('NinjaTookenForumBundle:Default:forum.html.twig', array('forums' => $forums));
     }
@@ -38,16 +63,20 @@ class DefaultController extends Controller
      */
     public function topicAction(Forum $forum, $page)
     {
-        $num = 20;
+        $num = $this->container->getParameter('numReponse');
+        $page = max(1, $page);
 
-        $repo_thread = $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Thread');
-        $threads = $repo_thread->findBy(
-            array('forum' => $forum),
-            array('lastCommentAt' => 'desc'),
-            $num, 0
-        );
+        $threads = $this->getDoctrine()
+                     ->getManager()
+                     ->getRepository('NinjaTookenForumBundle:Thread')
+                     ->getThreads($forum, $num, $page);
 
-        return $this->render('NinjaTookenForumBundle:Default:topic.html.twig', array('forum' => $forum, 'threads' => $threads));
+        return $this->render('NinjaTookenForumBundle:Default:topic.html.twig', array(
+            'forum' => $forum,
+            'threads' => $threads,
+            'page' => $page,
+            'nombrePage' => ceil(count($threads)/$num)
+        ));
     }
 
     /**
@@ -55,8 +84,7 @@ class DefaultController extends Controller
      */
     public function topicAjouterAction(Forum $forum)
     {
-
-        $num = 20;
+        $num = $this->container->getParameter('numReponse');
 
         $repo_thread = $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Thread');
         $threads = $repo_thread->findBy(
@@ -72,8 +100,7 @@ class DefaultController extends Controller
      */
     public function topicModifierAction(Forum $forum)
     {
-
-        $num = 20;
+        $num = $this->container->getParameter('numReponse');
 
         $repo_thread = $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Thread');
         $threads = $repo_thread->findBy(
@@ -98,16 +125,22 @@ class DefaultController extends Controller
      */
     public function messageAction(Forum $forum, Thread $thread, $page)
     {
-        $num = 20;
+        $num = $this->container->getParameter('numReponse');
+        $page = max(1, $page);
 
-        $repo_comment = $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Comment');
-        $comments = $repo_comment->findBy(
-            array('thread' => $thread),
-            array('dateAjout' => 'desc'),
-            $num, 0
-        );
+        $comments = $this->getDoctrine()
+                     ->getManager()
+                     ->getRepository('NinjaTookenForumBundle:Comment')
+                     ->getComments($thread, $num, $page);
 
-        return $this->render('NinjaTookenForumBundle:Default:message.html.twig', array('forum' => $forum, 'thread' => $thread, 'comments' => $comments));
+        return $this->render('NinjaTookenForumBundle:Default:message.html.twig', array(
+            'forum' => $forum,
+            'thread' => $thread,
+            'comments' => $comments,
+            'page' => $page,
+            'nombreComment' => count($comments),
+            'nombrePage' => ceil(count($comments)/$num)
+        ));
     }
 
     /**

@@ -1,0 +1,11 @@
+{% macro getUrl(user) %}{% spaceless %}
+{% if user.avatar is empty %}
+	{% if user.sexe == "H" %}
+		{{ asset('bundles/ninjatookenuser/images/boyz.jpg') }}
+	{% else %}
+		{{ asset('bundles/ninjatookenuser/images/girlz.jpg') }}
+	{% endif %}
+{% else %}
+	{{ asset('avatar/' ~ user.avatar) }}
+{% endif %}
+{% endspaceless %}{% endmacro %}

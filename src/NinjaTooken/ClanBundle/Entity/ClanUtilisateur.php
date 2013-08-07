@@ -28,7 +28,7 @@ class ClanUtilisateur
     private $membre;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", cascade={"persist"}, inversedBy="recruteur")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", cascade={"persist"}, inversedBy="recruts")
      * @var User
      */
     private $recruteur;
@@ -58,6 +58,7 @@ class ClanUtilisateur
      * @ORM\Column(name="date_ajout", type="datetime")
      */
     private $dateAjout;
+
 
 
     /**
@@ -94,29 +95,6 @@ class ClanUtilisateur
     }
 
     /**
-     * Set dateAjout
-     *
-     * @param \DateTime $dateAjout
-     * @return ClanUtilisateur
-     */
-    public function setDateAjout($dateAjout)
-    {
-        $this->dateAjout = $dateAjout;
-
-        return $this;
-    }
-
-    /**
-     * Get dateAjout
-     *
-     * @return \DateTime 
-     */
-    public function getDateAjout()
-    {
-        return $this->dateAjout;
-    }
-
-    /**
      * Set canEditClan
      *
      * @param boolean $canEditClan
@@ -138,12 +116,28 @@ class ClanUtilisateur
     {
         return $this->canEditClan;
     }
+
     /**
-     * Constructor
+     * Set dateAjout
+     *
+     * @param \DateTime $dateAjout
+     * @return ClanUtilisateur
      */
-    public function __construct()
+    public function setDateAjout($dateAjout)
     {
-        $this->recruteurs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->dateAjout = $dateAjout;
+
+        return $this;
+    }
+
+    /**
+     * Get dateAjout
+     *
+     * @return \DateTime 
+     */
+    public function getDateAjout()
+    {
+        return $this->dateAjout;
     }
 
     /**
@@ -170,29 +164,6 @@ class ClanUtilisateur
     }
 
     /**
-     * Set clan
-     *
-     * @param \NinjaTooken\ClanBundle\Entity\Clan $clan
-     * @return ClanUtilisateur
-     */
-    public function setClan(\NinjaTooken\ClanBundle\Entity\Clan $clan = null)
-    {
-        $this->clan = $clan;
-
-        return $this;
-    }
-
-    /**
-     * Get clan
-     *
-     * @return \NinjaTooken\ClanBundle\Entity\Clan 
-     */
-    public function getClan()
-    {
-        return $this->clan;
-    }
-
-    /**
      * Set recruteur
      *
      * @param \NinjaTooken\UserBundle\Entity\User $recruteur
@@ -213,5 +184,28 @@ class ClanUtilisateur
     public function getRecruteur()
     {
         return $this->recruteur;
+    }
+
+    /**
+     * Set clan
+     *
+     * @param \NinjaTooken\ClanBundle\Entity\Clan $clan
+     * @return ClanUtilisateur
+     */
+    public function setClan(\NinjaTooken\ClanBundle\Entity\Clan $clan = null)
+    {
+        $this->clan = $clan;
+
+        return $this;
+    }
+
+    /**
+     * Get clan
+     *
+     * @return \NinjaTooken\ClanBundle\Entity\Clan 
+     */
+    public function getClan()
+    {
+        return $this->clan;
     }
 }

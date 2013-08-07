@@ -1,19 +1,11 @@
+{% import "avatar.html.twig" as avatar %}
 			{% if comments is not empty %}
 						<section>
 							<h4>Derniers messages</h4>
 			{% for comment in comments %}
 							<div class="dernier" itemscope itemtype="http://schema.org/UserComments">
 								<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-									{% if comment.author.avatar is empty %}
-										{% if comment.author.sexe == "H" %}
-											{% set avatar = asset('bundles/ninjatookenuser/images/boyz.jpg') %}
-										{% else %}
-											{% set avatar = asset('bundles/ninjatookenuser/images/girlz.jpg') %}
-										{% endif %}
-									{% else %}
-										{% set avatar = asset('avatar/' ~ comment.author.avatar) %}
-									{% endif %}
-									<img src="{{ avatar }}" itemprop="image" class="pull-left" alt="">
+									<img src="{{ avatar.getUrl(comment.author) }}" itemprop="image" class="pull-left" alt="">
 									<a href="{{ path('ninja_tooken_user_fiche', {user_nom:comment.author.slug}) }}" rel="author" itemprop="url">
 										<span itemprop="name">{{ comment.author.username }}</span>
 									</a>

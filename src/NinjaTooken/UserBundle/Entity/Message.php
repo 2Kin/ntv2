@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="nt_message")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="NinjaTooken\UserBundle\Entity\MessageRepository")
  */
 class Message
 {

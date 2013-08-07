@@ -29,9 +29,9 @@ class User extends BaseUser
     private $clan;
 
     /**
-     * @ORM\OneToMany(targetEntity="NinjaTooken\ClanBundle\Entity\ClanUtilisateur", mappedBy="recruteurs", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="NinjaTooken\ClanBundle\Entity\ClanUtilisateur", mappedBy="recruteur", cascade={"persist", "remove"})
      */
-    private $recruteur;
+    private $recruts;
 
    /**
      * @var string
@@ -93,14 +93,14 @@ class User extends BaseUser
      *
      * @ORM\Column(name="receive_newsletter", type="boolean")
      */
-    private $receive_newsletter;
+    private $receiveNewsletter;
 
     /**
      * @var string
      *
      * @ORM\Column(name="receive_avertissement", type="boolean")
      */
-    private $receive_avertissement;
+    private $receiveAvertissement;
 
     /**
      * @var string
@@ -294,7 +294,7 @@ class User extends BaseUser
      */
     public function setReceiveNewsletter($receiveNewsletter)
     {
-        $this->receive_newsletter = $receiveNewsletter;
+        $this->receiveNewsletter = $receiveNewsletter;
 
         return $this;
     }
@@ -306,7 +306,7 @@ class User extends BaseUser
      */
     public function getReceiveNewsletter()
     {
-        return $this->receive_newsletter;
+        return $this->receiveNewsletter;
     }
 
     /**
@@ -317,7 +317,7 @@ class User extends BaseUser
      */
     public function setReceiveAvertissement($receiveAvertissement)
     {
-        $this->receive_avertissement = $receiveAvertissement;
+        $this->receiveAvertissement = $receiveAvertissement;
 
         return $this;
     }
@@ -329,7 +329,7 @@ class User extends BaseUser
      */
     public function getReceiveAvertissement()
     {
-        return $this->receive_avertissement;
+        return $this->receiveAvertissement;
     }
 
     /**
@@ -460,35 +460,35 @@ class User extends BaseUser
     }
 
     /**
-     * Add recruteur
+     * Add recruts
      *
-     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $recruteur
+     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $recruts
      * @return User
      */
-    public function addRecruteur(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $recruteur)
+    public function addRecrut(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $recruts)
     {
-        $this->recruteur[] = $recruteur;
+        $this->recruts[] = $recruts;
 
         return $this;
     }
 
     /**
-     * Remove recruteur
+     * Remove recruts
      *
-     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $recruteur
+     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $recruts
      */
-    public function removeRecruteur(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $recruteur)
+    public function removeRecrut(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $recruts)
     {
-        $this->recruteur->removeElement($recruteur);
+        $this->recruts->removeElement($recruts);
     }
 
     /**
-     * Get recruteur
+     * Get recruts
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getRecruteur()
+    public function getRecruts()
     {
-        return $this->recruteur;
+        return $this->recruts;
     }
 }

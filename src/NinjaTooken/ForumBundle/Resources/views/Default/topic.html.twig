@@ -29,16 +29,11 @@
 					{% for thread in threads %}
 					{% include 'NinjaTookenForumBundle:Default:topicListe.html.twig' %}
 					{% endfor %}
-					<div class="pagination">
-						<ul>
-							<li class="disabled"><a href="#">&laquo;</a></li>
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
-							<li><a href="#">&raquo;</a></li>
-						</ul>
-					</div>
+					{% include 'pagination.html.twig' with {
+						currentPage: page,
+						paginationPath: path('ninja_tooken_topic', {'topic_nom':forum.slug, 'page': ''}),
+						paginationAfter: '',
+						lastPage: nombrePage
+					} only %}
 				</section>
 {% endblock %}

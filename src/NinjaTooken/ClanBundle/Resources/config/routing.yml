@@ -1,7 +1,11 @@
 ninja_tooken_clans:
-    pattern:  /clan
-    defaults: { _controller: NinjaTookenClanBundle:Default:liste }
+    pattern:  /clan/{page}
+    defaults: { _controller: NinjaTookenClanBundle:Default:liste, page:1 }
+    requirements:
+        page:  \d*
 
 ninja_tooken_clan:
-    pattern:  /clan/{clan_nom}
-    defaults: { _controller: NinjaTookenClanBundle:Default:clan }
+    pattern:  /clan/{clan_nom}/{page}
+    defaults: { _controller: NinjaTookenClanBundle:Default:clan, page:1 }
+    requirements:
+        page:  \d*

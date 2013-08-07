@@ -24,310 +24,45 @@
 							Classer par
 							<label class="select">
 								<select name="clan">
-									<option value="date">date d'ajout</option>
-									<option value="ninja">nombre de ninja</option>
-									<option value="composition">composition</option>
-									<option value="experience">moyenne d'expérience</option>
+									<option value="composition"{% if order == "composition" %} selected{% endif %}>composition</option>
+									<option value="experience"{% if order == "experience" %} selected{% endif %}>moyenne d'expérience</option>
+									<option value="ninja"{% if order == "ninja" %} selected{% endif %}>nombre de ninja</option>
+									<option value="date"{% if order == "date" %} selected{% endif %}>date d'ajout</option>
 								</select>
 							</label>
 						</p>
 						<div class="row-fluid">
+						{% for clan in clans %}
+							{% set clan = clan[0] %}
+
 							<div class="span6">
-								<article class="news clan">
+								<article class="news clan" itemscope itemtype="http://schema.org/Article">
 									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
+										<img src="{{ asset('bundles/ninjatookenclan/kamon/' ~ clan.kamon) }}" class="pull-left" alt="">
+										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}">{% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}</a><br>
+										<span>{{ clan.membres.count }} ninja{% if clan.membres.count>1 %}s{% endif %} depuis le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}</span></h3>
+										{% if clan.isRecruting %}<span class="actif">recrutements ouverts</span>{% else %}<span>recrutements fermés</span>{% endif %}
 									</header>
 									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
+										<p>{{ clan.description|raw|purify('min') }}</p>
 									</div>
 									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span>recrutements fermés</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
+										<a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}"class="pull-right">Page du clan &raquo;</a>
 									</footer>
 								</article>
 							</div>
-							<div class="span6">
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-								<article class="news clan">
-									<header>
-										<img src="{{ asset('bundles/ninjatookencommon/images/kamon.png') }}" class="pull-left" alt="">
-										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}">[NTT] Ninja Tooken Team</a><br>
-										<span>13 ninjas depuis le 02 avril 2011</span></h3>
-										<span class="actif">recrutements ouverts</span>
-									</header>
-									<div class="content">
-										<p>C'est à la nuit tombée que sortent les vrais ninjas... Ninja Tooken Night Team No Life Tonight<br/><br/></p>
-									</div>
-									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:'test'}) }}"class="pull-right">Page du clan &raquo;</a>
-									</footer>
-								</article>
-							</div>
-							<div class="pagination">
-								<ul>
-									<li class="disabled"><a href="#">&laquo;</a></li>
-									<li><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#">&raquo;</a></li>
-								</ul>
-							</div>
+						{% if loop.index is divisibleby(2) and not loop.last %}
 						</div>
+						<div class="row-fluid">
+						{% endif %}
+						{% endfor %}
+						</div>
+						{% include 'pagination.html.twig' with {
+							currentPage: page,
+							paginationPath: path('ninja_tooken_clans', {'page': ''}),
+							paginationAfter: '?order=' ~ order,
+							lastPage: nombrePage
+						} only %}
 					</div>
 					<aside class="span4">
 						<form action="search.html" method="post" accept-charset="utf-8" class="row-fluid">
@@ -337,7 +72,17 @@
 
 						<section>
 							<h4>Derniers clans</h4>
-							{% include 'NinjaTookenClanBundle:Default:derniersClans.html.twig' %}
+							{% for clan in lastClans %}
+								{% set clan = clan[0] %}
+							<div class="dernier">
+								<span>
+									<img src="{{ asset('bundles/ninjatookenclan/kamon/' ~ clan.kamon) }}" class="pull-left" alt="">
+									<a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}">{% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}</a>
+								</span>
+								<time datetime="{{ clan.dateAjout|date("Y-m-d\\TH:i:sP") }}">le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}</time><br>
+								<h5><a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}">{{ clan.description|raw|striptags|slice(0, 50) }}</a></h5>
+							</div>
+							{% endfor %}
 						</section>
 
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}

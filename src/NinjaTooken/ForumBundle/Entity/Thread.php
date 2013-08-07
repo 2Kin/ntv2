@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity
  * @ORM\Table(name="nt_thread")
+ * @ORM\Entity(repositoryClass="NinjaTooken\ForumBundle\Entity\ThreadRepository")
  */
 class Thread
 {
