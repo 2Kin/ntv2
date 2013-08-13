@@ -1,6 +1,8 @@
 ninja_tooken_event:
-    pattern:  /event
-    defaults: { _controller: NinjaTookenForumBundle:Default:event }
+    pattern:  /event/{page}
+    defaults: { _controller: NinjaTookenForumBundle:Default:event, page:1 }
+    requirements:
+        page:  \d*
 
 ninja_tooken_forum:
     pattern:  /forum

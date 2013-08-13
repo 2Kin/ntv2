@@ -1,0 +1,24 @@
+########################################################
+##                                                    ##
+## USAGE:                                             ##
+##                                                    ##
+## $elo_calculator = new elo_calculator;              ##
+##                                                    ##
+## Please make sure you send the scores & results in  ##
+## the following order:                               ##
+##                                                    ##
+## 1st player's score                                 ##
+## 2nd player's score                                 ##
+## 1st player's result                                ##
+## 2nd player's result                                ##
+##                                                    ##
+## A better example is given here:                    ##
+##                                                    ##
+## $results=$elo_calculator->rating($S1,$S2,$R1,$R2); ##
+##                                                    ##
+## * S1 = 1st player's score                          ##
+## * S2 = 2nd player's score                          ##
+## * R1 = 1st player's result                         ##
+## * R2 = 2nd player's result                         ##
+##                                                    ##
+########################################################

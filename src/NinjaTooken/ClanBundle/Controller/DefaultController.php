@@ -15,11 +15,13 @@ class DefaultController extends Controller
         $num = $this->container->getParameter('numReponse');
         $page = max(1, $page);
 
+        $em = $this->getDoctrine()->getManager();
+
         $order = $request->get('order');
         if(empty($order))
             $order = 'composition';
 
-        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenClanBundle:Clan');
+        $repo = $em->getRepository('NinjaTookenClanBundle:Clan');
 
         return $this->render('NinjaTookenClanBundle:Default:liste.html.twig', array(
             'clans' => $repo->getClans($order, $num, $page),
@@ -39,31 +41,21 @@ class DefaultController extends Controller
         $num = $this->container->getParameter('numReponse');
         $page = max(1, $page);
 
-        $repo_forum = $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Forum');
+        $em = $this->getDoctrine()->getManager();
 
-        $forum = $repo_forum->createQueryBuilder('f')
-            ->where('f.type = :type')
-            ->andWhere('f.slug = :slug')
-            ->setParameter('type', 'clan')
-            ->setParameter('slug', $clan->getSlug())
-            ->getQuery()->getResult();
+        // le forum du clan
+        $forum = $em->getRepository('NinjaTookenForumBundle:Forum')->getForum($clan->getSlug(), 'clan');
         if($forum){
             $forum = current($forum);
-            $threads = $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Thread')->getThreads($forum, $num, $page);
+            $threads = $em->getRepository('NinjaTookenForumBundle:Thread')->getThreads($forum, $num, $page);
             if(count($threads)>0)
                 $forum->threads = $threads;
             else
                 $forum->threads = array();
         }
 
-        // gestion des membres
-        $repo_membre = $this->getDoctrine()->getManager()->getRepository('NinjaTookenClanBundle:ClanUtilisateur');
-        $shishou = $repo_membre->createQueryBuilder('cu')
-            ->where('cu.clan = :clan')
-            ->andWhere('cu.droit = :droit')
-            ->setParameter('clan', $clan)
-            ->setParameter('droit', 'Shishou')
-            ->getQuery()->getResult();
+        // l'arborescence des membres
+        $shishou = $em->getRepository('NinjaTookenClanBundle:ClanUtilisateur')->getMembres($clan, 'Shishou', null, 1, 1);
         $membres = array();
         if($shishou){
             $shishou = current($shishou);
@@ -73,6 +65,7 @@ class DefaultController extends Controller
             );
         }
 
+        // l'arborescence des membres mise à plat (listing simple)
         $membresListe = $this->getRecruteur($membres);
 
         return $this->render('NinjaTookenClanBundle:Default:clan.html.twig', array(
@@ -95,15 +88,10 @@ class DefaultController extends Controller
     }
 
     function getRecruts(ClanUtilisateur $recruteur){
+        $em = $this->getDoctrine()->getManager();
+
+        $recruts = $em->getRepository('NinjaTookenClanBundle:ClanUtilisateur')->getMembres(null, '',  $recruteur->getMembre());
         $membres = array();
-        $repo_membre = $this->getDoctrine()->getManager()->getRepository('NinjaTookenClanBundle:ClanUtilisateur');
-
-        $recruts =  $repo_membre->createQueryBuilder('cu')
-            ->where('cu.recruteur = :recruteur')
-            ->andWhere('cu.membre <> :recruteur')
-            ->setParameter('recruteur', $recruteur->getMembre()->getId())
-            ->getQuery()->getResult();
-
         foreach($recruts as $recrut){
             $membres[] = array(
                 'recruteur' => $recrut,

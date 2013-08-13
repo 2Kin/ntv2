@@ -1,6 +1,8 @@
 ninja_tooken_user_fiche:
-    pattern:  /fiche/{user_nom}
-    defaults: { _controller: NinjaTookenUserBundle:Default:fiche }
+    pattern:  /fiche/{user_nom}/{page}
+    defaults: { _controller: NinjaTookenUserBundle:Default:fiche, page:1 }
+    requirements:
+        page:  \d*
 
 ninja_tooken_user_messagerie:
     pattern:  /compte/messagerie/{page}

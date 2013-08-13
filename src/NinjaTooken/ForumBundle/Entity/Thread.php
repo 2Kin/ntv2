@@ -44,6 +44,20 @@ class Thread
     private $isEvent;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_event_start", type="date")
+     */
+    private $dateEventStart;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_event_end", type="date")
+     */
+    private $dateEventEnd;
+
+    /**
      * Tells if new comments can be added in this thread
      *
      * @var bool
@@ -455,5 +469,74 @@ class Thread
     public function setCommentable($isCommentable)
     {
         $this->isCommentable = (bool) $isCommentable;
+    }
+
+    /**
+     * Set dateEventStart
+     *
+     * @param \DateTime $dateEventStart
+     * @return Thread
+     */
+    public function setDateEventStart($dateEventStart)
+    {
+        $this->dateEventStart = $dateEventStart;
+
+        return $this;
+    }
+
+    /**
+     * Get dateEventStart
+     *
+     * @return \DateTime 
+     */
+    public function getDateEventStart()
+    {
+        return $this->dateEventStart;
+    }
+
+    /**
+     * Set dateEventEnd
+     *
+     * @param \DateTime $dateEventEnd
+     * @return Thread
+     */
+    public function setDateEventEnd($dateEventEnd)
+    {
+        $this->dateEventEnd = $dateEventEnd;
+
+        return $this;
+    }
+
+    /**
+     * Get dateEventEnd
+     *
+     * @return \DateTime 
+     */
+    public function getDateEventEnd()
+    {
+        return $this->dateEventEnd;
+    }
+
+    /**
+     * Set isCommentable
+     *
+     * @param boolean $isCommentable
+     * @return Thread
+     */
+    public function setIsCommentable($isCommentable)
+    {
+        $this->isCommentable = $isCommentable;
+
+        return $this;
+    }
+
+    /**
+     * Get isCommentable
+     *
+     * @return boolean 
+     */
+    public function getIsCommentable()
+    {
+        return $this->isCommentable;
     }
 }

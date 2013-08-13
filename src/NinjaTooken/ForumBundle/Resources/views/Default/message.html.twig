@@ -56,7 +56,9 @@
 									currentPage: page,
 									paginationPath: path('ninja_tooken_message', {topic_nom: forum.slug, message_nom:thread.slug, 'page': ''}),
 									paginationAfter: '',
-									lastPage: nombrePage
+									lastPage: nombrePage,
+									extremePagesLimit: 2,
+									nearbyPagesLimit: 3
 								} only %}
 								{% for comment in comments %}
 								<article itemprop="comment" itemscope itemtype="http://schema.org/UserComments" id="c{{ loop.index }}">
@@ -75,7 +77,9 @@
 									currentPage: page,
 									paginationPath: path('ninja_tooken_message', {topic_nom: forum.slug, message_nom:thread.slug, 'page': ''}),
 									paginationAfter: '',
-									lastPage: nombrePage
+									lastPage: nombrePage,
+									extremePagesLimit: 2,
+									nearbyPagesLimit: 3
 								} only %}
 							</section>
 							{% endif %}

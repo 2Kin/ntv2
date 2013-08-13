@@ -109,6 +109,13 @@ class User extends BaseUser
      */
     private $oldUsername;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_ajout", type="datetime")
+     */
+    private $dateAjout;
+
     public function __construct()
     {
         parent::__construct();
@@ -490,5 +497,28 @@ class User extends BaseUser
     public function getRecruts()
     {
         return $this->recruts;
+    }
+
+    /**
+     * Set dateAjout
+     *
+     * @param \DateTime $dateAjout
+     * @return User
+     */
+    public function setDateAjout($dateAjout)
+    {
+        $this->dateAjout = $dateAjout;
+
+        return $this;
+    }
+
+    /**
+     * Get dateAjout
+     *
+     * @return \DateTime 
+     */
+    public function getDateAjout()
+    {
+        return $this->dateAjout;
     }
 }

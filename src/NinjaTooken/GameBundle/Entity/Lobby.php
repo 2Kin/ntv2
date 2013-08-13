@@ -22,6 +22,15 @@ class Lobby
     private $id;
 
     /**
+     * user
+     *
+     * @var User
+     *
+     * @ORM\ManyToMany(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     */
+    private $users;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="carte", type="smallint")
@@ -270,5 +279,45 @@ class Lobby
     public function getDateUpdate()
     {
         return $this->dateUpdate;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add users
+     *
+     * @param \NinjaTooken\UserBundle\Entity\User $users
+     * @return Lobby
+     */
+    public function addUser(\NinjaTooken\UserBundle\Entity\User $users)
+    {
+        $this->users[] = $users;
+
+        return $this;
+    }
+
+    /**
+     * Remove users
+     *
+     * @param \NinjaTooken\UserBundle\Entity\User $users
+     */
+    public function removeUser(\NinjaTooken\UserBundle\Entity\User $users)
+    {
+        $this->users->removeElement($users);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

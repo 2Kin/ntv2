@@ -47,7 +47,9 @@
 							currentPage: page,
 							paginationPath: path('ninja_tooken_user_messagerie', {'page': ''}),
 							paginationAfter: '',
-							lastPage: nombrePage
+							lastPage: nombrePage,
+							extremePagesLimit: 1,
+							nearbyPagesLimit: 2
 						} only %}
 						{% else %}
 						<h4>Vous n'avez pas reçu de message</h4>

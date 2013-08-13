@@ -1,4 +1,5 @@
 {% extends '::layout.html.twig' %}
+{% import "avatar.html.twig" as avatar %}
 
 {% block title %}NinjaTooken - Mentions légales{% endblock %}
 {% block description %}NinjaTooken - jouer gratuitement{% endblock %}
@@ -16,52 +17,22 @@
 
 {% block body %}
 				<section class="main">
-					<h3>Ile (jour) #7423</h3>
-					<p><i class="icon-lock"></i> Partie "Libre", version 0.99975</p>
+				{% if games is not empty %}
+					{% for game in games %}
+					<h3>{{ carte[game.carte] }} #{{ game.partie }}</h3>
+					<p>{% if game.privee %}<i class="icon-lock"></i> {% endif %}Partie "{{ jeu[game.jeu] }}", version {{ game.version }}</p>
 
+					{% for user in game.users %}
 					<div class="membre pull-left">
-						<a href="utilisateur.html"><img src="images/avatar.jpg">Casey</a>
+						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:user.slug}) }}"><img src="{{ avatar.getUrl(user) }}">{{ user.username }}</a>
 					</div>
-					<div class="membre pull-left">
-						<a href="utilisateur.html"><img src="images/avatar.jpg">Casey</a>
-					</div>
-					<div class="membre pull-left">
-						<a href="utilisateur.html"><img src="images/avatar.jpg">Casey</a>
-					</div>
-					<div class="membre pull-left">
-						<a href="utilisateur.html"><img src="images/avatar.jpg">Casey</a>
-					</div>
+					{% endfor %}
 
 					<br class="clear">
-
-					<h3>Cascade #7737</h3>
-					<p><i class="icon-lock"></i> Partie "Libre", version 0.99975</p>
-
-					<div class="membre pull-left">
-						<a href="utilisateur.html"><img src="images/avatar.jpg">Casey</a>
-					</div>
-					<div class="membre pull-left">
-						<a href="utilisateur.html"><img src="images/avatar.jpg">Casey</a>
-					</div>
-					<div class="membre pull-left">
-						<a href="utilisateur.html"><img src="images/avatar.jpg">Casey</a>
-					</div>
-					<div class="membre pull-left">
-						<a href="utilisateur.html"><img src="images/avatar.jpg">Casey</a>
-					</div>
-					<div class="membre pull-left">
-						<a href="utilisateur.html"><img src="images/avatar.jpg">Casey</a>
-					</div>
-					<div class="membre pull-left">
-						<a href="utilisateur.html"><img src="images/avatar.jpg">Casey</a>
-					</div>
-					<div class="membre pull-left">
-						<a href="utilisateur.html"><img src="images/avatar.jpg">Casey</a>
-					</div>
-					<div class="membre pull-left">
-						<a href="utilisateur.html"><img src="images/avatar.jpg">Casey</a>
-					</div>
-
+					{% endfor %}
+				{% else %}
+					Pas de partie enregistrée en base pour l'instant.
 					<br class="clear">
+				{% endif %}
 				</section>
 {% endblock %}

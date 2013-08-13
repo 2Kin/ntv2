@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * ClanUtilisateur
  *
  * @ORM\Table(name="nt_clanutilisateur")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="NinjaTooken\ClanBundle\Entity\ClanUtilisateurRepository")
  */
 class ClanUtilisateur
 {

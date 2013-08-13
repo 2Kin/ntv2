@@ -48,27 +48,45 @@ class DefaultController extends Controller
     /**
      * @ParamConverter("user", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
      */
-    public function ficheAction(User $user)
+    public function ficheAction(User $user, $page = 1)
     {
-        return $this->render('NinjaTookenUserBundle:Default:fiche.html.twig', array('user' => $user));
+        // amis
+        $num = $this->container->getParameter('numReponse');
+        $page = max(1, $page);
+
+        $friends = $this->getDoctrine()->getManager()
+            ->getRepository('NinjaTookenUserBundle:Friend')
+            ->getFriends($user, $num, $page);
+
+        return $this->render('NinjaTookenUserBundle:Default:fiche.html.twig', array(
+            'friends' => $friends,
+            'page' => $page,
+            'nombrePage' => ceil(count($friends)/$num),
+            'user' => $user
+        ));
     }
 
     public function messagerieAction($page=1)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
-        $num = $this->container->getParameter('numReponse');
-        $page = max(1, $page);
+        $security = $this->get('security.context');
 
-        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Message');
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $num = $this->container->getParameter('numReponse');
+            $page = max(1, $page);
 
-        $message = current($repo->getFirstMessage($user));
+            $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Message');
 
-        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array(
-            'messages' => $repo->getMessages($user, $num, $page),
-            'page' => $page,
-            'nombrePage' => ceil($repo->getNumMessages($user)/$num),
-            'currentmessage' => $message
-        ));
+            $message = current($repo->getFirstMessage($user));
+
+            return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array(
+                'messages' => $repo->getMessages($user, $num, $page),
+                'page' => $page,
+                'nombrePage' => ceil($repo->getNumMessages($user)/$num),
+                'currentmessage' => $message
+            ));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
     /**
@@ -76,18 +94,23 @@ class DefaultController extends Controller
      */
     public function messagerieVoirAction(Message $message, $page=1)
     {
-        $user = $this->get('security.context')->getToken()->getUser();
-        $num = $this->container->getParameter('numReponse');
-        $page = max(1, $page);
+        $security = $this->get('security.context');
 
-        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Message');
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $num = $this->container->getParameter('numReponse');
+            $page = max(1, $page);
 
-        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array(
-            'messages' => $repo->getMessages($user, $num, $page),
-            'page' => $page,
-            'nombrePage' => ceil($repo->getNumMessages($user)/$num),
-            'currentmessage' => $message
-        ));
+            $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Message');
+
+            return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array(
+                'messages' => $repo->getMessages($user, $num, $page),
+                'page' => $page,
+                'nombrePage' => ceil($repo->getNumMessages($user)/$num),
+                'currentmessage' => $message
+            ));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
     public function messagerieAjouterAction()
@@ -104,7 +127,7 @@ class DefaultController extends Controller
             $user = $request->query->get('q');
 
             if(!empty($user)){
-                $qb = $this->container->get('doctrine')->getEntityManager()->createQueryBuilder()
+                $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()
                     ->select('u.username')
                     ->from('NinjaTookenUserBundle:User', 'u')
                     ->where("u.username LIKE :q")
@@ -126,93 +149,82 @@ class DefaultController extends Controller
      */
     public function messagerieSupprimerAction(Message $message, $page=1)
     {
-        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array('messages' => array()));
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array('messages' => array()));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
     public function parametresAction()
     {
-        return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig');
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig');
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
     public function parametresModifierAction()
     {
-        return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig');
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig');
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
     public function amisAction($page1, $page2)
     {
-        $num = $this->container->getParameter('numReponse');
-        $page1 = max(1, $page1);
-        $page2 = max(1, $page2);
+        $security = $this->get('security.context');
 
-        $user = $this->get('security.context')->getToken()->getUser();
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $num = $this->container->getParameter('numReponse');
+            $page1 = max(1, $page1);
+            $page2 = max(1, $page2);
 
-        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Friend');
+            $user = $security->getToken()->getUser();
 
-        $friends = $repo->createQueryBuilder('f')
-            ->where('f.user = :user')
-            ->andWhere('f.isConfirmed = true')
-            ->andWhere('f.isBlocked = false')
-            ->setParameter('user', $user)
-            ->addOrderBy('f.dateAjout', 'DESC')
-            ->setFirstResult(($page1-1) * $num)
-            ->setMaxResults($num)
-            ->getQuery()->getResult();
+            $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Friend');
 
-        $total1 = $repo->createQueryBuilder('f')
-            ->select('COUNT(f)')
-            ->where('f.user = :user')
-            ->andWhere('f.isConfirmed = true')
-            ->andWhere('f.isBlocked = false')
-            ->setParameter('user', $user)
-            ->getQuery()->getSingleScalarResult();
+            $friends = $repo->getFriends($user, $num, $page1);
 
-        $demandes = $repo->createQueryBuilder('f')
-            ->where('f.user = :user')
-            ->andWhere('f.isConfirmed = false')
-            ->andWhere('f.isBlocked = false')
-            ->setParameter('user', $user)
-            ->addOrderBy('f.dateAjout', 'DESC')
-            ->setFirstResult(($page2-1) * $num)
-            ->setMaxResults($num)
-            ->getQuery()->getResult();
+            $demandes = $repo->getDemandes($user, $num, $page2);
 
-        $total2 = $repo->createQueryBuilder('f')
-            ->select('COUNT(f)')
-            ->where('f.user = :user')
-            ->andWhere('f.isConfirmed = false')
-            ->andWhere('f.isBlocked = false')
-            ->setParameter('user', $user)
-            ->getQuery()->getSingleScalarResult();
-
-        return $this->render('NinjaTookenUserBundle:Default:amis.html.twig', array(
-            'friends' => $friends,
-            'demandes' => $demandes,
-            'page1' => $page1,
-            'page2' => $page2,
-            'nombrePage1' => ceil($total1/$num),
-            'nombrePage2' => ceil($total2/$num)
-        ));
+            return $this->render('NinjaTookenUserBundle:Default:amis.html.twig', array(
+                'friends' => $friends,
+                'demandes' => $demandes,
+                'page1' => $page1,
+                'page2' => $page2,
+                'nombrePage1' => ceil(count($friends)/$num),
+                'nombrePage2' => ceil(count($demandes)/$num)
+            ));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
     /**
-     * @ParamConverter("user", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     * @ParamConverter("friend", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
      */
-    public function amisConfirmerAction(User $user)
+    public function amisConfirmerAction(User $friend)
     {
-        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Friend');
-        $friends = $repo->createQueryBuilder('f')
-            ->where('f.user = :user')
-            ->andWhere('f.user = :user')
-            ->setParameter('user', $user)
-            ->addOrderBy('f.dateAjout', 'DESC')
-            ->setFirstResult(0)
-            ->setMaxResults(1)
-            ->getQuery()->getResult();
+        $security = $this->get('security.context');
 
-        return $this->render('NinjaTookenUserBundle:Default:amis.html.twig', array(
-            'friends' => $friends
-        ));
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            $friends = $this->getDoctrine()->getManager()
+                ->getRepository('NinjaTookenUserBundle:Friend')
+                ->getFriends($friend, 1, 0);
+
+            return $this->render('NinjaTookenUserBundle:Default:amis.html.twig', array(
+                'friends' => $friends
+            ));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
     /**
@@ -220,41 +232,41 @@ class DefaultController extends Controller
      */
     public function amisBloquerAction(User $user)
     {
-        return $this->render('NinjaTookenUserBundle:Default:amis.html.twig');
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            return $this->render('NinjaTookenUserBundle:Default:amis.html.twig');
+        }
     }
 
     public function capturesAction($page)
     {
-        $num = $this->container->getParameter('numReponse');
-        $page = max(1, $page);
+        $security = $this->get('security.context');
 
-        $user = $this->get('security.context')->getToken()->getUser();
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $num = $this->container->getParameter('numReponse');
+            $page = max(1, $page);
 
-        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Capture');
+            $captures = $this->getDoctrine()->getManager()
+                ->getRepository('NinjaTookenUserBundle:Capture')
+                ->getCaptures($security->getToken()->getUser(), $num, $page);
 
-        $captures = $repo->createQueryBuilder('c')
-            ->where('c.user = :user')
-            ->setParameter('user', $user)
-            ->addOrderBy('c.dateAjout', 'DESC')
-            ->setFirstResult(($page-1) * $num)
-            ->setMaxResults($num)
-            ->getQuery()->getResult();
-
-        $total = $repo->createQueryBuilder('c')
-            ->select('COUNT(c)')
-            ->where('c.user = :user')
-            ->setParameter('user', $user)
-            ->getQuery()->getSingleScalarResult();
-
-        return $this->render('NinjaTookenUserBundle:Default:captures.html.twig', array(
-            'captures' => $captures,
-            'page' => $page,
-            'nombrePage' => ceil($total/$num)
-        ));
+            return $this->render('NinjaTookenUserBundle:Default:captures.html.twig', array(
+                'captures' => $captures,
+                'page' => $page,
+                'nombrePage' => ceil(count($captures)/$num)
+            ));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
     public function capturesSupprimerAction($id)
     {
-        return $this->render('NinjaTookenUserBundle:Default:captures.html.twig');
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            return $this->render('NinjaTookenUserBundle:Default:captures.html.twig');
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 }

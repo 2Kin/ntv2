@@ -33,7 +33,9 @@
 						currentPage: page,
 						paginationPath: path('ninja_tooken_user_captures', {'page':''}),
 						paginationAfter: '',
-						lastPage: nombrePage
+						lastPage: nombrePage,
+						extremePagesLimit: 2,
+						nearbyPagesLimit: 3
 					} only %}
 				{% else %}
 					Pas de captures pour l'instant.

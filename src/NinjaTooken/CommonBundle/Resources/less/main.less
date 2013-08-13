@@ -171,6 +171,9 @@ label.select{
 				padding-right:18px
 			}
 		}
+		&[name="classe"]{
+			min-width:110px;
+		}
 	}
 }
 
@@ -293,10 +296,10 @@ nav, .footer footer{
 		a.active{
 			.opacity(100);
 		}
-		.french,.english{
+		.fr,.en{
 			.size(15px, 20px);
 		}
-		.english{
+		.en{
 			background-position:0 -17px;clear:right;margin-right:20px;
 		}
 		.facebook,
@@ -379,11 +382,11 @@ header{
 						background-color:@grayDark;
 					}
 					ul{
-						display:block;
+						.opacity(100);pointer-events:all;top:45px;.transition(all 0.3s ease-in);
 					}
 				}
 				ul{
-					display:none;position:absolute;top:45px;left:0;z-index:1000;background-color:@grayDark;padding:10px;.border-radius(@baseBorderRadius);width:220px;
+					.opacity(0);pointer-events:none;.transition(all 0.2s ease-out);position:absolute;top:75px;left:0;z-index:1000;background-color:@grayDark;padding:10px;.border-radius(@baseBorderRadius);width:220px;
 					// pour afficher le triangle
 					&:before{
 						position:absolute;left:25px;top:-8px;.square(0);border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:8px solid @grayDark;content:'';

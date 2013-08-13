@@ -45,6 +45,8 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         class: %class%
+        carte: %carte%
+        jeu: %jeu%
 
 # Assetic Configuration
 assetic:
@@ -112,10 +114,16 @@ exercise_html_purifier:
         Core.RemoveInvalidImg: true
         URI.Base: 'http://www.ninjatooken.com'
         URI.MakeAbsolute: true
-    min:
+    medium:
         Core.Encoding: 'UTF-8'
         HTML.Allowed: 'p,span,li,strong,b,em,i,strike,br,'
         HTML.TargetBlank: true
+        CSS.AllowedProperties:  'color,font,font-weight'
+    min:
+        Core.Encoding: 'UTF-8'
+        HTML.Allowed: 'p,strong,b,em,i,strike,'
+        AutoFormat.RemoveEmpty: true
+        AutoFormat.RemoveEmpty.RemoveNbsp : true
         CSS.AllowedProperties:  'color,font,font-weight'
 
 fos_user:

@@ -33,7 +33,9 @@
 						currentPage: page,
 						paginationPath: path('ninja_tooken_topic', {'topic_nom':forum.slug, 'page': ''}),
 						paginationAfter: '',
-						lastPage: nombrePage
+						lastPage: nombrePage,
+						extremePagesLimit: 2,
+						nearbyPagesLimit: 3
 					} only %}
 				</section>
 {% endblock %}

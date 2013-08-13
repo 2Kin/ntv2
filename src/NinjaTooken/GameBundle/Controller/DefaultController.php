@@ -3,12 +3,21 @@
 namespace NinjaTooken\GameBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
     public function partiesAction()
     {
-        return $this->render('NinjaTookenGameBundle:Default:parties.html.twig');
+        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenGameBundle:Lobby');
+
+        $games = $repo->createQueryBuilder('a')
+            ->orderBy('a.dateDebut', 'DESC')
+            ->getQuery()->getResult();
+
+        return $this->render('NinjaTookenGameBundle:Default:parties.html.twig', array(
+            'games' => $games
+        ));
     }
 
     public function calculateurAction()
@@ -16,9 +25,37 @@ class DefaultController extends Controller
         return $this->render('NinjaTookenGameBundle:Default:calculateur.html.twig');
     }
 
-    public function classementAction($page)
+    public function classementAction(Request $request, $page)
     {
-        return $this->render('NinjaTookenGameBundle:Default:classement.html.twig');
+        $num = $this->container->getParameter('numReponse');
+        $page = max(1, $page);
+
+        $order = $request->get('order');
+        if(empty($order))
+            $order = 'experience';
+
+        $filter = $request->get('filter');
+
+        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenGameBundle:Ninja');
+
+        $total = $repo->getNumNinjas();
+
+        $classe = $this->container->getParameter('class');
+        foreach($classe as $k=>$v){
+            $classeNum[$k] = $repo->getNumNinjas($k);
+        }
+
+        return $this->render('NinjaTookenGameBundle:Default:classement.html.twig', array(
+            'order' => $order,
+            'filter' => $filter,
+            'joueurs' => $repo->getNinjas($order, $filter, $num, $page),
+            'page' => $page,
+            'nombrePage' => ceil($total/$num),
+            'nombre' => $num,
+            'nombreNinja' => $total,
+            'experienceTotal' => $repo->getSumExperience(),
+            'classes' => $classeNum
+        ));
     }
     
     public function recentGamesAction($max = 3)

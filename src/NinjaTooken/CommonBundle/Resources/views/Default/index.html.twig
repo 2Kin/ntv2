@@ -33,7 +33,7 @@
 										<h3 itemprop="headline">{{ thread.nom }}</h3>
 									</header>
 									<div class="content" itemprop="articleBody">
-										<p>{{ thread.body|raw|purify('min') }}</p>
+										<p>{{ thread.body|raw|purify('medium') }}</p>
 									</div>
 									<footer>
 										<a href="{{ path('ninja_tooken_message', {topic_nom: thread.forum.slug, message_nom:thread.slug}) }}" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
@@ -53,7 +53,7 @@
 							<input type="submit" name="s" value="Ok !" class="span2">
 						</form>
 
-						{{ render(controller('NinjaTookenForumBundle:Default:recentComments', {'max': 10, 'forum': 0})) }}
+						{{ render(controller('NinjaTookenForumBundle:Default:recentComments', {'max': 10, 'forum': 0, 'user': 0})) }}
 
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
 

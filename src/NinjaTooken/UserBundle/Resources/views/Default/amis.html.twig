@@ -40,7 +40,9 @@
 						currentPage: page1,
 						paginationPath: path('ninja_tooken_user_amis', {'page1':'','page2': page2}),
 						paginationAfter: '',
-						lastPage: nombrePage1
+						lastPage: nombrePage1,
+						extremePagesLimit: 2,
+						nearbyPagesLimit: 3
 					} only %}
 
 					<h3>Mes amis</h3>
@@ -64,7 +66,9 @@
 						currentPage: page2,
 						paginationPath: path('ninja_tooken_user_amis', {'page1':page1,'page2': ''}),
 						paginationAfter: '',
-						lastPage: nombrePage2
+						lastPage: nombrePage2,
+						extremePagesLimit: 2,
+						nearbyPagesLimit: 3
 					} only %}
 				</section>
 {% endblock %}

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Capture
  *
  * @ORM\Table(name="nt_capture")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="NinjaTooken\UserBundle\Entity\CaptureRepository")
  */
 class Capture
 {

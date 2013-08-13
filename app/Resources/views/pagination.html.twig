@@ -1,29 +1,35 @@
 {% spaceless %}
 {% if lastPage > 1 %}
-{# the number of first and last pages to be displayed #}
-{% set extremePagesLimit = 1 %}
-{# the number of pages that are displayed around the active page #}
-{% set nearbyPagesLimit = 2 %}
+{% set begin = currentPage - nearbyPagesLimit %}
+{% set decalage = 0 %}
+{% if begin < 1 %}
+	{% set decalage = begin|abs + 1 %}
+	{% set begin = 1 %}
+{% endif %}
+{% set end = currentPage + decalage + nearbyPagesLimit %}
+{% if end > lastPage %}
+	{% set begin = currentPage - ( end - lastPage ) - nearbyPagesLimit %}
+	{% set end = lastPage %}
+	{% if begin < 1 %}
+		{% set begin = 1 %}
+	{% endif %}
+{% endif %}
 <div class="pagination">
 	<ul>
-		{% if currentPage > 1 %}
+		{% if begin > 1 %}
 			{% for i in range(1, extremePagesLimit) if ( i < currentPage - nearbyPagesLimit ) %}
 		<li><a href="{{ paginationPath }}{{ i }}{{ paginationAfter }}">{{ i }}</a></li>
 			{% endfor %}
-			{% if extremePagesLimit + 1 < currentPage - nearbyPagesLimit %}
+			{% if extremePagesLimit + 1 < begin %}
 		<li class="disabled"><a href="#">...</a></li>
 			{% endif %}
-			{% for i in range(currentPage-nearbyPagesLimit, currentPage-1) if ( i > 0 ) %}
-		<li><a href="{{ paginationPath }}{{ i }}{{ paginationAfter }}">{{ i }}</a></li>
-			{% endfor %}
 		{% endif %}
 
-		<li class="active"><a href="#">{{ currentPage }}</a></li>
+		{% for i in range(begin, end) %}
+		<li{% if i == currentPage %} class="active"{% endif %}><a href="{{ paginationPath }}{{ i }}{{ paginationAfter }}">{{ i }}</a></li>
+		{% endfor %}
 
-		{% if currentPage < lastPage %}
-			{% for i in range(currentPage+1, currentPage + nearbyPagesLimit) if ( i <= lastPage ) %}
-		<li><a href="{{ paginationPath }}{{ i }}{{ paginationAfter }}">{{ i }}</a></li>
-			{% endfor %}
+		{% if end < lastPage %}
 			{% if  (lastPage - extremePagesLimit) > (currentPage + nearbyPagesLimit) %}
 		<li class="disabled"><a href="#">...</a></li>
 			{% endif %}

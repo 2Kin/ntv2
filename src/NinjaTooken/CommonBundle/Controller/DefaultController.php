@@ -10,20 +10,16 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
+        $num = $this->container->getParameter('numReponse');
         $em = $this->getDoctrine()->getManager();
 
-        $repo1 = $em->getRepository('NinjaTookenForumBundle:Thread');
-        $repo2 = $em->getRepository('NinjaTookenForumBundle:Forum');
-
-        $forum = $repo2->findOneBy(array('slug' => 'nouveautes'));
-
-        $threads = $repo1->findBy(
-            array('forum' => $forum),
-            array('dateAjout' => 'DESC'),
-            10,0
-        );
-
-        return $this->render('NinjaTookenCommonBundle:Default:index.html.twig', array('threads' => $threads));
+        return $this->render('NinjaTookenCommonBundle:Default:index.html.twig', array(
+            'threads' => $em->getRepository('NinjaTookenForumBundle:Thread')->findBy(
+                array('forum' => $em->getRepository('NinjaTookenForumBundle:Forum')->findOneBy(array('slug' => 'nouveautes'))),
+                array('dateAjout' => 'DESC'),
+                $num,0
+            )
+        ));
     }
 
     public function jouerAction()

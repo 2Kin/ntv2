@@ -23,4 +23,21 @@ class ThreadRepository extends EntityRepository
 
         return new Paginator($query);
     }
+
+    public function getEvents($nombreParPage=5, $page=1)
+    {
+        $page = max(1, $page);
+
+        $query = $this->createQueryBuilder('t')
+            ->where('t.isEvent = :isEvent')
+            ->setParameter('isEvent', true)
+            ->addOrderBy('t.isPostit', 'DESC')
+            ->addOrderBy('t.lastCommentAt', 'DESC')
+            ->getQuery();
+
+        $query->setFirstResult(($page-1) * $nombreParPage)
+            ->setMaxResults($nombreParPage);
+
+        return new Paginator($query);
+    }
 }

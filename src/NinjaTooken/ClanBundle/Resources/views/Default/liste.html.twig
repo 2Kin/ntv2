@@ -44,7 +44,7 @@
 										{% if clan.isRecruting %}<span class="actif">recrutements ouverts</span>{% else %}<span>recrutements fermés</span>{% endif %}
 									</header>
 									<div class="content">
-										<p>{{ clan.description|raw|purify('min') }}</p>
+										<p>{{ clan.description|raw|purify('medium') }}</p>
 									</div>
 									<footer>
 										<a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}"class="pull-right">Page du clan &raquo;</a>
@@ -61,7 +61,9 @@
 							currentPage: page,
 							paginationPath: path('ninja_tooken_clans', {'page': ''}),
 							paginationAfter: '?order=' ~ order,
-							lastPage: nombrePage
+							lastPage: nombrePage,
+							extremePagesLimit: 2,
+							nearbyPagesLimit: 3
 						} only %}
 					</div>
 					<aside class="span4">
