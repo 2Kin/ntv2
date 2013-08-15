@@ -58,4 +58,23 @@ class ClanRepository extends EntityRepository
 
         return $query->getQuery()->getSingleScalarResult();
     }
+
+    public function searchClans($q = "", $nombreParPage=5, $page=1)
+    {
+        $query = $this->createQueryBuilder('c')
+            ->where('c.online = :online')
+            ->setParameter('online', true)
+            ->addOrderBy('c.dateAjout', 'DESC');
+
+        if(!empty($q)){
+            $query->andWhere('c.nom LIKE :q')
+                ->andWhere('c.description LIKE :q')
+                ->setParameter('q', '%'.$q.'%');
+        }
+
+        $query->setFirstResult(($page-1) * $nombreParPage)
+            ->setMaxResults($nombreParPage);
+
+        return $query->getQuery()->getResult();
+    }
 }

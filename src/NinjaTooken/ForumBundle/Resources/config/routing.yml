@@ -1,3 +1,11 @@
+ninja_tooken_message_old:
+    pattern:  /message.php
+    defaults: { _controller: NinjaTookenForumBundle:Default:oldMessage }
+
+ninja_tooken_forum_old:
+    pattern:  /forum.php
+    defaults: { _controller: NinjaTookenForumBundle:Default:oldForum }
+
 ninja_tooken_event:
     pattern:  /event/{page}
     defaults: { _controller: NinjaTookenForumBundle:Default:event, page:1 }

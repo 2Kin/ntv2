@@ -11,7 +11,23 @@ use NinjaTooken\UserBundle\Entity\Message;
 
 class DefaultController extends Controller
 {
-    
+
+    public function oldUserAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('NinjaTookenUserBundle:User')->findOneBy(array('old_id' => (int)$request->get('ID')));
+
+        if(!$user){
+            throw new NotFoundHttpException('Cet utilisateur n\'existe pas !');
+        }
+
+        return $this->redirect($this->generateUrl('ninja_tooken_user_fiche', array(
+            'user_nom' => $user->getSlug(),
+            'page' => 1
+        )));
+    }
+
     public function connectedAction(User $user)
     {
         $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Message');
@@ -63,6 +79,29 @@ class DefaultController extends Controller
             'page' => $page,
             'nombrePage' => ceil(count($friends)/$num),
             'user' => $user
+        ));
+    }
+
+    public function userSearchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $num = $this->container->getParameter('numReponse');
+        $q = $request->get('q');
+
+        $query = $em->getRepository('NinjaTookenUserBundle:User')->createQueryBuilder('u')
+            ->where('u.locked = :locked')
+            ->setParameter('locked', false);
+
+        if(!empty($q)){
+            $query->andWhere('u.username LIKE :q')
+                ->setParameter('q', $q.'%');
+        }
+
+        $query->setFirstResult(0)
+            ->setMaxResults($num);
+
+        return $this->render('NinjaTookenUserBundle:Default:search.html.twig', array(
+            'users' => $query->getQuery()->getResult()
         ));
     }
 

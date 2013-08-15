@@ -49,6 +49,13 @@ class Comment
     */
     private $author;
 
+    /**
+    * @var int
+    *
+    * @ORM\Column(name="old_id", type="integer")
+    */
+    private $old_id;
+
     public function __construct()
     {
         $this->dateAjout = new DateTime();
@@ -138,5 +145,28 @@ class Comment
     public function setThread(NinjaTooken\ForumBundle\Entity\Thread $thread)
     {
         $this->thread = $thread;
+    }
+
+    /**
+     * Set old_id
+     *
+     * @param integer $oldId
+     * @return Thread
+     */
+    public function setOldId($oldId)
+    {
+        $this->old_id = $oldId;
+
+        return $this;
+    }
+
+    /**
+     * Get old_id
+     *
+     * @return integer 
+     */
+    public function getOldId()
+    {
+        return $this->old_id;
     }
 }

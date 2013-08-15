@@ -1,0 +1,55 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - Clans{% endblock %}
+{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+
+{% block breadcrumbs1 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<span itemprop="title">Communauté</span>
+							</span>  <i class="icon-angle-right"></i> 
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_clans') }}" itemprop="url">
+									<span itemprop="title">Clans</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_clan_search') }}" itemprop="url">
+									<span itemprop="title">Chercher</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+				<section class="forum">
+					<h4>Résultat de la recherche</h4>
+					<br class="clear">
+					{% if clans is not empty %}
+					<p>{{ clans|length }} clan{% if clans|length > 1 %}s{% endif %} trouvé{% if clans|length > 1 %}s{% endif %} pour "{{ app.request.get('q') }}".</p>
+						{% for clan in clans %}
+						<div class="row-fluid topic">
+							<div class="span6">
+								<h5><a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}">{% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}</a></h5>
+							</div>
+							<div class="span3">
+								<span>{{ clan.membres.count }} ninja{% if clan.membres.count>1 %}s{% endif %} depuis le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}</span>
+							</div>
+							<div class="span3">
+								{% if clan.isRecruting %}<span class="actif">recrutements ouverts</span>{% else %}<span>recrutements fermés</span>{% endif %}
+							</div>
+						</div>
+						{% endfor %}
+					{% else %}
+					Aucun résultat trouvé.
+					{% endif %}
+					<br class="clear">
+					<h4>Faire une autre recherche</h4>
+					<form action="{{ path('ninja_tooken_clan_search') }}" method="post" accept-charset="utf-8" class="row-fluid">
+						<input type="text" name="q" value="Chercher" class="span10">
+						<input type="submit" name="s" value="Ok !" class="span2">
+					</form>
+				</section>
+{% endblock %}

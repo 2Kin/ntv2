@@ -2,13 +2,34 @@ ninja_tooken_homepage:
     pattern:  /
     defaults: { _controller: NinjaTookenCommonBundle:Default:index }
 
+ninja_tooken_jouer_old:
+    pattern:  /jouer.php
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: ninja_tooken_jouer
+        permanent: true
+
 ninja_tooken_jouer:
     pattern:  /jouer
     defaults: { _controller: NinjaTookenCommonBundle:Default:jouer }
 
+ninja_tooken_manuel_old:
+    pattern:  /manuel-ninja/{hash}
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: ninja_tooken_manuel
+        permanent: true
+
 ninja_tooken_manuel:
     pattern:  /guide-du-ninja
     defaults: { _controller: NinjaTookenCommonBundle:Default:manuel }
+
+ninja_tooken_reglement_old:
+    pattern:  /reglement.php
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: ninja_tooken_reglement
+        permanent: true
 
 ninja_tooken_reglement:
     pattern:  /regles-respecter
@@ -18,6 +39,13 @@ ninja_tooken_chat:
     pattern:  /chat
     defaults: { _controller: NinjaTookenCommonBundle:Default:chat }
 
+ninja_tooken_faq_old:
+    pattern:  /faq.php
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: ninja_tooken_faq_generale
+        permanent: true
+
 ninja_tooken_faq_generale:
     pattern:  /faq-generale
     defaults: { _controller: NinjaTookenCommonBundle:Default:faqGenerale }
@@ -26,13 +54,34 @@ ninja_tooken_faq_technique:
     pattern:  /faq-technique
     defaults: { _controller: NinjaTookenCommonBundle:Default:faqTechnique }
 
+ninja_tooken_team_old:
+    pattern:  /team-ninja-tooken.php
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: ninja_tooken_team
+        permanent: true
+
 ninja_tooken_team:
     pattern:  /team
     defaults: { _controller: NinjaTookenCommonBundle:Default:team }
 
+ninja_tooken_mentions_legales_old:
+    pattern:  /mentions-legales.php
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: ninja_tooken_mentions_legales
+        permanent: true
+
 ninja_tooken_mentions_legales:
     pattern:  /mentions-legales
     defaults: { _controller: NinjaTookenCommonBundle:Default:mentionsLegales }
+
+ninja_tooken_contact_old:
+    pattern:  /nous-contacter.php
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: ninja_tooken_contact
+        permanent: true
 
 ninja_tooken_contact:
     pattern:  /nous-contacter

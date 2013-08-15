@@ -1,8 +1,23 @@
+ninja_tooken_clans_old:
+    pattern:  /clan-ninja.php
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: ninja_tooken_clans
+        permanent: true
+
 ninja_tooken_clans:
     pattern:  /clan/{page}
     defaults: { _controller: NinjaTookenClanBundle:Default:liste, page:1 }
     requirements:
         page:  \d*
+
+ninja_tooken_clan_search:
+    pattern:  /clan/search
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanSearch }
+
+ninja_tooken_clan_old:
+    pattern:  /clan.php
+    defaults: { _controller: NinjaTookenForumBundle:Default:oldClan }
 
 ninja_tooken_clan:
     pattern:  /clan/{clan_nom}/{page}

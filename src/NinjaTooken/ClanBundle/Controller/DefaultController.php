@@ -32,6 +32,22 @@ class DefaultController extends Controller
         ));
     }
 
+    public function oldClanAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $clan = $em->getRepository('NinjaTookenClanBundle:Clan')->findOneBy(array('old_id' => (int)$request->get('ID')));
+
+        if(!$clan){
+            throw new NotFoundHttpException('Ce clan n\'existe pas !');
+        }
+
+        return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
+            'clan_nom' => $clan->getSlug(),
+            'page' => 1
+        )));
+    }
+
     /**
      * @ParamConverter("clan", class="NinjaTookenClanBundle:Clan", options={"mapping": {"clan_nom":"slug"}})
      */
@@ -75,6 +91,18 @@ class DefaultController extends Controller
             'nombrePage' => ceil(count($threads)/$num),
             'membres' => $membres,
             'membresListe' => $membresListe
+        ));
+    }
+
+    public function clanSearchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $num = $this->container->getParameter('numReponse');
+
+        $clans = $em->getRepository('NinjaTookenClanBundle:Clan')->searchClans($request->get('q'), $num, 1);
+
+        return $this->render('NinjaTookenClanBundle:Default:search.html.twig', array(
+            'clans' => $clans
         ));
     }
 

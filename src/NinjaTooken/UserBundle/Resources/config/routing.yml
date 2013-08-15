@@ -1,3 +1,11 @@
+ninja_tooken_user_old:
+    pattern:  /utilisateur.php
+    defaults: { _controller: NinjaTookenUserBundle:Default:oldUser }
+
+ninja_tooken_user_search:
+    pattern:  /ficher/search
+    defaults: { _controller: NinjaTookenUserBundle:Default:userSearch }
+
 ninja_tooken_user_fiche:
     pattern:  /fiche/{user_nom}/{page}
     defaults: { _controller: NinjaTookenUserBundle:Default:fiche, page:1 }
