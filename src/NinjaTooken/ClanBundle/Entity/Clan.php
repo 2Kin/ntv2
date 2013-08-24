@@ -25,7 +25,7 @@ class Clan
     /**
      * @var int
      *
-     * @ORM\Column(name="old_id", type="integer")
+     * @ORM\Column(name="old_id", type="integer", nullable=true)
      */
     private $old_id;
 
@@ -96,6 +96,15 @@ class Clan
      */
     private $isRecruting;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->membres = new \Doctrine\Common\Collections\ArrayCollection();
+
+        $this->setDateAjout(new \DateTime());
+    }
 
     /**
      * Get id
@@ -312,13 +321,6 @@ class Clan
     public function getOldId()
     {
         return $this->old_id;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->membres = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

@@ -1,0 +1,22 @@
+services:
+    ninjatooken.forum.admin.forum:
+        class: NinjaTooken\ForumBundle\Admin\ForumAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "forum", label: "Forum" }
+        arguments: [ null, NinjaTooken\ForumBundle\Entity\Forum, null]
+        calls:
+            - [ setTranslationDomain, [NinjaTookenForumBundle]]
+    ninjatooken.forum.admin.thread:
+        class: NinjaTooken\ForumBundle\Admin\ThreadAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "forum", label: "Topic" }
+        arguments: [ null, NinjaTooken\ForumBundle\Entity\Thread, null]
+        calls:
+            - [ setTranslationDomain, [NinjaTookenForumBundle]]
+    ninjatooken.forum.admin.comment:
+        class: NinjaTooken\ForumBundle\Admin\CommentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "forum", label: "Commentaire" }
+        arguments: [ null, NinjaTooken\ForumBundle\Entity\Comment, null]
+        calls:
+            - [ setTranslationDomain, [NinjaTookenForumBundle]]

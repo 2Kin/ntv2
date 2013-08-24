@@ -52,13 +52,13 @@ class Comment
     /**
     * @var int
     *
-    * @ORM\Column(name="old_id", type="integer")
+    * @ORM\Column(name="old_id", type="integer", nullable=true)
     */
     private $old_id;
 
     public function __construct()
     {
-        $this->dateAjout = new DateTime();
+        $this->setDateAjout(new DateTime());
     }
 
     /**

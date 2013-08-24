@@ -24,7 +24,7 @@ class Message
     /**
      * @var int
      *
-     * @ORM\Column(name="old_id", type="integer")
+     * @ORM\Column(name="old_id", type="integer", nullable=true)
      */
     private $old_id;
 
@@ -63,6 +63,20 @@ class Message
      */
     private $hasDeleted;
 
+    /**
+     * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\MessageUser", mappedBy="message", cascade={"persist", "remove"})
+     */
+    private $receivers;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->receivers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setDateAjout(new \DateTime());
+        $this->setHasDeleted(false);
+    }
 
     /**
      * Get id
@@ -210,5 +224,38 @@ class Message
     public function getOldId()
     {
         return $this->old_id;
+    }
+
+    /**
+     * Add receivers
+     *
+     * @param \NinjaTooken\UserBundle\Entity\MessageUser $receivers
+     * @return Message
+     */
+    public function addReceiver(\NinjaTooken\UserBundle\Entity\MessageUser $receivers)
+    {
+        $this->receivers[] = $receivers;
+
+        return $this;
+    }
+
+    /**
+     * Remove receivers
+     *
+     * @param \NinjaTooken\UserBundle\Entity\MessageUser $receivers
+     */
+    public function removeReceiver(\NinjaTooken\UserBundle\Entity\MessageUser $receivers)
+    {
+        $this->receivers->removeElement($receivers);
+    }
+
+    /**
+     * Get receivers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getReceivers()
+    {
+        return $this->receivers;
     }
 }

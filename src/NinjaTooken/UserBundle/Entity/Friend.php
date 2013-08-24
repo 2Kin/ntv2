@@ -56,6 +56,15 @@ class Friend
      */
     private $dateAjout;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->setDateAjout(new \DateTime());
+        $this->setIsBlocked(false);
+        $this->setIsConfirmed(false);
+    }
 
     /**
      * Get id

@@ -25,7 +25,7 @@ class Forum
     /**
      * @var int
      *
-     * @ORM\Column(name="old_id", type="integer")
+     * @ORM\Column(name="old_id", type="integer", nullable=true)
      */
     private $old_id;
 
@@ -63,6 +63,13 @@ class Forum
      */
     private $type;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->setDateAjout(new \DateTime());
+    }
 
     /**
      * Get id

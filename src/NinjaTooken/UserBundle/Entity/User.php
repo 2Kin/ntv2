@@ -1,13 +1,14 @@
 <?php
 namespace NinjaTooken\UserBundle\Entity;
 
-use FOS\UserBundle\Entity\User as BaseUser;
+use Sonata\UserBundle\Entity\BaseUser as BaseUser;
+use Sonata\UserBundle\Model\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="nt_fos_user")
+ * @ORM\Table(name="nt_user")
  */
 class User extends BaseUser
 {
@@ -17,6 +18,15 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="NinjaTooken\UserBundle\Entity\Group")
+     * @ORM\JoinTable(name="nt_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
 
     /**
      * @ORM\OneToOne(targetEntity="NinjaTooken\GameBundle\Entity\Ninja", mappedBy="user")
@@ -43,7 +53,7 @@ class User extends BaseUser
     /**
      * @var int
      *
-     * @ORM\Column(name="old_id", type="integer")
+     * @ORM\Column(name="old_id", type="integer", nullable=true)
      */
     private $old_id;
 
@@ -54,37 +64,16 @@ class User extends BaseUser
     private $slug;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="langue", type="string", length=4)
-     */
-    private $langue;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="sexe", type="string", length=1)
-     */
-    private $sexe;
-
-    /**
-     * @var date
-     *
-     * @ORM\Column(name="date_naissance", type="date")
-     */
-    private $dateNaissance;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
+    * @var string
+    *
+    * @ORM\Column(name="description", type="text", nullable=true)
+    */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="avatar", type="string", length=255)
+     * @ORM\Column(name="avatar", type="string", length=255, nullable=true)
      */
     private $avatar;
 
@@ -109,17 +98,13 @@ class User extends BaseUser
      */
     private $oldUsername;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_ajout", type="datetime")
-     */
-    private $dateAjout;
-
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+
+        $this->setGender(UserInterface::GENDER_MAN);
+        $this->setReceiveAvertissement(false);
+        $this->setReceiveNewsletter(false);
     }
 
     /**
@@ -156,80 +141,11 @@ class User extends BaseUser
     }
 
     /**
-     * Set langue
-     *
-     * @param string $langue
-     * @return User
-     */
-    public function setLangue($langue)
-    {
-        $this->langue = $langue;
-
-        return $this;
-    }
-
-    /**
-     * Get langue
-     *
-     * @return string 
-     */
-    public function getLangue()
-    {
-        return $this->langue;
-    }
-
-    /**
-     * Set sexe
-     *
-     * @param string $sexe
-     * @return User
-     */
-    public function setSexe($sexe)
-    {
-        $this->sexe = $sexe;
-
-        return $this;
-    }
-
-    /**
-     * Get sexe
-     *
-     * @return string 
-     */
-    public function getSexe()
-    {
-        return $this->sexe;
-    }
-
-    /**
-     * Set dateNaissance
-     *
-     * @param \DateTime $dateNaissance
-     * @return User
-     */
-    public function setDateNaissance($dateNaissance)
-    {
-        $this->dateNaissance = $dateNaissance;
-
-        return $this;
-    }
-
-    /**
-     * Get dateNaissance
-     *
-     * @return \DateTime 
-     */
-    public function getDateNaissance()
-    {
-        return $this->dateNaissance;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return User
-     */
+    * Set description
+    *
+    * @param string $description
+    * @return User
+    */
     public function setDescription($description)
     {
         $this->description = $description;
@@ -238,10 +154,10 @@ class User extends BaseUser
     }
 
     /**
-     * Get description
-     *
-     * @return string 
-     */
+    * Get description
+    *
+    * @return string
+    */
     public function getDescription()
     {
         return $this->description;
@@ -497,28 +413,5 @@ class User extends BaseUser
     public function getRecruts()
     {
         return $this->recruts;
-    }
-
-    /**
-     * Set dateAjout
-     *
-     * @param \DateTime $dateAjout
-     * @return User
-     */
-    public function setDateAjout($dateAjout)
-    {
-        $this->dateAjout = $dateAjout;
-
-        return $this;
-    }
-
-    /**
-     * Get dateAjout
-     *
-     * @return \DateTime 
-     */
-    public function getDateAjout()
-    {
-        return $this->dateAjout;
     }
 }

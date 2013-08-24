@@ -27,8 +27,12 @@ class Lobby
      * @var User
      *
      * @ORM\ManyToMany(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     * @ORM\JoinTable(name="nt_lobby_user",
+     *      joinColumns={@ORM\JoinColumn(name="lobby_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     * )
      */
-    private $users;
+    public $users;
 
     /**
      * @var integer
@@ -85,6 +89,15 @@ class Lobby
      * @ORM\Column(name="date_update", type="datetime")
      */
     private $dateUpdate;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setDateDebut(new \DateTime());
+    }
 
 
     /**
@@ -279,13 +292,6 @@ class Lobby
     public function getDateUpdate()
     {
         return $this->dateUpdate;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

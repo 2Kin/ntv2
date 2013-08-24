@@ -24,14 +24,18 @@ class RegistrationFormType extends BaseType
                 'label' => 'Mail',
                 'label_attr' => array('class' => 'libelle')
             ))
-            ->add('sexe', 'choice', array(
-                'choices' => array('H' => 'Homme', 'F' => 'Femme'),
+            ->add('gender', 'choice', array(
+                'choices' => array(
+                    UserInterface::GENDER_UNKNOWN => 'gender_unknown',
+                    UserInterface::GENDER_FEMALE  => 'gender_female',
+                    UserInterface::GENDER_MAN     => 'gender_male',
+                ),
                 'data' => 'H',
                 'expanded' => true,
                 'required' => true,
                 'label_attr' => array('class' => 'libelle')
             ))
-            ->add('langue', 'choice', array(
+            ->add('locale', 'choice', array(
                 'choices' => array('fr' => 'Français', 'en' => 'English'),
                 'data' => 'fr',
                 'expanded' => true,

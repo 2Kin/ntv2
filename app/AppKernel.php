@@ -25,10 +25,15 @@ class AppKernel extends Kernel
             new NinjaTooken\ForumBundle\NinjaTookenForumBundle(),
             new NinjaTooken\UserBundle\NinjaTookenUserBundle(),
 
+			new Sonata\BlockBundle\SonataBlockBundle(),
 			new Sonata\jQueryBundle\SonatajQueryBundle(),
 			new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
 			new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-			new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+
             new NinjaTooken\GameBundle\NinjaTookenGameBundle(),
             new NinjaTooken\ClanBundle\NinjaTookenClanBundle(),
             new NinjaTooken\CommonBundle\NinjaTookenCommonBundle(),

@@ -1,4 +1,4 @@
-{% import "avatar.html.twig" as avatar %}
+			{% import "avatar.html.twig" as avatar %}
 			<div class="accountLogged">
                             <div class="pseudo"><strong>{{ user.username }}</strong>{% if user.ninja is not empty %} {% if user.ninja.classe is not empty %}<span class="{{ class[user.ninja.classe]|lower }}">{{ class[user.ninja.classe] }}</span>{% endif %}{% if user.level is not empty %}, Nv {{ user.level }}{% endif %}{% endif %}</div>
                             <img src="{{ avatar.getUrl(user) }}" class="pull-left" alt="">

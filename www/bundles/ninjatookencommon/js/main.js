@@ -227,7 +227,7 @@ $(document).ready(function(){
 						var json = result.responseJSON;
 						if(typeof json != "undefined"){
 							for(var i=0;i<json.length;i++){
-								users.push(json[i].username);
+								users.push(json[i].text);
 							}
 						}
 						_destination.tagit(

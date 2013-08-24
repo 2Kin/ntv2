@@ -1,9 +1,9 @@
 {% extends '::layout.html.twig' %}
 {% import "avatar.html.twig" as avatar %}
 
-{% block title %}NinjaTooken - Clan NinjaTookenTeam [NTT]{% endblock %}
-{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
-{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block title %}NinjaTooken - {% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}{% endblock %}
+{% block description %}{{ clan.description|raw|striptags|slice(0,255) }}{% endblock %}
+{% block keywords %}NinjaTooken, shinobi, ninja, clan, {% if clan.tag is not empty %}{{ clan.tag }}, {% endif %}{{ clan.nom }}, team, équipe, fps, gratuit, online, free{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">

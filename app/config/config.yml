@@ -1,6 +1,10 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @NinjaTookenClanBundle/Resources/config/admin.yml }
+    - { resource: @NinjaTookenUserBundle/Resources/config/admin.yml }
+    - { resource: @NinjaTookenForumBundle/Resources/config/admin.yml }
+    - { resource: @NinjaTookenGameBundle/Resources/config/admin.yml }
 
 framework:
     #esi:             ~
@@ -75,12 +79,10 @@ doctrine:
         user:     %database_user%
         password: %database_password%
         charset:  UTF8
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: %kernel.root_dir%/data/data.db3
-        # path:     %database_path%
-
+        types:
+            json: Sonata\Doctrine\Types\JsonType
     orm:
-        auto_generate_proxy_classes: %kernel.debug%
+        auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
 
 # Swiftmailer Configuration
@@ -127,9 +129,11 @@ exercise_html_purifier:
         CSS.AllowedProperties:  'color,font,font-weight'
 
 fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    db_driver: orm
     firewall_name: main
     user_class: NinjaTooken\UserBundle\Entity\User
+    group:
+        group_class: NinjaTooken\UserBundle\Entity\Group
     from_email:
         address:        %mail_contact%
         sender_name:    %mail_name%
@@ -156,3 +160,140 @@ fos_facebook:
     secret: %facebook_secret%
     cookie: true
     permissions: [email]
+
+# admin
+sonata_user:
+    security_acl: true
+    manager_type: orm
+    class:
+        user: NinjaTooken\UserBundle\Entity\User
+    admin:                  # Admin Classes
+        user:
+            class:          Sonata\UserBundle\Admin\Entity\UserAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    SonataUserBundle
+ 
+        group:
+            class:          Sonata\UserBundle\Admin\Entity\GroupAdmin
+            controller:     SonataAdminBundle:CRUD
+            translation:    SonataUserBundle
+    profile:  # Profile Form (firstname, lastname, etc ...)
+        form:
+            type:               sonata_user_profile
+            handler:            sonata.user.profile.form.handler.default
+            name:               sonata_user_profile_form
+            validation_groups:  [Profile]
+
+sonata_admin:
+    security:
+        handler: sonata.admin.security.handler.acl
+        acl_user_manager: fos_user.user_manager
+        # acl security information
+        information:
+            GUEST:    [VIEW, LIST]
+            STAFF:    [EDIT, LIST, CREATE]
+            EDITOR:   [OPERATOR, EXPORT]
+            ADMIN:    [MASTER]
+        admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
+        object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
+    title:      DaFuckingAdmin
+    title_logo: /ntv2/www/bundles/sonataadmin/logo_title.png
+    options:
+        html5_validate: false # does not use html5 validation
+        confirm_exit:   false # disable confirmation when quitting with unsaved changes
+    templates:
+        layout:  SonataAdminBundle::standard_layout.html.twig
+        ajax:    SonataAdminBundle::ajax_layout.html.twig
+        list:    SonataAdminBundle:CRUD:list.html.twig
+        show:    SonataAdminBundle:CRUD:show.html.twig
+        edit:    SonataAdminBundle:CRUD:edit.html.twig
+
+    dashboard:
+        blocks:
+            - { position: left, type: sonata.admin.block.admin_list }
+            - { position: right, type: sonata.block.service.text, settings: { content: "<h2>Welcome to the Sonata Admin</h2> <p>This is a <code>sonata.block.service.text</code> from the Block Bundle, you can create and add new block in these area by configuring the <code>sonata_admin</code> section.</p> <br /> For instance, here a RSS feed parser (<code>sonata.block.service.rss</code>):"} }
+            - { position: right, type: sonata.block.service.rss, settings: { title: Sonata Project's Feeds, url: http://sonata-project.org/blog/archive.rss }}
+
+        groups:
+            user:
+                label: Utilisateurs
+            clan:
+                label: Clans
+            forum:
+                label: Forums
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+        sonata.block.service.text:
+        sonata.block.service.action:
+        sonata.block.service.rss:
+
+sonata_doctrine_orm_admin:
+    # default value is null, so doctrine uses the value defined in the configuration
+    entity_manager: ~
+
+    templates:
+        form:
+            - SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig
+        filter:
+            - SonataDoctrineORMAdminBundle:Form:filter_admin_fields.html.twig
+        types:
+            list:
+                array:      SonataAdminBundle:CRUD:list_array.html.twig
+                boolean:    SonataAdminBundle:CRUD:list_boolean.html.twig
+                date:       SonataAdminBundle:CRUD:list_date.html.twig
+                time:       SonataAdminBundle:CRUD:list_time.html.twig
+                datetime:   SonataAdminBundle:CRUD:list_datetime.html.twig
+                text:       SonataAdminBundle:CRUD:base_list_field.html.twig
+                trans:      SonataAdminBundle:CRUD:list_trans.html.twig
+                string:     SonataAdminBundle:CRUD:base_list_field.html.twig
+                smallint:   SonataAdminBundle:CRUD:base_list_field.html.twig
+                bigint:     SonataAdminBundle:CRUD:base_list_field.html.twig
+                integer:    SonataAdminBundle:CRUD:base_list_field.html.twig
+                decimal:    SonataAdminBundle:CRUD:base_list_field.html.twig
+                identifier: SonataAdminBundle:CRUD:base_list_field.html.twig
+
+            show:
+                array:      SonataAdminBundle:CRUD:show_array.html.twig
+                boolean:    SonataAdminBundle:CRUD:show_boolean.html.twig
+                date:       SonataAdminBundle:CRUD:show_date.html.twig
+                time:       SonataAdminBundle:CRUD:show_time.html.twig
+                datetime:   SonataAdminBundle:CRUD:show_datetime.html.twig
+                text:       SonataAdminBundle:CRUD:base_show_field.html.twig
+                trans:      SonataAdminBundle:CRUD:show_trans.html.twig
+                string:     SonataAdminBundle:CRUD:base_show_field.html.twig
+                smallint:   SonataAdminBundle:CRUD:base_show_field.html.twig
+                bigint:     SonataAdminBundle:CRUD:base_show_field.html.twig
+                integer:    SonataAdminBundle:CRUD:base_show_field.html.twig
+                decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig
+
+stfalcon_tinymce:
+    selector: ".tinymce"
+    language: %locale%
+    theme:
+        simple:
+            theme: "modern"
+            plugins: "autolink link image lists pagebreak emoticons media contextmenu paste noneditable nonbreaking"
+            schema: "html5"
+            width: 'inherit'
+            height: 200
+            entity_encoding: "raw"
+            paste_auto_cleanup_on_paste: true
+            apply_source_formatting: true
+            force_br_newlines: true
+            convert_urls: false
+            relative_urls: false
+            media_strict: false
+            auto_focus: false
+            toolbar: "undo,redo,|,bold,italic,underline,strikethrough,forecolor,|,link,unlink,|,justifyleft,justifycenter,justifyright,justifyfull,bullist,|,emoticons,image,imageshack,media"
+            menubar: false
+            statusbar: false
+            tab_focus: ':prev,:next'
+            valid_elements: "@[id|class|title|style],span[data-mce-type|data-mce-style|align],a[href|target],legend,fieldset,img[src|alt|align|height|width],object[classid|width|height|codebase|*],param[name|value|_value],embed[type|width|height|src|*],ul,li,ol,p[align],font[face|size|color],strong/b,em/i,u,strike,br"
+
+genemu_form:
+    select2:
+         enabled: true

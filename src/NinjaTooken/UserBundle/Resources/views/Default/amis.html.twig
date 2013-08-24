@@ -1,9 +1,9 @@
 {% extends '::layout.html.twig' %}
 {% import "avatar.html.twig" as avatar %}
 
-{% block title %}NinjaTooken - Guide du débutant{% endblock %}
-{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
-{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block title %}NinjaTooken - Les amis{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -13,7 +13,7 @@
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<a href="{{ path('ninja_tooken_user_amis') }}" itemprop="url">
+								<a href="{{ path(app.request.attributes.get('_route')) }}" itemprop="url">
 									<span itemprop="title">Amis</span>
 								</a>
 							</span>
@@ -21,52 +21,45 @@
 
 {% block body %}
 				<section class="main">
-					<h3>Demande d'amis</h3>
+					<h3>
+						<a href="{{ path('ninja_tooken_user_amis', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis' %} class="actif"{% endif %}><i class="icon-heart"></i> Mes amis</a> - 
+						<a href="{{ path('ninja_tooken_user_amis_demande', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis_demande' %} class="actif"{% endif %}><i class="icon-heart-empty"></i> Demande d'amis</a>
+					</h3>
 
-					{% if demandes is not empty %}
-					{% for demande in demandes %}
-					<div class="membre pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:demande.friend.slug}) }}"><img src="{{ avatar.getUrl(demande.friend) }}">{{ demande.friend.username }}</a>
-						<a href="{{ path('ninja_tooken_user_amis_confirmer', {user_nom:demande.friend.slug}) }}" class="button small">Confirmer</a>
-					</div>
-					{% endfor %}
+					{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis' %}
+						<p><span class="legend online"> En ligne</span>
+						<span class="legend offline"> Hors ligne</span></p>
+
+						{% if friends is not empty %}
+						{% for friend in friends %}
+						<div class="membre offline pull-left">
+							<a href="{{ path('ninja_tooken_user_fiche', {user_nom:friend.friend.slug}) }}"><img src="{{ avatar.getUrl(friend.friend) }}">{{ friend.friend.username }}</a>
+							<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:friend.friend.slug}) }}" class="button small">Bloquer</a>
+						</div>
+						{% endfor %}
+						{% else %}
+						Pas encore d'amis.
+						{% endif %}
 					{% else %}
-					Pas de demandes pour l'instant.
-					<br class="clear">
+						{% if demandes is not empty %}
+						{% for demande in demandes %}
+						<div class="membre pull-left">
+							<a href="{{ path('ninja_tooken_user_fiche', {user_nom:demande.friend.slug}) }}"><img src="{{ avatar.getUrl(demande.friend) }}">{{ demande.friend.username }}</a> -
+							<a href="{{ path('ninja_tooken_user_amis_confirmer', {user_nom:demande.friend.slug}) }}" class="button small">Confirmer</a>
+						</div>
+						{% endfor %}
+						{% else %}
+						Pas de demandes pour l'instant.
+						<br class="clear">
+						{% endif %}
 					{% endif %}
 
 					<br class="clear">
 					{% include 'pagination.html.twig' with {
-						currentPage: page1,
-						paginationPath: path('ninja_tooken_user_amis', {'page1':'','page2': page2}),
+						currentPage: page,
+						paginationPath: path(app.request.attributes.get('_route'), {'page':''}),
 						paginationAfter: '',
-						lastPage: nombrePage1,
-						extremePagesLimit: 2,
-						nearbyPagesLimit: 3
-					} only %}
-
-					<h3>Mes amis</h3>
-
-					<p><span class="legend online"> En ligne</span>
-					<span class="legend offline"> Hors ligne</span></p>
-
-					{% if friends is not empty %}
-					{% for friend in friends %}
-					<div class="membre pull-left">
-						<a href="{{ path('ninja_tooken_user_fiche', {user_nom:friend.friend.slug}) }}"><img src="{{ avatar.getUrl(friend.friend) }}">{{ friend.friend.username }}</a>
-						<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:friend.friend.slug}) }}" class="button small">Bloquer</a>
-					</div>
-					{% endfor %}
-					{% else %}
-					Pas encore d'amis.
-					{% endif %}
-
-					<br class="clear">
-					{% include 'pagination.html.twig' with {
-						currentPage: page2,
-						paginationPath: path('ninja_tooken_user_amis', {'page1':page1,'page2': ''}),
-						paginationAfter: '',
-						lastPage: nombrePage2,
+						lastPage: nombrePage,
 						extremePagesLimit: 2,
 						nearbyPagesLimit: 3
 					} only %}

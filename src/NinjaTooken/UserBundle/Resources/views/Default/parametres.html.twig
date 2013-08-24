@@ -1,8 +1,9 @@
 {% extends '::layout.html.twig' %}
+{% import "avatar.html.twig" as avatar %}
 
-{% block title %}NinjaTooken - Guide du débutant{% endblock %}
-{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
-{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block title %}NinjaTooken - Paramètres{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -19,7 +20,7 @@
 {% endblock %}
 
 {% block body %}
-				<form action="{{ path('ninja_tooken_user_parametres_modifier') }}" method="post" accept-charset="UTF-8" class="full">
+				<form action="{{ path('ninja_tooken_user_parametres') }}" method="post" name="editAccount" accept-charset="UTF-8" class="full">
 					<h3><i class="icon-user"></i> Informations personnelles</h3>
 					<div class="row-fluid">
 						<div class="span3 offset1">
@@ -44,8 +45,8 @@
 							<label class="libelle required">Sexe</label>
 						</div>
 						<div class="span8">
-							<input type="radio" name="sexe" value="H" id="input_sexe_h"{%if app.user.sexe=="H" %} checked{% endif %}><label for="input_sexe_h"> Homme</label>
-							<input type="radio" name="sexe" value="F" id="input_sexe_f"{%if app.user.sexe=="F" %} checked{% endif %}><label for="input_sexe_f"> Femme</label>
+							<input type="radio" name="gender" value="m" id="input_gender_m"{%if app.user.gender=="m" %} checked{% endif %}><label for="input_gender_m"> Homme</label>
+							<input type="radio" name="gender" value="f" id="input_gender_f"{%if app.user.gender=="f" %} checked{% endif %}><label for="input_gender_f"> Femme</label>
 						</div>
 					</div>
 					<div class="row-fluid">
@@ -53,8 +54,8 @@
 							<label class="libelle required">Langue</label>
 						</div>
 						<div class="span8">
-							<input type="radio" name="langue" value="FR" id="input_langue_fr"{%if app.user.langue=="FR" %} checked{% endif %}><label for="input_langue_fr"> Français</label>
-							<input type="radio" name="langue" value="EN" id="input_langue_en"{%if app.user.langue=="EN" %} checked{% endif %}><label for="input_langue_en"> English</label>
+							<input type="radio" name="locale" value="fr" id="input_locale_fr"{%if app.user.locale=="fr" %} checked{% endif %}><label for="input_locale_fr"> Français</label>
+							<input type="radio" name="locale" value="en" id="input_locale_en"{%if app.user.locale=="en" %} checked{% endif %}><label for="input_locale_en"> English</label>
 						</div>
 					</div>
 					<div class="row-fluid">
@@ -65,21 +66,21 @@
 							<label class="select">
 								<select name="jour">
 								{% for i in range(1, 31) %}
-									<option value="{{ i }}"{% if i==app.user.dateNaissance|date("d") %} selected{% endif %}>{{ i }}</option>
+									<option value="{{ i }}"{% if i==app.user.dateOfBirth|date("d") %} selected{% endif %}>{{ i }}</option>
 								{% endfor %}
 								</select>
 							</label>
 							<label class="select">
 								<select name="mois">
 								{% for i in range(1, 12) %}
-									<option value="{{ i }}"{% if i==app.user.dateNaissance|date("m") %} selected{% endif %}>{{ date('2013-' ~ i ~ '-01')|localizeddate(locale=app.request.locale, format='LLLL') }}</option>
+									<option value="{{ i }}"{% if i==app.user.dateOfBirth|date("m") %} selected{% endif %}>{{ date('2013-' ~ i ~ '-01')|localizeddate(locale=app.request.locale, format='LLLL') }}</option>
 								{% endfor %}
 								</select>
 							</label>
 							<label class="select">
 								<select name="annee">
 								{% for i in range("now"|date_modify("-80 year")|date("Y"), "now"|date_modify("-4 year")|date("Y")) %}
-									<option value="{{ i }}"{% if i==app.user.dateNaissance|date("Y") %} selected{% endif %}>{{ i }}</option>
+									<option value="{{ i }}"{% if i==app.user.dateOfBirth|date("Y") %} selected{% endif %}>{{ i }}</option>
 								{% endfor %}
 								</select>
 							</label>
@@ -91,7 +92,7 @@
 							(affichée dans la <a href="{{ path('ninja_tooken_user_fiche', {'user_nom':app.user.slug}) }}">fiche ninja</a>)
 						</div>
 						<div class="span8">
-							<div class="textarea" name="description">{{ app.user.description|raw|purify('full') }}</div>
+							<div class="textarea" name="description">{{ app.user.biography|raw|purify('full') }}</div>
 						</div>
 					</div>
 					<div class="row-fluid">
@@ -99,7 +100,7 @@
 							<label class="libelle">Avatar</label>
 						</div>
 						<div class="span8">
-							<img src="images/avatar.jpg" class="pull-left" alt="">
+							<img src="{{ avatar.getUrl(app.user) }}" class="pull-left" alt="">
 							<a href="#" class="button small">Modifier</a>
 						</div>
 					</div>
@@ -115,12 +116,13 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span8 offset4">
+							<input type="hidden" name="editAccount" value="1">
 							<input type="submit" value="Enregistrer" class="button">
 						</div>
 					</div>
 				</form>
 				
-				<form action="{{ path('ninja_tooken_user_parametres_modifier') }}" method="post" accept-charset="UTF-8" class="full">
+				<form action="{{ path('ninja_tooken_user_parametres') }}" method="post" name="editPassword" accept-charset="UTF-8" class="full">
 					<h3><i class="icon-key"></i> Mot de passe</h3>
 					<div class="row-fluid">
 						<div class="span3 offset1">
@@ -148,12 +150,13 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span8 offset4">
+							<input type="hidden" name="editPassword" value="1">
 							<input type="submit" value="Enregistrer" class="button">
 						</div>
 					</div>
 				</form>
 
-				<form action="{{ path('ninja_tooken_user_parametres_modifier') }}" method="post" accept-charset="UTF-8" class="full">
+				<form action="{{ path('ninja_tooken_user_parametres') }}" method="post" name="deleteAccount" accept-charset="UTF-8" class="full">
 					<h3><i class="icon-trash"></i> Suppression</h3>
 					<div class="row-fluid">
 						<div class="span8 offset4">
@@ -162,6 +165,7 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span8 offset4">
+							<input type="hidden" name="deleteAccount" value="1">
 							<input type="submit" value="Supprimer" class="button">
 						</div>
 					</div>

@@ -59,7 +59,13 @@ class ClanUtilisateur
      */
     private $dateAjout;
 
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->setDateAjout(new \DateTime());
+    }
 
     /**
      * Get id

@@ -2,17 +2,35 @@ jms_security_extra:
     secure_all_services: false
     expressions: true
 
+parameters:
+    security.acl.permission.map.class: Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap
+    sonata.admin.security.mask.builder.class: Sonata\AdminBundle\Security\Acl\Permission\MaskBuilder
+    sonata.user.admin.user.entity: NinjaTooken\UserBundle\Entity\User
+    sonata.user.admin.group.entity: NinjaTooken\UserBundle\Entity\Group
+
 security:
+    acl:
+        connection: default
+
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SONATA_READER:
+        ROLE_SONATA_EDITOR:
+        ROLE_SONATA_ADMIN:
+        ROLE_STAFF:       [ROLE_USER, ROLE_SONATA_READER]
+        ROLE_ADMIN:       [ROLE_STAFF, ROLE_SONATA_EDITOR, ROLE_SONATA_ADMIN]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        SONATA:
+            - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT
+    # set access_strategy to unanimous, else you may have unexpected behaviors
+    access_decision_manager:
+        strategy: unanimous
 
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_manager
         chainprovider:
             chain:
                 providers: [fos_userbundle, fos_facebook_provider]
@@ -20,21 +38,33 @@ security:
             id: fos_facebook.user.login
 
     firewalls:
+        admin:
+            pattern:      /daFuckingAdmin(.*)
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /daFuckingAdmin/login
+                use_forward:    false
+                check_path:     /daFuckingAdmin/login_check
+                failure_path:   null
+            logout:
+                path:   /daFuckingAdmin/logout
+            anonymous:    true
+
         main:
-            pattern: ^/
+            pattern: .*
             fos_facebook:
                 app_url: "http://apps.facebook.com/this-is-my-awesome-app"
                 server_url: "http://www.ninjatooken.com"
-                login_path: /user/login
+                login_path: fos_user_security_login
                 check_path: /facebook/login_check
                 provider: fos_facebook_provider
                 default_target_path: ninja_tooken_user_messagerie
             form_login:
+                provider: fos_userbundle
                 csrf_provider: form.csrf_provider
                 check_path: fos_user_security_check
                 login_path: fos_user_security_login
                 default_target_path: ninja_tooken_user_messagerie
-                provider: fos_userbundle
             logout:
                 path:   fos_user_security_logout
                 target: ninja_tooken_homepage
@@ -48,7 +78,31 @@ security:
             security: false
 
     access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/(fr|en)/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(fr|en)/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(fr|en)/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(fr|en)/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(fr|en)/user/new$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(fr|en)/user/check-confirmation-email$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(fr|en)/user/confirm/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(fr|en)/user/confirmed$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(fr|en)/user/request-reset-password$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(fr|en)/user/send-resetting-email$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(fr|en)/user/check-resetting-email$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(fr|en)/user/reset-password/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/daFuckingAdmin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/daFuckingAdmin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/daFuckingAdmin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/daFuckingAdmin, role: [ROLE_STAFF, ROLE_ADMIN] }
+
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # The WDT has to be allowed to anonymous users to avoid requiring the login with the AJAX request
+        - { path: ^/_wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/_profiler/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # AsseticBundle paths used when using the controller for assets
+        - { path: ^/js/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/css/, role: IS_AUTHENTICATED_ANONYMOUSLY }

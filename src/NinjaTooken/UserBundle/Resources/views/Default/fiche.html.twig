@@ -1,9 +1,9 @@
 {% extends '::layout.html.twig' %}
 {% import "avatar.html.twig" as avatar %}
 
-{% block title %}NinjaTooken - Guide du débutant{% endblock %}
-{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
-{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block title %}NinjaTooken - {{ user.username }}{% endblock %}
+{% block description %}{{ user.biography|raw|striptags|slice(0,255) }}{% endblock %}
+{% block keywords %}NinjaTooken, shinobi, ninja, {{ user.username }}, fps, gratuit, online, free{% endblock %}
 
 {% block breadcrumbs1 %}{% endblock %}
 
@@ -18,8 +18,10 @@
 {% block body %}
 				<div class="row-fluid">
 					<section class="main span8">
-						<h5>Inscrit depuis le {{ user.dateAjout|localizeddate('full', 'none', app.request.locale) }}</h5>
+						<h5>Inscrit depuis le {{ user.createdAt|localizeddate('full', 'none', app.request.locale) }}</h5>
 						{{ render(controller('NinjaTookenGameBundle:Default:signature', {'user':user})) }}
+
+						{{ user.biography|raw|purify('full') }}
 
 						{% if friends is not empty %}
 						<h3>Amis</h3>

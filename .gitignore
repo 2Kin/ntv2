@@ -6,5 +6,6 @@
 /www/avatar/*
 /www/bundles/*
 /www/css/*
+/www/assetic/*
 /www/js/*
 /app/config/parameters.yml

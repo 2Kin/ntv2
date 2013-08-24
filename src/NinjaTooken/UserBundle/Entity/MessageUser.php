@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * MessageUser
  *
  * @ORM\Table(name="nt_messageuser")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="NinjaTooken\UserBundle\Entity\MessageUserRepository")
  */
 class MessageUser
 {
@@ -24,7 +24,7 @@ class MessageUser
     /**
      * @var Message
      *
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\Message")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\Message", inversedBy="receivers")
      */
     private $message;
 
@@ -48,6 +48,14 @@ class MessageUser
      * @ORM\Column(name="has_deleted", type="boolean")
      */
     private $hasDeleted;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->setHasDeleted(false);
+    }
 
 
     /**

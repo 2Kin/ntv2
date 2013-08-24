@@ -23,7 +23,7 @@ class Thread
     /**
      * @var int
      *
-     * @ORM\Column(name="old_id", type="integer")
+     * @ORM\Column(name="old_id", type="integer", nullable=true)
      */
     private $old_id;
 
@@ -46,14 +46,14 @@ class Thread
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_event_start", type="date")
+     * @ORM\Column(name="date_event_start", type="date", nullable=true)
      */
     private $dateEventStart;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_event_end", type="date")
+     * @ORM\Column(name="date_event_end", type="date", nullable=true)
      */
     private $dateEventEnd;
 
@@ -132,7 +132,7 @@ class Thread
      *
      * @var DateTime
      *
-     * @ORM\Column(name="last_comment_at", type="datetime")
+     * @ORM\Column(name="last_comment_at", type="datetime", nullable=true)
      */
     private $lastCommentAt = null;
 
@@ -143,6 +143,14 @@ class Thread
      * @var User
      */
     private $lastCommentBy = null;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->setDateAjout(new \DateTime());
+    }
 
     /**
      * Get id

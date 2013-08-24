@@ -3,12 +3,18 @@ ninja_tooken_user_old:
     defaults: { _controller: NinjaTookenUserBundle:Default:oldUser }
 
 ninja_tooken_user_search:
-    pattern:  /ficher/search
+    pattern:  /fiche/search
     defaults: { _controller: NinjaTookenUserBundle:Default:userSearch }
 
 ninja_tooken_user_fiche:
     pattern:  /fiche/{user_nom}/{page}
     defaults: { _controller: NinjaTookenUserBundle:Default:fiche, page:1 }
+    requirements:
+        page:  \d*
+
+ninja_tooken_user_messagerie_envoi:
+    pattern:  /compte/messagerie/envoi/{page}
+    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieEnvoi, page:1 }
     requirements:
         page:  \d*
 
@@ -18,47 +24,34 @@ ninja_tooken_user_messagerie:
     requirements:
         page:  \d*
 
-ninja_tooken_user_messagerie_voir:
-    pattern:  /compte/messagerie/{page}/{message_id}
-    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieVoir, page:1 }
-    requirements:
-        page:  \d*
-
-ninja_tooken_user_messagerie_ajouter:
-    pattern:  /compte/messagerie/ajouter
-    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieAjouter }
-
-ninja_tooken_user_messagerie_supprimer:
-    pattern:  /compte/messagerie/{page}/{message_id}/supprimer/
-    defaults: { _controller: NinjaTookenUserBundle:Default:messagerieSupprimer, page:1 }
-    requirements:
-        page:  \d*
-
 ninja_tooken_user_find:
     pattern:  /compte/messagerie/user/find
     defaults: { _controller: NinjaTookenUserBundle:Default:userFind }
+    requirements:
+        _method:  GET
 
 ninja_tooken_user_parametres:
     pattern:  /compte/parametres
     defaults: { _controller: NinjaTookenUserBundle:Default:parametres }
 
-ninja_tooken_user_parametres_modifier:
-    pattern:  /compte/parametres/modifier
-    defaults: { _controller: NinjaTookenUserBundle:Default:parametresModifier }
-
 ninja_tooken_user_amis:
-    pattern:  /compte/amis/{page1}/{page2}
-    defaults: { _controller: NinjaTookenUserBundle:Default:amis, page1:1, page2:1 }
+    pattern:  /compte/amis/{page}
+    defaults: { _controller: NinjaTookenUserBundle:Default:amis, page:1 }
     requirements:
-        page1:  \d*
-        page2:  \d*
+        page:  \d*
+
+ninja_tooken_user_amis_demande:
+    pattern:  /compte/amis/demande/{page}
+    defaults: { _controller: NinjaTookenUserBundle:Default:amisDemande, page:1 }
+    requirements:
+        page:  \d*
 
 ninja_tooken_user_amis_confirmer:
-    pattern:  /compte/amis/{user_nom}/confirmer/
+    pattern:  /compte/amis/confirm/{user_nom}
     defaults: { _controller: NinjaTookenUserBundle:Default:amisConfirmer }
 
 ninja_tooken_user_amis_bloquer:
-    pattern:  /compte/amis/{user_nom}/bloquer/
+    pattern:  /compte/amis/block/{user_nom}
     defaults: { _controller: NinjaTookenUserBundle:Default:amisBloquer }
 
 ninja_tooken_user_captures:

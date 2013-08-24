@@ -1,0 +1,8 @@
+services:
+    ninjatooken.clan.admin.clan:
+        class: NinjaTooken\ClanBundle\Admin\ClanAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "clan", label: "Clan" }
+        arguments: [ null, NinjaTooken\ClanBundle\Entity\Clan, null]
+        calls:
+            - [ setTranslationDomain, [NinjaTookenClanBundle]]

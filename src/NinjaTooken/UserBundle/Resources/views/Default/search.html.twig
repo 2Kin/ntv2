@@ -1,8 +1,8 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}NinjaTooken - Forum{% endblock %}
-{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
-{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block title %}NinjaTooken - Recherche de ninja{% endblock %}
+{% block description %}Rechercher un ninja simplement et rapidement !{% endblock %}
+{% block keywords %}NinjaTooken, shinobi, ninja, recherche, fps, gratuit, online, free{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -36,7 +36,7 @@
 								{% if user.ninja.grade>0 %}{{ user.ninja.grade }}° dan{% endif %}
 							</div>
 							<div class="span4">
-								 Inscrit depuis le {{ user.dateAjout|localizeddate('full', 'none', app.request.locale) }}
+								 Inscrit depuis le {{ user.createdAt|localizeddate('full', 'none', app.request.locale) }}
 							</div>
 						</div>
 						{% endfor %}

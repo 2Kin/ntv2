@@ -105,7 +105,7 @@ class DefaultController extends Controller
         ));
     }
 
-    public function messagerieAction($page=1)
+    public function messagerieEnvoiAction(Request $request, $page=1)
     {
         $security = $this->get('security.context');
 
@@ -113,25 +113,41 @@ class DefaultController extends Controller
             $user = $security->getToken()->getUser();
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
+            $em = $this->getDoctrine()->getManager();
 
-            $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Message');
+            $repo = $em->getRepository('NinjaTookenUserBundle:Message');
 
-            $message = current($repo->getFirstMessage($user));
+            $id = (int)$request->get('id');
+            if(empty($id)){
+                $message = current($repo->getFirstSendMessage($user));
+                if($message)
+                    $id = $message->getId();
+            }else{
+                $message = $repo->findOneBy(array('id' => $id));
+
+                // suppression du message
+                if((int)$request->get('del')==1){
+                    $message->setHasDeleted(true);
+                    $em->persist($message);
+                    $em->flush();
+
+                    $message = current($repo->getFirstSendMessage($user));
+                    $id = $message->getId();
+                }
+            }
 
             return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array(
-                'messages' => $repo->getMessages($user, $num, $page),
+                'messages' => $repo->getSendMessages($user, $num, $page),
                 'page' => $page,
-                'nombrePage' => ceil($repo->getNumMessages($user)/$num),
-                'currentmessage' => $message
+                'nombrePage' => ceil($repo->getNumSendMessages($user)/$num),
+                'currentmessage' => $message,
+                'id' => $id
             ));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
-    /**
-     * @ParamConverter("message", class="NinjaTookenUserBundle:Message", options={"mapping": {"message_id":"id"}})
-     */
-    public function messagerieVoirAction(Message $message, $page=1)
+    public function messagerieAction(Request $request, $page=1)
     {
         $security = $this->get('security.context');
 
@@ -139,22 +155,52 @@ class DefaultController extends Controller
             $user = $security->getToken()->getUser();
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
+            $em = $this->getDoctrine()->getManager();
 
-            $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Message');
+            $repo = $em->getRepository('NinjaTookenUserBundle:Message');
+
+            $id = (int)$request->get('id');
+            if(empty($id)){
+                $message = current($repo->getFirstReceiveMessage($user));
+                if($message)
+                    $id = $message->getId();
+            }else
+                $message = $repo->findOneBy(array('id' => $id));
+
+            // vérifie l'état de lecture
+            if($message){
+                foreach($message->getReceivers() as $receiver){
+                    if($receiver->getUser() == $user){
+                        // suppression du message
+                        if((int)$request->get('del')==1){
+                            $receiver->setHasDeleted(true);
+                            $em->persist($receiver);
+                            $em->flush();
+
+                            $message = current($repo->getFirstReceiveMessage($user));
+                            $id = $message->getId();
+                            break;
+                        }
+                        // date de lecture
+                        if($receiver->getDateRead()->format('Y')=='-0001'){
+                            $receiver->setDateRead(new \DateTime('now'));
+                            $em->persist($receiver);
+                            $em->flush();
+                            break;
+                        }
+                    }
+                }
+            }
 
             return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array(
-                'messages' => $repo->getMessages($user, $num, $page),
+                'messages' => $repo->getReceiveMessages($user, $num, $page),
                 'page' => $page,
-                'nombrePage' => ceil($repo->getNumMessages($user)/$num),
-                'currentmessage' => $message
+                'nombrePage' => ceil($repo->getNumReceiveMessages($user)/$num),
+                'currentmessage' => $message,
+                'id' => $id
             ));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
-    }
-
-    public function messagerieAjouterAction()
-    {
-        return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array('messages' => array()));
     }
 
     public function userFindAction(Request $request)
@@ -167,7 +213,7 @@ class DefaultController extends Controller
 
             if(!empty($user)){
                 $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()
-                    ->select('u.username')
+                    ->select('u.username as text, u.id')
                     ->from('NinjaTookenUserBundle:User', 'u')
                     ->where("u.username LIKE :q")
                     ->orderBy('u.username', 'ASC')
@@ -196,7 +242,7 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
-    public function parametresAction()
+    public function parametresAction(Request $request)
     {
         $security = $this->get('security.context');
 
@@ -206,40 +252,47 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
-    public function parametresModifierAction()
-    {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
-            return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig');
-        }
-        return $this->redirect($this->generateUrl('fos_user_security_login'));
-    }
-
-    public function amisAction($page1, $page2)
+    public function amisAction($page)
     {
         $security = $this->get('security.context');
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $num = $this->container->getParameter('numReponse');
-            $page1 = max(1, $page1);
-            $page2 = max(1, $page2);
+            $page = max(1, $page);
 
             $user = $security->getToken()->getUser();
 
             $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Friend');
 
-            $friends = $repo->getFriends($user, $num, $page1);
-
-            $demandes = $repo->getDemandes($user, $num, $page2);
+            $friends = $repo->getFriends($user, $num, $page);
 
             return $this->render('NinjaTookenUserBundle:Default:amis.html.twig', array(
                 'friends' => $friends,
+                'page' => $page,
+                'nombrePage' => ceil(count($friends)/$num)
+            ));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    public function amisDemandeAction($page)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $num = $this->container->getParameter('numReponse');
+            $page = max(1, $page);
+
+            $user = $security->getToken()->getUser();
+
+            $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Friend');
+
+            $demandes = $repo->getDemandes($user, $num, $page);
+
+            return $this->render('NinjaTookenUserBundle:Default:amis.html.twig', array(
                 'demandes' => $demandes,
-                'page1' => $page1,
-                'page2' => $page2,
-                'nombrePage1' => ceil(count($friends)/$num),
-                'nombrePage2' => ceil(count($demandes)/$num)
+                'page' => $page,
+                'nombrePage' => ceil(count($demandes)/$num)
             ));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));

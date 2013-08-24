@@ -7,14 +7,55 @@ use NinjaTooken\UserBundle\Entity\User;
  
 class MessageRepository extends EntityRepository
 {
-    public function getMessages(User $user, $nombreParPage=5, $page=1)
+    public function getSendMessages(User $user, $nombreParPage=5, $page=1)
     {
         $page = max(1, $page);
 
         $query = $this->createQueryBuilder('m')
-            ->innerJoin('NinjaTookenUserBundle:MessageUser', 'mu', 'WITH', 'm.id = mu.message')
-            ->innerJoin('NinjaTookenUserBundle:User', 'u', 'WITH', 'm.user = u.id')
-            ->select(array('m','mu','u'))
+            ->where('m.user = :user')
+            ->andWhere('m.hasDeleted = 0')
+            ->setParameter('user', $user)
+            ->addOrderBy('m.dateAjout', 'DESC')
+            ->setFirstResult(($page-1) * $nombreParPage)
+            ->setMaxResults($nombreParPage)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getFirstSendMessage(User $user)
+    {
+        $query = $this->createQueryBuilder('m')
+            ->andWhere('m.user = :user')
+            ->andWhere('m.hasDeleted = 0')
+            ->setParameter('user', $user)
+            ->addGroupBy('m.id')
+            ->addOrderBy('m.dateAjout', 'DESC')
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
+    public function getNumSendMessages(User $user)
+    {
+        $query = $this->createQueryBuilder('m')
+            ->select('COUNT(m)')
+            ->where('m.user = :user')
+            ->andWhere('m.hasDeleted = 0')
+            ->setParameter('user', $user)
+            ->getQuery();
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function getReceiveMessages(User $user, $nombreParPage=5, $page=1)
+    {
+        $page = max(1, $page);
+
+        $query = $this->createQueryBuilder('m')
+            ->leftJoin('m.receivers', 'mu')
             ->where('mu.user = :user')
             ->andWhere('m.user <> :user')
             ->andWhere('mu.hasDeleted = 0')
@@ -25,13 +66,13 @@ class MessageRepository extends EntityRepository
             ->setMaxResults($nombreParPage)
             ->getQuery();
 
-        return $query->getScalarResult();
+        return $query->getResult();
     }
 
-    public function getFirstMessage(User $user)
+    public function getFirstReceiveMessage(User $user)
     {
         $query = $this->createQueryBuilder('m')
-            ->innerJoin('NinjaTookenUserBundle:MessageUser', 'mu', 'WITH', 'm.id = mu.message')
+            ->leftJoin('m.receivers', 'mu')
             ->where('mu.user = :user')
             ->andWhere('m.user <> :user')
             ->andWhere('mu.hasDeleted = 0')
@@ -45,11 +86,11 @@ class MessageRepository extends EntityRepository
         return $query->getResult();
     }
 
-    public function getNumMessages(User $user)
+    public function getNumReceiveMessages(User $user)
     {
         $query = $this->createQueryBuilder('m')
+            ->leftJoin('m.receivers', 'mu')
             ->select('COUNT(m)')
-            ->innerJoin('NinjaTookenUserBundle:MessageUser', 'mu', 'WITH', 'm.id = mu.message')
             ->where('mu.user = :user')
             ->andWhere('m.user <> :user')
             ->andWhere('mu.hasDeleted = 0')

@@ -1,8 +1,8 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}NinjaTooken - Guide du débutant{% endblock %}
-{% block description %}NinjaTooken - jouer gratuitement{% endblock %}
-{% block keywords %}NinjaTooken - jouer gratuitement{% endblock %}
+{% block title %}NinjaTooken - Messagerie{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
 
 {% block breadcrumbs1 %}
 
@@ -22,86 +22,131 @@
 {% block body %}
 				<div class="row-fluid">
 					<aside class="span4">
-						<a href="{{ path('ninja_tooken_user_messagerie_ajouter') }}" class="button mini">Nouveau Message</a><br><br>
-						<h3><i class="icon-inbox"></i> Boîte <a href="#" class="actif">Réception</a> - <a href="#"><i class="icon-reply"></i> Envoie</a></h3>
+						{% if app.request.get('add') != 1 %}<a href="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?add=1" class="button mini">Nouveau Message</a><br><br>{% endif %}
+						<h3>
+							<i class="icon-inbox"></i>
+							Boîte <a href="{{ path('ninja_tooken_user_messagerie') }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_messagerie' %} class="actif"{% endif %}>Réception</a> - 
+							<a href="{{ path('ninja_tooken_user_messagerie_envoi') }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_messagerie_envoi' %} class="actif"{% endif %}><i class="icon-reply"></i> Envoie</a></h3>
 						{% if messages is not empty %}
 							{% set dateActu = '' %}
 							{% for message in messages %}
-								{% if dateActu|date("m/d/Y") != message.m_dateAjout|date("m/d/Y") %}
-									{% set dateActu = message.m_dateAjout %}
+								{% if dateActu|date("m/d/Y") != message.dateAjout|date("m/d/Y") %}
+									{% set dateActu = message.dateAjout %}
 									{% if dateActu|date("m/d/Y") == "now"|date("m/d/Y") %}
-						<h4>Aujourd'hui</h4>
+								<h4>Aujourd'hui</h4>
 									{% elseif dateActu|date("m/d/Y") == "yesterday"|date("m/d/Y") %}
-						<h4>Hier</h4>
+								<h4>Hier</h4>
 									{% else %}
-						<h4>{{ dateActu|localizeddate('full', 'none', app.request.locale) }}</h4>
+								<h4>{{ dateActu|localizeddate('full', 'none', app.request.locale) }}</h4>
 									{% endif %}
 								{% endif %}
-						<div class="messagerie">
-							<a href="{{ path('ninja_tooken_user_messagerie_supprimer', {message_id:message.m_id}) }}" class="pull-right"><i class="icon-trash"></i></a>
-							<a href="{{ path('ninja_tooken_user_messagerie_voir', {message_id:message.m_id, 'page':page}) }}"{% if app.request.requesturi==path('ninja_tooken_user_messagerie_voir', {message_id:message.m_id}) or currentmessage.id==message.m_id %} class="actif"{% endif %}>{% if message.mu_dateRead|date('Y') == '-0001' %}<i class="icon-eye-open"></i> {% endif %}{{ message.m_dateAjout|localizeddate('none', 'short', app.request.locale) }} <strong>{{ message.u_username }}</strong>, {{ message.m_nom }}</a>
-						</div>
+								{% set new = false %}
+								{% if app.request.attributes.get('_route')=='ninja_tooken_user_messagerie' %}
+									{% for receiver in message.receivers if receiver.user == app.user and receiver.dateRead|date('Y') == '-0001' %}{% set new = true %}{% endfor %}
+								{% endif %}
+								<div class="messagerie">
+									<a href="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?id={{ message.id }}&del=1" class="pull-right"><i class="icon-trash"></i></a>
+									<p><a href="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?id={{ message.id }}"{% if id == message.id %} class="actif"{% endif %}>{% if new %}<i class="icon-eye-open"></i>{% endif %} {{ message.dateAjout|localizeddate('none', 'short', app.request.locale) }} <strong>{{ message.nom }}</strong></a></p>
+									<p>De <a href="{{ path('ninja_tooken_user_fiche', {user_nom:message.user.slug}) }}">{{ message.user.username }}</a>
+									à {% for receiver in message.receivers %}<a href="{{ path('ninja_tooken_user_fiche', {user_nom:receiver.user.slug}) }}">{{ receiver.user.username }}</a>{% if not loop.last %},{% endif %}{% endfor %}</p>
+								</div>
 							{% endfor %}
 
-						{% include 'pagination.html.twig' with {
-							currentPage: page,
-							paginationPath: path('ninja_tooken_user_messagerie', {'page': ''}),
-							paginationAfter: '',
-							lastPage: nombrePage,
-							extremePagesLimit: 1,
-							nearbyPagesLimit: 2
-						} only %}
+							{% include 'pagination.html.twig' with {
+								currentPage: page,
+								paginationPath: path(app.request.attributes.get('_route'), {'page': ''}),
+								paginationAfter: '?id=' ~ id,
+								lastPage: nombrePage,
+								extremePagesLimit: 1,
+								nearbyPagesLimit: 2
+							} only %}
 						{% else %}
-						<h4>Vous n'avez pas reçu de message</h4>
+						<h4>Vous n'avez pas {% if app.request.attributes.get('_route')=='ninja_tooken_user_messagerie' %}reçu{% else %}envoyé{% endif %} de message</h4>
 						{% endif %}
 					</aside>
 					<section class="span8">
-						{% if currentmessage is not empty %}
-						<article itemscope itemtype="http://schema.org/Article">
-							<header>
-								<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
-									<img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" itemprop="image" class="pull-left" alt="">
-									<a href="{{ path('ninja_tooken_user_fiche', {user_nom:currentmessage.user.slug}) }}" rel="author" itemprop="url">
-										<span itemprop="name">{{ currentmessage.user.username }}</span>
-									</a>
-								</span>
-								<time itemprop="datePublished" datetime="{{ currentmessage.dateAjout|date("Y-m-d\\TH:i:sP") }}">le {{ currentmessage.dateAjout|localizeddate('full', 'none', app.request.locale) }} à {{ currentmessage.dateAjout|localizeddate('none', 'short', app.request.locale) }}</time><br>
-								<h3 itemprop="headline">{{ currentmessage.nom }}</h3>
-							</header>
-							<div class="content" itemprop="articleBody">
-								{{ currentmessage.content|raw|purify('full') }}
-							</div>
-						</article>
-						<hr>
-						<form action="#" method="post" accept-charset="UTF-8" class="full">
-							<div class="row-fluid">
-								<div class="span3"><label class="libelle required">Destinataire(s)</label></div>
-								<div class="span9">
-									<ul id="destinations" class="fake-input" data-find="{{ path('ninja_tooken_user_find') }}">
-										<li>{{ currentmessage.user.username }}</li>
-									</ul>
+						{% if app.request.get('add') == 1 %}
+						<div class="main">
+							<h3>Nouveau message</h3>
+							<form action="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?add=1" method="post" accept-charset="UTF-8" class="full">
+								<div class="row-fluid">
+									<div class="span3"><label class="libelle required">Destinataire(s)</label></div>
+									<div class="span9">
+										<ul id="destinations" class="fake-input" data-find="{{ path('ninja_tooken_user_find') }}"></ul>
+									</div>
 								</div>
-							</div>
-							<div class="row-fluid">
-								<div class="span3"><label class="libelle required" for="sujet">Sujet</label></div>
-								<div class="span9">
-									<input type="text" name="sujet" id="sujet" value="{{ currentmessage.nom }}" class=""/>
+								<div class="row-fluid">
+									<div class="span3"><label class="libelle required" for="sujet">Sujet</label></div>
+									<div class="span9">
+										<input type="text" name="sujet" id="sujet" value="" class=""/>
+									</div>
 								</div>
-							</div>
-							<div class="row-fluid">
-								<div class="span3"><label class="libelle required" for="message">Message</label></div>
-								<div class="span9">
-									<div class="textarea" name="message">&nbsp;</div>
+								<div class="row-fluid">
+									<div class="span3"><label class="libelle required" for="message">Message</label></div>
+									<div class="span9">
+										<div class="textarea" name="message">&nbsp;</div>
+									</div>
 								</div>
-							</div>
-							<div class="row-fluid">
-								<div class="span9 offset3">
-									<input type="submit" value="Répondre" class="button">
+								<div class="row-fluid">
+									<div class="span9 offset3">
+										<input type="submit" value="Envoyer" class="button">
+									</div>
 								</div>
-							</div>
-						</form>
+							</form>
+						</div>
 						{% else %}
-						<h5>Aucun message sélectionné.</h5>
+							{% if currentmessage is not empty %}
+							<article itemscope itemtype="http://schema.org/Article">
+								<header>
+									<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
+										<img src="{{ asset('bundles/ninjatookencommon/images/avatar.jpg') }}" itemprop="image" class="pull-left" alt="">
+										<a href="{{ path('ninja_tooken_user_fiche', {user_nom:currentmessage.user.slug}) }}" rel="author" itemprop="url">
+											<span itemprop="name">{{ currentmessage.user.username }}</span>
+										</a>
+									</span>
+									<time itemprop="datePublished" datetime="{{ currentmessage.dateAjout|date("Y-m-d\\TH:i:sP") }}">le {{ currentmessage.dateAjout|localizeddate('full', 'none', app.request.locale) }} à {{ currentmessage.dateAjout|localizeddate('none', 'short', app.request.locale) }}</time><br>
+									<h3 itemprop="headline">{{ currentmessage.nom }}</h3>
+								</header>
+								<div class="content" itemprop="articleBody">
+									{{ currentmessage.content|raw|purify('full') }}
+								</div>
+							</article>
+							<hr>
+							<form action="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?add=1" method="post" accept-charset="UTF-8" class="full">
+								<div class="row-fluid">
+									<div class="span3"><label class="libelle required">Destinataire(s)</label></div>
+									<div class="span9">
+										<ul id="destinations" class="fake-input" data-find="{{ path('ninja_tooken_user_find') }}">
+											{# l'expéditeur du message #}
+											{% if currentmessage.user != app.user %}<li>{{ currentmessage.user.username }}</li>{% endif %}
+											{# les destinataires du message #}
+											{% for messageuser in currentmessage.receivers if messageuser.user != app.user %}
+											<li>{{ messageuser.user.username }}</li>
+											{% endfor %}
+										</ul>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span3"><label class="libelle required" for="sujet">Sujet</label></div>
+									<div class="span9">
+										<input type="text" name="sujet" id="sujet" value="{{ currentmessage.nom }}" class=""/>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span3"><label class="libelle required" for="message">Message</label></div>
+									<div class="span9">
+										<div class="textarea" name="message">&nbsp;</div>
+									</div>
+								</div>
+								<div class="row-fluid">
+									<div class="span9 offset3">
+										<input type="submit" value="Répondre" class="button">
+									</div>
+								</div>
+							</form>
+							{% else %}
+							<h5>Aucun message sélectionné.</h5>
+							{% endif %}
 						{% endif %}
 					</section>
 				</div>

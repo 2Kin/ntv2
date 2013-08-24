@@ -18,6 +18,18 @@
                     "reference":"0.8.6-standalone"
                 }
             }
+        },
+        {
+            "type":"package",
+            "package": {
+                "name": "ivaynberg/select2",
+                "version":"3.4.2",
+                "source": {
+                    "url": "https://github.com/ivaynberg/select2",
+                    "type": "git",
+                    "reference":"master"
+                }
+            }
         }
     ],
     "require": {
@@ -37,11 +49,19 @@
         "friendsofsymfony/user-bundle": "*",
         "exercise/htmlpurifier-bundle": "dev-master",
         "leafo/lessphp": "@dev",
+
+	"sonata-project/admin-bundle": "*",
         "sonata-project/doctrine-orm-admin-bundle": "*",
+	"sonata-project/user-bundle": "*",
+	"sonata-project/doctrine-extensions": "*",
         "stof/doctrine-extensions-bundle": "dev-master",
+	"stfalcon/tinymce-bundle": "dev-master",
+	"genemu/form-bundle": "2.1.*",
+	"ivaynberg/select2": "*",
+
         "facebook/php-sdk": "3.2.2",
         "friendsofsymfony/facebook-bundle": "dev-master",
-	"Frug/AJAX-Chat": "dev-master"
+        "Frug/AJAX-Chat": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [
