@@ -53,7 +53,7 @@ security:
         main:
             pattern: .*
             fos_facebook:
-                app_url: "http://apps.facebook.com/this-is-my-awesome-app"
+                app_url: ""
                 server_url: "http://www.ninjatooken.com"
                 login_path: fos_user_security_login
                 check_path: /facebook/login_check

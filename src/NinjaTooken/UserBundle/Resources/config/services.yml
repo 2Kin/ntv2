@@ -8,6 +8,12 @@ services:
         tags:
             - { name: form.type, alias: ninjatooken_user_registration }
 
+    ninjatooken_user.form.handler.registration:
+        class: NinjaTooken\UserBundle\Form\Handler\RegistrationFormHandler
+        arguments: ["@fos_user.registration.form", "@request", "@fos_user.user_manager", "@fos_user.mailer", "@fos_user.util.token_generator"]
+        scope: request
+        public: false
+
     fos_facebook.user.login:
         class: NinjaTooken\UserBundle\Security\User\Provider\FacebookProvider
         arguments:
@@ -15,3 +21,9 @@ services:
             userManager: "@fos_user.user_manager"
             validator: "@validator"
             container: "@service_container"
+
+    ninjatooken_user_listener:
+        class: NinjaTooken\UserBundle\Listener\LoginListener
+        arguments: ['@security.context', '@doctrine']
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }

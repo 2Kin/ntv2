@@ -9,7 +9,11 @@ use NinjaTooken\UserBundle\Entity\Friend;
 use NinjaTooken\UserBundle\Entity\Message;
 use NinjaTooken\UserBundle\Entity\MessageUser;
 use NinjaTooken\UserBundle\Entity\Capture;
+use NinjaTooken\UserBundle\Entity\Ip;
 use NinjaTooken\GameBundle\Entity\Lobby;
+use Symfony\Component\Security\Core\Util\StringUtils;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class UnityController extends Controller
 {
@@ -195,7 +199,7 @@ class UnityController extends Controller
 								$experience	= $doc->getElementsByTagName('experience')->item(0)->getElementsByTagName('x');
 								$k			= 0;
 								foreach ($experience as $exp){
-									if($exp->getAttribute('val')>$s_game->Experience)
+									if($exp->getAttribute('val')>$ninja->getExperience)
 										break;
 									$k++;
 								}
@@ -356,8 +360,41 @@ class UnityController extends Controller
                                 }
                             }
                         }
+
+                        // check qu'un joueur avec multi-compte n'est pas déjà connecté dans une partie
                         if($data=='1' && $this->idUtilisateur!=(int)$l){
-                            // TODO :: check qu'un joueur avec multi-compte n'est pas déjà connecté dans la partie
+                            $ips = $userCheck->getIps();
+                            if(!empty($ips)){
+                                // la liste des ips connues de l'utilisateur à vérifier
+                                $ipsCompare = array();
+                                foreach($ips as $ip){
+                                    $ipsCompare[] = $ip->getIp();
+                                }
+                                // boucle sur les parties
+                                $lobbies = $em->getRepository('NinjaTookenGameBundle:Lobby')->findAll();
+                                if($lobbies){
+                                    foreach($lobbies as $lobby){
+                                        // les utilisateurs des parties
+                                        $users = $lobby->getUsers();
+                                        if($users){
+                                            foreach($users as $user){
+                                                // les ips des utilisateurs
+                                                $userIps = $user->getIps();
+                                                if($userIps){
+                                                    foreach($userIps as $ip){
+                                                        if(in_array($ip->getIp(), $ipsCompare)){
+                                                            $data = '0';
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if($data=='0')break;
+                                            }
+                                        }
+                                        if($data=='0')break;
+                                    }
+                                }
+                            }
                         }
                         break;
                     // apparition du yokai
@@ -524,6 +561,7 @@ class UnityController extends Controller
                                 ->createQueryBuilder('l')
                                 ->where(':user MEMBER OF l.users')
                                 ->setParameter('user', $user)
+                                ->getQuery()
                                 ->getResult();
                             if($lobby){
                                 $lobby->setDateUpdate(new \DateTime());
@@ -553,6 +591,7 @@ class UnityController extends Controller
                                 ->setParameter('user', $user)
                                 ->setFirstResult(0)
                                 ->setMaxResults(100)
+                                ->getQuery()
                                 ->getResult();
 
                             $content = '<'.'?xml version="1.0" encoding="UTF-8"?'.'>';
@@ -577,6 +616,132 @@ class UnityController extends Controller
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
+    public function connectAction(Request $request)
+    {
+        // initialisation
+        $content = "<"."?xml version=\"1.0\" encoding=\"UTF-8\""."?><root>";
+        $retour = '0';
+        $friendsUsername = array();
+
+        // données récupérées
+        $this->time = (int)$request->get('time');
+        $this->crypt = $request->headers->get('X-COMMON');
+        $this->phpsessid = $request->cookies->get('PHPSESSID');
+        $this->gameversion = $this->container->getParameter('unity.version');
+        $this->cryptUnity = $this->container->getParameter('unity.crypt');
+
+        // variables postées
+        $login = $request->get('login');
+        $pwd = $request->get('pwd');
+        $visiteur = $request->get('visiteur');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $maxid	= $em->getRepository('NinjaTookenUserBundle:User')
+            ->createQueryBuilder('u')
+            ->select('MAX(u.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $security = $this->get('security.context');
+
+        // tentative de connexion
+        if(!empty($login) && !empty($pwd)){
+		    if($this->isCryptingOk($login.$pwd.$visiteur)){
+                // récupère l'utilisateur par le login
+                $user = $em->getRepository('NinjaTookenUserBundle:User')->findOneBy(array('username' => $login));
+                if($user){
+                    $factory = $this->get('security.encoder_factory');
+                    $encoder = $factory->getEncoder($user);
+                    $password = $encoder->encodePassword($pwd, $user->getSalt());
+                    // vérifie que le mot de passe est ok
+                    if(StringUtils::equals($password, $user->getPassword() )){
+                        // lance la connexion
+                        $token = new UsernamePasswordToken($user, $user->getPassword(), $this->container->getParameter('fos_user.firewall_name'), $user->getRoles());
+                        $security->setToken($token);
+                        $event = new InteractiveLoginEvent($request, $token);
+                        $this->get("event_dispatcher")->dispatch("security.interactive_login", $event);
+                    }
+                }
+            }
+        }
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $this->idUtilisateur = $user->getId();
+
+            // les données du joueur
+            $content .= '<login avatar="'.$user->getAvatar().'" id="'.$user->getId().'" maxid="'.$maxid.'"><![CDATA['.$user->getUsername()."]]></login>";
+
+            $ninja = $user->getNinja();
+            if($ninja){
+                // fait le ménage dans les lobby
+                $lobbies = $em->getRepository('NinjaTookenGameBundle:Lobby')
+                    ->createQueryBuilder('l')
+                    ->where(':user MEMBER OF l.users')
+                    ->setParameter('user', $user)
+                    ->getQuery()
+                    ->getResult();
+                if($lobbies)
+                    $lobbies->remove();
+            }else{
+                // on créé l'entité "ninja"
+                $ninja = new Ninja();
+                $ninja->setUser($user);
+
+                $em->persist($ninja);
+                $em->flush();
+            }
+            // calcul l'age
+            $age	= "10";
+            $dateBirth = $user->getDateOfBirth();
+            if($dateBirth)
+                $age = $dateBirth->diff(new \DateTime())->format('%y');
+
+            // les données du ninja
+            $content .= '<params force="'.$ninja->getAptitudeForce().'" vitesse="'.$ninja->getAptitudeVitesse().'" vie="'.$ninja->getAptitudeVie().'" chakra="'.$ninja->getAptitudeChakra().'" experience="'.$ninja->getExperience().'" grade="'.$ninja->getGrade().'" bouleElementaire="'.$ninja->getJutsuBoule().'" doubleSaut="'.$ninja->getJutsuDoubleSaut().'" bouclierElementaire="'.$ninja->getJutsuBouclier().'" marcherMur="'.$ninja->getJutsuMarcherMur().'" deflagrationElementaire="'.$ninja->getJutsuDeflagration().'" marcherViteEau="'.$ninja->getJutsuMarcherEau().'" changerObjet="'.$ninja->getJutsuMetamorphose().'" multishoot="'.$ninja->getJutsuMultishoot().'" invisibleman="'.$ninja->getJutsuInvisibilite().'" resistanceExplosion="'.$ninja->getJutsuResistanceExplosion().'" phoenix="'.$ninja->getJutsuPhoenix().'" vague="'.$ninja->getJutsuVague().'" pieux="'.$ninja->getJutsuPieux().'" tornade="'.$ninja->getJutsuTornade().'" teleportation="'.$ninja->getJutsuTeleportation().'" kusanagi="'.$ninja->getJutsuKusanagi().'" acierRenforce="'.$ninja->getJutsuAcierRenforce().'" chakraVie="'.$ninja->getJutsuChakraVie().'" classe="'.$ninja->getClasse().'" masque="'.$ninja->getMasque().'" couleurMasque="'.$ninja->getMasqueCouleur().'" detailMasque="'.$ninja->getMasqueDetail().'" costume="'.$ninja->getCostume().'" couleurCostume="'.$ninja->getCostumeCouleur().'" detailCostume="'.$ninja->getCostumeDetail().'" assassinnat="'.$ninja->getMissionAssassinnat().'" course="'.$ninja->getMissionCourse().'" langue="'.$request->getLocale().'" accomplissement="'.$ninja->getAccomplissement().'" age="'.$age.'" sexe="'.($user->getGender()=='f'?'F':"H").'"/>';
+
+            // liste d'amis
+            $friends = $em->getRepository('NinjaTookenUserBundle:Friend')->getFriends($user, 100, 0);
+            if($friends){
+                foreach($friends->getIterator() as $friend){
+                    $friendsUsername[]	= '<t><![CDATA['.$friend->getFriend()->getUsername().']]></t>';
+                }
+            }
+
+            $retour	= '1';
+        }else{
+            if(!empty($visiteur)){
+                $content .= '<login avatar="" id="'.($maxid+date("Hms")).'" maxid="'.$maxid.'"><![CDATA[Visiteur_'.date("Hms").']]></login>';
+                $content .= '<params force="4" vitesse="3" vie="0" chakra="0" experience="0" grade="0" bouleElementaire="0" doubleSaut="0" bouclierElementaire="0" marcherMur="0" deflagrationElementaire="0" marcherViteEau="0" changerObjet="0" multishoot="0" invisibleman="0" resistanceExplosion="0" phoenix="0" vague="0" pieux="0" tornade="0" teleportation="0" kusanagi="0" acierRenforce="0" chakraVie="0" classe="" masque="0" couleurMasque="0" detailMasque="0" costume="0" couleurCostume="0" detailCostume="0" assassinnat="0" course="0" langue="'.$request->getLocale().'" accomplissement="0000000000000000000000000" age="10" sexe="H"/>';
+                $retour	= '1';
+            }
+        }
+        $content .= '<friends>';
+        $content .= implode("", $friendsUsername);
+        $content .= '</friends>';
+        $content .= preg_replace('/\r\n|\r|\n|\t|\s\s+/m','',$this->getDataContent());
+
+        $facebook = $this->get('fos_facebook.api');
+        $scope = implode(',', $this->container->getParameter('fos_facebook.permissions'));
+        $facebookUri	= $facebook->getLoginUrl(array('display'=>'popup', 'scope'=> $scope, 'redirect_uri'=>'/xml/game/fb_connect.php'));
+        $facebookUriS	= $facebook->getLoginUrl(array('display'=>'page', 'scope'=> $scope, 'redirect_uri'=>'/xml/game/fb_connect.php'));
+
+        $content .= "<facebook><![CDATA[".$facebookUri."]]></facebook>";
+        $content .= "<facebookS><![CDATA[".$facebookUriS."]]></facebookS>";
+        $content .= "<sessid><![CDATA[".$this->phpsessid."]]></sessid>";
+        $content .= "<retour>".$retour."</retour>";
+        $content .= "</root>";
+
+        return new Response($content, 200, array('Content-Type' => 'text/xml'));
+    }
+
+    public function versionAction(Request $request)
+    {
+        $this->gameversion = $this->container->getParameter('unity.version');
+        return new Response($this->gameversion, 200, array('Content-Type' => 'text/plain'));
+    }
+
 	// fonction de cryptage
 	private function isCryptingOk($val=""){
 		return $this->crypt == hash("sha256", $this->cryptUnity.$this->phpsessid.$this->time.$val.$this->idUtilisateur.$this->phpsessid.$this->gameversion, false);
@@ -584,9 +749,11 @@ class UnityController extends Controller
 
     // récupère les données xml
     private function getData(){
-        $xml = file_get_contents(dirname(__FILE__).'/../Resources/public/xml/game.xml');
         $doc = new \DOMDocument();
-        $doc->loadXml('<root>'.$xml.'</root>' );
+        $doc->loadXml('<root>'.$this->getDataContent().'</root>' );
         return $doc;
+    }
+    private function getDataContent(){
+        return file_get_contents(dirname(__FILE__).'/../Resources/public/xml/game.xml');
     }
 }

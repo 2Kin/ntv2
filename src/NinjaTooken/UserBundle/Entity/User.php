@@ -43,13 +43,6 @@ class User extends BaseUser
      */
     private $recruts;
 
-   /**
-     * @var string
-     *
-     * @ORM\Column(name="facebookId", type="string", length=255, nullable=true)
-     */
-    private $facebookId;
-
     /**
      * @var int
      *
@@ -97,6 +90,11 @@ class User extends BaseUser
      * @ORM\Column(name="old_username", type="text", nullable=true)
      */
     private $oldUsername;
+
+    /**
+     * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\Ip", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $ips;
 
     public function __construct()
     {
@@ -281,12 +279,12 @@ class User extends BaseUser
 
     public function serialize()
     {
-        return serialize(array($this->facebookId, parent::serialize()));
+        return serialize(array($this->facebookUid, parent::serialize()));
     }
 
     public function unserialize($data)
     {
-        list($this->facebookId, $parentData) = unserialize($data);
+        list($this->facebookUid, $parentData) = unserialize($data);
         parent::unserialize($parentData);
     }
 
@@ -300,29 +298,12 @@ class User extends BaseUser
     }
 
     /**
-     * @param string $facebookId
-     * @return void
-     */
-    public function setFacebookId($facebookId)
-    {
-        $this->facebookId = $facebookId;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFacebookId()
-    {
-        return $this->facebookId;
-    }
-
-    /**
      * @param Array
      */
     public function setFBData($fbdata)
     {
         if (isset($fbdata['id'])) {
-            $this->setFacebookId($fbdata['id']);
+            $this->setFacebookUid($fbdata['id']);
             $this->addRole('ROLE_FACEBOOK');
         }
         if (isset($fbdata['first_name'])) {
@@ -413,5 +394,38 @@ class User extends BaseUser
     public function getRecruts()
     {
         return $this->recruts;
+    }
+
+    /**
+     * Add ips
+     *
+     * @param \NinjaTooken\UserBundle\Entity\Ip $ips
+     * @return User
+     */
+    public function addIp(\NinjaTooken\UserBundle\Entity\Ip $ips)
+    {
+        $this->ips[] = $ips;
+
+        return $this;
+    }
+
+    /**
+     * Remove ips
+     *
+     * @param \NinjaTooken\UserBundle\Entity\Ip $ips
+     */
+    public function removeIp(\NinjaTooken\UserBundle\Entity\Ip $ips)
+    {
+        $this->ips->removeElement($ips);
+    }
+
+    /**
+     * Get ips
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIps()
+    {
+        return $this->ips;
     }
 }

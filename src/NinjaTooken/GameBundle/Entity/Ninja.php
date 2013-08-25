@@ -35,238 +35,238 @@ class Ninja
      *
      * @ORM\Column(name="aptitude_force", type="smallint")
      */
-    private $aptitudeForce;
+    private $aptitudeForce = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="aptitude_vitesse", type="smallint")
      */
-    private $aptitudeVitesse;
+    private $aptitudeVitesse = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="aptitude_vie", type="smallint")
      */
-    private $aptitudeVie;
+    private $aptitudeVie = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="aptitude_chakra", type="smallint")
      */
-    private $aptitudeChakra;
+    private $aptitudeChakra = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_boule", type="smallint")
      */
-    private $jutsuBoule;
+    private $jutsuBoule = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_double_saut", type="smallint")
      */
-    private $jutsuDoubleSaut;
+    private $jutsuDoubleSaut = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_bouclier", type="smallint")
      */
-    private $jutsuBouclier;
+    private $jutsuBouclier = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_marcher_mur", type="smallint")
      */
-    private $jutsuMarcherMur;
+    private $jutsuMarcherMur = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_deflagration", type="smallint")
      */
-    private $jutsuDeflagration;
+    private $jutsuDeflagration = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_marcher_eau", type="smallint")
      */
-    private $jutsuMarcherEau;
+    private $jutsuMarcherEau = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_metamorphose", type="smallint")
      */
-    private $jutsuMetamorphose;
+    private $jutsuMetamorphose = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_multishoot", type="smallint")
      */
-    private $jutsuMultishoot;
+    private $jutsuMultishoot = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_invisibilite", type="smallint")
      */
-    private $jutsuInvisibilite;
+    private $jutsuInvisibilite = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_resistance_explosion", type="smallint")
      */
-    private $jutsuResistanceExplosion;
+    private $jutsuResistanceExplosion = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_phoenix", type="smallint")
      */
-    private $jutsuPhoenix;
+    private $jutsuPhoenix = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_vague", type="smallint")
      */
-    private $jutsuVague;
+    private $jutsuVague = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_pieux", type="smallint")
      */
-    private $jutsuPieux;
+    private $jutsuPieux = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_teleportation", type="smallint")
      */
-    private $jutsuTeleportation;
+    private $jutsuTeleportation = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_tornade", type="smallint")
      */
-    private $jutsuTornade;
+    private $jutsuTornade = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_kusanagi", type="smallint")
      */
-    private $jutsuKusanagi;
+    private $jutsuKusanagi = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_acier_renforce", type="smallint")
      */
-    private $jutsuAcierRenforce;
+    private $jutsuAcierRenforce = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jutsu_chakra_vie", type="smallint")
      */
-    private $jutsuChakraVie;
+    private $jutsuChakraVie = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="grade", type="smallint")
      */
-    private $grade;
+    private $grade = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="experience", type="bigint")
      */
-    private $experience;
+    private $experience = 0;
 
     /**
      * @var string
      *
      * @ORM\Column(name="classe", type="string", length=25)
      */
-    private $classe;
+    private $classe = "";
 
     /**
      * @var integer
      *
      * @ORM\Column(name="masque", type="smallint")
      */
-    private $masque;
+    private $masque = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="masque_couleur", type="smallint")
      */
-    private $masqueCouleur;
+    private $masqueCouleur = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="masque_detail", type="smallint")
      */
-    private $masqueDetail;
+    private $masqueDetail = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="costume", type="smallint")
      */
-    private $costume;
+    private $costume = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="costume_couleur", type="smallint")
      */
-    private $costumeCouleur;
+    private $costumeCouleur = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="costume_detail", type="smallint")
      */
-    private $costumeDetail;
+    private $costumeDetail = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="mission_assassinnat", type="smallint")
      */
-    private $missionAssassinnat;
+    private $missionAssassinnat = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="mission_course", type="smallint")
      */
-    private $missionCourse;
+    private $missionCourse = 0;
 
     /**
      * @var string
      *
      * @ORM\Column(name="accomplissement", type="string", length=25)
      */
-    private $accomplissement;
+    private $accomplissement = "0000000000000000000000000";
 
 
     /**

@@ -145,6 +145,7 @@ fos_user:
     registration:
         form:
             type: ninjatooken_user_registration
+            handler: ninjatooken_user.form.handler.registration
         confirmation:
             enabled:    false
 

@@ -35,8 +35,12 @@
 							<label class="libelle" for="mail">Mail</label>
 						</div>
 						<div class="span8">
-							{% if true %}<p class="note">Ton adresse mail n’a pas été vérifiée.<br/>
-							En cas d’oubli, tu ne pourras pas récupérer ton mot de passe, tu ne seras pas averti lors d’un nouveau message, et tu ne recevras pas de newsletter.</p>{% endif %}
+							{% if app.user.confirmationToken is not empty %}
+							<p class="note">Ton adresse mail n’a pas été vérifiée.<br>
+							En cas d’oubli, tu ne pourras pas récupérer ton mot de passe, tu ne seras pas averti lors d’un nouveau message, et tu ne recevras pas de newsletter.<br>
+							<a href="{{ path('ninja_tooken_user_parametres') }}?mailConfirm=1">Envoyer un mail de confirmation</a>
+							</p>
+							{% endif %}
 							<input type="email" name="mail" id="mail" value="{{ app.user.email }}" required>
 						</div>
 					</div>
