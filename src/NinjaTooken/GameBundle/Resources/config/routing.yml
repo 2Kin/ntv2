@@ -11,15 +11,3 @@ ninja_tooken_game_classement:
     defaults: { _controller: NinjaTookenGameBundle:Default:classement, page:1 }
     requirements:
         page:  \d*
-
-ninja_tooken_game_update:
-    pattern:  /xml/game/update.php
-    defaults: { _controller: NinjaTookenGameBundle:Unity:update }
-
-ninja_tooken_game_connect:
-    pattern:  /xml/game/connect.php
-    defaults: { _controller: NinjaTookenGameBundle:Unity:connect }
-
-ninja_tooken_game_version:
-    pattern:  /xml/game/version.txt
-    defaults: { _controller: NinjaTookenGameBundle:Unity:version }

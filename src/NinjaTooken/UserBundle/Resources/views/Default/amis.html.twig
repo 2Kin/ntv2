@@ -25,6 +25,11 @@
 						<a href="{{ path('ninja_tooken_user_amis', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis' %} class="actif"{% endif %}><i class="icon-heart"></i> Mes amis</a> - 
 						<a href="{{ path('ninja_tooken_user_amis_demande', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis_demande' %} class="actif"{% endif %}><i class="icon-heart-empty"></i> Demande d'amis</a>
 					</h3>
+					{% for flashMessage in app.session.flashbag.get('notice') %}
+					    <div class="flash-notice">
+						{{ flashMessage }}
+					    </div>
+					{% endfor %}
 
 					{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis' %}
 						<p><span class="legend online"> En ligne</span>
@@ -34,7 +39,7 @@
 						{% for friend in friends %}
 						<div class="membre offline pull-left">
 							<a href="{{ path('ninja_tooken_user_fiche', {user_nom:friend.friend.slug}) }}"><img src="{{ avatar.getUrl(friend.friend) }}">{{ friend.friend.username }}</a>
-							<a href="{{ path('ninja_tooken_user_amis_bloquer', {user_nom:friend.friend.slug}) }}" class="button small">Bloquer</a>
+							<a href="{{ path('ninja_tooken_user_amis_bloquer', {id:friend.id}) }}" class="button small">Bloquer</a>
 						</div>
 						{% endfor %}
 						{% else %}
@@ -45,7 +50,7 @@
 						{% for demande in demandes %}
 						<div class="membre pull-left">
 							<a href="{{ path('ninja_tooken_user_fiche', {user_nom:demande.friend.slug}) }}"><img src="{{ avatar.getUrl(demande.friend) }}">{{ demande.friend.username }}</a> -
-							<a href="{{ path('ninja_tooken_user_amis_confirmer', {user_nom:demande.friend.slug}) }}" class="button small">Confirmer</a>
+							<a href="{{ path('ninja_tooken_user_amis_confirmer', {id:demande.id}) }}" class="button small">Confirmer</a>
 						</div>
 						{% endfor %}
 						{% else %}

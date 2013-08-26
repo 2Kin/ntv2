@@ -1,6 +1,7 @@
-/@AutoEmbed-1.8
-/@bracket
-/@integration
+@AutoEmbed-1.8
+@bracket
+@integration
+*.unity3d
 /web/bundles/
 /app/bootstrap*
 /app/cache/*

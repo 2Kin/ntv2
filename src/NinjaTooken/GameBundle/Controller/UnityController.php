@@ -736,12 +736,6 @@ class UnityController extends Controller
         return new Response($content, 200, array('Content-Type' => 'text/xml'));
     }
 
-    public function versionAction(Request $request)
-    {
-        $this->gameversion = $this->container->getParameter('unity.version');
-        return new Response($this->gameversion, 200, array('Content-Type' => 'text/plain'));
-    }
-
 	// fonction de cryptage
 	private function isCryptingOk($val=""){
 		return $this->crypt == hash("sha256", $this->cryptUnity.$this->phpsessid.$this->time.$val.$this->idUtilisateur.$this->phpsessid.$this->gameversion, false);

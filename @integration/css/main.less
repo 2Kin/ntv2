@@ -964,3 +964,24 @@ body>.content:before{
 		}
 	}
 }
+
+// popup
+.popup-bg{
+	background-color:rgba(0,0,0,0.5);position:fixed;.size(100%, 100%);top:0;left:0;z-index:100;display:hidden;.opacity(0);.transition(all 0.2s linear);visibility:hidden;
+	&.on{
+		display:block;.opacity(100);.transition(all 0.2s linear);visibility:visible;
+	}
+	.popup{
+		position:fixed;background-color:@white;color:@black;top:50%;left:50%;margin-left:-185px;margin-top:-32px;width:370px;height:65px;padding:30px 0;.border-radius(@baseBorderRadius);.box-shadow(3px 3px 5px fadeout(@black, 60%));text-align:center;font-size:@fontSizeMedium;line-height:@fontSizeMedium;font-weight:bold;
+		.button{
+			font-size:@fontSizeLarge;line-height:@fontSizeLarge;font-family:@headFontFamily;color:@textColor;text-shadow:2px 2px 1px @gray;display:inline-block;padding:2px 15px 6px;
+			background-color:@linkColor;.border-radius(@baseBorderRadius);.box-shadow(1px 1px 1px fadeout(@black, 60%));
+			&:hover{
+				background-color:@black !important;
+			}
+			&.cancel{
+				background-color:@gray;
+			}
+		}
+	}
+}

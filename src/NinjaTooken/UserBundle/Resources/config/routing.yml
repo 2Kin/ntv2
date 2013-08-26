@@ -34,6 +34,18 @@ ninja_tooken_user_parametres:
     pattern:  /compte/parametres
     defaults: { _controller: NinjaTookenUserBundle:Default:parametres }
 
+ninja_tooken_user_parametres_confirm_mail:
+    pattern:  /compte/parametres/confirm-mail
+    defaults: { _controller: NinjaTookenUserBundle:Default:parametresConfirmMail }
+
+ninja_tooken_user_parametres_update_password:
+    pattern:  /compte/parametres/update-password
+    defaults: { _controller: NinjaTookenUserBundle:Default:parametresUpdatePassword }
+
+ninja_tooken_user_parametres_delete_account:
+    pattern:  /compte/parametres/delete-account
+    defaults: { _controller: NinjaTookenUserBundle:Default:parametresDeleteAccount }
+
 ninja_tooken_user_amis:
     pattern:  /compte/amis/{page}
     defaults: { _controller: NinjaTookenUserBundle:Default:amis, page:1 }
@@ -47,12 +59,16 @@ ninja_tooken_user_amis_demande:
         page:  \d*
 
 ninja_tooken_user_amis_confirmer:
-    pattern:  /compte/amis/confirm/{user_nom}
+    pattern:  /compte/amis/confirm/{id}
     defaults: { _controller: NinjaTookenUserBundle:Default:amisConfirmer }
+    requirements:
+        id:  \d*
 
 ninja_tooken_user_amis_bloquer:
-    pattern:  /compte/amis/block/{user_nom}
+    pattern:  /compte/amis/block/{id}
     defaults: { _controller: NinjaTookenUserBundle:Default:amisBloquer }
+    requirements:
+        id:  \d*
 
 ninja_tooken_user_captures:
     pattern:  /compte/captures/{page}
@@ -64,7 +80,7 @@ ninja_tooken_user_captures_supprimer:
     pattern:  /compte/captures/{id}/supprimer/
     defaults: { _controller: NinjaTookenUserBundle:Default:capturesSupprimer }
     requirements:
-        page:  \d*
+        id:  \d*
 
 _security_check_facebook:
     pattern:   /facebook/login_check

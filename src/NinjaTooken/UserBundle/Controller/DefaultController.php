@@ -7,7 +7,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use NinjaTooken\UserBundle\Entity\User;
+use NinjaTooken\UserBundle\Entity\Friend;
 use NinjaTooken\UserBundle\Entity\Message;
+use FOS\UserBundle\Mailer\MailerInterface;
 
 class DefaultController extends Controller
 {
@@ -247,7 +249,83 @@ class DefaultController extends Controller
         $security = $this->get('security.context');
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
-            return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig');
+            return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig', array(
+                'formPassword' => $this->container->get('fos_user.change_password.form')->createView()
+            ));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    public function parametresConfirmMailAction()
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            $confirmation = $user->getConfirmationToken();
+            if(isset($confirmation) && !empty($confirmation)){
+
+                $this->container->get('fos_user.mailer')->sendConfirmationEmailMessage($user);
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Un mail de confirmation vient d\'être envoyé.'
+                );
+            }
+
+            return $this->redirect($this->generateUrl('ninja_tooken_user_parametres'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    public function parametresUpdatePasswordAction(Request $request)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+
+            $form = $this->container->get('fos_user.change_password.form');
+            $formHandler = $this->container->get('fos_user.change_password.form.handler');
+
+            $process = $formHandler->process($user);
+            if ($process) {
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Ton mot de passe a correctement été modifié.'
+                );
+            }
+/*
+
+            $confirmation = $user->getConfirmationToken();
+            if(isset($confirmation) && !empty($confirmation)){
+
+                $newPassword = "";
+                $user->setPlainPassword($newPassword);
+                $this->container->get('fos_user.user_manager')->updateUser($user);
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Ton mot de passe a correctement été modifié.'
+                );
+            }*/
+
+            return $this->redirect($this->generateUrl('ninja_tooken_user_parametres'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    public function parametresDeleteAccount()
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $this->container->get('fos_user.user_manager')->deleteUser($user);
+
+            return $this->redirect($this->generateUrl('ninja_tooken_homepage'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
@@ -299,36 +377,57 @@ class DefaultController extends Controller
     }
 
     /**
-     * @ParamConverter("friend", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     * @ParamConverter("friend", class="NinjaTookenUserBundle:Friend")
      */
-    public function amisConfirmerAction(User $friend)
+    public function amisConfirmerAction(Friend $friend)
     {
         $security = $this->get('security.context');
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
 
-            $friends = $this->getDoctrine()->getManager()
-                ->getRepository('NinjaTookenUserBundle:Friend')
-                ->getFriends($friend, 1, 0);
+            if($friend->getUser() == $user){
+                $em = $this->getDoctrine()->getManager();
 
-            return $this->render('NinjaTookenUserBundle:Default:amis.html.twig', array(
-                'friends' => $friends
-            ));
+                $friend->setIsConfirmed(true);
+                $em->persist($friend);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    $friend->getFriend()->getUsername().' fait désormais partie de tes amis.'
+                );
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_user_amis'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
     /**
-     * @ParamConverter("user", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     * @ParamConverter("friend", class="NinjaTookenUserBundle:Friend")
      */
-    public function amisBloquerAction(User $user)
+    public function amisBloquerAction(Friend $friend)
     {
         $security = $this->get('security.context');
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
-            return $this->render('NinjaTookenUserBundle:Default:amis.html.twig');
+            $user = $security->getToken()->getUser();
+
+            if($friend->getUser() == $user){
+                $em = $this->getDoctrine()->getManager();
+
+                $friend->setIsBlocked(true);
+                $em->persist($friend);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    $friend->getFriend()->getUsername().' est désormais bloqué.'
+                );
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_user_amis'));
         }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
     public function capturesAction($page)
@@ -352,12 +451,38 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
-    public function capturesSupprimerAction($id)
+    /**
+     * @ParamConverter("capture", class="NinjaTookenUserBundle:Capture")
+     */
+    public function capturesSupprimerAction(Capture $capture)
     {
         $security = $this->get('security.context');
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
-            return $this->render('NinjaTookenUserBundle:Default:captures.html.twig');
+            $user = $security->getToken()->getUser();
+            if($capture->getUser() == $user){
+                // supprime d'imgur
+                $ch		= curl_init();
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_setopt($ch, CURLOPT_VERBOSE, 0);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible;)");
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Client-ID 4dfd53cd4de2cb1') );
+                curl_setopt($ch, CURLOPT_URL, "https://api.imgur.com/3/image/".$capture->getDeleteHash());
+                $retour	= curl_exec($ch);
+				if(!curl_errno($ch)){
+                    $em = $this->getDoctrine()->getManager();
+
+                    $em->remove($capture);
+                    $em->flush();
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        'La capture a bien été supprimée.'
+                    );
+                }
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_user_captures'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }

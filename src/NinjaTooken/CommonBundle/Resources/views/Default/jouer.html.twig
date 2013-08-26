@@ -20,10 +20,14 @@
 						<div id="unityPlayer">
 							<div class="missing">
 								<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
-									<img alt="Unity Web Player. Install now!" src="images/getunity.png" width="193" height="63" />
+									<img alt="Unity Web Player. Install now!" src="{{ asset('bundles/ninjatookencommon/images/getunity.png') }}" width="193" height="63" />
 								</a>
 							</div>
 						</div>
+						<script>
+						var unityLoader = "{{ asset('bundles/ninjatookengame/loader.unity3d') }}";
+						var unityGame = "{{ asset('bundles/ninjatookengame/ninja-tooken-' ~ version ~ '.unity3d') }}";
+						</script>
 					</section>
 					<aside class="span3 module">
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}

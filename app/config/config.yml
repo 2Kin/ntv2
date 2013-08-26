@@ -51,6 +51,7 @@ twig:
         class: %class%
         carte: %carte%
         jeu: %jeu%
+        version: %unity.version%
 
 # Assetic Configuration
 assetic:

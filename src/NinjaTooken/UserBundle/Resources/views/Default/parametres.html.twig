@@ -1,3 +1,53 @@
+{% form_theme formPassword _self %}
+
+{% block form_widget_compound %}
+{% spaceless %}
+	{% if form.parent is empty %}
+	    {{ form_errors(form) }}
+	{% endif %}
+	{{ block('form_rows') }}
+	{{ form_rest(form) }}
+{% endspaceless %}
+{% endblock form_widget_compound %}
+
+{% block choice_widget_expanded %}
+{% spaceless %}
+    {% for child in form %}
+	{{ form_widget(child) }}
+	{{ form_label(child) }}
+    {% endfor %}
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{% block form_row %}
+    <div class="row-fluid">
+	<div class="span3 offset1">
+	{{ form_label(form) }}
+	</div>
+	<div class="span8">
+	{{ form_widget(form) }}
+	{{ form_errors(form) }}
+	</div>
+    </div>
+{% endblock form_row %}
+
+{% block form_label %}
+{% spaceless %}
+    {% if label is not sameas(false) %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': 'libelle required'}) %}
+        {% endif %}
+        {% if label is empty %}
+            {% set label = name|humanize %}
+        {% endif %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_label %}
+
 {% extends '::layout.html.twig' %}
 {% import "avatar.html.twig" as avatar %}
 
@@ -20,6 +70,11 @@
 {% endblock %}
 
 {% block body %}
+				{% for flashMessage in app.session.flashbag.get('notice') %}
+				    <div class="flash-notice">
+					{{ flashMessage }}
+				    </div>
+				{% endfor %}
 				<form action="{{ path('ninja_tooken_user_parametres') }}" method="post" name="editAccount" accept-charset="UTF-8" class="full">
 					<h3><i class="icon-user"></i> Informations personnelles</h3>
 					<div class="row-fluid">
@@ -38,7 +93,7 @@
 							{% if app.user.confirmationToken is not empty %}
 							<p class="note">Ton adresse mail n’a pas été vérifiée.<br>
 							En cas d’oubli, tu ne pourras pas récupérer ton mot de passe, tu ne seras pas averti lors d’un nouveau message, et tu ne recevras pas de newsletter.<br>
-							<a href="{{ path('ninja_tooken_user_parametres') }}?mailConfirm=1">Envoyer un mail de confirmation</a>
+							<a href="{{ path('ninja_tooken_user_parametres_confirm_mail') }}">Envoyer un mail de confirmation</a>
 							</p>
 							{% endif %}
 							<input type="email" name="mail" id="mail" value="{{ app.user.email }}" required>
@@ -125,42 +180,18 @@
 						</div>
 					</div>
 				</form>
-				
-				<form action="{{ path('ninja_tooken_user_parametres') }}" method="post" name="editPassword" accept-charset="UTF-8" class="full">
+
+				<form action="{{ path('ninja_tooken_user_parametres_update_password') }}" {{ form_enctype(formPassword) }} method="POST" name="editPassword" accept-charset="UTF-8" class="full">
 					<h3><i class="icon-key"></i> Mot de passe</h3>
-					<div class="row-fluid">
-						<div class="span3 offset1">
-							<label class="libelle required" for="oldPwd">Ancien mot de passe</label>
-						</div>
-						<div class="span8">
-							<input type="password" name="oldPwd" id="oldPwd" value="" required>
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span3 offset1">
-							<label class="libelle required" for="newPwd">Nouveau mot de passe</label>
-						</div>
-						<div class="span8">
-							<input type="password" name="newPwd" id="newPwd" value="" required>
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span3 offset1">
-							<label class="libelle required" for="repeatPwd">Répéter</label>
-						</div>
-						<div class="span8">
-							<input type="password" name="repeatPwd" id="repeatPwd" value="" required>
-						</div>
-					</div>
+					{{ form_widget(formPassword) }}
 					<div class="row-fluid">
 						<div class="span8 offset4">
-							<input type="hidden" name="editPassword" value="1">
 							<input type="submit" value="Enregistrer" class="button">
 						</div>
 					</div>
 				</form>
 
-				<form action="{{ path('ninja_tooken_user_parametres') }}" method="post" name="deleteAccount" accept-charset="UTF-8" class="full">
+				<form action="{{ path('ninja_tooken_user_parametres_delete_account') }}" method="post" name="deleteAccount" accept-charset="UTF-8" class="full">
 					<h3><i class="icon-trash"></i> Suppression</h3>
 					<div class="row-fluid">
 						<div class="span8 offset4">
@@ -169,7 +200,6 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span8 offset4">
-							<input type="hidden" name="deleteAccount" value="1">
 							<input type="submit" value="Supprimer" class="button">
 						</div>
 					</div>

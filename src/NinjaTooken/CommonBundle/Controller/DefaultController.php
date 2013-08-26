@@ -24,7 +24,10 @@ class DefaultController extends Controller
 
     public function jouerAction()
     {
-        return $this->render('NinjaTookenCommonBundle:Default:jouer.html.twig');
+        $response = $this->render('NinjaTookenCommonBundle:Default:jouer.html.twig');
+        $response->setSharedMaxAge(600);
+        
+        return $response;
     }
 
     public function manuelAction()

@@ -21,6 +21,60 @@
     }
 }());
 
+// permet de désactiver/activer le scrolling de la page
+function disableWheel() {
+    /* Gecko */
+    addHandler(window, 'DOMMouseScroll', wheel);
+    /* Opera */
+    addHandler(window, 'mousewheel', wheel);
+    /* IE */
+    addHandler(document, 'mousewheel', wheel);
+}
+function enableWheel() {
+	if(on)
+		return;
+    /* Gecko */
+    removeHandler(window, 'DOMMouseScroll', wheel);
+    /* Opera */
+    removeHandler(window, 'mousewheel', wheel);
+    /* IE */
+    removeHandler(document, 'mousewheel', wheel);
+}
+function addHandler(object, event, handler, useCapture) {
+    if (object.addEventListener) {
+        object.addEventListener(event, handler, useCapture ? useCapture : false);
+    } else if (object.attachEvent) {
+        object.attachEvent('on' + event, handler);
+    } else alert("Add handler is not supported");
+}
+function removeHandler(object, event, handler) {
+    if (object.removeEventListener) {
+        object.removeEventListener(event, handler, false);
+    } else if (object.detachEvent) {
+        object.detachEvent('on' + event, handler);
+    } else alert("Remove handler is not supported");
+}
+// Wheel event handler
+function wheel(event) {
+    var delta; // Scroll direction
+    // -1 - scroll down
+    // 1  - scroll up
+    event = event || window.event;
+    // Opera & IE works with property wheelDelta
+    if (event.wheelDelta) {
+        delta = event.wheelDelta / 120;
+        // In Опере value of wheelDelta the same but with opposite sign
+        if (window.opera) delta = -delta;
+        // Gecko uses property detail
+    } else if (event.detail) {
+        delta = -event.detail / 3;
+    }
+    // Disables processing events
+    if (event.preventDefault) event.preventDefault();
+    event.returnValue = false;
+    return delta;
+}
+
 $(document).ready(function(){
 	// les paramètres passés via l'url
 	var prmstr = window.location.search.substr(1);
@@ -119,45 +173,62 @@ $(document).ready(function(){
 	// le jeu
 	var unityPlayer = $("#unityPlayer");
 	if(unityPlayer.length>0){
-		var u = new UnityObject2({
-			width:'100%',
-			height:'100%',
-			enableUnityAnalytics:false,
-			enableGoogleAnalytics:false,
-			params:{
-				backgroundcolor: "333333",
-				bordercolor: "333333",
-				textcolor: "FFFFFF",
-				disableContextMenu: true,
-				disableExternalCall:true
+		if(typeof unityLoader != "undefined"){
+			ntUnity = new UnityObject2({
+				width:'100%',
+				height:'100%',
+				enableUnityAnalytics:false,
+				enableGoogleAnalytics:false,
+				params:{
+					backgroundcolor: "333333",
+					bordercolor: "333333",
+					textcolor: "FFFFFF",
+					disableContextMenu: true,
+					disableExternalCall:true
+				}
+			});
+			ntUnity.observeProgress(function (progress) {
+				var $missingScreen = $(progress.targetEl).find(".missing");
+				switch(progress.pluginStatus) {
+					case "unsupported":
+						showUnsupported();
+						break;
+					case "broken":
+						alert("You will need to restart your browser after installation.");
+						break;
+					case "missing":
+						$missingScreen.find("a").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								return false;
+						});
+						$missingScreen.show();
+						break;
+					case "installed":
+						$missingScreen.remove();
+						break;
+					case "first":
+						break;
+				}
+			});
+			ntUnity.initPlugin(unityPlayer.get(0), unityLoader);
+
+			if(typeof unityGame != "undefined"){
+				ntUnityLoaded = window.setInterval(
+					function(){
+						var uO = ntUnity.getUnity();
+						if(uO != null){
+							window.clearInterval(ntUnityLoaded);
+							setTimeout(function(){
+								ntUnity.getUnity().SendMessage("loader", "initStream", unityGame);
+							},1000);
+						}
+					},
+					100
+				);
 			}
-		});
-		u.observeProgress(function (progress) {
-			var $missingScreen = $(progress.targetEl).find(".missing");
-			switch(progress.pluginStatus) {
-				case "unsupported":
-					showUnsupported();
-					break;
-				case "broken":
-					alert("You will need to restart your browser after installation.");
-					break;
-				case "missing":
-					$missingScreen.find("a").click(function (e) {
-							e.stopPropagation();
-							e.preventDefault();
-							u.installPlugin();
-							return false;
-					});
-					$missingScreen.show();
-					break;
-				case "installed":
-					$missingScreen.remove();
-					break;
-				case "first":
-					break;
-			}
-		});
-		u.initPlugin(unityPlayer.get(0), "loader_.unity3d");
+		}
 	}
 
 	// classements
@@ -183,6 +254,30 @@ $(document).ready(function(){
 	$('select[name="classe"]').on('change', function(){
 		document.location.href = String(document.location.pathname).replace(/classement\/([0-9]*)/gi, 'classement/1')+'?filter='+$(this).find('option:selected').val()+'&order='+(typeof params['order']!="undefined"?params['order']:"")+'#classement';
 	});
+
+	// paramètres
+	var _deleteAccount = $('form[name="deleteAccount"]');
+	if(_deleteAccount.length>0){
+		var _validation = false;
+		var _popup = $('.popup-bg');
+		_popup.find('a[href="confirm"]').on('click', function(){
+			_validation = true;
+			_deleteAccount.trigger('submit');
+			_popup.removeClass('on');
+			return false;
+		});
+		_popup.find('a[href="cancel"]').on('click', function(){
+			_popup.removeClass('on');
+			return false;
+		});
+		_deleteAccount.on('submit', function(){
+			if(!_validation){
+				_popup.addClass('on');
+			}
+			return _validation;
+		});
+
+	}
 
 	// réponses
 	var _answers = $("a.answer");

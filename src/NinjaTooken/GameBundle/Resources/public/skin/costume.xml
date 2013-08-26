@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skins>
+	<skin value="Standard" folder="standard" sexe="H">
+		<compo type="couleur" value="Bleu/Suiton" folder="blue"/>
+		<compo type="couleur" value="Gris/Futon" folder="grey"/>
+		<compo type="couleur" value="Beige/Doton" folder="yellow"/>
+		<compo type="couleur" value="Marron/Raiton" folder="beige"/>
+		<compo type="couleur" value="Rouge/Katon" folder="red"/>
+		<compo type="detail" value="-" folder="clean"/>
+		<compo type="detail" value="Boueux" folder="dirty"/>
+		<compo type="detail" value="Ensanglanté" folder="sang"/>
+		<compo type="detail" value="Avec motif" folder="motif"/>
+	</skin>
+	<skin value="Standard" folder="standard" sexe="F">
+		<compo type="couleur" value="rose" folder="rose"/>
+		<compo type="couleur" value="mauve" folder="mauve"/>
+		<compo type="couleur" value="bleue" folder="bleue"/>
+		<compo type="detail" value="-" folder="clean"/>
+		<compo type="detail" value="Boueux" folder="boue"/>
+		<compo type="detail" value="Sang" folder="blood"/>
+	</skin>
+	<skin value="Camouflage" folder="camouflage" sexe="H">
+		<compo type="couleur" value="Vert" folder="green"/>
+		<compo type="couleur" value="Bleu" folder="blue"/>
+		<compo type="detail" value="-" folder="clean"/>
+		<compo type="detail" value="Boueux" folder="boue"/>
+		<compo type="detail" value="Sang" folder="sang"/>
+	</skin>
+	<skin value="Type Katon" folder="katon" sexe="H">
+		<compo type="couleur" value="Bleu/Suiton" folder="blue"/>
+		<compo type="couleur" value="Gris/Futon" folder="grey"/>
+		<compo type="couleur" value="Beige/Doton" folder="yellow"/>
+		<compo type="couleur" value="Marron/Raiton" folder="beige"/>
+		<compo type="couleur" value="Rouge/Katon" folder="red"/>
+		<compo type="detail" value="-" folder="clean"/>
+		<compo type="detail" value="Boueux" folder="boue"/>
+		<compo type="detail" value="Ensanglanté" folder="sang"/>
+		<compo type="detail" value="Griffé" folder="griffure"/>
+		<compo type="detail" value="Troué" folder="troue"/>
+		<compo type="detail" value="Brulé" folder="brule"/>
+	</skin>
+	<skin value="Raizen" folder="raizen" sexe="H">
+		<compo type="couleur" value="concour" folder="concour"/>
+		<compo type="detail" value="skin" folder="raizen"/>
+	</skin>
+	<skin value="Halloween" folder="halloween" sexe="H">
+		<compo type="couleur" value="-" folder="halloween"/>
+		<compo type="detail" value="-" folder="clean"/>
+	</skin>
+	<skin value="Halloween" folder="halloween" sexe="F">
+		<compo type="couleur" value="-" folder="halloween"/>
+		<compo type="detail" value="-" folder="clean"/>
+	</skin>
+	<skin value="Kuma" folder="kuma" sexe="F">
+		<compo type="couleur" value="concour" folder="concour"/>
+		<compo type="detail" value="-" folder="clean"/>
+		<compo type="detail" value="Sang" folder="blood"/>
+		<compo type="detail" value="Griffe" folder="griffure"/>
+	</skin>
+	<skin value="Idirinho" folder="idirinho" sexe="F">
+		<compo type="couleur" value="concour" folder="concour"/>
+		<compo type="detail" value="-" folder="clean"/>
+		<compo type="detail" value="Sang" folder="blood"/>
+		<compo type="detail" value="Griffe" folder="griffure"/>
+	</skin>
+	<skin value="Valentinose" folder="valentinose" sexe="H">
+		<compo type="couleur" value="concour" folder="concour"/>
+		<compo type="detail" value="skin" folder="valentinose"/>
+	</skin>
+	<skin value="Idirinho" folder="idirinho" sexe="H">
+		<compo type="couleur" value="concour" folder="concour"/>
+		<compo type="detail" value="Doton" folder="doton"/>
+		<compo type="detail" value="Futon" folder="futon"/>
+		<compo type="detail" value="Katon" folder="katon"/>
+		<compo type="detail" value="Raiton" folder="raiton"/>
+		<compo type="detail" value="Suiton" folder="suiton"/>
+	</skin>
+</skins>
