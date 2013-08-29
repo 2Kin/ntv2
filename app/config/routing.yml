@@ -72,3 +72,7 @@ _sonata_admin:
     resource: .
     type: sonata_admin
     prefix: /daFuckingAdmin
+
+_imagine:
+    resource: .
+    type:     imagine

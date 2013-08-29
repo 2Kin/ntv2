@@ -20,11 +20,6 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
 
-			new FOS\UserBundle\FOSUserBundle(),
-			new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
-            new NinjaTooken\ForumBundle\NinjaTookenForumBundle(),
-            new NinjaTooken\UserBundle\NinjaTookenUserBundle(),
-
 			new Sonata\BlockBundle\SonataBlockBundle(),
 			new Sonata\jQueryBundle\SonatajQueryBundle(),
 			new Sonata\AdminBundle\SonataAdminBundle(),
@@ -33,12 +28,18 @@ class AppKernel extends Kernel
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
+            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
 
+			new Exercise\HTMLPurifierBundle\ExerciseHTMLPurifierBundle(),
+            new NinjaTooken\ForumBundle\NinjaTookenForumBundle(),
+            new NinjaTooken\UserBundle\NinjaTookenUserBundle(),
             new NinjaTooken\GameBundle\NinjaTookenGameBundle(),
             new NinjaTooken\ClanBundle\NinjaTookenClanBundle(),
             new NinjaTooken\CommonBundle\NinjaTookenCommonBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new NinjaTooken\ChatBundle\NinjaTookenChatBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+			new FOS\UserBundle\FOSUserBundle(),
             new FOS\FacebookBundle\FOSFacebookBundle(),
         );
 

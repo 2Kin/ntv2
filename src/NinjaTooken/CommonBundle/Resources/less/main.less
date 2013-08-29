@@ -4,6 +4,7 @@
 @import "bootstrap-loader.less";
 @import "vendor/jquery.bracket.less";
 @import "vendor/slickmap.less";
+@import "vendor/jquery.motionCaptcha.0.2.less";
 
 /*!
  *  Font Awesome 3.1.0
@@ -133,7 +134,10 @@ input[type="radio"]{
 		background-position:-@inputSize -@inputSize;
 	}
 }
-
+// file
+input[type="file"]{
+	display:none;position:absolute;.opacity(0);
+}
 // textarea
 textarea{
 	height:auto;
@@ -502,6 +506,9 @@ body>.content:before{
 		background-color:@linkColor;.border-radius(@baseBorderRadius);.box-shadow(1px 1px 1px fadeout(@black, 60%));
 		&:hover{
 			background-color:@black
+		}
+		&[disabled]{
+			pointer-events:none;.opacity(50);
 		}
 		&.mini{
 			padding:2px 15px 6px;
@@ -990,4 +997,9 @@ body>.content:before{
 			}
 		}
 	}
+}
+
+// message de retour
+.flash-notice{
+	background-color:rgba(255,255,255,0.9);.border-radius(@baseBorderRadius);.box-shadow(1px 1px 1px @black);text-shadow:1px 1px 2px @gray;display:block;padding:10px;color:@black;margin:30px 0;
 }

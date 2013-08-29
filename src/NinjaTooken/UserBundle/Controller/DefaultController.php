@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use NinjaTooken\UserBundle\Entity\User;
 use NinjaTooken\UserBundle\Entity\Friend;
+use NinjaTooken\UserBundle\Entity\Capture;
 use NinjaTooken\UserBundle\Entity\Message;
 use FOS\UserBundle\Mailer\MailerInterface;
 
@@ -249,6 +250,29 @@ class DefaultController extends Controller
         $security = $this->get('security.context');
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            // post request
+            if ($request->getMethod() === 'POST') {
+                $user = $security->getToken()->getUser();
+                $em = $this->getDoctrine()->getManager();
+
+                // permet de générer le fichier
+                $file = $request->files->get('avatar');
+                if($file !== null){
+                    $extension = strtolower($file->guessExtension());
+                    if(in_array($extension, array('jpeg','jpg','png','gif'))){
+                        $user->file = $file;
+                        $cachedImage = dirname(__FILE__).'/../../../../www/cache/avatar/'.$user->getWebAvatar();
+                        if(file_exists($cachedImage)){
+                            unlink($cachedImage);
+                        }
+                        $user->setAvatar('');
+                    }
+                }
+
+                $em->persist($user);
+                $em->flush();
+            }
+
             return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig', array(
                 'formPassword' => $this->container->get('fos_user.change_password.form')->createView()
             ));
@@ -299,9 +323,6 @@ class DefaultController extends Controller
             }
 /*
 
-            $confirmation = $user->getConfirmationToken();
-            if(isset($confirmation) && !empty($confirmation)){
-
                 $newPassword = "";
                 $user->setPlainPassword($newPassword);
                 $this->container->get('fos_user.user_manager')->updateUser($user);
@@ -310,7 +331,7 @@ class DefaultController extends Controller
                     'notice',
                     'Ton mot de passe a correctement été modifié.'
                 );
-            }*/
+            */
 
             return $this->redirect($this->generateUrl('ninja_tooken_user_parametres'));
         }
@@ -462,16 +483,18 @@ class DefaultController extends Controller
             $user = $security->getToken()->getUser();
             if($capture->getUser() == $user){
                 // supprime d'imgur
-                $ch		= curl_init();
+                $imgur = $this->container->getParameter('imgur');
+                $ch = curl_init();
                 curl_setopt($ch, CURLOPT_HEADER, 0);
                 curl_setopt($ch, CURLOPT_VERBOSE, 0);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible;)");
-                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Client-ID 4dfd53cd4de2cb1') );
                 curl_setopt($ch, CURLOPT_URL, "https://api.imgur.com/3/image/".$capture->getDeleteHash());
-                $retour	= curl_exec($ch);
-				if(!curl_errno($ch)){
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Client-ID '.$imgur) );
+                if($retour = curl_exec($ch)){
                     $em = $this->getDoctrine()->getManager();
 
                     $em->remove($capture);

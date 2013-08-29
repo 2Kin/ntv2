@@ -5,9 +5,11 @@ use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 use Sonata\UserBundle\Model\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="nt_user")
  */
 class User extends BaseUser
@@ -70,6 +72,10 @@ class User extends BaseUser
      */
     private $avatar;
 
+    // propriété utilisé temporairement pour la suppression
+    private $tempAvatar;
+    public $file;
+
     /**
      * @var string
      *
@@ -83,6 +89,13 @@ class User extends BaseUser
      * @ORM\Column(name="receive_avertissement", type="boolean")
      */
     private $receiveAvertissement;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="use_gravatar", type="boolean")
+     */
+    private $useGravatar;
 
     /**
      * @var string
@@ -103,6 +116,86 @@ class User extends BaseUser
         $this->setGender(UserInterface::GENDER_MAN);
         $this->setReceiveAvertissement(false);
         $this->setReceiveNewsletter(false);
+        $this->setUseGravatar(false);
+    }
+
+    public function getAbsoluteAvatar()
+    {
+        return null === $this->avatar || "" === $this->avatar ? null : $this->getUploadRootDir().'/'.$this->avatar;
+    }
+
+    public function getWebAvatar()
+    {
+        return null === $this->avatar || "" === $this->avatar  ? null : $this->getUploadDir().'/'.$this->avatar;
+    }
+
+    protected function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../www/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        return 'avatar';
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        if (null !== $this->file) {
+            $this->setAvatar(uniqid(mt_rand(), true).".".$this->file->guessExtension());
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        if (null !== $this->file) {
+            $file = $this->id.'.'.$this->file->guessExtension();
+
+            $fileAbsolute = $this->getUploadRootDir().$file;
+            if(file_exists($fileAbsolute))
+                unlink($fileAbsolute);
+
+            $this->setAvatar($file);
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+
+        $this->file->move($this->getUploadRootDir(), $this->getAvatar());
+
+        unset($this->file);
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function storeFilenameForRemove()
+    {
+        $this->tempAvatar = $this->getAbsoluteAvatar();
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if($this->tempAvatar && file_exists($this->tempAvatar)) {
+            unlink($this->tempAvatar);
+        }
     }
 
     /**
@@ -251,6 +344,29 @@ class User extends BaseUser
     public function getReceiveAvertissement()
     {
         return $this->receiveAvertissement;
+    }
+
+    /**
+     * Set use_gravatar
+     *
+     * @param boolean $useGravatar
+     * @return User
+     */
+    public function setUseGravatar($useGravatar)
+    {
+        $this->useGravatar = $useGravatar;
+
+        return $this;
+    }
+
+    /**
+     * Get use_gravatar
+     *
+     * @return boolean 
+     */
+    public function getUseGravatar()
+    {
+        return $this->useGravatar;
     }
 
     /**

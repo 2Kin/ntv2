@@ -163,6 +163,23 @@ fos_facebook:
     cookie: true
     permissions: [email]
 
+#gravatar
+ornicar_gravatar:
+    rating: g
+    size: 100
+    default: mm
+
+# resize avatar
+avalanche_imagine:
+    source_root:  %kernel.root_dir%/../www
+    web_root:     %kernel.root_dir%/../www
+    cache_prefix: cache
+    driver:       gd
+    filters:
+        avatar:
+            type:    thumbnail
+            options: { size: [100, 100], mode: outbound }
+
 # admin
 sonata_user:
     security_acl: true

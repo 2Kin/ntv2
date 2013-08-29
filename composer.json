@@ -49,6 +49,8 @@
         "friendsofsymfony/user-bundle": "*",
         "exercise/htmlpurifier-bundle": "dev-master",
         "leafo/lessphp": "@dev",
+	"ornicar/gravatar-bundle": "dev-master",
+	"avalanche123/imagine-bundle": "v2.1",
 
 	"sonata-project/admin-bundle": "*",
         "sonata-project/doctrine-orm-admin-bundle": "*",

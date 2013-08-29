@@ -337,6 +337,22 @@ $(document).ready(function(){
 		});
 	}
 
+	// upload de fichier
+	var _upload = $('input[type="file"]');
+	if(_upload.length>0){
+		var _btn = _upload.next();
+		_btn.on('click', function(){
+			_upload.trigger('click');
+			return false;
+		});
+		_upload.on('change', function(e){
+			var file = _upload.val().split("\\");
+		    _btn.html(file[file.length-1]);
+			_upload.parents('form').trigger('submit');
+			e.preventDefault();
+		});
+	}
+
 	// bracket pour tournoi
 	var _bracketD = $("#bracket");
 	/*var _bracket = {
@@ -379,4 +395,10 @@ $(document).ready(function(){
 			embed_id: 'timeline'
 		});
 	}
+
+	// captcha sur formulaire de contact
+	$('#contact').motionCaptcha({
+		errorMsg: 'Ré-essayes...',
+		successMsg: 'Captcha réussi'
+	});
 });

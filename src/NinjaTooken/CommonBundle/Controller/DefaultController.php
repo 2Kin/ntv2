@@ -3,6 +3,7 @@
 namespace NinjaTooken\CommonBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 use NinjaTooken\GameBundle\NinjaTookenGameBundle;
 
@@ -65,8 +66,37 @@ class DefaultController extends Controller
         return $this->render('NinjaTookenCommonBundle:Default:mentionsLegales.html.twig');
     }
 
-    public function contactAction()
+    public function contactAction(Request $request)
     {
+        if ('POST' === $request->getMethod()) {
+            $csrfProvider = $this->get('form.csrf_provider');
+            if(!$csrfProvider->isCsrfTokenValid('contact'.$request->cookies->get('PHPSESSID'), $request->request->get('_token'))) {
+                throw new RuntimeException('CSRF attack detected.');
+            }
+            $texte = trim($request->get('content'));
+            $sujet = trim($request->get('sujet'));
+            $email = trim($request->get('email'));
+            if(!empty($texte)){
+                $emailContact = $this->container->getParameter('mail_admin');
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject('[NT] Contact : '.$sujet)
+                    ->setFrom($email)
+                    ->setTo($emailContact)
+                    ->setBody($this->renderView('NinjaTookenCommonBundle:Default:contactEmail.html.twig', array(
+                        'texte' => $texte,
+                        'email' => $email
+                    )));
+
+                $this->get('mailer')->send($message);
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Ton message a bien été envoyé, tu recevras une réponse au plus vite ;)'
+                );
+            }
+        }
+
         return $this->render('NinjaTookenCommonBundle:Default:contact.html.twig');
     }
 }

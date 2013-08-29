@@ -12,4 +12,5 @@
 /www/css/*
 /www/assetic/*
 /www/js/*
+/www/cache/*
 /app/config/parameters.yml

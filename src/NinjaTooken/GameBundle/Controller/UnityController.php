@@ -456,7 +456,8 @@ class UnityController extends Controller
                     case"i":
                         $fileupload = $request->get('fileupload');
 						if($this->isCryptingOk($a)){
-							$ch				= curl_init();
+                            $imgur = $this->container->getParameter('imgur');
+							$ch = curl_init();
 							curl_setopt($ch, CURLOPT_HEADER, 0);
 							curl_setopt($ch, CURLOPT_VERBOSE, 0);
 							curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
@@ -465,7 +466,7 @@ class UnityController extends Controller
 							curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible;)");
 							curl_setopt($ch, CURLOPT_URL, "https://api.imgur.com/3/upload.xml");
 							curl_setopt($ch, CURLOPT_POST, true);
-							curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Client-ID 4dfd53cd4de2cb1') );
+							curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Client-ID '.$imgur) );
 							curl_setopt($ch, CURLOPT_POSTFIELDS, array(
 								"image"			=> $fileupload,
 								"type"			=> "base64",
