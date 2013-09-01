@@ -57,11 +57,9 @@ class Forum
     private $dateAjout;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=50)
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan", inversedBy="forums")
      */
-    private $type;
+    private $clan;
 
     /**
      * Constructor
@@ -151,29 +149,6 @@ class Forum
     }
 
     /**
-     * Set type
-     *
-     * @param string $type
-     * @return Forum
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string 
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * Set slug
      *
      * @param string $slug
@@ -217,5 +192,28 @@ class Forum
     public function getOldId()
     {
         return $this->old_id;
+    }
+
+    /**
+     * Set clan
+     *
+     * @param \NinjaTooken\ClanBundle\Entity\Clan $clan
+     * @return Forum
+     */
+    public function setClan(\NinjaTooken\ClanBundle\Entity\Clan $clan = null)
+    {
+        $this->clan = $clan;
+
+        return $this;
+    }
+
+    /**
+     * Get clan
+     *
+     * @return \NinjaTooken\ClanBundle\Entity\Clan 
+     */
+    public function getClan()
+    {
+        return $this->clan;
     }
 }

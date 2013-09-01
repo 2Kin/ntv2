@@ -35,6 +35,11 @@ class Clan
     private $membres;
 
     /**
+     * @ORM\OneToMany(targetEntity="NinjaTooken\ForumBundle\Entity\Forum", mappedBy="clan", cascade={"persist", "remove"})
+     */
+    private $forums;
+
+    /**
      * @Gedmo\Slug(fields={"nom"})
      * @ORM\Column(length=128, unique=true)
      */
@@ -102,6 +107,7 @@ class Clan
     public function __construct()
     {
         $this->membres = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->forums = new \Doctrine\Common\Collections\ArrayCollection();
 
         $this->setDateAjout(new \DateTime());
     }
@@ -377,5 +383,38 @@ class Clan
     public function getIsRecruting()
     {
         return $this->isRecruting;
+    }
+
+    /**
+     * Add forums
+     *
+     * @param \NinjaTooken\ForumBundle\Entity\Forum $forums
+     * @return Clan
+     */
+    public function addForum(\NinjaTooken\ForumBundle\Entity\Forum $forums)
+    {
+        $this->forums[] = $forums;
+
+        return $this;
+    }
+
+    /**
+     * Remove forums
+     *
+     * @param \NinjaTooken\ForumBundle\Entity\Forum $forums
+     */
+    public function removeForum(\NinjaTooken\ForumBundle\Entity\Forum $forums)
+    {
+        $this->forums->removeElement($forums);
+    }
+
+    /**
+     * Get forums
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getForums()
+    {
+        return $this->forums;
     }
 }

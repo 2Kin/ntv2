@@ -29,18 +29,16 @@
 					<section class="span8">
 						<div class="main clearfix">
 							<h3>Fondé le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}</h3>
-							<img src="{{ asset('bundles/ninjatookenclan/kamon/' ~ clan.kamon) }}" class="pull-right">
-							<img src="{{ asset('bundles/ninjatookenclan/kamon/' ~ clan.kamon) }}" class="pull-left">
-							<p style="text-align:center">
+							<img src="{{ asset('bundles/ninjatookenclan/kamon/' ~ clan.kamon) }}" class="pull-left clan">
 							{{ clan.description|raw|purify('full') }}
 							{%if clan.url is not empty %}Page perso : <a href="{{ clan.url }}" target="_blank">{{ clan.url }}</a>{% endif %}
-							</p>
 						</div>
+						<br class="clear">
 
 						<div class="grade clearfix">
 							<h3>Organisation du clan</h3>
 							{% if membres is not empty %}
-							<ul class="col4">
+							<ul class="col{{ membres.recruts|length }}">
 								<li class="first"><a href="{{ path('ninja_tooken_user_fiche', {user_nom:membres.recruteur.membre.slug}) }}"><img src="{{ avatar.getUrl(membres.recruteur.membre) }}" class="pull-left"> {{ membres.recruteur.membre.username }}<br>{{ membres.recruteur.droit }}</a></li>
 								{% if membres.recruts is not empty %}
 								{% for recruts in membres.recruts %}
@@ -68,7 +66,12 @@
 
 						{% if forum is not empty %}
 						<div class="forum">
-							<h4><a href="{{ path('ninja_tooken_topic_ajouter', {topic_nom:forum.slug}) }}" class="button pull-right">Nouveau topic</a><a href="{{ path('ninja_tooken_topic', {topic_nom:forum.slug}) }}">{{ forum.nom }}</a></h4>
+							<h4>
+								{% if is_granted("ROLE_USER") and app.user.clan and app.user.clan.clan == clan and app.user.clan.canEditClan == true %}
+									<a href="{{ path('ninja_tooken_topic_ajouter', {topic_nom:forum.slug}) }}" class="button pull-right">Nouveau topic</a>
+								{% endif %}
+								<a href="{{ path('ninja_tooken_topic', {topic_nom:forum.slug}) }}">{{ forum.nom }}</a>
+							</h4>
 							{% if forum.threads is not empty %}
 							{% for thread in forum.threads %}
 							{% include 'NinjaTookenForumBundle:Default:topicListe.html.twig' %}

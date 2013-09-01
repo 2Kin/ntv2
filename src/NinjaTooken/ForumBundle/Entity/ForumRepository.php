@@ -3,18 +3,19 @@ namespace NinjaTooken\ForumBundle\Entity;
  
 use Doctrine\ORM\EntityRepository;
 use NinjaTooken\ForumBundle\Entity\Forum;
+use NinjaTooken\ClanBundle\Entity\Clan;
  
 class ForumRepository extends EntityRepository
 {
-    public function getForum($slug="", $type="", $nombreParPage=20, $page=1)
+    public function getForum($slug="", Clan $clan = null, $nombreParPage=20, $page=1)
     {
         $page = max(1, $page);
 
         $query = $this->createQueryBuilder('f');
 
-        if(!empty($type)){
-            $query->where('f.type = :type')
-                ->setParameter('type', $type);
+        if($clan){
+            $query->where('f.clan = :clan')
+                ->setParameter('clan', $clan);
         }
         if(!empty($slug)){
             $query->andWhere('f.slug = :slug')

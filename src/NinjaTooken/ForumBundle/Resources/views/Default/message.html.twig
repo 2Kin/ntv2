@@ -23,7 +23,7 @@
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_message', {topic_nom:forum.slug, message_nom:thread.slug}) }}" itemprop="url">
-									<span itemprop="title">{% if thread.isCommentable =='0' %}<i class="icon-lock"></i> {% endif %}{% if thread.isPostit =='1' %}<i class="icon-pushpin"></i> {% endif %}{% if date(thread.lastCommentAt) > date('-1days') %}<i class="icon-eye-open"></i> {% endif %}{{ thread.nom }}</span>
+									<span itemprop="title">{% if thread.isCommentable == false %}<i class="icon-lock"></i> {% endif %}{% if thread.isPostit =='1' %}<i class="icon-pushpin"></i> {% endif %}{% if date(thread.lastCommentAt) > date('-1days') %}<i class="icon-eye-open"></i> {% endif %}{{ thread.nom }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -39,7 +39,20 @@
 							<div class="content clearfix" itemprop="articleBody">
 								{{ thread.body|raw|purify('full') }}
 							</div>
-							<p class="clearfix"><a href="#" class="button mini pull-right answer">Répondre</a></p>
+							<p class="clearfix">
+							{% if thread.isCommentable == true %}
+								{% if is_granted("ROLE_USER") %}
+							<a href="#" class="button mini pull-right answer">Répondre</a>
+								{% endif %}
+								{% if is_granted("ROLE_ADMIN") or comment.user == app.user or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
+									<a href="#" class="button mini pull-right">Supprimer</a>
+									<a href="#" class="button mini pull-right">Éditer</a>
+								{% endif %}
+							{% endif %}							
+							{% if is_granted("ROLE_ADMIN") %}
+								<a href="#" class="button mini pull-right">Verrouiller</a>
+								<a href="#" class="button mini pull-right">Post-it</a>
+							{% endif %}
 							<form action="#" method="post" accept-charset="UTF-8" id="answer" class="full inset">
 								<div>
 									<div class="textarea" name="content">&nbsp;</div>
@@ -48,6 +61,7 @@
 									<input type="submit" value="Répondre" class="button">
 								</div>
 							</form>
+							</p>
 							{% if nombreComment > 0 %}
 							<hr>
 							<section>
@@ -70,7 +84,17 @@
 									<div class="content clearfix" itemprop="commentText">
 										<p>{{ comment.body|raw|purify('full') }}</p>
 									</div>
-									<p class="clearfix"><a href="#" class="button mini pull-right answer">Répondre</a></p>
+									{% if thread.isCommentable == true %}
+										<p class="clearfix">
+										{% if is_granted("ROLE_USER") %}
+											<a href="#" class="button mini pull-right answer">Répondre</a>
+										{% endif %}
+										{% if is_granted("ROLE_ADMIN") or comment.user == app.user or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
+											<a href="#" class="button mini pull-right">Supprimer</a>
+											<a href="#" class="button mini pull-right">Éditer</a>
+										{% endif %}
+										</p>
+									{% endif %}
 								</article>
 								{% endfor %}
 								{% include 'pagination.html.twig' with {

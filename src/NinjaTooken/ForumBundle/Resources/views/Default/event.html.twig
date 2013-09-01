@@ -21,7 +21,7 @@
 {% block body %}
 				<div id="timeline"></div>
 				<section class="forum">
-					<h4><a href="#" class="button pull-right">Nouvel event</a>Events</h4>
+					{% if is_granted("ROLE_ADMIN") %}<h4><a href="#" class="button pull-right">Nouvel event</a>Events</h4>{% endif %}
 					{% if threads is not empty %}
 					{% set firstThread = threads|first %}
 					{% if firstThread.dateEventStart|date("Y") == "-0001" %}

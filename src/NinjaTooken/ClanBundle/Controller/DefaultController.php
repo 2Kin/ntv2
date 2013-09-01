@@ -60,7 +60,8 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         // le forum du clan
-        $forum = $em->getRepository('NinjaTookenForumBundle:Forum')->getForum($clan->getSlug(), 'clan');
+        $forum = $em->getRepository('NinjaTookenForumBundle:Forum')->getForum($clan->getSlug(), $clan);
+        $threads = array();
         if($forum){
             $forum = current($forum);
             $threads = $em->getRepository('NinjaTookenForumBundle:Thread')->getThreads($forum, $num, $page);

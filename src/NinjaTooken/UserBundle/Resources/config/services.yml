@@ -27,3 +27,10 @@ services:
         arguments: ['@security.context', '@doctrine']
         tags:
             - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+
+    security.access.blacklist_voter:
+        class:      NinjaTooken\UserBundle\Security\Authorization\Voter\ClientIpVoter
+        arguments:  ["@service_container", %banned.ip%]
+        public:     false
+        tags:
+            - { name: security.voter }

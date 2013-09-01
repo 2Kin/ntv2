@@ -23,6 +23,15 @@
 
 						{{ user.biography|raw|purify('full') }}
 
+						{% if user.oldUsernames is not empty %}
+						<h3>Autre pseudo utilisé</h3>
+						<p>
+							{% for oldUsername in user.oldUsernames %}
+								<strong>{{ oldUsername }}</strong>{% if not loop.last %}, {% endif %}
+							{% endfor%}
+						</p>
+						{% endif %}
+
 						{% if friends is not empty %}
 						<h3>Amis</h3>
 						<p><span class="legend online"> En ligne</span>

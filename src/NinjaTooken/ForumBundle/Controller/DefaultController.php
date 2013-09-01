@@ -76,7 +76,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $allForums = $em->getRepository('NinjaTookenForumBundle:Forum')->getForum('', 'forum');
+        $allForums = $em->getRepository('NinjaTookenForumBundle:Forum')->getForum('');
         $forums = array();
         foreach($allForums as $forum){
             $threads = $em->getRepository('NinjaTookenForumBundle:Thread')->getThreads($forum, 5, 1);

@@ -15,12 +15,17 @@ class ForumAdmin extends Admin
             ->add('nom', 'text', array(
                 'label' => 'Nom'
             ))
+            ->add('clan', 'genemu_jqueryselect2_entity', array(
+                'label' => 'Clan',
+                'class' => 'NinjaTookenClanBundle:Clan',
+                'property' => 'nom',
+                'configs' => array(
+                    'placeholder' => 'Sélectionnez un clan'
+                )
+            ))
             ->add('old_id', 'integer', array(
                 'label' => 'Ancien identifiant',
                 'required' => false
-            ))
-            ->add('type', 'text', array(
-                'label' => 'Type'
             ))
             ->add('ordre', 'integer', array(
                 'label' => 'Position'
@@ -44,7 +49,7 @@ class ForumAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('nom')
-            ->add('type')
+            ->addIdentifier('clan.nom')
             ->add('ordre')
             ->add('dateAjout')
         ;
