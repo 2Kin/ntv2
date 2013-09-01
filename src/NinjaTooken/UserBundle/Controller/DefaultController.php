@@ -11,6 +11,7 @@ use NinjaTooken\UserBundle\Entity\Friend;
 use NinjaTooken\UserBundle\Entity\Capture;
 use NinjaTooken\UserBundle\Entity\Message;
 use FOS\UserBundle\Mailer\MailerInterface;
+use FOS\UserBundle\Util\Canonicalizer;
 
 class DefaultController extends Controller
 {
@@ -245,7 +246,150 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
-    public function parametresAction(Request $request)
+    public function parametresAction()
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig', array(
+                'formPassword' => $this->container->get('fos_user.change_password.form')->createView()
+            ));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    public function parametresUpdateAction(Request $request)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            // post request
+            if ($request->getMethod() === 'POST') {
+                $user = $security->getToken()->getUser();
+                $em = $this->getDoctrine()->getManager();
+                $userRepository = $em->getRepository('NinjaTookenUserBundle:User');
+
+                $update = false;
+                // paramètres de compte
+                if((int)$request->get('editAccount') == 1){
+                    $userManager = $this->container->get('fos_user.user_manager');
+                    $canonicalizer = new Canonicalizer();
+
+                    // modification de pseudo
+                    $oldPseudo = $user->getOldUsernames();
+                    $pseudo = trim((string)$request->get('pseudo'));
+                    if(count($oldPseudo)<4 || in_array($pseudo, $oldPseudo)){
+                        $oPseudo = $user->getUsername();
+                        if($oPseudo != $pseudo && !empty($pseudo)){
+                            $pseudoCanonical = $canonicalizer->canonicalize($pseudo);
+                            $userPseudo = $userManager->findUserByUsername($pseudo);
+                            // le pseudo n'est pas actuellement utilisé
+                            if(!$userPseudo){
+                                $userPseudo = $userRepository->createQueryBuilder('u')
+                                    ->where('u.enabled = :enabled')
+                                    ->andWhere('u.oldUsernamesCanonical LIKE :pseudo')
+                                    ->andWhere('u.id <> :id')
+                                    ->setParameter('enabled', true)
+                                    ->setParameter('pseudo', ','.$pseudoCanonical.',')
+                                    ->setParameter('id', $user->getId())
+                                    ->getQuery()
+                                    ->getOneOrNullResult();
+                                // le pseudo n'est pas utilisé par un autre joueur
+                                if(!$userPseudo){
+                                    $user->setUsername($pseudo);
+                                    $user->setUsernameCanonical($pseudoCanonical);
+                                    $user->addOldUsername($oPseudo);
+
+                                    // met à jour les anciens pseudos
+                                    $oldUsernamesCanonical = ',';
+                                    $oldUsernames = $user->getOldUsernames();
+                                    foreach($oldUsernames as $oldUsername){
+                                        $oldUsernamesCanonical .= $canonicalizer->canonicalize($oldUsername).',';
+                                    }
+                                    $user->setOldUsernamesCanonical($oldUsernamesCanonical);
+                                }else{
+                                    $this->get('session')->getFlashBag()->add(
+                                        'notice',
+                                        'Le pseudo demandé est déjà utilisé.'
+                                    );
+                                }
+                            }else{
+                                $this->get('session')->getFlashBag()->add(
+                                    'notice',
+                                    'Le pseudo demandé est déjà utilisé.'
+                                );
+                            }
+                        }
+                    }else{
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            'Maximum de changement de pseudo atteint.'
+                        );
+                    }
+
+                    // modification d'email
+                    $email = (string)$request->get('email');
+                    if(preg_match('#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#', $email)){
+                        $oEmail = $user->getEmail();
+                        if($oEmail != $email){
+                            if(!$userManager->findUserByEmail($email)){
+                                if (null === $user->getConfirmationToken()) {
+                                    $user->setConfirmationToken($this->get('fos_user.util.token_generator')->generateToken());
+                                }
+                                $user->setEmail($email);
+                                $user->setEmailCanonical($canonicalizer->canonicalize($email));
+                            }else{
+                                $this->get('session')->getFlashBag()->add(
+                                    'notice',
+                                    'Le mail demandé est déjà utilisé.'
+                                );
+                            }
+                        }
+                    }
+
+                    $user->setGender((string)$request->get('gender')=='f'?'f':'m');
+                    $user->setLocale((string)$request->get('locale')=='fr'?'fr':'en');
+
+                    $user->setDateOfBirth(new \DateTime((int)$request->get('annee')."-".(int)$request->get('mois')."-".(int)$request->get('jour')));
+
+                    $user->setDescription((string)$request->get('description'));
+
+                    $user->setReceiveNewsletter((int)$request->get('news') == 1);
+                    $user->setReceiveAvertissement((int)$request->get('mail') == 1);
+
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        'Tes paramètres ont bien été mis à jour.'
+                    );
+
+                    $update = true;
+                // hébergement de l'avatar
+                }elseif((int)$request->get('editAvatar') == 1){
+                    $user->setUseGravatar(
+                        $request->get('avatar') == 'gravatar'
+                    );
+
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        'Le mode d\'hébergement de ton avatar a été modifié.'
+                    );
+
+                    $update = true;
+                }
+
+                // permet d'enregistrer les modifications
+                if($update){
+                    $em->persist($user);
+                    $em->flush();
+                }
+
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_user_parametres'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    public function parametresUpdateAvatarAction(Request $request)
     {
         $security = $this->get('security.context');
 
@@ -271,11 +415,14 @@ class DefaultController extends Controller
 
                 $em->persist($user);
                 $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Ton avatar a bien été mis à jour.'
+                );
             }
 
-            return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig', array(
-                'formPassword' => $this->container->get('fos_user.change_password.form')->createView()
-            ));
+            return $this->redirect($this->generateUrl('ninja_tooken_user_parametres'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }

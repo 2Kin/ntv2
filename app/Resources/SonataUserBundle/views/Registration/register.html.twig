@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block body %}
-				<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full">
+				<form action="#" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full" id="register">
 					<h3>Créé ton compte pour sauvegarder ton expérience, intégrer un clan, ou participer aux tournois NinjaTooken.</h3>
 					<div class="row-fluid">
 						<div class="span3 offset1">
@@ -78,10 +78,20 @@
 							<input type="checkbox" name="fos_user_registration_form[receive_avertissement]" value="1" id="input_mail"><label for="input_mail"> Je souhaite être averti par mail de l'arrivée de nouveaux messages</label>
 						</div>
 					</div>
+					<div class="row-fluid">
+						<div class="span3 offset1">
+							<label class="libelle required">Captcha</label>
+						</div>
+						<div class="span8" id="mc">
+							<p>Pour pouvoir t'inscrire, reproduis la forme ci-dessous :</p>
+							<canvas id="mc-canvas">Ton navigateur ne supporte pas les &lt;canvas&gt;.</canvas>
+							<input type="hidden" id="mc-action" value="{{ path('fos_user_registration_register') }}">
+						</div>
+					</div>
 					{{ form_widget(form._token) }}
 					<div class="row-fluid">
 						<div class="span8 offset4">
-							<input type="submit" value="Jouer" class="button">
+							<input type="submit" value="Jouer" class="button" disabled>
 						</div>
 					</div>
 				</form>

@@ -34,6 +34,14 @@ ninja_tooken_user_parametres:
     pattern:  /compte/parametres
     defaults: { _controller: NinjaTookenUserBundle:Default:parametres }
 
+ninja_tooken_user_parametres_update:
+    pattern:  /compte/parametres/update
+    defaults: { _controller: NinjaTookenUserBundle:Default:parametresUpdate }
+
+ninja_tooken_user_parametres_update_avatar:
+    pattern:  /compte/parametres/update-avatar
+    defaults: { _controller: NinjaTookenUserBundle:Default:parametresUpdateAvatar }
+
 ninja_tooken_user_parametres_confirm_mail:
     pattern:  /compte/parametres/confirm-mail
     defaults: { _controller: NinjaTookenUserBundle:Default:parametresConfirmMail }

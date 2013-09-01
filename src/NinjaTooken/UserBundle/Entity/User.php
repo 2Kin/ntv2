@@ -77,32 +77,39 @@ class User extends BaseUser
     public $file;
 
     /**
-     * @var string
+     * @var boolean
      *
      * @ORM\Column(name="receive_newsletter", type="boolean")
      */
     private $receiveNewsletter;
 
     /**
-     * @var string
+     * @var boolean
      *
      * @ORM\Column(name="receive_avertissement", type="boolean")
      */
     private $receiveAvertissement;
 
     /**
-     * @var string
+     * @var boolean
      *
      * @ORM\Column(name="use_gravatar", type="boolean")
      */
     private $useGravatar;
 
     /**
+     * @var array
+     *
+     * @ORM\Column(name="old_usernames", type="array")
+     */
+    private $oldUsernames;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="old_username", type="text", nullable=true)
+     * @ORM\Column(name="old_usernames_canonical", type="string")
      */
-    private $oldUsername;
+    private $oldUsernamesCanonical;
 
     /**
      * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\Ip", mappedBy="user", cascade={"persist", "remove"})
@@ -117,6 +124,8 @@ class User extends BaseUser
         $this->setReceiveAvertissement(false);
         $this->setReceiveNewsletter(false);
         $this->setUseGravatar(false);
+        $this->oldUsernames = array();
+        $this->oldUsernamesCanonical = "";
     }
 
     public function getAbsoluteAvatar()
@@ -278,26 +287,78 @@ class User extends BaseUser
     }
 
     /**
+     * Returns the old user names
+     *
+     * @return array The usernames
+     */
+    public function getOldUsernames()
+    {
+        return array_unique($this->oldUsernames);
+    }
+
+    /**
      * Set oldUsername
      *
-     * @param string $oldUsername
+     * @param array $oldUsername
      * @return User
      */
-    public function setOldUsername($oldUsername)
+    public function setOldUsernames(array $oldUsernames)
     {
-        $this->oldUsername = $oldUsername;
+        $this->oldUsernames = array();
+
+        foreach ($oldUsernames as $oldUsername) {
+            $this->addOldUsername($oldUsername);
+        }
 
         return $this;
     }
 
     /**
-     * Get oldUsername
+     * add oldusername
+     */
+    public function addOldUsername($username)
+    {
+        if (!in_array($username, $this->oldUsernames, true)) {
+            $this->oldUsernames[] = $username;
+        }
+
+        return $this;
+    }
+
+    /**
+     * remove oldusername
+     */
+    public function removeOldUsername($username)
+    {
+        if (false !== $key = array_search(strtoupper($username), $this->oldUsernames, true)) {
+            unset($this->oldUsernames[$key]);
+            $this->oldUsernames = array_values($this->oldUsernames);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set oldUsernamesCanonical
+     *
+     * @param string $oldUsernamesCanonical
+     * @return User
+     */
+    public function setOldUsernamesCanonical($oldUsernamesCanonical)
+    {
+        $this->oldUsernamesCanonical = $oldUsernamesCanonical;
+
+        return $this;
+    }
+
+    /**
+     * Get oldUsernamesCanonical
      *
      * @return string 
      */
-    public function getOldUsername()
+    public function getOldUsernamesCanonical()
     {
-        return $this->oldUsername;
+        return $this->oldUsernamesCanonical;
     }
 
     /**
