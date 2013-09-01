@@ -1,3 +1,7 @@
+ninja_tooken_tournament:
+    resource: "@NinjaTookenTournamentBundle/Resources/config/routing.yml"
+    prefix:   /
+
 root:
     pattern: /
     defaults:

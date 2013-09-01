@@ -41,6 +41,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 			new FOS\UserBundle\FOSUserBundle(),
             new FOS\FacebookBundle\FOSFacebookBundle(),
+            new NinjaTooken\TournamentBundle\NinjaTookenTournamentBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
