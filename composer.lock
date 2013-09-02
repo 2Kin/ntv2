@@ -1798,12 +1798,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ornicar/GravatarBundle.git",
-                "reference": "82c27e766f2af13ffc4db449a1e7489361562fe1"
+                "reference": "83e7f2fbcd700d21d6429ac823c12e55bee30846"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ornicar/GravatarBundle/zipball/82c27e766f2af13ffc4db449a1e7489361562fe1",
-                "reference": "82c27e766f2af13ffc4db449a1e7489361562fe1",
+                "url": "https://api.github.com/repos/ornicar/GravatarBundle/zipball/83e7f2fbcd700d21d6429ac823c12e55bee30846",
+                "reference": "83e7f2fbcd700d21d6429ac823c12e55bee30846",
                 "shasum": ""
             },
             "require": {
@@ -1842,7 +1842,7 @@
                 "templating",
                 "twig"
             ],
-            "time": "2013-03-26 06:23:17"
+            "time": "2013-09-01 18:48:11"
         },
         {
             "name": "phpoption/phpoption",

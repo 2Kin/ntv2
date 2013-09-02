@@ -24,21 +24,21 @@ class Tournament
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="DateLimiteInscription", type="datetime")
+     * @ORM\Column(name="dateLimiteInscription", type="datetime")
      */
     private $dateLimiteInscription;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="DateDebut", type="datetime")
+     * @ORM\Column(name="dateDebut", type="datetime")
      */
     private $dateDebut;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="DateFin", type="datetime")
+     * @ORM\Column(name="dateFin", type="datetime")
      */
     private $dateFin;
 

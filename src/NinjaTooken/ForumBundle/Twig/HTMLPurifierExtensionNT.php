@@ -36,6 +36,20 @@ class HTMLPurifierExtensionNT extends HTMLPurifierExtension
                 $def->addAttribute('embed', 'allowfullscreen', 'Enum#true,false');
                 $def->addAttribute('object', 'classid', 'CDATA');
                 $def->addElement(
+                    'iframe', 'Inline', 'Flow', 'Common',
+                    array(
+                        'src' => 'URI#embedded',
+                        'width' => 'Length',
+                        'height' => 'Length',
+                        'name' => 'ID',
+                        'scrolling' => 'Enum#yes,no,auto',
+                        'frameborder' => 'Enum#0,1',
+                        'longdesc' => 'URI',
+                        'marginheight' => 'Pixels',
+                        'marginwidth' => 'Pixels',
+                    )
+                );
+                $def->addElement(
                     'fieldset',
                     'Block',
                     'Flow',

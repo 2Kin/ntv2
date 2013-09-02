@@ -62,6 +62,16 @@ class Comment
     }
 
     /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
     * Set author's name
     * 
     * @param UserInterface $author 

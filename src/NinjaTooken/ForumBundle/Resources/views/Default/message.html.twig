@@ -45,15 +45,17 @@
 							<a href="#" class="button mini pull-right answer">Répondre</a>
 								{% endif %}
 								{% if is_granted("ROLE_ADMIN") or comment.user == app.user or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
-									<a href="#" class="button mini pull-right">Supprimer</a>
-									<a href="#" class="button mini pull-right">Éditer</a>
+									<a href="{{ path('ninja_tooken_message_supprimer', {topic_nom:forum.slug, message_nom:thread.slug}) }}" class="button mini pull-right">Supprimer</a>
+									<a href="{{ path('ninja_tooken_message_modifier', {topic_nom:forum.slug, message_nom:thread.slug}) }}" class="button mini pull-right">Éditer</a>
 								{% endif %}
 							{% endif %}							
 							{% if is_granted("ROLE_ADMIN") %}
-								<a href="#" class="button mini pull-right">Verrouiller</a>
-								<a href="#" class="button mini pull-right">Post-it</a>
+								<a href="{{ path('ninja_tooken_message_verrouiller', {topic_nom:forum.slug, message_nom:thread.slug}) }}" class="button mini pull-right">Verrouiller</a>
+								<a href="{{ path('ninja_tooken_message_postit', {topic_nom:forum.slug, message_nom:thread.slug}) }}" class="button mini pull-right">Post-it</a>
 							{% endif %}
-							<form action="#" method="post" accept-charset="UTF-8" id="answer" class="full inset">
+							</p>
+							<form action="{{ path('ninja_tooken_comment_ajouter', {topic_nom:forum.slug, message_nom:thread.slug}) }}" method="post" accept-charset="UTF-8" id="answer" class="full inset">
+								<hr>
 								<div>
 									<div class="textarea" name="content">&nbsp;</div>
 								</div>
@@ -61,7 +63,6 @@
 									<input type="submit" value="Répondre" class="button">
 								</div>
 							</form>
-							</p>
 							{% if nombreComment > 0 %}
 							<hr>
 							<section>
@@ -90,8 +91,8 @@
 											<a href="#" class="button mini pull-right answer">Répondre</a>
 										{% endif %}
 										{% if is_granted("ROLE_ADMIN") or comment.user == app.user or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
-											<a href="#" class="button mini pull-right">Supprimer</a>
-											<a href="#" class="button mini pull-right">Éditer</a>
+											<a href="{{ path('ninja_tooken_comment_supprimer', {topic_nom:forum.slug, message_nom:thread.slug, comment_id:comment.id}) }}" class="button mini pull-right">Supprimer</a>
+											<a href="{{ path('ninja_tooken_comment_modifier', {topic_nom:forum.slug, message_nom:thread.slug, comment_id:comment.id}) }}" class="button mini pull-right">Éditer</a>
 										{% endif %}
 										</p>
 									{% endif %}

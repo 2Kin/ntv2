@@ -192,7 +192,9 @@ class DefaultController extends Controller
      */
     public function topicSupprimerAction(Forum $forum)
     {
-        return $this->render('NinjaTookenForumBundle:Default:topic.html.twig', array('forum' => $forum, 'threads' => $threads));
+        return $this->redirect($this->generateUrl('ninja_tooken_topic', array(
+            'topic_nom' => $thread->getForum()->getSlug()
+        )));
     }
 
     /**
@@ -231,7 +233,10 @@ class DefaultController extends Controller
      */
     public function messageModifierAction(Forum $forum, Thread $thread)
     {
-        return $this->render('NinjaTookenForumBundle:Default:message.html.twig');
+        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
+            'topic_nom' => $thread->getForum()->getSlug(),
+            'message_nom' => $thread->getSlug()
+        )));
     }
 
     /**
@@ -240,7 +245,72 @@ class DefaultController extends Controller
      */
     public function messageSupprimerAction(Forum $forum, Thread $thread)
     {
-        return $this->render('NinjaTookenForumBundle:Default:message.html.twig');
+        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
+            'topic_nom' => $thread->getForum()->getSlug(),
+            'message_nom' => $thread->getSlug()
+        )));
+    }
+
+    /**
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
+     */
+    public function messageVerrouillerAction(Forum $forum, Thread $thread)
+    {
+        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
+            'topic_nom' => $thread->getForum()->getSlug(),
+            'message_nom' => $thread->getSlug()
+        )));
+    }
+
+    /**
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
+     */
+    public function messagePostitAction(Forum $forum, Thread $thread)
+    {
+        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
+            'topic_nom' => $thread->getForum()->getSlug(),
+            'message_nom' => $thread->getSlug()
+        )));
+    }
+
+    /**
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
+     */
+    public function commentAjouterAction(Forum $forum, Thread $thread)
+    {
+        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
+            'topic_nom' => $thread->getForum()->getSlug(),
+            'message_nom' => $thread->getSlug()
+        )));
+    }
+
+    /**
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
+     * @ParamConverter("comment", class="NinjaTookenForumBundle:Comment", options={"mapping": {"comment_id":"id"}})
+     */
+    public function commentModifierAction(Forum $forum, Thread $thread, Comment $comment)
+    {
+        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
+            'topic_nom' => $thread->getForum()->getSlug(),
+            'message_nom' => $thread->getSlug()
+        )));
+    }
+
+    /**
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
+     * @ParamConverter("comment", class="NinjaTookenForumBundle:Comment", options={"mapping": {"comment_id":"id"}})
+     */
+    public function commentSupprimerAction(Forum $forum, Thread $thread, Comment $comment)
+    {
+        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
+            'topic_nom' => $thread->getForum()->getSlug(),
+            'message_nom' => $thread->getSlug()
+        )));
     }
 
     public function recentCommentsAction($max = 10, $forum = 0, $user = 0)

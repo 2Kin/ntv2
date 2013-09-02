@@ -146,7 +146,7 @@ $(document).ready(function(){
 	if(_textarea.length>0){
 		_textarea.tinymce({
 			// General options
-			plugins : "autolink link image lists pagebreak emoticons media contextmenu paste noneditable nonbreaking",
+			plugins : "autolink link image lists pagebreak emoticons nt_media contextmenu paste noneditable nonbreaking",
 			schema: "html5",
 			theme: "modern",
 			width : '100%',
@@ -161,11 +161,11 @@ $(document).ready(function(){
 			auto_focus : false,
 			inline: true,
 			// Theme options
-			toolbar : "undo,redo,|,bold,italic,underline,strikethrough,forecolor,|,link,unlink,|,justifyleft,justifycenter,justifyright,justifyfull,bullist,|,emoticons,image,imageshack,media",
+			toolbar : "undo,redo,|,bold,italic,underline,strikethrough,forecolor,|,link,unlink,|,justifyleft,justifycenter,justifyright,justifyfull,bullist,|,emoticons,image,nt_media,",
 			menubar : false,
 			statusbar : false,
 			tab_focus : ':prev,:next',
-			valid_elements : "@[id|class|title|style],span[data-mce-type|data-mce-style|align],a[href|target],legend,fieldset,img[src|alt|align|height|width],object[classid|width|height|codebase|*],param[name|value|_value],embed[type|width|height|src|*],ul,li,ol,p[align],font[face|size|color],strong/b,em/i,u,strike,br",
+			valid_elements : "@[id|class|title|style],span[data-mce-type|data-mce-style|align],a[href|target],legend,fieldset,img[src|alt|align|height|width],object[classid|width|height|codebase|*],param[name|value|_value],embed[type|width|height|src|*],iframe[type|width|height|src|frameborder|scrolling|marginheight|marginwidth|name|align],ul,li,ol,p[align],font[face|size|color],strong/b,em/i,u,strike,br",
 			language : 'fr_FR',
 		});
 	}

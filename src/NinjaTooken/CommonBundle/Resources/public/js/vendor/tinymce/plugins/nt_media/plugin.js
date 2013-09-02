@@ -308,11 +308,12 @@ function AutoEmbed() {
 		  {
 			'title' : 'Dailymotion',
 			'website' : 'http://www.dailymotion.com',
-			'url-match' : 'http://(?:www\.)?dailymotion\.(?:com|alice\.it)/(?:(?:[^"]*?)?video|swf)/([a-z0-9]{1,18})',
+			'url-match' : 'http://(?:www\.)?dailymotion\.(?:com|alice\.it)/(?:(?:[^"]*?)?video|swf)/([a-z0-9]{1,7})_([a-z0-9-]*)',
 			'embed-src' : 'http://www.dailymotion.com/swf/$2?related=0',
-			'embed-width' : '420',
-			'embed-height' : '339',
+			'embed-width' : '480',
+			'embed-height' : '270',
 			'image-src' : 'http://www.dailymotion.com/thumbnail/160x120/video/$2',
+			'iframe-player' : 'http://www.dailymotion.com/embed/video/$2?hideInfos=1',
 		  },
 		  {
 			'title' : 'Google Video',
@@ -1801,6 +1802,11 @@ function AutoEmbed() {
 	function _setDefaultParams() {
 
 		var source = self._stub['embed-src'];
+
+		for (var i = 1; i <= self._media_id.length; i++) {
+			source = source.replace('$' + i, self._media_id[i - 1]);
+		}
+
 		var flashvars = self._stub['flashvars'] ? self._stub['flashvars'] : null;
 
 		for (var i = 1; i <= self._media_id.length; i++) {
@@ -1993,7 +1999,6 @@ tinymce.PluginManager.add('nt_media', function(editor, url) {
 			try{
 				var ae = new AutoEmbed();
 				var res = ae.parseUrl(data.source1);
-				console.log(ae.getEmbedCode());
 				return ae.getEmbedCode();
 			}catch(e){}
 
@@ -2397,7 +2402,7 @@ tinymce.PluginManager.add('nt_media', function(editor, url) {
 		}
 	});
 
-	editor.addButton('media', {
+	editor.addButton('nt_media', {
 		tooltip: 'Insert/edit video',
 		onclick: showDialog,
 		stateSelector: 'img[data-mce-object=video]'
