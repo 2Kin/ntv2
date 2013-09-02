@@ -34,7 +34,7 @@ class ClanUtilisateur
     private $recruteur;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan", cascade={"persist"}, inversedBy="membres")
      */
     private $clan;
 

@@ -297,12 +297,12 @@ class Lobby
     /**
      * Add users
      *
-     * @param \NinjaTooken\UserBundle\Entity\User $users
+     * @param \NinjaTooken\UserBundle\Entity\User $user
      * @return Lobby
      */
-    public function addUser(\NinjaTooken\UserBundle\Entity\User $users)
+    public function addUser(\NinjaTooken\UserBundle\Entity\User $user)
     {
-        $this->users[] = $users;
+        $this->users[] = $user;
 
         return $this;
     }
@@ -310,11 +310,11 @@ class Lobby
     /**
      * Remove users
      *
-     * @param \NinjaTooken\UserBundle\Entity\User $users
+     * @param \NinjaTooken\UserBundle\Entity\User $user
      */
-    public function removeUser(\NinjaTooken\UserBundle\Entity\User $users)
+    public function removeUser(\NinjaTooken\UserBundle\Entity\User $user)
     {
-        $this->users->removeElement($users);
+        $this->users->removeElement($user);
     }
 
     /**

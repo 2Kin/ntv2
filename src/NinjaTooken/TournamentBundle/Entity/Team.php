@@ -36,6 +36,13 @@ class Team
     private $cri;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="dateInscription", type="datetime")
+     */
+    private $dateInscription;
+
+    /**
      * user
      *
      * @var User
@@ -49,7 +56,7 @@ class Team
     private $membres;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Tournament")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Tournament", inversedBy="teams", cascade={"persist"})
      * @var Tournament
      */
     private $tournament;
@@ -60,6 +67,7 @@ class Team
     public function __construct()
     {
         $this->membres = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setDateInscription(new \DateTime());
     }
 
     /**
@@ -173,4 +181,28 @@ class Team
     {
         return $this->tournament;
     }
+
+    /**
+     * Set dateInscription
+     *
+     * @param \DateTime $dateInscription
+     * @return Round
+     */
+    public function setDateInscription($dateInscription)
+    {
+        $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
+
+    /**
+     * Get dateInscription
+     *
+     * @return \DateTime 
+     */
+    public function getDateInscription()
+    {
+        return $this->dateInscription;
+    }
+
 }

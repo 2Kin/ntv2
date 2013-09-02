@@ -62,6 +62,13 @@ class Round
     private $jeu;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="protected", type="string", length=20)
+     */
+    private $protected;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateAjout", type="datetime")
@@ -76,11 +83,24 @@ class Round
     private $tour;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Tournament")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Tournament", inversedBy="rounds", cascade={"persist"})
      * @var Tournament
      */
     private $tournament;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->setDateAjout(new \DateTime());
+        $this->setTour(1);
+        $this->setJeu(0);
+        $this->setCarte(0);
+        $this->setScoreTeam1(0);
+        $this->setScoreTeam2(0);
+        $this->setProtected("");
+    }
 
     /**
      * Get id
@@ -297,5 +317,28 @@ class Round
     public function getTournament()
     {
         return $this->tournament;
+    }
+
+    /**
+     * Set protected
+     *
+     * @param string $protected
+     * @return Tournament
+     */
+    public function setProtected($protected)
+    {
+        $this->protected = $protected;
+
+        return $this;
+    }
+
+    /**
+     * Get protected
+     *
+     * @return string 
+     */
+    public function getProtected()
+    {
+        return $this->protected;
     }
 }

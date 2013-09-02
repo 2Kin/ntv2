@@ -31,7 +31,7 @@ class User extends BaseUser
     protected $groups;
 
     /**
-     * @ORM\OneToOne(targetEntity="NinjaTooken\GameBundle\Entity\Ninja", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="NinjaTooken\GameBundle\Entity\Ninja", mappedBy="user", cascade={"persist", "remove"})
      */
     private $ninja;
 
