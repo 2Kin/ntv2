@@ -40,14 +40,14 @@ class Friend
      *
      * @ORM\Column(name="is_blocked", type="boolean")
      */
-    private $isBlocked;
+    private $isBlocked = false;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_confirmed", type="boolean")
      */
-    private $isConfirmed;
+    private $isConfirmed = false;
 
     /**
      * @var \DateTime
@@ -62,8 +62,6 @@ class Friend
     public function __construct()
     {
         $this->setDateAjout(new \DateTime());
-        $this->setIsBlocked(false);
-        $this->setIsConfirmed(false);
     }
 
     /**

@@ -3,6 +3,7 @@ namespace NinjaTooken\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -41,7 +42,7 @@ class Thread
      *
      * @ORM\Column(name="is_event", type="boolean")
      */
-    private $isEvent;
+    private $isEvent = false;
 
     /**
      * @var \DateTime
@@ -79,6 +80,8 @@ class Thread
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
+     * @Assert\MaxLength(255)
+     * @Assert\NotBlank()
      */
     private $nom;
 
@@ -99,14 +102,14 @@ class Thread
      * @var string
      *
      * @ORM\Column(name="body", type="text")
-     * @var string
+     * @Assert\NotBlank()
      */
     protected $body;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="url_video", type="string", length=255)
+     * @ORM\Column(name="url_video", type="string", length=255, nullable=true)
      */
     private $urlVideo;
 
@@ -134,7 +137,7 @@ class Thread
      *
      * @ORM\Column(name="last_comment_at", type="datetime", nullable=true)
      */
-    private $lastCommentAt = null;
+    private $lastCommentAt;
 
     /**
      * Denormalized author of the last comment
@@ -142,7 +145,7 @@ class Thread
      * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
      * @var User
      */
-    private $lastCommentBy = null;
+    private $lastCommentBy;
 
     /**
      * Constructor
@@ -150,6 +153,7 @@ class Thread
     public function __construct()
     {
         $this->setDateAjout(new \DateTime());
+        $this->setLastCommentAt(new \DateTime());
     }
 
     /**
@@ -460,23 +464,6 @@ class Thread
     public function setLastCommentAt($lastCommentAt)
     {
         $this->lastCommentAt = $lastCommentAt;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isCommentable()
-    {
-        return $this->isCommentable;
-    }
-
-    /**
-     * @param  bool
-     * @return null
-     */
-    public function setCommentable($isCommentable)
-    {
-        $this->isCommentable = (bool) $isCommentable;
     }
 
     /**

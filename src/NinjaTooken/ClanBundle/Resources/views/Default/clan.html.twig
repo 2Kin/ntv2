@@ -68,9 +68,9 @@
 						<div class="forum">
 							<h4>
 								{% if is_granted("ROLE_USER") and app.user.clan and app.user.clan.clan == clan and app.user.clan.canEditClan == true %}
-									<a href="{{ path('ninja_tooken_topic_ajouter', {topic_nom:forum.slug}) }}" class="button pull-right">Nouveau topic</a>
+									<a href="{{ path('ninja_tooken_thread_ajouter', {forum_nom:forum.slug}) }}" class="button pull-right">Nouveau topic</a>
 								{% endif %}
-								<a href="{{ path('ninja_tooken_topic', {topic_nom:forum.slug}) }}">{{ forum.nom }}</a>
+								<a href="{{ path('ninja_tooken_topic', {forum_nom:forum.slug}) }}">{{ forum.nom }}</a>
 							</h4>
 							{% if forum.threads is not empty %}
 							{% for thread in forum.threads %}

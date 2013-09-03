@@ -47,7 +47,7 @@
 									{% set second = thread.dateEventEnd|date("Y,m,d") %}
 								{% endif %}
 							{% endif %}
-							{% set text = thread.body|raw|slice(0,250)|purify('min') ~ '<p><a href="' ~ path('ninja_tooken_message', {topic_nom: thread.forum.slug, message_nom:thread.slug, page:1}) ~ '" class="pull-right">Lire la suite &raquo;</a></p>' %}
+							{% set text = thread.body|raw|slice(0,250)|purify('min') ~ '<p><a href="' ~ path('ninja_tooken_thread', {forum_nom: thread.forum.slug, thread_nom:thread.slug, page:1}) ~ '" class="pull-right">Lire la suite &raquo;</a></p>' %}
 							{
 								"startDate":"{{ first }}",
 								"endDate":"{{ second }}",

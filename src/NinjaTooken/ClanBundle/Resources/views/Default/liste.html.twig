@@ -44,7 +44,7 @@
 										{% if clan.isRecruting %}<span class="actif">recrutements ouverts</span>{% else %}<span>recrutements fermés</span>{% endif %}
 									</header>
 									<div class="content">
-										<p>{{ clan.description|raw|purify('medium') }}</p>
+										<p>{% if clan.accroche is not empty %}{{ clan.accroche }}{% else %}{{ clan.description|raw|purify('medium') }}{% endif %}</p>
 									</div>
 									<footer>
 										<a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}"class="pull-right">Page du clan &raquo;</a>

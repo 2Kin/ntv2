@@ -36,7 +36,7 @@
 										<p>{{ thread.body|raw|purify('medium') }}</p>
 									</div>
 									<footer>
-										<a href="{{ path('ninja_tooken_message', {topic_nom: thread.forum.slug, message_nom:thread.slug}) }}" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
+										<a href="{{ path('ninja_tooken_thread', {forum_nom: thread.forum.slug, thread_nom:thread.slug}) }}" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
 									</footer>
 								</article>
 							</div>

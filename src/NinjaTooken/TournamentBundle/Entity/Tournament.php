@@ -24,21 +24,21 @@ class Tournament
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateLimiteInscription", type="datetime")
+     * @ORM\Column(name="date_limite_inscription", type="datetime")
      */
     private $dateLimiteInscription;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateDebut", type="datetime")
+     * @ORM\Column(name="date_debut", type="datetime")
      */
     private $dateDebut;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateFin", type="datetime")
+     * @ORM\Column(name="date_fin", type="datetime")
      */
     private $dateFin;
 
@@ -52,16 +52,9 @@ class Tournament
     /**
      * @var integer
      *
-     * @ORM\Column(name="maxTeam", type="smallint")
+     * @ORM\Column(name="max_team", type="smallint")
      */
     private $maxTeam;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="isDuel", type="boolean")
-     */
-    private $isDuel;
 
     /**
      * @ORM\OneToOne(targetEntity="NinjaTooken\ForumBundle\Entity\Thread")
@@ -80,6 +73,11 @@ class Tournament
     * @ORM\OrderBy({"dateInscription" = "ASC"})
     */
     private $teams;
+
+    /**
+    * @ORM\OneToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Team")
+    */
+    private $ninjaTooken;
 
     /**
      * Constructor
@@ -214,6 +212,29 @@ class Tournament
     {
         return $this->thread;
     }
+
+    /**
+     * Set ninjaTooken
+     *
+     * @param \NinjaTooken\TournamentBundle\Entity\Team $ninjaTooken
+     * @return Tournament
+     */
+    public function setNinjaTooken(\NinjaTooken\TournamentBundle\Entity\Team $ninjaTooken=null)
+    {
+        $this->ninjaTooken = $ninjaTooken;
+
+        return $this;
+    }
+
+    /**
+     * Get ninjaTooken
+     *
+     * @return \NinjaTooken\TournamentBundle\Entity\Team
+     */
+    public function getNinjaTooken()
+    {
+        return $this->ninjaTooken;
+    }
     
     /**
      * Add rounds
@@ -304,28 +325,5 @@ class Tournament
     public function getMaxTeam()
     {
         return $this->maxTeam;
-    }
-
-    /**
-     * Set isDuel
-     *
-     * @param boolean $isDuel
-     * @return Tournament
-     */
-    public function setIsDuel($isDuel)
-    {
-        $this->isDuel = $isDuel;
-
-        return $this;
-    }
-
-    /**
-     * Get isDuel
-     *
-     * @return boolean 
-     */
-    public function getIsDuel()
-    {
-        return $this->isDuel;
     }
 }

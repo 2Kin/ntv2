@@ -14,7 +14,7 @@
 								</a> <i class="icon-angle-right"></i>
 							</span>
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<a href="{{ path('ninja_tooken_topic', {topic_nom:forum.slug}) }}" itemprop="url">
+								<a href="{{ path('ninja_tooken_topic', {forum_nom:forum.slug}) }}" itemprop="url">
 									<span itemprop="title">{{ forum.nom }}</span>
 								</a>
 							</span>
@@ -22,7 +22,7 @@
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<a href="{{ path('ninja_tooken_message', {topic_nom:forum.slug, message_nom:thread.slug}) }}" itemprop="url">
+								<a href="{{ path('ninja_tooken_thread', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" itemprop="url">
 									<span itemprop="title">{% if thread.isCommentable == false %}<i class="icon-lock"></i> {% endif %}{% if thread.isPostit =='1' %}<i class="icon-pushpin"></i> {% endif %}{% if date(thread.lastCommentAt) > date('-1days') %}<i class="icon-eye-open"></i> {% endif %}{{ thread.nom }}</span>
 								</a>
 							</span>
@@ -45,16 +45,16 @@
 							<a href="#" class="button mini pull-right answer">Répondre</a>
 								{% endif %}
 								{% if is_granted("ROLE_ADMIN") or comment.user == app.user or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
-									<a href="{{ path('ninja_tooken_message_supprimer', {topic_nom:forum.slug, message_nom:thread.slug}) }}" class="button mini pull-right">Supprimer</a>
-									<a href="{{ path('ninja_tooken_message_modifier', {topic_nom:forum.slug, message_nom:thread.slug}) }}" class="button mini pull-right">Éditer</a>
+									<a href="{{ path('ninja_tooken_thread_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Supprimer</a>
+									<a href="{{ path('ninja_tooken_thread_modifier', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Éditer</a>
 								{% endif %}
 							{% endif %}							
 							{% if is_granted("ROLE_ADMIN") %}
-								<a href="{{ path('ninja_tooken_message_verrouiller', {topic_nom:forum.slug, message_nom:thread.slug}) }}" class="button mini pull-right">Verrouiller</a>
-								<a href="{{ path('ninja_tooken_message_postit', {topic_nom:forum.slug, message_nom:thread.slug}) }}" class="button mini pull-right">Post-it</a>
+								<a href="{{ path('ninja_tooken_thread_verrouiller', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Verrouiller</a>
+								<a href="{{ path('ninja_tooken_thread_postit', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Post-it</a>
 							{% endif %}
 							</p>
-							<form action="{{ path('ninja_tooken_comment_ajouter', {topic_nom:forum.slug, message_nom:thread.slug}) }}" method="post" accept-charset="UTF-8" id="answer" class="full inset">
+							<form action="{{ path('ninja_tooken_comment_ajouter', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" method="post" accept-charset="UTF-8" id="answer" class="full inset">
 								<hr>
 								<div>
 									<div class="textarea" name="content">&nbsp;</div>
@@ -69,7 +69,7 @@
 								<span class="comments">{{ nombreComment }} commentaire{% if nombreComment>1 %}s{% endif %}</span>
 								{% include 'pagination.html.twig' with {
 									currentPage: page,
-									paginationPath: path('ninja_tooken_message', {topic_nom: forum.slug, message_nom:thread.slug, 'page': ''}),
+									paginationPath: path('ninja_tooken_thread', {forum_nom: forum.slug, thread_nom:thread.slug, 'page': ''}),
 									paginationAfter: '',
 									lastPage: nombrePage,
 									extremePagesLimit: 2,
@@ -91,8 +91,8 @@
 											<a href="#" class="button mini pull-right answer">Répondre</a>
 										{% endif %}
 										{% if is_granted("ROLE_ADMIN") or comment.user == app.user or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
-											<a href="{{ path('ninja_tooken_comment_supprimer', {topic_nom:forum.slug, message_nom:thread.slug, comment_id:comment.id}) }}" class="button mini pull-right">Supprimer</a>
-											<a href="{{ path('ninja_tooken_comment_modifier', {topic_nom:forum.slug, message_nom:thread.slug, comment_id:comment.id}) }}" class="button mini pull-right">Éditer</a>
+											<a href="{{ path('ninja_tooken_comment_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" class="button mini pull-right">Supprimer</a>
+											<a href="{{ path('ninja_tooken_comment_modifier', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" class="button mini pull-right">Éditer</a>
 										{% endif %}
 										</p>
 									{% endif %}
@@ -100,7 +100,7 @@
 								{% endfor %}
 								{% include 'pagination.html.twig' with {
 									currentPage: page,
-									paginationPath: path('ninja_tooken_message', {topic_nom: forum.slug, message_nom:thread.slug, 'page': ''}),
+									paginationPath: path('ninja_tooken_thread', {forum_nom: forum.slug, thread_nom:thread.slug, 'page': ''}),
 									paginationAfter: '',
 									lastPage: nombrePage,
 									extremePagesLimit: 2,

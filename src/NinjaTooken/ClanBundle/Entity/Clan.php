@@ -4,6 +4,7 @@ namespace NinjaTooken\ClanBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Clan
@@ -49,6 +50,8 @@ class Clan
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
+     * @Assert\MaxLength(255)
+     * @Assert\NotBlank()
      */
     private $nom;
 
@@ -56,20 +59,32 @@ class Clan
      * @var string
      *
      * @ORM\Column(name="tag", type="string", length=5)
+     * @Assert\MaxLength(5)
      */
     private $tag;
 
     /**
      * @var string
      *
+     * @ORM\Column(name="accroche", type="string", length=255)
+     * @Assert\MaxLength(255)
+     */
+    private $accroche;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text")
+     * @Assert\NotBlank()
      */
     private $description;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255)
+     * @ORM\Column(name="url", type="string", length=255, nullable=true)
+     * @Assert\MaxLength(255)
+     * @Assert\Url()
      */
     private $url;
 
@@ -77,6 +92,7 @@ class Clan
      * @var string
      *
      * @ORM\Column(name="kamon", type="string", length=255)
+     * @Assert\MaxLength(255)
      */
     private $kamon;
 
@@ -92,14 +108,14 @@ class Clan
      *
      * @ORM\Column(name="online", type="boolean")
      */
-    private $online;
+    private $online = true;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="is_recruting", type="boolean")
      */
-    private $isRecruting;
+    private $isRecruting = true;
 
     /**
      * Constructor
@@ -189,6 +205,29 @@ class Clan
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set accroche
+     *
+     * @param string $accroche
+     * @return Clan
+     */
+    public function setAccroche($accroche)
+    {
+        $this->accroche = $accroche;
+
+        return $this;
+    }
+
+    /**
+     * Get accroche
+     *
+     * @return string 
+     */
+    public function getAccroche()
+    {
+        return $this->accroche;
     }
 
     /**

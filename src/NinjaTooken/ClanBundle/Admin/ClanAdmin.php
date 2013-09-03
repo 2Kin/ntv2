@@ -39,6 +39,10 @@ class ClanAdmin extends Admin
                 },
                 'property' => 'membre'
             ))
+            ->add('accroche', 'text', array(
+                'label' => 'Accroche',
+                'required' => false
+            ))
             ->add('description', 'textarea', array(
                 'label' => 'Description',
                 'required' => false,

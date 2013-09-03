@@ -36,9 +36,16 @@ class Team
     private $cri;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_abandon", type="boolean")
+     */
+    private $isAbandon = false;
+
+    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="dateInscription", type="datetime")
+     * @ORM\Column(name="date_inscription", type="datetime")
      */
     private $dateInscription;
 
@@ -56,6 +63,12 @@ class Team
     private $membres;
 
     /**
+     * @ORM\OneToMany(targetEntity="NinjaTooken\TournamentBundle\Entity\RoundTeam", mappedBy="team", cascade={"persist", "remove"})
+     * @var RoundTeam
+     */
+    private $rounds;
+
+    /**
      * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Tournament", inversedBy="teams", cascade={"persist"})
      * @var Tournament
      */
@@ -67,6 +80,7 @@ class Team
     public function __construct()
     {
         $this->membres = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->rounds = new \Doctrine\Common\Collections\ArrayCollection();
         $this->setDateInscription(new \DateTime());
     }
 
@@ -205,4 +219,59 @@ class Team
         return $this->dateInscription;
     }
 
+    /**
+     * Add rounds
+     *
+     * @param \NinjaTooken\TournamentBundle\Entity\RoundTeam $round
+     * @return Team
+     */
+    public function addRound(\NinjaTooken\ClanBundle\Entity\RoundTeam $round)
+    {
+        $this->rounds[] = $round;
+
+        return $this;
+    }
+
+    /**
+     * Remove rounds
+     *
+     * @param \NinjaTooken\TournamentBundle\Entity\RoundTeam $round
+     */
+    public function removeRound(\NinjaTooken\TournamentBundle\Entity\RoundTeam $round)
+    {
+        $this->rounds->removeElement($round);
+    }
+
+    /**
+     * Get rounds
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRounds()
+    {
+        return $this->rounds;
+    }
+
+    /**
+     * Set isAbandon
+     *
+     * @param boolean $isAbandon
+     * @return Team
+     */
+    public function setIsAbandon($isAbandon)
+    {
+        $this->isAbandon = $isAbandon;
+
+        return $this;
+    }
+
+    /**
+     * Get isAbandon
+     *
+     * @return boolean 
+     */
+    public function getIsAbandon()
+    {
+        return $this->isAbandon;
+    }
 }

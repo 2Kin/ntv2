@@ -50,6 +50,13 @@ class Forum
     private $ordre;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="can_user_create_thread", type="boolean")
+     */
+    private $canUserCreateThread = true;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_ajout", type="datetime")
@@ -215,5 +222,28 @@ class Forum
     public function getClan()
     {
         return $this->clan;
+    }
+
+    /**
+     * Set canUserCreateThread
+     *
+     * @param boolean $canUserCreateThread
+     * @return Thread
+     */
+    public function setCanUserCreateThread($canUserCreateThread)
+    {
+        $this->canUserCreateThread = $canUserCreateThread;
+
+        return $this;
+    }
+
+    /**
+     * Get canUserCreateThread
+     *
+     * @return boolean 
+     */
+    public function getCanUserCreateThread()
+    {
+        return $this->canUserCreateThread;
     }
 }

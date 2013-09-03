@@ -47,16 +47,7 @@ class MessageUser
      *
      * @ORM\Column(name="has_deleted", type="boolean")
      */
-    private $hasDeleted;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->setHasDeleted(false);
-    }
-
+    private $hasDeleted = false;
 
     /**
      * Get id

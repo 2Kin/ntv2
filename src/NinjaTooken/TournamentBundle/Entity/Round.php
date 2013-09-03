@@ -22,65 +22,67 @@ class Round
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Team")
-     * @var Team
-     */
-    private $team1;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Team")
-     * @var Team
-     */
-    private $team2;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="scoreTeam1", type="smallint")
-     */
-    private $scoreTeam1;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="scoreTeam2", type="smallint")
-     */
-    private $scoreTeam2;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="carte", type="smallint")
      */
-    private $carte;
+    private $carte = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jeu", type="smallint")
      */
-    private $jeu;
+    private $jeu = 0;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="protected", type="string", length=20)
+     * @ORM\Column(name="privee", type="string", length=20)
      */
-    private $protected;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateAjout", type="datetime")
-     */
-    private $dateAjout;
+    private $privee = "";
 
     /**
      * @var integer
      *
      * @ORM\Column(name="tour", type="smallint")
      */
-    private $tour;
+    private $tour = 1;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ordre", type="smallint")
+     */
+    private $ordre = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="num_gagnant", type="smallint")
+     */
+    private $numGagnant = 1;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_ajout", type="datetime")
+     */
+    private $dateAjout;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_debut", type="datetime", nullable=true)
+     */
+    private $dateDebut;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_fin", type="datetime", nullable=true)
+     */
+    private $dateFin;
 
     /**
      * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Tournament", inversedBy="rounds", cascade={"persist"})
@@ -89,17 +91,19 @@ class Round
     private $tournament;
 
     /**
+     * @ORM\OneToMany(targetEntity="NinjaTooken\TournamentBundle\Entity\RoundTeam", mappedBy="round", cascade={"persist", "remove"})
+     * @var RoundTeam
+     */
+    private $teams;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
+        $this->teams = new \Doctrine\Common\Collections\ArrayCollection();
+
         $this->setDateAjout(new \DateTime());
-        $this->setTour(1);
-        $this->setJeu(0);
-        $this->setCarte(0);
-        $this->setScoreTeam1(0);
-        $this->setScoreTeam2(0);
-        $this->setProtected("");
     }
 
     /**
@@ -110,52 +114,6 @@ class Round
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set scoreTeam1
-     *
-     * @param integer $scoreTeam1
-     * @return Round
-     */
-    public function setScoreTeam1($scoreTeam1)
-    {
-        $this->scoreTeam1 = $scoreTeam1;
-
-        return $this;
-    }
-
-    /**
-     * Get scoreTeam1
-     *
-     * @return integer 
-     */
-    public function getScoreTeam1()
-    {
-        return $this->scoreTeam1;
-    }
-
-    /**
-     * Set scoreTeam2
-     *
-     * @param integer $scoreTeam2
-     * @return Round
-     */
-    public function setScoreTeam2($scoreTeam2)
-    {
-        $this->scoreTeam2 = $scoreTeam2;
-
-        return $this;
-    }
-
-    /**
-     * Get scoreTeam2
-     *
-     * @return integer 
-     */
-    public function getScoreTeam2()
-    {
-        return $this->scoreTeam2;
     }
 
     /**
@@ -182,6 +140,52 @@ class Round
     }
 
     /**
+     * Set dateDebut
+     *
+     * @param \DateTime $dateDebut
+     * @return Round
+     */
+    public function setDateDebut($dateDebut)
+    {
+        $this->dateDebut = $dateDebut;
+
+        return $this;
+    }
+
+    /**
+     * Get dateDebut
+     *
+     * @return \DateTime 
+     */
+    public function getDateDebut()
+    {
+        return $this->dateDebut;
+    }
+
+    /**
+     * Set dateFin
+     *
+     * @param \DateTime $dateFin
+     * @return Round
+     */
+    public function setDateFin($dateFin)
+    {
+        $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    /**
+     * Get dateFin
+     *
+     * @return \DateTime 
+     */
+    public function getDateFin()
+    {
+        return $this->dateFin;
+    }
+
+    /**
      * Set tour
      *
      * @param integer $tour
@@ -202,6 +206,52 @@ class Round
     public function getTour()
     {
         return $this->tour;
+    }
+
+    /**
+     * Set ordre
+     *
+     * @param integer $ordre
+     * @return Round
+     */
+    public function setOrdre($ordre)
+    {
+        $this->ordre = $ordre;
+
+        return $this;
+    }
+
+    /**
+     * Get ordre
+     *
+     * @return integer 
+     */
+    public function getOrdre()
+    {
+        return $this->ordre;
+    }
+
+    /**
+     * Set numGagnant
+     *
+     * @param integer $numGagnant
+     * @return Round
+     */
+    public function setNumGagnant($numGagnant)
+    {
+        $this->numGagnant = $numGagnant;
+
+        return $this;
+    }
+
+    /**
+     * Get numGagnant
+     *
+     * @return integer 
+     */
+    public function getNumGagnant()
+    {
+        return $this->numGagnant;
     }
 
     /**
@@ -320,25 +370,58 @@ class Round
     }
 
     /**
-     * Set protected
+     * Set privee
      *
-     * @param string $protected
+     * @param string $privee
      * @return Tournament
      */
-    public function setProtected($protected)
+    public function setPrivee($privee)
     {
-        $this->protected = $protected;
+        $this->privee = $privee;
 
         return $this;
     }
 
     /**
-     * Get protected
+     * Get privee
      *
      * @return string 
      */
-    public function getProtected()
+    public function getPrivee()
     {
-        return $this->protected;
+        return $this->privee;
+    }
+
+    /**
+     * Add teams
+     *
+     * @param \NinjaTooken\TournamentBundle\Entity\RoundTeam $team
+     * @return Round
+     */
+    public function addTeam(\NinjaTooken\ClanBundle\Entity\RoundTeam $team)
+    {
+        $this->teams[] = $team;
+
+        return $this;
+    }
+
+    /**
+     * Remove teams
+     *
+     * @param \NinjaTooken\TournamentBundle\Entity\RoundTeam $team
+     */
+    public function removeTeam(\NinjaTooken\TournamentBundle\Entity\RoundTeam $team)
+    {
+        $this->teams->removeElement($team);
+    }
+
+    /**
+     * Get teams
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTeams()
+    {
+        return $this->teams;
     }
 }

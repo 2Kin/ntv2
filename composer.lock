@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "81c68d702366ccbcad57364839a871de",
+    "hash": "f212fbcb28ed6826d31723f294aafcbe",
     "packages": [
         {
             "name": "Frug/AJAX-Chat",
@@ -3134,11 +3134,11 @@
     ],
     "minimum-stability": "alpha",
     "stability-flags": {
+        "stof/doctrine-extensions-bundle": 20,
+        "stfalcon/tinymce-bundle": 20,
         "exercise/htmlpurifier-bundle": 20,
         "leafo/lessphp": 20,
         "ornicar/gravatar-bundle": 20,
-        "stof/doctrine-extensions-bundle": 20,
-        "stfalcon/tinymce-bundle": 20,
         "friendsofsymfony/facebook-bundle": 20,
         "frug/ajax-chat": 20
     },

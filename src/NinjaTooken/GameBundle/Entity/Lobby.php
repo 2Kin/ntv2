@@ -39,42 +39,42 @@ class Lobby
      *
      * @ORM\Column(name="carte", type="smallint")
      */
-    private $carte;
+    private $carte = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="partie", type="smallint")
      */
-    private $partie;
+    private $partie = 0;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="maximum", type="smallint")
      */
-    private $maximum;
+    private $maximum = 2;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="jeu", type="smallint")
      */
-    private $jeu;
+    private $jeu = 0;
 
     /**
      * @var string
      *
      * @ORM\Column(name="privee", type="string", length=30)
      */
-    private $privee;
+    private $privee = '';
 
     /**
      * @var float
      *
      * @ORM\Column(name="version", type="decimal", precision=10, scale=6)
      */
-    private $version;
+    private $version = 0;
 
     /**
      * @var \DateTime
@@ -97,6 +97,7 @@ class Lobby
     {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->setDateDebut(new \DateTime());
+        $this->setDateUpdate(new \DateTime());
     }
 
 

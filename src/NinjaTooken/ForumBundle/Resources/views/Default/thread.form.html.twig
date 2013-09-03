@@ -1,0 +1,85 @@
+{% form_theme form _self %}
+
+{% block form_widget_compound %}
+{% spaceless %}
+	{% if form.parent is empty %}
+	    {{ form_errors(form) }}
+	{% endif %}
+	{{ block('form_rows') }}
+	{{ form_rest(form) }}
+{% endspaceless %}
+{% endblock form_widget_compound %}
+
+{% block form_row %}
+    <div class="row-fluid">
+	<div class="span3 offset1">
+	{{ form_label(form) }}
+	</div>
+	<div class="span8">
+	{{ form_widget(form) }}
+	{{ form_errors(form) }}
+	</div>
+    </div>
+{% endblock form_row %}
+
+{% block textarea_widget %}
+{% spaceless %}
+    <div class="textarea" {{ block('widget_attributes') }}>{{ value|raw|purify('full') }}</div>
+{% endspaceless %}
+{% endblock textarea_widget %}
+
+{% block form_label %}
+{% spaceless %}
+    {% if label is not sameas(false) %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': 'libelle required'}) %}
+        {% endif %}
+        {% if label is empty %}
+            {% set label = name|humanize %}
+        {% endif %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>{{ label|trans({}, translation_domain) }}</label>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_label %}
+
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - {{ forum.nom }}{% endblock %}
+{% block description %}Les topics de "{{ forum.nom }}", c'est ici pour votre jeu fps de ninja gratuit.{% endblock %}
+{% block keywords %}NinjaTooken, shinobi, ninja, {{ forum.nom }}, topic, message, fps, gratuit, online, free{% endblock %}
+
+{% block breadcrumbs1 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<span itemprop="title">Communauté</span>
+							</span>  <i class="icon-angle-right"></i> 
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_forum') }}" itemprop="url">
+									<span itemprop="title">Forums</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_topic', {forum_nom:forum.slug}) }}" itemprop="url">
+									<span itemprop="title">{{ forum.nom }}</span>
+								</a>
+							</span>
+{% endblock %}
+
+{% block body %}
+				<section class="forum">
+                    <form action="#" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full">
+                        <h3><i class="icon-plus"></i> Ajouter un topic</h3>
+                        {{ form_widget(form) }}
+                        <div class="row-fluid">
+                            <div class="span8 offset4">
+                                <input type="submit" value="Ajouter" class="button">
+                            </div>
+                        </div>
+                    </form>
+				</section>
+{% endblock %}

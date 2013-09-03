@@ -11,7 +11,7 @@
 									</a>
 								</span>
 								<time itemprop="startDate" datetime="{{ comment.dateAjout|date("Y-m-d\\TH:i:sP") }}">le {{ comment.dateAjout|localizeddate('medium', 'none', app.request.locale) }} à {{ comment.dateAjout|localizeddate('none', 'short', app.request.locale) }}</time><br>
-								<h5><a href="{{ path('ninja_tooken_message', {topic_nom:comment.thread.forum.slug, message_nom:comment.thread.slug}) }}" itemprop="replyToUrl"><span itemprop="name">{{ comment.thread.nom }}</span></a></h5>
+								<h5><a href="{{ path('ninja_tooken_thread', {forum_nom:comment.thread.forum.slug, thread_nom:comment.thread.slug}) }}" itemprop="replyToUrl"><span itemprop="name">{{ comment.thread.nom }}</span></a></h5>
 							</div>
 			{% endfor %}
 						</section>

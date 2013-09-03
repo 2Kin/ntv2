@@ -43,14 +43,14 @@ class ClanUtilisateur
      *
      * @ORM\Column(name="droit", type="string", length=50)
      */
-    private $droit;
+    private $droit = "Shonin";
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="can_edit_clan", type="boolean")
      */
-    private $canEditClan;
+    private $canEditClan = false;
 
     /**
      * @var \DateTime

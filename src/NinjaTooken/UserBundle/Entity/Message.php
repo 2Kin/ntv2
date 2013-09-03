@@ -3,6 +3,7 @@
 namespace NinjaTooken\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Message
@@ -32,6 +33,8 @@ class Message
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
+     * @Assert\MaxLength(255)
+     * @Assert\NotBlank()
      */
     private $nom;
 
@@ -39,6 +42,7 @@ class Message
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Assert\NotBlank()
      */
     private $content;
 
@@ -61,7 +65,7 @@ class Message
      *
      * @ORM\Column(name="has_deleted", type="boolean")
      */
-    private $hasDeleted;
+    private $hasDeleted = false;
 
     /**
      * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\MessageUser", mappedBy="message", cascade={"persist", "remove"})
@@ -75,7 +79,6 @@ class Message
     {
         $this->receivers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->setDateAjout(new \DateTime());
-        $this->setHasDeleted(false);
     }
 
     /**

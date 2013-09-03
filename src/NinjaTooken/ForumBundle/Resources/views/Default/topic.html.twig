@@ -17,7 +17,7 @@
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<a href="{{ path('ninja_tooken_topic', {topic_nom:forum.slug}) }}" itemprop="url">
+								<a href="{{ path('ninja_tooken_topic', {forum_nom:forum.slug}) }}" itemprop="url">
 									<span itemprop="title">{{ forum.nom }}</span>
 								</a>
 							</span>
@@ -25,13 +25,13 @@
 
 {% block body %}
 				<section class="forum">
-					{% if is_granted("ROLE_USER") and forum.clan is empty or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true or is_granted("ROLE_ADMIN")) %}<h4><a href="{{ path('ninja_tooken_topic_ajouter', {topic_nom:forum.slug}) }}" class="button pull-right">Nouveau topic</a></h4>{% endif %}<br class="clear">
+					{% if is_granted("ROLE_USER") and forum.clan is empty or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true or is_granted("ROLE_ADMIN")) %}<h4><a href="{{ path('ninja_tooken_thread_ajouter', {forum_nom:forum.slug}) }}" class="button pull-right">Nouveau topic</a></h4>{% endif %}<br class="clear">
 					{% for thread in threads %}
 					{% include 'NinjaTookenForumBundle:Default:topicListe.html.twig' %}
 					{% endfor %}
 					{% include 'pagination.html.twig' with {
 						currentPage: page,
-						paginationPath: path('ninja_tooken_topic', {'topic_nom':forum.slug, 'page': ''}),
+						paginationPath: path('ninja_tooken_topic', {'forum_nom':forum.slug, 'page': ''}),
 						paginationAfter: '',
 						lastPage: nombrePage,
 						extremePagesLimit: 2,

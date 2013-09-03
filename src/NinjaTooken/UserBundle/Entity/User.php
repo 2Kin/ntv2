@@ -81,21 +81,21 @@ class User extends BaseUser
      *
      * @ORM\Column(name="receive_newsletter", type="boolean")
      */
-    private $receiveNewsletter;
+    private $receiveNewsletter = false;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="receive_avertissement", type="boolean")
      */
-    private $receiveAvertissement;
+    private $receiveAvertissement = false;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="use_gravatar", type="boolean")
      */
-    private $useGravatar;
+    private $useGravatar = false;
 
     /**
      * @var array
@@ -121,9 +121,6 @@ class User extends BaseUser
         parent::__construct();
 
         $this->setGender(UserInterface::GENDER_MAN);
-        $this->setReceiveAvertissement(false);
-        $this->setReceiveNewsletter(false);
-        $this->setUseGravatar(false);
         $this->oldUsernames = array();
         $this->oldUsernamesCanonical = "";
     }

@@ -3,6 +3,7 @@
 namespace NinjaTooken\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Capture
@@ -32,6 +33,9 @@ class Capture
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=255)
+     * @Assert\MaxLength(255)
+     * @Assert\Url()
+     * @Assert\NotBlank()
      */
     private $url;
 
@@ -39,6 +43,9 @@ class Capture
      * @var string
      *
      * @ORM\Column(name="url_tmb", type="string", length=255)
+     * @Assert\MaxLength(255)
+     * @Assert\Url()
+     * @Assert\NotBlank()
      */
     private $urlTmb;
 
@@ -46,6 +53,8 @@ class Capture
      * @var string
      *
      * @ORM\Column(name="delete_hash", type="string", length=255)
+     * @Assert\MaxLength(255)
+     * @Assert\NotBlank()
      */
     private $deleteHash;
 

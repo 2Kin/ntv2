@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use NinjaTooken\ForumBundle\Entity\Forum;
 use NinjaTooken\ForumBundle\Entity\Thread;
+use NinjaTooken\ForumBundle\Form\Type\ThreadType;
+use NinjaTooken\ForumBundle\Entity\Comment;
 
 class DefaultController extends Controller
 {
@@ -27,9 +29,9 @@ class DefaultController extends Controller
             throw new NotFoundHttpException('Ce message n\'existe pas !');
         }
 
-        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
-            'topic_nom' => $thread->getForum()->getSlug(),
-            'message_nom' => $thread->getSlug(),
+        return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
+            'forum_nom' => $thread->getForum()->getSlug(),
+            'thread_nom' => $thread->getSlug(),
             'page' => 1
         )));
     }
@@ -45,7 +47,7 @@ class DefaultController extends Controller
         }
 
         return $this->redirect($this->generateUrl('ninja_tooken_topic', array(
-            'topic_nom' => $forum->getSlug(),
+            'forum_nom' => $forum->getSlug(),
             'page' => 1
         )));
     }
@@ -136,7 +138,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"forum_nom":"slug"}})
      */
     public function topicAction(Forum $forum, $page)
     {
@@ -156,52 +158,10 @@ class DefaultController extends Controller
     }
 
     /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"forum_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"thread_nom":"slug"}})
      */
-    public function topicAjouterAction(Forum $forum)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $num = $this->container->getParameter('numReponse');
-
-        $threads = $em->getRepository('NinjaTookenForumBundle:Thread')->findBy(
-            array('forum' => $forum),
-            array('lastCommentAt' => 'desc'),
-            $num, 0
-        );
-        return $this->render('NinjaTookenForumBundle:Default:topic.html.twig', array('forum' => $forum, 'threads' => $threads));
-    }
-
-    /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
-     */
-    public function topicModifierAction(Forum $forum)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $num = $this->container->getParameter('numReponse');
-
-        $threads = $em->getRepository('NinjaTookenForumBundle:Thread')->findBy(
-            array('forum' => $forum),
-            array('lastCommentAt' => 'desc'),
-            $num, 0
-        );
-        return $this->render('NinjaTookenForumBundle:Default:topic.html.twig', array('forum' => $forum, 'threads' => $threads));
-    }
-
-    /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
-     */
-    public function topicSupprimerAction(Forum $forum)
-    {
-        return $this->redirect($this->generateUrl('ninja_tooken_topic', array(
-            'topic_nom' => $thread->getForum()->getSlug()
-        )));
-    }
-
-    /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
-     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
-     */
-    public function messageAction(Forum $forum, Thread $thread, $page)
+    public function threadAction(Forum $forum, Thread $thread, $page)
     {
         $em = $this->getDoctrine()->getManager();
         $num = $this->container->getParameter('numReponse');
@@ -220,96 +180,248 @@ class DefaultController extends Controller
     }
 
     /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"forum_nom":"slug"}})
      */
-    public function messageAjouterAction(Forum $forum)
+    public function threadAjouterAction(Request $request, Forum $forum)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if($forum->getCanUserCreateThread() || $security->isGranted('ROLE_ADMIN') !== false){
+                $thread = new Thread();
+                $thread->setAuthor($user);
+                $thread->setForum($forum);
+                $form = $this->createForm(new ThreadType(), $thread);
+                if('POST' === $request->getMethod()) {
+                    // cas particulier du formulaire avec tinymce
+                    $request->request->set('thread', array_merge(
+                        $request->request->get('thread'),
+                        array('body' => $request->get('thread_body'))
+                    ));
+
+                    $form->bind($request);
+
+                    if ($form->isValid()) {
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($thread);
+                        $em->flush();
+
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            'Le topic a bien été ajouté.'
+                        );
+
+                        return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
+                            'forum_nom' => $forum->getSlug(),
+                            'thread_nom' => $thread->getSlug()
+                        )));
+                    }
+                }
+                return $this->render('NinjaTookenForumBundle:Default:thread.form.html.twig', array(
+                    'forum' => $forum,
+                    'form' => $form->createView()
+                ));
+            }
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"forum_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"thread_nom":"slug"}})
+     */
+    public function threadModifierAction(Request $request, Forum $forum, Thread $thread)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false){
+                $form = $this->createForm(new ThreadType(), $thread);
+                if('POST' === $request->getMethod()) {
+                    // cas particulier du formulaire avec tinymce
+                    $request->request->set('thread', array_merge(
+                        $request->request->get('thread'),
+                        array('body' => $request->get('thread_body'))
+                    ));
+
+                    //$request->get('thread[body]') = $request->get('thread_body');
+                    $form->bind($request);
+
+                    if ($form->isValid()) {
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($thread);
+                        $em->flush();
+
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            'Le topic a bien été modifié.'
+                        );
+
+                        return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
+                            'forum_nom' => $forum->getSlug(),
+                            'thread_nom' => $thread->getSlug()
+                        )));
+                    }
+                }
+                return $this->render('NinjaTookenForumBundle:Default:thread.form.html.twig', array(
+                    'forum' => $forum,
+                    'form' => $form->createView()
+                ));
+            }
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"forum_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"thread_nom":"slug"}})
+     */
+    public function threadVerrouillerAction(Forum $forum, Thread $thread)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if($security->isGranted('ROLE_ADMIN') !== false){
+                $em = $this->getDoctrine()->getManager();
+                $thread->setIsCommentable(
+                    !$thread->getIsCommentable()
+                );
+                $em->persist($thread);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Le topic a bien été verrouillé.'
+                );
+            }
+        }
+
+        return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
+            'forum_nom' => $thread->getForum()->getSlug(),
+            'thread_nom' => $thread->getSlug()
+        )));
+    }
+
+    /**
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"forum_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"thread_nom":"slug"}})
+     */
+    public function threadPostitAction(Forum $forum, Thread $thread)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if($security->isGranted('ROLE_ADMIN') !== false){
+                $em = $this->getDoctrine()->getManager();
+                $thread->setIsPostit(
+                    !$thread->getIsPostit()
+                );
+                $em->persist($thread);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Le topic a bien été placé en "post-it".'
+                );
+            }
+        }
+
+        return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
+            'forum_nom' => $thread->getForum()->getSlug(),
+            'thread_nom' => $thread->getSlug()
+        )));
+    }
+
+    /**
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"forum_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"thread_nom":"slug"}})
+     */
+    public function threadSupprimerAction(Forum $forum, Thread $thread)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false){
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($thread);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Le topic a bien été supprimé.'
+                );
+
+                return $this->redirect($this->generateUrl('ninja_tooken_topic', array(
+                    'forum_nom' => $forum->getSlug()
+                )));
+            }
+        }
+        return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
+            'forum_nom' => $forum->getSlug(),
+            'thread_nom' => $thread->getSlug()
+        )));
+    }
+
+    /**
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"forum_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"thread_nom":"slug"}})
+     */
+    public function commentAjouterAction(Request $request, Forum $forum, Thread $thread)
     {
         return $this->render('NinjaTookenForumBundle:Default:message.html.twig');
     }
 
     /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
-     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
-     */
-    public function messageModifierAction(Forum $forum, Thread $thread)
-    {
-        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
-            'topic_nom' => $thread->getForum()->getSlug(),
-            'message_nom' => $thread->getSlug()
-        )));
-    }
-
-    /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
-     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
-     */
-    public function messageSupprimerAction(Forum $forum, Thread $thread)
-    {
-        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
-            'topic_nom' => $thread->getForum()->getSlug(),
-            'message_nom' => $thread->getSlug()
-        )));
-    }
-
-    /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
-     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
-     */
-    public function messageVerrouillerAction(Forum $forum, Thread $thread)
-    {
-        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
-            'topic_nom' => $thread->getForum()->getSlug(),
-            'message_nom' => $thread->getSlug()
-        )));
-    }
-
-    /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
-     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
-     */
-    public function messagePostitAction(Forum $forum, Thread $thread)
-    {
-        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
-            'topic_nom' => $thread->getForum()->getSlug(),
-            'message_nom' => $thread->getSlug()
-        )));
-    }
-
-    /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
-     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
-     */
-    public function commentAjouterAction(Forum $forum, Thread $thread)
-    {
-        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
-            'topic_nom' => $thread->getForum()->getSlug(),
-            'message_nom' => $thread->getSlug()
-        )));
-    }
-
-    /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
-     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"forum_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"thread_nom":"slug"}})
      * @ParamConverter("comment", class="NinjaTookenForumBundle:Comment", options={"mapping": {"comment_id":"id"}})
      */
-    public function commentModifierAction(Forum $forum, Thread $thread, Comment $comment)
+    public function commentModifierAction(Request $request, Forum $forum, Thread $thread, Comment $comment, $page)
     {
-        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
-            'topic_nom' => $thread->getForum()->getSlug(),
-            'message_nom' => $thread->getSlug()
+        return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
+            'forum_nom' => $forum->getSlug(),
+            'thread_nom' => $thread->getSlug(),
+            'page' => $page
         )));
     }
 
     /**
-     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"topic_nom":"slug"}})
-     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"message_nom":"slug"}})
+     * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"forum_nom":"slug"}})
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"thread_nom":"slug"}})
      * @ParamConverter("comment", class="NinjaTookenForumBundle:Comment", options={"mapping": {"comment_id":"id"}})
      */
-    public function commentSupprimerAction(Forum $forum, Thread $thread, Comment $comment)
+    public function commentSupprimerAction(Request $request, Forum $forum, Thread $thread, Comment $comment, $page)
     {
-        return $this->redirect($this->generateUrl('ninja_tooken_message', array(
-            'topic_nom' => $thread->getForum()->getSlug(),
-            'message_nom' => $thread->getSlug()
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if( ($thread->getIsCommentable() && $comment->getAuthor() == $user) || $security->isGranted('ROLE_ADMIN') !== false){
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($comment);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Le commentaire a bien été supprimé.'
+                );
+            }
+        }
+        return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
+            'forum_nom' => $forum->getSlug(),
+            'thread_nom' => $thread->getSlug(),
+            'page' => $page
         )));
     }
 
