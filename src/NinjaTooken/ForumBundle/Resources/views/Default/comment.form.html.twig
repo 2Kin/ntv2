@@ -54,15 +54,12 @@
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<span itemprop="title">Communauté</span>
-							</span>  <i class="icon-angle-right"></i> 
+							</span> <i class="icon-angle-right"></i>
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_forum') }}" itemprop="url">
 									<span itemprop="title">Forums</span>
-								</a>
+								</a> <i class="icon-angle-right"></i>
 							</span>
-{% endblock %}
-
-{% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_topic', {forum_nom:forum.slug}) }}" itemprop="url">
 									<span itemprop="title">{{ forum.nom }}</span>
@@ -70,10 +67,18 @@
 							</span>
 {% endblock %}
 
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_thread', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" itemprop="url">
+									<span itemprop="title">{% if thread.isCommentable == false %}<i class="icon-lock"></i> {% endif %}{% if thread.isPostit =='1' %}<i class="icon-pushpin"></i> {% endif %}{% if date(thread.lastCommentAt) > date('-1days') %}<i class="icon-eye-open"></i> {% endif %}{{ thread.nom }}</span>
+								</a>
+							</span>
+{% endblock %}
+
 {% block body %}
 				<section class="forum">
 				    <form action="#" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full">
-					<h3><i class="icon-plus"></i> Ajouter un topic</h3>
+					<h3><i class="icon-plus"></i> Ajouter un commentaire</h3>
 					{{ form_widget(form) }}
 					<div class="row-fluid">
 					    <div class="span8 offset4">

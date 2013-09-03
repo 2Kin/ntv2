@@ -1999,7 +1999,8 @@ tinymce.PluginManager.add('nt_media', function(editor, url) {
 			try{
 				var ae = new AutoEmbed();
 				var res = ae.parseUrl(data.source1);
-				return ae.getEmbedCode();
+				if(res !== false)
+					return ae.getEmbedCode();
 			}catch(e){}
 
 			tinymce.each(urlPatterns, function(pattern) {

@@ -10,6 +10,7 @@ use NinjaTooken\ForumBundle\Entity\Forum;
 use NinjaTooken\ForumBundle\Entity\Thread;
 use NinjaTooken\ForumBundle\Form\Type\ThreadType;
 use NinjaTooken\ForumBundle\Entity\Comment;
+use NinjaTooken\ForumBundle\Form\Type\CommentType;
 
 class DefaultController extends Controller
 {
@@ -165,9 +166,13 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $num = $this->container->getParameter('numReponse');
+        $security = $this->get('security.context');
         $page = max(1, $page);
 
         $comments = $em->getRepository('NinjaTookenForumBundle:Comment')->getComments($thread, $num, $page);
+
+        if($thread->getIsCommentable() || $security->isGranted('ROLE_ADMIN') !== false)
+            $form = $this->createForm(new CommentType(), new Comment());
 
         return $this->render('NinjaTookenForumBundle:Default:message.html.twig', array(
             'forum' => $forum,
@@ -175,7 +180,8 @@ class DefaultController extends Controller
             'comments' => $comments,
             'page' => $page,
             'nombreComment' => count($comments),
-            'nombrePage' => ceil(count($comments)/$num)
+            'nombrePage' => ceil(count($comments)/$num),
+            'form' => isset($form)?$form->createView():null
         ));
     }
 
@@ -297,13 +303,12 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Le topic a bien été verrouillé.'
+                    $thread->getIsCommentable()?'Le topic a bien été verrouillé.':'Le topic a bien été déverrouillé.'
                 );
             }
         }
-
         return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
-            'forum_nom' => $thread->getForum()->getSlug(),
+            'forum_nom' => $forum->getSlug(),
             'thread_nom' => $thread->getSlug()
         )));
     }
@@ -329,13 +334,12 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Le topic a bien été placé en "post-it".'
+                    $thread->getIsPostit()?'Le topic a été tagué en "post-it".':'Le topic a été détagué en "post-it".'
                 );
             }
         }
-
         return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
-            'forum_nom' => $thread->getForum()->getSlug(),
+            'forum_nom' => $forum->getSlug(),
             'thread_nom' => $thread->getSlug()
         )));
     }
@@ -376,9 +380,47 @@ class DefaultController extends Controller
      * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"forum_nom":"slug"}})
      * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"thread_nom":"slug"}})
      */
-    public function commentAjouterAction(Request $request, Forum $forum, Thread $thread)
+    public function commentAjouterAction(Request $request, Forum $forum, Thread $thread, $page)
     {
-        return $this->render('NinjaTookenForumBundle:Default:message.html.twig');
+        $security = $this->get('security.context');
+        $page = max(1, $page);
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if($thread->getIsCommentable() || $security->isGranted('ROLE_ADMIN') !== false){
+                $comment = new Comment();
+                $comment->setAuthor($user);
+                $comment->setThread($thread);
+
+                $form = $this->createForm(new CommentType(), $comment);
+                if('POST' === $request->getMethod()) {
+                    // cas particulier du formulaire avec tinymce
+                    $request->request->set('comment', array_merge(
+                        $request->request->get('comment'),
+                        array('body' => $request->get('comment_body'))
+                    ));
+
+                    $form->bind($request);
+
+                    if ($form->isValid()) {
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($comment);
+                        $em->flush();
+
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            'Le commentaire a bien été ajouté.'
+                        );
+                    }
+                }
+            }
+        }
+        return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
+            'forum_nom' => $forum->getSlug(),
+            'thread_nom' => $thread->getSlug(),
+            'page' => $page
+        )));
     }
 
     /**
@@ -388,6 +430,36 @@ class DefaultController extends Controller
      */
     public function commentModifierAction(Request $request, Forum $forum, Thread $thread, Comment $comment, $page)
     {
+        $security = $this->get('security.context');
+        $page = max(1, $page);
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if( ($thread->getIsCommentable() && $comment->getAuthor() == $user) || $security->isGranted('ROLE_ADMIN') !== false){
+                $form = $this->createForm(new CommentType(), $comment);
+                if('POST' === $request->getMethod()) {
+                    // cas particulier du formulaire avec tinymce
+                    $request->request->set('comment', array_merge(
+                        $request->request->get('comment'),
+                        array('body' => $request->get('comment_body'))
+                    ));
+
+                    $form->bind($request);
+
+                    if ($form->isValid()) {
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($comment);
+                        $em->flush();
+
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            'Le commentaire a bien été modifié.'
+                        );
+                    }
+                }
+            }
+        }
         return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
             'forum_nom' => $forum->getSlug(),
             'thread_nom' => $thread->getSlug(),
@@ -403,6 +475,7 @@ class DefaultController extends Controller
     public function commentSupprimerAction(Request $request, Forum $forum, Thread $thread, Comment $comment, $page)
     {
         $security = $this->get('security.context');
+        $page = max(1, $page);
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();

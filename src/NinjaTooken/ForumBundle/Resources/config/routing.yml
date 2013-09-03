@@ -53,8 +53,10 @@ ninja_tooken_thread_postit:
     defaults: { _controller: NinjaTookenForumBundle:Default:threadPostit }
 
 ninja_tooken_comment_ajouter:
-    pattern:  /forum/{forum_nom}/{thread_nom}/ajouter/
+    pattern:  /forum/{forum_nom}/{thread_nom}/ajouter/{page}
     defaults: { _controller: NinjaTookenForumBundle:Default:commentAjouter }
+    requirements:
+        page:  \d*
 
 ninja_tooken_comment_modifier:
     pattern:  /forum/{forum_nom}/{thread_nom}/{comment_id}/modifier/{page}

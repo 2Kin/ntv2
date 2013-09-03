@@ -60,7 +60,7 @@ class Comment
 
     public function __construct()
     {
-        $this->setDateAjout(new DateTime());
+        $this->setDateAjout(new \DateTime());
     }
 
     /**
@@ -78,9 +78,11 @@ class Comment
     * 
     * @param UserInterface $author 
     */
-    public function setAuthor(UserInterface $author)
+    public function setAuthor(\NinjaTooken\UserBundle\Entity\User $author)
     {
         $this->author = $author;
+
+        return $this;
     }
 
     /**
@@ -94,20 +96,6 @@ class Comment
     }
 
     /**
-    * Get authors comeplete name
-    * 
-    * @return string 
-    */
-    public function getAuthorName()
-    {
-        if (null === $this->getAuthor()) {
-            return 'Anonymous';
-        }
-
-        return $this->getAuthor()->getUsername();
-    }
-
-    /**
      * @return string
      */
     public function getBody()
@@ -117,11 +105,14 @@ class Comment
 
     /**
      * @param  string
-     * @return null
+     *
+     * @return Comment
      */
     public function setBody($body)
     {
         $this->body = $body;
+
+        return $this;
     }
 
     /**
@@ -135,10 +126,14 @@ class Comment
     /**
      * Sets the creation date
      * @param DateTime $dateAjout
+     *
+     * @return Comment
      */
-    public function setDateAjout(DateTime $dateAjout)
+    public function setDateAjout(\DateTime $dateAjout)
     {
         $this->dateAjout = $dateAjout;
+
+        return $this;
     }
 
     /**
@@ -150,20 +145,22 @@ class Comment
     }
 
     /**
-     * @param ThreadInterface $thread
+     * @param Thread $thread
      *
-     * @return void
+     * @return Comment
      */
-    public function setThread(NinjaTooken\ForumBundle\Entity\Thread $thread)
+    public function setThread(\NinjaTooken\ForumBundle\Entity\Thread $thread)
     {
         $this->thread = $thread;
+
+        return $this;
     }
 
     /**
      * Set old_id
      *
      * @param integer $oldId
-     * @return Thread
+     * @return Comment
      */
     public function setOldId($oldId)
     {
