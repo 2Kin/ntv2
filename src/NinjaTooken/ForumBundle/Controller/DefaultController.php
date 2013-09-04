@@ -172,8 +172,7 @@ class DefaultController extends Controller
 
         $comments = $em->getRepository('NinjaTookenForumBundle:Comment')->getCommentsByThread($thread, $num, $page);
 
-        if($thread->getIsCommentable() || $security->isGranted('ROLE_ADMIN') !== false)
-            $form = $this->createForm(new CommentType(), new Comment());
+        $form = $this->createForm(new CommentType(), new Comment());
 
         return $this->render('NinjaTookenForumBundle:Default:thread.html.twig', array(
             'forum' => $forum,
@@ -181,7 +180,7 @@ class DefaultController extends Controller
             'comments' => $comments,
             'page' => $page,
             'nombrePage' => ceil($thread->getNumComments()/$num),
-            'form' => isset($form)?$form->createView():null
+            'form' => $form->createView()
         ));
     }
 
@@ -304,7 +303,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    $thread->getIsCommentable()?'Le topic a bien été verrouillé.':'Le topic a bien été déverrouillé.'
+                    $thread->getIsCommentable()?'Le topic a bien été déverrouillé.':'Le topic a bien été verrouillé.'
                 );
             }
         }

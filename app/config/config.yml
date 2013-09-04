@@ -180,7 +180,7 @@ avalanche_imagine:
 
 # admin
 sonata_user:
-    security_acl: true
+    security_acl: false
     manager_type: orm
     class:
         user: NinjaTooken\UserBundle\Entity\User

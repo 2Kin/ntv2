@@ -61,6 +61,8 @@
 							{{ flashMessage }}
 						    </div>
 						{% endfor %}
+						{# permet de définir un administrateur local pour les clan, ou le global #}
+						{% set ROLE_ADMIN = is_granted("ROLE_ADMIN") or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
 						<article itemscope itemtype="http://schema.org/Article">
 							{{ render(controller('NinjaTookenGameBundle:Default:signature', {'user':thread.author})) }}
 							<header>
@@ -70,26 +72,21 @@
 								{{ thread.body|raw|purify('full') }}
 							</div>
 							<p class="clearfix">
-							{% if thread.isCommentable == true %}
+							{% if thread.isCommentable == true or ROLE_ADMIN %}
 								{% if is_granted("ROLE_USER") %}
 							<a href="#" class="button mini pull-right answer">Répondre</a>
 								{% endif %}
-								{% if is_granted("ROLE_ADMIN") or thread.author == app.user or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
+								{% if ROLE_ADMIN or thread.author == app.user %}
 							<a href="{{ path('ninja_tooken_thread_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right delete">Supprimer</a>
 							<a href="{{ path('ninja_tooken_thread_modifier', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Éditer</a>
 								{% endif %}
-							{% endif %}							
-							{% if is_granted("ROLE_ADMIN") %}
-								{% if thread.isCommentable == false %}
-							<a href="#" class="button mini pull-right answer">Répondre</a>
-							<a href="{{ path('ninja_tooken_thread_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right delete">Supprimer</a>
-							<a href="{{ path('ninja_tooken_thread_modifier', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Éditer</a>
-								{% endif %}
-								<a href="{{ path('ninja_tooken_thread_verrouiller', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Verrouiller</a>
+								{% if ROLE_ADMIN %}
+								<a href="{{ path('ninja_tooken_thread_verrouiller', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">{% if thread.isCommentable %}Verrouiller{% else %}Déverouiller{% endif %}</a>
 								<a href="{{ path('ninja_tooken_thread_postit', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Post-it</a>
+								{% endif %}
 							{% endif %}
 							</p>
-							{% if form is defined %}
+							{% if ROLE_ADMIN or (thread.isCommentable and is_granted("ROLE_USER")) %}
 							    <form action="{{ path('ninja_tooken_comment_ajouter', {forum_nom:forum.slug, thread_nom:thread.slug, page:page}) }}" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" id="answer" class="full inset">
 								<hr>
 								{{ form_widget(form) }}
@@ -120,12 +117,12 @@
 									<div class="content clearfix" itemprop="commentText">
 										<p>{{ comment.body|raw|purify('full') }}</p>
 									</div>
-									{% if thread.isCommentable == true %}
+									{% if thread.isCommentable == true or ROLE_ADMIN %}
 										<p class="clearfix">
 										{% if is_granted("ROLE_USER") %}
 											<a href="#" class="button mini pull-right answer">Répondre</a>
 										{% endif %}
-										{% if is_granted("ROLE_ADMIN") or comment.author == app.user or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
+										{% if ROLE_ADMIN or comment.author == app.user %}
 											<a href="{{ path('ninja_tooken_comment_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" class="button mini pull-right delete">Supprimer</a>
 											<a href="{{ path('ninja_tooken_comment_modifier', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" class="button mini pull-right">Éditer</a>
 										{% endif %}
