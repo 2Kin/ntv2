@@ -9,14 +9,8 @@ class DefaultController extends Controller
 {
     public function partiesAction()
     {
-        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenGameBundle:Lobby');
-
-        $games = $repo->createQueryBuilder('a')
-            ->orderBy('a.dateDebut', 'DESC')
-            ->getQuery()->getResult();
-
         return $this->render('NinjaTookenGameBundle:Default:parties.html.twig', array(
-            'games' => $games
+            'games' => $this->getDoctrine()->getManager()->getRepository('NinjaTookenGameBundle:Lobby')->findBy(array(), array('dateDebut' => 'DESC'))
         ));
     }
 
@@ -75,51 +69,21 @@ class DefaultController extends Controller
         $ninja = $user->getNinja();
 
         if($ninja){
-            $xml = file_get_contents(dirname(__FILE__).'/../Resources/public/xml/game.xml');
-            $document = new \DOMDocument();
-            $document->loadXml('<root>'.$xml.'</root>' );
+            $gameData = $this->get('ninjatooken_game.gamedata');
 
             // l'expérience (et données associées)
-            $experience	= $ninja->getExperience();
-            $dan        = $ninja->getGrade();
-            $niveau		= 0;
-            $xpXML		= $document->getElementsByTagName('experience')->item(0)->getElementsByTagName('x');
-            $k			= 0;
-            $xp			= $experience-$dan*$xpXML->item($xpXML->length-2)->getAttribute('val');
-            foreach ($xpXML as $exp){
-                if($exp->getAttribute('val')<=$xp)
-                    $k++;
-                else
-                    break;
-            }
-            $levelActu = $xpXML->item($k>0?$k-1:0);
-            $levelSuivant = $xpXML->item($k);
+            $gameData->setExperience($ninja->getExperience(), $ninja->getGrade());
 
-            $user->level = $levelActu->getAttribute('niveau');
-            $user->ratio = ($xp - $levelActu->getAttribute("val"))/($levelSuivant->getAttribute("val")-$levelActu->getAttribute("val"))*100;
+            $user->level = $gameData->getLevelActuel();
+            $user->ratio = $gameData->getRatio();
 
             // classement
             $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenGameBundle:Ninja');
-            $classement = $repo->createQueryBuilder('a')
-                 ->select('COUNT(a)')
-                 ->leftJoin('NinjaTookenUserBundle:User', 'u', 'WITH', 'a.user = u.id')
-                 ->where('u.locked = 0')
-                 ->andWhere('a.experience > :experience')
-                 ->setParameters(array(
-                    'experience' => $experience
-                ))
-                 ->getQuery()
-                 ->getSingleScalarResult();
-			$user->classement		= $classement+1;
+
+			$user->classement = $repo->getClassement($ninja->getExperience());
 
             // total de joueurs
-            $total = $repo->createQueryBuilder('a')
-                 ->select('COUNT(a)')
-                 ->leftJoin('NinjaTookenUserBundle:User', 'u', 'WITH', 'a.user = u.id')
-                 ->where('u.locked = 0')
-                 ->getQuery()
-                 ->getSingleScalarResult();
-			$user->total		= $total;
+            $user->total = $repo->getNumNinjas();
 
             return $this->render('NinjaTookenGameBundle:Default:signature.html.twig', array('user' => $user));
         }

@@ -75,14 +75,14 @@
 							<a href="#" class="button mini pull-right answer">Répondre</a>
 								{% endif %}
 								{% if is_granted("ROLE_ADMIN") or thread.author == app.user or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
-							<a href="{{ path('ninja_tooken_thread_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Supprimer</a>
+							<a href="{{ path('ninja_tooken_thread_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right delete">Supprimer</a>
 							<a href="{{ path('ninja_tooken_thread_modifier', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Éditer</a>
 								{% endif %}
 							{% endif %}							
 							{% if is_granted("ROLE_ADMIN") %}
 								{% if thread.isCommentable == false %}
 							<a href="#" class="button mini pull-right answer">Répondre</a>
-							<a href="{{ path('ninja_tooken_thread_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Supprimer</a>
+							<a href="{{ path('ninja_tooken_thread_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right delete">Supprimer</a>
 							<a href="{{ path('ninja_tooken_thread_modifier', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Éditer</a>
 								{% endif %}
 								<a href="{{ path('ninja_tooken_thread_verrouiller', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Verrouiller</a>
@@ -98,10 +98,10 @@
 								</div>
 							    </form>
 							{% endif %}
-							{% if nombreComment > 0 %}
+							{% if thread.numComments > 0 %}
 							<hr>
 							<section>
-								<span class="comments">{{ nombreComment }} commentaire{% if nombreComment>1 %}s{% endif %}</span>
+								<span class="comments">{{ thread.numComments }} commentaire{% if thread.numComments>1 %}s{% endif %}</span>
 								{% include 'pagination.html.twig' with {
 									currentPage: page,
 									paginationPath: path('ninja_tooken_thread', {forum_nom: forum.slug, thread_nom:thread.slug, 'page': ''}),
@@ -126,7 +126,7 @@
 											<a href="#" class="button mini pull-right answer">Répondre</a>
 										{% endif %}
 										{% if is_granted("ROLE_ADMIN") or comment.author == app.user or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
-											<a href="{{ path('ninja_tooken_comment_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" class="button mini pull-right">Supprimer</a>
+											<a href="{{ path('ninja_tooken_comment_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" class="button mini pull-right delete">Supprimer</a>
 											<a href="{{ path('ninja_tooken_comment_modifier', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" class="button mini pull-right">Éditer</a>
 										{% endif %}
 										</p>

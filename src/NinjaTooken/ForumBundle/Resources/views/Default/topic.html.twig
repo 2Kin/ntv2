@@ -25,6 +25,11 @@
 
 {% block body %}
 				<section class="forum">
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="flash-notice">
+                        {{ flashMessage }}
+                        </div>
+                    {% endfor %}
 					{% if is_granted("ROLE_USER") and forum.clan is empty or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true or is_granted("ROLE_ADMIN")) %}<h4><a href="{{ path('ninja_tooken_thread_ajouter', {forum_nom:forum.slug}) }}" class="button pull-right">Nouveau topic</a></h4>{% endif %}<br class="clear">
 					{% for thread in threads %}
 					{% include 'NinjaTookenForumBundle:Default:topicListe.html.twig' %}

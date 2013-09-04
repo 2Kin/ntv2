@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use NinjaTooken\UserBundle\Entity\User;
 use NinjaTooken\ForumBundle\Entity\Forum;
 use NinjaTooken\ForumBundle\Entity\Thread;
 use NinjaTooken\ForumBundle\Form\Type\ThreadType;
@@ -169,18 +170,17 @@ class DefaultController extends Controller
         $security = $this->get('security.context');
         $page = max(1, $page);
 
-        $comments = $em->getRepository('NinjaTookenForumBundle:Comment')->getComments($thread, $num, $page);
+        $comments = $em->getRepository('NinjaTookenForumBundle:Comment')->getCommentsByThread($thread, $num, $page);
 
         if($thread->getIsCommentable() || $security->isGranted('ROLE_ADMIN') !== false)
             $form = $this->createForm(new CommentType(), new Comment());
 
-        return $this->render('NinjaTookenForumBundle:Default:message.html.twig', array(
+        return $this->render('NinjaTookenForumBundle:Default:thread.html.twig', array(
             'forum' => $forum,
             'thread' => $thread,
             'comments' => $comments,
             'page' => $page,
-            'nombreComment' => count($comments),
-            'nombrePage' => ceil(count($comments)/$num),
+            'nombrePage' => ceil($thread->getNumComments()/$num),
             'form' => isset($form)?$form->createView():null
         ));
     }
@@ -275,6 +275,7 @@ class DefaultController extends Controller
                 }
                 return $this->render('NinjaTookenForumBundle:Default:thread.form.html.twig', array(
                     'forum' => $forum,
+                    'thread' => $thread,
                     'form' => $form->createView()
                 ));
             }
@@ -456,15 +457,23 @@ class DefaultController extends Controller
                             'notice',
                             'Le commentaire a bien été modifié.'
                         );
+                        return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
+                            'forum_nom' => $forum->getSlug(),
+                            'thread_nom' => $thread->getSlug(),
+                            'page' => $page
+                        )));
                     }
                 }
+                return $this->render('NinjaTookenForumBundle:Default:comment.form.html.twig', array(
+                    'forum' => $forum,
+                    'thread' => $thread,
+                    'comment' => $comment,
+                    'page' => $page,
+                    'form' => $form->createView()
+                ));
             }
         }
-        return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
-            'forum_nom' => $forum->getSlug(),
-            'thread_nom' => $thread->getSlug(),
-            'page' => $page
-        )));
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
     /**
@@ -498,27 +507,10 @@ class DefaultController extends Controller
         )));
     }
 
-    public function recentCommentsAction($max = 10, $forum = 0, $user = 0)
+    public function recentCommentsAction($max = 10, Forum $forum = null, User $user = null)
     {
-        $em = $this->getDoctrine()->getManager();
-        $query = $em->getRepository('NinjaTookenForumBundle:Comment')
-            ->createQueryBuilder('a')
-            ->orderBy('a.dateAjout', 'DESC');
-
-        if(!empty($forum)){
-            $query->leftJoin('NinjaTookenForumBundle:Thread', 't', 'WITH', 'a.thread = t.id')
-                ->where('t.forum = :forum')
-                ->setParameter('forum', $forum);
-        }
-        if(!empty($user)){
-            $query->where('a.author = :user')
-                ->setParameter('user', $user);
-        }
-        $comments = $query->getQuery()
-            ->setFirstResult(0)
-            ->setMaxResults($max)
-            ->getResult();
-
-        return $this->render('NinjaTookenForumBundle:Comments:recentList.html.twig', array('comments' => $comments));
+        return $this->render('NinjaTookenForumBundle:Comments:recentList.html.twig', array(
+            'comments' => $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Comment')->getRecentComments($forum, $user, $max)
+        ));
     }
 }

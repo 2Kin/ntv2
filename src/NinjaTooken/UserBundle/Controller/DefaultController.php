@@ -11,7 +11,6 @@ use NinjaTooken\UserBundle\Entity\Friend;
 use NinjaTooken\UserBundle\Entity\Capture;
 use NinjaTooken\UserBundle\Entity\Message;
 use FOS\UserBundle\Mailer\MailerInterface;
-use FOS\UserBundle\Util\Canonicalizer;
 
 class DefaultController extends Controller
 {
@@ -39,27 +38,12 @@ class DefaultController extends Controller
 
         $ninja = $user->getNinja();
         if($ninja){
-            $xml = file_get_contents(dirname(__FILE__).'/../../GameBundle/Resources/public/xml/game.xml');
-            $document = new \DOMDocument();
-            $document->loadXml('<root>'.$xml.'</root>' );
+            $gameData = $this->get('ninjatooken_game.gamedata');
 
             // l'expérience (et données associées)
-            $experience	= $ninja->getExperience();
-            $dan        = $ninja->getGrade();
-            $niveau		= 0;
-            $xpXML		= $document->getElementsByTagName('experience')->item(0)->getElementsByTagName('x');
-            $k			= 0;
-            $xp			= $experience-$dan*$xpXML->item($xpXML->length-2)->getAttribute('val');
-            foreach ($xpXML as $exp){
-                if($exp->getAttribute('val')<=$xp)
-                    $k++;
-                else
-                    break;
-            }
-            $levelActu = $xpXML->item($k>0?$k-1:0);
-            $levelSuivant = $xpXML->item($k);
+            $gameData->setExperience($ninja->getExperience(), $ninja->getGrade());
 
-            $user->level = $levelActu->getAttribute('niveau');
+            $user->level = $gameData->getLevelActuel();
         }
 
         return $this->render('NinjaTookenUserBundle:Default:connected.html.twig', array('user' => $user));
@@ -88,24 +72,8 @@ class DefaultController extends Controller
 
     public function userSearchAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $num = $this->container->getParameter('numReponse');
-        $q = $request->get('q');
-
-        $query = $em->getRepository('NinjaTookenUserBundle:User')->createQueryBuilder('u')
-            ->where('u.locked = :locked')
-            ->setParameter('locked', false);
-
-        if(!empty($q)){
-            $query->andWhere('u.username LIKE :q')
-                ->setParameter('q', $q.'%');
-        }
-
-        $query->setFirstResult(0)
-            ->setMaxResults($num);
-
         return $this->render('NinjaTookenUserBundle:Default:search.html.twig', array(
-            'users' => $query->getQuery()->getResult()
+            'users' => $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:User')->searchUser((string)$request->get('q'), $this->container->getParameter('numReponse'))
         ));
     }
 
@@ -267,13 +235,11 @@ class DefaultController extends Controller
             if ($request->getMethod() === 'POST') {
                 $user = $security->getToken()->getUser();
                 $em = $this->getDoctrine()->getManager();
-                $userRepository = $em->getRepository('NinjaTookenUserBundle:User');
 
                 $update = false;
                 // paramètres de compte
                 if((int)$request->get('editAccount') == 1){
                     $userManager = $this->container->get('fos_user.user_manager');
-                    $canonicalizer = new Canonicalizer();
 
                     // modification de pseudo
                     $oldPseudo = $user->getOldUsernames();
@@ -281,32 +247,12 @@ class DefaultController extends Controller
                     if(count($oldPseudo)<4 || in_array($pseudo, $oldPseudo)){
                         $oPseudo = $user->getUsername();
                         if($oPseudo != $pseudo && !empty($pseudo)){
-                            $pseudoCanonical = $canonicalizer->canonicalize($pseudo);
-                            $userPseudo = $userManager->findUserByUsername($pseudo);
                             // le pseudo n'est pas actuellement utilisé
-                            if(!$userPseudo){
-                                $userPseudo = $userRepository->createQueryBuilder('u')
-                                    ->where('u.enabled = :enabled')
-                                    ->andWhere('u.oldUsernamesCanonical LIKE :pseudo')
-                                    ->andWhere('u.id <> :id')
-                                    ->setParameter('enabled', true)
-                                    ->setParameter('pseudo', ','.$pseudoCanonical.',')
-                                    ->setParameter('id', $user->getId())
-                                    ->getQuery()
-                                    ->getOneOrNullResult();
+                            if(!$userManager->findUserByUsername($pseudo)){
                                 // le pseudo n'est pas utilisé par un autre joueur
-                                if(!$userPseudo){
+                                if(!$em->getRepository('NinjaTookenUserBundle:User')->findUserByOldPseudo($pseudo, $user->getId())){
                                     $user->setUsername($pseudo);
-                                    $user->setUsernameCanonical($pseudoCanonical);
                                     $user->addOldUsername($oPseudo);
-
-                                    // met à jour les anciens pseudos
-                                    $oldUsernamesCanonical = ',';
-                                    $oldUsernames = $user->getOldUsernames();
-                                    foreach($oldUsernames as $oldUsername){
-                                        $oldUsernamesCanonical .= $canonicalizer->canonicalize($oldUsername).',';
-                                    }
-                                    $user->setOldUsernamesCanonical($oldUsernamesCanonical);
                                 }else{
                                     $this->get('session')->getFlashBag()->add(
                                         'notice',
@@ -337,7 +283,6 @@ class DefaultController extends Controller
                                     $user->setConfirmationToken($this->get('fos_user.util.token_generator')->generateToken());
                                 }
                                 $user->setEmail($email);
-                                $user->setEmailCanonical($canonicalizer->canonicalize($email));
                             }else{
                                 $this->get('session')->getFlashBag()->add(
                                     'notice',
@@ -352,7 +297,7 @@ class DefaultController extends Controller
 
                     $user->setDateOfBirth(new \DateTime((int)$request->get('annee')."-".(int)$request->get('mois')."-".(int)$request->get('jour')));
 
-                    $user->setDescription((string)$request->get('description'));
+                    $user->setDescription((string)$request->get('user_description'));
 
                     $user->setReceiveNewsletter((int)$request->get('news') == 1);
                     $user->setReceiveAvertissement((int)$request->get('mail') == 1);

@@ -6,11 +6,13 @@ use Sonata\UserBundle\Model\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use FOS\UserBundle\Util\Canonicalizer;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="nt_user")
+ * @ORM\Entity(repositoryClass="NinjaTooken\UserBundle\Entity\UserRepository")
  */
 class User extends BaseUser
 {
@@ -169,6 +171,18 @@ class User extends BaseUser
 
             $this->setAvatar($file);
         }
+
+        // met à jour les anciens pseudos
+        $canonicalizer = new Canonicalizer();
+        $oldUsernamesCanonical = '';
+        $oldUsernames = $this->getOldUsernames();
+        if(!empty($oldUsernames)){
+            $oldUsernamesCanonical .= ',';
+            foreach($oldUsernames as $oldUsername){
+                $oldUsernamesCanonical .= $canonicalizer->canonicalize($oldUsername).',';
+            }
+        }
+        $this->setOldUsernamesCanonical($oldUsernamesCanonical);
     }
 
     /**

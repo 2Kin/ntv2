@@ -33,14 +33,21 @@ class NinjaRepository extends EntityRepository
     public function getNumNinjas($classe="")
     {
         $query = $this->createQueryBuilder('n')
-            ->select('COUNT(n)');
+            ->select('COUNT(n)')
+            ->leftJoin('NinjaTookenUserBundle:User', 'u', 'WITH', 'n.user = u.id')
+            ->where('u.locked = 0');
 
         if(!empty($classe)){
-            $query->where('n.classe = :classe')
+            $query->andWhere('n.classe = :classe')
                 ->setParameter('classe', $classe);
         }
 
-        return $query->getQuery()->getSingleScalarResult();
+        $query = $query->getQuery();
+
+        $query->useResultCache(true, 1800, __METHOD__.serialize($query->getParameters()));
+        $query->useQueryCache(true);
+
+        return $query->getSingleScalarResult();
     }
 
     public function getSumExperience()
@@ -48,6 +55,23 @@ class NinjaRepository extends EntityRepository
         $query = $this->createQueryBuilder('n')
             ->select('SUM(n.experience)');
 
-        return $query->getQuery()->getSingleScalarResult();
+        $query = $query->getQuery();
+
+        $query->useResultCache(true, 1800, __METHOD__);
+        $query->useQueryCache(true);
+
+        return $query->getSingleScalarResult();
+    }
+
+    public function getClassement($experience = 0)
+    {
+        $query = $this->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->leftJoin('NinjaTookenUserBundle:User', 'u', 'WITH', 'a.user = u.id')
+            ->where('u.locked = 0')
+            ->andWhere('a.experience > :experience')
+            ->setParameter('experience', $experience);
+
+        return $query->getQuery()->getSingleScalarResult() + 1;
     }
 }

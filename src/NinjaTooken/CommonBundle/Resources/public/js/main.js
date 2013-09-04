@@ -255,28 +255,56 @@ $(document).ready(function(){
 		document.location.href = String(document.location.pathname).replace(/classement\/([0-9]*)/gi, 'classement/1')+'?filter='+$(this).find('option:selected').val()+'&order='+(typeof params['order']!="undefined"?params['order']:"")+'#classement';
 	});
 
-	// paramètres
-	var _deleteAccount = $('form[name="deleteAccount"]');
-	if(_deleteAccount.length>0){
-		var _validation = false;
-		var _popup = $('.popup-bg');
+	// gestion de la popup
+	var _popup = $('.popup-bg');
+	if(_popup.length>0){
+		var _referer = undefined;
+		_popup.on('open', function(e){
+			if(typeof _referer !="undefined"){
+				_popup.addClass('on');
+			}
+		});
 		_popup.find('a[href="confirm"]').on('click', function(){
-			_validation = true;
-			_deleteAccount.trigger('submit');
 			_popup.removeClass('on');
+			_referer.trigger('validate');
 			return false;
 		});
 		_popup.find('a[href="cancel"]').on('click', function(){
+			_referer = undefined;
 			_popup.removeClass('on');
 			return false;
 		});
-		_deleteAccount.on('submit', function(){
-			if(!_validation){
-				_popup.addClass('on');
-			}
-			return _validation;
-		});
+		var _addPopupValidate = function(_element, _event){
+			_element.attr('data-remove', '0');
+			_element.on(_event, function(){
+				if(_element.attr('data-remove')!='1'){
+					_referer = _element;
+					_popup.trigger('open');
+					return false;
+				}
+			});
+			_element.on('validate', function(){
+				_element.attr('data-remove', '1');
+				if(_event=='click'){
+					document.location = _element.attr('href');
+				}else
+					_element.trigger(_event);
+			});
+		};
 
+		// confirmation pour supprimer mon compte
+		var _deleteAccount = $('form[name="deleteAccount"]');
+		if(_deleteAccount.length>0){
+			_addPopupValidate(_deleteAccount, 'submit');
+		}
+		// confirmation pour supprimer un thread/message
+		var _delete = $('a.delete');
+		if(_delete.length>0){
+			var _event = 'click';
+			_delete.each(function(){
+				_addPopupValidate($(this), 'click');
+			});
+		}
 	}
 
 	// réponses

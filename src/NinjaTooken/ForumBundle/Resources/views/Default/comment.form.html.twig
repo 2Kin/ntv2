@@ -47,9 +47,9 @@
 
 {% extends '::layout.html.twig' %}
 
-{% block title %}NinjaTooken - {{ forum.nom }}{% endblock %}
-{% block description %}Les topics de "{{ forum.nom }}", c'est ici pour votre jeu fps de ninja gratuit.{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, {{ forum.nom }}, topic, message, fps, gratuit, online, free{% endblock %}
+{% block title %}NinjaTooken - Éditer un commentaire{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -63,11 +63,8 @@
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_topic', {forum_nom:forum.slug}) }}" itemprop="url">
 									<span itemprop="title">{{ forum.nom }}</span>
-								</a>
+								</a> <i class="icon-angle-right"></i>
 							</span>
-{% endblock %}
-
-{% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_thread', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" itemprop="url">
 									<span itemprop="title">{% if thread.isCommentable == false %}<i class="icon-lock"></i> {% endif %}{% if thread.isPostit =='1' %}<i class="icon-pushpin"></i> {% endif %}{% if date(thread.lastCommentAt) > date('-1days') %}<i class="icon-eye-open"></i> {% endif %}{{ thread.nom }}</span>
@@ -75,14 +72,21 @@
 							</span>
 {% endblock %}
 
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_comment_modifier', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" itemprop="url">
+									<span itemprop="title"><i class="icon-pencil"></i> Éditer un commentaire</span>
+								</a>
+							</span>
+{% endblock %}
+
 {% block body %}
 				<section class="forum">
 				    <form action="#" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full">
-					<h3><i class="icon-plus"></i> Ajouter un commentaire</h3>
 					{{ form_widget(form) }}
 					<div class="row-fluid">
 					    <div class="span8 offset4">
-						<input type="submit" value="Ajouter" class="button">
+						<input type="submit" value="Éditer" class="button">
 					    </div>
 					</div>
 				    </form>

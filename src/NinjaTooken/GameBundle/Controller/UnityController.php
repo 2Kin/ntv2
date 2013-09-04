@@ -57,7 +57,8 @@ class UnityController extends Controller
 						if($this->isCryptingOk($a.$l)){
                             $grade	= explode(":", $l);
 							if(count($grade)==2){
-                                $doc = $this->getData();
+                                $gameData = $this->get('ninjatooken_game.gamedata');
+                                $doc = $gameData->getDocument();
 								$max = $doc->getElementsByTagName('experience')->item(0)->getElementsByTagName('x')->item(99)->getAttribute('val');
 								if($ninja->getExperience() - $ninja->getGrade()*$max>$max){
 									$gr = intval($grade[0]);
@@ -189,7 +190,8 @@ class UnityController extends Controller
 						if($this->isCryptingOk($a.$l)){
 							$levels	= explode(":", $l);
 							if(count($levels)==22){
-								$doc = $this->getData();
+                                $gameData = $this->get('ninjatooken_game.gamedata');
+                                $doc = $gameData->getDocument();
 								$levelUp	= $doc->getElementsByTagName('levelUp')->item(0);
 								$capaciteV	= $levelUp->getElementsByTagName('capacite')->item(0)->getAttribute('val');
 								$capaciteD	= $levelUp->getElementsByTagName('capacite')->item(0)->getAttribute('depart');
@@ -299,7 +301,8 @@ class UnityController extends Controller
                                     $ninjaCheck = $userCheck->getNinja();
                                     if($ninjaCheck){
                                         // chargement du xml des données du jeu
-                                        $doc = $this->getData();
+                                        $gameData = $this->get('ninjatooken_game.gamedata');
+                                        $doc = $gameData->getDocument();
 
                                         // l'expérience (et données associées)
                                         $experience	= $ninjaCheck->getExperience();
@@ -721,7 +724,8 @@ class UnityController extends Controller
         $content .= '<friends>';
         $content .= implode("", $friendsUsername);
         $content .= '</friends>';
-        $content .= preg_replace('/\r\n|\r|\n|\t|\s\s+/m','',$this->getDataContent());
+        $gameData = $this->get('ninjatooken_game.gamedata');
+        $content .= preg_replace('/\r\n|\r|\n|\t|\s\s+/m','',$gameData->getRaw());
 
         $facebook = $this->get('fos_facebook.api');
         $scope = implode(',', $this->container->getParameter('fos_facebook.permissions'));
@@ -743,11 +747,6 @@ class UnityController extends Controller
 	}
 
     // récupère les données xml
-    private function getData(){
-        $doc = new \DOMDocument();
-        $doc->loadXml('<root>'.$this->getDataContent().'</root>' );
-        return $doc;
-    }
     private function getDataContent(){
         return file_get_contents(dirname(__FILE__).'/../Resources/public/xml/game.xml');
     }
