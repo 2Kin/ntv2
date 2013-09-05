@@ -680,9 +680,43 @@ body>.content:before{
 		span{
 			color:@grayLight;
 		}
+        .textarea{
+            p,
+            span{
+                color:@gray;
+            }
+        }
 		img.clan{
 			.size(100px, 100px);background-color:@grayLight;.border-radius(@baseBorderRadius);padding:@baseBorderRadius;
 		}
+        .kamon{
+            max-height:630px;overflow:auto;padding:0 4px;
+            &>div{
+                margin:@baseLineHeight/2.5;display:inline-block;text-align:center;cursor:pointer;
+                @media (min-width: 980px) {
+                    &:nth-child(6n){
+                        margin-right:0;
+                    }
+                    &:nth-child(6n+1){
+                        margin-left:0;
+                    }
+                }
+                img{
+                    .transition(all 0.3s linear);
+                }
+                &.selected,
+                &.selected:hover{
+                    img{
+                        .box-shadow(0 0 0 4px @linkColor);background-color:@white;
+                    }
+                }
+                &:hover{
+                    img{
+                        .box-shadow(0 0 0 4px @black);background-color:@white;
+                    }
+                }
+            }
+        }
 		a{
 			span{
 				color:@linkColor;.transition(all 0.2s linear);
@@ -818,7 +852,7 @@ body>.content:before{
 		&.inset{
 			margin-bottom:0;
 		}
-		input[type="text"], input[type="password"], input[type="email"]{
+		input[type="text"], input[type="password"], input[type="email"], input[type="url"]{
 			width:98%;display:block;
 		}
 		&>div{

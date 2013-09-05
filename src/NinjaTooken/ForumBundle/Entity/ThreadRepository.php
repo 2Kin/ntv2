@@ -69,4 +69,18 @@ class ThreadRepository extends EntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    public function deleteThreadsByForum(Forum $forum = null)
+    {
+        if($forum){
+            $query = $this->createQueryBuilder('t')
+                ->delete('NinjaTookenForumBundle:Thread', 't')
+                ->where('t.forum = :forum')
+                ->setParameter('forum', $forum)
+                ->getQuery();
+     
+            return 1 === $query->getScalarResult();
+        }
+        return false;
+    }
 }

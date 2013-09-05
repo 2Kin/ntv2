@@ -365,9 +365,14 @@ class DefaultController extends Controller
                     'Le topic a bien été supprimé.'
                 );
 
-                return $this->redirect($this->generateUrl('ninja_tooken_topic', array(
-                    'forum_nom' => $forum->getSlug()
-                )));
+                if(!$forum->getClan())
+                    return $this->redirect($this->generateUrl('ninja_tooken_topic', array(
+                        'forum_nom' => $forum->getSlug()
+                    )));
+                else
+                    return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
+                        'clan_nom' => $forum->getClan()->getSlug()
+                    )));
             }
         }
         return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
@@ -471,6 +476,11 @@ class DefaultController extends Controller
                     'form' => $form->createView()
                 ));
             }
+            return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
+                'forum_nom' => $forum->getSlug(),
+                'thread_nom' => $thread->getSlug(),
+                'page' => $page
+            )));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }

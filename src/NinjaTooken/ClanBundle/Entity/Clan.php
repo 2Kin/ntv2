@@ -58,7 +58,7 @@ class Clan
     /**
      * @var string
      *
-     * @ORM\Column(name="tag", type="string", length=5)
+     * @ORM\Column(name="tag", type="string", length=5, nullable=true)
      * @Assert\MaxLength(5)
      */
     private $tag;
@@ -66,7 +66,7 @@ class Clan
     /**
      * @var string
      *
-     * @ORM\Column(name="accroche", type="string", length=255)
+     * @ORM\Column(name="accroche", type="string", length=255, nullable=true)
      * @Assert\MaxLength(255)
      */
     private $accroche;
@@ -371,12 +371,13 @@ class Clan
     /**
      * Add membres
      *
-     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $membres
+     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $membre
      * @return Clan
      */
-    public function addMembre(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $membres)
+    public function addMembre(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $membre)
     {
-        $this->membres[] = $membres;
+        $this->membres[] = $membre;
+        $membre->setClan($this);
 
         return $this;
     }
@@ -384,11 +385,11 @@ class Clan
     /**
      * Remove membres
      *
-     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $membres
+     * @param \NinjaTooken\ClanBundle\Entity\ClanUtilisateur $membre
      */
-    public function removeMembre(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $membres)
+    public function removeMembre(\NinjaTooken\ClanBundle\Entity\ClanUtilisateur $membre)
     {
-        $this->membres->removeElement($membres);
+        $this->membres->removeElement($membre);
     }
 
     /**

@@ -6,7 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use NinjaTooken\ClanBundle\Entity\Clan;
+use NinjaTooken\ClanBundle\Form\Type\ClanType;
 use NinjaTooken\ClanBundle\Entity\ClanUtilisateur;
+use NinjaTooken\ForumBundle\Entity\Forum;
+use NinjaTooken\ForumBundle\Entity\Thread;
 
 class DefaultController extends Controller
 {
@@ -95,6 +98,187 @@ class DefaultController extends Controller
         ));
     }
 
+    public function clanAjouterAction(Request $request)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if(!$user->getClan()){
+                $clan = new Clan();
+                $form = $this->createForm(new ClanType(), $clan);
+                if('POST' === $request->getMethod()) {
+                    // cas particulier du formulaire avec tinymce
+                    $request->request->set('clan', array_merge(
+                        $request->request->get('clan'),
+                        array('description' => $request->get('clan_description'))
+                    ));
+
+                    $form->bind($request);
+
+                    if ($form->isValid()) {
+                        $em = $this->getDoctrine()->getManager();
+
+                        $clanutilisateur = new ClanUtilisateur();
+                        $clanutilisateur->setDroit('Shishou');
+                        $clanutilisateur->setCanEditClan(true);
+                        $clanutilisateur->setRecruteur($user);
+                        $clanutilisateur->setMembre($user);
+
+                        $clan->addMembre($clanutilisateur);
+                        $user->setClan($clanutilisateur);
+
+                        $forum = new Forum();
+                        $forum->setNom($clan->getNom());
+                        $forum->setClan($clan);
+
+                        $thread = new Thread();
+                        $thread->setNom('Général');
+                        $thread->setBody($clan->getDescription());
+                        $thread->setForum($forum);
+                        $thread->setAuthor($user);
+
+                        $em->persist($thread);
+                        $em->persist($forum);
+                        $em->persist($clanutilisateur);
+                        $em->persist($user);
+                        $em->persist($clan);
+                        $em->flush();
+
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            'Le clan a bien été ajouté.'
+                        );
+
+                        return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
+                            'clan_nom' => $clan->getSlug()
+                        )));
+                    }
+                }
+            }else{
+                return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
+                    'clan_nom' => $user->getClan()->getClan()->getSlug()
+                )));
+            }
+            return $this->render('NinjaTookenClanBundle:Default:clan.form.html.twig', array(
+                'form' => $form->createView()
+            ));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("clan", class="NinjaTookenClanBundle:Clan", options={"mapping": {"clan_nom":"slug"}})
+     */
+    public function clanModifierAction(Request $request, Clan $clan)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            // vérification des droits utilisateurs
+            $canEdit = false;
+            if($user->getClan()){
+                $clanUser = $user->getClan()->getClan();
+                if($clanUser == $clan && $user->getClan()->getCanEditClan())
+                    $canEdit = true;
+            }
+
+            if($canEdit || $security->isGranted('ROLE_ADMIN') !== false){
+                $form = $this->createForm(new ClanType(), $clan);
+                if('POST' === $request->getMethod()) {
+                    // cas particulier du formulaire avec tinymce
+                    $request->request->set('clan', array_merge(
+                        $request->request->get('clan'),
+                        array('description' => $request->get('clan_description'))
+                    ));
+
+                    $form->bind($request);
+
+                    if ($form->isValid()) {
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($clan);
+                        $em->flush();
+
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            'Le clan a bien été modifié.'
+                        );
+
+                        return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
+                            'clan_nom' => $clan->getSlug()
+                        )));
+                    }
+                }
+                return $this->render('NinjaTookenClanBundle:Default:clan.form.html.twig', array(
+                    'form' => $form->createView(),
+                    'clan' => $clan
+                ));
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_clans'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("clan", class="NinjaTookenClanBundle:Clan", options={"mapping": {"clan_nom":"slug"}})
+     */
+    public function clanSupprimerAction(Clan $clan)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            // vérification des droits utilisateurs
+            $canDelete = false;
+            if($user->getClan()){
+                $clanUser = $user->getClan()->getClan();
+                if($clanUser == $clan && $user->getClan()->getDroit()=="Shishou")
+                    $canDelete = true;
+            }
+
+            if($canDelete || $security->isGranted('ROLE_ADMIN') !== false){
+                $em = $this->getDoctrine()->getManager();
+
+                $forums = $clan->getForums();
+                if(!empty($forums)){
+                    foreach($forums as $forum){
+                        $em->getRepository('NinjaTookenForumBundle:Thread')->deleteThreadsByForum($forum);
+                        $em->remove($forum);
+                    }
+                }
+                $em->remove($clan);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Le clan a bien été supprimé.'
+                );
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_clans'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("clan", class="NinjaTookenClanBundle:Clan", options={"mapping": {"clan_nom":"slug"}})
+     * @ParamConverter("user", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     */
+    public function clanUtilisateurSupprimerAction(Clan $clan, User $user)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            return $this->redirect($this->generateUrl('ninja_tooken_clans'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
     public function clanSearchAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -119,7 +303,7 @@ class DefaultController extends Controller
     function getRecruts(ClanUtilisateur $recruteur){
         $em = $this->getDoctrine()->getManager();
 
-        $recruts = $em->getRepository('NinjaTookenClanBundle:ClanUtilisateur')->getMembres(null, '',  $recruteur->getMembre());
+        $recruts = $em->getRepository('NinjaTookenClanBundle:ClanUtilisateur')->getMembres(null, '',  $recruteur->getMembre(),100);
         $membres = array();
         foreach($recruts as $recrut){
             $membres[] = array(

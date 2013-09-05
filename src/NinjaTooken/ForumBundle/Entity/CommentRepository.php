@@ -89,8 +89,8 @@ class CommentRepository extends EntityRepository
     public function deleteCommentsByThread(Thread $thread = null)
     {
         if($thread){
-            $query = $this->createQueryBuilder()
-                ->delete('Comment', 'c')
+            $query = $this->createQueryBuilder('c')
+                ->delete('NinjaTookenForumBundle:Comment', 'c')
                 ->where('c.thread = :thread')
                 ->setParameter('thread', $thread)
                 ->getQuery();

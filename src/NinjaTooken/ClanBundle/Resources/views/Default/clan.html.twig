@@ -27,9 +27,20 @@
 {% block body %}
 				<div class="row-fluid">
 					<section class="span8">
+						{% for flashMessage in app.session.flashbag.get('notice') %}
+						    <div class="flash-notice">
+							{{ flashMessage }}
+						    </div>
+						{% endfor %}
+						{# permet de définir un administrateur local pour les clan, ou le global #}
+						{% set ROLE_ADMIN = is_granted("ROLE_ADMIN") or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
+						{% set ROLE_SHISHOU = is_granted("ROLE_ADMIN") or (forum.clan and app.user.clan and app.user.clan.droit == 'Shishou') %}
+
 						<div class="main clearfix">
-							<h3>Fondé le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}</h3>
-							<img src="{{ asset('bundles/ninjatookenclan/kamon/' ~ clan.kamon) }}" class="pull-left clan">
+							<h3 class="clearfix">Fondé le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}
+                            {% if ROLE_SHISHOU %}<a href="{{ path('ninja_tooken_clan_supprimer', {clan_nom:clan.slug}) }}" class="button mini pull-right delete">Supprimer</a>{% endif %}
+                            {% if ROLE_ADMIN %}<a href="{{ path('ninja_tooken_clan_modifier', {clan_nom:clan.slug}) }}" class="button mini pull-right">Éditer</a>{% endif %}</h3>
+							<img src="{{ asset(clan.kamon) }}" class="pull-left clan">
 							{{ clan.description|raw|purify('full') }}
 							{%if clan.url is not empty %}Page perso : <a href="{{ clan.url }}" target="_blank">{{ clan.url }}</a>{% endif %}
 						</div>
@@ -38,29 +49,36 @@
 						<div class="grade clearfix">
 							<h3>Organisation du clan</h3>
 							{% if membres is not empty %}
-							<ul class="col{{ membres.recruts|length }}">
-								<li class="first"><a href="{{ path('ninja_tooken_user_fiche', {user_nom:membres.recruteur.membre.slug}) }}"><img src="{{ avatar.getUrl(membres.recruteur.membre) }}" class="pull-left"> {{ membres.recruteur.membre.username }}<br>{{ membres.recruteur.droit }}</a></li>
-								{% if membres.recruts is not empty %}
-								{% for recruts in membres.recruts %}
-								<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:recruts.recruteur.membre.slug}) }}"><img src="{{ avatar.getUrl(recruts.recruteur.membre) }}" class="pull-left"> {{ recruts.recruteur.membre.username }}<br>{{ recruts.recruteur.droit }}</a>
-									{% if recruts.recruts is not empty %}
-									<ul>
-									{% for recruts1 in recruts.recruts %}
-										<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:recruts1.recruteur.membre.slug}) }}"><img src="{{ avatar.getUrl(recruts1.recruteur.membre) }}" class="pull-left"> {{ recruts1.recruteur.membre.username }}<br>{{ recruts1.recruteur.droit }}</a></li>
-										{% if recruts1.recruts is not empty %}
-										<ul>
-										{% for recruts2 in recruts1.recruts %}
-											<li><a href="{{ path('ninja_tooken_user_fiche', {user_nom:recruts2.recruteur.membre.slug}) }}"><img src="{{ avatar.getUrl(recruts2.recruteur.membre) }}" class="pull-left"> {{ recruts2.recruteur.membre.username }}<br>{{ recruts2.recruteur.droit }}</a></li>
-										{% endfor %}
-										</ul>
-										{% endif %}
-									{% endfor %}
-									</ul>
-									{% endif %}
-								</li>
-								{% endfor %}
-								{% endif %}
-							</ul>
+							<ul class="tree">
+								<li>
+                                    {% include "NinjaTookenClanBundle:Default:clan.membre.html.twig" with {'recruteur':membres.recruteur, 'showAdmin':false} %}
+								    {% if membres.recruts is not empty %}
+                                    <ul>
+								        {% for recruts in membres.recruts %}
+                                        <li>
+                                            {% include "NinjaTookenClanBundle:Default:clan.membre.html.twig" with {'recruteur':recruts.recruteur, 'showAdmin':true} %}
+                                            {% if recruts.recruts is not empty %}
+                                            <ul>
+                                                {% for recruts1 in recruts.recruts %}
+                                                <li>
+                                                    {% include "NinjaTookenClanBundle:Default:clan.membre.html.twig" with {'recruteur':recruts1.recruteur, 'showAdmin':true} %}
+                                                    {% if recruts1.recruts is not empty %}
+                                                    <ul>
+                                                        {% for recruts2 in recruts1.recruts %}
+                                                        <li>{% include "NinjaTookenClanBundle:Default:clan.membre.html.twig" with {'recruteur':recruts2.recruteur, 'showAdmin':true} %}</li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                    {% endif %}
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                            {% endif %}
+                                        </li>
+                                    {% endfor %}
+                                    </ul>
+                                    {% endif %}
+                                </li>
+                            </ul>
 							{% endif %}
 						</div>
 
@@ -98,13 +116,11 @@
 							{% if membresListe is not empty %}
 							<h3>Les membres</h3>
 							{% for membre in membresListe %}
-							<div class="membre pull-left">
-								<a href="{{ path('ninja_tooken_user_fiche', {user_nom:membre.membre.slug}) }}"><img src="{{ avatar.getUrl(membre.membre) }}">{{ membre.membre.username }}, {{ membre.droit }}</a>
-							</div>
-							{% endfor %}
+							<div class="membre pull-left">{% include "NinjaTookenClanBundle:Default:clan.membre.html.twig" with {'recruteur':membre, 'showAdmin':false} %}</div>
+                            {% endfor %}
 							<br class="clear">
 							{% endif %}
-							<a href="#" class="button mini">Postuler</a><br/><br/>
+							{% if clan.isRecruting and is_granted('ROL_USER') and app.user.clan is empty %}<a href="#" class="button mini">Postuler</a>{% endif %}<br/><br/>
 						</section>
 
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}

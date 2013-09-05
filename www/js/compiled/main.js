@@ -1618,6 +1618,21 @@ $(document).ready(function(){
 		});
 	}
 
+	// liste de kamon
+	var _kamon = $('.kamon');
+	if(_kamon.length>0){
+		var _input = $('#clan_kamon');
+		var _all = _kamon.find('div');
+		_all.each(function(){
+			var _this = $(this);
+			_this.click(function(){
+				_all.removeClass('selected');
+				_this.addClass('selected');
+				_input.val(_this.attr('data-val'));
+			});
+		});
+	}
+
 	// upload de fichier
 	var _upload = $('form[name="editAvatar"] input[type="file"]');
 	if(_upload.length>0){

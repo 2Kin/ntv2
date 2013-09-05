@@ -47,7 +47,7 @@ class Forum
      *
      * @ORM\Column(name="ordre", type="smallint")
      */
-    private $ordre;
+    private $ordre = 0;
 
     /**
      * @var bool

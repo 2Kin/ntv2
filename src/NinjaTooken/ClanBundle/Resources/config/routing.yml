@@ -19,8 +19,24 @@ ninja_tooken_clan_old:
     pattern:  /clan.php
     defaults: { _controller: NinjaTookenForumBundle:Default:oldClan }
 
+ninja_tooken_clan_ajouter:
+    pattern:  /clan/ajouter
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanAjouter }
+
 ninja_tooken_clan:
     pattern:  /clan/{clan_nom}/{page}
     defaults: { _controller: NinjaTookenClanBundle:Default:clan, page:1 }
     requirements:
         page:  \d*
+
+ninja_tooken_clan_modifier:
+    pattern:  /clan/{clan_nom}/modifier
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanModifier }
+
+ninja_tooken_clan_supprimer:
+    pattern:  /clan/{clan_nom}/supprimer
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanSupprimer }
+
+ninja_tooken_clan_destituer:
+    pattern:  /clan/{clan_nom}/{user_nom}/destituer
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurSupprimer }

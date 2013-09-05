@@ -8,11 +8,24 @@
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<span itemprop="title">Communauté</span>
 							</span>  <i class="icon-angle-right"></i> 
+                            {% if forum.clan is empty %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_forum') }}" itemprop="url">
 									<span itemprop="title">Forums</span>
 								</a>
 							</span>
+                            {% else %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_clans') }}" itemprop="url">
+									<span itemprop="title">Clans</span>
+								</a> <i class="icon-angle-right"></i>
+							</span>
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_clan', {clan_nom:forum.clan.slug}) }}" itemprop="url">
+									<span itemprop="title">{% if forum.clan.tag is not empty %}[{{ forum.clan.tag }}] {% endif %}{{ forum.clan.nom }}</span>
+								</a>
+							</span>
+                            {% endif %}
 {% endblock %}
 
 {% block breadcrumbs2 %}

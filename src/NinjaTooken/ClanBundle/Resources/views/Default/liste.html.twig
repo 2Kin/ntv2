@@ -18,8 +18,15 @@
 							</span>
 {% endblock %}
 
-{% block body %}				<div class="row-fluid">
+{% block body %}
+                <div class="row-fluid">
 					<div class="span8">
+                        {% for flashMessage in app.session.flashbag.get('notice') %}
+                            <div class="flash-notice">
+                            {{ flashMessage }}
+                            </div>
+                        {% endfor %}
+
 						<p class="filtre">
 							Classer par
 							<label class="select">
@@ -30,6 +37,8 @@
 									<option value="date"{% if order == "date" %} selected{% endif %}>date d'ajout</option>
 								</select>
 							</label>
+
+                            {% if is_granted('ROLE_USER') and app.user.clan is empty %}<a href="{{ path('ninja_tooken_clan_ajouter') }}" class="button mini pull-right">Fonder un clan</a>{% endif %}
 						</p>
 						<div class="row-fluid">
 						{% for clan in clans %}
@@ -38,7 +47,7 @@
 							<div class="span6">
 								<article class="news clan" itemscope itemtype="http://schema.org/Article">
 									<header>
-										<img src="{{ asset('bundles/ninjatookenclan/kamon/' ~ clan.kamon) }}" class="pull-left clan" alt="">
+										<img src="{{ asset(clan.kamon) }}" class="pull-left clan" alt="">
 										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}">{% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}</a><br>
 										<span>{{ clan.membres.count }} ninja{% if clan.membres.count>1 %}s{% endif %} depuis le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}</span></h3>
 										{% if clan.isRecruting %}<span class="actif">recrutements ouverts</span>{% else %}<span>recrutements fermés</span>{% endif %}
@@ -78,7 +87,7 @@
 								{% set clan = clan[0] %}
 							<div class="dernier">
 								<span>
-									<img src="{{ asset('bundles/ninjatookenclan/kamon/' ~ clan.kamon) }}" class="pull-left clan" alt="">
+									<img src="{{ asset(clan.kamon) }}" class="pull-left clan" alt="">
 									<a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}">{% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}</a>
 								</span>
 								<time datetime="{{ clan.dateAjout|date("Y-m-d\\TH:i:sP") }}">le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}</time><br>

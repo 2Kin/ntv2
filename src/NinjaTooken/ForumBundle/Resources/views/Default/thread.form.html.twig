@@ -63,6 +63,7 @@
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_topic', {forum_nom:forum.slug}) }}" itemprop="url">
 									<span itemprop="title">{{ forum.nom }}</span>
+                            {% if thread is defined %}
 								</a> <i class="icon-angle-right"></i>
 							</span>
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -70,6 +71,10 @@
 									<span itemprop="title">{% if thread.isCommentable == false %}<i class="icon-lock"></i> {% endif %}{% if thread.isPostit =='1' %}<i class="icon-pushpin"></i> {% endif %}{% if date(thread.lastCommentAt) > date('-1days') %}<i class="icon-eye-open"></i> {% endif %}{{ thread.nom }}</span>
 								</a>
 							</span>
+                            {% else %}
+								</a>
+							</span>
+                            {% endif %}
 {% endblock %}
 
 {% block breadcrumbs2 %}

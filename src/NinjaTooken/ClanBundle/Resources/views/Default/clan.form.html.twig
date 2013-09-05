@@ -1,0 +1,94 @@
+{% form_theme form _self %}
+
+{% block form_widget_compound %}
+{% spaceless %}
+	{% if form.parent is empty %}
+	    {{ form_errors(form) }}
+	{% endif %}
+	{{ block('form_rows') }}
+	{{ form_rest(form) }}
+{% endspaceless %}
+{% endblock form_widget_compound %}
+
+{% block form_row %}
+    <div class="row-fluid">
+	<div class="span3 offset1">
+	{{ form_label(form) }}
+	</div>
+	<div class="span8">
+	{{ form_widget(form) }}
+	{{ form_errors(form) }}
+	</div>
+    </div>
+{% endblock form_row %}
+
+{% block choice_widget_collapsed %}
+{% spaceless %}
+    <div class="kamon">
+    {% for group_label, choice in choices %}
+        <div{% if choice is selectedchoice(value) %} class="selected"{% endif %} data-val="{{ choice.value }}"><img src="{{ asset(choice.value) }}" class="clan" alt="{{ choice.label|trans({}, translation_domain) }}"></div>
+    {% endfor %}
+    <input type="hidden"{{ block('widget_attributes') }} value="{{ value }}">
+    </div>
+{% endspaceless %}
+{% endblock choice_widget_collapsed %}
+
+{% block textarea_widget %}
+{% spaceless %}
+    <div class="textarea" {{ block('widget_attributes') }}>{{ value|raw|purify('full') }}</div>
+{% endspaceless %}
+{% endblock textarea_widget %}
+
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - {% if clan is not defined %}Ajouter{% else %}Éditer{% endif %} un clan{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+
+{% block breadcrumbs1 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<span itemprop="title">Communauté</span>
+							</span>  <i class="icon-angle-right"></i> 
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_clans') }}" itemprop="url">
+									<span itemprop="title">Clans</span>
+                            {% if clan is defined %}
+								</a> <i class="icon-angle-right"></i>
+							</span>
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}" itemprop="url">
+									<span itemprop="title">{% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}</span>
+								</a>
+							</span>
+                            {% else %}
+								</a>
+							</span>
+                            {% endif %}
+{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                            {% if clan is not defined %}
+								<a href="{{ path('ninja_tooken_clan_ajouter') }}" itemprop="url">
+									<span itemprop="title"><i class="icon-plus"></i> Ajouter un clan</span>
+								</a>
+                            {% else %}
+								<a href="{{ path('ninja_tooken_clan_modifier', {clan_nom:clan.slug}) }}" itemprop="url">
+									<span itemprop="title"><i class="icon-pencil"></i> Éditer un clan</span>
+								</a>
+                            {% endif %}
+							</span>
+{% endblock %}
+
+{% block body %}
+				<section class="main">
+				    <form action="#" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full">
+					{{ form_widget(form) }}
+					<div class="row-fluid">
+					    <div class="span8 offset4">
+						<input type="submit" value="{% if clan is not defined %}Ajouter{% else %}Éditer{% endif %}" class="button">
+					    </div>
+					</div>
+				    </form>
+				</section>
+{% endblock %}
