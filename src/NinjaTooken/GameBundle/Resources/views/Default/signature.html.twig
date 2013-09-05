@@ -56,7 +56,7 @@
 	<div class="row-fluid">
 		{% if user.clan is not empty %}
 		<div class="nfo span6" itemprop="memberOf" itemtype="http://schema.org/Organization">
-			 <a href="{{ path('ninja_tooken_clan', {clan_nom:user.clan.clan.slug}) }}" itemprop="url"><span itemprop="name">{{ user.clan.clan.nom }}</span></a> - <strong itemprop="jobTitle">{{ user.clan.droit }}</strong>
+			 <a href="{{ path('ninja_tooken_clan', {clan_nom:user.clan.clan.slug}) }}" itemprop="url"><span itemprop="name">{{ user.clan.clan.nom }}</span></a> - <strong itemprop="jobTitle">{{ clanStatut[user.clan.droit] }}</strong>
 		</div>
 		<div class="nfo right span6" itemprop="award">
 		{% else %}

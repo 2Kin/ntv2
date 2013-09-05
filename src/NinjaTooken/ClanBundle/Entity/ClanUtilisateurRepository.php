@@ -7,7 +7,7 @@ use NinjaTooken\UserBundle\Entity\User;
  
 class ClanUtilisateurRepository extends EntityRepository
 {
-    public function getMembres(Clan $clan=null, $droit="", User $recruteur=null, $nombreParPage=20, $page=1)
+    public function getMembres(Clan $clan=null, $droit=null, User $recruteur=null, $nombreParPage=20, $page=1)
     {
         $page = max(1, $page);
 
@@ -17,7 +17,7 @@ class ClanUtilisateurRepository extends EntityRepository
             $query->where('cu.clan = :clan')
                 ->setParameter('clan', $clan);
         }
-        if(!empty($droit)){
+        if(isset($droit)){
             $query->andWhere('cu.droit = :droit')
                 ->setParameter('droit', $droit);
         }

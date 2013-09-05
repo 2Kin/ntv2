@@ -69,6 +69,6 @@ class ClanType extends AbstractType
 
     public function getName()
     {
-        return 'clan';
+        return 'ninjatooken_clanbundle_clantype';
     }
 }

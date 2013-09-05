@@ -1,7 +1,7 @@
 <a href="{{ path('ninja_tooken_user_fiche', {user_nom:recruteur.membre.slug}) }}" class="pull-left">
     <img src="{{ avatar.getUrl(recruteur.membre) }}" class="pull-left">
     {{ recruteur.membre.username }}<br>
-    {{ recruteur.droit }}
+    {{ clanStatut[recruteur.droit] }}
 </a>
 {% if showAdmin %}
     {% if recruteur.recruteur == app.user or is_granted('ROLE_ADMIN') %}

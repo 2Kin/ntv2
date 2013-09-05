@@ -75,7 +75,7 @@ class DefaultController extends Controller
         }
 
         // l'arborescence des membres
-        $shishou = $em->getRepository('NinjaTookenClanBundle:ClanUtilisateur')->getMembres($clan, 'Shishou', null, 1, 1);
+        $shishou = $em->getRepository('NinjaTookenClanBundle:ClanUtilisateur')->getMembres($clan, 0, null, 1, 1);
         $membres = array();
         if($shishou){
             $shishou = current($shishou);
@@ -121,7 +121,6 @@ class DefaultController extends Controller
                         $em = $this->getDoctrine()->getManager();
 
                         $clanutilisateur = new ClanUtilisateur();
-                        $clanutilisateur->setDroit('Shishou');
                         $clanutilisateur->setCanEditClan(true);
                         $clanutilisateur->setRecruteur($user);
                         $clanutilisateur->setMembre($user);
@@ -236,7 +235,7 @@ class DefaultController extends Controller
             $canDelete = false;
             if($user->getClan()){
                 $clanUser = $user->getClan()->getClan();
-                if($clanUser == $clan && $user->getClan()->getDroit()=="Shishou")
+                if($clanUser == $clan && $user->getClan()->getDroit()==0)
                     $canDelete = true;
             }
 
@@ -302,8 +301,7 @@ class DefaultController extends Controller
 
     function getRecruts(ClanUtilisateur $recruteur){
         $em = $this->getDoctrine()->getManager();
-
-        $recruts = $em->getRepository('NinjaTookenClanBundle:ClanUtilisateur')->getMembres(null, '',  $recruteur->getMembre(),100);
+        $recruts = $em->getRepository('NinjaTookenClanBundle:ClanUtilisateur')->getMembres(null, null, $recruteur->getMembre(), 100);
         $membres = array();
         foreach($recruts as $recrut){
             $membres[] = array(

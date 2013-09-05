@@ -39,11 +39,11 @@ class ClanUtilisateur
     private $clan;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="droit", type="string", length=50)
+     * @ORM\Column(name="droit", type="smallint")
      */
-    private $droit = "Shonin";
+    private $droit = 0;
 
     /**
      * @var boolean
@@ -80,7 +80,7 @@ class ClanUtilisateur
     /**
      * Set droit
      *
-     * @param string $droit
+     * @param integer $droit
      * @return ClanUtilisateur
      */
     public function setDroit($droit)
@@ -93,7 +93,7 @@ class ClanUtilisateur
     /**
      * Get droit
      *
-     * @return string 
+     * @return integer 
      */
     public function getDroit()
     {

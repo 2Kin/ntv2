@@ -16,6 +16,6 @@ class CommentType extends AbstractType
 
     public function getName()
     {
-        return 'comment';
+        return 'ninjatooken_forumbundle_commenttype';
     }
 }
