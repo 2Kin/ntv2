@@ -22,15 +22,8 @@ class MessageType extends AbstractType
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'data_class' => 'NinjaTooken\UserBundle\Entity\Message'
-        ));
-    }
-
     public function getName()
     {
-        return 'ninjatooken_userbundle_messagetype';
+        return 'message';
     }
 }

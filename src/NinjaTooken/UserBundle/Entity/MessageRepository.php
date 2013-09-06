@@ -12,9 +12,9 @@ class MessageRepository extends EntityRepository
         $page = max(1, $page);
 
         $query = $this->createQueryBuilder('m')
-            ->where('m.user = :user')
+            ->where('m.author = :author')
             ->andWhere('m.hasDeleted = 0')
-            ->setParameter('user', $user)
+            ->setParameter('author', $user)
             ->addOrderBy('m.dateAjout', 'DESC')
             ->setFirstResult(($page-1) * $nombreParPage)
             ->setMaxResults($nombreParPage)
@@ -26,9 +26,9 @@ class MessageRepository extends EntityRepository
     public function getFirstSendMessage(User $user)
     {
         $query = $this->createQueryBuilder('m')
-            ->andWhere('m.user = :user')
+            ->where('m.author = :author')
             ->andWhere('m.hasDeleted = 0')
-            ->setParameter('user', $user)
+            ->setParameter('author', $user)
             ->addGroupBy('m.id')
             ->addOrderBy('m.dateAjout', 'DESC')
             ->setFirstResult(0)
@@ -42,9 +42,9 @@ class MessageRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('m')
             ->select('COUNT(m)')
-            ->where('m.user = :user')
+            ->where('m.author = :author')
             ->andWhere('m.hasDeleted = 0')
-            ->setParameter('user', $user)
+            ->setParameter('author', $user)
             ->getQuery();
 
         return $query->getSingleScalarResult();
@@ -56,8 +56,7 @@ class MessageRepository extends EntityRepository
 
         $query = $this->createQueryBuilder('m')
             ->leftJoin('m.receivers', 'mu')
-            ->where('mu.user = :user')
-            ->andWhere('m.user <> :user')
+            ->where('mu.destinataire = :user')
             ->andWhere('mu.hasDeleted = 0')
             ->setParameter('user', $user)
             ->addGroupBy('m.id')
@@ -73,8 +72,7 @@ class MessageRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('m')
             ->leftJoin('m.receivers', 'mu')
-            ->where('mu.user = :user')
-            ->andWhere('m.user <> :user')
+            ->where('mu.destinataire = :user')
             ->andWhere('mu.hasDeleted = 0')
             ->setParameter('user', $user)
             ->addGroupBy('m.id')
@@ -91,8 +89,7 @@ class MessageRepository extends EntityRepository
         $query = $this->createQueryBuilder('m')
             ->leftJoin('m.receivers', 'mu')
             ->select('COUNT(m)')
-            ->where('mu.user = :user')
-            ->andWhere('m.user <> :user')
+            ->where('mu.destinataire = :user')
             ->andWhere('mu.hasDeleted = 0')
             ->setParameter('user', $user)
             ->getQuery();
@@ -105,12 +102,11 @@ class MessageRepository extends EntityRepository
         $query = $this->createQueryBuilder('m')
             ->select('COUNT(m)')
             ->innerJoin('NinjaTookenUserBundle:MessageUser', 'mu', 'WITH', 'm.id = mu.message')
-            ->where('mu.user = :user')
-            ->andWhere('m.user <> :user')
-            ->andWhere('mu.dateRead = :date')
-            ->andWhere('mu.hasDeleted = 0')
+            ->where('mu.destinataire = :user')
+            ->andWhere('mu.dateRead is NULL')
+            ->andWhere('mu.hasDeleted = :hasDeleted')
             ->setParameter('user', $user)
-            ->setParameter('date', '0000-00-00 00:00:00')
+            ->setParameter('hasDeleted', false)
             ->getQuery();
 
         return $query->getSingleScalarResult();

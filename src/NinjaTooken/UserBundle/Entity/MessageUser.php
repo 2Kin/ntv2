@@ -33,12 +33,12 @@ class MessageUser
      *
      * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
      */
-    private $user;
+    private $destinataire;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_read", type="datetime")
+     * @ORM\Column(name="date_read", type="datetime", nullable=true)
      */
     private $dateRead;
 
@@ -106,26 +106,26 @@ class MessageUser
     }
 
     /**
-     * Set user
+     * Set destinataire
      *
-     * @param \NinjaTooken\UserBundle\Entity\User $user
+     * @param \NinjaTooken\UserBundle\Entity\User $destinataire
      * @return MessageUser
      */
-    public function setUser(\NinjaTooken\UserBundle\Entity\User $user = null)
+    public function setDestinataire(\NinjaTooken\UserBundle\Entity\User $destinataire = null)
     {
-        $this->user = $user;
+        $this->destinataire = $destinataire;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get destinataire
      *
      * @return \NinjaTooken\UserBundle\Entity\User 
      */
-    public function getUser()
+    public function getDestinataire()
     {
-        return $this->user;
+        return $this->destinataire;
     }
 
     /**

@@ -339,29 +339,28 @@ $(document).ready(function(){
 	if(_destination.length>0){
 		var request = _destination.attr('data-find');
 		_destination.tagit({
-			tags: function(input, autocomplete) {
+			tags: function(input, autocomplete){
 				if(_destination.query)
 					_destination.query.abort();
-				_destination.query = $.ajax({
-					dataType:'json',
-					url:request+'?q='+input.toLowerCase(),
-					complete:function(result){
-						var users = [];
-						var json = result.responseJSON;
-						if(typeof json != "undefined"){
-							for(var i=0;i<json.length;i++){
-								users.push(json[i].text);
-							}
+				var q = $.trim(input.toLowerCase());
+				if(q.length>2){
+					_destination.query = $.ajax({
+						dataType:'json',
+						url:request+'?q='+q,
+						complete:function(result){
+							var json = result.responseJSON;
+							_destination.tagit(
+								"autocomplete",
+								json,
+								autocomplete
+							);
 						}
-						_destination.tagit(
-							"autocomplete",
-							users,
-							autocomplete
-						);
-					}
-				});
+					});
+				}
 			},
-			field: "destination"
+			inputlibelle: "text",
+			inputvalue: "id",
+			field: "destinataires[]"
 		});
 	}
 

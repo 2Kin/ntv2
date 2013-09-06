@@ -6,6 +6,12 @@ ninja_tooken_user_search:
     pattern:  /fiche/search
     defaults: { _controller: NinjaTookenUserBundle:Default:userSearch }
 
+ninja_tooken_user_find:
+    pattern:  /compte/messagerie/user/find
+    defaults: { _controller: NinjaTookenUserBundle:Default:userFind }
+    requirements:
+        _method:  GET
+
 ninja_tooken_user_fiche:
     pattern:  /fiche/{user_nom}/{page}
     defaults: { _controller: NinjaTookenUserBundle:Default:fiche, page:1 }
@@ -23,12 +29,6 @@ ninja_tooken_user_messagerie:
     defaults: { _controller: NinjaTookenUserBundle:Default:messagerie, page:1 }
     requirements:
         page:  \d*
-
-ninja_tooken_user_find:
-    pattern:  /compte/messagerie/user/find
-    defaults: { _controller: NinjaTookenUserBundle:Default:userFind }
-    requirements:
-        _method:  GET
 
 ninja_tooken_user_parametres:
     pattern:  /compte/parametres

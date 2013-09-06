@@ -21,7 +21,7 @@
 						<h5>Inscrit depuis le {{ user.createdAt|localizeddate('full', 'none', app.request.locale) }}</h5>
 						{{ render(controller('NinjaTookenGameBundle:Default:signature', {'user':user})) }}
 
-						{{ user.biography|raw|purify('full') }}
+						{{ user.description|raw|purify('full') }}
 
 						{% if user.oldUsernames is not empty %}
 						<h3>Autre pseudo utilisé</h3>

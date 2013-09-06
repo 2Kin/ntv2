@@ -21,6 +21,6 @@ class ThreadType extends AbstractType
 
     public function getName()
     {
-        return 'ninjatooken_forumbundle_threadtype';
+        return 'thread';
     }
 }

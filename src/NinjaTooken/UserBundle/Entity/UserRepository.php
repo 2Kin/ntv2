@@ -29,10 +29,14 @@ class UserRepository extends EntityRepository
         return $query->getQuery()->getOneOrNullResult();
     }
 
-    public function searchUser($q = "", $num = 10)
+    public function searchUser($q = "", $num = 10, $allData = true)
     {
-        $query = $this->createQueryBuilder('u')
-            ->where('u.locked = :locked')
+        $query = $this->createQueryBuilder('u');
+
+        if(!$allData)
+            $query->select('u.username as text, u.id');
+
+        $query->where('u.locked = :locked')
             ->setParameter('locked', false);
 
         if(!empty($q)){
@@ -40,7 +44,8 @@ class UserRepository extends EntityRepository
                 ->setParameter('q', $q.'%');
         }
 
-        $query->setFirstResult(0)
+        $query->orderBy('u.username', 'ASC')
+            ->setFirstResult(0)
             ->setMaxResults($num);
 
         return $query->getQuery()->getResult();

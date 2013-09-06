@@ -58,7 +58,7 @@ class Message
      *
      * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
      */
-    private $user;
+    private $author;
 
     /**
      * @var boolean
@@ -161,26 +161,26 @@ class Message
     }
 
     /**
-     * Set user
+     * Set author
      *
-     * @param string $user
+     * @param string $author
      * @return Message
      */
-    public function setUser($user)
+    public function setAuthor($author)
     {
-        $this->user = $user;
+        $this->author = $author;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get author
      *
      * @return string 
      */
-    public function getUser()
+    public function getAuthor()
     {
-        return $this->user;
+        return $this->author;
     }
 
     /**
@@ -235,9 +235,10 @@ class Message
      * @param \NinjaTooken\UserBundle\Entity\MessageUser $receivers
      * @return Message
      */
-    public function addReceiver(\NinjaTooken\UserBundle\Entity\MessageUser $receivers)
+    public function addReceiver(\NinjaTooken\UserBundle\Entity\MessageUser $receiver)
     {
-        $this->receivers[] = $receivers;
+        $this->receivers[] = $receiver;
+        $receiver->setMessage($this);
 
         return $this;
     }
@@ -247,9 +248,10 @@ class Message
      *
      * @param \NinjaTooken\UserBundle\Entity\MessageUser $receivers
      */
-    public function removeReceiver(\NinjaTooken\UserBundle\Entity\MessageUser $receivers)
+    public function removeReceiver(\NinjaTooken\UserBundle\Entity\MessageUser $receiver)
     {
-        $this->receivers->removeElement($receivers);
+        $this->receivers->removeElement($receiver);
+        $receiver->setMessage(null);
     }
 
     /**

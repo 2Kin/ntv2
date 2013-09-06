@@ -11,6 +11,7 @@ use NinjaTooken\UserBundle\Entity\Friend;
 use NinjaTooken\UserBundle\Entity\Capture;
 use NinjaTooken\UserBundle\Entity\Message;
 use NinjaTooken\UserBundle\Form\Type\MessageType;
+use NinjaTooken\UserBundle\Entity\MessageUser;
 use FOS\UserBundle\Mailer\MailerInterface;
 
 class DefaultController extends Controller
@@ -71,13 +72,6 @@ class DefaultController extends Controller
         ));
     }
 
-    public function userSearchAction(Request $request)
-    {
-        return $this->render('NinjaTookenUserBundle:Default:search.html.twig', array(
-            'users' => $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:User')->searchUser((string)$request->get('q'), $this->container->getParameter('numReponse'))
-        ));
-    }
-
     public function messagerieEnvoiAction(Request $request, $page=1)
     {
         return $this->messagerie($request, $page, false);
@@ -97,60 +91,21 @@ class DefaultController extends Controller
 
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
+            $id = 0;
 
             $em = $this->getDoctrine()->getManager();
-            $repo = $em->getRepository('NinjaTookenUserBundle:Message');
+            $repo_message = $em->getRepository('NinjaTookenUserBundle:Message');
 
-            $id = (int)$request->get('id');
-            if(empty($id)){
-                $message = current($reception?$repo->getFirstReceiveMessage($user):$repo->getFirstSendMessage($user));
-                if($message)
-                    $id = $message->getId();
-            }else{
-                $message = $repo->findOneBy(array('id' => $id));
+            // est dans l'envoi d'un message ?
+            $isNewMessage = (int)$request->get('add')==1;
 
-                // suppression du message
-                if((int)$request->get('del')==1){
-                    $message->setHasDeleted(true);
-                    $em->persist($message);
-                    $em->flush();
-
-                    $message = current($reception?$repo->getFirstReceiveMessage($user):$repo->getFirstSendMessage($user));
-                    $id = $message->getId();
-                }
-            }
-
-            // vérifie l'état de lecture
-            if($message && $reception){
-                foreach($message->getReceivers() as $receiver){
-                    if($receiver->getUser() == $user){
-                        // suppression du message
-                        if((int)$request->get('del')==1){
-                            $receiver->setHasDeleted(true);
-                            $em->persist($receiver);
-                            $em->flush();
-
-                            $message = current($repo->getFirstReceiveMessage($user));
-                            $id = $message->getId();
-                            break;
-                        }
-                        // date de lecture
-                        if($receiver->getDateRead()->format('Y')=='-0001'){
-                            $receiver->setDateRead(new \DateTime('now'));
-                            $em->persist($receiver);
-                            $em->flush();
-                            break;
-                        }
-                    }
-                }
-            }
+            // est dans la suppression d'un message ?
+            $isDeleteMessage = (int)$request->get('del')==1;
 
             // l'envoi d'un message
             $form = null;
-            // ajout d'un message
-            if((int)$request->get('add')==1){
+            if($isNewMessage){
                 $message = new Message();
-                $message->setUser($user);
                 $form = $this->createForm(new MessageType(), $message);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
@@ -162,24 +117,118 @@ class DefaultController extends Controller
                     $form->bind($request);
 
                     if ($form->isValid()) {
-                        $em = $this->getDoctrine()->getManager();
-                        $em->persist($message);
-                        $em->flush();
+                        $destinataires = array();
+                        $destis = $request->request->get('destinataires');
+                        if($destis){
+                            $repo_user = $em->getRepository('NinjaTookenUserBundle:User');
+                            foreach($destis as $desti){
+                                $destinataire = $repo_user->findOneById((int)$desti);
+                                if($destinataire)
+                                    $destinataires[] = $destinataire;
+                            }
+                        }
+
+                        if(!empty($destinataires)){
+                            $message->setAuthor($user);
+                            foreach($destinataires as $destinataire){
+                                $messageuser = new MessageUser();
+                                $messageuser->setDestinataire($destinataire);
+                                $message->addReceiver($messageuser);
+
+                                if($destinataire->getReceiveAvertissement() && $destinataire->getConfirmationToken()===null){
+                                    // todo :: envoyer un message d'avertissement par mail
+                                    $email = $destinataire->getEmail();
+                                    echo $email." ";
+                                }
+
+                                $em->persist($messageuser);
+                            }
+                            $em->persist($message);
+
+                            $em->flush();
+                        }
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
                             'Le message a bien été envoyé.'
                         );
+                        return $this->redirect($this->generateUrl($reception?'ninja_tooken_user_messagerie':'ninja_tooken_user_messagerie_envoi', array(
+                            'page' => $page
+                        )));
                     }
+                }
+            // lecture - suppression
+            }else{
+
+                // cherche un message à afficher
+                $id = (int)$request->get('id');
+                if(!empty($id))
+                    $message = $repo_message->findOneBy(array('id' => $id));
+                else{
+                    $message = current($reception?$repo_message->getFirstReceiveMessage($user):$repo_message->getFirstSendMessage($user));
+                    if($message)
+                        $id = $message->getId();
+                }
+
+                if($message){
+                    // en réception
+                    if($reception){
+                        foreach($message->getReceivers() as $receiver){
+                            if($receiver->getDestinataire() == $user){
+                                // suppression du message
+                                if($isDeleteMessage){
+                                    $receiver->setHasDeleted(true);
+                                    $em->persist($receiver);
+                                    $em->flush();
+
+                                    $this->get('session')->getFlashBag()->add(
+                                        'notice',
+                                        'Le message a bien été supprimé.'
+                                    );
+                                    return $this->redirect($this->generateUrl('ninja_tooken_user_messagerie', array(
+                                        'page' => $page
+                                    )));
+                                }
+                                // date de lecture
+                                if($receiver->getDateRead()===null){
+                                    $receiver->setDateRead(new \DateTime('now'));
+                                    $em->persist($receiver);
+                                    $em->flush();
+                                    break;
+                                }
+                            }
+                        }
+                    // en envoi : suppression du message
+                    }elseif($isDeleteMessage){
+                        $message->setHasDeleted(true);
+                        $em->persist($message);
+                        $em->flush();
+
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            'Le message a bien été supprimé.'
+                        );
+                        return $this->redirect($this->generateUrl('ninja_tooken_user_messagerie_envoi', array(
+                            'page' => $page
+                        )));
+                    }
+                }
+                // le formulaire de réponse d'un message
+                if($message){
+                    $messageform = new Message();
+                    $messageform->setNom('Re : '.str_replace('Re : ', '', $message->getNom()));
+                    $messageform->setContent('<fieldset><legend>'.$message->getAuthor()->getUsername().'</legend>'.$message->getContent().'</fieldset><p></p>');
+
+                    $form = $this->createForm(new MessageType(), $messageform);
                 }
             }
 
             if($reception){
-                $messages = $repo->getReceiveMessages($user, $num, $page);
-                $total = $repo->getNumReceiveMessages($user);
+                $messages = $repo_message->getReceiveMessages($user, $num, $page);
+                $total = $repo_message->getNumReceiveMessages($user);
             }else{
-                $messages = $repo->getSendMessages($user, $num, $page);
-                $total = $repo->getNumSendMessages($user);
+                $messages = $repo_message->getSendMessages($user, $num, $page);
+                $total = $repo_message->getNumSendMessages($user);
             }
 
             return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array(
@@ -193,7 +242,6 @@ class DefaultController extends Controller
             );
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
-
     }
 
     public function userFindAction(Request $request)
@@ -202,24 +250,35 @@ class DefaultController extends Controller
         $users = array();
 
         if($request->isXmlHttpRequest()){
-            $user = $request->query->get('q');
+            $user = (string)$request->query->get('q');
 
             if(!empty($user)){
-                $qb = $this->getDoctrine()->getEntityManager()->createQueryBuilder()
-                    ->select('u.username as text, u.id')
-                    ->from('NinjaTookenUserBundle:User', 'u')
-                    ->where("u.username LIKE :q")
-                    ->orderBy('u.username', 'ASC')
-                    ->setParameter('q', $user.'%')
-                    ->setFirstResult(0)
-                    ->setMaxResults(10);
-
-                $users = $qb->getQuery()->getResult();
+                $users = $this->getDoctrine()
+                    ->getEntityManager()
+                    ->getRepository('NinjaTookenUserBundle:User')
+                    ->searchUser($user, 10, false);
             }
         }
 
         $response->setData($users);
         return $response;
+    }
+
+    public function userSearchAction(Request $request)
+    {
+        $users = array();
+
+        $user = (string)$request->get('q');
+        if(!empty($user)){
+            $users = $this->getDoctrine()
+                ->getEntityManager()
+                ->getRepository('NinjaTookenUserBundle:User')
+                ->searchUser($user, $this->container->getParameter('numReponse'));
+        }
+
+        return $this->render('NinjaTookenUserBundle:Default:search.html.twig', array(
+            'users' => $users
+        ));
     }
 
     public function parametresAction()

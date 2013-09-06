@@ -14,8 +14,8 @@ class MessageUserRepository extends EntityRepository
 
         $query = $this->createQueryBuilder('mu')
             ->leftJoin('mu.message', 'm')
-            ->where('mu.user = :user')
-            ->andWhere('m.user <> :user')
+            ->where('mu.destinataire = :user')
+            ->andWhere('m.author <> :user')
             ->andWhere('mu.hasDeleted = 0')
             ->setParameter('user', $user)
             ->addGroupBy('m.id')
@@ -31,8 +31,8 @@ class MessageUserRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('mu')
             ->leftJoin('mu.message', 'm')
-            ->where('mu.user = :user')
-            ->andWhere('m.user <> :user')
+            ->where('mu.destinataire = :user')
+            ->andWhere('m.author <> :user')
             ->andWhere('mu.hasDeleted = 0')
             ->setParameter('user', $user)
             ->addGroupBy('m.id')
@@ -49,8 +49,8 @@ class MessageUserRepository extends EntityRepository
         $query = $this->createQueryBuilder('mu')
             ->leftJoin('mu.message', 'm')
             ->select('COUNT(m)')
-            ->where('mu.user = :user')
-            ->andWhere('m.user <> :user')
+            ->where('mu.destinataire = :user')
+            ->andWhere('m.author <> :user')
             ->andWhere('mu.hasDeleted = 0')
             ->setParameter('user', $user)
             ->getQuery();

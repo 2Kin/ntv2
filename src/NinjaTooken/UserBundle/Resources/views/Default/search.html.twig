@@ -29,13 +29,17 @@
 							<div class="span6">
 								<h5><a href="{{ path('ninja_tooken_user_fiche', {user_nom:user.slug}) }}">{{ user.username }}</a></h5>
 							</div>
-							<div class="span1">
-								{% if user.ninja.classe is not empty %}<span class="{{ class[user.ninja.classe]|lower }}">{{ class[user.ninja.classe] }}</span>{% endif %}
-							</div>
-							<div class="span1">
-								{% if user.ninja.grade>0 %}{{ user.ninja.grade }}° dan{% endif %}
-							</div>
-							<div class="span4">
+                            {% if user.ninja %}
+                                <div class="span1">
+                                    {% if user.ninja.classe is not empty %}<span class="{{ class[user.ninja.classe]|lower }}">{{ class[user.ninja.classe] }}</span>{% endif %}
+                                </div>
+                                <div class="span1">
+                                    {% if user.ninja.grade>0 %}{{ user.ninja.grade }}° dan{% endif %}
+                                </div>
+							    <div class="span4">
+                            {% else %}
+							<div class="offset2 span4">
+                            {% endif %}
 								 Inscrit depuis le {{ user.createdAt|localizeddate('full', 'none', app.request.locale) }}
 							</div>
 						</div>
