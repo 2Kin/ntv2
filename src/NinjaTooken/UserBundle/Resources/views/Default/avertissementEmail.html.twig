@@ -1,7 +1,7 @@
 {% extends '::contact.html.twig' %}
 
 {% block content %}
-                {{ email }}<br/>
-                {{ texte }}<br/>
+                Tu viens de recevoir un nouveau message de la part de {{ user.username }} :<hr/>
+                {{ message.content }}<hr/>
                 <a href="{{ app.request.basepath }}" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">{{ app.request.basepath }}</span></a>
 {% endblock %}

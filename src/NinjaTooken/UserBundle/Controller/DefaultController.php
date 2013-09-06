@@ -134,11 +134,22 @@ class DefaultController extends Controller
                                 $messageuser = new MessageUser();
                                 $messageuser->setDestinataire($destinataire);
                                 $message->addReceiver($messageuser);
-
+                                
+                                // envoyer un message d'avertissement par mail
                                 if($destinataire->getReceiveAvertissement() && $destinataire->getConfirmationToken()===null){
-                                    // todo :: envoyer un message d'avertissement par mail
                                     $email = $destinataire->getEmail();
-                                    echo $email." ";
+                                    $emailContact = $this->container->getParameter('mail_admin');
+
+                                    $message = \Swift_Message::newInstance()
+                                        ->setSubject('[NT] nouveau message de la part de '.$user->getUsername())
+                                        ->setFrom($emailContact)
+                                        ->setTo($email)
+                                        ->setBody($this->renderView('NinjaTookenUserBundle:Default:avertissementEmail.html.twig', array(
+                                            'user' => $user,
+                                            'message' => $message
+                                        )));
+
+                                    $this->get('mailer')->send($message);
                                 }
 
                                 $em->persist($messageuser);
