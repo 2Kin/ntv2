@@ -41,6 +41,20 @@ class ClanProposition
     private $dateAjout;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_changement_etat", type="datetime")
+     */
+    private $dateChangementEtat;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="etat", type="smallint")
+     */
+    private $etat;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -59,23 +73,10 @@ class ClanProposition
     }
 
     /**
-     * Set droit
-     *
-     * @param integer $droit
-     * @return ClanUtilisateur
-     */
-    public function setDroit($droit)
-    {
-        $this->droit = $droit;
-
-        return $this;
-    }
-
-    /**
      * Set dateAjout
      *
      * @param \DateTime $dateAjout
-     * @return ClanUtilisateur
+     * @return ClanProposition
      */
     public function setDateAjout($dateAjout)
     {
@@ -138,5 +139,51 @@ class ClanProposition
     public function getPostulant()
     {
         return $this->postulant;
+    }
+
+    /**
+     * Set etat
+     *
+     * @param integer $etat
+     * @return ClanProposition
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    /**
+     * Get etat
+     *
+     * @return integer 
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * Set dateChangementEtat
+     *
+     * @param \DateTime $dateChangementEtat
+     * @return ClanProposition
+     */
+    public function setDateChangementEtat($dateChangementEtat)
+    {
+        $this->dateChangementEtat = $dateChangementEtat;
+
+        return $this;
+    }
+
+    /**
+     * Get dateChangementEtat
+     *
+     * @return \DateTime 
+     */
+    public function getDateChangementEtat()
+    {
+        return $this->dateChangementEtat;
     }
 }

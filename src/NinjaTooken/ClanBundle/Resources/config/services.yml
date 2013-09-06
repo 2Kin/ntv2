@@ -2,6 +2,7 @@ parameters:
 #    ninja_tooken_clan.example.class: NinjaTooken\ClanBundle\Example
 
 services:
-#    ninja_tooken_clan.example:
-#        class: %ninja_tooken_clan.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    ninjatooken_clan.clan_proposition_listener:
+        class: NinjaTooken\ClanBundle\Listener\ClanPropositionListener
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }
