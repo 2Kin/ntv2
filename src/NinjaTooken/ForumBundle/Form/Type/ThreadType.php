@@ -10,10 +10,12 @@ class ThreadType extends AbstractType
     {
         $builder
             ->add('nom', 'text', array(
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'label_attr' => array('class' => 'libelle')
             ))
             ->add('body', 'textarea', array(
-                'label' => 'Contenu'
+                'label' => 'Contenu',
+                'label_attr' => array('class' => 'libelle')
             ));
     }
 

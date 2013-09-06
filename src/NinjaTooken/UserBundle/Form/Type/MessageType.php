@@ -13,17 +13,12 @@ class MessageType extends AbstractType
         $builder
             ->add('nom', 'text', array(
                 'label' => 'Sujet',
-                'label_attr' => array(
-                    'class' => 'libelle'
-                )
+                'label_attr' => array('class' => 'libelle')
             ))
             ->add('content', 'textarea', array(
                 'label' => 'Message',
-                'label_attr' => array(
-                    'class' => 'libelle'
-                )
+                'label_attr' => array('class' => 'libelle')
             ))
-            ->add('content')
         ;
     }
 

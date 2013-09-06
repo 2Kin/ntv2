@@ -80,19 +80,30 @@ class DefaultController extends Controller
 
     public function messagerieEnvoiAction(Request $request, $page=1)
     {
+        return $this->messagerie($request, $page, false);
+    }
+
+    public function messagerieAction(Request $request, $page=1)
+    {
+        return $this->messagerie($request, $page);
+    }
+
+    public function messagerie(Request $request, $page=1, $reception=true)
+    {
         $security = $this->get('security.context');
 
         if($security->isGranted('ROLE_USER') ){
             $user = $security->getToken()->getUser();
+
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
-            $em = $this->getDoctrine()->getManager();
 
+            $em = $this->getDoctrine()->getManager();
             $repo = $em->getRepository('NinjaTookenUserBundle:Message');
 
             $id = (int)$request->get('id');
             if(empty($id)){
-                $message = current($repo->getFirstSendMessage($user));
+                $message = current($reception?$repo->getFirstReceiveMessage($user):$repo->getFirstSendMessage($user));
                 if($message)
                     $id = $message->getId();
             }else{
@@ -104,48 +115,13 @@ class DefaultController extends Controller
                     $em->persist($message);
                     $em->flush();
 
-                    $message = current($repo->getFirstSendMessage($user));
+                    $message = current($reception?$repo->getFirstReceiveMessage($user):$repo->getFirstSendMessage($user));
                     $id = $message->getId();
                 }
             }
 
-            return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array_merge(
-                    array(
-                        'messages' => $repo->getSendMessages($user, $num, $page),
-                        'page' => $page,
-                        'nombrePage' => ceil($repo->getNumSendMessages($user)/$num),
-                        'currentmessage' => $message,
-                        'id' => $id
-                    ),
-                    $this->messagerie($request, $user)
-                )
-            );
-        }
-        return $this->redirect($this->generateUrl('fos_user_security_login'));
-    }
-
-    public function messagerieAction(Request $request, $page=1)
-    {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('ROLE_USER') ){
-            $user = $security->getToken()->getUser();
-            $num = $this->container->getParameter('numReponse');
-            $page = max(1, $page);
-            $em = $this->getDoctrine()->getManager();
-
-            $repo = $em->getRepository('NinjaTookenUserBundle:Message');
-
-            $id = (int)$request->get('id');
-            if(empty($id)){
-                $message = current($repo->getFirstReceiveMessage($user));
-                if($message)
-                    $id = $message->getId();
-            }else
-                $message = $repo->findOneBy(array('id' => $id));
-
             // vérifie l'état de lecture
-            if($message){
+            if($message && $reception){
                 foreach($message->getReceivers() as $receiver){
                     if($receiver->getUser() == $user){
                         // suppression du message
@@ -169,52 +145,55 @@ class DefaultController extends Controller
                 }
             }
 
-            return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array_merge(
-                    array(
-                        'messages' => $repo->getReceiveMessages($user, $num, $page),
-                        'page' => $page,
-                        'nombrePage' => ceil($repo->getNumReceiveMessages($user)/$num),
-                        'currentmessage' => $message,
-                        'id' => $id
-                    ),
-                    $this->messagerie($request, $user)
+            // l'envoi d'un message
+            $form = null;
+            // ajout d'un message
+            if((int)$request->get('add')==1){
+                $message = new Message();
+                $message->setUser($user);
+                $form = $this->createForm(new MessageType(), $message);
+                if('POST' === $request->getMethod()) {
+                    // cas particulier du formulaire avec tinymce
+                    $request->request->set('message', array_merge(
+                        $request->request->get('message'),
+                        array('content' => $request->get('message_content'))
+                    ));
+
+                    $form->bind($request);
+
+                    if ($form->isValid()) {
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($message);
+                        $em->flush();
+
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            'Le message a bien été envoyé.'
+                        );
+                    }
+                }
+            }
+
+            if($reception){
+                $messages = $repo->getReceiveMessages($user, $num, $page);
+                $total = $repo->getNumReceiveMessages($user);
+            }else{
+                $messages = $repo->getSendMessages($user, $num, $page);
+                $total = $repo->getNumSendMessages($user);
+            }
+
+            return $this->render('NinjaTookenUserBundle:Default:messagerie.html.twig', array(
+                    'messages' => $messages,
+                    'page' => $page,
+                    'nombrePage' => ceil($total/$num),
+                    'currentmessage' => $message,
+                    'id' => $id,
+                    'form' => $form?$form->createView():null
                 )
             );
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
-    }
 
-    public function messagerie(Request $request, User $user){
-        $form = null;
-        // ajout d'un message
-        if((int)$request->get('add')==1){
-            $message = new Message();
-            $message->setUser($user);
-            $form = $this->createForm(new MessageType(), $message);
-            if('POST' === $request->getMethod()) {
-                // cas particulier du formulaire avec tinymce
-                $request->request->set('message', array_merge(
-                    $request->request->get('message'),
-                    array('content' => $request->get('message_content'))
-                ));
-
-                $form->bind($request);
-
-                if ($form->isValid()) {
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($message);
-                    $em->flush();
-
-                    $this->get('session')->getFlashBag()->add(
-                        'notice',
-                        'Le message a bien été envoyé.'
-                    );
-                }
-            }
-        }
-        return array(
-            'form' => $form?$form->createView():null
-        );
     }
 
     public function userFindAction(Request $request)
@@ -249,7 +228,7 @@ class DefaultController extends Controller
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig', array(
-                'formPassword' => $this->container->get('fos_user.change_password.form')->createView()
+                'form' => $this->container->get('fos_user.change_password.form')->createView()
             ));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));

@@ -180,7 +180,7 @@ class DefaultController extends Controller
             'comments' => $comments,
             'page' => $page,
             'nombrePage' => ceil($thread->getNumComments()/$num),
-            'form' => $form->createView()
+            'form_comment' => $form->createView()
         ));
     }
 

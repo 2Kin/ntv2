@@ -70,8 +70,8 @@
 							<h3>Nouveau message</h3>
 							<form action="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?add=1" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full">
 								<div class="row-fluid">
-									<div class="span3"><label class="libelle required">Destinataire(s)</label></div>
-									<div class="span9">
+									<div class="span3 offset1"><label class="libelle required">Destinataire(s)</label></div>
+									<div class="span8">
 										<ul id="destinations" class="fake-input" data-find="{{ path('ninja_tooken_user_find') }}"></ul>
 									</div>
 								</div>

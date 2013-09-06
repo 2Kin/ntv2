@@ -1,3 +1,5 @@
+{% if form is defined and form is not empty %}{% form_theme form 'form.html.twig' %}{% endif %}
+{% if form_comment is defined and form_comment is not empty %}{% form_theme form_comment 'form.comment.html.twig' %}{% endif %}
 <!DOCTYPE html>
 <html lang="fr">
     <head>

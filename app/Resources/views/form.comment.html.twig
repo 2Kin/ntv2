@@ -1,0 +1,25 @@
+{# suppression de divs #}
+{% block form_widget_compound %}
+{% spaceless %}
+	{% if form.parent is empty %}
+	    {{ form_errors(form) }}
+	{% endif %}
+	{{ block('form_rows') }}
+	{{ form_rest(form) }}
+{% endspaceless %}
+{% endblock form_widget_compound %}
+
+{# ré-organisation boostrap #}
+{% block form_row %}
+    <div>
+    {{ form_widget(form) }}
+    {{ form_errors(form) }}
+    </div>
+{% endblock form_row %}
+
+{# wysiwyg tinymce #}
+{% block textarea_widget %}
+{% spaceless %}
+    <div class="textarea" {{ block('widget_attributes') }}>{{ value|raw|purify('full') }}</div>
+{% endspaceless %}
+{% endblock textarea_widget %}

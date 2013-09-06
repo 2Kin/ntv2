@@ -982,9 +982,9 @@ body>.content:before{
 
 	// tag-it (destinataires d'un message)
 	ul.tagit{
-		list-style:none;.border-radius(@baseBorderRadius);background-color:@grayLight;height:30px;color:@gray;padding:0;width:100%;.transition(all 0.2s linear);margin:0;
+		list-style:none;.border-radius(@baseBorderRadius);background-color:@grayLight;height:30px;color:@black;padding:0;width:100%;.transition(all 0.2s linear);margin:0;
 		&.focused{
-			outline:none;background-color:@white;color:@black;.transition(all 0.2s linear);
+			outline:none;background-color:@white;.transition(all 0.2s linear);
 			.tag{
 				background-color:@grayLight;
 			}
@@ -992,13 +992,16 @@ body>.content:before{
 		li{
 			position:relative;display:block;float:left;margin:2px;padding:3px 24px 3px 7px;
 			&.tag{
-				.border-radius(@baseBorderRadius);background-color:@white;color:@gray;
+				.border-radius(@baseBorderRadius);background-color:@white;
 				.close{
 					position:absolute;cursor:pointer;margin-top:2px;right:5px;font-size:@fontSizeLarge;line-height:17px;
 					&:hover{
 						color:@black;
 					}
 				}
+                span{
+                    color:inherit;
+                }
 			}
 			&.tagit-edit-handle{
 				input{

@@ -16,51 +16,37 @@ class ClanType extends AbstractType
         $builder
             ->add('nom', 'text', array(
                 'label' => 'Nom',
-                'label_attr' => array(
-                    'class' => 'libelle'
-                )
+                'label_attr' => array('class' => 'libelle')
             ))
             ->add('tag', 'text', array(
                 'label' => 'Tag de clan',
-                'label_attr' => array(
-                    'class' => 'libelle'
-                ),
+                'label_attr' => array('class' => 'libelle'),
                 'required' => false
             ))
             ->add('accroche', 'text', array(
                 'label' => 'Accroche',
-                'label_attr' => array(
-                    'class' => 'libelle'
-                ),
+                'label_attr' => array('class' => 'libelle'),
                 'required' => false
             ))
             ->add('description', 'textarea', array(
                 'label' => 'Contenu',
-                'label_attr' => array(
-                    'class' => 'libelle'
-                )
+                'label_attr' => array('class' => 'libelle')
             ))
             ->add('url', 'url', array(
                 'label' => 'Page perso',
-                'label_attr' => array(
-                    'class' => 'libelle'
-                ),
+                'label_attr' => array('class' => 'libelle'),
                 'required' => false
             ))
             ->add('kamon', 'choice', array(
                 'label' => 'Kamon',
-                'label_attr' => array(
-                    'class' => 'libelle'
-                ),
+                'label_attr' => array('class' => 'libelle'),
                 'multiple' => false,
                 'choices'  => $kamonChoices,
                 'data' => (isset($options['data']) && $options['data']->getKamon() !== null) ? $options['data']->getKamon() : key($kamonChoices)
             ))
             ->add('isRecruting', 'choice', array(
                 'label' => 'Le clan recrute',
-                'label_attr' => array(
-                    'class' => 'libelle'
-                ),
+                'label_attr' => array('class' => 'libelle'),
                 'multiple' => false,
                 'expanded' => true,
                 'choices'  => array(true => 'Oui', false => 'Non')

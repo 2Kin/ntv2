@@ -1,0 +1,52 @@
+{# suppression de divs #}
+{% block form_widget_compound %}
+{% spaceless %}
+	{% if form.parent is empty %}
+	    {{ form_errors(form) }}
+	{% endif %}
+	{{ block('form_rows') }}
+	{{ form_rest(form) }}
+{% endspaceless %}
+{% endblock form_widget_compound %}
+
+{# ré-organisation boostrap #}
+{% block form_row %}
+    <div class="row-fluid">
+        <div class="span3 offset1">
+        {{ form_label(form) }}
+        </div>
+        <div class="span8">
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+        </div>
+    </div>
+{% endblock form_row %}
+
+{# suppression de divs #}
+{% block choice_widget_expanded %}
+{% spaceless %}
+    {% for child in form %}
+	{{ form_widget(child) }}
+	{{ form_label(child) }}
+    {% endfor %}
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{# kamon #}
+{% block choice_widget_collapsed %}
+{% spaceless %}
+    <div class="kamon">
+    {% for group_label, choice in choices %}
+        <div{% if choice is selectedchoice(value) %} class="selected"{% endif %} data-val="{{ choice.value }}"><img src="{{ asset(choice.value) }}" class="clan" alt="{{ choice.label|trans({}, translation_domain) }}"></div>
+    {% endfor %}
+    <input type="hidden"{{ block('widget_attributes') }} value="{{ value }}">
+    </div>
+{% endspaceless %}
+{% endblock choice_widget_collapsed %}
+
+{# wysiwyg tinymce #}
+{% block textarea_widget %}
+{% spaceless %}
+    <div class="textarea" {{ block('widget_attributes') }}>{{ value|raw|purify('full') }}</div>
+{% endspaceless %}
+{% endblock textarea_widget %}
