@@ -33,8 +33,8 @@
 						    </div>
 						{% endfor %}
 						{# permet de définir un administrateur local pour les clan, ou le global #}
-						{% set ROLE_ADMIN = is_granted("ROLE_ADMIN") or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
-						{% set ROLE_SHISHOU = is_granted("ROLE_ADMIN") or (forum.clan and app.user.clan and app.user.clan.droit == 0) %}
+						{% set ROLE_ADMIN = is_granted("ROLE_ADMIN") or (forum.clan and app.user and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
+						{% set ROLE_SHISHOU = is_granted("ROLE_ADMIN") or (forum.clan and app.user and app.user.clan and app.user.clan.droit == 0) %}
 
 						<div class="main clearfix">
 							<h3 class="clearfix">Fondé le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}

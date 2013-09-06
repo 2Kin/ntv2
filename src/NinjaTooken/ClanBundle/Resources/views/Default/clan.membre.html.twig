@@ -5,8 +5,8 @@
 </a>
 {% if showAdmin %}
     {% if recruteur.recruteur == app.user or is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('ninja_tooken_clan_destituer', {'clan_nom':clan.slug,'user_nom':recruteur.membre.slug}) }}" class="button small pull-left">Destituer</a>
-    {% elseif app.user.clan and app.user.clan == recruteur.membre.clan %}
+        <a href="{{ path('ninja_tooken_clan_destituer', {'clan_nom':clan.slug,'user_nom':recruteur.membre.slug}) }}" class="button small pull-left">Destituer</a> 
+    {% elseif app.user and app.user.clan and app.user.clan == recruteur.membre.clan %}
         <a href="{{ path('ninja_tooken_clan_recruter', {'clan_nom':clan.slug,'user_nom':recruteur.membre.slug}) }}" class="button small pull-left">Recruter</a>
     {% endif %}
 {% endif %}

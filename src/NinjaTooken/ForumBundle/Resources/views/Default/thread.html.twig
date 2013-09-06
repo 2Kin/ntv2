@@ -75,7 +75,7 @@
 						    </div>
 						{% endfor %}
 						{# permet de définir un administrateur local pour les clan, ou le global #}
-						{% set ROLE_ADMIN = is_granted("ROLE_ADMIN") or (forum.clan and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
+						{% set ROLE_ADMIN = is_granted("ROLE_ADMIN") or (forum.clan and app.user and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
 						<article itemscope itemtype="http://schema.org/Article">
 							{{ render(controller('NinjaTookenGameBundle:Default:signature', {'user':thread.author})) }}
 							<header>
