@@ -6,3 +6,9 @@ services:
         class: NinjaTooken\ClanBundle\Listener\ClanPropositionListener
         tags:
             - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: postRemove }
+
+    ninjatooken_clan.clan_utilisateur_listener:
+        class: NinjaTooken\ClanBundle\Listener\ClanUtilisateurListener
+        tags:
+            - { name: doctrine.event_listener, event: postRemove }

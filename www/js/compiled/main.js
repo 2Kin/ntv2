@@ -1620,27 +1620,39 @@ $(document).ready(function(){
 	if(_textarea.length>0){
 		_textarea.tinymce({
 			// General options
-			plugins : "autolink link image lists pagebreak emoticons nt_media contextmenu paste noneditable nonbreaking",
+			plugins : "autolink link image lists pagebreak emoticons nt_media contextmenu paste noneditable nonbreaking textcolor",
 			schema: "html5",
 			theme: "modern",
 			width : '100%',
 			height:300,
 			entity_encoding : "raw",
+			element_format : "html",
 			paste_auto_cleanup_on_paste : true,
 			apply_source_formatting : true,
-			force_br_newlines : true,
 			convert_urls : false,
 			relative_urls : false,
 			media_strict: false,
 			auto_focus : false,
 			inline: true,
 			// Theme options
-			toolbar : "undo,redo,|,bold,italic,underline,strikethrough,forecolor,|,link,unlink,|,justifyleft,justifycenter,justifyright,justifyfull,bullist,|,emoticons,image,nt_media,",
+			toolbar : "styleselect | bold italic underline strikethrough forecolor | link unlink | alignleft aligncenter alignright alignjustify bullist | emoticons image nt_media",
 			menubar : false,
 			statusbar : false,
 			tab_focus : ':prev,:next',
 			valid_elements : "@[id|class|title|style],span[data-mce-type|data-mce-style|align],a[href|target],legend,fieldset,img[src|alt|align|height|width],object[classid|width|height|codebase|*],param[name|value|_value],embed[type|width|height|src|*],iframe[type|width|height|src|frameborder|scrolling|marginheight|marginwidth|name|align],ul,li,ol,p[align],font[face|size|color],strong/b,em/i,u,strike,br",
 			language : 'fr_FR',
+			style_formats: [
+				{title: 'entête 1', block : 'h3'},
+				{title: 'entête 2', block : 'h4'},
+				{title: 'entête 3', block : 'h5'},
+				{title: 'entête 4', block : 'h6'}
+			],
+			formats : {
+				alignleft : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', attributes: {"align":  'left'}},
+				aligncenter : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', attributes: {"align":  'center'}},
+				alignright : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', attributes: {"align":  'right'}},
+				alignfull : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', attributes: {"align":  'justify'}}
+			}
 		});
 	}
 

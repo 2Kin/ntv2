@@ -65,6 +65,7 @@ security:
                 check_path: fos_user_security_check
                 login_path: fos_user_security_login
                 default_target_path: ninja_tooken_user_messagerie
+                use_referer: true
             logout:
                 path:   fos_user_security_logout
                 target: ninja_tooken_homepage

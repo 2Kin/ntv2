@@ -11,23 +11,23 @@ ninja_tooken_clans:
     requirements:
         page:  \d*
 
-ninja_tooken_clan_search:
-    pattern:  /clan/search
-    defaults: { _controller: NinjaTookenClanBundle:Default:clanSearch }
-
 ninja_tooken_clan_old:
     pattern:  /clan.php
     defaults: { _controller: NinjaTookenForumBundle:Default:oldClan }
-
-ninja_tooken_clan_ajouter:
-    pattern:  /clan/ajouter
-    defaults: { _controller: NinjaTookenClanBundle:Default:clanAjouter }
 
 ninja_tooken_clan:
     pattern:  /clan/{clan_nom}/{page}
     defaults: { _controller: NinjaTookenClanBundle:Default:clan, page:1 }
     requirements:
         page:  \d*
+
+ninja_tooken_clan_search:
+    pattern:  /clan-search
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanSearch }
+
+ninja_tooken_clan_ajouter:
+    pattern:  /clan-ajouter
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanAjouter }
 
 ninja_tooken_clan_modifier:
     pattern:  /clan/{clan_nom}/modifier
@@ -38,5 +38,25 @@ ninja_tooken_clan_supprimer:
     defaults: { _controller: NinjaTookenClanBundle:Default:clanSupprimer }
 
 ninja_tooken_clan_destituer:
-    pattern:  /clan/{clan_nom}/{user_nom}/destituer
+    pattern:  /clan/{clan_nom}/destituer/{user_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurSupprimer }
+
+ninja_tooken_clan_recruter:
+    pattern:  /clan-recruter/
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruter }
+
+ninja_tooken_clan_recruter_supprimer:
+    pattern:  /clan-recruter/{user_nom}/supprimer
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterSupprimer }
+
+ninja_tooken_clan_recruter_ajouter:
+    pattern:  /clan-recruter/{user_nom}
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterAjouter }
+
+ninja_tooken_clan_recruter_accepter:
+    pattern:  /clan-recruter-accepter/{user_nom}/{recruteur_nom}
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterAccepter }
+
+ninja_tooken_clan_recruter_refuser:
+    pattern:  /clan-recruter-refuser/{user_nom}/{recruteur_nom}
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterRefuser }

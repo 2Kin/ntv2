@@ -8,8 +8,12 @@ use Symfony\Component\HttpFoundation\Request;
 use NinjaTooken\ClanBundle\Entity\Clan;
 use NinjaTooken\ClanBundle\Form\Type\ClanType;
 use NinjaTooken\ClanBundle\Entity\ClanUtilisateur;
+use NinjaTooken\ClanBundle\Entity\ClanProposition;
 use NinjaTooken\ForumBundle\Entity\Forum;
 use NinjaTooken\ForumBundle\Entity\Thread;
+use NinjaTooken\UserBundle\Entity\User;
+use NinjaTooken\UserBundle\Entity\Message;
+use NinjaTooken\UserBundle\Entity\MessageUser;
 
 class DefaultController extends Controller
 {
@@ -264,16 +268,241 @@ class DefaultController extends Controller
 
     /**
      * @ParamConverter("clan", class="NinjaTookenClanBundle:Clan", options={"mapping": {"clan_nom":"slug"}})
-     * @ParamConverter("user", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     * @ParamConverter("utilisateur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
      */
-    public function clanUtilisateurSupprimerAction(Clan $clan, User $user)
+    public function clanUtilisateurSupprimerAction(Clan $clan, User $utilisateur)
     {
         $security = $this->get('security.context');
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
+            $em = $this->getDoctrine()->getManager();
 
-            return $this->redirect($this->generateUrl('ninja_tooken_clans'));
+            $userRecruts = $user->getRecruts();
+            $clanutilisateur = $utilisateur->getClan();
+            // l'utilisateur actuel est le recruteur du joueur visé
+            if(!empty($userRecruts) && $userRecruts->contains($clanutilisateur) ){
+                $em->remove($clanutilisateur);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Le joueur et ses recruts ont bien été révoqués.'
+                );
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
+                'clan_nom' => $clan->getSlug()
+            )));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    public function clanUtilisateurRecruterAction()
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $em = $this->getDoctrine()->getManager();
+
+            if($user->getClan()){
+                $repo = $em->getRepository('NinjaTookenClanBundle:ClanProposition');
+                return $this->render('NinjaTookenClanBundle:Default:clan.recrutement.html.twig', array(
+                    'recrutements' => $repo->getPropositionByRecruteur($user),
+                    'propositions' => $repo->getPropositionByPostulant($user),
+                    'clan' => $user->getClan()->getClan()
+                ));
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_homepage'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("utilisateur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     */
+    public function clanUtilisateurRecruterSupprimerAction(User $utilisateur)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $em = $this->getDoctrine()->getManager();
+
+            if($user->getClan()){
+                $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByUsers($user, $utilisateur);
+                if($clanProposition){
+                    $em->remove($clanProposition);
+                    $em->flush();
+
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        'Votre proposition de recrutement a bien été annulée.'
+                    );
+                }
+                return $this->redirect($this->generateUrl('ninja_tooken_clan_recruter'));
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_homepage'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("utilisateur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     */
+    public function clanUtilisateurRecruterAjouterAction(User $utilisateur)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $em = $this->getDoctrine()->getManager();
+
+            if($user->getClan()){
+                $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByUsers($user, $utilisateur);
+                if(!$clanProposition){
+                    $content = '<p>Une proposition de recrutement vient de t\'être adressée par <a href="'.$this->generateUrl('ninja_tooken_user_fiche', array('user_nom' => $user->getSlug())).'"'.$user->getUsername().'</a>.<br/>';
+                    $param = array(
+                        'user_nom' => $utilisateur->getSlug(),
+                        'recruteur_nom' => $user->getSlug()
+                    );
+                    $content .= '<a href="'.$this->generateUrl('ninja_tooken_clan_recruter_refuser', $param).'" class="button small">Refuser</a> ou ';
+                    $content .= '<a href="'.$this->generateUrl('ninja_tooken_clan_recruter_accepter', $param).'" class="button small">Accepter</a>';
+                    $content .= "</p>";
+
+                    $clanProposition = new ClanProposition();
+                    $clanProposition->setRecruteur($user);
+                    $clanProposition->setPostulant($utilisateur);
+
+                    // ajoute le message
+                    $message = new Message();
+                    $message->setAuthor($user);
+                    $message->setNom('Proposition de recrutement');
+                    $message->setContent($content);
+
+                    $messageuser = new MessageUser();
+                    $messageuser->setDestinataire($utilisateur);
+                    $message->addReceiver($messageuser);
+
+                    $em->persist($messageuser);
+                    $em->persist($message);
+                    $em->persist($clanProposition);
+                    $em->flush();
+
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        'Votre proposition de recrutement a bien été faite.'
+                    );
+                }else{
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        'Une proposition de recrutement a déjà été faite.'
+                    );
+                }
+                return $this->redirect($this->getRequest()->headers->get('referer'));
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_homepage'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("utilisateur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     * @ParamConverter("recruteur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     */
+    public function clanUtilisateurRecruterAccepterAction(User $utilisateur, User $recruteur)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $em = $this->getDoctrine()->getManager();
+
+            $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByUsers($recruteur, $utilisateur);
+            if($clanProposition){
+                if($user == $utilisateur && $recruteur->getClan()!==null){
+                    $clanutilisateur = $recruteur->getClan();
+                    if($clanutilisateur->getDroit()<3){
+                        $clan = $clanutilisateur->getClan();
+
+                        // on met à jour la proposition
+                        $clanProposition->setEtat(1);
+                        $em->persist($clanProposition);
+
+                        // on supprime une ancienne liaison
+                        if($utilisateur->getClan() !== null){
+                            $em->remove($utilisateur->getClan());
+                        }
+
+                        // on ajoute la nouvelle liaison
+                        $cu = new ClanUtilisateur();
+                        $cu->setRecruteur($recruteur);
+                        $cu->setMembre($utilisateur);
+                        $cu->setClan($clanutilisateur->getClan());
+                        $cu->setDroit($clanutilisateur->getDroit() + 1);
+                        $em->persist($cu);
+
+                        // on ajoute un message
+                        $message = new Message();
+                        $message->setAuthor($utilisateur);
+                        $message->setNom('Re : Proposition de recrutement');
+                        $message->setContent('Acceptée !!');
+                        $messageuser = new MessageUser();
+                        $messageuser->setDestinataire($recruteur);
+                        $message->addReceiver($messageuser);
+                        $em->persist($messageuser);
+                        $em->persist($message);
+
+                        $em->flush();
+
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            'Bienvenue dans ton nouveau clan !'
+                        );
+
+                        return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
+                            'clan_nom' => $clan->getSlug()
+                        )));
+                    }
+                }
+            }
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("utilisateur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     * @ParamConverter("recruteur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     */
+    public function clanUtilisateurRecruterRefuserAction(User $utilisateur, User $recruteur)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $em = $this->getDoctrine()->getManager();
+
+            $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByUsers($recruteur, $utilisateur);
+            if($clanProposition){
+                if($user == $utilisateur){
+                    // on met à jour la proposition
+                    $clanProposition->setEtat(2);
+                    $em->persist($clanProposition);
+
+                    // on ajoute un message
+                    $message = new Message();
+                    $message->setAuthor($utilisateur);
+                    $message->setNom('Re : Proposition de recrutement');
+                    $message->setContent('Refusée :/');
+                    $messageuser = new MessageUser();
+                    $messageuser->setDestinataire($recruteur);
+                    $message->addReceiver($messageuser);
+                    $em->persist($messageuser);
+                    $em->persist($message);
+
+                    $em->flush();
+                }
+            }
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }

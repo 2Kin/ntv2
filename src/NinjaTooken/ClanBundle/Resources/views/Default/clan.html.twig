@@ -33,13 +33,15 @@
 						    </div>
 						{% endfor %}
 						{# permet de définir un administrateur local pour les clan, ou le global #}
-						{% set ROLE_ADMIN = is_granted("ROLE_ADMIN") or (forum.clan and app.user and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
-						{% set ROLE_SHISHOU = is_granted("ROLE_ADMIN") or (forum.clan and app.user and app.user.clan and app.user.clan.droit == 0) %}
+						{% set ROLE_ADMIN = is_granted("ROLE_ADMIN") or (app.user and app.user.clan and app.user.clan.clan == clan and app.user.clan.canEditClan == true) %}
+						{% set ROLE_SHISHOU = is_granted("ROLE_ADMIN") or (app.user and app.user.clan and app.user.clan.clan == clan and app.user.clan.droit == 0) %}
 
 						<div class="main clearfix">
 							<h3 class="clearfix">Fondé le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}
-                            {% if ROLE_SHISHOU %}<a href="{{ path('ninja_tooken_clan_supprimer', {clan_nom:clan.slug}) }}" class="button mini pull-right delete">Supprimer</a>{% endif %}
-                            {% if ROLE_ADMIN %}<a href="{{ path('ninja_tooken_clan_modifier', {clan_nom:clan.slug}) }}" class="button mini pull-right">Éditer</a>{% endif %}</h3>
+							    {% if ROLE_SHISHOU %}<a href="{{ path('ninja_tooken_clan_supprimer', {clan_nom:clan.slug}) }}" class="button mini pull-right delete">Supprimer</a>{% endif %}
+							    {% if ROLE_ADMIN %}<a href="{{ path('ninja_tooken_clan_modifier', {clan_nom:clan.slug}) }}" class="button mini pull-right">Éditer</a>{% endif %}
+							    {% if app.user and app.user.clan and app.user.clan.clan == clan and app.user.clan.droit<3 %}<a href="{{ path('ninja_tooken_clan_recruter') }}" class="button mini pull-right">Recrutement</a>{% endif %}
+							</h3>
 							<img src="{{ asset(clan.kamon) }}" class="pull-left clan">
 							{{ clan.description|raw|purify('full') }}
 							{%if clan.url is not empty %}Page perso : <a href="{{ clan.url }}" target="_blank">{{ clan.url }}</a>{% endif %}

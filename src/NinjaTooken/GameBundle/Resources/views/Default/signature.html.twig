@@ -58,10 +58,15 @@
 		<div class="nfo span6" itemprop="memberOf" itemtype="http://schema.org/Organization">
 			 <a href="{{ path('ninja_tooken_clan', {clan_nom:user.clan.clan.slug}) }}" itemprop="url"><span itemprop="name">{{ user.clan.clan.nom }}</span></a> - <strong itemprop="jobTitle">{{ clanStatut[user.clan.droit] }}</strong>
 		</div>
-		<div class="nfo right span6" itemprop="award">
 		{% else %}
-		<div class="nfo right span12" itemprop="award">
+		<div class="nfo span6" itemprop="memberOf" itemtype="http://schema.org/Organization">
+			<strong itemprop="jobTitle">Ronin</strong>
+			{% if app.user and app.user.clan and app.user.clan.droit<3 %}
+			<a href="{{ path('ninja_tooken_clan_recruter_ajouter', {'user_nom':user.slug}) }}" class="button small pull-left">Recruter</a>
+			{% endif %}
+		</div>
 		{% endif %}
+		<div class="nfo right span6" itemprop="award">
 			<strong>{{ user.ninja.missionCourse }}</strong> courses<strong> / {{ user.ninja.missionAssassinnat }}</strong> assassinats
 		</div>
 	</div>

@@ -43,7 +43,7 @@ class ClanProposition
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_changement_etat", type="datetime")
+     * @ORM\Column(name="date_changement_etat", type="datetime", nullable=true)
      */
     private $dateChangementEtat;
 
@@ -52,7 +52,7 @@ class ClanProposition
      *
      * @ORM\Column(name="etat", type="smallint")
      */
-    private $etat;
+    private $etat = 0;
 
     /**
      * Constructor

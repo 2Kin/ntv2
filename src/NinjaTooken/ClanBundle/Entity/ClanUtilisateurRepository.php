@@ -7,7 +7,7 @@ use NinjaTooken\UserBundle\Entity\User;
  
 class ClanUtilisateurRepository extends EntityRepository
 {
-    public function getMembres(Clan $clan=null, $droit=null, User $recruteur=null, $nombreParPage=20, $page=1)
+    public function getMembres(Clan $clan=null, $droit=null, User $recruteur=null, $nombreParPage=100, $page=1)
     {
         $page = max(1, $page);
 
@@ -22,7 +22,7 @@ class ClanUtilisateurRepository extends EntityRepository
                 ->setParameter('droit', $droit);
         }
         if(isset($recruteur)){
-            $query->where('cu.recruteur = :recruteur')
+            $query->andWhere('cu.recruteur = :recruteur')
                 ->andWhere('cu.membre <> :recruteur')
                 ->setParameter('recruteur', $recruteur);
         }
@@ -32,5 +32,21 @@ class ClanUtilisateurRepository extends EntityRepository
             ->setMaxResults($nombreParPage);
 
         return $query->getQuery()->getResult();
+    }
+
+    public function getMembreByClanUser(Clan $clan=null, User $user=null)
+    {
+        $query = $this->createQueryBuilder('cu');
+
+        if(isset($clan)){
+            $query->where('cu.clan = :clan')
+                ->setParameter('clan', $clan);
+        }
+        if(isset($user)){
+            $query->andWhere('cu.membre = :user')
+                ->setParameter('user', $user);
+        }
+
+        return $query->getQuery()->getOneOrNullResult();
     }
 }
