@@ -1,0 +1,3 @@
+http://binarybeast.com/
+http://challonge.com/
+https://github.com/teijo/jquery-bracket

@@ -58,12 +58,8 @@ class DefaultController extends Controller
     /**
      * @ParamConverter("clan", class="NinjaTookenClanBundle:Clan", options={"mapping": {"clan_nom":"slug"}})
      */
-    public function clanAction(Clan $clan, $page = 1)
+    public function clanAction(Clan $clan)
     {
-        // gestion des forums
-        $num = $this->container->getParameter('numReponse');
-        $page = max(1, $page);
-
         $em = $this->getDoctrine()->getManager();
 
         // le forum du clan
@@ -71,7 +67,7 @@ class DefaultController extends Controller
         $threads = array();
         if($forum){
             $forum = current($forum);
-            $threads = $em->getRepository('NinjaTookenForumBundle:Thread')->getThreads($forum, $num, $page);
+            $threads = $em->getRepository('NinjaTookenForumBundle:Thread')->getThreads($forum, 5, 1);
             if(count($threads)>0)
                 $forum->threads = $threads;
             else
@@ -95,8 +91,6 @@ class DefaultController extends Controller
         return $this->render('NinjaTookenClanBundle:Default:clan.html.twig', array(
             'clan' => $clan,
             'forum' => $forum,
-            'page' => $page,
-            'nombrePage' => ceil(count($threads)/$num),
             'membres' => $membres,
             'membresListe' => $membresListe
         ));
@@ -246,13 +240,6 @@ class DefaultController extends Controller
             if($canDelete || $security->isGranted('ROLE_ADMIN') !== false){
                 $em = $this->getDoctrine()->getManager();
 
-                $forums = $clan->getForums();
-                if(!empty($forums)){
-                    foreach($forums as $forum){
-                        $em->getRepository('NinjaTookenForumBundle:Thread')->deleteThreadsByForum($forum);
-                        $em->remove($forum);
-                    }
-                }
                 $em->remove($clan);
                 $em->flush();
 
@@ -267,10 +254,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * @ParamConverter("clan", class="NinjaTookenClanBundle:Clan", options={"mapping": {"clan_nom":"slug"}})
      * @ParamConverter("utilisateur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
      */
-    public function clanUtilisateurSupprimerAction(Clan $clan, User $utilisateur)
+    public function clanUtilisateurSupprimerAction(User $utilisateur)
     {
         $security = $this->get('security.context');
 
@@ -280,19 +266,84 @@ class DefaultController extends Controller
 
             $userRecruts = $user->getRecruts();
             $clanutilisateur = $utilisateur->getClan();
-            // l'utilisateur actuel est le recruteur du joueur visé
-            if(!empty($userRecruts) && $userRecruts->contains($clanutilisateur) ){
-                $em->remove($clanutilisateur);
-                $em->flush();
+            if($clanutilisateur){
+                // l'utilisateur actuel est le recruteur du joueur visé, ou est le joueur lui-même !
+                if( (!empty($userRecruts) && $userRecruts->contains($clanutilisateur)) || $user==$utilisateur ){
+                    $clan = $clanutilisateur->getClan();
+                    // pas un shishou !
+                    if($clanutilisateur->getEtat() > 0){
+                        $em->remove($clanutilisateur);
+                        $em->flush();
 
-                $this->get('session')->getFlashBag()->add(
-                    'notice',
-                    'Le joueur et ses recruts ont bien été révoqués.'
-                );
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            'Le joueur et ses recruts ont bien été révoqués.'
+                        );
+                    }
+
+                    if($clan){
+                        return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
+                            'clan_nom' => $clan->getSlug()
+                        )));
+                    }
+                }
             }
-            return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
-                'clan_nom' => $clan->getSlug()
-            )));
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Le joueur ne peut être révoqué dans les conditions actuelles.'
+            );
+            return $this->redirect($this->generateUrl('ninja_tooken_clans'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("utilisateur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     */
+    public function clanUtilisateurSupprimerShishouAction(User $utilisateur)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $em = $this->getDoctrine()->getManager();
+
+            if($user->getClan()){
+                $clanutilisateur = $user->getClan();
+                // est le shishou
+                if($clanutilisateur->getDroit() == 0){
+                    $clan = $clanutilisateur->getClan();
+
+                    // on vérifie que le joueur visé fait parti du même clan
+                    if($utilisateur->getClan()){
+                        $clanutilisateur_old = $utilisateur->getClan();
+                        if($clanutilisateur_old->getClan() == $clan){
+                            // supprime l'état de l'ancien joueur visé
+                            $em->remove($clanutilisateur_old);
+
+                            // échange ses droits avec celui du shishou actuel
+                            $clanutilisateur->setMembre($utilisateur);
+                            $em->persist($clanutilisateur);
+
+                            $em->flush();
+
+                            $this->get('session')->getFlashBag()->add(
+                                'notice',
+                                'Le nouveau Shishou a correctement été nommé.'
+                            );
+
+                            return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
+                                'clan_nom' => $clan->getSlug()
+                            )));
+                        }
+                    }
+                }
+            }
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Le joueur ne peut être promu Shishou dans les conditions actuelles.'
+            );
+            return $this->redirect($this->generateUrl('ninja_tooken_clans'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
@@ -304,7 +355,6 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
-
             if($user->getClan()){
                 $repo = $em->getRepository('NinjaTookenClanBundle:ClanProposition');
                 return $this->render('NinjaTookenClanBundle:Default:clan.recrutement.html.twig', array(
@@ -313,7 +363,7 @@ class DefaultController extends Controller
                     'clan' => $user->getClan()->getClan()
                 ));
             }
-            return $this->redirect($this->generateUrl('ninja_tooken_homepage'));
+            return $this->redirect($this->generateUrl('ninja_tooken_clans'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
@@ -366,8 +416,8 @@ class DefaultController extends Controller
                         'user_nom' => $utilisateur->getSlug(),
                         'recruteur_nom' => $user->getSlug()
                     );
-                    $content .= '<a href="'.$this->generateUrl('ninja_tooken_clan_recruter_refuser', $param).'" class="button small">Refuser</a> ou ';
-                    $content .= '<a href="'.$this->generateUrl('ninja_tooken_clan_recruter_accepter', $param).'" class="button small">Accepter</a>';
+                    $content .= '<a href="'.$this->generateUrl('ninja_tooken_clan_recruter_refuser', $param).'" class="button small delete">Refuser</a> ou ';
+                    $content .= '<a href="'.$this->generateUrl('ninja_tooken_clan_recruter_accepter', $param).'" class="button small delete">Accepter</a>';
                     $content .= "</p>";
 
                     $clanProposition = new ClanProposition();

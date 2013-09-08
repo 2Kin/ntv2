@@ -24,9 +24,8 @@
 					{% if is_granted("ROLE_ADMIN") %}<h4><a href="#" class="button pull-right">Nouvel event</a>Events</h4>{% endif %}
 					{% if threads is not empty %}
 					{% set firstThread = threads|first %}
-					{% if firstThread.dateEventStart|date("Y") == "-0001" %}
-						{% set firstDate = firstThread.dateAjout %}
-					{% else %}
+					{% set firstDate = firstThread.dateAjout %}
+					{% if firstThread.dateEventStart %}
 						{% set firstDate = firstThread.dateEventStart %}
 					{% endif %}
 					<script>
@@ -36,16 +35,13 @@
 						"text":"Tournoi, streams, concours : c'est ici que ça se passe !",
 						"startDate":"{{ firstDate|date("Y,m,d") }}",
 						"date": [{% for thread in threads %}{% spaceless %}
-							{% if thread.dateEventStart|date("Y") == "-0001"  %}
-								{% set first = thread.dateAjout|date("Y,m,d") %}
-								{% set second = '' %}
-							{% else %}
+							{% set first = thread.dateAjout|date("Y,m,d") %}
+							{% set second = '' %}
+							{% if thread.dateEventStart %}
 								{% set first = thread.dateEventStart|date("Y,m,d") %}
-								{% if thread.dateEventEnd|date("Y") == "-0001"  %}
-									{% set second = '' %}
-								{% else %}
-									{% set second = thread.dateEventEnd|date("Y,m,d") %}
-								{% endif %}
+							{% endif %}
+							{% if thread.dateEventEnd %}
+								{% set second = thread.dateEventEnd|date("Y,m,d") %}
 							{% endif %}
 							{% set text = thread.body|raw|slice(0,250)|purify('min') ~ '<p><a href="' ~ path('ninja_tooken_thread', {forum_nom: thread.forum.slug, thread_nom:thread.slug, page:1}) ~ '" class="pull-right">Lire la suite &raquo;</a></p>' %}
 							{

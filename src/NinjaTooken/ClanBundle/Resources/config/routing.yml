@@ -16,10 +16,8 @@ ninja_tooken_clan_old:
     defaults: { _controller: NinjaTookenForumBundle:Default:oldClan }
 
 ninja_tooken_clan:
-    pattern:  /clan/{clan_nom}/{page}
-    defaults: { _controller: NinjaTookenClanBundle:Default:clan, page:1 }
-    requirements:
-        page:  \d*
+    pattern:  /clan/{clan_nom}
+    defaults: { _controller: NinjaTookenClanBundle:Default:clan }
 
 ninja_tooken_clan_search:
     pattern:  /clan-search
@@ -38,11 +36,15 @@ ninja_tooken_clan_supprimer:
     defaults: { _controller: NinjaTookenClanBundle:Default:clanSupprimer }
 
 ninja_tooken_clan_destituer:
-    pattern:  /clan/{clan_nom}/destituer/{user_nom}
+    pattern:  /clan-destituer/{user_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurSupprimer }
 
+ninja_tooken_clan_destituer_shishou:
+    pattern:  /clan-destituer-shishou/{user_nom}
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurSupprimerShishou }
+
 ninja_tooken_clan_recruter:
-    pattern:  /clan-recruter/
+    pattern:  /clan-recruter
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruter }
 
 ninja_tooken_clan_recruter_supprimer:

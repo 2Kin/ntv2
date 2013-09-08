@@ -12,15 +12,26 @@ class ClanUtilisateurListener
     public function postRemove(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        $em = $args->getEntityManager();
-
         if ($entity instanceof ClanUtilisateur)
         {
+            $em = $args->getEntityManager();
+
             $user = $entity->getMembre();
             $recruts = $user->getRecruts();
             if($recruts){
-                foreach($recruts as $recrut){
-                    $em->remove($recrut);
+                // ré-affecte vers le rang supérieur
+                if($entity->getRecruteur()){
+                    $newRecruteur = $entity->getRecruteur();
+                    foreach($recruts as $recrut){
+                        $recrut->setRecruteur($newRecruteur);
+                        $recrut->setDroit($newRecruteur->getDroit()+1);
+                        $em->persist($recrut);
+                    }
+                // supprime les liaisons
+                }else{
+                    foreach($recruts as $recrut){
+                        $em->remove($recrut);
+                    }
                 }
             }
             $propositions = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByRecruteur($user);

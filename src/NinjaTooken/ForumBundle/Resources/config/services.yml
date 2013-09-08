@@ -7,15 +7,21 @@ services:
         tags:
             - { name: twig.extension }
 
+    ninjatooken_forum.forum_listener:
+        class: NinjaTooken\ForumBundle\Listener\ForumListener
+        tags:
+            - { name: doctrine.event_listener, event: postRemove }
+
+    ninjatooken_forum.thread_listener:
+        class: NinjaTooken\ForumBundle\Listener\ThreadListener
+        tags:
+            - { name: doctrine.event_listener, event: postRemove }
+            - { name: doctrine.event_listener, event: postPersist }
+
     ninjatooken_forum.comment_listener:
         class: NinjaTooken\ForumBundle\Listener\CommentListener
         arguments: ["%akismet.active%", "%akismet.key%", "%akismet.url%"]
         tags:
             - { name: doctrine.event_listener, event: prePersist }
             - { name: doctrine.event_listener, event: postPersist }
-            - { name: doctrine.event_listener, event: postRemove }
-
-    ninjatooken_forum.thread_listener:
-        class: NinjaTooken\ForumBundle\Listener\ThreadListener
-        tags:
             - { name: doctrine.event_listener, event: postRemove }

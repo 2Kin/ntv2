@@ -23,7 +23,8 @@
 				<section class="main">
 					<h3>
 						<a href="{{ path('ninja_tooken_user_amis', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis' %} class="actif"{% endif %}><i class="icon-heart"></i> Mes amis</a> - 
-						<a href="{{ path('ninja_tooken_user_amis_demande', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis_demande' %} class="actif"{% endif %}><i class="icon-heart-empty"></i> Demande d'amis</a>
+						<a href="{{ path('ninja_tooken_user_amis_demande', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis_demande' %} class="actif"{% endif %}><i class="icon-heart-empty"></i> Demandes en cours</a> - 
+						<a href="{{ path('ninja_tooken_user_amis_blocked', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis_blocked' %} class="actif"{% endif %}><i class="icon-frown"></i> Demandes bloqués</a>
 					</h3>
 					{% for flashMessage in app.session.flashbag.get('notice') %}
 					    <div class="flash-notice">
@@ -45,16 +46,29 @@
 						{% else %}
 						Pas encore d'amis.
 						{% endif %}
-					{% else %}
+					{% elseif app.request.attributes.get('_route')=='ninja_tooken_user_amis_demande' %}
 						{% if demandes is not empty %}
 						{% for demande in demandes %}
 						<div class="membre pull-left">
-							<a href="{{ path('ninja_tooken_user_fiche', {user_nom:demande.friend.slug}) }}"><img src="{{ avatar.getUrl(demande.friend) }}">{{ demande.friend.username }}</a> -
+							<a href="{{ path('ninja_tooken_user_fiche', {user_nom:demande.friend.slug}) }}"><img src="{{ avatar.getUrl(demande.friend) }}">{{ demande.friend.username }}</a>
 							<a href="{{ path('ninja_tooken_user_amis_confirmer', {id:demande.id}) }}" class="button small">Confirmer</a>
 						</div>
 						{% endfor %}
 						{% else %}
 						Pas de demandes pour l'instant.
+						<br class="clear">
+						{% endif %}
+					{% elseif app.request.attributes.get('_route')=='ninja_tooken_user_amis_blocked' %}
+						{% if blocked is not empty %}
+						{% for block in blocked %}
+						<div class="membre pull-left">
+							<a href="{{ path('ninja_tooken_user_fiche', {user_nom:block.friend.slug}) }}"><img src="{{ avatar.getUrl(block.friend) }}">{{ block.friend.username }}</a>
+							<a href="{{ path('ninja_tooken_user_amis_debloquer', {id:block.id}) }}" class="button small">Débloquer</a>
+							<a href="{{ path('ninja_tooken_user_amis_supprimer', {id:block.id}) }}" class="button small delete">Supprimer</a>
+						</div>
+						{% endfor %}
+						{% else %}
+						Pas de demandes bloquées pour l'instant.
 						<br class="clear">
 						{% endif %}
 					{% endif %}

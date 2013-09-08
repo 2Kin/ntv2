@@ -549,6 +549,29 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
+    public function amisBlockedAction($page)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $num = $this->container->getParameter('numReponse');
+            $page = max(1, $page);
+
+            $user = $security->getToken()->getUser();
+
+            $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Friend');
+
+            $blocked = $repo->getBlocked($user, $num, $page);
+
+            return $this->render('NinjaTookenUserBundle:Default:amis.html.twig', array(
+                'blocked' => $blocked,
+                'page' => $page,
+                'nombrePage' => ceil(count($blocked)/$num)
+            ));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
     /**
      * @ParamConverter("friend", class="NinjaTookenUserBundle:Friend")
      */
@@ -598,7 +621,60 @@ class DefaultController extends Controller
                     $friend->getFriend()->getUsername().' est désormais bloqué.'
                 );
             }
+            return $this->redirect($this->generateUrl('ninja_tooken_user_amis_blocked'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("friend", class="NinjaTookenUserBundle:Friend")
+     */
+    public function amisDebloquerAction(Friend $friend)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if($friend->getUser() == $user){
+                $em = $this->getDoctrine()->getManager();
+
+                $friend->setIsBlocked(false);
+                $em->persist($friend);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    $friend->getFriend()->getUsername().' est débloqué.'
+                );
+            }
             return $this->redirect($this->generateUrl('ninja_tooken_user_amis'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("friend", class="NinjaTookenUserBundle:Friend")
+     */
+    public function amisSupprimerAction(Friend $friend)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if($friend->getUser() == $user){
+                $em = $this->getDoctrine()->getManager();
+
+                $em->remove($friend);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Suppression correctement effectuée.'
+                );
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_user_amis_blocked'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }

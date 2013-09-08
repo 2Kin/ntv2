@@ -57,6 +57,13 @@ class Forum
     private $canUserCreateThread = true;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="num_threads", type="integer")
+     */
+    private $numThreads = 0;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_ajout", type="datetime")
@@ -199,6 +206,38 @@ class Forum
     public function getOldId()
     {
         return $this->old_id;
+    }
+
+    /**
+     * Gets the number of threads
+     *
+     * @return integer
+     */
+    public function getNumThreads()
+    {
+        return $this->numThreads;
+    }
+
+    /**
+     * Sets the number of threads
+     *
+     * @param integer $threads
+     */
+    public function setNumThreads($threads)
+    {
+        $this->numThreads = intval($threads);
+    }
+
+    /**
+     * Increments the number of threads by the supplied
+     * value.
+     *
+     * @param  integer $by Value to increment threads by
+     * @return integer The new thread total
+     */
+    public function incrementNumThreads($by = 1)
+    {
+        return $this->numThreads += intval($by);
     }
 
     /**

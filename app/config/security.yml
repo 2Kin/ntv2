@@ -64,8 +64,9 @@ security:
                 csrf_provider: form.csrf_provider
                 check_path: fos_user_security_check
                 login_path: fos_user_security_login
-                default_target_path: ninja_tooken_user_messagerie
-                use_referer: true
+                always_use_default_target_path: false
+                default_target_path:            ninja_tooken_user_messagerie
+                use_referer:                    false
             logout:
                 path:   fos_user_security_logout
                 target: ninja_tooken_homepage

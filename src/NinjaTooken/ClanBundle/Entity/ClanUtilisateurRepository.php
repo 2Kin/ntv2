@@ -49,4 +49,18 @@ class ClanUtilisateurRepository extends EntityRepository
 
         return $query->getQuery()->getOneOrNullResult();
     }
+
+    public function removeByClan(Clan $clan = null)
+    {
+        if($clan){
+            $query = $this->createQueryBuilder('cu')
+                ->delete('NinjaTookenClanBundle:ClanUtilisateur', 'cu')
+                ->where('cu.clan = :clan')
+                ->setParameter('clan', $clan)
+                ->getQuery();
+     
+            return 1 === $query->getScalarResult();
+        }
+        return false;
+    }
 }
