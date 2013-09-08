@@ -113,5 +113,28 @@ class CustomAJAXChat extends AJAXChat {
 		return $channels;
 	}
 
+    function parseCustomCommands($text, $textParts) {
+        switch($textParts[0]) {
+            // Away from keyboard message:
+            case '/afk':
+                $this->setUserName('/afk '.$this->getUserName());
+                $this->updateOnlineList();
+                $this->addInfoMessage($this->getUserName(), 'userName');
+                $this->setSessionVar('AwayFromKeyboard', true);
+                return true;
+            default:
+                   return false;
+        }
+    }
+
+    function onNewMessage($text) {
+        if($this->getSessionVar('AwayFromKeyboard')) {
+            $this->setUserName($this->subString($this->getUserName(), 5));
+            $this->updateOnlineList();
+            $this->addInfoMessage($this->getUserName(), 'userName');
+            $this->setSessionVar('AwayFromKeyboard', false);
+        }
+        return true;
+    }
 }
 ?>

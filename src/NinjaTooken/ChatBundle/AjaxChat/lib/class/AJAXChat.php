@@ -781,6 +781,7 @@ class AJAXChat {
 				$text
 			);
 		}
+        include("chatbot.php");
 	}
 
 	function insertParsedMessageJoin($textParts) {

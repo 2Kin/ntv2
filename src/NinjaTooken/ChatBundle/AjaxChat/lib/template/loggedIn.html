@@ -116,8 +116,6 @@
 			<select id="channelSelection" onchange="ajaxChat.switchChannel(this.options[this.selectedIndex].value);">[CHANNEL_OPTIONS/]</select>
 			<label for="styleSelection">[LANG]style[/LANG]:</label>
 			<select id="styleSelection" onchange="ajaxChat.setActiveStyleSheet(ajaxChat.getSelectedStyle());">[STYLE_OPTIONS/]</select>
-			<label for="languageSelection">[LANG]language[/LANG]:</label>
-			<select id="languageSelection" onchange="ajaxChat.switchLanguage(this.value);">[LANGUAGE_OPTIONS/]</select>
   		</div>
 		<div id="statusIconContainer" class="statusContainerOn"></div>
 		<!--[if lt IE 7]>
@@ -249,6 +247,10 @@
 					<tr class="rowOdd">
 						<td class="desc">[LANG]helpItemDescNick[/LANG]</td>
 						<td class="code">[LANG]helpItemCodeNick[/LANG]</td>
+					</tr>
+					<tr class="rowEven">
+						<td class="desc">[LANG]helpItemDescAfk[/LANG]</td>
+						<td class="code">[LANG]helpItemCodeAfk[/LANG]</td>
 					</tr>
 				</table>
 			</div>
