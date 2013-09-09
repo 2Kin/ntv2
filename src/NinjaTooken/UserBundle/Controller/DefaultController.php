@@ -34,8 +34,11 @@ class DefaultController extends Controller
 
     public function connectedAction(User $user)
     {
-        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Message');
-        $user->numNewMessage = $repo->getNumNewMessages($user);
+        $em = $this->getDoctrine()->getManager();
+        $repo_message = $em->getRepository('NinjaTookenUserBundle:Message');
+        $repo_friend = $em->getRepository('NinjaTookenUserBundle:Friend');
+        $user->numNewMessage = $repo_message->getNumNewMessages($user);
+        $user->numDemandesFriends = $repo_friend->getNumDemandes($user);
 
         $ninja = $user->getNinja();
         if($ninja){
@@ -519,6 +522,9 @@ class DefaultController extends Controller
 
             return $this->render('NinjaTookenUserBundle:Default:amis.html.twig', array(
                 'friends' => $friends,
+                'numFriends' => $repo->getNumFriends($user),
+                'numBlocked' => $repo->getNumBlocked($user),
+                'numDemande' => $repo->getNumDemandes($user),
                 'page' => $page,
                 'nombrePage' => ceil(count($friends)/$num)
             ));
@@ -542,6 +548,9 @@ class DefaultController extends Controller
 
             return $this->render('NinjaTookenUserBundle:Default:amis.html.twig', array(
                 'demandes' => $demandes,
+                'numFriends' => $repo->getNumFriends($user),
+                'numBlocked' => $repo->getNumBlocked($user),
+                'numDemande' => $repo->getNumDemandes($user),
                 'page' => $page,
                 'nombrePage' => ceil(count($demandes)/$num)
             ));
@@ -565,6 +574,9 @@ class DefaultController extends Controller
 
             return $this->render('NinjaTookenUserBundle:Default:amis.html.twig', array(
                 'blocked' => $blocked,
+                'numFriends' => $repo->getNumFriends($user),
+                'numBlocked' => $repo->getNumBlocked($user),
+                'numDemande' => $repo->getNumDemandes($user),
                 'page' => $page,
                 'nombrePage' => ceil(count($blocked)/$num)
             ));
@@ -674,6 +686,46 @@ class DefaultController extends Controller
                     'Suppression correctement effectuée.'
                 );
             }
+            return $this->redirect($this->generateUrl('ninja_tooken_user_amis_blocked'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    public function amisBlockedSupprimerAction()
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $em = $this->getDoctrine()->getManager();
+            $repo = $em->getRepository('NinjaTookenUserBundle:Friend');
+
+            $repo->deleteAllBlocked($user);
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Suppressions correctement effectuées.'
+            );
+            return $this->redirect($this->generateUrl('ninja_tooken_user_amis_blocked'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    public function amisDemandeSupprimerAction()
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $em = $this->getDoctrine()->getManager();
+            $repo = $em->getRepository('NinjaTookenUserBundle:Friend');
+
+            $repo->deleteAllDemandes($user);
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                'Suppressions correctement effectuées.'
+            );
             return $this->redirect($this->generateUrl('ninja_tooken_user_amis_blocked'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));

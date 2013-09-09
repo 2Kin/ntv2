@@ -345,9 +345,15 @@ nav, .footer footer{
         padding-top:(@baseLineHeight*1.25);
     }
     .accountLogged{
-        a{
-            height:15px;width:30%;min-width:100px;padding-top:1px;.text-overflow();
-        }
+	li{
+		width:calc(33.3% e(-) 18px);min-width:120px;
+		a{
+		    height:15px;padding-top:1px;.text-overflow();
+		    sup{
+			background-color:@linkColor;.border-radius(10px);color:@grayDark;padding: 1px 5px;top:-1px;font-weight:bold;
+		    }
+		}
+	}
         img{
             margin-right:10px;max-width:35px;
         }

@@ -78,6 +78,10 @@ ninja_tooken_user_amis_confirmer:
     requirements:
         id:  \d*
 
+ninja_tooken_user_amis_bloquer_supprimer_tout:
+    pattern:  /compte/amis/block/supprimer-all
+    defaults: { _controller: NinjaTookenUserBundle:Default:amisBlockedSupprimer }
+
 ninja_tooken_user_amis_bloquer:
     pattern:  /compte/amis/block/{id}
     defaults: { _controller: NinjaTookenUserBundle:Default:amisBloquer }
@@ -95,6 +99,11 @@ ninja_tooken_user_amis_supprimer:
     defaults: { _controller: NinjaTookenUserBundle:Default:amisSupprimer }
     requirements:
         id:  \d*
+
+ninja_tooken_user_amis_demande_supprimer_tout:
+    pattern:  /compte/amis/demande/supprimer-all
+    defaults: { _controller: NinjaTookenUserBundle:Default:amisDemandeSupprimer }
+
 
 ninja_tooken_user_captures:
     pattern:  /compte/captures/{page}

@@ -28,7 +28,7 @@
         <div class="top">
             <div class="container">
                 <section class="row-fluid">
-                    <div class="span4 flagSocial clearfix">
+                    <div class="span3 flagSocial clearfix">
 			{% for locale in ['fr', 'en'] %}
 			<a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale' : locale})) }}" class="{{ locale }}{% if locale == app.request.locale %} active{% endif %}"></a>
 			{% endfor %}
@@ -37,10 +37,10 @@
                         <a href="http://www.youtube.com/user/ArbitreNT" target="_blank" class="youtube"></a>
                         <a href="http://society6.com/NinjaTooken/" target="_blank" class="society6"></a>
                     </div>
-                    <div class="span4 gameResume visible-desktop">
+                    <div class="span3 gameResume visible-desktop">
 		    {{ render(controller('NinjaTookenGameBundle:Default:recentGames', {'max': 3})) }}
                     </div>
-                    <div class="span4">
+                    <div class="span6">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 			{{ render(controller('NinjaTookenUserBundle:Default:connected', {'user': app.user})) }}
 			{% else %}

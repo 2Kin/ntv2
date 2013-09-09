@@ -4,8 +4,8 @@
                             <img src="{{ avatar.getUrl(user) }}" class="pull-left" alt="">
                             <nav>
                                 <ul>
-                                    <li><a href="{{ path('ninja_tooken_user_messagerie') }}" class="pull-left"><i class="icon-envelope-alt"></i> {{ user.numNewMessage }} message{% if user.numNewMessage>1 %}s{% endif %}</a></li>
-                                    <li><a href="{{ path('ninja_tooken_user_amis') }}" class="pull-left"><i class="icon-heart"></i> Amis</a></li>
+                                    <li><a href="{{ path('ninja_tooken_user_messagerie') }}" class="pull-left"><i class="icon-envelope-alt"></i> messagerie{% if user.numNewMessage>0 %} <sup>{{ user.numNewMessage }}</sup>{% endif %}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_user_amis') }}" class="pull-left"><i class="icon-heart"></i> Amis{% if user.numDemandesFriends>0 %} <sup>{{ user.numDemandesFriends }}</sup>{% endif %}</a></li>
                                     <li><a href="{% if user.clan %}{{ path('ninja_tooken_clan', {clan_nom:user.clan.clan.slug}) }}{% else %}{{ path('ninja_tooken_clans', {'page':1}) }}{% endif %}" class="pull-left"><i class="icon-ticket"></i> Clan</a></li>
                                     <li><a href="{{ path('ninja_tooken_user_parametres') }}" class="pull-left"><i class="icon-cog"></i> Paramètres</a></li>
                                     <li><a href="{{ path('ninja_tooken_user_captures') }}" class="pull-left"><i class="icon-picture"></i> Captures</a></li>
