@@ -471,4 +471,85 @@ $(document).ready(function(){
 		errorMsg: 'Ré-essayes...',
 		successMsg: 'Captcha réussi'
 	});
+
+
+	// calculateur de jutsus
+	var getCalculateur = function(_lvl, _data){
+		var _lvlActuel, _lvlSuivant, _palierActuel, _palierSuivant, _val;
+		var i = 1;
+		// base
+		_palierActuel = _data[0];
+		_val = {};
+		for(attr in _palierActuel){
+			if(attr!='lvl')
+				_val[attr] = _palierActuel[attr];
+		}
+		// ajout par niveau
+		while(i<_data.length-1){
+			_palierActuel = _data[i];
+			_palierSuivant = _data[i+1];
+			_lvlActuel	= _palierActuel.lvl;
+			_lvlSuivant	= _palierSuivant.lvl;
+			if(_lvl<_lvlActuel){
+				return _val;
+			}else if(_lvl>_lvlSuivant){
+				for(attr in _palierActuel){
+					if(attr!='lvl')
+						_val[attr] += (_lvlSuivant-_lvlActuel)*_palierActuel[attr];
+				}
+			}else{
+				for(attr in _palierActuel){
+					if(attr!='lvl')
+						_val[attr] += (_lvl-_lvlActuel)*_palierActuel[attr];
+				}
+				return _val;
+			}
+			i++;
+		}
+		if(_lvl>_palierActuel.lvl)
+			_palierActuel = _data[_data.length-1];
+		_lvlActuel	= _palierActuel.lvl;
+		for(attr in _palierActuel){
+			if(attr!='lvl')
+				_val[attr] += (_lvl-_lvlActuel+1)*_palierActuel[attr];
+		}
+		return _val;
+	};
+	var _capacites = $("select[name=capacite]");
+	if(_capacites.length>0){
+		_capacites.each(function(){
+			var _this = $(this);
+			eval('var _data='+_this.attr('data-json'));
+			var _result = $('.result[data-id='+_this.attr('data-id')+']');
+			_this.on('change', function(){
+				var calcul = getCalculateur(parseInt(_this.find('option:selected').val()), _data);
+				_result.empty();
+				if(_this.attr('data-id')=='force'){
+					_result.append('<strong> Katana</strong> : '+Math.round(calcul.val*6));
+					_result.append('<strong> Kunaï</strong> : '+Math.round(calcul.val*2.5));
+					_result.append('<strong> Shuriken</strong> : '+Math.round(calcul.val*1.75));
+					_result.append('<strong> Shuriken de l\'ombre</strong> : '+Math.round(calcul.val*7));
+				}else
+					_result.append('<strong> Valeur</strong> : '+Math.round(calcul.val*100)/100);
+			});
+			_this.trigger('change');
+		});
+	}
+	var _aptitudes = $("select[name=aptitude]");
+	if(_aptitudes.length>0){
+		_aptitudes.each(function(){
+			var _this = $(this);
+			eval('var _data='+_this.attr('data-json'));
+			eval('var _attr='+_this.attr('data-attr'));
+			var _result = $('.result[data-id='+_this.attr('data-id')+']');
+			_this.on('change', function(){
+				var calcul = getCalculateur(parseInt(_this.find('option:selected').val()), _data);
+				_result.empty();
+				for(var n in calcul){
+					_result.append('<strong> '+_attr[n]+'</strong> : '+Math.round(calcul[n]*100)/100);
+				}
+			});
+			_this.trigger('change');
+		});
+	}
 });

@@ -4,6 +4,7 @@ namespace NinjaTooken\GameBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use NinjaTooken\GameBundle\Utils\GameData;
 
 class DefaultController extends Controller
 {
@@ -18,160 +19,189 @@ class DefaultController extends Controller
     {
         $capacites = array(
             'force' => array(
-                'nom' => 'force'
+                'nom' => 'Force'
             ),
             'vitesse' => array(
-                'nom' => 'vitesse'
+                'nom' => 'Vitesse'
             ),
             'vie' => array(
-                'nom' => 'vie'
+                'nom' => 'Vie'
             ),
             'chakra' => array(
-                'nom' => 'chakra'
+                'nom' => 'Chakra'
             )
         );
         $aptitudes = array(
             'bouleElementaire' => array(
-                'nom' => 'boule élémentaire',
+                'nom' => 'Boule élémentaire',
                 'values' => array(
-                    array('nom' => 'dégâts', 'value' => 'degat'),
-                    array('nom' => 'rayon', 'value' => 'rayon'),
-                    array('nom' => 'chakra', 'value' => 'chakra')
+                    'degat' => 'dégâts',
+                    'rayon' => 'taille',
+                    'chakra' => 'chakra'
                 )
             ),
             'doubleSaut' => array(
-                'nom' => 'double saut',
+                'nom' => 'Double saut',
                 'values' => array(
-                    array('nom' => 'Augmentation du 1° saut', 'value' => 'saut1'),
-                    array('nom' => 'Augmentation du 2° saut', 'value' => 'saut2')
+                    'saut1' => '1° saut',
+                    'saut2' => '2° saut'
                 )
             ),
             'bouclierElementaire' => array(
-                'nom' => 'bouclier élémentaire',
+                'nom' => 'Bouclier élémentaire',
                 'values' => array(
-                    array('nom' => 'réduction', 'value' => 'reduction'),
-                    array('nom' => 'chakra', 'value' => 'chakra'),
-                    array('nom' => 'durée', 'value' => 'last')
+                    'reduction' => 'taux de protection',
+                    'chakra' => 'chakra',
+                    'last' => 'durée'
                 )
             ),
             'marcherMur' => array(
-                'nom' => 'marcher sur les murs',
+                'nom' => 'Marcher sur les murs',
                 'values' => array(
-                    array('nom' => 'chakra', 'value' => 'chakra'),
-                    array('nom' => 'durée', 'value' => 'last')
+                    'chakra' => 'chakra',
+                    'last' => 'durée'
                 )
             ),
             'acierRenforce' => array(
-                'nom' => 'acier renforcé',
+                'nom' => 'Acier renforcé',
                 'values' => array(
-                    array('nom' => 'dégâts', 'value' => 'degat'),
-                    array('nom' => 'chakra', 'value' => 'chakra'),
-                    array('nom' => 'durée', 'value' => 'last')
+                    'degat' => 'dégâts',
+                    'chakra' => 'chakra',
+                    'last' => 'durée'
                 )
             ),
             'deflagrationElementaire' => array(
-                'nom' => 'déflagration élémentaire',
+                'nom' => 'Déflagration élémentaire',
                 'values' => array(
-                    array('nom' => 'dégâts', 'value' => 'degat'),
-                    array('nom' => 'chakra', 'value' => 'chakra'),
-                    array('nom' => 'rayon', 'value' => 'rayon')
+                    'degat' => 'dégâts',
+                    'chakra' => 'chakra',
+                    'rayon' => 'taille',
                 )
             ),
             'chakraVie' => array(
-                'nom' => 'déflagration élémentaire',
+                'nom' => 'Chakra de vie',
                 'values' => array(
-                    array('nom' => 'chakra', 'value' => 'chakra'),
-                    array('nom' => 'durée', 'value' => 'last')
+                    'chakra' => 'chakra',
+                    'last' => 'durée'
                 )
             ),
             'resistanceExplosion' => array(
-                'nom' => 'résistance aux explosions',
+                'nom' => 'Résistance aux explosions',
                 'values' => array(
-                    array('nom' => 'réduction', 'value' => 'reduction'),
-                    array('nom' => 'durée', 'value' => 'last')
+                    'reduction' => 'réduction',
+                    'last' => 'durée'
                 )
             ),
             'marcherViteEau' => array(
-                'nom' => 'marcher sur l\'eau',
+                'nom' => 'Marcher sur l\'eau',
                 'values' => array(
-                    array('nom' => 'durée', 'value' => 'last')
+                    'last' => 'durée'
                 )
             ),
             'changerObjet' => array(
-                'nom' => 'métamorphose',
+                'nom' => 'Métamorphose',
                 'values' => array(
-                    array('nom' => 'durée', 'value' => 'last')
+                    'last' => 'durée'
                 )
             ),
             'multishoot' => array(
-                'nom' => 'métamorphose',
+                'nom' => 'Multishoot',
                 'values' => array(
-                    array('nom' => 'vitesse', 'value' => 'speed'),
-                    array('nom' => 'chakra', 'value' => 'chakra'),
-                    array('nom' => 'durée', 'value' => 'last')
+                    'speed' => 'diminution de temps',
+                    'chakra' => 'chakra',
+                    'last' => 'durée'
                 )
             ),
             'invisibleman' => array(
-                'nom' => 'invisiblité',
+                'nom' => 'Invisiblité',
                 'values' => array(
-                    array('nom' => 'opacité', 'value' => 'opacity'),
-                    array('nom' => 'durée', 'value' => 'last')
+                    'opacity' => 'taux d\'invisibilité',
+                    'last' => 'durée'
                 )
             ),
             'phoenix' => array(
-                'nom' => 'phoenix',
+                'nom' => 'Phoenix',
                 'values' => array(
-                    array('nom' => 'dégâts', 'value' => 'degat'),
-                    array('nom' => 'rayon', 'value' => 'rayon'),
-                    array('nom' => 'chakra', 'value' => 'chakra'),
-                    array('nom' => 'distance', 'value' => 'distance')
+                    'degat' => 'dégâts',
+                    'rayon' => 'taille',
+                    'chakra' => 'chakra',
+                    'distance' => 'distance'
                 )
             ),
             'vague' => array(
-                'nom' => 'vague',
+                'nom' => 'Vague',
                 'values' => array(
-                    array('nom' => 'dégâts', 'value' => 'degat'),
-                    array('nom' => 'temps', 'value' => 'temps'),
-                    array('nom' => 'chakra', 'value' => 'chakra'),
-                    array('nom' => 'distance', 'value' => 'distance')
+                    'degat' => 'dégâts',
+                    'temps' => 'durée',
+                    'chakra' => 'chakra',
+                    'distance' => 'distance'
                 )
             ),
             'pieux' => array(
-                'nom' => 'pieux',
+                'nom' => 'Pieux',
                 'values' => array(
-                    array('nom' => 'dégâts', 'value' => 'degat'),
-                    array('nom' => 'largeur', 'value' => 'largeur'),
-                    array('nom' => 'longueur', 'value' => 'longueur'),
-                    array('nom' => 'chakra', 'value' => 'chakra'),
-                    array('nom' => 'distance', 'value' => 'distance')
+                    'degat' => 'dégâts',
+                    'largeur' => 'largeur',
+                    'longueur' => 'longueur',
+                    'chakra' => 'chakra',
+                    'distance' => 'distance'
                 )
             ),
             'teleportation' => array(
-                'nom' => 'téléportation',
+                'nom' => 'Téléportation',
                 'values' => array(
-                    array('nom' => 'dégâts', 'value' => 'vie'),
-                    array('nom' => 'chakra', 'value' => 'chakra'),
-                    array('nom' => 'distance', 'value' => 'distance')
+                    'vie' => 'dégâts',
+                    'chakra' => 'chakra',
+                    'distance' => 'distance'
                 )
             ),
             'tornade' => array(
-                'nom' => 'tornade',
+                'nom' => 'Tornade',
                 'values' => array(
-                    array('nom' => 'dégâts', 'value' => 'degat'),
-                    array('nom' => 'temps', 'value' => 'temps'),
-                    array('nom' => 'chakra', 'value' => 'chakra'),
-                    array('nom' => 'distance', 'value' => 'distance')
+                    'degat' => 'dégâts',
+                    'temps' => 'durée',
+                    'chakra' => 'chakra',
+                    'distance' => 'distance'
                 )
             ),
             'kusanagi' => array(
-                'nom' => 'tornade',
+                'nom' => 'Kusanagi',
                 'values' => array(
-                    array('nom' => 'dégâts', 'value' => 'degat'),
-                    array('nom' => 'durée', 'value' => 'last'),
-                    array('nom' => 'chakra', 'value' => 'chakra')
+                    'degat' => 'dégâts',
+                    'last' => 'durée',
+                    'chakra' => 'chakra'
                 )
             )
         );
+
+        $data = new GameData();
+        $dom = $data->getDocument();
+        foreach($capacites as $k=>$val){
+            $xml = array();
+            $cd = $dom->getElementsByTagName($k)->item(0)->getElementsByTagName('x');
+            foreach($cd as $v){
+                $xml[] = array(
+                    'val' => (float)str_replace('a','.',$v->getAttribute('val')),
+                    'lvl' => (int)$v->getAttribute('niveau')
+                 );
+            }
+            $capacites[$k]['xml'] = json_encode($xml);
+        }
+
+        foreach($aptitudes as $k=>$val){
+            $xml = array();
+            $cd = $dom->getElementsByTagName($k)->item(0)->getElementsByTagName('x');
+            foreach($cd as $v){
+                $attr = array();
+                $attr['lvl'] = (int)$v->getAttribute('niveau');
+                foreach($val['values'] as $k1=>$v1){
+                    $attr[$k1] = (float)str_replace('a','.',$v->getAttribute($k1));
+                }
+                $xml[] = $attr;
+            }
+            $aptitudes[$k]['xml'] = json_encode($xml);
+            $aptitudes[$k]['values'] = json_encode($aptitudes[$k]['values']);
+        }
 
         return $this->render('NinjaTookenGameBundle:Default:calculateur.html.twig', array(
             'capacites' => $capacites,
