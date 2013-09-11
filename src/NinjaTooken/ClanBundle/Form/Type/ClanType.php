@@ -44,6 +44,12 @@ class ClanType extends AbstractType
                 'choices'  => $kamonChoices,
                 'data' => (isset($options['data']) && $options['data']->getKamon() !== null) ? $options['data']->getKamon() : key($kamonChoices)
             ))
+            ->add('kamonUpload', 'file', array(
+                'label' => 'Kamon perso',
+                'label_attr' => array('class' => 'libelle'),
+                'data_class' => null,
+                'required' => false
+            ))
             ->add('isRecruting', 'choice', array(
                 'label' => 'Le clan recrute',
                 'label_attr' => array('class' => 'libelle'),

@@ -1,4 +1,5 @@
 {% extends '::layout.html.twig' %}
+{% import "kamon.html.twig" as kamon %}
 
 {% block title %}NinjaTooken - Clans{% endblock %}
 {% block description %}Quel est le clan de ninja le plus puissant de Ninjatooken ? Créé un clan, recrute des joueurs, défies les meilleurs et augmente ta renommée!{% endblock %}
@@ -47,7 +48,7 @@
 							<div class="span6">
 								<article class="news clan" itemscope itemtype="http://schema.org/Article">
 									<header>
-										<img src="{{ asset(clan.kamon) }}" class="pull-left clan" alt="">
+										<img src="{{ kamon.getUrl(clan) }}" class="pull-left clan" alt="">
 										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}">{% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}</a><br>
 										<span>{{ clan.membres.count }} ninja{% if clan.membres.count>1 %}s{% endif %} depuis le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}</span></h3>
 										{% if clan.isRecruting %}<span class="actif">recrutements ouverts</span>{% else %}<span>recrutements fermés</span>{% endif %}
@@ -87,7 +88,7 @@
 								{% set clan = clan[0] %}
 							<div class="dernier">
 								<span>
-									<img src="{{ asset(clan.kamon) }}" class="pull-left clan" alt="">
+									<img src="{{ kamon.getUrl(clan) }}" class="pull-left clan" alt="">
 									<a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}">{% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}</a>
 								</span>
 								<time datetime="{{ clan.dateAjout|date("Y-m-d\\TH:i:sP") }}">le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}</time><br>

@@ -16,7 +16,167 @@ class DefaultController extends Controller
 
     public function calculateurAction()
     {
-        return $this->render('NinjaTookenGameBundle:Default:calculateur.html.twig');
+        $capacites = array(
+            'force' => array(
+                'nom' => 'force'
+            ),
+            'vitesse' => array(
+                'nom' => 'vitesse'
+            ),
+            'vie' => array(
+                'nom' => 'vie'
+            ),
+            'chakra' => array(
+                'nom' => 'chakra'
+            )
+        );
+        $aptitudes = array(
+            'bouleElementaire' => array(
+                'nom' => 'boule élémentaire',
+                'values' => array(
+                    array('nom' => 'dégâts', 'value' => 'degat'),
+                    array('nom' => 'rayon', 'value' => 'rayon'),
+                    array('nom' => 'chakra', 'value' => 'chakra')
+                )
+            ),
+            'doubleSaut' => array(
+                'nom' => 'double saut',
+                'values' => array(
+                    array('nom' => 'Augmentation du 1° saut', 'value' => 'saut1'),
+                    array('nom' => 'Augmentation du 2° saut', 'value' => 'saut2')
+                )
+            ),
+            'bouclierElementaire' => array(
+                'nom' => 'bouclier élémentaire',
+                'values' => array(
+                    array('nom' => 'réduction', 'value' => 'reduction'),
+                    array('nom' => 'chakra', 'value' => 'chakra'),
+                    array('nom' => 'durée', 'value' => 'last')
+                )
+            ),
+            'marcherMur' => array(
+                'nom' => 'marcher sur les murs',
+                'values' => array(
+                    array('nom' => 'chakra', 'value' => 'chakra'),
+                    array('nom' => 'durée', 'value' => 'last')
+                )
+            ),
+            'acierRenforce' => array(
+                'nom' => 'acier renforcé',
+                'values' => array(
+                    array('nom' => 'dégâts', 'value' => 'degat'),
+                    array('nom' => 'chakra', 'value' => 'chakra'),
+                    array('nom' => 'durée', 'value' => 'last')
+                )
+            ),
+            'deflagrationElementaire' => array(
+                'nom' => 'déflagration élémentaire',
+                'values' => array(
+                    array('nom' => 'dégâts', 'value' => 'degat'),
+                    array('nom' => 'chakra', 'value' => 'chakra'),
+                    array('nom' => 'rayon', 'value' => 'rayon')
+                )
+            ),
+            'chakraVie' => array(
+                'nom' => 'déflagration élémentaire',
+                'values' => array(
+                    array('nom' => 'chakra', 'value' => 'chakra'),
+                    array('nom' => 'durée', 'value' => 'last')
+                )
+            ),
+            'resistanceExplosion' => array(
+                'nom' => 'résistance aux explosions',
+                'values' => array(
+                    array('nom' => 'réduction', 'value' => 'reduction'),
+                    array('nom' => 'durée', 'value' => 'last')
+                )
+            ),
+            'marcherViteEau' => array(
+                'nom' => 'marcher sur l\'eau',
+                'values' => array(
+                    array('nom' => 'durée', 'value' => 'last')
+                )
+            ),
+            'changerObjet' => array(
+                'nom' => 'métamorphose',
+                'values' => array(
+                    array('nom' => 'durée', 'value' => 'last')
+                )
+            ),
+            'multishoot' => array(
+                'nom' => 'métamorphose',
+                'values' => array(
+                    array('nom' => 'vitesse', 'value' => 'speed'),
+                    array('nom' => 'chakra', 'value' => 'chakra'),
+                    array('nom' => 'durée', 'value' => 'last')
+                )
+            ),
+            'invisibleman' => array(
+                'nom' => 'invisiblité',
+                'values' => array(
+                    array('nom' => 'opacité', 'value' => 'opacity'),
+                    array('nom' => 'durée', 'value' => 'last')
+                )
+            ),
+            'phoenix' => array(
+                'nom' => 'phoenix',
+                'values' => array(
+                    array('nom' => 'dégâts', 'value' => 'degat'),
+                    array('nom' => 'rayon', 'value' => 'rayon'),
+                    array('nom' => 'chakra', 'value' => 'chakra'),
+                    array('nom' => 'distance', 'value' => 'distance')
+                )
+            ),
+            'vague' => array(
+                'nom' => 'vague',
+                'values' => array(
+                    array('nom' => 'dégâts', 'value' => 'degat'),
+                    array('nom' => 'temps', 'value' => 'temps'),
+                    array('nom' => 'chakra', 'value' => 'chakra'),
+                    array('nom' => 'distance', 'value' => 'distance')
+                )
+            ),
+            'pieux' => array(
+                'nom' => 'pieux',
+                'values' => array(
+                    array('nom' => 'dégâts', 'value' => 'degat'),
+                    array('nom' => 'largeur', 'value' => 'largeur'),
+                    array('nom' => 'longueur', 'value' => 'longueur'),
+                    array('nom' => 'chakra', 'value' => 'chakra'),
+                    array('nom' => 'distance', 'value' => 'distance')
+                )
+            ),
+            'teleportation' => array(
+                'nom' => 'téléportation',
+                'values' => array(
+                    array('nom' => 'dégâts', 'value' => 'vie'),
+                    array('nom' => 'chakra', 'value' => 'chakra'),
+                    array('nom' => 'distance', 'value' => 'distance')
+                )
+            ),
+            'tornade' => array(
+                'nom' => 'tornade',
+                'values' => array(
+                    array('nom' => 'dégâts', 'value' => 'degat'),
+                    array('nom' => 'temps', 'value' => 'temps'),
+                    array('nom' => 'chakra', 'value' => 'chakra'),
+                    array('nom' => 'distance', 'value' => 'distance')
+                )
+            ),
+            'kusanagi' => array(
+                'nom' => 'tornade',
+                'values' => array(
+                    array('nom' => 'dégâts', 'value' => 'degat'),
+                    array('nom' => 'durée', 'value' => 'last'),
+                    array('nom' => 'chakra', 'value' => 'chakra')
+                )
+            )
+        );
+
+        return $this->render('NinjaTookenGameBundle:Default:calculateur.html.twig', array(
+            'capacites' => $capacites,
+            'aptitudes' => $aptitudes
+        ));
     }
 
     public function classementAction(Request $request, $page)
@@ -51,7 +211,7 @@ class DefaultController extends Controller
             'classes' => $classeNum
         ));
     }
-    
+
     public function recentGamesAction($max = 3)
     {
         $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenGameBundle:Lobby');
@@ -63,7 +223,7 @@ class DefaultController extends Controller
 
         return $this->render('NinjaTookenGameBundle:Games:recentList.html.twig', array('games' => $games));
     }
-    
+
     public function signatureAction(\NinjaTooken\UserBundle\Entity\User $user)
     {
         $ninja = $user->getNinja();

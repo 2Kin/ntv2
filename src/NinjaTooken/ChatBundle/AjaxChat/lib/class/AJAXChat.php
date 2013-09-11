@@ -158,12 +158,12 @@ class AJAXChat {
 			$this->initLogsViewSession();
 		}
 
-		if(!$this->getRequestVar('ajax') && !headers_sent()) {
+		/*if(!$this->getRequestVar('ajax') && !headers_sent()) {
 			// Set style cookie:
 			$this->setStyle();
 			// Set langCode cookie:
 			$this->setLangCodeCookie();
-		}
+		}*/
 		
 		$this->initCustomSession();
 	}
@@ -2765,16 +2765,7 @@ class AJAXChat {
 	}
 
 	function getLangCode() {
-		// Get the langCode from request or cookie:
-		$langCodeCookie = isset($_COOKIE[$this->getConfig('sessionName').'_lang']) ? $_COOKIE[$this->getConfig('sessionName').'_lang'] : null;
-		$langCode = $this->getRequestVar('lang') ? $this->getRequestVar('lang') : $langCodeCookie;
-		// Check if the langCode is valid:
-		if(!in_array($langCode, $this->getConfig('langAvailable'))) {
-			// Determine the user language:
-			$language = new AJAXChatLanguage($this->getConfig('langAvailable'), $this->getConfig('langDefault'));
-			$langCode = $language->getLangCode();
-		}
-		return $langCode;
+        return $this->getConfig('langDefault');
 	}
 
 	function setLangCodeCookie() {

@@ -9,6 +9,16 @@
 {% endspaceless %}
 {% endblock form_widget_compound %}
 
+{% block form_widget_simple %}
+{% spaceless %}
+    {% set type = type|default('text') %}
+    <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% if type == "file" %}
+        <a href="#" class="button mini">Choisir</a>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_widget_simple %}
+
 {# ré-organisation boostrap #}
 {% block form_row %}
     <div class="row-fluid">

@@ -1882,6 +1882,20 @@ $(document).ready(function(){
 			e.preventDefault();
 		});
 	}
+	var _upload = $('form[name="clan"] input[type="file"]');
+	if(_upload.length>0){
+		var _form = _upload.closest('form');
+		var _btn = _upload.next();
+		_btn.on('click', function(){
+			_upload.trigger('click');
+			return false;
+		});
+		_upload.on('change', function(e){
+			var file = _upload.val().split("\\");
+		    _btn.html(file[file.length-1]);
+			e.preventDefault();
+		});
+	}
 
 	// bracket pour tournoi
 	var _bracketD = $("#bracket");

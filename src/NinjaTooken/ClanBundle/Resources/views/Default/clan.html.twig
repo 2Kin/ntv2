@@ -1,5 +1,6 @@
 {% extends '::layout.html.twig' %}
 {% import "avatar.html.twig" as avatar %}
+{% import "kamon.html.twig" as kamon %}
 
 {% block title %}NinjaTooken - {% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}{% endblock %}
 {% block description %}{{ clan.description|raw|striptags|slice(0,255) }}{% endblock %}
@@ -43,7 +44,7 @@
 								{% if ROLE_ADMIN or ROLE_SHISHOU %}<a href="{{ path('ninja_tooken_clan_modifier', {clan_nom:clan.slug}) }}" class="button mini pull-right">Éditer</a>{% endif %}
 								{% if ROLE_CLAN %}<a href="{{ path('ninja_tooken_clan_recruter') }}" class="button mini pull-right">Recrutement</a>{% endif %}
 							</h3>
-							<img src="{{ asset(clan.kamon) }}" class="pull-left clan">
+							<img src="{{ kamon.getUrl(clan) }}" class="pull-left clan">
 							{{ clan.description|raw|purify('full') }}
 							{%if clan.url is not empty %}Page perso : <a href="{{ clan.url }}" target="_blank">{{ clan.url }}</a>{% endif %}
 						</div>

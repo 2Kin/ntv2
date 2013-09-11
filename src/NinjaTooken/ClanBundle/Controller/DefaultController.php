@@ -196,6 +196,21 @@ class DefaultController extends Controller
 
                     if ($form->isValid()) {
                         $em = $this->getDoctrine()->getManager();
+
+                        // permet de générer le fichier
+                        $file = $request->files->get('clan')['kamonUpload'];
+                        if($file !== null){
+                            $extension = strtolower($file->guessExtension());
+                            if(in_array($extension, array('jpeg','jpg','png','gif'))){
+                                $clan->file = $file;
+                                $cachedImage = dirname(__FILE__).'/../../../../www/cache/kamon/'.$clan->getWebKamonUpload();
+                                if(file_exists($cachedImage)){
+                                    unlink($cachedImage);
+                                }
+                                $clan->setKamonUpload('');
+                            }
+                        }
+
                         $em->persist($clan);
                         $em->flush();
 

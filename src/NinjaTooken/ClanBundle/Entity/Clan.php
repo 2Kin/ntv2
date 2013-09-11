@@ -4,12 +4,14 @@ namespace NinjaTooken\ClanBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Clan
  *
  * @ORM\Table(name="nt_clan")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="NinjaTooken\ClanBundle\Entity\ClanRepository")
  */
 class Clan
@@ -97,6 +99,24 @@ class Clan
     private $kamon;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="kamon_upload", type="string", length=255, nullable=true)
+     * @Assert\Image(
+     *     minWidth = 50,
+     *     maxWidth = 400,
+     *     minHeight = 50,
+     *     maxHeight = 400,
+     *     mimeTypes = {"image/jpeg", "image/png", "image/gif"}
+     * )
+     */
+    private $kamonUpload;
+
+    // propriété utilisé temporairement pour la suppression
+    private $tempKamon;
+    public $file;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_ajout", type="datetime")
@@ -126,6 +146,85 @@ class Clan
         $this->forums = new \Doctrine\Common\Collections\ArrayCollection();
 
         $this->setDateAjout(new \DateTime());
+    }
+
+    public function getAbsoluteKamonUpload()
+    {
+        return null === $this->kamonUpload || "" === $this->kamonUpload ? null : $this->getUploadRootDir().'/'.$this->kamonUpload;
+    }
+
+    public function getWebKamonUpload()
+    {
+        return null === $this->kamonUpload || "" === $this->kamonUpload  ? null : $this->getUploadDir().'/'.$this->kamonUpload;
+    }
+
+    protected function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../www/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        return 'kamon';
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        if (null !== $this->file) {
+            $this->setKamonUpload(uniqid(mt_rand(), true).".".$this->file->guessExtension());
+        }
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function preUpdate()
+    {
+        if (null !== $this->file) {
+            $file = $this->id.'.'.$this->file->guessExtension();
+
+            $fileAbsolute = $this->getUploadRootDir().$file;
+            if(file_exists($fileAbsolute))
+                unlink($fileAbsolute);
+
+            $this->setKamonUpload($file);
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+
+        $this->file->move($this->getUploadRootDir(), $this->getKamonUpload());
+
+        unset($this->file);
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function storeFilenameForRemove()
+    {
+        $this->tempKamon = $this->getAbsoluteKamonUpload();
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if($this->tempKamon && file_exists($this->tempKamon)) {
+            unlink($this->tempKamon);
+        }
     }
 
     /**
@@ -456,5 +555,28 @@ class Clan
     public function getForums()
     {
         return $this->forums;
+    }
+
+    /**
+     * Set avatar
+     *
+     * @param string $kamonUpload
+     * @return Clan
+     */
+    public function setKamonUpload($kamonUpload)
+    {
+        $this->kamonUpload = $kamonUpload;
+
+        return $this;
+    }
+
+    /**
+     * Get kamonUpload
+     *
+     * @return string 
+     */
+    public function getKamonUpload()
+    {
+        return $this->kamonUpload;
     }
 }
