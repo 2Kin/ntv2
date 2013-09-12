@@ -35,147 +35,159 @@ class DefaultController extends Controller
             'bouleElementaire' => array(
                 'nom' => 'Boule élémentaire',
                 'values' => array(
-                    'degat' => 'dégâts',
-                    'rayon' => 'taille',
-                    'chakra' => 'chakra'
+                    'degat' => 'Inflige ## points de dégats',
+                    'rayon' => 'Grosseur de ##m.',
+                    'chakra' => 'Coute ## points de chakra'
                 )
             ),
             'doubleSaut' => array(
                 'nom' => 'Double saut',
                 'values' => array(
-                    'saut1' => '1° saut',
-                    'saut2' => '2° saut'
+                    'saut1' => 'Portée du 1° saut augmenté de ##% par rapport à la hauteur de base',
+                    'saut2' => 'Portée du 2° saut augmenté de ##% par rapport à la hauteur de base'
                 )
             ),
             'bouclierElementaire' => array(
                 'nom' => 'Bouclier élémentaire',
                 'values' => array(
-                    'reduction' => 'taux de protection',
-                    'chakra' => 'chakra',
-                    'last' => 'durée'
+                    'reduction' => 'Protège à ##%',
+                    'chakra' => 'Coute ## points de chakra',
+                    'last' => 'Dure ##s.'
                 )
             ),
             'marcherMur' => array(
                 'nom' => 'Marcher sur les murs',
                 'values' => array(
-                    'chakra' => 'chakra',
-                    'last' => 'durée'
+                    'chakra' => 'Coute ## points de chakra',
+                    'last' => 'Dure ##s.'
                 )
             ),
             'acierRenforce' => array(
                 'nom' => 'Acier renforcé',
                 'values' => array(
-                    'degat' => 'dégâts',
-                    'chakra' => 'chakra',
-                    'last' => 'durée'
+                    'degat' => 'Inflige ## points de dégats',
+                    'chakra' => 'Coute ## points de chakra',
+                    'last' => 'Dure ##s.'
                 )
             ),
             'deflagrationElementaire' => array(
                 'nom' => 'Déflagration élémentaire',
                 'values' => array(
-                    'degat' => 'dégâts',
-                    'chakra' => 'chakra',
-                    'rayon' => 'taille',
+                    'degat' => 'Inflige ## points de dégats',
+                    'chakra' => 'Coute ## points de chakra',
+                    'rayon' => 'Couvre une sphère de ##m. de diamètre',
                 )
             ),
             'chakraVie' => array(
                 'nom' => 'Chakra de vie',
                 'values' => array(
-                    'chakra' => 'chakra',
-                    'last' => 'durée'
+                    'chakra' => 'Coute ## points de chakra',
+                    'last' => 'Dure ##s.'
                 )
             ),
             'resistanceExplosion' => array(
                 'nom' => 'Résistance aux explosions',
                 'values' => array(
-                    'reduction' => 'réduction',
-                    'last' => 'durée'
+                    'reduction' => 'Protège à ##%',
+                    'last' => 'Dure ##s.'
                 )
             ),
             'marcherViteEau' => array(
                 'nom' => 'Marcher sur l\'eau',
                 'values' => array(
-                    'last' => 'durée'
+                    'last' => 'Dure ##s.'
                 )
             ),
             'changerObjet' => array(
                 'nom' => 'Métamorphose',
                 'values' => array(
-                    'last' => 'durée'
+                    'last' => 'Dure ##s.'
                 )
             ),
             'multishoot' => array(
                 'nom' => 'Multishoot',
                 'values' => array(
-                    'speed' => 'diminution de temps',
-                    'chakra' => 'chakra',
-                    'last' => 'durée'
+                    'speed' => 'Temps entre chaque tire diminué de ##s.',
+                    'chakra' => 'Coute ## points de chakra',
+                    'last' => 'Dure ##s.'
                 )
             ),
             'invisibleman' => array(
                 'nom' => 'Invisiblité',
                 'values' => array(
-                    'opacity' => 'taux d\'invisibilité',
-                    'last' => 'durée'
+                    'opacity' => 'Invisible à ##%',
+                    'last' => 'Dure ##s.'
                 )
             ),
             'phoenix' => array(
                 'nom' => 'Phoenix',
                 'values' => array(
-                    'degat' => 'dégâts',
-                    'rayon' => 'taille',
-                    'chakra' => 'chakra',
-                    'distance' => 'distance'
+                    'degat' => 'Inflige ## points de dégats',
+                    'rayon' => 'Couvre une sphère de ##m. de diamètre',
+                    'chakra' => 'Coute ## points de chakra',
+                    'distance' => 'Peut être lancé jusqu\'à ##m.'
                 )
             ),
             'vague' => array(
                 'nom' => 'Vague',
                 'values' => array(
-                    'degat' => 'dégâts',
-                    'temps' => 'durée',
-                    'chakra' => 'chakra',
-                    'distance' => 'distance'
+                    'degat' => 'Inflige ## points de dégats',
+                    'temps' => 'Dure ##s.',
+                    'chakra' => 'Coute ## points de chakra',
+                    'distance' => 'Peut être lancé jusqu\'à ##m.'
                 )
             ),
             'pieux' => array(
                 'nom' => 'Pieux',
                 'values' => array(
-                    'degat' => 'dégâts',
-                    'largeur' => 'largeur',
-                    'longueur' => 'longueur',
-                    'chakra' => 'chakra',
-                    'distance' => 'distance'
+                    'degat' => 'Inflige ## points de dégats',
+                    'largeur' => 'Les pieux s\'étendent sur ##m. de largeur.',
+                    'longueur' => 'Les pieux s\'étendent sur ##m. de longueur',
+                    'chakra' => 'Coute ## points de chakra',
+                    'distance' => 'Peut être lancé jusqu\'à ##m.'
                 )
             ),
             'teleportation' => array(
                 'nom' => 'Téléportation',
                 'values' => array(
-                    'vie' => 'dégâts',
-                    'chakra' => 'chakra',
-                    'distance' => 'distance'
+                    'vie' => 'Inflige ## points de dégats',
+                    'chakra' => 'Coute ## points de chakra',
+                    'distance' => 'Peut être lancé jusqu\'à ##m.'
                 )
             ),
             'tornade' => array(
                 'nom' => 'Tornade',
                 'values' => array(
-                    'degat' => 'dégâts',
-                    'temps' => 'durée',
-                    'chakra' => 'chakra',
-                    'distance' => 'distance'
+                    'degat' => 'Inflige ## points de dégats',
+                    'temps' => 'Dure ##s.',
+                    'chakra' => 'Coute ## points de chakra',
+                    'distance' => 'Peut être lancé jusqu\'à ##m.'
                 )
             ),
             'kusanagi' => array(
                 'nom' => 'Kusanagi',
                 'values' => array(
-                    'degat' => 'dégâts',
-                    'last' => 'durée',
-                    'chakra' => 'chakra'
+                    'degat' => 'Inflige ## points de dégats',
+                    'last' => 'Dure ##s.',
+                    'chakra' => 'Coute ## points de chakra'
                 )
             )
         );
 
         $data = new GameData();
         $dom = $data->getDocument();
+
+        $levelUp = array();
+        $cd = $dom->getElementsByTagName('levelUp')->item(0);
+        $levelUp['capacite'] = json_encode(array(
+            'val' => (int)$cd->getElementsByTagName('capacite')->item(0)->getAttribute('val'),
+            'depart' => (int)$cd->getElementsByTagName('capacite')->item(0)->getAttribute('depart'),
+        ));
+        $levelUp['aptitude'] = json_encode(array(
+            'val' => (int)$cd->getElementsByTagName('aptitude')->item(0)->getAttribute('val'),
+            'depart' => (int)$cd->getElementsByTagName('aptitude')->item(0)->getAttribute('depart'),
+        ));
+
         foreach($capacites as $k=>$val){
             $xml = array();
             $cd = $dom->getElementsByTagName($k)->item(0)->getElementsByTagName('x');
@@ -188,6 +200,11 @@ class DefaultController extends Controller
             $capacites[$k]['xml'] = json_encode($xml);
         }
 
+        $classes = array();
+        $cd = $dom->getElementsByTagName('classe')->item(0)->getElementsByTagName('x');
+        foreach($cd as $v){
+            $classes[$v->getAttribute('val')] = strtolower($v->getAttribute('name'));
+        }
         foreach($aptitudes as $k=>$val){
             $xml = array();
             $cd = $dom->getElementsByTagName($k)->item(0)->getElementsByTagName('x');
@@ -199,13 +216,18 @@ class DefaultController extends Controller
                 }
                 $xml[] = $attr;
             }
+            $limit = $dom->getElementsByTagName($k)->item(0)->getAttribute('limit');
+            $aptitudes[$k]['limit'] = isset($classes[$limit])?$classes[$limit]:'';
+            $aptitudes[$k]['niveau'] = $dom->getElementsByTagName($k)->item(0)->getAttribute('niveau');
             $aptitudes[$k]['xml'] = json_encode($xml);
             $aptitudes[$k]['values'] = json_encode($aptitudes[$k]['values']);
         }
 
         return $this->render('NinjaTookenGameBundle:Default:calculateur.html.twig', array(
             'capacites' => $capacites,
-            'aptitudes' => $aptitudes
+            'aptitudes' => $aptitudes,
+            'classes' => $this->container->getParameter('class'),
+            'levelUp' => $levelUp
         ));
     }
 

@@ -17,6 +17,35 @@
 {% block body %}
 				<section class="main">
                     <form class="full" name="calculateur" method="post" action="#">
+                        <div class="row-fluid">
+                            <div class="span3"><label class="libelle">Classe</label></div>
+                            <div class="span9">
+                                <label class="select">
+                                    <select name="calculateurLimit">
+                                        {% for k, classe in classes %}
+                                        <option value="{{ classe|lower }}" class="{{ classe|lower }}">{{ classe }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row-fluid">
+                            <div class="span3"><label class="libelle">Niveau</label></div>
+                            <div class="span2">
+                                <label class="select">
+                                    <select name="calculateurLevel" data-aptitude="{{ levelUp.aptitude }}" data-capacite="{{ levelUp.capacite }}">
+                                    {% for i in 0..100 %}
+                                        <option value="{{ i }}">{{ i }}</option>
+                                    {% endfor %}
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="span7">
+                                Points de capacités disponibles : <strong><span class="result" data-id="ptsCapacite"></span></strong><br>
+                                Points de jutsus disponibles : <strong><span class="result" data-id="ptsAptitude"></span></strong>
+                            </div>
+                        </div>
+                        
                         <h3>Capacités</h3>
 			{% for key, capacite in capacites %}
                         <div class="row-fluid">
@@ -24,7 +53,7 @@
                             <div class="span2">
                                 <label class="select">
                                     <select name="capacite" data-id="{{ key }}" data-json="{{ capacite.xml }}">
-                                    {% for i in 1..100 %}
+                                    {% for i in 0..100 %}
                                         <option value="{{ i }}">{{ i }}</option>
                                     {% endfor %}
                                     </select>
@@ -34,14 +63,19 @@
                         </div>
                         {% endfor %}
 
+                        <div class="row-fluid">
+                            <div class="span2 offset3"><span class="result" data-id="capacites"></span></div>
+                            <div class="span7"></div>
+                        </div>
+
                         <h3>Jutsus</h3>
 			{% for key, aptitude in aptitudes %}
-                        <div class="row-fluid">
+                        <div class="row-fluid" data-limit="{{ aptitude.limit }}" data-niveau="{{ aptitude.niveau }}">
                             <div class="span3"><label class="libelle">{{ aptitude.nom }}</label></div>
                             <div class="span2">
                                 <label class="select">
                                     <select name="aptitude" data-id="{{ key }}" data-json="{{ aptitude.xml }}" data-attr="{{ aptitude.values }}">
-                                    {% for i in 1..30 %}
+                                    {% for i in 0..30 %}
                                         <option value="{{ i }}">{{ i }}</option>
                                     {% endfor %}
                                     </select>
@@ -50,6 +84,11 @@
                             <div class="span7"><span class="result" data-id="{{ key }}"></span></div>
                         </div>
                         {% endfor %}
+
+                        <div class="row-fluid">
+                            <div class="span2 offset3"><span class="result" data-id="aptitudes"></span></div>
+                            <div class="span7"></div>
+                        </div>
                     </form>
                 </section>
 {% endblock %}
