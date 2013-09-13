@@ -513,9 +513,27 @@ header{
 }
 
 // les ninjas sur le côté gauche
-body>.content:before{
-    @media(min-width:1400px){
-        position:fixed;bottom:0;left:50%;margin-left:-930px;content:"";.size(420px, 305px);background:transparent url(../images/ninjas.png) no-repeat scroll 0 0;
+@media(min-width:980px){
+    body>.ninjas{
+        position:fixed;bottom:50px;left:140px;.size(230px, 140px);pointer-events:none;z-index:-1;
+        >div{
+            background:transparent none no-repeat scroll 0 0;
+            &.ninja1{
+                background-image:url(../images/ninja1.png);.size(217px, 128px);margin-left:-130px;margin-top:70px;.opacity(40);
+            }
+            &.ninja2{
+                background-image:url(../images/ninja2.png);.size(242px, 112px);margin-left:-30px;margin-top:-10px;.opacity(40);
+            }
+            &.ninja3{
+                background-image:url(../images/ninja3.png);.size(191px, 108px);margin-left:30px;margin-top:100px;.opacity(30);
+            }
+            &.ninja4{
+                background-image:url(../images/ninja4.png);.size(159px, 131px);margin-left:80px;margin-top:-70px;.opacity(20);
+            }
+            &.ninja5{
+                background-image:url(../images/ninja5.png);.size(163px, 108px);margin-left:95px;margin-top:160px;.opacity(20);
+            }
+        }
     }
 }
 // contenu principal de la page

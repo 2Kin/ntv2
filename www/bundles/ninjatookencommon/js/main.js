@@ -474,4 +474,7 @@ $(document).ready(function(){
 
 	// calculateur de jutsus
 	var _calculateur = new Calculateur();
+
+	// parallax
+	$('.ninjas').parallax();
 });
