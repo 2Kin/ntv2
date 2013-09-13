@@ -9,16 +9,16 @@
         <meta name="description" content="{% block description %}NinjaTooken{% endblock %}">
         <meta name="keywords" content="{% block keywords %}NinjaTooken{% endblock %}">
         <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="{{ asset('bundles/ninjatookencommon/css/main.css') }}" />
-    <link rel="alternate" type="application/atom+xml" title="Les dernières nouveautés" href="/feed/" />
+        <link rel="stylesheet" href="{{ asset('bundles/ninjatookencommon/css/main.css') }}" />
+        <link rel="alternate" type="application/atom+xml" title="Les dernières nouveautés" href="/feed/" />
 
-    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ asset('touch-icon-iphone.png') }}" />
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('touch-icon-ipad.png') }}" />
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('touch-icon-iphone-retina.png') }}" />
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('touch-icon-ipad-retina.png') }}" />
-    <meta name="msapplication-TileImage" content="{{ asset('windows8.png') }}"/>
-    <meta name="msapplication-TileColor" content="#ff3b00"/>
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+        <link rel="apple-touch-icon" href="{{ asset('touch-icon-iphone.png') }}" />
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('touch-icon-ipad.png') }}" />
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('touch-icon-iphone-retina.png') }}" />
+        <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('touch-icon-ipad-retina.png') }}" />
+        <meta name="msapplication-TileImage" content="{{ asset('windows8.png') }}"/>
+        <meta name="msapplication-TileColor" content="#ff3b00"/>
     </head>
     <body>
         <!--[if lt IE 9]>
@@ -191,6 +191,10 @@
 		'@NinjaTookenCommonBundle/Resources/public/js/vendor/jquery.bracket.min.js'
 		'@NinjaTookenCommonBundle/Resources/public/js/vendor/timeline-min.js'
 		'@NinjaTookenCommonBundle/Resources/public/js/vendor/jquery.motionCaptcha.0.2.js'
+		'@NinjaTookenCommonBundle/Resources/public/js/src/class.js'
+		'@NinjaTookenCommonBundle/Resources/public/js/src/class.calculateur.js'
+		'@NinjaTookenCommonBundle/Resources/public/js/src/class.aptitude.js'
+		'@NinjaTookenCommonBundle/Resources/public/js/src/class.jutsu.js'
 		'@NinjaTookenCommonBundle/Resources/public/js/main.js'
 		output='js/compiled/main.js' combine=true
 	%}

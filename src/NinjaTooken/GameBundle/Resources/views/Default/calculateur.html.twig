@@ -22,8 +22,8 @@
                             <div class="span9">
                                 <label class="select">
                                     <select name="calculateurLimit">
-                                        {% for k, classe in classes %}
-                                        <option value="{{ classe|lower }}" class="{{ classe|lower }}">{{ classe }}</option>
+                                        {% for k, v in classes %}
+                                        <option value="{{ v|lower }}" class="{{ v|lower }}"{% if v|lower == classe %} selected{% endif %}>{{ v }}</option>
                                         {% endfor %}
                                     </select>
                                 </label>
@@ -35,7 +35,7 @@
                                 <label class="select">
                                     <select name="calculateurLevel" data-aptitude="{{ levelUp.aptitude }}" data-capacite="{{ levelUp.capacite }}">
                                     {% for i in 0..100 %}
-                                        <option value="{{ i }}">{{ i }}</option>
+                                        <option value="{{ i }}"{% if i == level %} selected{% endif %}>{{ i }}</option>
                                     {% endfor %}
                                     </select>
                                 </label>
@@ -47,14 +47,14 @@
                         </div>
                         
                         <h3>Capacités</h3>
-			{% for key, capacite in capacites %}
-                        <div class="row-fluid">
+			            {% for key, capacite in capacites %}
+                        <div class="row-fluid calculateur-capacite">
                             <div class="span3"><label class="libelle">{{ capacite.nom }}</label></div>
                             <div class="span2">
                                 <label class="select">
                                     <select name="capacite" data-id="{{ key }}" data-json="{{ capacite.xml }}">
                                     {% for i in 0..100 %}
-                                        <option value="{{ i }}">{{ i }}</option>
+                                        <option value="{{ i }}"{% if i == capacite.current %} selected{% endif %}>{{ i }}</option>
                                     {% endfor %}
                                     </select>
                                 </label>
@@ -64,19 +64,18 @@
                         {% endfor %}
 
                         <div class="row-fluid">
-                            <div class="span2 offset3"><span class="result" data-id="capacites"></span></div>
-                            <div class="span7"></div>
+                            <div class="span9 offset3">Points restants : <strong><span class="result" data-id="total-capacites"></span></strong></div>
                         </div>
 
                         <h3>Jutsus</h3>
-			{% for key, aptitude in aptitudes %}
-                        <div class="row-fluid" data-limit="{{ aptitude.limit }}" data-niveau="{{ aptitude.niveau }}">
-                            <div class="span3"><label class="libelle">{{ aptitude.nom }}</label></div>
+			            {% for key, aptitude in aptitudes %}
+                        <div class="row-fluid calculateur-jutsu" data-limit="{{ aptitude.limit }}" data-niveau="{{ aptitude.niveau }}">
+                            <div class="span3"><label class="libelle {{ aptitude.limit }}">{{ aptitude.nom }}</label></div>
                             <div class="span2">
                                 <label class="select">
                                     <select name="aptitude" data-id="{{ key }}" data-json="{{ aptitude.xml }}" data-attr="{{ aptitude.values }}">
                                     {% for i in 0..30 %}
-                                        <option value="{{ i }}">{{ i }}</option>
+                                        <option value="{{ i }}"{% if i == aptitude.current %} selected{% endif %}>{{ i }}</option>
                                     {% endfor %}
                                     </select>
                                 </label>
@@ -86,8 +85,7 @@
                         {% endfor %}
 
                         <div class="row-fluid">
-                            <div class="span2 offset3"><span class="result" data-id="aptitudes"></span></div>
-                            <div class="span7"></div>
+                            <div class="span9 offset3">Points restants : <strong><span class="result" data-id="total-aptitudes"></span></strong></div>
                         </div>
                     </form>
                 </section>

@@ -17,18 +17,43 @@ class DefaultController extends Controller
 
     public function calculateurAction()
     {
+        $gameData = $this->get('ninjatooken_game.gamedata');
+
+        $level = 0;
+        $classe = "suiton";
+        // les données du joueur connecté
+        $security = $this->get('security.context');
+        $ninja = null;
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $ninja = $user->getNinja();
+
+            if($ninja){
+                // l'expérience (et données associées)
+                $gameData->setExperience($ninja->getExperience(), $ninja->getGrade());
+                $level = $gameData->getLevelActuel();
+
+                $classeP = $this->container->getParameter('class');
+                $classe = strtolower($classeP[$ninja->getClasse()]);
+            }
+        }
+
         $capacites = array(
             'force' => array(
-                'nom' => 'Force'
+                'nom' => 'Force',
+                'current' => $ninja?$ninja->getAptitudeForce():0
             ),
             'vitesse' => array(
-                'nom' => 'Vitesse'
+                'nom' => 'Vitesse',
+                'current' => $ninja?$ninja->getAptitudeVitesse():0
             ),
             'vie' => array(
-                'nom' => 'Vie'
+                'nom' => 'Vie',
+                'current' => $ninja?$ninja->getAptitudeVie():0
             ),
             'chakra' => array(
-                'nom' => 'Chakra'
+                'nom' => 'Chakra',
+                'current' => $ninja?$ninja->getAptitudeChakra():0
             )
         );
         $aptitudes = array(
@@ -38,14 +63,16 @@ class DefaultController extends Controller
                     'degat' => 'Inflige ## points de dégats',
                     'rayon' => 'Grosseur de ##m.',
                     'chakra' => 'Coute ## points de chakra'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuBoule():0
             ),
             'doubleSaut' => array(
                 'nom' => 'Double saut',
                 'values' => array(
                     'saut1' => 'Portée du 1° saut augmenté de ##% par rapport à la hauteur de base',
                     'saut2' => 'Portée du 2° saut augmenté de ##% par rapport à la hauteur de base'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuDoubleSaut():0
             ),
             'bouclierElementaire' => array(
                 'nom' => 'Bouclier élémentaire',
@@ -53,14 +80,16 @@ class DefaultController extends Controller
                     'reduction' => 'Protège à ##%',
                     'chakra' => 'Coute ## points de chakra',
                     'last' => 'Dure ##s.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuBouclier():0
             ),
             'marcherMur' => array(
                 'nom' => 'Marcher sur les murs',
                 'values' => array(
                     'chakra' => 'Coute ## points de chakra',
                     'last' => 'Dure ##s.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuMarcherMur():0
             ),
             'acierRenforce' => array(
                 'nom' => 'Acier renforcé',
@@ -68,7 +97,8 @@ class DefaultController extends Controller
                     'degat' => 'Inflige ## points de dégats',
                     'chakra' => 'Coute ## points de chakra',
                     'last' => 'Dure ##s.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuAcierRenforce():0
             ),
             'deflagrationElementaire' => array(
                 'nom' => 'Déflagration élémentaire',
@@ -76,33 +106,38 @@ class DefaultController extends Controller
                     'degat' => 'Inflige ## points de dégats',
                     'chakra' => 'Coute ## points de chakra',
                     'rayon' => 'Couvre une sphère de ##m. de diamètre',
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuDeflagration():0
             ),
             'chakraVie' => array(
                 'nom' => 'Chakra de vie',
                 'values' => array(
                     'chakra' => 'Coute ## points de chakra',
                     'last' => 'Dure ##s.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuChakraVie():0
             ),
             'resistanceExplosion' => array(
                 'nom' => 'Résistance aux explosions',
                 'values' => array(
                     'reduction' => 'Protège à ##%',
                     'last' => 'Dure ##s.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuResistanceExplosion():0
             ),
             'marcherViteEau' => array(
                 'nom' => 'Marcher sur l\'eau',
                 'values' => array(
                     'last' => 'Dure ##s.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuMarcherEau():0
             ),
             'changerObjet' => array(
                 'nom' => 'Métamorphose',
                 'values' => array(
                     'last' => 'Dure ##s.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuMetamorphose():0
             ),
             'multishoot' => array(
                 'nom' => 'Multishoot',
@@ -110,14 +145,16 @@ class DefaultController extends Controller
                     'speed' => 'Temps entre chaque tire diminué de ##s.',
                     'chakra' => 'Coute ## points de chakra',
                     'last' => 'Dure ##s.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuMultishoot():0
             ),
             'invisibleman' => array(
                 'nom' => 'Invisiblité',
                 'values' => array(
                     'opacity' => 'Invisible à ##%',
                     'last' => 'Dure ##s.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuInvisibilite():0
             ),
             'phoenix' => array(
                 'nom' => 'Phoenix',
@@ -126,7 +163,8 @@ class DefaultController extends Controller
                     'rayon' => 'Couvre une sphère de ##m. de diamètre',
                     'chakra' => 'Coute ## points de chakra',
                     'distance' => 'Peut être lancé jusqu\'à ##m.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuPhoenix():0
             ),
             'vague' => array(
                 'nom' => 'Vague',
@@ -135,7 +173,8 @@ class DefaultController extends Controller
                     'temps' => 'Dure ##s.',
                     'chakra' => 'Coute ## points de chakra',
                     'distance' => 'Peut être lancé jusqu\'à ##m.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuVague():0
             ),
             'pieux' => array(
                 'nom' => 'Pieux',
@@ -145,7 +184,8 @@ class DefaultController extends Controller
                     'longueur' => 'Les pieux s\'étendent sur ##m. de longueur',
                     'chakra' => 'Coute ## points de chakra',
                     'distance' => 'Peut être lancé jusqu\'à ##m.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuPieux():0
             ),
             'teleportation' => array(
                 'nom' => 'Téléportation',
@@ -153,7 +193,8 @@ class DefaultController extends Controller
                     'vie' => 'Inflige ## points de dégats',
                     'chakra' => 'Coute ## points de chakra',
                     'distance' => 'Peut être lancé jusqu\'à ##m.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuTeleportation():0
             ),
             'tornade' => array(
                 'nom' => 'Tornade',
@@ -162,7 +203,8 @@ class DefaultController extends Controller
                     'temps' => 'Dure ##s.',
                     'chakra' => 'Coute ## points de chakra',
                     'distance' => 'Peut être lancé jusqu\'à ##m.'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuTornade():0
             ),
             'kusanagi' => array(
                 'nom' => 'Kusanagi',
@@ -170,12 +212,12 @@ class DefaultController extends Controller
                     'degat' => 'Inflige ## points de dégats',
                     'last' => 'Dure ##s.',
                     'chakra' => 'Coute ## points de chakra'
-                )
+                ),
+                'current' => $ninja?$ninja->getJutsuKusanagi():0
             )
         );
 
-        $data = new GameData();
-        $dom = $data->getDocument();
+        $dom = $gameData->getDocument();
 
         $levelUp = array();
         $cd = $dom->getElementsByTagName('levelUp')->item(0);
@@ -227,7 +269,9 @@ class DefaultController extends Controller
             'capacites' => $capacites,
             'aptitudes' => $aptitudes,
             'classes' => $this->container->getParameter('class'),
-            'levelUp' => $levelUp
+            'levelUp' => $levelUp,
+            'level' => $level,
+            'classe' => $classe
         ));
     }
 
