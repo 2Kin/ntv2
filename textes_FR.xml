@@ -1,0 +1,1165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<partie nom="Accueil" href="/">
+		<contenu><![CDATA[<span class="punch">NinjaTooken est un jeu FPS gratuit en ligne multijoueur et solo dans un univers médiéval japonais.</span>
+		<h3>Évolutif, gratuit, multijoueur, et en réseau</h3>
+		<a href="/inscription.php" alt="Quel ninja es-tu" title="Quel ninja es-tu" class="pastille">Quel ninja<br/>es-tu ?</a>
+		<p>Ninja Tooken te transporte dans un univers où les ninjas sont sans pitié. Le but du jeu ? Tous les killer !<br/><br/>
+		Pour commencer, créé ton compte. Puis, choisis la classe de ton ninja : Katon (le feu), Suiton (l'eau), Futon (le vent), Doton (la terre), Raiton (la foudre). Ensuite, le principe est simple : plus tu killes, plus tu gagnes des points d'expérience. Ces points te permettront de faire évoluer ton ninja selon ta classe. Mais attention chaque élément a son ennemi juré. Par exemple, si tu appartiens à Katon, méfie-toi surtout de Suiton.<br/><br/>
+		Avec un chat intégré et jusqu'à 14 ninjas en réseau, chaque partie est différente mais toujours démentielle ! Alors viens te battre, évolue dans le jeu, et participe à l'enrichissement de "Ninja Tooken, la revanche du ninja r'din".<br/><br/>
+		Et NinjaTooken c'est aussi ##NUM_JOUEURS## joueurs ayant cumulés ##NUM_EXPERIENCE## points d'expériences : rejoins la communauté !</p>
+		<h3>Les "NinjaTooken"</h3>
+		<div class="box gold nt gradient">
+			<span class="number"></span>
+			<span class="login">-Delton-</span>
+			<span class="description">vainqueur des tournois du <a href="/message.php?ID=272352">12 mai 2013</a> et du <a href="/message.php?ID=290784">18 août 2013</a></span>
+		</div>
+		<p>Les anciens NinjaTooken :</p>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login" style="width:215px">Pein-rikoudu, Horoshimaru et Suikeii</span>
+			<span class="description">vainqueurs du tournoi <a href="/message.php?ID=245781">10 février 2013</a></span>
+		</div>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login">Rw_light</span>
+			<span class="description">vainqueur du tournoi <a href="/message.php?ID=235008">22 décembre 2012</a></span>
+		</div>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login">Pein-Rikoudu</span>
+			<span class="description">vainqueur du tournoi <a href="/message.php?ID=217944">20 octobre 2012</a></span>
+		</div>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login" style="width:200px">kether, Blade-Inferno et Strikesword</span>
+			<span class="description">vainqueurs du tournoi <a href="/message.php?ID=182447">8 juillet 2012</a></span>
+		</div>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login">Fusako.Uchiha</span>
+			<span class="description">vainqueur du tournoi <a href="/message.php?ID=165196">5 Mai 2012</a></span>
+		</div>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login">Ninjamza</span>
+			<span class="description">vainqueur du tournoi <a href="/message.php?ID=160075">21 avril 2012</a></span>
+		</div>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login">Kether</span>
+			<span class="description">vainqueur du tournoi <a href="/message.php?ID=142474">25 février 2012</a></span>
+		</div>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login">L-orbe-shuriken</span>
+			<span class="description">vainqueur du tournoi <a href="/message.php?ID=119260">13 novembre 2011</a></span>
+		</div>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login">Yoyosam</span>
+			<span class="description">vainqueur du tournoi <a href="/message.php?ID=109224">22 octobre 2011</a></span>
+		</div>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login">Rydax</span>
+			<span class="description">vainqueur du tournoi <a href="/message.php?ID=72948#message72948">16 juillet 2011</a>, <a href="/message.php?ID=79127">13 août 2011</a>, et <a href="/message.php?ID=93504">18 septembre 2011</a></span>
+		</div>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login">Gaara76</span>
+			<span class="description">vainqueur du tournoi <a href="/message.php?ID=68359#message68359">26 juin 2011</a></span>
+		</div>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login">Mistral</span>
+			<span class="description">vainqueur du tournoi <a href="/message.php?ID=60173#message60173"> 14 mai 2011</a>, <a href="/message.php?ID=63228#message63228">29 mai 2011</a>, et <a href="/message.php?ID=64492#message64492">5 juin 2011</a></span>
+		</div>
+		<div class="box grey nto gradient">
+			<span class="number"></span>
+			<span class="login">Zanhkraft</span>
+			<span class="description">vainqueur du tournoi <a href="/message.php?ID=33451#message33451">organisé le 13/14 novembre 2010</a></span>
+		</div>
+
+		<h3>Classement</h3>
+		<div id="classementSelect">
+			<a href="#" id="Experience" class="colonne on" title="classer par expérience">Expérience</a>
+			<a href="#" id="Assassinnat" class="colonne" title="classer par assassinat">Assassinat</a>
+			<a href="#" id="Course" class="colonne" title="classer par course">Course</a>
+			<span href="#" class="colonne" title="filtrer par classe" id="Classe">Classe : <span id="type">Tous</span>
+				<span class="classe">
+					<a href="#" title="" class="on">Tous</a>]]></contenu>
+
+		<contenu><![CDATA[</span>
+			</span>
+		</div>
+		<ul id="classement"></ul>
+		<br class="clear"/><br/>
+		<a href="#" id="classementNext">Plus de ninjas !</a>
+		<h3>Répartition par classe</h3>]]></contenu>
+
+		<contenu><![CDATA[<br/><br/>Dernière mise à jour le ##DATE##<br/><br/>]]></contenu>
+
+		<contenu><![CDATA[<a href="/chat/?channelID=0&lang=fr" onclick="javascript:pop('/fr/chat/?channelID=0&lang=fr',1000,650);return false;" target="_blank" rel="nofollow" class="chat"><span>Ouvrir le chat NinjaTooken</span></a><br/>
+		<div id="lastSide">
+			<ul class="onglet">
+				<li><a href="#" id="new" title="Dernières news">News</a></li>
+				<li><a href="#" id="message" title="Derniers messages">Message</a></li>
+				<li><a href="#" id="sujet" title="derniers sujets">Sujet</a></li>
+				<li><a href="#" id="clan" title="derniers clans">Clan</a></li>
+			</ul>
+			<div class="lastContain"></div>
+		</div>
+		<iframe src="http://www.facebook.com/plugins/likebox.php?locale=fr_FR&amp;href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FNinja-Tooken%2F102601529783806&amp;width=237&amp;colorscheme=dark&amp;show_faces=true&amp;stream=false&amp;header=false&amp;height=258" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:237px; height:258px;" allowTransparency="true"></iframe>
+		<h3>Partenaires</h3>]]></contenu>
+
+	</partie>
+	<partie nom="Communauté">
+		<partie nom="Forum" href=""/>
+		<partie nom="Clan" href="/clan-ninja.php"/>
+		<partie nom="Modération des abus" href="/abuse.php"/>
+		<partie nom="Règlement" href="/reglement.php"/>
+	</partie>
+	<partie nom="JOUER" href="/jouer.php"/>
+	<partie nom="Manuel du Ninja" href="/manuel-ninja/commande-jeu.php">
+		<partie nom="Guide du Débutant">
+			<partie nom="Commande de Jeu" href="/manuel-ninja/commande-jeu.php">
+				<contenu><![CDATA[<img src="/img/ninjatooken1.jpg" class="right" alt=""/>
+				Pour commencer à jouer à Ninja Tooken, rien de très compliqué !<br/><br/>
+				Comme la majorité des FPS, les touches à utiliser pour les déplacements sont : "Z,Q,S,D".<br/><br/>
+				A ces touches s'ajoutent la barre espace pour sauter (ou clic droit), les touches "1,2,3,4,5" pour les armes, et les touches "A,E,R,F,T" pour les jutsus... mais tu peux également changer d'armes/jutsus avec la roulette de la souris.<br/>
+				C'est très pratique, car comme par hasard, elles sont toutes regroupés au même endroit...<br/><br/>
+				Evidemment si cette disposition ne te plait pas, ou si tu as un clavier qwerty, ou mal formée, tu peux la personnaliser dans les <a href="/manuel-ninja/parametrage-touche.php" title="Paramétrage des touches">options du jeu</a>.<br/><br/>
+				Pour agrémenter le tout, tu utilises la souris, dont tu peux aussi changer la sensibilité dans les options. Bien foutu, non?<br/><br/>]]></contenu>
+			</partie>
+			<partie nom="Partie Solo" href="/manuel-ninja/partie-solo.php">
+				<contenu><![CDATA[Deux types de missions sont disponibles dans la partie Solo de Ninja Tooken : Course et Assassinat.<br/>
+				Réaliser ces missions te permettrons de mieux contrôler ton ninja durant tes phases de déplacement, et d'attaque, tout en gagnant de l'expérience !<br/>
+				Pour réaliser ces missions, lance une partie solo puis, une fois près des indicateurs, appuis sur la "touche de chat" ("Entrée" par défaut).
+				<br/><br/>
+				<h3>Course</h3>
+				<img src="/img/course.jpg" alt="course" class="right"/>
+				Tu devras pour réaliser cette mission, ramasser des pièces d'or dans un temps limité.<br/>
+				Dès que tu as ramassé toutes les pièces dans le temps imparti, la mission est réussie, et tu gagnes un certain nombre de points d'expérience (en fonction du nombre de pièces à ramasser et du temps restant).
+				Par contre, si tu n'as pas ramassé toutes les pièces à la fin du chrono, la mission est ratée et tu ne gagnes aucun point.<br/>
+				Mais pas d'inquiétudes, tu peux recommencer chaque mission course autant de fois que tu veux !<br/>
+				<br/>
+				<h3>Assassinat</h3>
+				<img src="/img/assassinat.jpg" alt="assassinat" class="left"/>
+				Un contrat a été posé sur un ninja ! Pour le mener à bien, tu devras tuer un ninja sur la map. Si ta cible ou un autre ninja t'élimine, ta mission est ratée. Si tu dépasses le temps aloué pour tuer ta cible, la mission est ratée.<br/>
+				Tu l'auras compris, il va falloir faire preuve d'un véritable instinct de ninja pour mener à bien cette mission !<br/>
+				Mais pas de panique, tu peux recommencer chaque mission assassinat autant de fois que tu veux !<br/>
+				<br/><br/><br/><br/>
+				Pour chacune de ces missions, tu auras un indicateur de position te permettant de connaitre l'emplacement de la pièce la plus proche à ramasser, ou du ninja à assassiner, ainsi qu'en haut à gauche une fenêtre contenant le type de mission actuellement jouée, un chronomètre, et des informations sépcifiques à chaque mission.]]></contenu>
+			</partie>
+			<partie nom="Partie Réseau" href="/manuel-ninja/partie-reseau.php">
+				<contenu><![CDATA[<img src="/img/reseau.jpg" alt="parties réseaux" class="right"/>
+				Quatre types de parties sont disponibles à la création d'une partie en réseau.<br/>
+				<br/>
+				<h3>Partie standard</h3>
+				Pas de temps, pas d'équipe, pas de drapeau : du combat, tout simplement !<br/>
+				Chaque joueur connecté va devoir lutter pour sa survie avec ses propres moyens, sans aide et sans limite de temps.<br/>
+				<br/>
+				<h3>Partie en équipe</h3>
+				Pour cette partie, deux équipes se livrent une lutte sans merci ! Chaque nouveau joueur qui se connecte rejoint l'équipe la moins nombreuse.<br/>
+				Les ennemis sont en rouge, les alliés en bleu, et il n'est pas possible de tuer un allié.<br/>
+				<br/>
+				<h3>Partie chronométrée</h3>
+				Tu as 10 minutes pour t'imposer, passé ce délai, les compteurs sont remis à zéros et une nouvelle partie commence ! Ici pas d'équipe, que des ennemis !<br/>
+				<br/>
+				<h3>Parchemin</h3>
+				Le but du mode est de capturer un parchemin qui est un objet unique présent sur la map (et placé aléatoirement), puis de survivre pendant un certain temps sur un emplacement défini afin de gagner un max' d'expérience !!<br/>
+				Ce mode se veut donc un mixe des modes "hunter" et "capture the flag" tout en gardant des effets spécifiques à Ninja Tooken.]]></contenu>
+			</partie>
+		</partie>
+		<partie nom="Mon Ninja">
+			<partie nom="Description Générale" href="/manuel-ninja/description-generale.php">
+				<contenu><![CDATA[<p align="center"><img src="/img/fresque.jpg" class="center" alt=""/><br/></p>
+				Ninja Tooken te transporte dans un univers très japonisant où les ninjas sont sans pitié. Le but du jeu ? Tous les killer !<br/><br/>
+				Pour commencer, <a href="/inscription.php">créé ton compte</a>. Puis, choisis la classe de ton ninja : Katon (le feu), Suiton (l'eau), Futon (le vent), Doton (la terre), Raiton (la foudre).<br/>
+				Ensuite, le principe est simple : plus tu killes, plus tu gagnes des points d'expérience.<br/>
+				Ces points te permettront de faire évoluer ton ninja selon ta classe.<br/><br/>
+				Mais attention chaque élément a son ennemi juré. Par exemple, si tu appartiens à Katon, méfie-toi surtout de Suiton.]]></contenu>
+			</partie>
+			<partie nom="Vie et Chakra" href="/manuel-ninja/vie-chakra.php">
+				<contenu><![CDATA[<img src="/img/infosPerso.jpg" alt="interface" class="right"/>
+				La vie et le chakra sont deux éléments très importants pour ton ninja : si tu n'as plus de points de vie la fin est proche, et si tu n'as plus de chakra tu ne pourras plus utiliser de jutsus.<br/>
+				Ces deux jauges peuvent être augmentées via les point d'aptitudes que tu leur accorderas.<br/>
+				Tu peux aussi regagner de la vie ou du chakra via les bonus disséminés dans la carte. Le bonus "bol de ramen" redonne de la vie, et le "Ying Yang" redonne du chakra.<br/>
+				Le chakra à en plus la particularité de se régénérer à raison de cinq points par seconde.]]></contenu>
+			</partie>
+			<partie nom="Expérience" href="/manuel-ninja/experience.php">
+				<contenu><![CDATA[<img src="/img/experience.jpg" alt="un niveau en plus" class="right"/>
+				L'expérience peut être gagnée de différentes façons.<br/>
+				En <a href="/manuel-ninja/partie-solo.php" title="Partie solo">mode Solo</a>, tu gagnes de l'expérience lorsque tu kill un ninja, mais tu peux aussi en gagner en effectuant les missions disponibles.<br/>
+				En mode réseau, l'expérience provient uniquement des kills que tu effectues. Plus le niveau du ninja que tu viens d'abattre est grand, et plus tu gagneras d'expérience. Il faut savoir prendre des risques, et partir défier les meilleurs ninjas.<br/>
+				Une fois gagnée, cette expérience va te permettre de passer des niveaux, chacun te faisant gagner des points d'aptitudes et de jutsus.<br/>
+				<br/>
+				Tu trouveras dans le <a href="/manuel-ninja/partie-solo.php" title="guide du débutant">"Guide du débutant"</a> toutes les informations concernant les différentes façons de gagner de l'expérience dans Ninja Tooken !<br/>
+				<br/>
+				<h3>Rangs</h3>
+				<br/>
+				Le rang de ton ninja dépend directement de son niveau, et donc de l'expérience gagnée :<br/>
+				<table border="0">
+					<tr>
+						<td width="100"><strong>Niveau 1-9</strong></td>
+						<td>Blatte</td>
+					</tr>
+					<tr>
+						<td><strong>Niveau 10-19</strong></td>
+						<td>Étudiant</td>
+					</tr>
+					<tr>
+						<td><strong>Niveau 20-49</strong></td>
+						<td>Genin</td>
+					</tr>
+					<tr>
+						<td><strong>Niveau 50-69</strong></td>
+						<td>Chunin</td>
+					</tr>
+					<tr>
+						<td><strong>Niveau 70-89</strong></td>
+						<td>Jōnin</td>
+					</tr>
+					<tr>
+						<td><strong>Niveau 90-100</strong></td>
+						<td>Sannin</td>
+					</tr>
+				</table>
+				<br/><br/>
+				Si tu me lis, tu dois certainement être une blatte ! Mais ne t'inquiètes pas, cette étape se termine rapidement, et tu vas pouvoir accèder aux plus puissants jutsus dans à peu près pas très longtemps !<br/>
+				<br/>
+				<h3>Dans</h3>
+				Une fois arrivée au niveau 100, tu auras la possibilité depuis le menu « mon ninja » de passer un dan (ou grade). En passant un dan, ton niveau est recalculé sur la base des points d’expérience excédents le palier du niveau 100, soit : XP final = XP total – 5194303*dan<br/>
+				Ainsi, tu as la possibilité de « recommencer » le jeu aux premiers niveaux tout en gardant ton ninja.<br/>
+				<br/>
+				Il existe actuellement 15 dans.]]></contenu>
+			</partie>
+			<partie nom="Aptitudes" href="/manuel-ninja/aptitude.php">
+				<contenu><![CDATA[Les aptitudes sont la base de ton ninja. A chaque niveau, tu gagneras deux points à répartir selon tes envies et la voie que tu veux faire prendre à ton ninja. Tu veux qu'il soit plus fort ? Plus rapide ? Plus tenace ? A toi d'en décider !<br/><br/>
+				<h3>4 aptitudes et leurs différents effets<br/></h3>
+				<img src="/img/skecthfuton.jpg" class="right" alt=""/>
+				<h4>Force</h4>
+				La force agit sur deux aspects de ton ninja : plus tu auras de force, plus les armes de ton ninja infligeront de dégâts (attention, uniquement les armes, et non les jutsus !).<br/>
+				Mais l'aptitude force n'améliore pas que les dégâts, elle permet aussi à ton ninja de lancer les kunaïs, shurikens, et autres armes de distance, plus loin.<br/>
+				<br/>
+				<h4>Vitesse</h4>
+				La vitesse permet tout simplement à ton ninja de courir plus vite. N'oublies pas qu'un bon ninja est un ninja furtif, et donc rapide pour attaquer, comme pour battre en retraite.<br/>
+				<br/>
+				<h4>Vie</h4>
+				La vie est directement proportionnelle à ta jauge de vie. En y attribuant des points, tu augmenteras ton maximum de points de vie.<br/>
+				<br/>
+				<h4>Chakra</h4>
+				Le chakra est identique à l'aptitude vie, mais appliquée au chakra. Plus tu y mets de points, plus ta jauge de chakra sera grande.]]></contenu>
+			</partie>
+			<partie nom="Jutsus" href="/manuel-ninja/jutsu.php">
+				<contenu><![CDATA[Avec les jutsus, on passe aux choses sérieuses !<br/>
+				Un point te sera attribué à chaque nouveau niveau que tu passeras. Une fois ce point acquis, tu pourras le placer dans le jutsu que tu souhaites développer, ou dans celui que tu veux apprendre.<br/>
+				Contrairement aux aptitudes, tu ne disposeras pas de tous les jutsus dès le début de ton aventure. Ils se débloqueront au fur et à mesure de ta progression et en fonction de ta classe. Mais ne t'inquiètes pas, les points que tu as placé dans un jutsu ne le sont pas définitivement. Tu peux à tout moment les enlever d'un jutsu pour mieux en développer un autre.<br/>
+				<br/>
+				<h3>Types de jutsus</h3>
+				Les jutsus se répartissent en plusieurs catégories. Il en existe des passifs (actifs tout le temps), des actifs (activable "manuellement"), des jutsus d'attaques, des jutsus de défense, et même des jutsus de déplacement. Tu peux vraiment spécialiser ton ninja comme tu le souhaites, et ainsi pousser ta stratégie au maximum.<br/>
+				<br/>
+				<h3>Jutsus généraux</h3>
+				La plupart des jutsus sont communs aux cinq classes (Katon, Futon, Raiton, Doton, Suiton), d'autres sont spécifiques à certaines classes, nous les verrons plus tard. Voyons maintenant ces jutsus généraux.<br/>
+				<br/>
+				<h4>Protection nouveau joueur</h4>
+				<img src="/img/jutsus/protection.png" alt="protection" class="left"/>
+				Ce jutsu passif et qui ne consomme pas de chakra est offert à tout joueur ayant un niveau inférieur à 30. Il limite à 20 points les dégâts reçus par un ninja d'un niveau 60 ou plus.<br/>
+				Pas d'amélioration possible ! Ce jutsu disparait au niveau 31.<br/>
+				<br/>
+				<h4>Boule de chakra</h4>
+				<img src="/img/jutsus/boule.png" alt="boule de chakra" class="left"/>
+				Ce jutsu d'attaque est très simple, il permet d'attaquer à distance en envoyant une boule de chakra. Cette boule n'est pas affectée par la gravité, et donc peut être envoyée à longue distance tout en restant très précise. <br/>
+				Amélioration en fonction des points de chakra affectés : Plus puissante, plus grosse, et plus rapide mais consomme plus de chakra.<br/>
+				<br/>
+				<h4>Double saut</h4>
+				<img src="/img/jutsus/saut.png" alt="double saut" class="left"/>
+				Comme son nom l'indique, le double saut permet d'effectuer un deuxième saut à la suite du premier pour atteindre des zones hautes. Le double saut étant un jutsu passif, il n'est pas nécessaire de l'activer; Le double saut ne consomme pas de chakra<br/>
+				Amélioration en fonction des points de chakra affectés : Le premier et le deuxième saut sont plus grands.<br/>
+				<br/>
+				<h4>Bouclier</h4>
+				<img src="/img/jutsus/bouclier.png" alt="bouclier" class="left"/>
+				Le bouclier permet de réduire les dommage subis. Attention, ce jutsus n'est pas passif, il faut l'activer, et il n'est actif que pendant une durée déterminée. <br/>
+				Amélioration en fonction des points de chakra affectés : Le bouclier réduit encore plus les dommages et dure encore plus longtemps mais consomme plus de chakra.<br/>
+				<br/>
+				<h4>Marcher sur les murs</h4>
+				<img src="/img/jutsus/mur.png" alt="marcher sur les murs" class="left"/>
+				Ce jutsu actif permet de marcher sur des pentes très raide et des surface verticales pendant un certain laps de temps. Il se déclenche en appuyant par défaut sur la touche "Contrôle". A chaque déclenchement, il consomme du chakra, mais n'ayez crainte, ce jutsu très utile n'en consomme que très peu.<br/>
+				Amélioration en fonction des points de chakra affectés : Le temps pour marcher à la verticale ainsi que le coût en chakra augmente.<br/>
+				<br/>
+				<h4>Acier renforcé</h4>
+				<img src="/img/jutsus/acierRenforce.png" alt="acier renforcé" class="left"/>
+				Cette technique longtemps gardée secrète, a la particularité d'instiller du chakra dans ses armes blanches, afin d'augmenter de manière significative le tranchant de l'acier. Epée, kunaï, shuriken, shuriken de l'ombre, et clous de ninja deviennent alors encore plus redoutables, leurs dégâts étant littéralement multipliés à l'activation de ce jutsu.<br/>
+				Pour garder son attention à son maximum, le viseur se noirci durant le temps d'effet d'acier renforcé. Par contre les ennemis seront également avertis du danger par la présence d'un dragon tournoyant autour du ninja.<br/>
+				Amélioration en fonction des points de chakra affectés : Dure plus longtemps et inflige plus de dégâts mais consomme plus de chakra.<br/>
+				<br/>
+				<h4>Déflagration</h4>
+				<img src="/img/jutsus/deflagration.png" alt="déflagration" class="left"/>
+				La déflagration est un jutsu à la fois défensif et hostile. En plus d’infliger des dégâts importants aux ennemis se trouvant dans l’air d’effet, elle les repousse, annule les armes de jets, et ralenti les boules d’énergie. Mais si tu comptes l'utiliser, il te faux prévoir une bonne dose de chakra... car si la déflagration est très puissante, elle consomme également énormément de chakra.<br/>
+				Amélioration en fonction des points de chakra affectés : Les dégâts, la portée et la consommation de chakra augmentent.<br/>
+				<br/>
+				<h4>Chakra de vie</h4>
+				<img src="/img/jutsus/chakraVie.png" alt="chakra de vie" class="left"/>
+				Le chakra de vie permet une fois activé d'utiliser sa jauge de chakra pour absorber les dégâts qu'on vous infligera. Il permet donc d'étendre sa jauge de vie sur la jauge de chakra, mais pas de régénérer sa jauge de vie.<br/>
+				Une fois lancé, un son de battement de coeur signalera, ainsi qu'à vos adversaires, de sa présence. Les adversaires verront en plus une « aura de chakra » se dégager de votre corps.<br/>
+				Ce jutsu peut être désactivé à volonté. Il se désactive de toute façon automatiquement lorsque la jauge de chakra est vide.<br/>
+				Amélioration en fonction des points de chakra affectés : Dure plus longtemps mais consomme plus de chakra.<br/>
+				<br/>
+				<h4>Kusanagi</h4>
+				<img src="/img/jutsus/kusanagi.png" alt="Kusanagi" class="left"/>
+				Cette épée légendaire, pendant japonais d’Excalibur, est l'aboutissement des techniques de combat les plus évoluées, alliées à la plus grande maitrise spirituelle qui soit. À chaque activation de cette puissante relique, une onde de chakra comprimée sera projetée à très grande vitesse devant vous. Le résultat en est une très fine et arquée vague d'énergie totalement inarrêtable. Si un ennemi est touché par ce tranchant hors du commun, il sera repoussé par la puissance dévastatrice de l'attaque.<br/>
+				Amélioration en fonction des points de chakra affectés : Se propage plus loin (et donc devient plus grande), et inflige plus de dégâts mais consomme plus de chakra.<br/>
+				<br/>
+				<br/>
+				Voyons maintenant les jutsus spécifiques à chaque classe...<br/>
+				<br/>
+				<br/>
+				<h3 id="classe">Jutsus par classes</h3>
+				Chacune des <a href="/manuel-ninja/classe.php">cinq classes</a> possède deux jutsus spéciaux.<br/>
+				<br/>
+				<h4>Katon, le feu</h4>
+				<ul>
+					<li>
+						<h4>Protection contre le feu</h4>
+						<img src="/img/jutsus/resistance.png" alt="Protection contre le feu" class="left"/>
+						Cette protection permet de diminuer les dégâts des boules de chakra, des déflagrations, du Phoenix, et des explosifs (tonneau, ou kunaï explosif). Ce jutsu ne consomme pas de chakra.<br/>
+						Amélioration en fonction des points de chakra affectés : La protection augmente.
+					</li>
+					<li>
+						<h4>Phoenix</h4>
+						<img src="/img/jutsus/phoenix.png" alt="phoenix" class="left"/>
+						Cette attaque permet à ton ninja d'envoyer l'esprit du feu sur une zone du terrain ciblée. Une fois l'esprit arrivé à destination, une énorme explosion s'ensuit brulant gravement les ennemis pris dans la fureur élémentale.<br/>
+						Amélioration en fonction des points de chakra affectés : Les dégâts, la distance cible, et le rayon finale d'action augmentent (ainsi que le cout en chakra).<br/>
+						<strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
+					</li>
+				</ul>
+				<h4>Suiton, l'eau</h4>
+				<ul>
+					<li>
+						<h4>Marcher sur l'eau</h4>
+						<img src="/img/jutsus/marcher.png" alt="marcher sur l'eau" class="left"/>
+						Ce jutsu permet de marcher sur l'eau, et d’augmenter sa vitesse de déplacement sur et sous cet élément. Marcher sur l'eau est un jutsu actif qui ne consomme pas de chakra.<br/>
+						Amélioration en fonction des points de chakra affectés : Augmente la durée de l'effet, et la vitesse de déplacement.
+					</li>
+					<li>
+						<h4>Vague</h4>
+						<img src="/img/jutsus/vague.png" alt="vague" class="left"/>
+						Invoque la puissance dévastatrice des esprits aqueux à partir d'une zone ciblée du terrain. Une fois invoquée, la vague suit le terrain sur une trajectoire rectiligne et inflige d'importants dégâts à tous les ennemis touchés.<br/>
+						Amélioration en fonction des points de chakra affectés : Augmente la durée du déplacement, la distance ciblée, les dégâts infligés et le coût en chakra.<br/>
+						<strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
+					</li>
+				</ul>
+				<h4>Futon, l'air</h4>
+				<ul>
+					<li>
+						<h4>Transparence</h4>
+						<img src="/img/jutsus/transparence.png" alt="transparence" class="left"/>
+						Ce jutsu rend ton ninja translucide, et ne consomme pas de chakra !<br/>
+						Amélioration en fonction des points de chakra affectés : Le ninja devient de moins en moins visible. La distance nécessaire pour être visé avec le shuriken de l'ombre diminue d'autant !
+					</li>
+					<li>
+						<h4>Tornade</h4>
+						<img src="/img/jutsus/tornade.png" alt="tornade" class="left"/>
+						Déclenche la puissance versatile du vent durant un temps limitée. A partir de ton ninja et vers une zone ciblée du terrain, la tornade se déplace en spirale et inflige d'importants dégâts à tous les ennemis touchés.<br/>
+						Amélioration en fonction des points de chakra affectés : Augmente la distance ciblée, le temps d'invocation, les dégâts infligés et le coût en chakra.<br/>
+						<strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
+					</li>
+				</ul>
+				<h4>Doton, la terre</h4>
+				<ul>
+					<li>
+						<h4>Métamorphose</h4>
+						<img src="/img/jutsus/rock.png" alt="métamorphose" class="left"/>
+						Ce jutsu de spécialité doton permet à ton ninja de se transformer en rocher pendant une certaine durée. Lorsque ton ninja est sous la forme d’un rocher, il regagnera de la vie. Pour se cacher et attaquer en fourbe, il n'y a pas mieux ! La métamorphose est un jutsu actif, qui s'annule dès que tu te déplaces.<br/>
+						Amélioration en fonction des points de chakra affectés : La transformation dure plus longtemps, et fait gagner plus de vie.
+					</li>
+					<li>
+						<h4>Pics de roche</h4>
+						<img src="/img/jutsus/pieux.png" alt="pics de roche" class="left"/>
+						Invoque la puissance de la terre, à partir d'une zone ciblée du terrain. Une fois invoqué, de nombreux pieux surgissent de la terre et viennent empaler les ennemis leur infligeant d'importants dégâts.<br/>
+						Amélioration en fonction des points de chakra affectés : Augmente la distance ciblée, le nombre de pieux, les dégâts infligés et le coût en chakra.<br/>
+						<strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
+					</li>
+				</ul>
+				<h4>Raiton, la foudre</h4>
+				<ul>
+					<li>
+						<h4>Tirs multiples</h4>
+						<img src="/img/jutsus/multi.png" alt="multishoot" class="left"/>
+						Le multishoot est un jutsu permettant d'augmenter la cadence de tir de ton ninja. Il fonctionne pour toutes les <a href="/manuel-ninja/arme.php" title="armes">attaques physiques</a> (hormis le katana).<br/>
+						Amélioration en fonction des points de chakra affectés : La cadence de tir augmente de plus en plus (l'intervalle entre les attaques est malgré tout limitée à 150ms au minimum !).
+					</li>
+					<li>
+						<h4>Téléportation</h4>
+						<img src="/img/jutsus/teleportation.png" alt="téléportation" class="left"/>
+						Appel les pouvoirs de célérité de la foudre du ninja vers une zone ciblée. Une fois invoquée, les élémentaires de la foudre transporte le ninja vers une zone ciblée à une vitesse hallucinante en échange d'un don de vie.<br/>
+						Amélioration en fonction des points de chakra affectés : La distance de téléportation et le cout en chakra augmentent avec le nombre de points de vie exigés.
+					</li>
+				</ul>]]></contenu>
+			</partie>
+			<partie nom="Armes" href="/manuel-ninja/arme.php">
+				<contenu><![CDATA[<img src="/img/ninjamec.jpg" class="right" alt=""/>
+				Les armes dans Ninja Tooken sont aussi importantes que les jutsus, ne les délaissez pas !<br/>
+				<br/>
+				Les dégâts infligés par les armes dépendant évidemment du type d'arme utilisé, mais aussi de la <a href="/manuel-ninja/aptitude.php" title="Aptitudes">force</a> de ton ninja.<br/>
+				<br/>
+				<br/>
+				Détaillons maintenant chaque arme :<br/>
+				<br style="clear:both"/>
+				<h4>Katana</h4>
+				<img src="/img/armes/katana.png" alt="katana" class="left"/>
+				Le katana est l'unique arme de corps à corps. Etant plus difficile à utiliser dans les combats ninjas qui se déroulent la plupart du temps à distance, elle inflige des dégâts très importants ! Si vous avez l'occasion de vous rapprocher discrètement d'un autre ninja, un coup de katana sera l'idéal pour en finir rapidement...<br/>
+				<br/>
+				<h4>Kunaï</h4>
+				<img src="/img/armes/kunai.png" alt="kunaï" class="left"/>
+				Le kunaï est une des armes de base du ninja. Tu en as un bon paquet en reserve, alors utilises-les ! Si tu n'en as plus, tu peux toujours en reprendre avec les caisses d'armes disséminées un peu partout dans chaque carte. Le lancer de kunaï n'est pas droit, car la gravité vient se mêler au combat... Pour avoir des lancés plus droits, et ainsi atteindre des cibles plus éloignés de façons plus précise, il te faut augmenter la force de ton ninja.<br/>
+				<br/>
+				<h4>Kunaï explosif</h4>
+				<img src="/img/armes/explo.png" alt="Kunaï explosif" class="left"/>
+				Le kunaï explosif s'utilise de la même manière que le kunaï normal, sauf qu'il explose au bout d'un temps assez court, ou au contact de la cible. Ne reste pas à coté ! Tu peux te recharger en kunaïs explosifs grâce aux caisses bonus qui en contiennent.<br/>
+				<br/>
+				<h4>Shuriken</h4>
+				<img src="/img/armes/shuriken.png" alt="Shuriken" class="left"/>
+				Le shuriken est aussi une arme de base du ninja. Qui a déjà vu un vrai ninja sans shuriken ? Comme le kunaï et les armes de distance, le shuriken subit la gravité et donc ne peux pas atteindre des cibles trop éloignées. Le kunaï est même meilleur que le shuriken sur ce point là, car le shuriken a une plus petit portée. Cependant tu peux lancer plus de shuriken dans un même temps, mais il inflige moins de dégâts. A toi de voir lequel tu préfères ! Comme les kunaïs, explosifs ou non, tu peux récupérer des shurikens dans les caisses bonus adéquates.<br/>
+				<br/>
+				<h4>Shuriken de l'ombre</h4>
+				<img src="/img/armes/ombre.png" alt="Shuriken de l'ombre" class="left"/>Le shuriken de l'ombre est un énorme shuriken qui ne rate presque jamais sa cible ! Cette arme aussi puissante que l'épée mais à distance, ne se trouve cependant qu'en quantité très limitée. Utilise-le au bon moment !<br/>
+				<br/>
+				<h4>Fumigène</h4>
+				<img src="/img/armes/fumigene.png" alt="Fumigene" class="left"/>Le fumigène n'est pas réellement une arme puisqu'il n'inflige aucun dégât. Il te permet de t'enfuire d'un combat mal engagé, ou de te faire gagner un peu de répits en dégageant une grosse quantité de fumée devant toi pendant quelques secondes. A toi de profiter au mieux de cette arme "tactique".<br/>
+				<br/>
+				<h4>Makibishi</h4>
+				<img src="/img/armes/makibishi.png" alt="Makibishi" class="left"/>Les makibishi sont un assemblage de 4 clous. Envoyés par poignées de six, ils permettent de piéger la zone où ils retombent. En courant après un adversaire ayant lancé des makibishi, on risque de se les planter dans les pieds et donc de réduire sa vitesse de moitié pendant quelques secondes. Les makibishi restent sur la carte tant que personne n'a marché dessus (ou que le piégeur ne s'est pas déconnecté).]]></contenu>
+			</partie>
+			<partie nom="Classes"  href="/manuel-ninja/classe.php">
+				<contenu><![CDATA[<img src="/img/classes.jpg" alt="opposition des classes" class="right"/>
+				Comme tu le sais certainement si tu as déjà commencer à jouer, le début de l'aventure dans Ninja Tooken commence par le choix de sa classe. Ce choix permet de se spécialiser dans un élément en débloquant des <a href="/manuel-ninja/jutsu.php#classe" title="jutsus par classe">jutsus spécifiques</a>.
+				<br/>
+				<br/>
+				Parmi ces cinqs classes tu retrouveras :
+				<ul>
+					<li>Suiton (l'eau avec comme ennemi Doton),</li>
+					<li>et Katon (le feu avec comme ennemi Suiton),</li>
+					<li>Futon (le vent avec comme ennemi Katon),</li>
+					<li>Raiton (la foudre avec comme ennemi Futon),</li>
+					<li>Doton (la terre avec comme ennemi Raiton).</li>
+				</ul>
+				<br/>
+				<h3>Principe des oppositions de classe<br/></h3>
+				Chacune des 5 cinqs classes est prédominante sur une autre. Cela signifie qu'un ninja d'une classe prédominante sur une autre infligera plus de dégât à un ninja de cette classe.<br/>
+				Par exemple un ninja Suiton infligera 10% de dégâts de plus des dommages habituels à un ninja Katon. Mais le ninja Katon fera de même sur un ninja Futon. Voici un graphique illustrant la boucle des prédominances :<br/>
+				<br/>
+				N'oublie pas que tu peux voir les pourcentages de ninja de chaque classe en bas de la page d'accueil. Choisis intelligemment ta classe en fonction des classes présentes dans le jeu (si il y a 50% de ninjas dotons, choisis plutôt raiton !)<br/>
+				<br/>
+				
+				<br/>
+				Comme dit en introduction, chaque classe possède deux jutsus qui lui sont propres. Ces jutsus vont probablement déterminer ton choix de classe.
+				<p align="center"><img src="/img/fresque.jpg" class="center" alt=""/><br/></p>
+				<strong>Suiton</strong> : Marcher sur l'eau, Vague<br/>
+				<strong>Futon</strong> : Transparence, Tornade<br/>
+				<strong>Katon</strong> : Protection contre le feu, Phoenix<br/>
+				<strong>Raiton</strong> : Multishoot, Téléportation<br/>
+				<strong>Doton</strong> : Métamorphose, Pics de roche<br/>
+				<br/>
+				Rendez-vous dans la partie <a href="/manuel-ninja/jutsu.php#classe" alt="Jutsus" title="Jutsus">jutsus par classe</a> pour en savoir plus.]]></contenu>
+			</partie>
+		</partie>
+		<partie nom="Options">
+			<partie nom="Paramétrage des Touches" href="/manuel-ninja/parametrage-touche.php">
+				<contenu><![CDATA[<img src="/img/touches.gif" alt="paramétrage des touches" class="right"/>
+				Tu l'auras compris, Ninja Tooken est un jeu complet ! Mais pas de panique, car tu peux modifier absolument tous les contrôles du jeu à loisir.<br/>
+				<br/>
+				Pour cela rends toi dans le menu "Options" puis direction "Contrôles". Tu devrais voir la liste complète des actions avec à droite la touche du clavier associée... et si tu as un doute sur une action, il te suffit de passer sur le texte correspondant.<br/>
+				<br/>
+				A partir de là rien de plus simple, clique sur le bouton correspondant à la touche que tu veux modifier et appuis sur la touche que tu préfères utiliser. Mais fais attention de ne pas assigner la même touche à plusieurs actions différentes, sans quoi la précédente action ne marchera plus...<br/>
+				Ces modifications sont prises en comptes sur ton ordinateur uniquement, donc si tu en changes, n'oublie pas de repasser par ce menu !<br/>
+				<br/>
+				Tu noteras au passage qu'à partir de ce même menu tu peux modifier la sensibilité de la souris : plus elle est élevée, et plus ton ninja tournera vite.]]></contenu>
+			</partie>
+			<partie nom="Paramétrage de la Vidéo et du Son" href="/manuel-ninja/parametrage-video.php">
+				<contenu><![CDATA[<img src="/img/audioVideo.gif" alt="paramétrage de la Vidéo et du Son" class="right"/>
+				A partir du menu "Options" puis "Audio", tu peux modifier le volume des sons et des musiques d'ambiance du jeu.<br/>
+				<br/>
+				Dans le menu "Graphique" tu peux modifier la qualité d'affichage de la 3D. Par défaut celle-ci est en "Simple". Si tu constates des ralentissements, tu peux la diminuer, et si tu as la dernière bête de course, n'hésites pas à augmenter, tu ne le regretteras pas !<br/>
+				<br/>
+				A noter le paramètre "Sélection automatique" qui va choisir pendant le jeu le rapport qualité/FPS le plus adapté.<br/>
+				Selon la configuration de ton pc, ce paramétrage peut s'avérer instable (aller/retour incessant entre deux niveaux de qualité graphiques) : ici encore, n'hésite pas et teste !]]></contenu>
+			</partie>
+			<partie nom="Système (cékoidon)" href="/manuel-ninja/systeme.php">
+				<contenu><![CDATA[<img src="/img/systeme.gif" alt="Système" class="right"/>
+				Depuis le menu "Options" puis "Système" tu arrives sur des informations purement informatives qui détectent la version du plug-in utilisée, ainsi que ta carte graphique.<br/>
+				Tu auras également la possibilité de modifier la langue du jeu.<br/>
+				<br/>
+				Ces informations sont fournies à titre purement informatives... vérifie que tout correspond à ce que tu as effectivement sur ton pc, et vas vite jouer !]]></contenu>
+			</partie>
+			<partie nom="Demandes d'Améliorations et bugs" href="/manuel-ninja/amelioration-bug.php">
+				<contenu><![CDATA[Tu joues depuis un certain temps maintenant, et tu as remarqué des bugs, ou tu veux partager tes idées pour améliorer le jeu ?<br/>
+				Pour cela, il suffit de nous envoyer un message ici : <a href="/forum.php?ID=65#forum65" alt="Amélioration et bugs" title="Améliorations et bugs">Forum : Amélioration et bugs</a>]]></contenu>
+			</partie>
+		</partie>
+	</partie>
+	<partie nom="FAQ" href="/faq.php">
+		<partie nom="Questions générales" href="/faq.php#q1">
+			<partie nom="Qu'est-ce-que NinjaTooken ?" href="/faq.php#q11">
+				<contenu><![CDATA[Ninja Tooken est un FPS ninja multijoueur jouable online. Que dis-je, Ninja Tooken est LE seul FPS sur l'univers ninja. Inspiré de manga, Ninja Tooken te propose de te mettre dans la peau d'un ninja, qui pourra évoluer selon tes désirs. Classes, armes, aptitudes, capacités, tu pourras choisir ta voie. Jouable directement dans ton navigateur favori (Firefox, Chrome, Opera, Christopher Colombus, Safari, et même Internet Explorer), Ninja Tooken est totalement en 3D et fonctionne avec la plupart des ordinateurs (le mien a 5 ans et ça marche !).]]></contenu>
+			</partie>
+			<partie nom="Pourquoi se créer un compte ?" href="/faq.php#q12">
+				<contenu><![CDATA[Tu peux jouer sans t'inscrire, seulement ta progression ne sera pas sauvegardée... à noter que le compte de Ninja Tooken, la revanche du ninja R'Din est le même que celui du site n-c-team.com : ton avatar, ta messagerie, tes paramètres : tout est en place.<br/>
+				Si tu es déjà inscrit sur la NCT, ne touches à rien, et laisses toi guider par Ninja Tooken.]]></contenu>
+			</partie>
+			<partie nom="Ninja Tooken est-il payant ?" href="/faq.php#q13">
+				<contenu><![CDATA[NON, absolument pas ! Ninja Tooken est un jeu entièrement gratuit, il faut juste s'inscrire (mais ça aussi c'est gratuit) ! Nous n'acceptons évidemment pas non plus les dons... Pour payer les serveurs de Ninja Tooken nous comptons sur les publicités présentes sur le site.<br/>
+				Mais genre aujourd'hui c'est gratuit, mais dans un mois vous allez nous faire payer, c'est la crise non ?<br/>
+				Mais je viens de dire que non ! Ninja Tooken est gratuit est le restera pour toujours ! Aucun soucis à ce sujet alors maintenant arrête de m'embêter avec cette question.]]></contenu>
+			</partie>
+			<partie nom="Qui êtes vous, et pourquoi ce jeu ?" href="/faq.php#q14">
+				<contenu><![CDATA[Nous sommes un groupe de passionnés : étudiants, professionnels, ou simples néophytes !<br/>
+				Ce jeu permet d'exprimer nos compétences, de les développer, mais également et surtout de nous faire plaisir.]]></contenu>
+			</partie>
+			<partie nom="A quand les prochaines versions ?" href="/faq.php#q15">
+				<contenu><![CDATA[Malheureusement le temps est ce qui nous fait le plus défaut : nous travaillons pendant nos heures perdues sans planning et avant tout pour le plaisir.<br/>
+					Et comme la création d'un jeu vidéo, aussi humble soit-il, prend énormément de temps, il nous est impossible de donner une autre réponse que : "When it's done" !]]></contenu>
+			</partie>
+			<partie nom="Je peux faire quoi pour vous aider ?" href="/faq.php#q16">
+				<contenu><![CDATA[C'est simple, parles en autour de toi ! Dans ton pseudo MSN, sur ton site, ton blog, facebook, twitter... Suffit d'en parler, et ça nous suffit, on n'est pas bien difficiles en fait. Même un petit mot comme « Ninja Tooken : Jeu gratuit multiplayer online : http://www.ninjatooken.com/ »<br/>
+				Ca suffit, c'est parfait pour un lien dans les partenaires, pour ton pseudo MSN ou facebook. Après c'est comme tu le sens !]]></contenu>
+			</partie>
+		</partie>
+		<partie nom="Problèmes techniques" href="/faq.php#q2">
+			<partie nom="Comment faire pour changer de pseudo, ou supprimer mon compte ?" href="/faq.php#q21">
+				<contenu><![CDATA[Une fois ton compte créé, tu ne peux pas changer de pseudo, il te faut supprimer ton compte et en recréer un autre !<br/>
+				Pour supprimer ton compte, il te suffit d'aller dans tes <a href="#" class="paramDelete">paramètres</a> et de cliquer sur le bouton "suppression" qui s'y trouve, en bas de page. Attention, la suppression est définitive et ton personnage ne pourra être récupéré.]]></contenu>
+			</partie>
+			<partie nom="Pourquoi j'ai une page blanche et puis rien ?" href="/faq.php#q22">
+				<contenu><![CDATA[Déjà regarde si tu as bien installé le plugin unity3D <a href="http://unity3d.com/webplayer/" target="_blank">disponible ici</a> (l'installation est rapide et ne nécessite pas de relancer son navigateur).<br/>
+				Ensuite vérifie que tu peux bien voir la <a href="http://unity3d.com/gallery/live-demos/index.html#tropical-paradise" target="_blank">démo Unity3d</a>.<br/>
+				Si oui, va sur <a href="http://www.m2h.nl/files/HWstats.html" target="_blank">cette page</a>, copie et colle le contenu affiché dans le forum "<a href="/forum.php?ID=65">Amélioration et Bug</a>". Essaie d'être assez précis dans la description de ton problème, et avant de poster regarde si quelqu'un n'a pas déjà eu le même problème. Nous t'aiderons au mieux pour que tu puisses nous rejoindre dans le jeu !<br/>
+				Sinon, vérifie que les drivers de ta carte graphique sont bien à jour... et encore plus simplement, essaies d'aller sur le jeu avec un autre navigateur !]]></contenu>
+			</partie>
+			<partie nom="Le jeu se charge puis se bloque avant 100%, je fais quoi ?" href="/faq.php#q23">
+				<contenu><![CDATA[Si le jeu se bloque et ne se charge pas complètement, c'est que ta connexion a subit une coupure réseau pendant le chargement. Actuellement, il n'y a pas de reprise automatique de téléchargement. Pour relancer le chargement du jeu et pouvoir jouer correctement, il te suffit de <a href="http://www.libellules.ch/support/cache.php" target="_blank">vider le cache de ton navigateur</a> et <a href="http://webplayer.unity3d.com/setup/" target="_blank">de Unity</a>, puis de recharger la page. Bon jeu !]]></contenu>
+			</partie>
+			<partie nom="Pourquoi je n'arrive pas à rejoindre une partie ?" href="/faq.php#q24">
+				<contenu><![CDATA[
+				NinjaTooken utilise PhotonNetwork Cloud pour les parties multiplayer. Il y a plusieurs cas de figures pour lesquels tu peux avoir un problème :<br/>
+				<ul>
+					<li>un pare-feu peut en être la cause, il suffit alors d'autoriser la demande de connexion Photon,</li>
+					<li>un anti-virus peut également bloquer les connexions : essaye de le désactiver le temps de la connexion... si tu arrives à te connecter alors un peu de paramétrage est également nécessaire (se renseigner directement dans la FAQ de l'antivirus),</li>
+					<li>enfin le problème peut venir de ton routeur ou proxy qui ne redirige pas correctement les données...</li>
+				</ul>
+				Accède au panneau de contrôle du routeur. Une recherche rapide sur Internet sur le modèle de ton routeur devrait te donner les infos nécessaire pour cette étape et les suivantes.<br/>
+				Active le mode DMZ (ou "zone démilitarisée"). Essaye de redémarrer Ninja Tooken, et tout devrait fonctionner ! Si tu ne peux toujours pas te connecter aux autres parties, alors ce n'est pas un problème de routeur : inutile d'essayer les autres étapes, et passe directement à la suite...<br/>
+				Désactive le mode DMZ, puis vérifie si le mode UPnP (Universal Plug and Play) est activé, cela afin de permettre la redirection automatique des ports. Il faut en effet éviter de laisser le routeur en mode DMZ, parce que cela ne te protégerais plus contre certaines attaques via Internet.<br/>
+				Si le mode DMZ a fonctionné, mais pas le mode UPnP, la dernière solution consiste à ajouter manuellement la redirection du port 5055 en UDP (l'ajout des ports 5056 en UDP, et 4520/4530/4531/843 en TCP peut aider si la connexion ne marche pas mieux).Tu peux utiliser Port Map si tu es sur OS X.<br/>
+			]]></contenu>
+			</partie>
+			<partie nom="Pourquoi je n'arrive pas à me connecter à mon compte ?" href="/faq.php#q25">
+				<contenu><![CDATA[Plusieurs problèmes peuvent t'empêcher de correctement te connecter :
+				<ul>
+					<li>tu n'as pas encore validé ton compte utilisateur : un mail a dû t'être envoyé comportant un lien de validation. Clique dessus, et connectes toi !</li>
+					<li>si tu as oublié ton mot de passe, il te suffit de cliquer sur le lien en haut de page "mot de passe oublié ?", un nouveau mot de passe te sera envoyé par mail</li>
+					<li>ton pseudo ou ton mot de passe comporte des caractères non latin (tu as voulu faire le malin en écrivant en japonais?). Pour corriger le problème, <a href="/nous-contacter.php" alt="nous contacter" title="nous-contacter">contacts-nous</a> !</li>
+					<li>le serveur est surchargé : pas de miracles, il te faut patienter!</li>
+				</ul>]]></contenu>
+			</partie>
+			<partie nom="Le jeu lague chez moi, c'est normal ?" href="/faq.php#q26">
+				<contenu><![CDATA[Le jeu peut laguer chez toi mais pas chez les autres joueurs (qui eux te verront malgrés tout te déplacer de façon hachurée). C'est généralement dû à un problème de <a href="http://fr.wikipedia.org/wiki/Ping_%28logiciel%29" target="_blank">ping</a> trop haut.<br/>
+				Pour vérifier ton ping, tu peux aller sur : <a href="http://ping.eu/ping/" target="_blank">http://ping.eu/ping/</a> et rentrer l'url du service PhotonCloud : app.exitgamescloud.com<br/>
+				Un ping correct est en moyenne en-dessous de 20ms. Si le tien est au-dessus, contactes ton FAI...<br/>
+				A savoir que le ping n'a aucun rapport avec ta vitesse de téléchargement, qui peut être le deuxième problème de lague : assures toi bien de ne rien télécharger quand tu joues !]]></contenu>
+			</partie>
+			<partie nom="Le jeu ram, je fais quoi ?" href="/faq.php#q27">
+				<contenu><![CDATA[Si le jeu ram (ralentissements), tu peux aller diminuer la qualité graphique du jeu dans le menu : "options" puis "graphiques".<br/>
+				Plus d'informations sont disponibles dans le <a href="/manuel-ninja/parametrage-video.php" title="Paramétrage de la vidéo et du son">manuel du ninja : "Paramétrage de la vidéo et du son"</a>.<br/>
+				Tu peux également diminuer la résolution système pour améliorer les performances en mode "plein écran".]]></contenu>
+			</partie>
+			<partie nom="Une fois en jeu, la souris ne répond plus, que faire ?" href="/faq.php#q28">
+				<contenu><![CDATA[Il existe pour la version actuelle d'Unity3D (le moteur graphique utilisé pour NinjaTooken) un bug empêchant la souris de fonctionner correctement avec le navigateur Internet Explorer. Ce bug n'est pas récurrent : il peut se produire mais pas forcément tout le temps.<br/>
+				Pour jouer correctement à NinjaTooken il est donc conseiller si le cas se produit, d'utiliser un autre navigateur (Firefox, Chrome, Safari...).]]></contenu>
+			</partie>
+		</partie>
+	</partie>
+	<reglement><![CDATA[<h1>Règlement</h1>
+
+	En vous inscrivant sur Ninja Tooken, vous vous engagez à respecter un certain nombre de règles. Celles-ci ont été créées pour conserver une bonne ambiance de jeu. Tout joueur ne les respectant pas se verra sujet à des sanctions telles que la suppression de son compte sans préavis.
+	Liste non exhaustive des règles à respecter :<br/><br/>
+
+
+	<h2>Comptes et pseudos</h2>
+	Le pseudo de ton ninja doit respecter les quelques règles suivantes :
+	<ul>
+		<li>Ne pas être vulgaire ni insultant</li>
+		<li>Ne pas comporter de connotation sexuelle voire pornographique</li>
+		<li>Ne pas faire référence à une orientation politique, à une ethnie, une communauté ou une religion</li>
+		<li>Ne pas copier une marque déposée</li>
+		<li>Ne pas faire référence à un produit illégal</li>
+		<li>Ne pas imiter le nom d'un modérateur ou administrateur de Ninja Tooken</li>
+	</ul>
+
+	Il est interdit de prêter son compte, en raison des divers abus possibles (gain d’xp plus rapide). En cas de manquement à cette règle, les deux joueurs encourent des sanctions.<br/><br/>
+
+	<h2>Chat/Forum/Clans</h2>
+	<ul>
+		<li>Le flood, (répétition d’un même message plusieurs fois dans un court délai) n'est pas autorisé.</li>
+		<li>Il est interdit de faire de la publicité pour un site tiers, y compris ceux en rapport avec Ninja Tooken</li>
+		<li>Les discours insultants, pornographiques, religieux, xénophobes, homophobes, politiques, incitants à consommer des produits illégaux ou même parlant de Christophe Maé sont strictement interdits.</li>
+		<li>Respectez au maximum la grammaire Française ! Tout le monde n’en sera que plus heureux.</li>
+	</ul>
+
+	<h2>Respect du jeu</h2>
+	<ul>
+		<li>L'usurpation d'identité est interdite, que ce soit celle d'un joueur, d'un modérateur, ou d'un administrateur, et ce peu importe la raison (bonne ou mauvaise).</li>
+		<li>Dévoiler les informations personnelles d'un autre joueur est prohibé.</li>
+		<li>De manière générale, il est interdit de nuire au bon déroulement du jeu.</li>
+	</ul>
+
+	<h2>Commerce</h2>
+		Sont interdits :
+	<ul>
+		<li>le commerce ou l’échange de comptes ou de clans.</li>
+		<li>L’organisation de concours, animations ou tournois payants</li>
+	</ul>
+
+	<h2>Triche</h2>
+	<ul>
+		<li>Il est illégal d'abuser d'un bug du jeu. Toute anomalie doit être reportée via le forum (partie Bug et Amélioration) ou via le formulaire de contact.</li>
+		<li>L'utilisation d'un programme tiers dans le but d'altérer l'usage du jeu est interdit.</li>
+		<li>Il est autorisé d'avoir plusieurs comptes.</li>
+		<li>Il est interdit de jouer avec plusieurs comptes dans une même partie.</li>
+	</ul>]]></reglement>
+	<team><![CDATA[<h2>Ninja Tooken, c'est des ninjas et des shurikens, mais c'est aussi...</h2>
+
+	<h3>Infographie 3D</h3>
+
+	<h4>Andre Doan aka Drey77</h4>
+	Artiste 3D en recherche d'emploi (animation, modélisation, et textures)<br/>
+	Mail : <a href="mailto:%61%6E%64%72%65%2E%64%6F%61%6E%40%67%6D%61%69%6C%2E%63%6F%6D">andre.doan -at- gmail.com</a><br/>
+	Site : <a target="_blank" href="http://www.andredoan.com/">http://www.andredoan.com/</a><br/>
+	<br/>
+
+	<h4>Régis Roussot aka Chaukopeps</h4>
+	Infographiste, Animateur 3D (animation, modélisation, et textures)<br/>
+	Mail : <a href="mailto:%72%65%67%69%73%72%6F%75%73%73%6F%74%40%68%6F%74%6D%61%69%6C%2E%66%72">regisroussot -at- hotmail.fr</a><br/>
+	Site : <a target="_blank" href="http://chaukopeps.over-blog.fr/">http://chaukopeps.over-blog.fr/</a><br/>
+	<br/>
+
+	<h4>Jonathan Persoons</h4>
+	Étudiant (modélisation, et textures)<br/>
+	Mail : <a href="mailto:%70%65%72%73%6F%6F%6E%73%6A%40%67%6D%61%69%6C%2E%63%6F%6D">persoonsj -at- gmail.com</a><br/>
+	Facebook : <a target="_blank" href="http://www.facebook.com/profile.php?ref=profile&amp;id=854619641">http://www.facebook.com/profile.php?ref=profile&amp;id=854619641</a><br/>
+	<br/>
+
+	<h4>Antoine Heckmann aka MrSlher</h4>
+	Étudiant en animation 3D/Jeux video (modélisation, et textures)<br/>
+	Mail : <a href="mailto:%6E%65%67%72%6F%5F%64%6F%6E%6E%40%68%6F%74%6D%61%69%6C%2E%63%6F%6D">negro_donn -at- hotmail.com</a><br/>
+	<br/>
+
+	<h4>Manakel</h4>
+	Modélisation, et textures<br/>
+
+	<h4>Yadoob</h4>
+	Modélisation, et textures<br/>
+	Blog : <a href="http://utopies.over-blog.fr/" title="http://utopies.over-blog.fr/">http://utopies.over-blog.fr/</a><br/>
+
+	<h4>Kay</h4>
+	Modélisation et textures<br/>
+	<br/>
+
+	<h4>Everest</h4>
+	Modélisation et textures<br/>
+	<br/>
+	
+	<h3>Infographie 2D</h3>
+
+	<h4>Eberhard</h4>
+	Character design, et Interface 2D<br/>
+	<br/>
+
+	<h4>Anomen</h4>
+	Illustrations, textures, et Webdesign<br/>
+	<br/>
+
+	<h3>Contenus et gestion</h3>
+
+	<h4>Neo[F]abien-Sama</h4>
+	<br/>
+
+
+	<h3>Musique et son</h3>
+
+	<h4>Will Alexander</h4>
+	SoundCloud : <a href="https://soundcloud.com/willalexander" title="https://soundcloud.com/willalexander">https://soundcloud.com/willalexander</a><br/>
+
+	<h4>Crystalmir</h4>
+	<br/>
+
+	<h3>Bêta-testing</h3>
+
+	<h4>Yondame-Hokage</h4>
+	<br/>
+
+	<h4>Poups229</h4>
+	Étudiant<br/>
+	<br/>
+
+	<h3>Administration réseau</h3>
+
+	<h4>G-Rom</h4>
+	<h4>Wanix</h4>
+	<br/>
+
+	<h3>Animation de la communauté</h3>
+
+	<h4>Casey</h4>
+	Modération site<br/>
+	<h4>Soxsoxsox</h4>
+	Modération site<br/>
+	Mail : <a href="mailto:%74%68%6F%6D%61%73%33%30%33%40%68%6F%74%6D%61%69%6C%2E%66%72">thomas303 -at- hotmail.fr</a><br/>
+	Facebook : <a target="_blank" href="http://fr-fr.facebook.com/people/Soxsoxsox-Threesox/100002183121158">http://fr-fr.facebook.com/people/Soxsoxsox-Threesox/100002183121158</a><br/>
+	<br/>
+	<h4>Yondame-Hokage</h4>
+	Modération site<br/>
+	Mail : <a href="mailto:%44%79%6C%61%6E%33%32%35%30%40%68%6F%74%6D%61%69%6C%2E%63%6F%6D">Dylan3250 -at- hotmail.com</a><br/>
+	Facebook : <a target="_blank" href="http://fr-fr.facebook.com/people/Shinz%C3%B4-Takez%C3%B4/100002317862191">http://fr-fr.facebook.com/people/Shinz%C3%B4-Takez%C3%B4/100002317862191</a><br/>
+	<br/>
+	<h4>Yusei32</h4>
+	Organisation évènementielle<br/>
+	<h4>Rydax</h4>
+	Modération Chat<br/>
+	<br/>
+
+	<h3>Traduction</h3>
+
+	<h4>Casey</h4>
+	Traduction - Son<br/>
+	Mail : <a href="mailto:%68%6F%70%65%6C%65%73%73%75%74%6F%70%69%61%6E%40%67%6D%61%69%6C%2E%63%6F%6D">hopelessutopian -at- gmail.com</a>
+	<br/>
+	<h4>Soxsoxsox</h4>
+	Modération site<br/>
+	Mail : <a href="mailto:%74%68%6F%6D%61%73%33%30%33%40%68%6F%74%6D%61%69%6C%2E%66%72">thomas303 -at- hotmail.fr</a><br/>
+	Facebook : <a target="_blank" href="http://fr-fr.facebook.com/people/Soxsoxsox-Threesox/100002183121158">http://fr-fr.facebook.com/people/Soxsoxsox-Threesox/100002183121158</a><br/>
+	<br/>
+
+	<h3>Programmation et intégration</h3>
+
+	<h4>2Kin</h4>
+	<br/>
+	<br/>
+	Pour toutes questions, n'hésitez pas à <a target="_blank" href="/nous-contacter.php" alt="nous contacter" title="nous contacter">nous contacter</a> !
+	<br/>]]></team>
+	<mention><![CDATA[<strong>ACCORD DE CONFIDENTIALITÉS</strong><br>
+	La Naruto Constant Team est sensible aux problèmes de confidentialité sur Internet et s'est engagée à protéger votre confidentialité. La NCT prend des mesures utiles afin de protéger toutes les informations de nos visiteurs en ligne contre tout accès et utilisation non autorisés.<br>
+	La NCT recueille uniquement les informations personnelles fournies à titre volontaire par les personnes consultant son site Web. Vous êtes totalement libre en ce qui concerne la communication ou non de ces informations. Si vous avez volontairement fourni certaines informations, cela signifie que vous consentez à ce que nous collections et utilisions vos renseignements personnels en accord avec la présente déclaration de confidentialité.<br>
+	Vous pourrez, une fois inscrit, mettre à jour vos informations personnelles en éditant votre profil.<br>
+	<br>
+	<strong>DROITS D'AUTEURS</strong><br>
+	Le jeu Ninja Tooken est une propriété exclusive de ses créateurs. Eux seuls peuvent le mettre à contribution librement. Toute reproduction partielle ou complète est interdite.<br>
+	<br>
+	<strong>DEMENTI</strong><br>
+	Malgré de stricts contrôles, nous déclinons toute responsabilité quant aux contenus de liens externes pointant vers Ninja Tooken, ou inversement. L'auteur d'une page web est le seul responsable de son contenu.<br>]]></mention>
+	<reglementModeration><![CDATA[
+	Afin d'assurer à tous les utilisateurs de NinjaTooken une expérience de jeu amusante et sûre, la « modération des abus » a été mise en place, dans lequel tous les utilisateurs du jeu ont les moyens de faire respecter la conduite considérée comme acceptable et de sanctionner les conduites considérées comme inappropriées. Voici comment vous, en tant qu'utilisateur, pouvez faire l'objet d'un rapport, comment fonctionne l'examen des rapports et en conséquence les sanctions possibles. Cette Politique s'applique conjointement avec le règlement du jeu.<br>
+	<br>
+	<strong>COMMENT UN RAPPORT PEUT-IL ÊTRE SOUMIS ?</strong><br>
+	Durant une partie en réseau, chaque utilisateur peut faire un rapport contre n'importe quel autre utilisateur connecté à la partie, et ceci depuis le menu du jeu (touche par défaut "m"), puis en cliquant sur "Social", et enfin en cliquant sur le bouton "signaler un abus" qui se trouve en-dessous à droite du pseudo de l'utilisateur incriminé. Vous pouvez faire un rapport contre tout joueur qui, selon vous, n'a pas respecté le règlement du jeu ou qui s'est comporté de façon immorale.<br>
+	Si durant une même partie, au moins la moitié des joueurs signalent un même joueur, celui-ci sera automatiquement déconnecté de la partie et ne pourra plus la rejoindre.<br>
+	<br>
+	<strong>QUELLES SONT LES ÉLÉMENTS MIS À DISPOSITION POUR "JUGER" UN RAPPORT ?</strong><br>
+	Lorsqu'un utilisateur a été signalé dans une partie, le système crée automatiquement une fiche de « modération des abus » et y associe un rapport, lequel contient les informations suivantes:<br>
+	<ul>
+		<li>le pseudo du ninja de l'utilisateur signalé;</li>
+		<li>les statistiques du ninja de l'utilisateur signalé;</li>
+		<li>l'intégralité du journal de discussion pour la partie lors de laquelle l'utilisateur a fait l'objet d'un rapport.</li>
+	</ul><br>
+	Un utilisateur ne procède pas à un vote pour chaque rapport individuel, il procède à un vote unique et global en tenant compte de l'historique général de l'utilisateur. Ainsi, examiner tous les rapports individuellement aide un utilisateur à mieux connaître l'historique des fautes et lui permet de voter précisément et équitablement pour ou contre la prise de mesures disciplinaires.<br>
+	<br>
+	<strong>COMMENT LE VOTE FONCTIONNE-T-IL ?</strong><br>
+	Après qu'un utilisateur ait examiné les rapports, il peut y attribuer une note de un à cinq shurikens, afin de l'« acquitter » ou le « sanctionner ».<br/>
+	<ul>
+		<li>Une note de "un" shuriken correspond à « acquitter » le joueur,</li>
+		<li>"deux" à le sanctionner par un malus de 20% sur ses points d'expériences gagnés,</li>
+		<li>"trois" à un malus de 40%,</li>
+		<li>"quatre" 60%,</li>
+		<li>et enfin "cinq" 80%.</li>
+	</ul>
+	Si un joueur a un malus de 80% sur ses points d'expérience, par exemple au lieu de gagner 100 points, il en gagnera 20.<br>
+	Le malus n'est pris en compte qu'à partir de 10 votes.<br>
+	<br>
+	Les modérateurs, et administrateurs de NinjaTooken pourront acquitter l'utilisateur incriminé en supprimant l'ensemble des rapports et les votes effectués à son encontre, ou le bannir du jeu.<br>
+	Vous serez averti à chaque fois qu'un utilisateur crée un rapport contre vous, mais vous ne serez pas averti de la suite du rapport qui a été déposé contre vous. Pour cela il faudra que vous consultiez régulièrement la page « modération des abus ».<br>
+	<br>
+	<strong>ÉLIGIBILITÉ ET PARTICIPATION/QUI PEUT VOTER ?</strong><br>
+	Seuls les utilisateurs dont le compte a atteint le niveau 55 peuvent voter. Les utilisateurs éligibles et qui souhaitent participer doivent se connecter sur le site Internet de NinjaTooken, et lire et accepter cette Politique.
+	]]></reglementModeration>
+	<texte>
+		<txt><![CDATA[Page perso :]]></txt>
+		<txt><![CDATA[Shinobis du clan :]]></txt>
+		<txt><![CDATA[##DROIT## de clan, membre depuis le ##DATE##]]></txt>
+		<txt><![CDATA[Editer]]></txt>
+		<txt><![CDATA[Il n'y a pas encore de message.]]></txt>
+		<txt><![CDATA[afficher plus de messages]]></txt>
+		<txt><![CDATA[Aller à la page :]]></txt>
+		<txt><![CDATA[Poster un message]]></txt>
+		<txt><![CDATA[Titre]]></txt>
+		<txt><![CDATA[Contenu]]></txt>
+		<txt><![CDATA[Poster]]></txt><!--10-->
+		<txt><![CDATA[Ce clan a été créé le ##DATE##, il compte ##NUM## ninja(s) pour un niveau moyen de ##LEVEL##.]]></txt>
+		<txt><![CDATA[Clan]]></txt>
+		<txt><![CDATA[Liste des clans]]></txt>
+		<txt><![CDATA[Classer :]]></txt>
+		<txt><![CDATA[par date]]></txt>
+		<txt><![CDATA[par nombre de shinobis]]></txt>
+		<txt><![CDATA[par niveau moyen des shinobis]]></txt>
+		<txt><![CDATA[afficher plus de clans]]></txt>
+		<txt><![CDATA[Ajouter un clan]]></txt>
+		<txt><![CDATA[Nom du clan]]></txt><!--20-->
+		<txt><![CDATA[Site du clan]]></txt>
+		<txt><![CDATA[Description du clan]]></txt>
+		<txt><![CDATA[Blason (<a href="http://fr.wikipedia.org/wiki/Kamon" target="_blank">Kamon</a>) du clan]]></txt>
+		<txt><![CDATA[Ajouter]]></txt>
+		<txt><![CDATA[Se désinscrire des envoies de mail automatique]]></txt>
+		<txt><![CDATA[tu n'as pas correctement rentré ton mail]]></txt>
+		<txt><![CDATA[Ta désinscription à l'envoi de mail au site a été annulée :]]></txt>
+		<txt><![CDATA[Pour te désinscrire à l'envoi de mail, remplis les champs ci-dessous :]]></txt>
+		<txt><![CDATA[Adresse email]]></txt>
+		<txt><![CDATA[J'accepte de recevoir par mail les news du site (pas plus d'un envoi par mois)]]></txt><!--30-->
+		<txt><![CDATA[Je souhaite être averti par mail de l'arrivé de nouveaux messages dans ma boite de réception]]></txt>
+		<txt><![CDATA[La NCT dispose de moyens informatiques destinés à gérer les échanges d'information entre ses différents membres.<br/>
+		Les informations enregistrées sont réservées à l'usage de la NCT et mis à part le pseudo, le sexe et la date de naissance, ne sont pas communiquées.<br/>
+		Conformément aux articles 39 et suivants de la loi n° 78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés, toute personne peut obtenir communication et, le cas échéant, rectification ou suppression des informations la concernant, <a href="/nous-contacter.php">en adressant sa demande depuis le formulaire de contact</a> ou depuis <a href="#" class="paramGeneral">son panneau de configuration</a>.]]></txt>
+		<txt><![CDATA[Envoyer]]></txt>
+		<txt><![CDATA[Effacer]]></txt>
+		<txt><![CDATA[Les champs signés par un * sont obligatoires.]]></txt>
+		<txt><![CDATA[Team "Ninja Tooken"]]></txt>
+		<txt><![CDATA[Partenaires]]></txt>
+		<txt><![CDATA[Règlement]]></txt>
+		<txt><![CDATA[Mentions légales]]></txt>
+		<txt><![CDATA[Nous contacter]]></txt><!--40-->
+		<txt><![CDATA[S'inscrire]]></txt>
+		<txt><![CDATA[Se connecter]]></txt>
+		<txt><![CDATA[fermer]]></txt>
+		<txt><![CDATA[Pour pouvoir sauvegarder la progression de ton ninja, un compte utilisateur est nécessaire !]]></txt>
+		<txt><![CDATA[Pseudo]]></txt>
+		<txt><![CDATA[Mot de passe]]></txt>
+		<txt><![CDATA[Répéter]]></txt>
+		<txt><![CDATA[E-mail]]></txt>
+		<txt><![CDATA[Nom]]></txt>
+		<txt><![CDATA[Prénom]]></txt><!--50-->
+		<txt><![CDATA[Ville]]></txt>
+		<txt><![CDATA[Téléphone]]></txt>
+		<txt><![CDATA[Sexe]]></txt>
+		<txt><![CDATA[Masculin]]></txt>
+		<txt><![CDATA[Féminin]]></txt>
+		<txt><![CDATA[Date de naissance]]></txt>
+		<txt><![CDATA[Janvier]]></txt>
+		<txt><![CDATA[Février]]></txt>
+		<txt><![CDATA[Mars]]></txt>
+		<txt><![CDATA[Avril]]></txt><!--60-->
+		<txt><![CDATA[Mai]]></txt>
+		<txt><![CDATA[Juin]]></txt>
+		<txt><![CDATA[Juillet]]></txt>
+		<txt><![CDATA[Août]]></txt>
+		<txt><![CDATA[Septembre]]></txt>
+		<txt><![CDATA[Octobre]]></txt>
+		<txt><![CDATA[Novembre]]></txt>
+		<txt><![CDATA[Décembre]]></txt>
+		<txt><![CDATA[Langue]]></txt>
+		<txt><![CDATA[Description]]></txt><!--70-->
+		<txt><![CDATA[Connexion avec Facebook]]></txt>
+		<txt><![CDATA[Connexion classique]]></txt>
+		<txt><![CDATA[Mot de passe oublié ?]]></txt>
+		<txt><![CDATA[Parties en cours]]></txt>
+		<txt><![CDATA[Forum]]></txt>
+		<txt><![CDATA[dernier message]]></txt>
+		<txt><![CDATA[Nouveau sujet]]></txt>
+		<txt><![CDATA[Afficher plus de message]]></txt>
+		<txt><![CDATA[Derniers utilisateurs enregistrés]]></txt>
+		<txt><![CDATA[##NUM1## utilisateurs enregistrés et ##NUM2## messages postés.]]></txt><!--80-->
+		<txt><![CDATA[dernier]]></txt>
+		<txt><![CDATA[Il n'y a pas encore de message dans ce forum.]]></txt>
+		<txt><![CDATA[Il n'y a pas encore de réponse à ce message.]]></txt>
+		<txt><![CDATA[Manuel du Ninja]]></txt>
+		<txt><![CDATA[réponse(s)]]></txt>
+		<txt><![CDATA[Editer]]></txt>
+		<txt><![CDATA[Supprimer ce message ?]]></txt>
+		<txt><![CDATA[oui]]></txt>
+		<txt><![CDATA[non]]></txt>
+		<txt><![CDATA[Supprimer]]></txt><!--90-->
+		<txt><![CDATA[Répondre]]></txt>
+		<txt><![CDATA[Citer]]></txt>
+		<txt><![CDATA[S'inscrire à NinjaTooken !]]></txt>
+		<txt><![CDATA[Inscription par Facebook]]></txt>
+		<txt><![CDATA[Se connecter avec Facebook]]></txt>
+		<txt><![CDATA[Inscription classique]]></txt>
+		<txt><![CDATA[+ Renseigner les informations facultatives !]]></txt>
+		<txt><![CDATA[tu n'as pas correctement renseigné ton login]]></txt>
+		<txt><![CDATA[tu n'as pas correctement rentré ton mail]]></txt>
+		<txt><![CDATA[tu n'as pas correctement répété ton mot de passe]]></txt><!--100-->
+		<txt><![CDATA[tu dois entrer un mot de passe de 6 caractères minimum]]></txt>
+		<txt><![CDATA[Ton inscription au site a été annulée :]]></txt>
+		<txt><![CDATA[Supprimé]]></txt>
+		<txt><![CDATA[message(s)]]></txt>
+		<txt><![CDATA[Posté le]]></txt>
+		<txt><![CDATA[Ce ninja fait partie du clan]]></txt>
+		<txt><![CDATA[Partager]]></txt>
+		<txt><![CDATA[Communauté]]></txt>
+		<txt><![CDATA[FAQ]]></txt>
+		<txt><![CDATA[Inscription]]></txt><!--110-->
+		<txt><![CDATA[Crée ton ninja]]></txt>
+		<txt><![CDATA[Nos partenaires]]></txt>
+		<txt><![CDATA[Modifications de tes paramètres personnels annulés]]></txt>
+		<txt><![CDATA[Modifier mes informations personnelles]]></txt>
+		<txt><![CDATA[tu n'as pas renseigné une adresse mail valide]]></txt>
+		<txt><![CDATA[tu n'as pas renseigné de sujet pour ton message]]></txt>
+		<txt><![CDATA[tu n'as pas écrit ton message]]></txt>
+		<txt><![CDATA[Envoi du message annulé]]></txt>
+		<txt><![CDATA[Votre mail]]></txt>
+		<txt><![CDATA[Sujet]]></txt><!--120-->
+		<txt><![CDATA[Fiche Utilisateur]]></txt>
+		<txt><![CDATA[Signature (grand modèle)]]></txt>
+		<txt><![CDATA[Code HTML pour cette signature :]]></txt>
+		<txt><![CDATA[BBCode pour cette signature :]]></txt>
+		<txt><![CDATA[Code HTML pour cet avatar :]]></txt>
+		<txt><![CDATA[BBCode pour cet avatar :]]></txt>
+		<txt><![CDATA[Insérer cette image dans un forum]]></txt>
+		<txt><![CDATA[Insérer cette image dans un blog]]></txt>
+		<txt><![CDATA[Signature (petit modèle)]]></txt>
+		<txt><![CDATA[Avatar]]></txt><!--130-->
+		<txt><![CDATA[Envoyer un message à ##PSEUDO##]]></txt>
+		<txt><![CDATA[Homme]]></txt>
+		<txt><![CDATA[Femme]]></txt>
+		<txt><![CDATA[Né(e) le ##DATE##]]></txt>
+		<txt><![CDATA[bon anniversaire!]]></txt>
+		<txt><![CDATA[(##AGE## ans)]]></txt>
+		<txt><![CDATA[Inscrit(e) le ##DATE##]]></txt>
+		<txt><![CDATA[Activé(e) le ##DATE##]]></txt>
+		<txt><![CDATA[Pas encore activé(e).]]></txt>
+		<txt><![CDATA[Il fait partie de...]]></txt><!--140-->
+		<txt><![CDATA[ en tant que ]]></txt>
+		<txt><![CDATA[Ses derniers messages]]></txt>
+		<txt><![CDATA[##PSEUDO## a posté un message]]></txt>
+		<txt><![CDATA[Dernière mise à jour le ##DATE##]]></txt>
+		<txt><![CDATA[Chercher un utilisateur]]></txt>
+		<txt><![CDATA[tu n'as pas renseigné d'utilisateur à rechercher]]></txt>
+		<txt><![CDATA[Recherche annulée :]]></txt>
+		<txt><![CDATA[Résultat(s) pour la recherche sur '##LOGIN##']]></txt>
+		<txt><![CDATA[Aucun résultat pour la recherche sur '##RECHERCHE##']]></txt>
+		<txt><![CDATA[Activation de ton inscription au jeu NinjaTooken]]></txt><!--150-->
+		<txt><![CDATA[Tu viens de t'inscrire sur le site de NinjaTooken. Pour finaliser ton inscription et te connecter au jeu, <a href="http://www.ninjatooken.com/?c=##CODE##" target="_blank">clique ici</a>, ou copie/colle cette adresse dans ton navigateur :<br/><span style="white-space:nowrap;">http://www.ninjatooken.com/?c=##CODE##</span>]]></txt>
+		<txt><![CDATA[Ton inscription a bien été prise en compte.<br/>Un mail vient de t'être envoyé contenant un lien qui te permettra de finaliser ton inscription.]]></txt>
+		<txt><![CDATA[Le mail permettant de t'activer n'a pu être envoyé. Pour finaliser ton inscription, <a href="http://www.ninjatooken.com/?c=##CODE##">cliques ici</a>.]]></txt>
+		<txt><![CDATA[Notre serveur est fatigué, ré-essayes de t'inscrire un peu plus tard...]]></txt>
+		<txt><![CDATA[Tu n'as pas correctement répété ton mot de passe.]]></txt>
+		<txt><![CDATA[Ce login est déjà utilisé, Choisis en un autre !]]></txt>
+		<txt><![CDATA[Ce mail est déjà utilisé.]]></txt>
+		<txt><![CDATA[Tu n'as pas entré une adresse mail valide.]]></txt>
+		<txt><![CDATA[Cette partie est accessible par accès restreint uniquement. Veuillez vous connecter.]]></txt>
+		<txt><![CDATA[Nouveau message privé de la part de ##LOGIN##]]></txt><!--160-->
+		<txt><![CDATA[Tu viens de recevoir un nouveau message priv&eacute; de la part de ##LOGIN##.<br/>Pour le lire, connecte-toi sur le site!]]></txt>
+		<txt><![CDATA[Problème à l'envoi du message.]]></txt>
+		<txt><![CDATA[Un destinataire au message n'a pas été trouvé.]]></txt>
+		<txt><![CDATA[Suppression du(des) message(s) correctement effectuée.]]></txt>
+		<txt><![CDATA[Echec à la suppression.]]></txt>
+		<txt><![CDATA[Archivage du(des) message(s) correctement effectué.]]></txt>
+		<txt><![CDATA[Echec à l'archivage.]]></txt>
+		<txt><![CDATA[Message correctement envoyé à ##LISTE##]]></txt>
+		<txt><![CDATA[Destinataire du message introuvable, envoi annulé...<br/>Les champs nécessaires à l'envoi du message n'ont pas été correctement renseignés, envoi annulé...]]></txt>
+		<txt><![CDATA[Envoyer un message :]]></txt><!--170-->
+		<txt><![CDATA[Destinataire]]></txt>
+		<txt><![CDATA[Archiver]]></txt>
+		<txt><![CDATA[Nouveau message]]></txt>
+		<txt><![CDATA[Réceptions]]></txt>
+		<txt><![CDATA[Envois]]></txt>
+		<txt><![CDATA[Archives]]></txt>
+		<txt><![CDATA[Supprimer la sélection]]></txt>
+		<txt><![CDATA[Tout sélectionner]]></txt>
+		<txt><![CDATA[Archiver la sélection]]></txt>
+		<txt><![CDATA[de]]></txt><!--180-->
+		<txt><![CDATA[à]]></txt>
+		<txt><![CDATA[Pas de messages pour l'instant...]]></txt>
+		<txt><![CDATA[Mes Informations]]></txt>
+		<txt><![CDATA[Mot de passe]]></txt>
+		<txt><![CDATA[Supprimer mon compte]]></txt>
+		<txt><![CDATA[Modifications correctement effectuées.]]></txt>
+		<txt><![CDATA[Modifier l'image]]></txt>
+		<txt><![CDATA[Voir l'avatar actuel]]></txt>
+		<txt><![CDATA[Suppression du compte correctement effectuée.]]></txt>
+		<txt><![CDATA[Attention : la suppression d'un compte est définitive, les informations de ton ninja seront définitivement perdues.]]></txt><!--190-->
+		<txt><![CDATA[Le nouveau mot de passe a correctement été pris en compte.]]></txt>
+		<txt><![CDATA[Le mot de passe actuel a mal été renseigné.]]></txt>
+		<txt><![CDATA[Le nouveau mot de passe n'a pas été correctement répété.]]></txt>
+		<txt><![CDATA[Un champ au moins n'a pas été renseigné.]]></txt>
+		<txt><![CDATA[Ancien]]></txt>
+		<txt><![CDATA[Nouveau]]></txt>
+		<txt><![CDATA[Répéter le nouveau]]></txt>
+		<txt><![CDATA[Connection au jeu via Facebook]]></txt>
+		<txt><![CDATA[Bienvenue sur NinjaTooken ##LOGIN## !<br/><br/>Tu viens tout juste de te connecter à ton compte Facebook pour jouer à NinjaTooken.<br/>N'oublie pas de mettre à jour tes <a href='#' class="paramGeneral" title='Mes paramètres'>infos NinjaTooken</a> afin d'améliorer ton expérience de jeu (avatar, signature, email...).<br/><br/>A très vite dans le jeu ;)<br/>L'équipe NinjaTooken]]></txt>
+		<txt><![CDATA[Messagerie]]></txt><!--200-->
+		<txt><![CDATA[Paramètres]]></txt>
+		<txt><![CDATA[Se déconnecter]]></txt>
+		<txt><![CDATA[##NUM## message(s) non lu(s)]]></txt>
+		<txt><![CDATA[Rappel de tes identifiants de connexion]]></txt>
+		<txt><![CDATA[Tu as demandé tes paramètres de connexion sur le site de la NCT.<br/>Si ce n'est pas le cas, n'hésites pas à contacter un administrateur du site...]]></txt>
+		<txt><![CDATA[Attention, tu n'as pas encore activé ton compte, pour pouvoir te connecter au site, <a href="##ACTIVATION##" target="_blank">clique ici</a>]]></txt>
+		<txt><![CDATA[Ton compte a été désactivé par un modérateur...]]></txt>
+		<txt><![CDATA[Le clan a correctement été ajouté.]]></txt>
+		<txt><![CDATA[Notre serveur est fatigué, ré-essayes d'ajouter ton clan un peu plus tard...]]></txt>
+		<txt><![CDATA[Ce nom de clan est déjà utilisé. Choisis en un autre !]]></txt><!--210-->
+		<txt><![CDATA[Tu fais déjà parti d'un clan. Tu ne peux pas créer de nouveau clan.]]></txt>
+		<txt><![CDATA[Le nom ou la description du clan n'ont pas été renseigné. L'ajout a été annulé]]></txt>
+		<txt><![CDATA[Pour rejoindre un clan tu dois être connecté !]]></txt>
+		<txt><![CDATA[Nouveau message de la part de ##LOGIN##]]></txt>
+		<txt><![CDATA[Tu viens de recevoir un nouveau message privé de la part de ##LOGIN##.<br/>Pour le lire, connecte-toi sur le site!]]></txt>
+		<txt><![CDATA[Le clan a été effacé de l'histoire.]]></txt>
+		<txt><![CDATA[Tu viens de quitter ce clan.]]></txt>
+		<txt><![CDATA[Tu viens de postuler dans ce clan en tant que guerrier.]]></txt>
+		<txt><![CDATA[Tu fais déjà parti de ce clan.]]></txt>
+		<txt><![CDATA[Tu as été banni de ce clan ou tu es en attente de recrutement.]]></txt><!--220-->
+		<txt><![CDATA[Le shinobi a été promu au rang d'intendant.]]></txt>
+		<txt><![CDATA[Le shinobi a été dégradé au rang de guerrier.]]></txt>
+		<txt><![CDATA[Changement de grade]]></txt>
+		<txt><![CDATA[Ton grade au sein du clan a été modifié.<br/><a href="##URL##">Page du clan</a>]]></txt>
+		<txt><![CDATA[Le shinobi a bien été banni]]></txt>
+		<txt><![CDATA[Le shinobi a bien été recruté.]]></txt>
+		<txt><![CDATA[Bannissement]]></txt>
+		<txt><![CDATA[Tu as été banni du clan.<br/><a href="##URL##">Page du clan</a>]]></txt>
+		<txt><![CDATA[Recrutement]]></txt>
+		<txt><![CDATA[Ta candidature a grandement retenu notre attention, et c'est avec plaisir que nous t'annonçons que tu fais désormais parti du clan !<br/>Félicitation !<br/><a href="##URL##">Page du clan</a>]]></txt><!--230-->
+		<txt><![CDATA[Le shinobi n'a pas été accepté.]]></txt>
+		<txt><![CDATA[Bien que très intéressante, ta candidature n'a été pas été retenue... progresse et peut-être à très vite dans notre clan !<br/><a href="##URL##">Page du clan</a>]]></txt>
+		<txt><![CDATA[quitter ce clan]]></txt>
+		<txt><![CDATA[annuler ma candidature]]></txt>
+		<txt><![CDATA[accepté]]></txt>
+		<txt><![CDATA[candidat]]></txt>
+		<txt><![CDATA[promouvoir en "Intendant"]]></txt>
+		<txt><![CDATA[peut bannir des ninjas du clan sauf le maitre de clan]]></txt>
+		<txt><![CDATA[dégrader en "Guerrier"]]></txt>
+		<txt><![CDATA[aucun droit particulier]]></txt><!--240-->
+		<txt><![CDATA[bannir ce shinobi]]></txt>
+		<txt><![CDATA[accepter ce shinobi]]></txt>
+		<txt><![CDATA[refuser ce shinobi]]></txt>
+		<txt><![CDATA[rejoindre ce clan]]></txt>
+		<txt><![CDATA[Ce clan n'existe plus !!]]></txt>
+		<txt><![CDATA[L'art de manipuler le feu]]></txt>
+		<txt><![CDATA[L'art de manipuler l'eau]]></txt>
+		<txt><![CDATA[L'art de manipuler la terre]]></txt>
+		<txt><![CDATA[L'art de manipuler la foudre]]></txt>
+		<txt><![CDATA[L'art de manipuler le vent]]></txt><!--250-->
+		<txt><![CDATA[Ton inscription est finalisée, tu peux dès maintenant te connecter sur le site.]]></txt>
+		<txt><![CDATA[Ton inscription n'a pu être finalisée, notre serveur subit notre succès...ré-essayes un peu plus tard.]]></txt>
+		<txt><![CDATA[Tu es déjà activé. Si tu as oublié ton mot de passe, cliques sur mot de passe oublié.]]></txt>
+		<txt><![CDATA[Ce code d'activation n'est pas bon. Copies et colles l'url fournie dans ton mail pour pouvoir finaliser ton inscription.]]></txt>
+		<txt><![CDATA[Tu viens de t'activer pour jouer à NinjaTooken.<br/>Tu peux désormais te connecter et te lancer dans l'aventure !]]></txt>
+		<txt><![CDATA[Inscription à NinjaTooken]]></txt>
+		<txt><![CDATA[Missions accomplies]]></txt>
+		<txt><![CDATA[Jutsu(s) maitrisé(s)...]]></txt>
+		<txt><![CDATA[sur]]></txt>
+		<txt><![CDATA[Limace]]></txt><!--260-->
+		<txt><![CDATA[Suiveur]]></txt>
+		<txt><![CDATA[Messager]]></txt>
+		<txt><![CDATA[Sprinter]]></txt>
+		<txt><![CDATA[Apprenti]]></txt>
+		<txt><![CDATA[Bourreau]]></txt>
+		<txt><![CDATA[Assassin]]></txt>
+		<txt><![CDATA[Exécuteur]]></txt>
+		<txt><![CDATA[Course]]></txt>
+		<txt><![CDATA[Assassinnat]]></txt>
+		<txt><![CDATA[Tu es déjà connecté, tu peux déjà <a href="/jouer.php#jouer" title='jouer'>jouer à NinjaTooken</a> sans avoir à créer un autre compte (voir les <a href='#' class='paramGeneral' title='mes paramètres'>paramètres</a> de mon compte).<br/> Un ninja est disponible pour chaque compte créé.]]></txt><!--270-->
+		<txt><![CDATA[Retirer de ma liste d'ami(s)]]></txt>
+		<txt><![CDATA[Ce mail n'est pas utilisé. Si tu as oublié tes paramètres de connexion<br/>ou que tu n'as pas reçu ton mail d'activation, <a href="javascript:popMdpOublie();" title="mot de passe oublié ?">cliques ici</a>.]]></txt>
+		<txt><![CDATA[Ton profil a correctement été mis à jour.]]></txt>
+		<txt><![CDATA[Es-tu sûr de vouloir supprimer ce compte ?]]></txt>
+		<txt><![CDATA[Amis]]></txt>
+		<txt><![CDATA[Ajouter un ami]]></txt>
+		<txt><![CDATA[Ajouter]]></txt>
+		<txt><![CDATA[##PSEUDO## a bien été ajouté à ta liste d'ami(s)]]></txt>
+		<txt><![CDATA[Problème à l'ajout de l'ami]]></txt>
+		<txt><![CDATA[Nouvel ami !]]></txt><!--280-->
+		<txt><![CDATA[##PSEUDO## a remarqué tes exploits et t'a ajouté dans sa liste d'ami(s).]]></txt>
+		<txt><![CDATA[Problème à la suppression de l'ami]]></txt>
+		<txt><![CDATA[Un ami en moins...]]></txt>
+		<txt><![CDATA[##PSEUDO## ne te considère plus de la même façon qu'aux premiers jours et a décidé de ne plus continuer vos relations.]]></txt>
+		<txt><![CDATA[ajouté le...]]></txt>
+		<txt><![CDATA[Tu n'as pas encore ajouté d'ami.]]></txt>
+		<txt><![CDATA[Le ninja a correctement été retiré de ta liste d'ami(s).]]></txt>
+		<txt><![CDATA[En jeu ?]]></txt>
+		<txt><![CDATA[Dans le chat ?]]></txt>
+		<txt><![CDATA[Violence verbale]]></txt><!--290-->
+		<txt><![CDATA[Des violences verbales ont été constatées par ##LOGIN##. Un rapport a donc été soumis à la communauté qui décidera de la teneur de tes propos.]]></txt>
+		<txt><![CDATA[Acquitter  ou sanctionner ?]]></txt>
+		<txt><![CDATA[de malus d'xp]]></txt>
+		<txt><![CDATA[votes]]></txt>
+		<txt><![CDATA[Le malus n'est pris en compte qu'à partir de 10 votes.]]></txt>
+		<txt><![CDATA[Abus constatés]]></txt>
+		<txt><![CDATA[Modération des Abus]]></txt>
+		<txt><![CDATA[Ouvrir la conversation]]></txt>
+		<txt><![CDATA[Constaté par]]></txt>
+		<txt><![CDATA[lors de la partie]]></txt>
+		<txt><![CDATA[Aucun abus constaté pour le moment !]]></txt>
+		<txt><![CDATA[Tu ne fais partie ou n'a postulé dans aucun clan.]]></txt>
+		<txt><![CDATA[Tu fais partie de ce clan :]]></txt>
+		<txt><![CDATA[Tu as postulé dans ce clan :]]></txt>
+		<txt><![CDATA[Règlement de la modération des abus.]]></txt>
+		<txt><![CDATA[Utilisateur(s) banni(s) suite à un signalement :]]></txt>
+		<txt><![CDATA[Captures d'écran]]></txt>
+		<txt><![CDATA[Pas de captures d'écran prises pour le moment.]]></txt>
+		<txt><![CDATA[Suppression de l'image correctement effectuée.]]></txt>
+		<txt><![CDATA[Es-tu sûr de vouloir supprimer cette image ?]]></txt>
+		<txt><![CDATA[Inconnu]]></txt><!--311-->
+	</texte>
+	<javascript>
+			<txt><![CDATA[Pas de résultats trouvés]]></txt>
+			<txt><![CDATA[Tu n'as pas renseigné de nom pour ton clan]]></txt>
+			<txt><![CDATA[Tu n'as pas renseigné de description pour ton clan]]></txt>
+			<txt><![CDATA[L'ajout du clan a été annulé :]]></txt>
+			<txt><![CDATA[Une erreur s'est produite à l'ajout du clan...]]></txt>
+			<txt><![CDATA[Tu n'as pas écrit ton message, il n'y a donc rien à poster :p]]></txt>
+			<txt><![CDATA[Tu n'as pas écrit le titre du sujet, l'envoi a été annulé.]]></txt>
+			<txt><![CDATA[tu as oublié de rentrer ton login]]></txt>
+			<txt><![CDATA[tu as oublié de rentrer ton mot de passe]]></txt>
+			<txt><![CDATA[Connection annulée :]]></txt>
+			<txt><![CDATA[fermer la fenêtre]]></txt>
+			<txt><![CDATA[fermer]]></txt>
+			<txt><![CDATA[Erreur à l'envoi des nouveaux paramètres de connexion. Ré-essayes un peu plus tard.]]></txt>
+			<txt><![CDATA[Le mail renseigné n'est pas valide. L'envoi a été annulé.]]></txt>
+			<txt><![CDATA[Le mail renseigné ne correspond à aucun compte. <a href="/inscription.php">Inscris toi sur le site !</a>]]></txt>
+			<txt><![CDATA[Le mail n'a pu être envoyé. Ré-essayes un peu plus tard !]]></txt>
+			<txt><![CDATA[Tes nouveaux paramètres de connexion viennent de t'être envoyé.]]></txt>
+			<txt><![CDATA[Le pseudo ou le mot de passe renseigné n'est pas bon.]]></txt>
+			<txt><![CDATA[Tu n'as pas renseigné ton pseudo ou ton mot de passe !]]></txt>
+			<txt><![CDATA[Voir mon ninja]]></txt>
+			<txt><![CDATA[Sélectionne un message au moins !]]></txt>
+			<txt><![CDATA[tu n'as pas renseigné de destinataire]]></txt>
+			<txt><![CDATA[tu n'as pas renseigné de sujet pour ton message]]></txt>
+			<txt><![CDATA[tu n'as pas écrit ton message]]></txt>
+			<txt><![CDATA[Echec à la mise à jour, erreur d'envoi des données]]></txt>
+			<txt><![CDATA[Le message ne peut pas être envoyé :]]></txt>
+			<txt><![CDATA[Echec à la mise à jour, erreur d'envoi des données]]></txt>
+			<txt><![CDATA[Tu as oublié tes paramètres de connexion ?<br/>Entre ton adresse e-mail pour les recevoir !!]]></txt>
+			<txt><![CDATA[Adresse email]]></txt>
+			<txt><![CDATA[Adresse email non valide, envoi impossible.]]></txt>
+			<txt><![CDATA[Retourner au formulaire.]]></txt>
+			<txt><![CDATA[Echec à l'inscription, erreur d'envoi des données]]></txt>
+			<txt><![CDATA[Tu n'as pas correctement renseigné ton Pseudo.]]></txt>
+			<txt><![CDATA[Tu dois renseigner un mot de passe de 8 caractères minimum.]]></txt>
+			<txt><![CDATA[Tu n'as pas correctement répété ton mot de passe.]]></txt>
+			<txt><![CDATA[Tu n'as pas renseigné une adresse mail valide.]]></txt>
+			<txt><![CDATA[Page perso]]></txt>
+			<txt><![CDATA[éditer]]></txt>
+			<txt><![CDATA[annuler]]></txt>
+			<txt><![CDATA[La suppression d'un message est définitive.<br/>Supprimer malgrés tout ce message ?]]></txt>
+			<txt><![CDATA[Il n'y a aucun texte à citer.]]></txt>
+			<txt><![CDATA[non]]></txt>
+			<txt><![CDATA[oui]]></txt>
+			<txt><![CDATA[supprimer]]></txt>
+			<txt><![CDATA[Contenu en chargement...]]></txt>
+			<txt><![CDATA[Vote non pris en compte.]]></txt>
+			<txt><![CDATA[Mauvais paramètres renseignés.]]></txt>
+			<txt><![CDATA[Le niveau requis pour voter est de 55.]]></txt>
+			<txt><![CDATA[Problèmes pour déterminer l'unicité du vote.]]></txt>
+			<txt><![CDATA[Le votant ne peut être la personne incriminée.]]></txt>
+			<txt><![CDATA[Le vote a déjà été effectué.]]></txt>
+			<txt><![CDATA[Une erreur a été détectée.]]></txt>
+		</javascript>
+</root>
