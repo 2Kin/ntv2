@@ -5,13 +5,13 @@
 </a>
 {% if showAdmin %}
     {% if is_granted('ROLE_USER') and recruteur.recruteur == app.user %}
-        <a href="{{ path('ninja_tooken_clan_destituer', {'user_nom':recruteur.membre.slug}) }}" class="button small pull-left delete">Destituer</a> 
+        <a href="{{ path('ninja_tooken_clan_destituer', {'user_nom':recruteur.membre.slug}) }}" class="button small pull-left delete">{{ 'action.destituer'|trans }}</a> 
     {% endif %}
     {% if is_granted('ROLE_USER') and app.user.clan and app.user.clan.droit < recruteur.droit and app.user!=recruteur.recruteur %}
-        <a href="{{ path('ninja_tooken_clan_recruter_ajouter', {'user_nom':recruteur.membre.slug}) }}" class="button small pull-left">Recruter</a>
+        <a href="{{ path('ninja_tooken_clan_recruter_ajouter', {'user_nom':recruteur.membre.slug}) }}" class="button small pull-left">{{ 'action.recruter'|trans }}</a>
     {% endif %}
     {% if ROLE_SHISHOU %}
-	<br><a href="{{ path('ninja_tooken_clan_destituer_shishou', {'user_nom':recruteur.membre.slug}) }}" class="button small pull-left delete">Promouvoir Shishou et Quitter le clan</a>
+	<br><a href="{{ path('ninja_tooken_clan_destituer_shishou', {'user_nom':recruteur.membre.slug}) }}" class="button small pull-left delete">{{ 'action.promouvoir'|trans }}</a>
     {% endif %}
 {% endif %}
 <br class="clear">

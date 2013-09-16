@@ -10,7 +10,6 @@
         <meta name="keywords" content="{% block keywords %}NinjaTooken{% endblock %}">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="{{ asset('bundles/ninjatookencommon/css/main.css') }}" />
-        <link rel="alternate" type="application/atom+xml" title="Les dernières nouveautés" href="/feed/" />
 
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
         <link rel="apple-touch-icon" href="{{ asset('touch-icon-iphone.png') }}" />
@@ -45,7 +44,7 @@
 			{{ render(controller('NinjaTookenUserBundle:Default:connected', {'user': app.user})) }}
 			{% else %}
 			<p class="account">
-                        Pas encore inscrit ? <a href="{{ path('fos_user_registration_register') }}">Créer mon Ninja</a> | <a href="{{ path('fos_user_security_login') }}">Mon compte</a>
+                        {{ 'compte.pasEncore'|trans({}, 'common') }} <a href="{{ path('fos_user_registration_register') }}">{{ 'compte.inscrire2'|trans({}, 'common') }}</a> | <a href="{{ path('fos_user_security_login') }}">{{ 'compte.compte'|trans({}, 'common') }}</a>
                         </p>
 			{% endif %}
                     </div>
@@ -64,40 +63,40 @@
                         <a href="{{ path('ninja_tooken_homepage') }}" rel="home"><img src="{{ asset('bundles/ninjatookencommon/images/logo.png') }}"></a>
                     </div>
                     <nav class="span8" role="navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
-                        <a class="visible-phone" id="menuMobile" href="#">Menu</a>
+                        <a class="visible-phone" id="menuMobile" href="#">{{ 'menu.menu'|trans({}, 'menu') }}</a>
                         <ul class="hidden-phone menu">
                             <li class="hidden-phone">
-                                <a href="{{ path('ninja_tooken_jouer') }}" class="play">Jouer</a>
+                                <a href="{{ path('ninja_tooken_jouer') }}" class="play">{{ 'menu.jouer'|trans({}, 'menu') }}</a>
                             </li>
                             <li>
-                                <a>Le Jeu</a>
+                                <a>{{ 'menu.jeu'|trans({}, 'menu') }}</a>
                                 <ul>
-                                    <li><a href="{{ path('ninja_tooken_game_classement') }}">Classement</a></li>
-                                    <li><a href="{{ path('ninja_tooken_game_parties') }}">Parties en cours</a></li>
-                                    <li><a href="{{ path('ninja_tooken_event') }}">Events</a></li>
+                                    <li><a href="{{ path('ninja_tooken_game_classement') }}">{{ 'menu.classement'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_game_parties') }}">{{ 'menu.partie'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_event') }}">{{ 'menu.evenement'|trans({}, 'menu') }}</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a>Manuel du Ninja</a>
+                                <a>{{ 'menu.manuel'|trans({}, 'menu') }}</a>
                                 <ul>
-                                    <li><a href="{{ path('ninja_tooken_manuel') }}">Guide du débutant</a></li>
-                                    <li><a href="{{ path('ninja_tooken_game_calculateur') }}">Calculateur de jutsus</a></li>
-                                    <li><a href="{{ path('ninja_tooken_reglement') }}">Règles à respecter</a></li>
+                                    <li><a href="{{ path('ninja_tooken_manuel') }}">{{ 'menu.guide'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_game_calculateur') }}">{{ 'menu.calculateur'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_reglement') }}">{{ 'menu.regle'|trans({}, 'menu') }}</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a>Communauté</a>
+                                <a>{{ 'menu.communaute'|trans({}, 'menu') }}</a>
                                 <ul>
-                                    <li><a href="{{ path('ninja_tooken_forum') }}">Forums</a></li>
-                                    <li><a href="{{ path('ninja_tooken_clans') }}">Clans</a></li>
-                                    <li><a href="{{ path('ninja_tooken_chat') }}">Chat</a></li>
+                                    <li><a href="{{ path('ninja_tooken_forum') }}">{{ 'menu.forum'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_clans') }}">{{ 'menu.clan'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_chat') }}">{{ 'menu.chat'|trans({}, 'menu') }}</a></li>
                                 </ul>
                             </li>
                             <li>
-                                <a>FAQ</a>
+                                <a>{{ 'menu.faq'|trans({}, 'menu') }}</a>
                                 <ul>
-                                    <li><a href="{{ path('ninja_tooken_faq_generale') }}">Questions générales</a></li>
-                                    <li><a href="{{ path('ninja_tooken_faq_technique') }}">Problèmes techniques</a></li>
+                                    <li><a href="{{ path('ninja_tooken_faq_generale') }}">{{ 'menu.generale'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_faq_technique') }}">{{ 'menu.technique'|trans({}, 'menu') }}</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -106,13 +105,9 @@
 		{% if home %}
                 <div class="row-fluid">
                     <div class="span4 presentation">
-                        <h1>Quel Ninja es-tu ?</h1>
-                        <p>
-                        NinjaTooken est un <strong>jeu en réseau gratuit</strong> !<br/><br/>
-                        Découvre un univers démentiel où les Ninjas s'affrontent sans pitié. <strong>Suiton</strong>, <strong>Futon</strong>, <strong>Raiton</strong>, <strong>Doton</strong>, <strong>Katon</strong>... ils ont chacun leurs pouvoirs, à toi de décider à <strong>quelle classe tu appartiens</strong> !<br/><br/>
-                        Crée ton compte pour <strong>sauvegarder ton expérience</strong>, <strong>intégrer un clan</strong>, ou <strong>participer aux tournois</strong> NinjaTooken.
-                        </p>
-                        <a href="{{ path('fos_user_registration_register') }}" class="create"><img src="{{ asset('bundles/ninjatookencommon/images/create.png') }}"> Crée ton Ninja</a>
+                        <h1>{{ 'entete.ninja'|trans({}, 'common') }}</h1>
+                        <p>{{ 'description.ninja'|trans({}, 'common') }}</p>
+                        <a href="{{ path('fos_user_registration_register') }}" class="create"><img src="{{ asset('bundles/ninjatookencommon/images/create.png') }}"> {{ 'compte.inscrire'|trans({}, 'common') }}</a>
                     </div>
                     <div class="span8 visible-desktop">
                         <div id="diaporama" class="diaporama">
@@ -137,7 +132,7 @@
                         <h1>{% block breadcrumbs2 %}
                             <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
                                 <a href="{{ path('ninja_tooken_homepage') }}" itemprop="url">
-                                    <span itemprop="title">Les dernières news</span>
+                                    <span itemprop="title">{{ 'entete.news'|trans({}, 'common') }}</span>
                                 </a>
                             </span>
                         {% endblock %}</h1>
@@ -173,17 +168,17 @@
         <div class="footer">
             <footer class="container">
                 <ul>
-                    <li><a href="{{ path('ninja_tooken_team') }}">Team "Ninja Tooken"</a></li>
-                    <li><a href="{{ path('ninja_tooken_reglement') }}">Règlement</a></li>
-                    <li><a href="{{ path('ninja_tooken_mentions_legales') }}">Mentions légales</a></li>
-                    <li><a href="{{ path('ninja_tooken_contact') }}">Nous contacter</a></li>
+                    <li><a href="{{ path('ninja_tooken_team') }}">{{ 'menu.team'|trans({}, 'menu') }}</a></li>
+                    <li><a href="{{ path('ninja_tooken_reglement') }}">{{ 'menu.reglement'|trans({}, 'menu') }}</a></li>
+                    <li><a href="{{ path('ninja_tooken_mentions_legales') }}">{{ 'menu.mention'|trans({}, 'menu') }}</a></li>
+                    <li><a href="{{ path('ninja_tooken_contact') }}">{{ 'menu.contact'|trans({}, 'menu') }}</a></li>
                 </ul>
             </footer>
         </div>
 
 	<div class="popup-bg">
 		<div class="popup">
-			<p>Cette action est irréversible : es-tu sûr ?<br><br><a href="confirm" class="button"><i class="icon-ok"></i> Confirmer</a> <a href="cancel" class="button cancel"><i class="icon-remove"></i> Annuler</a></p>
+			<p>{{ 'popup.delete'|trans({}, 'common') }}<br><br><a href="confirm" class="button"><i class="icon-ok"></i> {{ 'popup.confirm'|trans({}, 'common') }}</a> <a href="cancel" class="button cancel"><i class="icon-remove"></i> {{ 'popup.cancel'|trans({}, 'common') }}</a></p>
 		</div>
 	</div>
 

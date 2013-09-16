@@ -1,0 +1,67 @@
+filtre:
+    composition: composition
+    experience: moyenne d'expérience
+    nombre: nombre de ninja
+    date: date d'ajout
+action:
+    fonder: Fonder un clan
+    page: Page du clan
+    recrutement: Recrutement
+    quitter: Quitter le clan
+    postuler: Postuler
+    destituer: Destituer
+    recruter: Recruter
+    refuser: Refuser
+    accepter: Accepter
+    annuler: Annuler
+    promouvoir: Promouvoir Shishou et Quitter le clan
+keywords:
+    meta: NinjaTooken, shinobi, ninja, clan, team, équipe, fps, gratuit, online, free
+description:
+    meta: Quel est le clan de ninja le plus puissant de Ninjatooken ? Créé un clan, recrute des joueurs, défies les meilleurs et augmente ta renommée!
+    entete: %count% ninja depuis le %date%|]1,+Inf]%count% ninjas depuis le %date%
+    chercher: %count% clan trouvé pour "%q%".|]1,+Inf]%count% clans trouvés pour "%q%".
+    creation: le %date%
+    fonde: Fondé le %date%
+    perso: Page perso :
+    organisation: Organisation du clan
+    partenaire: Partenaires
+    dernier: Derniers clans
+    error404: Ce clan n'existe pas !
+    recrutement:
+        ouvert: recrutements ouverts
+        ferme: recrutements fermés
+        liste: Liste de tes recrutements passés, en cours, et à venir !
+        listeVide: Tu n'as actuellement pas de recrutement.
+        proposition: Liste des propositions de recrutements
+        propositionVide: Tu n'as actuellement pas de proposition de recrutement.
+notice:
+    ajoutOk: Le clan a bien été ajouté.
+    editOk: Le clan a bien été modifié.
+    deleteOk: Le clan a bien été supprimé.
+    revokeOk: Le joueur et ses recruts ont bien été révoqués.
+    revokeKo: Le joueur ne peut être révoqué dans les conditions actuelles.
+    promotionOk: Le nouveau Shishou a correctement été nommé.
+    promotionKo: Le joueur ne peut être promu Shishou dans les conditions actuelles.
+    recrutement:
+        cancelOk: Votre proposition de recrutement a bien été annulée.
+        addOk: Votre proposition de recrutement a bien été faite.
+        addKo: Une proposition de recrutement a déjà été faite.
+        bienvenue: Bienvenue dans ton nouveau clan !
+mail:
+    recrutement:
+        nouveau:
+            sujet: Proposition de recrutement
+            contenu: |
+                <p>Une proposition de recrutement vient de t'être adressée par <a href="%userUrl%">%userPseudo%</a>.<br/>
+                <a href="%urlRefuser%" class="button small delete">Refuser</a> ou <a href="%urlAccepter%" class="button small delete">Accepter</a></p>
+        refuser:
+            sujet: Re : Proposition de recrutement
+            contenu: Refusée :/
+        accepter:
+            sujet: Re : Proposition de recrutement
+            contenu: Acceptée !!
+forum:
+    numThread: %count% topic|]1,+Inf]%count% topics
+    newThread: Nouveau topic
+    noThread: Pas de topic pour le moment.

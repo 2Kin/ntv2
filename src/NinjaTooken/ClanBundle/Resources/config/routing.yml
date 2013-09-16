@@ -13,7 +13,7 @@ ninja_tooken_clans:
 
 ninja_tooken_clan_old:
     pattern:  /clan.php
-    defaults: { _controller: NinjaTookenForumBundle:Default:oldClan }
+    defaults: { _controller: NinjaTookenClanBundle:Default:oldClan }
 
 ninja_tooken_clan:
     pattern:  /clan/{clan_nom}

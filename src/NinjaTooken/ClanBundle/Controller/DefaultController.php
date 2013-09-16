@@ -3,6 +3,7 @@
 namespace NinjaTooken\ClanBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use NinjaTooken\ClanBundle\Entity\Clan;
@@ -46,7 +47,7 @@ class DefaultController extends Controller
         $clan = $em->getRepository('NinjaTookenClanBundle:Clan')->findOneBy(array('old_id' => (int)$request->get('ID')));
 
         if(!$clan){
-            throw new NotFoundHttpException('Ce clan n\'existe pas !');
+            throw new NotFoundHttpException($this->get('translator')->trans('description.error404'));
         }
 
         return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
@@ -145,7 +146,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            'Le clan a bien été ajouté.'
+                            $this->get('translator')->trans('notice.ajoutOk')
                         );
 
                         return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
@@ -216,7 +217,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            'Le clan a bien été modifié.'
+                            $this->get('translator')->trans('notice.editOk')
                         );
 
                         return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
@@ -260,7 +261,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Le clan a bien été supprimé.'
+                    $this->get('translator')->trans('notice.deleteOk')
                 );
             }
             return $this->redirect($this->generateUrl('ninja_tooken_clans'));
@@ -292,7 +293,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            'Le joueur et ses recruts ont bien été révoqués.'
+                            $this->get('translator')->trans('notice.revokeOk')
                         );
                     }
 
@@ -305,7 +306,7 @@ class DefaultController extends Controller
             }
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'Le joueur ne peut être révoqué dans les conditions actuelles.'
+                $this->get('translator')->trans('notice.revokeKo')
             );
             return $this->redirect($this->generateUrl('ninja_tooken_clans'));
         }
@@ -344,7 +345,7 @@ class DefaultController extends Controller
 
                             $this->get('session')->getFlashBag()->add(
                                 'notice',
-                                'Le nouveau Shishou a correctement été nommé.'
+                                $this->get('translator')->trans('notice.promotionOk')
                             );
 
                             return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
@@ -356,7 +357,7 @@ class DefaultController extends Controller
             }
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'Le joueur ne peut être promu Shishou dans les conditions actuelles.'
+                $this->get('translator')->trans('notice.promotionKo')
             );
             return $this->redirect($this->generateUrl('ninja_tooken_clans'));
         }
@@ -402,7 +403,7 @@ class DefaultController extends Controller
 
                     $this->get('session')->getFlashBag()->add(
                         'notice',
-                        'Votre proposition de recrutement a bien été annulée.'
+                        $this->get('translator')->trans('notice.recrutement.cancelOk')
                     );
                 }
                 return $this->redirect($this->generateUrl('ninja_tooken_clan_recruter'));
@@ -426,14 +427,7 @@ class DefaultController extends Controller
             if($user->getClan()){
                 $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByUsers($user, $utilisateur);
                 if(!$clanProposition){
-                    $content = '<p>Une proposition de recrutement vient de t\'être adressée par <a href="'.$this->generateUrl('ninja_tooken_user_fiche', array('user_nom' => $user->getSlug())).'"'.$user->getUsername().'</a>.<br/>';
-                    $param = array(
-                        'user_nom' => $utilisateur->getSlug(),
-                        'recruteur_nom' => $user->getSlug()
-                    );
-                    $content .= '<a href="'.$this->generateUrl('ninja_tooken_clan_recruter_refuser', $param).'" class="button small delete">Refuser</a> ou ';
-                    $content .= '<a href="'.$this->generateUrl('ninja_tooken_clan_recruter_accepter', $param).'" class="button small delete">Accepter</a>';
-                    $content .= "</p>";
+                    $translator = $this->get('translator');
 
                     $clanProposition = new ClanProposition();
                     $clanProposition->setRecruteur($user);
@@ -442,8 +436,21 @@ class DefaultController extends Controller
                     // ajoute le message
                     $message = new Message();
                     $message->setAuthor($user);
-                    $message->setNom('Proposition de recrutement');
-                    $message->setContent($content);
+                    $message->setNom($translator->trans('mail.recrutement.nouveau.sujet'));
+                    $message->setContent($translator->trans('mail.recrutement.nouveau.content', array(
+                        '%userUrl%' => $this->generateUrl('ninja_tooken_user_fiche', array(
+                            'user_nom' => $user->getSlug()
+                        )),
+                        '%userPseudo%' => $user->getUsername(),
+                        '%urlRefuser%' => $this->generateUrl('ninja_tooken_clan_recruter_refuser', array(
+                            'user_nom' => $utilisateur->getSlug(),
+                            'recruteur_nom' => $user->getSlug()
+                        )),
+                        '%urlAccepter%' => $this->generateUrl('ninja_tooken_clan_recruter_accepter', array(
+                            'user_nom' => $utilisateur->getSlug(),
+                            'recruteur_nom' => $user->getSlug()
+                        ))
+                    )));
 
                     $messageuser = new MessageUser();
                     $messageuser->setDestinataire($utilisateur);
@@ -456,12 +463,12 @@ class DefaultController extends Controller
 
                     $this->get('session')->getFlashBag()->add(
                         'notice',
-                        'Votre proposition de recrutement a bien été faite.'
+                        $translator->trans('notice.recrutement.addOk')
                     );
                 }else{
                     $this->get('session')->getFlashBag()->add(
                         'notice',
-                        'Une proposition de recrutement a déjà été faite.'
+                        $translator->trans('notice.recrutement.addKo')
                     );
                 }
                 return $this->redirect($this->getRequest()->headers->get('referer'));
@@ -488,6 +495,8 @@ class DefaultController extends Controller
                 if($user == $utilisateur && $recruteur->getClan()!==null){
                     $clanutilisateur = $recruteur->getClan();
                     if($clanutilisateur->getDroit()<3){
+                        $translator = $this->get('translator');
+
                         $clan = $clanutilisateur->getClan();
 
                         // on met à jour la proposition
@@ -510,8 +519,8 @@ class DefaultController extends Controller
                         // on ajoute un message
                         $message = new Message();
                         $message->setAuthor($utilisateur);
-                        $message->setNom('Re : Proposition de recrutement');
-                        $message->setContent('Acceptée !!');
+                        $message->setNom($translator->trans('mail.recrutement.accepter.sujet'));
+                        $message->setContent($translator->trans('mail.recrutement.accepter.contenu'));
                         $messageuser = new MessageUser();
                         $messageuser->setDestinataire($recruteur);
                         $message->addReceiver($messageuser);
@@ -522,7 +531,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            'Bienvenue dans ton nouveau clan !'
+                            $translator->trans('notice.recrutement.bienvenue')
                         );
 
                         return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
@@ -550,6 +559,8 @@ class DefaultController extends Controller
             $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByUsers($recruteur, $utilisateur);
             if($clanProposition){
                 if($user == $utilisateur){
+                    $translator = $this->get('translator');
+
                     // on met à jour la proposition
                     $clanProposition->setEtat(2);
                     $em->persist($clanProposition);
@@ -557,8 +568,8 @@ class DefaultController extends Controller
                     // on ajoute un message
                     $message = new Message();
                     $message->setAuthor($utilisateur);
-                    $message->setNom('Re : Proposition de recrutement');
-                    $message->setContent('Refusée :/');
+                    $message->setNom($translator->trans('mail.recrutement.refuser.sujet'));
+                    $message->setContent($translator->trans('mail.recrutement.refuser.contenu'));
                     $messageuser = new MessageUser();
                     $messageuser->setDestinataire($recruteur);
                     $message->addReceiver($messageuser);

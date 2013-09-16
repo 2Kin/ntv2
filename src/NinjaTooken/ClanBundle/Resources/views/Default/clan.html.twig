@@ -8,11 +8,11 @@
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">Communauté</span>
+								<span itemprop="title">{{ 'menu.communaute'|trans({}, 'menu') }}</span>
 							</span>  <i class="icon-angle-right"></i> 
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_clans') }}" itemprop="url">
-									<span itemprop="title">Clans</span>
+									<span itemprop="title">{{ 'menu.clan'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -39,20 +39,21 @@
 						{% set ROLE_SHISHOU = ROLE_CLAN and app.user.clan.droit == 0 %}
 
 						<div class="main clearfix">
-							<h3 class="clearfix">Fondé le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}
-								{% if ROLE_SHISHOU %}<a href="{{ path('ninja_tooken_clan_supprimer', {clan_nom:clan.slug}) }}" class="button mini pull-right delete">Supprimer</a>{% endif %}
-								{% if ROLE_ADMIN or ROLE_SHISHOU %}<a href="{{ path('ninja_tooken_clan_modifier', {clan_nom:clan.slug}) }}" class="button mini pull-right">Éditer</a>{% endif %}
-								{% if ROLE_CLAN %}<a href="{{ path('ninja_tooken_clan_recruter') }}" class="button mini pull-right">Recrutement</a>{% endif %}
+							<h3 class="clearfix">
+                                {{ 'description.fonde'|trans({'%date%': clan.dateAjout|localizeddate('medium', 'none', app.request.locale)}) }}
+								{% if ROLE_SHISHOU %}<a href="{{ path('ninja_tooken_clan_supprimer', {clan_nom:clan.slug}) }}" class="button mini pull-right delete">{{ 'action.supprimer'|trans({}, 'common') }}</a>{% endif %}
+								{% if ROLE_ADMIN or ROLE_SHISHOU %}<a href="{{ path('ninja_tooken_clan_modifier', {clan_nom:clan.slug}) }}" class="button mini pull-right">{{ 'action.editer'|trans({}, 'common') }}</a>{% endif %}
+								{% if ROLE_CLAN %}<a href="{{ path('ninja_tooken_clan_recruter') }}" class="button mini pull-right">{{ 'action.recrutement'|trans }}</a>{% endif %}
 							</h3>
 							<img src="{{ kamon.getUrl(clan) }}" class="pull-left clan">
 							{{ clan.description|raw|purify('full') }}
-							{%if clan.url is not empty %}Page perso : <a href="{{ clan.url }}" target="_blank">{{ clan.url }}</a>{% endif %}
+							{%if clan.url is not empty %}{{ 'description.perso'|trans }} <a href="{{ clan.url }}" target="_blank">{{ clan.url }}</a>{% endif %}
 						</div>
 						<br class="clear">
 
 						<div class="grade clearfix">
-							<h3>Organisation du clan
-								{% if ROLE_CLAN and ROLE_SHISHOU == false %}<a href="{{ path('ninja_tooken_clan_destituer', {user_nom:app.user.slug}) }}" class="button mini pull-right delete">Quitter le clan</a>{% endif %}
+							<h3>{{ 'description.organisation'|trans }}
+								{% if ROLE_CLAN and ROLE_SHISHOU == false %}<a href="{{ path('ninja_tooken_clan_destituer', {user_nom:app.user.slug}) }}" class="button mini pull-right delete">{{ 'action.quitter'|trans }}</a>{% endif %}
 							</h3>
 							{% if membres is not empty %}
 							<ul class="tree">
@@ -93,9 +94,9 @@
 						<hr>
 						<div class="forum">
 							<h4 class="pull-left"><a href="{{ path('ninja_tooken_topic', {forum_nom:forum.slug}) }}">{{ forum.nom }}</a></h4>
-							<span class="numComments"><i class="icon-comment"></i> {{ forum.numThreads }} topic{% if forum.numThreads>1 %}s{% endif %}</span>
+							<span class="numComments"><i class="icon-comment"></i> {{ 'forum.numThread'|transchoice(forum.numThreads) }} {{ forum.numThreads }}</span>
 							{% if ROLE_CLAN and app.user.clan.canEditClan == true %}
-								<a href="{{ path('ninja_tooken_thread_ajouter', {forum_nom:forum.slug}) }}" class="button pull-right">Nouveau topic</a>
+								<a href="{{ path('ninja_tooken_thread_ajouter', {forum_nom:forum.slug}) }}" class="button pull-right">{{ 'forum.newThread'|trans }}</a>
 							{% endif %}
 							<br class="clear">
 							{% if forum.threads is not empty %}
@@ -104,7 +105,7 @@
 								{% endfor %}
 							{% else %}
 							<div class="row-fluid topic">
-								<div class="span12"><h5>Pas de topic pour le moment.</h5></div>
+								<div class="span12"><h5>{{ 'forum.noThread'|trans }}</h5></div>
 							</div>
 							{% endif %}
 						</div>
@@ -120,13 +121,13 @@
 							{% endfor %}
 							<br class="clear">
 							{% endif %}
-							{% if clan.isRecruting and ROLE_CLAN == false %}<a href="#" class="button mini">Postuler</a>{% endif %}<br/><br/>
+							{% if clan.isRecruting and ROLE_CLAN == false %}<a href="#" class="button mini">{{ 'action.postuler'|trans }}</a>{% endif %}<br/><br/>
 						</section>
 
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
 
 						<section>
-							<h4>Partenaires</h4>
+							<h4>{{ 'description.partenaire'|trans }}</h4>
 							{% include 'NinjaTookenCommonBundle:Default:partenaires.html.twig' %}
 						</section>
 					</aside>

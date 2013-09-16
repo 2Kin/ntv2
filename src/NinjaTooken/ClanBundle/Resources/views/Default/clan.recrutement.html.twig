@@ -7,11 +7,11 @@
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">Communauté</span>
+								<span itemprop="title">{{ 'menu.communaute'|trans({}, 'menu') }}</span>
 							</span>  <i class="icon-angle-right"></i> 
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_clans') }}" itemprop="url">
-									<span itemprop="title">Clans</span>
+									<span itemprop="title">{{ 'menu.clan'|trans({}, 'menu') }}</span>
 								</a>
 							</span>  <i class="icon-angle-right"></i> 
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -24,7 +24,7 @@
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_clan_recruter') }}" itemprop="url">
-									<span itemprop="title">Recrutement</span>
+									<span itemprop="title">{{ 'action.recrutement'|trans }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -38,7 +38,7 @@
 						    </div>
 						{% endfor %}
 						{% if app.user.clan.droit<3 %}
-							<h3>Liste de tes recrutements passés, en cours, et à venir !</h3>
+							<h3>{{ 'description.recrutement.liste'|trans }}</h3>
 							{% if recrutements %}
 								{% for recrutement in recrutements %}
 									<div class="row-fluid">
@@ -51,14 +51,14 @@
 											{{ recrutement.dateChangementEtat|localizeddate('full', 'none', app.request.locale) }} à {{ recrutement.dateChangementEtat|localizeddate('none', 'short', app.request.locale) }}
 											{% endif %}
 										</div>
-										<div class="span2"><a href="{{ path('ninja_tooken_clan_recruter_supprimer', {'user_nom' : recrutement.postulant.slug}) }}" class="button small{% if recrutement.etat==0 %} delete{% endif %}">Annuler</a></div>
+										<div class="span2"><a href="{{ path('ninja_tooken_clan_recruter_supprimer', {'user_nom' : recrutement.postulant.slug}) }}" class="button small{% if recrutement.etat==0 %} delete{% endif %}">{{ 'action.annuler'|trans }}</a></div>
 									</div>
 								{% endfor %}
 							{% else %}
-							Tu n'as actuellement pas de recrutement.<br><br>
+							{{ 'description.recrutement.listeVide'|trans }}<br><br>
 							{% endif %}
 						{% endif %}
-						<h3>Liste des propositions de recrutements</h3>
+						<h3>{{ 'description.recrutement.proposition'|trans }}</h3>
 						{% if propositions %}
 							{% for proposition in propositions %}
 								<div class="row-fluid">
@@ -71,11 +71,11 @@
 											{{ proposition.dateChangementEtat|localizeddate('full', 'none', app.request.locale) }} à {{ proposition.dateChangementEtat|localizeddate('none', 'short', app.request.locale) }}
 										{% endif %}
 									</div>
-									<div class="span2"><a href="{{ path('ninja_tooken_clan_recruter_accepter', {'user_nom' : app.user.slug, 'recruteur_nom' : proposition.recruteur.slug}) }}" class="button small delete">Accepter</a> <a href="{{ path('ninja_tooken_clan_recruter_refuser', {'user_nom' : app.user.slug, 'recruteur_nom' : proposition.recruteur.slug}) }}" class="button small delete">Refuser</a></div>
+									<div class="span2"><a href="{{ path('ninja_tooken_clan_recruter_accepter', {'user_nom' : app.user.slug, 'recruteur_nom' : proposition.recruteur.slug}) }}" class="button small delete">{{ 'action.accepter'|trans }}</a> <a href="{{ path('ninja_tooken_clan_recruter_refuser', {'user_nom' : app.user.slug, 'recruteur_nom' : proposition.recruteur.slug}) }}" class="button small delete">{{ 'action.refuser'|trans }}</a></div>
 								</div>
 							{% endfor %}
 						{% else %}
-							Tu n'as actuellement pas de proposition de recrutement.
+							{{ 'description.recrutement.propositionVide'|trans }}
 						{% endif %}
 					</section>
 
@@ -83,7 +83,7 @@
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
 
 						<section>
-							<h4>Partenaires</h4>
+							<h4>{{ 'description.partenaire'|trans }}</h4>
 							{% include 'NinjaTookenCommonBundle:Default:partenaires.html.twig' %}
 						</section>
 					</aside>

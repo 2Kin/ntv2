@@ -1,20 +1,20 @@
 {% extends '::layout.html.twig' %}
 {% import "kamon.html.twig" as kamon %}
 
-{% block title %}NinjaTooken - Clans{% endblock %}
-{% block description %}Quel est le clan de ninja le plus puissant de Ninjatooken ? Créé un clan, recrute des joueurs, défies les meilleurs et augmente ta renommée!{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, clan, team, équipe, fps, gratuit, online, free{% endblock %}
+{% block title %}NinjaTooken - {{ 'menu.clan'|trans({}, 'menu') }}{% endblock %}
+{% block description %}{{ 'description.meta'|trans }}{% endblock %}
+{% block keywords %}{{ 'keywords.meta'|trans }}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">Communauté</span>
+								<span itemprop="title">{{ 'menu.communaute'|trans({}, 'menu') }}</span>
 							</span>
 {% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_clans') }}" itemprop="url">
-									<span itemprop="title">Clans</span>
+									<span itemprop="title">{{ 'menu.clan'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -32,14 +32,14 @@
 							Classer par
 							<label class="select">
 								<select name="clan">
-									<option value="composition"{% if order == "composition" %} selected{% endif %}>composition</option>
-									<option value="experience"{% if order == "experience" %} selected{% endif %}>moyenne d'expérience</option>
-									<option value="ninja"{% if order == "ninja" %} selected{% endif %}>nombre de ninja</option>
-									<option value="date"{% if order == "date" %} selected{% endif %}>date d'ajout</option>
+									<option value="composition"{% if order == "composition" %} selected{% endif %}>{{ 'filtre.composition'|trans }}</option>
+									<option value="experience"{% if order == "experience" %} selected{% endif %}>{{ 'filtre.experience'|trans }}</option>
+									<option value="ninja"{% if order == "ninja" %} selected{% endif %}>{{ 'filtre.nombre'|trans }}</option>
+									<option value="date"{% if order == "date" %} selected{% endif %}>{{ 'filtre.date'|trans }}</option>
 								</select>
 							</label>
 
-                            {% if is_granted('ROLE_USER') and app.user.clan is empty %}<a href="{{ path('ninja_tooken_clan_ajouter') }}" class="button mini pull-right">Fonder un clan</a>{% endif %}
+                            {% if is_granted('ROLE_USER') and app.user.clan is empty %}<a href="{{ path('ninja_tooken_clan_ajouter') }}" class="button mini pull-right">{{ 'action.fonder'|trans }}</a>{% endif %}
 						</p>
 						<div class="row-fluid">
 						{% for clan in clans %}
@@ -50,14 +50,14 @@
 									<header>
 										<img src="{{ kamon.getUrl(clan) }}" class="pull-left clan" alt="">
 										<h3><a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}">{% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}</a><br>
-										<span>{{ clan.membres.count }} ninja{% if clan.membres.count>1 %}s{% endif %} depuis le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}</span></h3>
-										{% if clan.isRecruting %}<span class="actif">recrutements ouverts</span>{% else %}<span>recrutements fermés</span>{% endif %}
+										<span>{{ 'description.entete'|transchoice(clan.membres.count, {'%date%': clan.dateAjout|localizeddate('medium', 'none', app.request.locale)}) }}</span></h3>
+										{% if clan.isRecruting %}<span class="actif">{{ 'description.recrutement.ouvert'|trans }}</span>{% else %}<span>{{ 'description.recrutement.ferme'|trans }}</span>{% endif %}
 									</header>
 									<div class="content">
 										<p>{% if clan.accroche is not empty %}{{ clan.accroche }}{% else %}{{ clan.description|raw|purify('medium') }}{% endif %}</p>
 									</div>
 									<footer>
-										<a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}"class="pull-right">Page du clan &raquo;</a>
+										<a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}"class="pull-right">{{ 'action.page'|trans }} &raquo;</a>
 									</footer>
 								</article>
 							</div>
@@ -78,12 +78,12 @@
 					</div>
 					<aside class="span4">
 						<form action="{{ path('ninja_tooken_clan_search', {page:1}) }}" method="post" accept-charset="utf-8" class="row-fluid">
-							<input type="text" name="q" value="Chercher" class="span10">
-							<input type="submit" name="s" value="Ok !" class="span2">
+							<input type="text" name="q" value="{{ 'action.chercher'|trans({}, 'common') }}" class="span10">
+							<input type="submit" name="s" value="{{ 'action.ok'|trans({}, 'common') }}" class="span2">
 						</form>
 
 						<section>
-							<h4>Derniers clans</h4>
+							<h4>{{ 'description.dernier'|trans }}</h4>
 							{% for clan in lastClans %}
 								{% set clan = clan[0] %}
 							<div class="dernier">
@@ -91,7 +91,7 @@
 									<img src="{{ kamon.getUrl(clan) }}" class="pull-left clan" alt="">
 									<a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}">{% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}</a>
 								</span>
-								<time datetime="{{ clan.dateAjout|date("Y-m-d\\TH:i:sP") }}">le {{ clan.dateAjout|localizeddate('medium', 'none', app.request.locale) }}</time><br>
+								<time datetime="{{ clan.dateAjout|date("Y-m-d\\TH:i:sP") }}">{{ 'description.creation'|trans({'%date%': clan.dateAjout|localizeddate('medium', 'none', app.request.locale)}) }}</time><br>
 								<h5><a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}">{{ clan.description|raw|striptags|slice(0, 50) }}</a></h5>
 							</div>
 							{% endfor %}
@@ -100,7 +100,7 @@
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
 
 						<section>
-							<h4>Partenaires</h4>
+							<h4>{{ 'description.partenaire'|trans }}</h4>
 							{% include 'NinjaTookenCommonBundle:Default:partenaires.html.twig' %}
 						</section>
 					</aside>
