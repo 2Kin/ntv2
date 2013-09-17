@@ -106,7 +106,7 @@
                 <div class="row-fluid">
                     <div class="span4 presentation">
                         <h1>{{ 'entete.ninja'|trans({}, 'common') }}</h1>
-                        <p>{{ 'description.ninja'|trans({}, 'common') }}</p>
+                        <p>{{ 'description.ninja'|trans({}, 'common')|raw }}</p>
                         <a href="{{ path('fos_user_registration_register') }}" class="create"><img src="{{ asset('bundles/ninjatookencommon/images/create.png') }}"> {{ 'compte.inscrire'|trans({}, 'common') }}</a>
                     </div>
                     <div class="span8 visible-desktop">

@@ -11,6 +11,9 @@ compte:
     inscrire2: Créer mon Ninja
     pasEncore: Pas encore inscrit ?
 description:
+    datetime: le %date% à %time%
+    suite: Lire la suite
+    partenaire: Partenaires
     ninja: |
         NinjaTooken est un <strong>jeu en réseau gratuit</strong> !<br/><br/>
         Découvre un univers démentiel où les Ninjas s'affrontent sans pitié. <strong>Suiton</strong>, <strong>Futon</strong>, <strong>Raiton</strong>, <strong>Doton</strong>, <strong>Katon</strong>... ils ont chacun leurs pouvoirs, à toi de décider à <strong>quelle classe tu appartiens</strong> !<br/><br/>

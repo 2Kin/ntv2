@@ -21,76 +21,27 @@
 {% block body %}
 				<div class="row-fluid">
 					<section class="span8 main">
-						<h3 id="q21">Comment faire pour changer de pseudo, ou supprimer mon compte ?</h3>
-						<p>Une fois ton compte créé, tu ne peux pas changer de pseudo, il te faut supprimer ton compte et en recréer un autre !<br>
-						Pour supprimer ton compte, il te suffit d'aller dans tes <a href="#" class="paramDelete">paramètres</a> et de cliquer sur le bouton "suppression" qui s'y trouve, en bas de page. Attention, la suppression est définitive et ton personnage ne pourra être récupéré.</p>
-
-						<h3 id="q22">Pourquoi j'ai une page blanche et puis rien ?</h3>
-						<p>Déjà regarde si tu as bien installé le plugin unity3D <a href="http://unity3d.com/webplayer/" target="_blank">disponible ici</a> (l'installation est rapide et ne nécessite pas de relancer son navigateur).<br>
-						Ensuite vérifie que tu peux bien voir la <a href="http://unity3d.com/gallery/live-demos/index.html#tropical-paradise" target="_blank">démo Unity3d</a>.<br>
-						Si oui, va sur <a href="http://www.m2h.nl/files/HWstats.html" target="_blank">cette page</a>, copie et colle le contenu affiché dans le forum "<a href="/fr/forum.php?ID=65">Amélioration et Bug</a>". Essaie d'être assez précis dans la description de ton problème, et avant de poster regarde si quelqu'un n'a pas déjà eu le même problème. Nous t'aiderons au mieux pour que tu puisses nous rejoindre dans le jeu !<br>
-						Sinon, vérifie que les drivers de ta carte graphique sont bien à jour... et encore plus simplement, essaies d'aller sur le jeu avec un autre navigateur !</p>
-
-						<h3 id="q23">Le jeu se charge puis se bloque avant 100%, je fais quoi ?</h3>
-						<p>Si le jeu se bloque et ne se charge pas complètement, c'est que ta connexion a subit une coupure réseau pendant le chargement. Actuellement, il n'y a pas de reprise automatique de téléchargement. Pour relancer le chargement du jeu et pouvoir jouer correctement, il te suffit de <a href="http://www.libellules.ch/support/cache.php" target="_blank">vider le cache de ton navigateur</a> et <a href="http://webplayer.unity3d.com/setup/" target="_blank">de Unity</a>, puis de recharger la page. Bon jeu !</p>
-
-						<h3 id="q24">Pourquoi je n'arrive pas à rejoindre une partie ?</h3>
-						<span>NinjaTooken utilise PhotonNetwork Cloud pour les parties multiplayer. Il y a plusieurs cas de figures pour lesquels tu peux avoir un problème :</span>
-						<ul>
-							<li><span>un pare-feu peut en être la cause, il suffit alors d'autoriser la demande de connexion Photon,</span></li>
-							<li><span>un anti-virus peut également bloquer les connexions : essaye de le désactiver le temps de la connexion... si tu arrives à te connecter alors un peu de paramétrage est également nécessaire (se renseigner directement dans la FAQ de l'antivirus),</span></li>
-							<li><span>enfin le problème peut venir de ton routeur ou proxy qui ne redirige pas correctement les données...</span></li>
-						</ul>
-						<p>Accède au panneau de contrôle du routeur. Une recherche rapide sur Internet sur le modèle de ton routeur devrait te donner les infos nécessaire pour cette étape et les suivantes.<br>
-						Active le mode DMZ (ou "zone démilitarisée"). Essaye de redémarrer Ninja Tooken, et tout devrait fonctionner ! Si tu ne peux toujours pas te connecter aux autres parties, alors ce n'est pas un problème de routeur : inutile d'essayer les autres étapes, et passe directement à la suite...<br>
-						Désactive le mode DMZ, puis vérifie si le mode UPnP (Universal Plug and Play) est activé, cela afin de permettre la redirection automatique des ports. Il faut en effet éviter de laisser le routeur en mode DMZ, parce que cela ne te protégerais plus contre certaines attaques via Internet.<br>
-						Si le mode DMZ a fonctionné, mais pas le mode UPnP, la dernière solution consiste à ajouter manuellement la redirection du port 5055 en UDP (l'ajout des ports 5056 en UDP, et 4520/4530/4531/843 en TCP peut aider si la connexion ne marche pas mieux).Tu peux utiliser Port Map si tu es sur OS X.</p>
-
-						<h3 id="q25">Pourquoi je n'arrive pas à me connecter à mon compte ?</h3>
-						<span>Plusieurs problèmes peuvent t'empêcher de correctement te connecter :</span>
-						<ul>
-							<li><span>tu n'as pas encore validé ton compte utilisateur : un mail a dû t'être envoyé comportant un lien de validation. Clique dessus, et connectes toi !</span></li>
-							<li><span>si tu as oublié ton mot de passe, il te suffit de cliquer sur le lien en haut de page "mot de passe oublié ?", un nouveau mot de passe te sera envoyé par mail</span></li>
-							<li><span>ton pseudo ou ton mot de passe comporte des caractères non latin (tu as voulu faire le malin en écrivant en japonais?). Pour corriger le problème, <a href="{{ path('ninja_tooken_contact') }}" alt="nous contacter" title="nous-contacter">contacts-nous</a> !</span></li>
-							<li><span>le serveur est surchargé : pas de miracles, il te faut patienter!</span></li>
-						</ul><p></p>
-
-						<h3 id="q26">Le jeu lague chez moi, c'est normal ?</h3>
-						<p>Le jeu peut laguer chez toi mais pas chez les autres joueurs (qui eux te verront malgrés tout te déplacer de façon hachurée). C'est généralement dû à un problème de <a href="http://fr.wikipedia.org/wiki/Ping_%28logiciel%29" target="_blank">ping</a> trop haut.<br>
-						Pour vérifier ton ping, tu peux aller sur : <a href="http://ping.eu/ping/" target="_blank">http://ping.eu/ping/</a> et rentrer l'url du service PhotonCloud : app.exitgamescloud.com<br>
-						Un ping correct est en moyenne en-dessous de 20ms. Si le tien est au-dessus, contactes ton FAI...<br>
-						A savoir que le ping n'a aucun rapport avec ta vitesse de téléchargement, qui peut être le deuxième problème de lague : assures toi bien de ne rien télécharger quand tu joues !</p>
-
-						<h3 id="q27">Le jeu ram, je fais quoi ?</h3>
-						<p>Si le jeu ram (ralentissements), tu peux aller diminuer la qualité graphique du jeu dans le menu : "options" puis "graphiques".<br>
-						Plus d'informations sont disponibles dans le <a href="{{ path('ninja_tooken_manuel') }}#parametrage-video" title="Paramétrage de la vidéo et du son">manuel du ninja : "Paramétrage de la vidéo et du son"</a>.<br>
-						Tu peux également diminuer la résolution système pour améliorer les performances en mode "plein écran".</p>
-
-						<h3 id="q28">Une fois en jeu, la souris ne répond plus, que faire ?</h3>
-						<p>Il existe pour la version actuelle d'Unity3D (le moteur graphique utilisé pour NinjaTooken) un bug empêchant la souris de fonctionner correctement avec le navigateur Internet Explorer. Ce bug n'est pas récurrent : il peut se produire mais pas forcément tout le temps.<br>
-						Pour jouer correctement à NinjaTooken il est donc conseiller si le cas se produit, d'utiliser un autre navigateur (Firefox, Chrome, Safari...).</p>
-
+                        {% set urlParametre = path('ninja_tooken_user_parametres') %}
+                        {% set oldForum = path('ninja_tooken_forum_old') %}
+                        {% set urlManuel = path('ninja_tooken_manuel') %}
+                        {% set urlContact = path('ninja_tooken_contact') %}
+                        {% for i in 7..14 %}
+                            <h3 id="q{{ i }}">{{ ('faq.question' ~ i)|trans }}</h3>
+                            <p>{{ ('faq.reponse' ~ i)|trans({'%urlParametre%': urlParametre, '%oldForum%': oldForum, '%urlContact%': urlContact, '%urlManuel%': urlManuel})|raw }}</p>
+                        {% endfor %}
 					</section>
 					<aside class="span4">
 						<section>
 							<ul>
-								<li><a href="#q21">Comment faire pour changer de pseudo, ou supprimer mon compte ?</a></li>
-								<li><a href="#q22">Pourquoi j'ai une page blanche et puis rien ?</a></li>
-								<li><a href="#q23">Le jeu se charge puis se bloque avant 100%, je fais quoi ?</a></li>
-								<li><a href="#q24">Pourquoi je n'arrive pas à rejoindre une partie ?</a></li>
-								<li><a href="#q25">Pourquoi je n'arrive pas à me connecter à mon compte ?</a></li>
-								<li><a href="#q26">Le jeu lague chez moi, c'est normal ?</a></li>
-								<li><a href="#q27">Le jeu ram, je fais quoi ?</a></li>
-								<li><a href="#q28">Une fois en jeu, la souris ne répond plus, que faire ?</a></li>
+                            {% for i in 7..14 %}
+								<li><a href="#q{{ i }}">{{ ('faq.question' ~ i)|trans }}</a></li>
+                            {% endfor %}
 							</ul>
 						</section>
 
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
 
-						<section>
-							<h4>Partenaires</h4>
-							{% include 'NinjaTookenCommonBundle:Default:partenaires.html.twig' %}
-						</section>
+						{% include 'NinjaTookenCommonBundle:Default:partenaires.html.twig' %}
 					</aside>
 				</div>
 {% endblock %}

@@ -1,15 +1,15 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}NinjaTooken - Jouer gratuitement{% endblock %}
-{% block description %}Joue gratuitement à Ninja Tooken directement depuis ton navigateur grâce au plug-in Unity3D. Pas d'installation, pas de contrainte, tout est gratuit et sans engagements !{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, jouer, play, fps, gratuit, online, free{% endblock %}
+{% block title %}NinjaTooken - {{ 'menu.jouer'|trans({}, 'menu') }}{% endblock %}
+{% block description %}{{ 'description.meta.jouer'|trans }}{% endblock %}
+{% block keywords %}{{ 'keywords.meta.jouer'|trans }}{% endblock %}
 
 {% block breadcrumbs1 %}{% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_jouer') }}" itemprop="url">
-									<span itemprop="title">Jouer</span>
+									<span itemprop="title">{{ 'menu.jouer'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}

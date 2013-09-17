@@ -2,15 +2,15 @@
 {% import "avatar.html.twig" as avatar %}
 
 {% block title %}NinjaTooken{% endblock %}
-{% block description %}Ninja Tooken, jeu FPS 3D gratuit jouable dans le navigateur avec un mode réseau et solo. Personnalise ton shinobi, et fais évoluer ton avatar.{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, fps, gratuit, online, free{% endblock %}
+{% block description %}{{ 'description.meta.index'|trans }}{% endblock %}
+{% block keywords %}{{ 'keywords.meta.index'|trans }}{% endblock %}
 
 {% block breadcrumbs1 %}{% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_homepage') }}" itemprop="url">
-									<span itemprop="title">Les dernières news</span>
+									<span itemprop="title">{{ 'entete.news'|trans({}, 'common') }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -29,14 +29,14 @@
 												<span itemprop="name">{{ thread.author.username }}</span>
 											</a>
 										</span>
-										<time itemprop="datePublished" datetime="{{ thread.dateAjout|date("Y-m-d\\TH:i:sP") }}">le {{ thread.dateAjout|localizeddate('full', 'none', app.request.locale) }} à {{ thread.dateAjout|localizeddate('none', 'short', app.request.locale) }}</time><br>
+										<time itemprop="datePublished" datetime="{{ thread.dateAjout|date("Y-m-d\\TH:i:sP") }}">{{ 'description.datetime'|trans({'%date%': thread.dateAjout|localizeddate('full', 'none', app.request.locale), '%time%': thread.dateAjout|localizeddate('none', 'short', app.request.locale)}, 'common') }}</time><br>
 										<h3 itemprop="headline">{{ thread.nom }}</h3>
 									</header>
 									<div class="content" itemprop="articleBody">
 										<p>{{ thread.body|raw|purify('medium') }}</p>
 									</div>
 									<footer>
-										<a href="{{ path('ninja_tooken_thread', {forum_nom: thread.forum.slug, thread_nom:thread.slug}) }}" itemprop="discussionUrl" class="pull-right">Lire la suite &raquo;</a>
+										<a href="{{ path('ninja_tooken_thread', {forum_nom: thread.forum.slug, thread_nom:thread.slug}) }}" itemprop="discussionUrl" class="pull-right">{{ 'description.suite'|trans({}, 'common') }} &raquo;</a>
 									</footer>
 								</article>
 							</div>
@@ -49,18 +49,15 @@
 					</section>
 					<aside class="span4">
 						<form action="{{ path('ninja_tooken_forum_search') }}" method="post" accept-charset="utf-8" class="row-fluid">
-							<input type="text" name="q" value="Chercher" class="span10">
-							<input type="submit" name="s" value="Ok !" class="span2">
+							<input type="text" name="q" value="{{ 'action.chercher'|trans({}, 'common') }}" class="span10">
+							<input type="submit" name="s" value="{{ 'action.ok'|trans({}, 'common') }}" class="span2">
 						</form>
 
 						{{ render(controller('NinjaTookenForumBundle:Default:recentComments', {'max': 10, 'forum': 0, 'user': 0})) }}
 
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
 
-						<section>
-							<h4>Partenaires</h4>
-							{% include 'NinjaTookenCommonBundle:Default:partenaires.html.twig' %}
-						</section>
+						{% include 'NinjaTookenCommonBundle:Default:partenaires.html.twig' %}
 					</aside>
 				</div>
 {% endblock %}

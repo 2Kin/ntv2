@@ -1,15 +1,15 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}NinjaTooken - nous contacter{% endblock %}
-{% block description %}Envoie un message à la team NinjaTooken, qui y répondra le plus vite possible !{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, contact, chat, fps, gratuit, online, free{% endblock %}
+{% block title %}NinjaTooken - {{ 'menu.contact'|trans({}, 'menu') }}{% endblock %}
+{% block description %}{{ 'description.meta.contact'|trans }}{% endblock %}
+{% block keywords %}{{ 'keywords.meta.contact'|trans }}{% endblock %}
 
 {% block breadcrumbs1 %}{% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_contact') }}" itemprop="url">
-									<span itemprop="title">Nous contacter</span>
+									<span itemprop="title">{{ 'menu.contact'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -23,7 +23,7 @@
 				<form action="#" method="post" accept-charset="UTF-8" class="full" id="contact">
 					<div class="row-fluid">
 						<div class="span3 offset1">
-							<label class="libelle required" for="email">Mail</label>
+							<label class="libelle required" for="email">{{ 'form.mail'|trans }}</label>
 						</div>
 						<div class="span8">
 							<input type="email" name="email" id="email" value="" required>
@@ -31,7 +31,7 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span3 offset1">
-							<label class="libelle required" for="sujet">Sujet</label>
+							<label class="libelle required" for="sujet">{{ 'form.sujet'|trans }}</label>
 						</div>
 						<div class="span8">
 							<input type="text" name="sujet" id="sujet" value="" required>
@@ -39,7 +39,7 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span3 offset1">
-							<label class="libelle required" for="content">Message</label>
+							<label class="libelle required" for="content">{{ 'form.message'|trans }}</label>
 						</div>
 						<div class="span8">
 							<div class="textarea" name="content" id="content"></div>
@@ -47,18 +47,18 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span3 offset1">
-							<label class="libelle required">Captcha</label>
+							<label class="libelle required">{{ 'form.captcha'|trans }}</label>
 						</div>
 						<div class="span8" id="mc">
-							<p>Pour pouvoir envoyer ton message, reproduis la forme ci-dessous :</p>
-							<canvas id="mc-canvas">Ton navigateur ne supporte pas les &lt;canvas&gt;.</canvas>
+							<p>{{ 'form.captchaMessage'|trans }}</p>
+							<canvas id="mc-canvas">{{ 'description.canvas'|trans }}</canvas>
 							<input type="hidden" id="mc-action" value="{{ path('ninja_tooken_contact') }}">
 						</div>
 					</div>
 					<div class="row-fluid">
 						<div class="span8 offset4">
 							<input type="hidden" name="_token" value="{{ csrf_token('contact' ~ app.session.id) }}">
-							<input type="submit" value="Envoyer" class="button" disabled>
+							<input type="submit" value="{{ 'action.envoyer'|trans }}" class="button" disabled>
 						</div>
 					</div>
 				</form>

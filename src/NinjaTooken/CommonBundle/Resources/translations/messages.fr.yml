@@ -1,0 +1,644 @@
+keywords:
+    meta:
+        index: NinjaTooken, shinobi, ninja, fps, gratuit, online, free
+        jouer: NinjaTooken, shinobi, ninja, jouer, play, fps, gratuit, online, free
+        guide: NinjaTooken, shinobi, ninja, manuel, guide, cheats, fps, gratuit, online, free
+        contact: NinjaTooken, shinobi, ninja, contact, chat, fps, gratuit, online, free
+        faq: NinjaTooken, shinobi, ninja, faq, questions, problèmes, réponse, fps, gratuit, online, free
+        mention: NinjaTooken, shinobi, ninja, mentions, légales, fps, gratuit, online, free
+        reglement: NinjaTooken, shinobi, ninja, règlement, fairplay, fps, gratuit, online, free
+        team: NinjaTooken, shinobi, ninja, équipe, team, développeur, fairplay, fps, gratuit, online, free
+description:
+    meta:
+        index: Ninja Tooken, jeu FPS 3D gratuit jouable dans le navigateur avec un mode réseau et solo. Personnalise ton shinobi, et fais évoluer ton avatar.
+        jouer: Joue gratuitement à Ninja Tooken directement depuis ton navigateur grâce au plug-in Unity3D. Pas d'installation, pas de contrainte, tout est gratuit et sans engagements !
+        guide: Le manuel du ninja est à consulter régulièrement pour survivre dans le monde sans pitié des shinobis !
+        contact: Envoie un message à la team NinjaTooken, qui y répondra le plus vite possible !
+        faq: Les réponses aux questions les plus courantes sur NinjaTooken : compte, gratuité, planning de sortie...
+        mention: Les mentions légales de Ninja Tooken, le FPS 3D gratuit. Ce jeu indépendant et gratuit est sans engagements !
+        reglement: Le règlement de Ninja Tooken : pour des parties fun et sans prises de tête !
+        team: Ninja Tooken c'est un jeu en 3D gratuit, mais c'est aussi des infographistes 2D et 3D, des développeurs, des administateurs réseaux, des bêta testeurs...
+    canvas: Ton navigateur ne supporte pas les &lt;canvas&gt;.
+notice:
+action:
+    envoyer: Envoyer
+    clique: clique ici
+form:
+    mail: Mail
+    sujet: Sujet
+    message: Message
+    captcha: Captcha
+    captchaMessage: Pour pouvoir envoyer ton message, reproduis la forme ci-dessous :
+mail:
+    desinscription:
+        message: Si tu ne souhaites plus recevoir de mail de la part de NinjaTooken, 
+faq:
+    question1: Qu'est-ce-que NinjaTooken ?
+    reponse1: |
+        Ninja Tooken est un FPS ninja multijoueur jouable online.
+        Que dis-je, Ninja Tooken est LE seul FPS sur l'univers ninja.
+        Inspiré de manga, Ninja Tooken te propose de te mettre dans la peau d'un ninja, qui pourra évoluer selon tes désirs. Classes, armes, aptitudes, capacités, tu pourras choisir ta voie.
+        Jouable directement dans ton navigateur favori (Firefox, Chrome, Opera, Christopher Colombus, Safari, et même Internet Explorer), Ninja Tooken est totalement en 3D et fonctionne avec la plupart des ordinateurs (le mien a 5 ans et ça marche !).
+    question2: Pourquoi se créer un compte ?
+    reponse2: |
+        Tu peux jouer sans t'inscrire, seulement ta progression ne sera pas sauvegardée...
+        à noter que le compte de Ninja Tooken, la revanche du ninja R'Din est le même que celui du site n-c-team.com : ton avatar, ta messagerie, tes paramètres : tout est en place.<br>
+        Si tu es déjà inscrit sur la NCT, ne touches à rien, et laisses toi guider par Ninja Tooken.
+    question3: Ninja Tooken est-il payant ?
+    reponse3: |
+        NON, absolument pas ! Ninja Tooken est un jeu entièrement gratuit, il faut juste s'inscrire (mais ça aussi c'est gratuit) ! Nous n'acceptons évidemment pas non plus les dons... Pour payer les serveurs de Ninja Tooken nous comptons sur les publicités présentes sur le site.<br>
+        Mais genre aujourd'hui c'est gratuit, mais dans un mois vous allez nous faire payer, c'est la crise non ?<br>
+        Mais je viens de dire que non ! Ninja Tooken est gratuit est le restera pour toujours ! Aucun soucis à ce sujet alors maintenant arrête de m'embêter avec cette question.
+    question4: Qui êtes vous, et pourquoi ce jeu ?
+    reponse4: |
+        Nous sommes un groupe de passionnés : étudiants, professionnels, ou simples néophytes !<br>
+        Ce jeu permet d'exprimer nos compétences, de les développer, mais également et surtout de nous faire plaisir.
+    question5: A quand les prochaines versions ?
+    reponse5: |
+        Malheureusement le temps est ce qui nous fait le plus défaut : nous travaillons pendant nos heures perdues sans planning et avant tout pour le plaisir.<br>
+        Et comme la création d'un jeu vidéo, aussi humble soit-il, prend énormément de temps, il nous est impossible de donner une autre réponse que : "When it's done" !
+    question6: Je peux faire quoi pour vous aider ?
+    reponse6: |
+        C'est simple, parles en autour de toi ! Dans ton pseudo MSN, sur ton site, ton blog, facebook, twitter... Suffit d'en parler, et ça nous suffit, on n'est pas bien difficiles en fait. Même un petit mot comme « Ninja Tooken : Jeu gratuit multiplayer online : http://www.ninjatooken.com/ »<br>
+        Ca suffit, c'est parfait pour un lien dans les partenaires, pour ton pseudo MSN ou facebook. Après c'est comme tu le sens !
+    question7: Comment faire pour changer de pseudo, ou supprimer mon compte ?
+    reponse7: |
+        Une fois ton compte créé, tu ne peux pas changer de pseudo, il te faut supprimer ton compte et en recréer un autre !<br>
+        Pour supprimer ton compte, il te suffit d'aller dans tes <a href="%urlParametre%" class="paramDelete">paramètres</a> et de cliquer sur le bouton "suppression" qui s'y trouve, en bas de page. Attention, la suppression est définitive et ton personnage ne pourra être récupéré.
+    question8: Pourquoi j'ai une page blanche et puis rien ?
+    reponse8: |
+        Déjà regarde si tu as bien installé le plugin unity3D <a href="http://unity3d.com/webplayer/" target="_blank">disponible ici</a> (l'installation est rapide et ne nécessite pas de relancer son navigateur).<br>
+        Ensuite vérifie que tu peux bien voir la <a href="http://unity3d.com/gallery/live-demos/index.html#tropical-paradise" target="_blank">démo Unity3d</a>.<br>
+        Si oui, va sur <a href="http://www.m2h.nl/files/HWstats.html" target="_blank">cette page</a>, copie et colle le contenu affiché dans le forum "<a href="%oldForum%?ID=65">Amélioration et Bug</a>". Essaie d'être assez précis dans la description de ton problème, et avant de poster regarde si quelqu'un n'a pas déjà eu le même problème. Nous t'aiderons au mieux pour que tu puisses nous rejoindre dans le jeu !<br>
+        Sinon, vérifie que les drivers de ta carte graphique sont bien à jour... et encore plus simplement, essaies d'aller sur le jeu avec un autre navigateur !
+    question9: Le jeu se charge puis se bloque avant 100%, je fais quoi ?
+    reponse9: |
+        Si le jeu se bloque et ne se charge pas complètement, c'est que ta connexion a subit une coupure réseau pendant le chargement. Actuellement, il n'y a pas de reprise automatique de téléchargement. Pour relancer le chargement du jeu et pouvoir jouer correctement, il te suffit de <a href="http://www.libellules.ch/support/cache.php" target="_blank">vider le cache de ton navigateur</a> et <a href="http://webplayer.unity3d.com/setup/" target="_blank">de Unity</a>, puis de recharger la page. Bon jeu !
+    question10: Pourquoi je n'arrive pas à rejoindre une partie ?
+    reponse10: |
+        <span>NinjaTooken utilise PhotonNetwork Cloud pour les parties multiplayer. Il y a plusieurs cas de figures pour lesquels tu peux avoir un problème :</span>
+        <ul>
+            <li><span>un pare-feu peut en être la cause, il suffit alors d'autoriser la demande de connexion Photon,</span></li>
+            <li><span>un anti-virus peut également bloquer les connexions : essaye de le désactiver le temps de la connexion... si tu arrives à te connecter alors un peu de paramétrage est également nécessaire (se renseigner directement dans la FAQ de l'antivirus),</span></li>
+            <li><span>enfin le problème peut venir de ton routeur ou proxy qui ne redirige pas correctement les données...</span></li>
+        </ul>
+        Accède au panneau de contrôle du routeur. Une recherche rapide sur Internet sur le modèle de ton routeur devrait te donner les infos nécessaire pour cette étape et les suivantes.<br>
+        Active le mode DMZ (ou "zone démilitarisée"). Essaye de redémarrer Ninja Tooken, et tout devrait fonctionner ! Si tu ne peux toujours pas te connecter aux autres parties, alors ce n'est pas un problème de routeur : inutile d'essayer les autres étapes, et passe directement à la suite...<br>
+        Désactive le mode DMZ, puis vérifie si le mode UPnP (Universal Plug and Play) est activé, cela afin de permettre la redirection automatique des ports. Il faut en effet éviter de laisser le routeur en mode DMZ, parce que cela ne te protégerais plus contre certaines attaques via Internet.<br>
+        Si le mode DMZ a fonctionné, mais pas le mode UPnP, la dernière solution consiste à ajouter manuellement la redirection du port 5055 en UDP (l'ajout des ports 5056 en UDP, et 4520/4530/4531/843 en TCP peut aider si la connexion ne marche pas mieux).Tu peux utiliser Port Map si tu es sur OS X.
+    question11: Pourquoi je n'arrive pas à me connecter à mon compte ?
+    reponse11: |
+        <span>Plusieurs problèmes peuvent t'empêcher de correctement te connecter :</span>
+        <ul>
+            <li><span>tu n'as pas encore validé ton compte utilisateur : un mail a dû t'être envoyé comportant un lien de validation. Clique dessus, et connectes toi !</span></li>
+            <li><span>si tu as oublié ton mot de passe, il te suffit de cliquer sur le lien en haut de page "mot de passe oublié ?", un nouveau mot de passe te sera envoyé par mail</span></li>
+            <li><span>ton pseudo ou ton mot de passe comporte des caractères non latin (tu as voulu faire le malin en écrivant en japonais?). Pour corriger le problème, <a href="%urlContact%" alt="nous contacter" title="nous-contacter">contacts-nous</a> !</span></li>
+            <li><span>le serveur est surchargé : pas de miracles, il te faut patienter!</span></li>
+        </ul>
+    question12: Le jeu lague chez moi, c'est normal ?
+    reponse12: |
+        Le jeu peut laguer chez toi mais pas chez les autres joueurs (qui eux te verront malgrés tout te déplacer de façon hachurée). C'est généralement dû à un problème de <a href="http://fr.wikipedia.org/wiki/Ping_%28logiciel%29" target="_blank">ping</a> trop haut.<br>
+        Pour vérifier ton ping, tu peux aller sur : <a href="http://ping.eu/ping/" target="_blank">http://ping.eu/ping/</a> et rentrer l'url du service PhotonCloud : app.exitgamescloud.com<br>
+        Un ping correct est en moyenne en-dessous de 20ms. Si le tien est au-dessus, contactes ton FAI...<br>
+        A savoir que le ping n'a aucun rapport avec ta vitesse de téléchargement, qui peut être le deuxième problème de lague : assures toi bien de ne rien télécharger quand tu joues !
+    question13: Le jeu ram, je fais quoi ?
+    reponse13: |
+        Si le jeu ram (ralentissements), tu peux aller diminuer la qualité graphique du jeu dans le menu : "options" puis "graphiques".<br>
+        Plus d'informations sont disponibles dans le <a href="%urlManuel%#parametrage-video" title="Paramétrage de la vidéo et du son">manuel du ninja : "Paramétrage de la vidéo et du son"</a>.<br>
+        Tu peux également diminuer la résolution système pour améliorer les performances en mode "plein écran".
+    question14: Une fois en jeu, la souris ne répond plus, que faire ?
+    reponse14: |
+        Il existe pour la version actuelle d'Unity3D (le moteur graphique utilisé pour NinjaTooken) un bug empêchant la souris de fonctionner correctement avec le navigateur Internet Explorer. Ce bug n'est pas récurrent : il peut se produire mais pas forcément tout le temps.<br>
+        Pour jouer correctement à NinjaTooken il est donc conseiller si le cas se produit, d'utiliser un autre navigateur (Firefox, Chrome, Safari...).
+guide:
+    partie1:
+        nom: Pour commencer...
+        sousPartie1:
+            nom: Description Générale
+            description: |
+                Ninja Tooken te transporte dans un univers très japonisant où les ninjas sont sans pitié. Le but du jeu ? Tous les killer !<br><br>
+                Pour commencer, <a href="%urlRegister%">créé ton compte</a>. Puis, choisis la classe de ton ninja : Katon (le feu), Suiton (l'eau), Futon (le vent), Doton (la terre), Raiton (la foudre).<br>
+                Ensuite, le principe est simple : plus tu killes, plus tu gagnes des points d'expérience.<br>
+                Ces points te permettront de faire évoluer ton ninja selon ta classe.<br><br>
+                Mais attention chaque élément a son ennemi juré. Par exemple, si tu appartiens à Katon, méfie-toi surtout de Suiton.
+        sousPartie2:
+            nom: Commandes de Jeu
+            description: |
+                Pour commencer à jouer à Ninja Tooken, rien de très compliqué !<br><br>
+                Comme la majorité des FPS (jeu de tir en vue à la première personne), les touches à utiliser pour les déplacements sont : "Z,Q,S,D".<br><br>
+                A ces touches s'ajoutent la barre espace pour sauter, les touches "1,2,3,4..." pour sélectionner les armes, et les touches "A,E,R,F,T..." pour les jutsus.<br>
+                C'est très pratique, car comme par hasard, elles sont toutes regroupés au même endroit, mais tu peux également changer d'armes/jutsus avec la roulette de la souris.<br><br>
+                Evidemment si cette configuration de touche ne te plait pas, ou si tu as un clavier qwerty, tu peux la personnaliser dans les <a href="#parametrage-touche" title="Paramétrage des touches">options du jeu</a>.
+                Tu pourras également y changer la sensibilité de ta souris.<br><br>Bien foutu, non?
+        sousPartie3:
+            nom: Partie Solo
+            description: |
+                Deux types de missions sont disponibles dans la partie Solo de Ninja Tooken : Course et Assassinat.<br>
+                Réaliser ces missions te permettrons de mieux contrôler ton ninja durant tes phases de déplacement, et d'attaque, tout en gagnant de l'expérience !<br>
+                Pour réaliser ces missions, lance une partie solo puis, une fois près des indicateurs, appuis sur la "touche de chat" ("Entrée" par défaut).<br>
+                Chaque mission peut être répétée autant de fois que tu le souhaites.
+            sousPartie1:
+                nom: Course
+                description: |
+                    <br>Tu devras pour réaliser cette mission, ramasser des pièces d'or dans un temps limité.<br>
+                    Le nombre de points d'expérience gagnés dépend du nombre de pièces à ramasser et du temps restant.
+            sousPartie2:
+                nom: Assassinat
+                description: |
+                    <br>Un contrat a été posé sur un ninja ! Pour réussir cette mission, tu devras le killer. Si ta cible ou un autre ninja t'élimine, ou que tu as dépassé le temps imparti, ta mission est ratée.<br>
+                    Tu l'auras compris, il va falloir faire preuve d'un véritable instinct de ninja pour réussir !
+            sousPartie3:
+                description: |
+                    Pour chacune de ces missions, tu auras un indicateur de position te permettant de connaitre l'emplacement de la pièce la plus proche à ramasser, ou du ninja à assassiner, ainsi qu'en haut à gauche une fenêtre contenant le type de mission actuellement jouée, un chronomètre, et des informations spécifiques.
+        sousPartie4:
+            nom: Partie Réseau
+            description: |
+                Cinq types de parties sont disponibles à la création d'une partie en réseau.
+            sousPartie1:
+                nom: Partie standard
+                description: |
+                    Pas de temps, pas d'équipe, pas de drapeau : du combat, tout simplement !<br>
+                    Chaque joueur connecté va devoir lutter pour sa survie avec ses propres moyens, sans aide et sans limite de temps.
+            sousPartie2:
+                nom: Partie en équipe
+                description: |
+                    Pour cette partie, deux équipes (une rouge et une bleue) se livrent une lutte sans merci ! Chaque nouveau joueur qui se connecte rejoint l'équipe la moins nombreuse.<br>
+                    Il n'est pas possible de tuer un allié.
+            sousPartie3:
+                nom: Partie chronométrée
+                description: |
+                    Tu as 10 minutes pour t'imposer, passé ce délai, les compteurs sont remis à zéros et une nouvelle partie commence ! Ici pas d'équipe, que des ennemis !
+            sousPartie4:
+                nom: Capture de sashimono
+                description: |
+                    Sur le terrain de jeu deux sashimonos (drapeaux) sont placés sur deux emplacements propres à chaque carte. L'objectif est de ramener le drapeau du camp adverse dans le sien.<br>
+                    Le première des deux équipes qui arrive à capturer un certain nombre de fois le drapeau adverse gagne.
+            sousPartie5:
+                nom: Parchemin
+                description: |
+                    Le but du mode est de capturer un parchemin qui est un objet unique présent sur la map (et placé aléatoirement), puis de survivre pendant un certain temps sur un emplacement défini afin de gagner un max' d'expérience !!<br>
+                    Ce mode se veut donc un mixe des modes "hunter" (non disponible dans NinjaTooken) et "capture de sashimono" tout en gardant des effets spécifiques à Ninja Tooken.
+    partie2:
+        nom: Mon Ninja
+        sousPartie1:
+            nom: Vie et Chakra
+            description: |
+                La vie et le chakra sont deux éléments très importants pour ton ninja : si tu n'as plus de points de vie la fin est proche, et si tu n'as plus de chakra tu ne pourras plus utiliser de jutsus.<br>
+                Ces deux jauges peuvent être augmentées via les point d'aptitudes que tu leur accorderas.<br>
+                Tu peux aussi regagner de la vie ou du chakra via les bonus disséminés dans la carte. Le bonus "bol de ramen" redonne de la vie, et le "Ying Yang" redonne du chakra.<br>
+                Le chakra à en plus la particularité de se régénérer à raison de cinq points par seconde.
+        sousPartie2:
+            nom: Expérience
+            description: |
+                L'expérience peut être gagnée de différentes façons.<br>
+                En <a href="#partie-solo" title="Partie solo">mode Solo</a>, tu gagnes de l'expérience lorsque tu kill un ninja, mais tu peux aussi en gagner en effectuant les missions disponibles.<br>
+                En mode réseau, l'expérience provient uniquement des kills que tu effectues. Plus le niveau du ninja que tu viens d'abattre est grand, et plus tu gagneras d'expérience. Il faut savoir prendre des risques, et partir défier les meilleurs ninjas.<br>
+                Une fois gagnée, cette expérience va te permettre de passer des niveaux, chacun te faisant gagner des points d'aptitudes et de jutsus.<br>
+                <br>
+                Tu trouveras dans le <a href="#partie-solo" title="guide du débutant">"Pour commencer"</a> toutes les informations concernant les différentes façons de gagner de l'expérience dans Ninja Tooken !</p>
+                <h4>Dans</h4>
+                <p>Une fois arrivée au niveau 100, tu auras la possibilité depuis le menu « mon ninja » de passer un dan (ou grade). En passant un dan, ton niveau est recalculé sur la base des points d’expérience excédents le palier du niveau 100, soit : XP final = XP total – 5194303*dan<br>
+                Ainsi, tu as la possibilité de « recommencer » le jeu aux premiers niveaux tout en gardant ton ninja.<br>
+                <br>
+                Il existe actuellement 15 dans.
+        sousPartie3:
+            nom: Aptitudes
+            description: |
+                Les aptitudes sont la base de ton ninja. A chaque niveau, tu gagneras deux points à répartir selon tes envies et la voie que tu veux faire prendre à ton ninja. Tu veux qu'il soit plus fort ? Plus rapide ? Plus tenace ? A toi d'en décider !
+            sousPartie1:
+                nom: Force
+                description: |
+                    La force agit sur deux aspects de ton ninja : plus tu auras de force, plus les armes de ton ninja infligeront de dégâts (attention, uniquement les armes, et non les jutsus !).<br>
+                    Mais l'aptitude force n'améliore pas que les dégâts, elle permet aussi à ton ninja de lancer les kunaïs, shurikens, et autres armes de distance, plus loin.
+            sousPartie2:
+                nom: Vitesse
+                description: |
+                    La vitesse permet tout simplement à ton ninja de courir plus vite. N'oublies pas qu'un bon ninja est un ninja furtif, et donc rapide pour attaquer, comme pour battre en retraite.
+            sousPartie3:
+                nom: Vie
+                description: |
+                    La vie est directement proportionnelle à ta jauge de vie. En y attribuant des points, tu augmenteras ton maximum de points de vie.
+            sousPartie4:
+                nom: Chakra
+                description: |
+                    Le chakra est identique à l'aptitude vie, mais appliquée au chakra. Plus tu y mets de points, plus ta jauge de chakra sera grande.
+        sousPartie4:
+            nom: Jutsus
+            description: |
+                Avec les jutsus, on passe aux choses sérieuses !<br>
+                Un point te sera attribué à chaque nouveau niveau que tu passeras. Une fois ce point acquis, tu pourras le placer dans le jutsu que tu souhaites développer, ou dans celui que tu veux apprendre.<br>
+                Contrairement aux aptitudes, tu ne disposeras pas de tous les jutsus dès le début de ton aventure. Ils se débloqueront au fur et à mesure de ta progression et en fonction de ta classe. Mais ne t'inquiètes pas, les points que tu as placé dans un jutsu ne le sont pas définitivement. Tu peux à tout moment les enlever d'un jutsu pour mieux en développer un autre.
+            sousPartie1:
+                nom: Types de jutsus
+                description: |
+                    Les jutsus se répartissent en plusieurs catégories. Il en existe des passifs (actifs tout le temps), des actifs (activable "manuellement"), des jutsus d'attaques, des jutsus de défense, et même des jutsus de déplacement. Tu peux vraiment spécialiser ton ninja comme tu le souhaites, et ainsi pousser ta stratégie au maximum.
+        sousPartie5:
+            nom: Jutsus généraux
+            description: |
+                La plupart des jutsus sont communs aux cinq classes (Katon, Futon, Raiton, Doton, Suiton), d'autres sont spécifiques à certaines classes, nous les verrons plus tard. Voyons maintenant ces jutsus généraux.
+            sousPartie1:
+                nom: Protection nouveau joueur
+                description: |
+                    Ce jutsu passif et qui ne consomme pas de chakra est offert à tout joueur ayant un niveau inférieur à 30. Il limite à 20 points les dégâts reçus par un ninja d'un niveau 60 ou plus.<br>
+                    Pas d'amélioration possible ! Ce jutsu disparait au niveau 31.
+            sousPartie2:
+                nom: Boule de chakra
+                description: |
+                    Ce jutsu d'attaque est très simple, il permet d'attaquer à distance en envoyant une boule de chakra. Cette boule n'est pas affectée par la gravité, et donc peut être envoyée à longue distance tout en restant très précise. <br>
+                    Amélioration en fonction des points de chakra affectés : Plus puissante, plus grosse, et plus rapide mais consomme plus de chakra.
+            sousPartie3:
+                nom: Double saut
+                description: |
+                    Comme son nom l'indique, le double saut permet d'effectuer un deuxième saut à la suite du premier pour atteindre des zones hautes. Le double saut étant un jutsu passif, il n'est pas nécessaire de l'activer; Le double saut ne consomme pas de chakra<br>
+                    Amélioration en fonction des points de chakra affectés : Le premier et le deuxième saut sont plus grands.
+            sousPartie4:
+                nom: Bouclier
+                description: |
+                    Le bouclier permet de réduire les dommage subis. Attention, ce jutsus n'est pas passif, il faut l'activer, et il n'est actif que pendant une durée déterminée. <br>
+                    Amélioration en fonction des points de chakra affectés : Le bouclier réduit encore plus les dommages et dure encore plus longtemps mais consomme plus de chakra.
+            sousPartie5:
+                nom: Marcher sur les murs
+                description: |
+                    Ce jutsu actif permet de marcher sur des pentes très raide et des surface verticales pendant un certain laps de temps. Il se déclenche en appuyant par défaut sur la touche "Contrôle". A chaque déclenchement, il consomme du chakra, mais n'ai crainte, ce jutsu très utile n'en consomme que très peu.<br>
+                    Amélioration en fonction des points de chakra affectés : Le temps pour marcher à la verticale ainsi que le coût en chakra augmente.
+            sousPartie6:
+                nom: Acier renforcé
+                description: |
+                    Cette technique longtemps gardée secrète, a la particularité d'instiller du chakra dans ses armes blanches, afin d'augmenter de manière significative le tranchant de l'acier. Epée, kunaï, shuriken, shuriken de l'ombre, et clous de ninja deviennent alors encore plus redoutables, leurs dégâts étant littéralement multipliés à l'activation de ce jutsu.<br>
+                    Pour garder son attention à son maximum, le viseur se noirci durant le temps d'effet d'acier renforcé. Par contre les ennemis seront également avertis du danger par la présence d'un dragon tournoyant autour du ninja.<br>
+                    Amélioration en fonction des points de chakra affectés : Dure plus longtemps et inflige plus de dégâts mais consomme plus de chakra.
+            sousPartie7:
+                nom: Déflagration
+                description: |
+                    La déflagration est un jutsu à la fois défensif et hostile. En plus d’infliger des dégâts importants aux ennemis se trouvant dans l’air d’effet, elle les repousse, annule les armes de jets, et ralenti les boules d’énergie. Mais si tu comptes l'utiliser, il te faux prévoir une bonne dose de chakra... car si la déflagration est très puissante, elle consomme également énormément de chakra.<br>
+                    Amélioration en fonction des points de chakra affectés : Les dégâts, la portée et la consommation de chakra augmentent.
+            sousPartie8:
+                nom: Chakra de vie
+                description: |
+                    Le chakra de vie permet une fois activé d'utiliser sa jauge de chakra pour absorber les dégâts qu'on t'infligera. Il permet donc d'étendre sa jauge de vie sur la jauge de chakra, mais pas de régénérer sa jauge de vie.<br>
+                    Une fois lancé, un son de battement de coeur signalera, ainsi qu'à vos adversaires, de sa présence. Les adversaires verront en plus une « aura de chakra » se dégager de votre corps.<br>
+                    Ce jutsu peut être désactivé à volonté. Il se désactive de toute façon automatiquement lorsque la jauge de chakra est vide.<br>
+                    Amélioration en fonction des points de chakra affectés : Dure plus longtemps mais consomme plus de chakra.
+            sousPartie9:
+                nom: Kusanagi
+                description: |
+                    Cette épée légendaire, pendant japonais d’Excalibur, est l'aboutissement des techniques de combat les plus évoluées, alliées à la plus grande maitrise spirituelle qui soit. À chaque activation de cette puissante relique, une onde de chakra comprimée sera projetée à très grande vitesse devant toi. Le résultat en est une très fine et arquée vague d'énergie totalement inarrêtable. Si un ennemi est touché par ce tranchant hors du commun, il sera repoussé par la puissance dévastatrice de l'attaque.<br>
+                    Amélioration en fonction des points de chakra affectés : Se propage plus loin (et donc devient plus grande), et inflige plus de dégâts mais consomme plus de chakra.<br><br><br>
+                    Voyons maintenant les jutsus spécifiques à chaque classe...
+        sousPartie6:
+            nom: Jutsus par classes
+            description: |
+                Chacune des <a href="#classes">cinq classes</a> possède deux jutsus spéciaux.
+            sousPartie1:
+                nom: Katon, le feu
+                sousPartie1:
+                    nom: Protection contre le feu
+                    description: |
+                        Cette protection permet de diminuer les dégâts des boules de chakra, des déflagrations, du Phoenix, et des explosifs (tonneau, ou kunaï explosif). Ce jutsu ne consomme pas de chakra.<br>
+                        Amélioration en fonction des points de chakra affectés : La protection augmente.
+                sousPartie2:
+                    nom: Phoenix
+                    description: |
+                        Cette attaque permet à ton ninja d'envoyer l'esprit du feu sur une zone du terrain ciblée. Une fois l'esprit arrivé à destination, une énorme explosion s'ensuit brulant gravement les ennemis pris dans la fureur élémentale.<br>
+                        Amélioration en fonction des points de chakra affectés : Les dégâts, la distance cible, et le rayon finale d'action augmentent (ainsi que le cout en chakra).<br>
+                        <strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
+            sousPartie2:
+                nom: Suiton, l'eau
+                sousPartie1:
+                    nom: Marcher sur l'eau
+                    description: |
+                        Ce jutsu permet de marcher sur l'eau, et d’augmenter sa vitesse de déplacement sur et sous cet élément. Marcher sur l'eau est un jutsu actif qui ne consomme pas de chakra.<br>
+                        Amélioration en fonction des points de chakra affectés : Augmente la durée de l'effet, et la vitesse de déplacement.
+                sousPartie2:
+                    nom: Vague
+                    description: |
+                        Invoque la puissance dévastatrice des esprits aqueux à partir d'une zone ciblée du terrain. Une fois invoquée, la vague suit le terrain sur une trajectoire rectiligne et inflige d'importants dégâts à tous les ennemis touchés.<br>
+                        Amélioration en fonction des points de chakra affectés : Augmente la durée du déplacement, la distance ciblée, les dégâts infligés et le coût en chakra.<br>
+                        <strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
+            sousPartie3:
+                nom: Futon, l'air
+                sousPartie1:
+                    nom: Transparence
+                    description: |
+                        Ce jutsu rend ton ninja translucide, et ne consomme pas de chakra !<br>
+                        Amélioration en fonction des points de chakra affectés : Le ninja devient de moins en moins visible. La distance nécessaire pour être visé avec le shuriken de l'ombre diminue d'autant !
+                sousPartie2:
+                    nom: Tornade
+                    description: |
+                        Déclenche la puissance versatile du vent durant un temps limitée. A partir de ton ninja et vers une zone ciblée du terrain, la tornade se déplace en spirale et inflige d'importants dégâts à tous les ennemis touchés.<br>
+                        Amélioration en fonction des points de chakra affectés : Augmente la distance ciblée, le temps d'invocation, les dégâts infligés et le coût en chakra.<br>
+                        <strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
+            sousPartie4:
+                nom: Doton, la terre
+                sousPartie1:
+                    nom: Métamorphose
+                    description: |
+                        Ce jutsu de spécialité doton permet à ton ninja de se transformer en rocher pendant une certaine durée. Lorsque ton ninja est sous la forme d’un rocher, il regagnera de la vie. Pour se cacher et attaquer en fourbe, il n'y a pas mieux ! La métamorphose est un jutsu actif, qui s'annule dès que tu te déplaces.<br>
+                        Amélioration en fonction des points de chakra affectés : La transformation dure plus longtemps, et fait gagner plus de vie.
+                sousPartie2:
+                    nom: Pieux
+                    description: |
+                        Invoque la puissance de la terre, à partir d'une zone ciblée du terrain. Une fois invoqué, de nombreux pieux surgissent de la terre et viennent empaler les ennemis leur infligeant d'importants dégâts.<br>
+                        Amélioration en fonction des points de chakra affectés : Augmente la distance ciblée, le nombre de pieux, les dégâts infligés et le coût en chakra.<br>
+                        <strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
+            sousPartie5:
+                nom: Raiton, la foudre
+                sousPartie1:
+                    nom: Tirs multiples
+                    description: |
+                        Le multishoot est un jutsu permettant d'augmenter la cadence de tir de ton ninja. Il fonctionne pour toutes les <a href="#arme" title="armes">attaques physiques</a> (hormis le katana).<br>
+                        Amélioration en fonction des points de chakra affectés : La cadence de tir augmente de plus en plus (l'intervalle entre les attaques est malgré tout limitée à 150ms au minimum !).
+                sousPartie2:
+                    nom: Téléportation
+                    description: |
+                        Appel les pouvoirs de célérité de la foudre du ninja vers une zone ciblée. Une fois invoquée, les élémentaires de la foudre transporte le ninja vers une zone ciblée à une vitesse hallucinante en échange d'un don de vie.<br>
+                        Amélioration en fonction des points de chakra affectés : La distance de téléportation et le cout en chakra augmentent avec le nombre de points de vie exigés.
+        sousPartie7:
+            nom: Armes
+            description: |
+                Les armes dans Ninja Tooken sont aussi importantes que les jutsus, ne les délaisse pas !<br><br>
+                Les dégâts infligés par les armes dépendant du type d'arme utilisé, et de la <a href="#aptitude" title="Aptitudes">force</a> de ton ninja (excepté pour le kunaï explosif et le fumigène).
+            sousPartie1:
+                nom: Katana
+                description: |
+                    Le katana est l'unique arme de corps à corps. Etant plus difficile à utiliser dans les combats ninjas qui se déroulent la plupart du temps à distance, elle inflige des dégâts très importants ! Si tu as l'occasion de te rapprocher discrètement d'un autre ninja, un coup de katana sera l'idéal pour en finir rapidement...
+            sousPartie2:
+                nom: Kunaï
+                description: |
+                    Le kunaï est une des armes de base du ninja. Tu en as un bon paquet en reserve, alors utilises-les ! Si tu n'en as plus, tu peux toujours en reprendre avec les caisses d'armes disséminées un peu partout dans chaque carte. Le lancer de kunaï n'est pas droit, car la gravité vient se mêler au combat... Pour avoir des lancés plus droits, et ainsi atteindre des cibles plus éloignés de façons plus précise, il te faut augmenter la force de ton ninja.
+            sousPartie3:
+                nom: Kunaï explosif
+                description: |
+                    Le kunaï explosif s'utilise de la même manière que le kunaï normal, sauf qu'il explose au bout d'un temps assez court, ou au contact de la cible. Ne reste pas à coté ! Tu peux te recharger en kunaïs explosifs grâce aux caisses bonus qui en contiennent.
+            sousPartie4:
+                nom: Shuriken
+                description: |
+                    Le shuriken est aussi une arme de base du ninja. Qui a déjà vu un vrai ninja sans shuriken ? Comme le kunaï et les armes de distance, le shuriken subit la gravité et donc ne peux pas atteindre des cibles trop éloignées. Le kunaï est même meilleur que le shuriken sur ce point là, car le shuriken a une plus petit portée. Cependant tu peux lancer plus de shuriken dans un même temps, mais il inflige moins de dégâts. A toi de voir lequel tu préfères ! Comme les kunaïs, explosifs ou non, tu peux récupérer des shurikens dans les caisses bonus adéquates.
+            sousPartie5:
+                nom: Shuriken de l'ombre
+                description: |
+                    Le shuriken de l'ombre est un énorme shuriken qui ne rate presque jamais sa cible ! Cette arme aussi puissante que l'épée mais à distance, ne se trouve cependant qu'en quantité très limitée. Utilise-le au bon moment !
+            sousPartie6:
+                nom: Fumigène
+                description: |
+                    Le fumigène n'est pas réellement une arme puisqu'il n'inflige aucun dégât. Il te permet de t'enfuire d'un combat mal engagé, ou de te faire gagner un peu de répits en dégageant une grosse quantité de fumée devant toi pendant quelques secondes. A toi de profiter au mieux de cette arme "tactique".
+            sousPartie7:
+                nom: Makibishi
+                description: |
+                    Les makibishi sont un assemblage de 4 clous. Envoyés par poignées de six, ils permettent de piéger la zone où ils retombent. En courant après un adversaire ayant lancé des makibishi, on risque de se les planter dans les pieds et donc de réduire sa vitesse de moitié pendant quelques secondes. Les makibishi restent sur la carte tant que personne n'a marché dessus (ou que le piégeur ne s'est pas déconnecté).
+        sousPartie8:
+            nom: Classes
+            description: |
+                Comme tu le sais certainement si tu as déjà commencer à jouer, le début de l'aventure dans Ninja Tooken commence par le choix de sa classe. Ce choix permet de se spécialiser dans un élément en débloquant des <a href="#jutsuClasse" title="jutsus par classe">jutsus spécifiques</a>.<br>
+                <span>Parmi ces cinqs classes tu retrouveras :</span>
+                <ul>
+                    <li><span class="suiton">Suiton (l'eau avec comme ennemi Doton),</span></li>
+                    <li><span class="katon">Katon (le feu avec comme ennemi Suiton),</span></li>
+                    <li><span class="futon">Futon (le vent avec comme ennemi Katon),</span></li>
+                    <li><span class="raiton">Raiton (la foudre avec comme ennemi Futon),</span></li>
+                    <li><span class="doton">Doton (la terre avec comme ennemi Raiton).</span></li>
+                </ul>
+            sousPartie1:
+                nom: Principe des oppositions de classe
+                description: |
+                    Chacune des 5 cinqs classes est prédominante sur une autre. Cela signifie qu'un ninja d'une classe prédominante sur une autre infligera plus de dégât à un ninja de cette classe.<br>
+                    Par exemple un ninja Suiton infligera 10% de dégâts de plus des dommages habituels à un ninja Katon. Mais le ninja Katon fera de même sur un ninja Futon. Voici un graphique illustrant la boucle des prédominances :<br>
+                    <br>
+                    N'oublie pas que tu peux voir les pourcentages de ninja de chaque classe en bas de la <a href="{{ path('ninja_tooken_game_classement') }}">page classement</a>. Choisis intelligemment ta classe en fonction des classes présentes dans le jeu (si il y a 50% de ninjas dotons, choisis plutôt raiton !)<br>
+                    <br>
+                    <br>
+                    Comme dit en introduction, chaque classe possède deux jutsus qui lui sont propres. Ces jutsus vont probablement déterminer ton choix de classe.
+                description1: |
+                    <strong>Suiton</strong> : Marcher sur l'eau, Vague<br>
+                    <strong>Futon</strong> : Transparence, Tornade<br>
+                    <strong>Katon</strong> : Protection contre le feu, Phoenix<br>
+                    <strong>Raiton</strong> : Multishoot, Téléportation<br>
+                    <strong>Doton</strong> : Métamorphose, Pics de roche<br>
+                    <br>
+                    Rendez-vous dans la partie <a href="#jutsu" alt="Jutsus" title="Jutsus">jutsus</a> pour en savoir plus.
+    partie3:
+        nom: Options
+        sousPartie1:
+            nom: Paramétrage des Touches
+            description: |
+                Tu l'auras compris, Ninja Tooken est un jeu complet ! Mais pas de panique, car tu peux modifier absolument tous les contrôles du jeu à loisir.<br><br>
+                Pour cela rends toi dans le menu "Options" puis direction "Contrôles". Tu devrais voir la liste complète des actions avec à droite la touche du clavier associée... et si tu as un doute sur une action, il te suffit de passer sur le texte correspondant.<br><br>
+                A partir de là rien de plus simple, clique sur le bouton correspondant à la touche que tu veux modifier et appuis sur la touche que tu préfères utiliser. Mais fais attention de ne pas assigner la même touche à plusieurs actions différentes, sans quoi la précédente action ne marchera plus...<br>
+                Ces modifications sont prises en comptes sur ton ordinateur uniquement, donc si tu en changes, n'oublie pas de repasser par ce menu !<br><br>
+                Tu noteras au passage qu'à partir de ce même menu tu peux modifier la sensibilité de la souris : plus elle est élevée, et plus ton ninja tournera vite.
+        sousPartie2:
+            nom: Paramétrage de la Vidéo et du Son
+            description: |
+                A partir du menu "Options" puis "Audio", tu peux modifier le volume des sons et des musiques d'ambiance du jeu.<br><br>
+                Dans le menu "Graphique" tu peux modifier la qualité d'affichage de la 3D. Par défaut celle-ci est en "Simple". Si tu constates des ralentissements, tu peux la diminuer, et si tu as la dernière bête de course, n'hésites pas à augmenter, tu ne le regretteras pas !<br><br>
+                A noter le paramètre "Sélection automatique" qui va choisir pendant le jeu le rapport qualité/FPS le plus adapté.<br>
+                Selon la configuration de ton pc, ce paramétrage peut s'avérer instable (aller/retour incessant entre deux niveaux de qualité graphiques) : ici encore, n'hésite pas et teste !
+        sousPartie3:
+            nom: Système (cékoidon)
+            description: |
+                Depuis le menu "Options" puis "Système" tu arrives sur des informations purement informatives qui détectent la version du plug-in utilisée, ainsi que ta carte graphique.<br>
+                Tu auras également la possibilité de modifier la langue du jeu.<br><br>
+                Ces informations sont fournies à titre purement informatives... vérifie que tout correspond à ce que tu as effectivement sur ton pc, et vas vite jouer !
+        sousPartie4:
+            nom: Demandes d'Améliorations et bugs
+            description: |
+                Tu joues depuis un certain temps maintenant, et tu as remarqué des bugs, ou tu veux partager tes idées pour améliorer le jeu ?<br>
+                Pour cela, il suffit de nous envoyer un message ici : <a href="%urlForum%" title="Améliorations et bugs">Forum : Amélioration et bugs</a>
+mention:
+    partie1:
+        nom: Accord de confidentialités
+        description: |
+            La Naruto Constant Team est sensible aux problèmes de confidentialité sur Internet et s'est engagée à protéger votre confidentialité. La NCT prend des mesures utiles afin de protéger toutes les informations de nos visiteurs en ligne contre tout accès et utilisation non autorisés.<br>
+            La NCT recueille uniquement les informations personnelles fournies à titre volontaire par les personnes consultant son site Web. Vous êtes totalement libre en ce qui concerne la communication ou non de ces informations. Si vous avez volontairement fourni certaines informations, cela signifie que vous consentez à ce que nous collections et utilisions vos renseignements personnels en accord avec la présente déclaration de confidentialité.<br>
+            Vous pourrez, une fois inscrit, mettre à jour vos informations personnelles en éditant votre profil.
+    partie2:
+        nom: Droits d'auteurs
+        description: |
+            Le jeu Ninja Tooken est une propriété exclusive de ses créateurs. Eux seuls peuvent le mettre à contribution librement. Toute reproduction partielle ou complète est interdite.
+    partie3:
+        nom: Démenti
+        description: |
+            Malgré de stricts contrôles, nous déclinons toute responsabilité quant aux contenus de liens externes pointant vers Ninja Tooken, ou inversement. L'auteur d'une page web est le seul responsable de son contenu.
+reglement:
+    description: |
+        En t'inscrivant sur Ninja Tooken, tu t'engages à respecter un certain nombre de règles. Celles-ci ont été créées pour conserver une bonne ambiance de jeu. Tout joueur ne les respectant pas se verra sujet à des sanctions telles que la suppression de son compte sans préavis.
+        Liste non exhaustive des règles à respecter :
+    partie1:
+        nom: Comptes et pseudos
+        description: |
+            <span>Le pseudo de ton ninja doit respecter les quelques règles suivantes :</span>
+            <ul>
+                <li><span>Ne pas être vulgaire ni insultant</span></li>
+                <li><span>Ne pas comporter de connotation sexuelle voire pornographique</span></li>
+                <li><span>Ne pas faire référence à une orientation politique, à une ethnie, une communauté ou une religion</span></li>
+                <li><span>Ne pas copier une marque déposée</span></li>
+                <li><span>Ne pas faire référence à un produit illégal</span></li>
+                <li><span>Ne pas imiter le nom d'un modérateur ou administrateur de Ninja Tooken</span></li>
+            </ul>
+            <span>Il est interdit de prêter son compte, en raison des divers abus possibles (suppression du compte prêté, gain d’xp plus rapide...). En cas de manquement à cette règle, les deux joueurs encourent des sanctions.</span>
+    partie2:
+        nom: Chat/Forum/Clans
+        description: |
+            <ul>
+                <li><span>Le flood, (répétition d’un même message plusieurs fois dans un court délai) n'est pas autorisé.</span></li>
+                <li><span>Il est interdit de faire de la publicité pour un site tiers, y compris ceux en rapport avec Ninja Tooken</span></li>
+                <li><span>Les discours insultants, pornographiques, religieux, xénophobes, homophobes, politiques, incitants à consommer des produits illégaux ou même parlant de Christophe Maé sont strictement interdits.</span></li>
+                <li><span>Respectez au maximum la grammaire Française ! Tout le monde n’en sera que plus heureux.</span></li>
+            </ul>
+    partie3:
+        nom: Respect du jeu
+        description: |
+            <ul>
+                <li><span>L'usurpation d'identité est interdite, que ce soit celle d'un joueur, d'un modérateur, ou d'un administrateur, et ce peu importe la raison (bonne ou mauvaise).</li>
+                <li><span>Dévoiler les informations personnelles d'un autre joueur est prohibé.</span></li>
+                <li><span>De manière générale, il est interdit de nuire au bon déroulement du jeu.</span></li>
+            </ul>
+    partie4:
+        nom: Commerce
+        description: |
+            <span>Sont interdits :</span>
+            <ul>
+                <li><span>le commerce ou l’échange de comptes ou de clans.</span></li>
+                <li><span>L’organisation de concours, animations ou tournois payants</span></li>
+            </ul>
+    partie5:
+        nom: Triche
+        description: |
+            <ul>
+                <li><span>Il est illégal d'abuser d'un bug du jeu. Toute anomalie doit être reportée via le forum (partie Bug et Amélioration) ou via le formulaire de contact.</span></li>
+                <li><span>L'utilisation d'un programme tiers dans le but d'altérer l'usage du jeu est interdit.</span></li>
+                <li><span>Il est autorisé d'avoir plusieurs comptes.</span></li>
+                <li><span>Il est interdit de jouer avec plusieurs comptes dans une même partie.</span></li>
+            </ul>
+team:
+    description: |
+        Ninja Tooken, c'est des ninjas et des shurikens, mais c'est aussi...
+    description1: |
+        Pour toutes questions, n'hésitez pas à <a href="%urlContact%" title="nous contacter">nous contacter</a> !
+    partie1:
+        nom: Infographie 3D
+    partie2:
+        nom: Infographie 2D
+    partie3:
+        nom: Musique et son
+    partie4:
+        nom: Bêta-testing
+    partie5:
+        nom: Administration réseau
+    partie6:
+        nom: Animation de la communauté
+    partie7:
+        nom: Traduction
+    partie8:
+        nom: Programmation et intégration
+    partie9:
+        nom: Contenus et gestion
+    membre1: 
+        nom: Andre Doan aka Drey77
+        description: |
+            Artiste 3D en recherche d'emploi (animation, modélisation, et textures)<br>
+            Mail : <a href="mailto:%61%6E%64%72%65%2E%64%6F%61%6E%40%67%6D%61%69%6C%2E%63%6F%6D">andre.doan -at- gmail.com</a><br>
+            Site : <a target="_blank" href="http://www.andredoan.com/">http://www.andredoan.com/</a>
+    membre2: 
+        nom: Régis Roussot aka Chaukopeps
+        description: |
+            Infographiste, Animateur 3D (animation, modélisation, et textures)<br>
+            Mail : <a href="mailto:%72%65%67%69%73%72%6F%75%73%73%6F%74%40%68%6F%74%6D%61%69%6C%2E%66%72">regisroussot -at- hotmail.fr</a><br>
+            Site : <a target="_blank" href="http://chaukopeps.over-blog.fr/">http://chaukopeps.over-blog.fr/</a>
+    membre3: 
+        nom: Jonathan Persoons
+        description: |
+            Étudiant (modélisation, et textures)<br>
+            Mail : <a href="mailto:%70%65%72%73%6F%6F%6E%73%6A%40%67%6D%61%69%6C%2E%63%6F%6D">persoonsj -at- gmail.com</a><br>
+            Facebook : <a target="_blank" href="http://www.facebook.com/profile.php?ref=profile&amp;id=854619641">http://www.facebook.com/profile.php?ref=profile&amp;id=854619641</a>
+    membre4: 
+        nom: Antoine Heckmann aka MrSlher
+        description: |
+            Étudiant en animation 3D/Jeux video (modélisation, et textures)<br>
+            Mail : <a href="mailto:%6E%65%67%72%6F%5F%64%6F%6E%6E%40%68%6F%74%6D%61%69%6C%2E%63%6F%6D">negro_donn -at- hotmail.com</a>
+    membre5: 
+        nom: Manakel
+        description: |
+            Modélisation, et textures<br>
+    membre6: 
+        nom: Yadoob
+        description: |
+            Modélisation, et textures<br>
+            Blog : <a href="http://utopies.over-blog.fr/" title="http://utopies.over-blog.fr/">http://utopies.over-blog.fr/</a>
+    membre7: 
+        nom: Kay
+        description: |
+            Modélisation et textures
+    membre8: 
+        nom: Everest
+        description: |
+            Modélisation et textures
+    membre9: 
+        nom: Eberhard
+        description: |
+            Character design, et Interface 2D
+    membre10: 
+        nom: Anomen
+        description: |
+            Illustrations, textures, et Webdesign
+    membre11: 
+        nom: Neo[F]abien-Sama
+        description: |
+    membre12: 
+        nom: Will Alexander
+        description: |
+            SoundCloud : <a href="https://soundcloud.com/willalexander" title="https://soundcloud.com/willalexander">https://soundcloud.com/willalexander</a>
+    membre13: 
+        nom: Crystalmir
+        description: |
+    membre14: 
+        nom: Yondame-Hokage
+        description: |
+    membre15: 
+        nom: Poups229
+        description: |
+            Étudiant
+    membre16: 
+        nom: G-Rom
+        description: |
+    membre17: 
+        nom: Wanix
+        description: |
+    membre18: 
+        nom: Casey
+        description: |
+            Modération site
+    membre19: 
+        nom: Soxsoxsox
+        description: |
+            Modération site<br>
+            Mail : <a href="mailto:%74%68%6F%6D%61%73%33%30%33%40%68%6F%74%6D%61%69%6C%2E%66%72">thomas303 -at- hotmail.fr</a><br>
+            Facebook : <a target="_blank" href="http://fr-fr.facebook.com/people/Soxsoxsox-Threesox/100002183121158">http://fr-fr.facebook.com/people/Soxsoxsox-Threesox/100002183121158</a>
+    membre20: 
+        nom: Yondame-Hokage
+        description: |
+            Modération site<br>
+            Mail : <a href="mailto:%44%79%6C%61%6E%33%32%35%30%40%68%6F%74%6D%61%69%6C%2E%63%6F%6D">Dylan3250 -at- hotmail.com</a><br>
+            Facebook : <a target="_blank" href="http://fr-fr.facebook.com/people/Shinz%C3%B4-Takez%C3%B4/100002317862191">http://fr-fr.facebook.com/people/Shinz%C3%B4-Takez%C3%B4/100002317862191</a>
+    membre21: 
+        nom: Yusei32
+        description: |
+            Organisation évènementielle
+    membre22: 
+        nom: Rydax
+        description: |
+            Modération Chat
+    membre23: 
+        nom: Casey
+        description: |
+            Traduction - Son<br>
+            Mail : <a href="mailto:%68%6F%70%65%6C%65%73%73%75%74%6F%70%69%61%6E%40%67%6D%61%69%6C%2E%63%6F%6D">hopelessutopian -at- gmail.com</a>
+    membre24: 
+        nom: Soxsoxsox
+        description: |
+            Modération site<br>
+            Mail : <a href="mailto:%74%68%6F%6D%61%73%33%30%33%40%68%6F%74%6D%61%69%6C%2E%66%72">thomas303 -at- hotmail.fr</a><br>
+            Facebook : <a target="_blank" href="http://fr-fr.facebook.com/people/Soxsoxsox-Threesox/100002183121158">http://fr-fr.facebook.com/people/Soxsoxsox-Threesox/100002183121158</a>
+    membre25: 
+        nom: 2Kin
+        description: |

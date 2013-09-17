@@ -54,7 +54,7 @@
         </tr>
         <tr>
             <td width="600">
-                <br/><br/><br/><br/>Si tu ne souhaites plus recevoir de mail de la part de NinjaTooken, <a href="{{ app.request.basepath }}desinscription.php?email={{ email }}" target="_blank" title="desinscription" style="color:blue; text-decoration: none;"><span style="color:blue;">clique ici</span></a>.
+                <br/><br/><br/><br/>{{ 'mail.desinscription.message'|trans }}<a href="{{ app.request.basepath }}desinscription.php?email={{ email }}" target="_blank" title="desinscription" style="color:blue; text-decoration: none;"><span style="color:blue;">{{ 'action.clique'|trans }}</span></a>.
             </td>
         </tr>
     </table>
