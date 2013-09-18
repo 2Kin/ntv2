@@ -2,22 +2,22 @@
 
 {% block title %}NinjaTooken - {{ thread.nom }}{% endblock %}
 {% block description %}{{ thread.body|raw|striptags|slice(0,255) }}{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, topic, {{ thread.nom }}, fps, gratuit, online, free{% endblock %}
+{% block keywords %}{{ thread.nom }}{{ 'keywords.meta.thread'|trans }}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">Communauté</span>
+								<span itemprop="title">{{ 'menu.communaute'|trans({}, 'menu') }}</span>
 							</span> <i class="icon-angle-right"></i>
                             {% if forum.clan is empty %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_forum') }}" itemprop="url">
-									<span itemprop="title">Forums</span>
+									<span itemprop="title">{{ 'menu.forum'|trans({}, 'menu') }}</span>
 								</a> <i class="icon-angle-right"></i>
 							</span>
                             {% else %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_clans') }}" itemprop="url">
-									<span itemprop="title">Clans</span>
+									<span itemprop="title">{{ 'menu.clan'|trans({}, 'menu') }}</span>
 								</a> <i class="icon-angle-right"></i>
 							</span>
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -54,7 +54,7 @@
 						<article itemscope itemtype="http://schema.org/Article">
 							{{ render(controller('NinjaTookenGameBundle:Default:signature', {'user':thread.author})) }}
 							<header>
-								<time itemprop="datePublished" datetime="{{ thread.dateAjout|date("Y-m-d\\TH:i:sP") }}">Le {{ thread.dateAjout|localizeddate('full', 'none', app.request.locale) }} à {{ thread.dateAjout|localizeddate('none', 'short', app.request.locale) }}</time>
+								<time itemprop="datePublished" datetime="{{ thread.dateAjout|date("Y-m-d\\TH:i:sP") }}">{{ 'description.datetime'|trans({'%date%': thread.dateAjout|localizeddate('full', 'none', app.request.locale), '%time%': thread.dateAjout|localizeddate('none', 'short', app.request.locale)}, 'common') }}</time>
 							</header>
 							<div class="content clearfix" itemprop="articleBody">
 								{{ thread.body|raw|purify('full') }}
@@ -62,15 +62,15 @@
 							<p class="clearfix">
 							{% if thread.isCommentable == true or ROLE_ADMIN %}
 								{% if is_granted("ROLE_USER") %}
-							<a href="#" class="button mini pull-right answer">Répondre</a>
+							<a href="#" class="button mini pull-right answer">{{ 'action.repondre'|trans({}, 'common') }}</a>
 								{% endif %}
 								{% if ROLE_ADMIN or thread.author == app.user %}
-							<a href="{{ path('ninja_tooken_thread_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right delete">Supprimer</a>
-							<a href="{{ path('ninja_tooken_thread_modifier', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Éditer</a>
+							<a href="{{ path('ninja_tooken_thread_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right delete">{{ 'action.supprimer'|trans({}, 'common') }}</a>
+							<a href="{{ path('ninja_tooken_thread_modifier', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">{{ 'action.editer'|trans({}, 'common') }}</a>
 								{% endif %}
 								{% if ROLE_ADMIN %}
-								<a href="{{ path('ninja_tooken_thread_verrouiller', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">{% if thread.isCommentable %}Verrouiller{% else %}Déverouiller{% endif %}</a>
-								<a href="{{ path('ninja_tooken_thread_postit', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">Post-it</a>
+								<a href="{{ path('ninja_tooken_thread_verrouiller', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">{% if thread.isCommentable %}{{ 'action.verrouiller'|trans({}, 'common') }}{% else %}{{ 'action.deverrouiller'|trans({}, 'common') }}{% endif %}</a>
+								<a href="{{ path('ninja_tooken_thread_postit', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">{{ 'action.postit'|trans({}, 'common') }}</a>
 								{% endif %}
 							{% endif %}
 							</p>
@@ -79,7 +79,7 @@
 								<hr>
 								{{ form_widget(form_comment) }}
 								<div>
-									<input type="submit" value="Répondre" class="button">
+									<input type="submit" value="{{ 'action.repondre'|trans({}, 'common') }}" class="button">
 								</div>
 							    </form>
 							{% endif %}
@@ -100,7 +100,7 @@
 									<link itemprop="url" href="#c{{ loop.index }}">
 									{{ render(controller('NinjaTookenGameBundle:Default:signature', {'user':comment.author})) }}
 									<header>
-										<time itemprop="commentTime" datetime="{{ comment.dateAjout|date("Y-m-d\\TH:i:sP") }}">Le {{ comment.dateAjout|localizeddate('medium', 'none', app.request.locale) }} à {{ comment.dateAjout|localizeddate('none', 'short', app.request.locale) }}</time>
+										<time itemprop="commentTime" datetime="{{ comment.dateAjout|date("Y-m-d\\TH:i:sP") }}">{{ 'description.datetime'|trans({'%date%': comment.dateAjout|localizeddate('full', 'none', app.request.locale), '%time%': comment.dateAjout|localizeddate('none', 'short', app.request.locale)}, 'common') }}</time>
 									</header>
 									<div class="content clearfix" itemprop="commentText">
 										<p>{{ comment.body|raw|purify('full') }}</p>
@@ -108,11 +108,11 @@
 									{% if thread.isCommentable == true or ROLE_ADMIN %}
 										<p class="clearfix">
 										{% if is_granted("ROLE_USER") %}
-											<a href="#" class="button mini pull-right answer">Répondre</a>
+											<a href="#" class="button mini pull-right answer">{{ 'action.repondre'|trans({}, 'common') }}</a>
 										{% endif %}
 										{% if ROLE_ADMIN or comment.author == app.user %}
-											<a href="{{ path('ninja_tooken_comment_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" class="button mini pull-right delete">Supprimer</a>
-											<a href="{{ path('ninja_tooken_comment_modifier', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" class="button mini pull-right">Éditer</a>
+											<a href="{{ path('ninja_tooken_comment_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" class="button mini pull-right delete">{{ 'action.supprimer'|trans({}, 'common') }}</a>
+											<a href="{{ path('ninja_tooken_comment_modifier', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" class="button mini pull-right">{{ 'action.editer'|trans({}, 'common') }}</a>
 										{% endif %}
 										</p>
 									{% endif %}
@@ -132,8 +132,8 @@
 					</div>
 					<aside class="span4">
 						<form action="{{ path('ninja_tooken_forum_search') }}" method="post" accept-charset="utf-8" class="row-fluid">
-							<input type="text" name="q" value="Chercher" class="span10">
-							<input type="submit" name="s" value="Ok !" class="span2">
+							<input type="text" name="q" value="{{ 'action.chercher'|trans({}, 'common') }}" class="span10">
+							<input type="submit" name="s" value="{{ 'action.ok'|trans({}, 'common') }}" class="span2">
 							<input type="hidden" name="forum" value="{{ forum.slug }}">
 						</form>
 

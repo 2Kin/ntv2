@@ -810,12 +810,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSFacebookBundle.git",
-                "reference": "e419d5ca792937b1fa008788f04bc2703233b392"
+                "reference": "30b6234f6ee6450fd12f74ecaa9df6f11cf33d0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSFacebookBundle/zipball/e419d5ca792937b1fa008788f04bc2703233b392",
-                "reference": "e419d5ca792937b1fa008788f04bc2703233b392",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSFacebookBundle/zipball/30b6234f6ee6450fd12f74ecaa9df6f11cf33d0c",
+                "reference": "30b6234f6ee6450fd12f74ecaa9df6f11cf33d0c",
                 "shasum": ""
             },
             "require": {
@@ -861,7 +861,7 @@
             "keywords": [
                 "facebook"
             ],
-            "time": "2013-06-09 23:45:10"
+            "time": "2013-09-16 01:02:14"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -1793,12 +1793,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ornicar/GravatarBundle.git",
-                "reference": "45a68e58c7dc7048e84f37babad6dc2661bb9f20"
+                "reference": "16ec60aab18a553c9a01e2cecc28f039c1b2c0f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ornicar/GravatarBundle/zipball/45a68e58c7dc7048e84f37babad6dc2661bb9f20",
-                "reference": "45a68e58c7dc7048e84f37babad6dc2661bb9f20",
+                "url": "https://api.github.com/repos/ornicar/GravatarBundle/zipball/16ec60aab18a553c9a01e2cecc28f039c1b2c0f3",
+                "reference": "16ec60aab18a553c9a01e2cecc28f039c1b2c0f3",
                 "shasum": ""
             },
             "require": {
@@ -1840,7 +1840,7 @@
                 "templating",
                 "twig"
             ],
-            "time": "2013-09-06 06:46:09"
+            "time": "2013-09-16 19:39:39"
         },
         {
             "name": "phpoption/phpoption",
@@ -2590,12 +2590,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stfalcon/TinymceBundle.git",
-                "reference": "0e6f8b05493c8d534510de5f96400a0258efe767"
+                "reference": "cd00aa03c1d47067cf64216e3ecfa2605deab191"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/0e6f8b05493c8d534510de5f96400a0258efe767",
-                "reference": "0e6f8b05493c8d534510de5f96400a0258efe767",
+                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/cd00aa03c1d47067cf64216e3ecfa2605deab191",
+                "reference": "cd00aa03c1d47067cf64216e3ecfa2605deab191",
                 "shasum": ""
             },
             "require": {
@@ -2639,7 +2639,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2013-08-20 15:24:05"
+            "time": "2013-09-16 06:40:50"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -2648,16 +2648,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
-                "reference": "fe3f6551a41d0bce874159fd4c46296fdd697d2b"
+                "reference": "6e8dc798687963ffc4e4e0dfa687b361699855a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/fe3f6551a41d0bce874159fd4c46296fdd697d2b",
-                "reference": "fe3f6551a41d0bce874159fd4c46296fdd697d2b",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/6e8dc798687963ffc4e4e0dfa687b361699855a9",
+                "reference": "6e8dc798687963ffc4e4e0dfa687b361699855a9",
                 "shasum": ""
             },
             "require": {
-                "gedmo/doctrine-extensions": "2.3.*",
+                "gedmo/doctrine-extensions": "~2.3.1",
                 "php": ">=5.3.2",
                 "symfony/framework-bundle": "~2.1"
             },
@@ -2701,7 +2701,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2013-08-27 13:42:00"
+            "time": "2013-09-16 09:35:16"
         },
         {
             "name": "swiftmailer/swiftmailer",

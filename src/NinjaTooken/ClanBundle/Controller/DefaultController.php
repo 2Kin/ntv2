@@ -47,7 +47,7 @@ class DefaultController extends Controller
         $clan = $em->getRepository('NinjaTookenClanBundle:Clan')->findOneBy(array('old_id' => (int)$request->get('ID')));
 
         if(!$clan){
-            throw new NotFoundHttpException($this->get('translator')->trans('description.error404'));
+            throw new NotFoundHttpException($this->get('translator')->trans('description.error404.clan'));
         }
 
         return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
@@ -146,7 +146,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            $this->get('translator')->trans('notice.ajoutOk')
+                            $this->get('translator')->trans('notice.clan.ajoutOk')
                         );
 
                         return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
@@ -217,7 +217,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            $this->get('translator')->trans('notice.editOk')
+                            $this->get('translator')->trans('notice.clan.editOk')
                         );
 
                         return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
@@ -261,7 +261,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    $this->get('translator')->trans('notice.deleteOk')
+                    $this->get('translator')->trans('notice.clan.deleteOk')
                 );
             }
             return $this->redirect($this->generateUrl('ninja_tooken_clans'));
@@ -293,7 +293,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            $this->get('translator')->trans('notice.revokeOk')
+                            $this->get('translator')->trans('notice.clan.revokeOk')
                         );
                     }
 
@@ -306,7 +306,7 @@ class DefaultController extends Controller
             }
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('notice.revokeKo')
+                $this->get('translator')->trans('notice.clan.revokeKo')
             );
             return $this->redirect($this->generateUrl('ninja_tooken_clans'));
         }
@@ -345,7 +345,7 @@ class DefaultController extends Controller
 
                             $this->get('session')->getFlashBag()->add(
                                 'notice',
-                                $this->get('translator')->trans('notice.promotionOk')
+                                $this->get('translator')->trans('notice.clan.promotionOk')
                             );
 
                             return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
@@ -357,7 +357,7 @@ class DefaultController extends Controller
             }
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                $this->get('translator')->trans('notice.promotionKo')
+                $this->get('translator')->trans('notice.clan.promotionKo')
             );
             return $this->redirect($this->generateUrl('ninja_tooken_clans'));
         }

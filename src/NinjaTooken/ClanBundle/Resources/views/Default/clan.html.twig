@@ -94,7 +94,7 @@
 						<hr>
 						<div class="forum">
 							<h4 class="pull-left"><a href="{{ path('ninja_tooken_topic', {forum_nom:forum.slug}) }}">{{ forum.nom }}</a></h4>
-							<span class="numComments"><i class="icon-comment"></i> {{ 'forum.numThread'|transchoice(forum.numThreads) }} {{ forum.numThreads }}</span>
+							<span class="numComments"><i class="icon-comment"></i> {{ 'forum.numThread'|transchoice(forum.numThreads) }}</span>
 							{% if ROLE_CLAN and app.user.clan.canEditClan == true %}
 								<a href="{{ path('ninja_tooken_thread_ajouter', {forum_nom:forum.slug}) }}" class="button pull-right">{{ 'forum.newThread'|trans }}</a>
 							{% endif %}

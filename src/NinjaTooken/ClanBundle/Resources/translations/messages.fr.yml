@@ -27,7 +27,8 @@ description:
     organisation: Organisation du clan
     partenaire: Partenaires
     dernier: Derniers clans
-    error404: Ce clan n'existe pas !
+    error404 :
+        clan: Ce clan n'existe pas !
     recrutement:
         ouvert: recrutements ouverts
         ferme: recrutements fermés
@@ -36,13 +37,14 @@ description:
         proposition: Liste des propositions de recrutements
         propositionVide: Tu n'as actuellement pas de proposition de recrutement.
 notice:
-    ajoutOk: Le clan a bien été ajouté.
-    editOk: Le clan a bien été modifié.
-    deleteOk: Le clan a bien été supprimé.
-    revokeOk: Le joueur et ses recruts ont bien été révoqués.
-    revokeKo: Le joueur ne peut être révoqué dans les conditions actuelles.
-    promotionOk: Le nouveau Shishou a correctement été nommé.
-    promotionKo: Le joueur ne peut être promu Shishou dans les conditions actuelles.
+    clan:
+        ajoutOk: Le clan a bien été ajouté.
+        editOk: Le clan a bien été modifié.
+        deleteOk: Le clan a bien été supprimé.
+        revokeOk: Le joueur et ses recruts ont bien été révoqués.
+        revokeKo: Le joueur ne peut être révoqué dans les conditions actuelles.
+        promotionOk: Le nouveau Shishou a correctement été nommé.
+        promotionKo: Le joueur ne peut être promu Shishou dans les conditions actuelles.
     recrutement:
         cancelOk: Votre proposition de recrutement a bien été annulée.
         addOk: Votre proposition de recrutement a bien été faite.

@@ -26,3 +26,8 @@ action:
     ok: Ok !
     supprimer: Supprimer
     editer: Éditer
+    ajouter: Ajouter
+    repondre: Répondre
+    verrouiller: Verrouiller
+    deverrouiller: Déverouiller
+    postit: Post-it

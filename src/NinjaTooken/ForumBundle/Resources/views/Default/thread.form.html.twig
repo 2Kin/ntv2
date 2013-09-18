@@ -1,17 +1,17 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}NinjaTooken - {% if thread is not defined %}Ajouter{% else %}Éditer{% endif %} un topic{% endblock %}
+{% block title %}NinjaTooken - {% if thread is not defined %}{{ 'action.addTopic'|trans }}{% else %}{{ 'action.editTopic'|trans }}{% endif %}{% endblock %}
 {% block description %}{% endblock %}
 {% block keywords %}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">Communauté</span>
+								<span itemprop="title">{{ 'menu.communaute'|trans({}, 'menu') }}</span>
 							</span> <i class="icon-angle-right"></i>
                             {% if forum.clan is empty %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_forum') }}" itemprop="url">
-									<span itemprop="title">Forums</span>
+									<span itemprop="title">{{ 'menu.forum'|trans({}, 'menu') }}</span>
 								</a> <i class="icon-angle-right"></i>
 							</span>
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -20,7 +20,7 @@
                             {% else %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_clans') }}" itemprop="url">
-									<span itemprop="title">Clans</span>
+									<span itemprop="title">{{ 'menu.clan'|trans({}, 'menu') }}</span>
 								</a> <i class="icon-angle-right"></i>
 							</span>
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -45,11 +45,11 @@
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
                             {% if thread is not defined %}
 								<a href="{{ path('ninja_tooken_thread_ajouter', {forum_nom:forum.slug}) }}" itemprop="url">
-									<span itemprop="title"><i class="icon-plus"></i> Ajouter un topic</span>
+									<span itemprop="title"><i class="icon-plus"></i> {{ 'action.addTopic'|trans }}</span>
 								</a>
                             {% else %}
 								<a href="{{ path('ninja_tooken_thread_modifier', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" itemprop="url">
-									<span itemprop="title"><i class="icon-pencil"></i> Éditer un topic</span>
+									<span itemprop="title"><i class="icon-pencil"></i> {{ 'action.editTopic'|trans }}</span>
 								</a>
                             {% endif %}
 							</span>
@@ -61,7 +61,7 @@
 					{{ form_widget(form) }}
 					<div class="row-fluid">
 					    <div class="span8 offset4">
-						<input type="submit" value="{% if thread is not defined %}Ajouter{% else %}Éditer{% endif %}" class="button">
+						<input type="submit" value="{% if thread is not defined %}{{ 'action.ajouter'|trans({}, 'common') }}{% else %}{{ 'action.editer'|trans({}, 'common') }}{% endif %}" class="button">
 					    </div>
 					</div>
 				    </form>

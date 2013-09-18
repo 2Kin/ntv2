@@ -3,10 +3,14 @@ action:
     suite: Lire la suite
     editComment: Éditer un commentaire
     newThread: Nouveau topic
+    editTopic: Éditer un topic
+    addTopic: Ajouter un topic
 keywords:
     meta:
         event: NinjaTooken, shinobi, ninja, event, stream, concour, tournoi, evènement, fps, gratuit, online, free
         forum: NinjaTooken, shinobi, ninja, forum, discussion, fps, gratuit, online, free
+    thread: NinjaTooken, shinobi, ninja, topic, fps, gratuit, online, free
+    threadList: NinjaTooken, shinobi, ninja, topic, message, fps, gratuit, online, free
 titre:
     event: Les events NinjaTooken
     dernierMessage: Derniers messages
@@ -16,9 +20,24 @@ description:
     meta:
         event: Tournoi, stream, concour, pour suivre tous les évènements de NinjaTooken et vivre le jeu à 200%, c'est ici !
         forum: Le forum de discussion de Ninja Tooken : échange tes découvertes, défie d'autres joueurs, organise une partie, propose tes améliorations, annonce un bug...
+    threadList: Les topics de "%forum%", c'est ici pour votre jeu fps de ninja gratuit.
     event: Tournoi, streams, concours : c'est ici que ça se passe !
     noEvent: Il n'y a pas encore d'évènements.
-    chercher: %count% topic trouvé pour "%q%".|]1,+Inf]%count% topics trouvés pour "%q%".
+    chercher0: %count% topic trouvé pour "%q%"|]1,+Inf]%count% topics trouvés pour "%q%"
     chercher1: dans le forum "%forum%"
     chercher2: comme auteur "%user%"
+    error404:
+        message: Ce message n'existe pas !
+        forum: Ce forum n'existe pas !
 notice:
+    topic:
+        ajoutOk: Le topic a bien été ajouté.
+        editOk: Le topic a bien été modifié.
+        deverrouilleOk: Le topic a bien été déverrouillé.
+        verrouilleOk: Le topic a bien été verrouillé.
+        postitOk: Le topic a été tagué en "post-it".
+        unpostitOk: Le topic a été détagué en "post-it".
+    comment:
+        ajoutOk: Le commentaire a bien été ajouté.
+        editOk: Le commentaire a bien été modifié.
+        deleteOk: Le commentaire a bien été supprimé.

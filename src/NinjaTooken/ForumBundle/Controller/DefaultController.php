@@ -28,7 +28,7 @@ class DefaultController extends Controller
         }
 
         if(!$thread){
-            throw new NotFoundHttpException('Ce message n\'existe pas !');
+            throw new NotFoundHttpException($this->get('translator')->trans('description.error404.message'));
         }
 
         return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
@@ -45,7 +45,7 @@ class DefaultController extends Controller
         $forum = $em->getRepository('NinjaTookenForumBundle:Forum')->findOneBy(array('old_id' => (int)$request->get('ID')));
 
         if(!$forum){
-            throw new NotFoundHttpException('Ce forum n\'existe pas !');
+            throw new NotFoundHttpException($this->get('translator')->trans('description.error404.forum'));
         }
 
         return $this->redirect($this->generateUrl('ninja_tooken_topic', array(
@@ -215,7 +215,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            'Le topic a bien été ajouté.'
+                            $this->get('translator')->trans('notice.topic.ajoutOk')
                         );
 
                         return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
@@ -263,7 +263,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            'Le topic a bien été modifié.'
+                            $this->get('translator')->trans('notice.topic.editOk')
                         );
 
                         return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
@@ -303,7 +303,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    $thread->getIsCommentable()?'Le topic a bien été déverrouillé.':'Le topic a bien été verrouillé.'
+                    $thread->getIsCommentable()?$this->get('translator')->trans('notice.topic.deverrouilleOk'):$this->get('translator')->trans('notice.topic.verrouilleOk')
                 );
             }
         }
@@ -334,7 +334,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    $thread->getIsPostit()?'Le topic a été tagué en "post-it".':'Le topic a été détagué en "post-it".'
+                    $thread->getIsPostit()?$this->get('translator')->trans('notice.topic.postitOk'):$this->get('translator')->trans('notice.topic.unpostitOk')
                 );
             }
         }
@@ -415,7 +415,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            'Le commentaire a bien été ajouté.'
+                            $this->get('translator')->trans('notice.comment.ajoutOk')
                         );
                     }
                 }
@@ -459,7 +459,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            'Le commentaire a bien été modifié.'
+                            $this->get('translator')->trans('notice.comment.editOk')
                         );
                         return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
                             'forum_nom' => $forum->getSlug(),
@@ -505,7 +505,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Le commentaire a bien été supprimé.'
+                     $this->get('translator')->trans('notice.comment.deleteOk')
                 );
             }
         }

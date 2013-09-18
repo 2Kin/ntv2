@@ -1,23 +1,23 @@
 {% extends '::layout.html.twig' %}
 
 {% block title %}NinjaTooken - {{ forum.nom }}{% endblock %}
-{% block description %}Les topics de "{{ forum.nom }}", c'est ici pour votre jeu fps de ninja gratuit.{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, {{ forum.nom }}, topic, message, fps, gratuit, online, free{% endblock %}
+{% block description %}{{ 'description.meta.threadList'|trans({'%forum%': forum.nom}) }}{% endblock %}
+{% block keywords %}{{ forum.nom }}, {{ 'keywords.meta.threadList'|trans }}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">Communauté</span>
+								<span itemprop="title">{{ 'menu.communaute'|trans({}, 'menu') }}</span>
 							</span>  <i class="icon-angle-right"></i> 
                             {% if forum.clan is empty %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_forum') }}" itemprop="url">
-									<span itemprop="title">Forums</span>
+									<span itemprop="title">{{ 'menu.forum'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
                             {% else %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_clans') }}" itemprop="url">
-									<span itemprop="title">Clans</span>
+									<span itemprop="title">{{ 'menu.clan'|trans({}, 'menu') }}</span>
 								</a> <i class="icon-angle-right"></i>
 							</span>
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -43,7 +43,7 @@
                         {{ flashMessage }}
                         </div>
                     {% endfor %}
-					{% if is_granted("ROLE_USER") and forum.clan is empty or (forum.clan and app.user and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true or is_granted("ROLE_ADMIN")) %}<h4><a href="{{ path('ninja_tooken_thread_ajouter', {forum_nom:forum.slug}) }}" class="button pull-right">Nouveau topic</a></h4>{% endif %}<br class="clear">
+					{% if is_granted("ROLE_USER") and forum.clan is empty or (forum.clan and app.user and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true or is_granted("ROLE_ADMIN")) %}<h4><a href="{{ path('ninja_tooken_thread_ajouter', {forum_nom:forum.slug}) }}" class="button pull-right">{{ 'action.addTopic'|trans }}</a></h4>{% endif %}<br class="clear">
 					{% for thread in threads %}
 					{% include 'NinjaTookenForumBundle:Default:topicListe.html.twig' %}
 					{% endfor %}
