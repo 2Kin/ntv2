@@ -1,16 +1,16 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}NinjaTooken - Éditer un commentaire{% endblock %}
+{% block title %}NinjaTooken - {{ 'action.editComment'|trans }}{% endblock %}
 {% block description %}{% endblock %}
 {% block keywords %}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">Communauté</span>
+								<span itemprop="title">{{ 'menu.communaute'|trans({}, 'menu') }}</span>
 							</span> <i class="icon-angle-right"></i>
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_forum') }}" itemprop="url">
-									<span itemprop="title">Forums</span>
+									<span itemprop="title">{{ 'menu.forum'|trans({}, 'menu') }}</span>
 								</a> <i class="icon-angle-right"></i>
 							</span>
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -28,7 +28,7 @@
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_comment_modifier', {forum_nom:forum.slug, thread_nom:thread.slug, comment_id:comment.id, page:page}) }}" itemprop="url">
-									<span itemprop="title"><i class="icon-pencil"></i> Éditer un commentaire</span>
+									<span itemprop="title"><i class="icon-pencil"></i> {{ 'action.editComment'|trans }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -39,7 +39,7 @@
 					{{ form_widget(form) }}
 					<div class="row-fluid">
 					    <div class="span8 offset4">
-						<input type="submit" value="Éditer" class="button">
+						<input type="submit" value="{{ 'action.editer'|trans({}, 'common') }}" class="button">
 					    </div>
 					</div>
 				    </form>

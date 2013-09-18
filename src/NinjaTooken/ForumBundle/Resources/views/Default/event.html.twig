@@ -1,19 +1,19 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}NinjaTooken - Events{% endblock %}
-{% block description %}Tournoi, stream, concour, pour suivre tous les évènements de NinjaTooken et vivre le jeu à 200%, c'est ici !{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, event, stream, concour, tournoi, evènement, fps, gratuit, online, free{% endblock %}
+{% block title %}NinjaTooken - {{ 'menu.evenement'|trans({}, 'menu') }}{% endblock %}
+{% block description %}{{ 'description.meta.event'|trans }}{% endblock %}
+{% block keywords %}{{ 'keywords.meta.event'|trans }}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">Le jeu</span>
+								<span itemprop="title">{{ 'menu.jeu'|trans({}, 'menu') }}</span>
 							</span>
 {% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_event') }}" itemprop="url">
-									<span itemprop="title">Events</span>
+									<span itemprop="title">{{ 'menu.evenement'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -21,7 +21,7 @@
 {% block body %}
 				<div id="timeline"></div>
 				<section class="forum">
-					{% if is_granted("ROLE_ADMIN") %}<h4><a href="#" class="button pull-right">Nouvel event</a>Events</h4>{% endif %}
+					{% if is_granted("ROLE_ADMIN") %}<a href="#" class="button pull-right">{{ 'action.newEvent'|trans }}</a>{% endif %}
 					{% if threads is not empty %}
 					{% set firstThread = threads|first %}
 					{% set firstDate = firstThread.dateAjout %}
@@ -30,9 +30,9 @@
 					{% endif %}
 					<script>
 					var _timeline = {"timeline":{
-						"headline":"Les events NinjaTooken",
+						"headline":"{{ 'titre.event'|trans|escape('js') }}",
 						"type":"default",
-						"text":"Tournoi, streams, concours : c'est ici que ça se passe !",
+						"text":"{{ 'description.event'|trans|escape('js') }}",
 						"startDate":"{{ firstDate|date("Y,m,d") }}",
 						"date": [{% for thread in threads %}{% spaceless %}
 							{% set first = thread.dateAjout|date("Y,m,d") %}
@@ -43,7 +43,7 @@
 							{% if thread.dateEventEnd %}
 								{% set second = thread.dateEventEnd|date("Y,m,d") %}
 							{% endif %}
-							{% set text = thread.body|raw|slice(0,250)|purify('min') ~ '<p><a href="' ~ path('ninja_tooken_thread', {forum_nom: thread.forum.slug, thread_nom:thread.slug, page:1}) ~ '" class="pull-right">Lire la suite &raquo;</a></p>' %}
+							{% set text = thread.body|raw|slice(0,250)|purify('min') ~ '<p><a href="' ~ path('ninja_tooken_thread', {forum_nom: thread.forum.slug, thread_nom:thread.slug, page:1}) ~ '" class="pull-right">{{ 'action.suite'|trans }} &raquo;</a></p>' %}
 							{
 								"startDate":"{{ first }}",
 								"endDate":"{{ second }}",
@@ -71,7 +71,7 @@
 						nearbyPagesLimit: 3
 					} only %}
 					{% else %}
-					Pas encore d'évènements.
+					{{ 'description.noEvent'|trans }}
 					{% endif %}
 				</section>
 {% endblock %}

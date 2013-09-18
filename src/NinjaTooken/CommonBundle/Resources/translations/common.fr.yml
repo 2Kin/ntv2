@@ -18,6 +18,7 @@ description:
         NinjaTooken est un <strong>jeu en réseau gratuit</strong> !<br/><br/>
         Découvre un univers démentiel où les Ninjas s'affrontent sans pitié. <strong>Suiton</strong>, <strong>Futon</strong>, <strong>Raiton</strong>, <strong>Doton</strong>, <strong>Katon</strong>... ils ont chacun leurs pouvoirs, à toi de décider à <strong>quelle classe tu appartiens</strong> !<br/><br/>
         Crée ton compte pour <strong>sauvegarder ton expérience</strong>, <strong>intégrer un clan</strong>, ou <strong>participer aux tournois</strong> NinjaTooken.
+    noResult: Aucun résultat trouvé.
 action:
     chercher: Chercher
     chercherResult: Résultat de la recherche

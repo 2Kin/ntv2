@@ -1,7 +1,7 @@
 {% import "avatar.html.twig" as avatar %}
 			{% if comments is not empty %}
 						<section>
-							<h4>Derniers messages</h4>
+							<h4>{{ 'titre.dernierMessage'|trans }}</h4>
 			{% for comment in comments %}
 							<div class="dernier" itemscope itemtype="http://schema.org/UserComments">
 								<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
@@ -10,7 +10,7 @@
 										<span itemprop="name">{{ comment.author.username }}</span>
 									</a>
 								</span>
-								<time itemprop="startDate" datetime="{{ comment.dateAjout|date("Y-m-d\\TH:i:sP") }}">le {{ comment.dateAjout|localizeddate('medium', 'none', app.request.locale) }} à {{ comment.dateAjout|localizeddate('none', 'short', app.request.locale) }}</time><br>
+								<time itemprop="startDate" datetime="{{ comment.dateAjout|date("Y-m-d\\TH:i:sP") }}">{{ 'description.datetime'|trans({'%date%': comment.dateAjout|localizeddate('medium', 'none', app.request.locale), '%time%': comment.dateAjout|localizeddate('none', 'short', app.request.locale)}, 'common') }}</time><br>
 								<h5><a href="{{ path('ninja_tooken_thread', {forum_nom:comment.thread.forum.slug, thread_nom:comment.thread.slug}) }}" itemprop="replyToUrl"><span itemprop="name">{{ comment.thread.nom }}</span></a></h5>
 							</div>
 			{% endfor %}

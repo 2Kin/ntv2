@@ -43,7 +43,7 @@
 						</div>
 						{% endfor %}
 					{% else %}
-					Aucun résultat trouvé.
+					{{ 'description.noResult'|trans({}, 'common') }}
 					{% endif %}
 					<br class="clear">
 					<h4>{{ 'action.chercherReset'|trans({}, 'common') }}</h4>

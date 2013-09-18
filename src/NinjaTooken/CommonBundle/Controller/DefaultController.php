@@ -92,7 +92,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Ton message a bien été envoyé, tu recevras une réponse au plus vite ;)'
+                    $this->get('translator')->trans('notice.contact')
                 );
             }
         }
