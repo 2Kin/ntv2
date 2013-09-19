@@ -14,7 +14,7 @@
 			<img src="{{ avatar.getUrl(user) }}" itemprop="image" class="pull-left" alt="">
 			<a href="{{ path('ninja_tooken_user_fiche', {user_nom:user.slug}) }}" rel="author" itemprop="url"><span itemprop="name">{{ user.username }}</span></a><br>
 		{% if user.ninja is not empty and user.ninja is defined %}
-			{% if user.ninja.classe is not empty %}<span class="{{ class[user.ninja.classe]|lower }}">{{ class[user.ninja.classe] }}</span>{% endif %}{% if user.ninja.grade>0 %} - <span itemprop="award">{{ user.ninja.grade }}° dan</span>{% endif %}
+			{% if user.ninja.classe is not empty %}<span class="{{ ('class.' ~ user.ninja.classe)|trans({}, 'game')|lower }}">{{ ('class.' ~ user.ninja.classe)|trans({}, 'game') }}</span>{% endif %}{% if user.ninja.grade>0 %} - <span itemprop="award">{{ user.ninja.grade }}° dan</span>{% endif %}
 		{% endif %}
 		</div>
 		{% if user.ninja is not empty and user.ninja is defined %}
@@ -56,7 +56,7 @@
 	<div class="row-fluid">
 		{% if user.clan is not empty %}
 		<div class="nfo span6" itemprop="memberOf" itemtype="http://schema.org/Organization">
-			 <a href="{{ path('ninja_tooken_clan', {clan_nom:user.clan.clan.slug}) }}" itemprop="url"><span itemprop="name">{{ user.clan.clan.nom }}</span></a> - <strong itemprop="jobTitle">{{ clanStatut[user.clan.droit] }}</strong>
+			 <a href="{{ path('ninja_tooken_clan', {clan_nom:user.clan.clan.slug}) }}" itemprop="url"><span itemprop="name">{{ user.clan.clan.nom }}</span></a> - <strong itemprop="jobTitle">{{ ('clan.rang' ~ user.clan.droit)|trans({}, 'game') }}</strong>
 		</div>
 		{% else %}
 		<div class="nfo span6" itemprop="memberOf" itemtype="http://schema.org/Organization">

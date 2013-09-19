@@ -49,10 +49,6 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         class: %class%
-        carte: %carte%
-        jeu: %jeu%
-        clanStatut: %clan%
-        clanRecrutement: %recrutement%
         version: %unity.version%
 
 # Assetic Configuration

@@ -1,7 +1,7 @@
                         <p><strong>{{ 'titre.partieActuelle'|trans }}</strong>
 			{% if games is not empty %}
 			{% for game in games %}
-			{{ carte[game.carte] }} #{{ game.partie }}{% if not loop.last %},{% endif %}
+			{{ ('carte.type' ~ game.carte)|trans({}, 'game') }} #{{ game.partie }}{% if not loop.last %},{% endif %}
 			{% endfor %}
                         ... <a href="{{ path('ninja_tooken_game_parties') }}">{{ 'action.partieToute'|trans }} &raquo;</a>
 			{% else %}

@@ -42,7 +42,7 @@
 							{% if recrutements %}
 								{% for recrutement in recrutements %}
 									<div class="row-fluid">
-										<div class="span2">{% if recrutement.etat == 0 %}<i class="icon-time"></i>{% elseif recrutement.etat == 1 %}<i class="icon-thumbs-up"></i>{% elseif recrutement.etat==2 %}<i class="icon-thumbs-down"></i>{% endif %} {{ clanRecrutement[recrutement.etat] }}</strong></div>
+										<div class="span2">{% if recrutement.etat == 0 %}<i class="icon-time"></i>{% elseif recrutement.etat == 1 %}<i class="icon-thumbs-up"></i>{% elseif recrutement.etat==2 %}<i class="icon-thumbs-down"></i>{% endif %} {{ ('recrutement.etat' ~ recrutement.etat)|trans({}, 'game') }}</strong></div>
 										<div class="span3"><a href="{{ path('ninja_tooken_user_fiche', {'user_nom' : recrutement.postulant.slug}) }}">{{ recrutement.postulant.username }}</a></div>
 										<div class="span5">
 											{% if recrutement.etat == 0 %}
@@ -62,7 +62,7 @@
 						{% if propositions %}
 							{% for proposition in propositions %}
 								<div class="row-fluid">
-									<div class="span2">{% if proposition.etat == 0 %}<i class="icon-time"></i>{% elseif  proposition.etat == 1 %}<i class="icon-thumbs-up"></i>{% elseif proposition.etat==2 %}<i class="icon-thumbs-down"></i>{% endif %} {{ clanRecrutement[proposition.etat] }}</strong></div>
+									<div class="span2">{% if proposition.etat == 0 %}<i class="icon-time"></i>{% elseif  proposition.etat == 1 %}<i class="icon-thumbs-up"></i>{% elseif proposition.etat==2 %}<i class="icon-thumbs-down"></i>{% endif %} {{ ('recrutement.etat' ~ proposition.etat)|trans({}, 'game') }}</strong></div>
 									<div class="span3"><a href="{{ path('ninja_tooken_user_fiche', {'user_nom' : proposition.recruteur.slug}) }}">{{ proposition.recruteur.username }}</a></div>
 									<div class="span5">
 										{% if proposition.etat == 0 %}

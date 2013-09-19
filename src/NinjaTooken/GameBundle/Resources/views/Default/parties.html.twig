@@ -23,8 +23,8 @@
 				<section class="main">
 				{% if games is not empty %}
 					{% for game in games %}
-					<h3>{{ carte[game.carte] }} #{{ game.partie }}</h3>
-					<p>{% if game.privee %}<i class="icon-lock"></i> {% endif %}{{ 'description.partie'|trans({'%type%': jeu[game.jeu], '%version%': game.version}) }}</p>
+					<h3>{{ ('carte.type' ~ game.carte)|trans({}, 'game') }} #{{ game.partie }}</h3>
+					<p>{% if game.privee %}<i class="icon-lock"></i> {% endif %}{{ 'description.partie'|trans({'%type%': ('jeu.type' ~ game.jeu)|trans({}, 'game'), '%version%': game.version}) }}</p>
 
 					{% for user in game.users %}
 					<div class="membre pull-left">

@@ -1,0 +1,37 @@
+clan:
+    rang0: Shishō
+    rang1: Taishō
+    rang2: Jōnin
+    rang3: Chūnin
+recrutement:
+    etat0: En cours
+    etat1: Accepté
+    etat2: Refusé
+class:
+    eau: Suiton
+    vent: Futon
+    feu: Katon
+    foudre: Raiton
+    terre: Doton
+jeu:
+    type0: Libre
+    type1: Equipe
+    type2: Chrono
+    type3: Parchemin
+carte:
+    type0: Base
+    type1: Ile (jour)
+    type2: Ile (nuit)
+    type3: Cascade
+    type4: Tutoriel
+    type5: Rivière (jour)
+    type6: Rivière (nuit)
+    type7: Dojo
+    type8: Forteresse
+    type9: Temple Shinto
+    type10: Caverne (jour)
+    type11: Caverne (nuit)
+    type12: Arène
+    type13: Ville fortifiée
+    type14: Montagne
+    type15: Au Dragon îvre

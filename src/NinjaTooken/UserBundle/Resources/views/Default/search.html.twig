@@ -31,7 +31,7 @@
 							</div>
                             {% if user.ninja %}
                                 <div class="span1">
-                                    {% if user.ninja.classe is not empty %}<span class="{{ class[user.ninja.classe]|lower }}">{{ class[user.ninja.classe] }}</span>{% endif %}
+                                    {% if user.ninja.classe is not empty %}<span class="{{ ('class.' ~ user.ninja.classe)|trans({}, 'game')|lower }}">{{ ('class.' ~ user.ninja.classe)|trans({}, 'game') }}</span>{% endif %}
                                 </div>
                                 <div class="span1">
                                     {% if user.ninja.grade>0 %}{{ user.ninja.grade }}° dan{% endif %}

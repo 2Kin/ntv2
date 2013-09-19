@@ -22,48 +22,17 @@ parameters:
         db_id_col:   session_id
         db_data_col: session_value
         db_time_col: session_time
-    class:
-        eau: Suiton
-        vent: Futon
-        feu: Katon
-        foudre: Raiton
-        terre: Doton
-    numReponse: 20
-    jeu:
-        - Libre
-        - Equipe
-        - Chrono
-        - Parchemin
-    carte:
-        - Base
-        - Ile (jour)
-        - Ile (nuit)
-        - Cascade
-        - Tutoriel
-        - Rivière (jour)
-        - Rivière (nuit)
-        - Dojo
-        - Forteresse
-        - Temple Shinto
-        - Caverne (jour)
-        - Caverne (nuit)
-        - Arène
-        - Ville fortifiée
-        - Montagne
-        - Au Dragon îvre
-    unity.version: 0.99981
+    unity.version: 0.99985
     unity.crypt: 
     imgur: 
     banned.ip: []
     akismet.active: false
     akismet.key: 
     akismet.url: http://www.site.com
-    clan:
-        - Shishō
-        - Taishō
-        - Jōnin
-        - Chūnin
-    recrutement:
-        - En cours
-        - Accepté
-        - Refusé
+    numReponse: 20
+    class:
+        eau: Suiton
+        vent: Futon
+        feu: Katon
+        foudre: Raiton
+        terre: Doton
