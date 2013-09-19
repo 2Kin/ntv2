@@ -4,7 +4,9 @@ keywords:
         jouer: NinjaTooken, shinobi, ninja, jouer, play, fps, gratuit, online, free
         guide: NinjaTooken, shinobi, ninja, manuel, guide, cheats, fps, gratuit, online, free
         contact: NinjaTooken, shinobi, ninja, contact, chat, fps, gratuit, online, free
-        faq: NinjaTooken, shinobi, ninja, faq, questions, problèmes, réponse, fps, gratuit, online, free
+        faq:
+            generale: NinjaTooken, shinobi, ninja, faq, questions, problèmes, réponse, fps, gratuit, online, free
+            technique: NinjaTooken, shinobi, ninja, réponse, faq, technique, problème, question, fps, gratuit, online, free
         mention: NinjaTooken, shinobi, ninja, mentions, légales, fps, gratuit, online, free
         reglement: NinjaTooken, shinobi, ninja, règlement, fairplay, fps, gratuit, online, free
         team: NinjaTooken, shinobi, ninja, équipe, team, développeur, fairplay, fps, gratuit, online, free
@@ -14,7 +16,9 @@ description:
         jouer: Joue gratuitement à Ninja Tooken directement depuis ton navigateur grâce au plug-in Unity3D. Pas d'installation, pas de contrainte, tout est gratuit et sans engagements !
         guide: Le manuel du ninja est à consulter régulièrement pour survivre dans le monde sans pitié des shinobis !
         contact: Envoie un message à la team NinjaTooken, qui y répondra le plus vite possible !
-        faq: Les réponses aux questions les plus courantes sur NinjaTooken : compte, gratuité, planning de sortie...
+        faq:
+            generale: Les réponses aux questions les plus courantes sur NinjaTooken : compte, gratuité, planning de sortie...
+            technique: Les réponses aux problèmes techniques les plus fréquents. Connexion à problème, chargement, lagues, mémoire, performances...
         mention: Les mentions légales de Ninja Tooken, le FPS 3D gratuit. Ce jeu indépendant et gratuit est sans engagements !
         reglement: Le règlement de Ninja Tooken : pour des parties fun et sans prises de tête !
         team: Ninja Tooken c'est un jeu en 3D gratuit, mais c'est aussi des infographistes 2D et 3D, des développeurs, des administateurs réseaux, des bêta testeurs...

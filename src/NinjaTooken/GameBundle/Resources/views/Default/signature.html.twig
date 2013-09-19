@@ -27,7 +27,7 @@
 					<div class="barre"><div class="complete" style="width:{{ '%.2f'|format(user.ratio) }}%"></div></div>
 				</div>
 				<div class="nfo right span5">
-					<strong>{{ user.classement }}°</strong> sur {{ user.total }} ninjas
+					<strong>{{ user.classement }}°</strong> {{ 'description.position'|trans({'%count%': user.total}) }}
 				</div>
 			</div>
 			{% if user.ninja.jutsuAcierRenforce>0 %}<i class="jutsu acierRenforce"></i>{% endif %}
@@ -60,14 +60,14 @@
 		</div>
 		{% else %}
 		<div class="nfo span6" itemprop="memberOf" itemtype="http://schema.org/Organization">
-			<strong itemprop="jobTitle">Ronin</strong>
+			<strong itemprop="jobTitle">Rōnin</strong>
 			{% if app.user and app.user.clan and app.user.clan.droit<3 %}
-			<a href="{{ path('ninja_tooken_clan_recruter_ajouter', {'user_nom':user.slug}) }}" class="button small pull-left">Recruter</a>
+			<a href="{{ path('ninja_tooken_clan_recruter_ajouter', {'user_nom':user.slug}) }}" class="button small pull-left">{{ 'action.recruter'|trans }}</a>
 			{% endif %}
 		</div>
 		{% endif %}
 		<div class="nfo right span6" itemprop="award">
-			<strong>{{ user.ninja.missionCourse }}</strong> courses<strong> / {{ user.ninja.missionAssassinnat }}</strong> assassinats
+			<strong>{{ user.ninja.missionCourse }}</strong> {{ 'game.course'|transchoice(user.ninja.missionCourse, {}, 'common') }}<strong> / {{ user.ninja.missionAssassinnat }}</strong> {{ 'game.assassinat'|transchoice(user.ninja.missionAssassinnat, {}, 'common') }}
 		</div>
 	</div>
 	{% endif %}

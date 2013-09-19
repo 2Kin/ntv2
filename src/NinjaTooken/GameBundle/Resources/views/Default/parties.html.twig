@@ -1,16 +1,20 @@
 {% extends '::layout.html.twig' %}
 {% import "avatar.html.twig" as avatar %}
 
-{% block title %}NinjaTooken - Parties en cours{% endblock %}
-{% block description %}Les parties actuellement jouées dans NinjaTooken sont directement accessible ici !{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, partie, actuel, fps, gratuit, online, free{% endblock %}
+{% block title %}NinjaTooken - {{ 'menu.partie'|trans({}, 'menu') }}{% endblock %}
+{% block description %}{{ 'description.meta.partie'|trans }}{% endblock %}
+{% block keywords %}{{ 'keywords.meta.partie'|trans }}{% endblock %}
 
-{% block breadcrumbs1 %}{% endblock %}
+{% block breadcrumbs1 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<span itemprop="title">{{ 'menu.jeu'|trans({}, 'menu') }}</span>
+							</span>
+{% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_game_parties') }}" itemprop="url">
-									<span itemprop="title">Parties en cours</span>
+									<span itemprop="title">{{ 'menu.partie'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -20,7 +24,7 @@
 				{% if games is not empty %}
 					{% for game in games %}
 					<h3>{{ carte[game.carte] }} #{{ game.partie }}</h3>
-					<p>{% if game.privee %}<i class="icon-lock"></i> {% endif %}Partie "{{ jeu[game.jeu] }}", version {{ game.version }}</p>
+					<p>{% if game.privee %}<i class="icon-lock"></i> {% endif %}{{ 'description.partie'|trans({'%type%': jeu[game.jeu], '%version%': game.version}) }}</p>
 
 					{% for user in game.users %}
 					<div class="membre pull-left">
@@ -31,7 +35,7 @@
 					<br class="clear">
 					{% endfor %}
 				{% else %}
-					Pas de partie enregistrée en base pour l'instant.
+					{{ 'description.noPartie'|trans }}
 					<br class="clear">
 				{% endif %}
 				</section>

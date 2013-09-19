@@ -59,10 +59,10 @@ parameters:
     akismet.key: 
     akismet.url: http://www.site.com
     clan:
-        - Shishou
-        - Taisho
-        - Junin
-        - Shunin
+        - Shishō
+        - Taishō
+        - Jōnin
+        - Chūnin
     recrutement:
         - En cours
         - Accepté

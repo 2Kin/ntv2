@@ -1,10 +1,10 @@
-                        <p><strong>Parties en cours</strong>
+                        <p><strong>{{ 'titre.partieActuelle'|trans }}</strong>
 			{% if games is not empty %}
 			{% for game in games %}
 			{{ carte[game.carte] }} #{{ game.partie }}{% if not loop.last %},{% endif %}
 			{% endfor %}
-                        ... <a href="{{ path('ninja_tooken_game_parties') }}">Toutes les parties &raquo;</a>
+                        ... <a href="{{ path('ninja_tooken_game_parties') }}">{{ 'action.partieToute'|trans }} &raquo;</a>
 			{% else %}
-			Il n'y a actuellement pas de partie.
+			{{ 'description.noPartie'|trans }}
 			{% endif %}
 			</p>

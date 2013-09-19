@@ -1,0 +1,77 @@
+filtre:
+    classement:
+        experience: Expérience
+        assassinat: Assassinat
+        course: Course
+        tous: Tous
+action:
+    partieToute: Toutes les parties
+keywords:
+    meta:
+        calculateur: NinjaTooken, shinobi, ninja, calculateur, jutsu, compétence, fps, gratuit, online, free
+        classement: NinjaTooken, shinobi, ninja, classement, codex, fps, gratuit, online, free
+        partie: NinjaTooken, shinobi, ninja, partie, actuel, fps, gratuit, online, free
+titre:
+    partieActuelle: Parties en cours
+    ninjatooken: Les "NinjaTooken"
+    repartition: Répartitions par classe
+description:
+    meta:
+        calculateur: Le calculateur de jutsu permet de connaitre pour chaque jutsu et selon le nombre de points appliqués, les dégâts et effets.
+        classement: Les shinobis de NinjaTooken sont ici référencés dans un grand codex vous permettant de connaitre la position de chacun !
+        partie: Les parties actuellement jouées dans NinjaTooken sont directement accessible ici !
+    noPartie: Pas de partie pour l'instant.
+    classement: NinjaTooken c'est %nombreNinja% joueurs ayant cumulés %experienceTotal% points d'expériences !
+    classe: %classe% L'art de manipuler l'élément %element%
+    partie: Partie "%type%", version %version%
+    position: sur %count% ninjas
+notice:
+    topic:
+calculateur:
+    classe: Classe
+    niveau: Niveau
+    ptsCapacite: Points de capacités disponibles :
+    ptsAptitude: Points de jutsus disponibles :
+    ptsRestants: Points restants :
+ninjatooken:
+    winner:
+        utilisateur: <a href="%urlUtilisateur%?ID=36758">Pein-rikoudu</a>, <a href="%urlUtilisateur%?ID=66114">Horoshimaru</a> et <a href="%urlUtilisateur%?ID=107657">Suikeii</a>
+        tournoi: vainqueur le <a href="%urlMessage%?ID=245781">10 février 2013</a>
+    ancien: Les anciens NinjaTooken :
+    ancienListe:
+        winner12:
+            utilisateur: Rw_light
+            tournoi: vainqueur le <a href="%urlMessage%?ID=235008">22 décembre 2012</a>
+        winner11:
+            utilisateur: <a href="%urlUtilisateur%?ID=36758">Pein-rikoudu</a>
+            tournoi: vainqueur le <a href="%urlMessage%?ID=217944">20 octobre 2012</a>
+        winner10:
+            utilisateur: <a href="%urlUtilisateur%?ID=11650">kether</a>, <a href="%urlUtilisateur%?ID=45363">Blade-Inferno</a> et <a href="%urlUtilisateur%?ID=37763">strikesword</a>
+            tournoi: vainqueurs le <a href="%urlMessage%?ID=182447">8 juillet 2012</a>
+        winner9:
+            utilisateur: <a href="%urlUtilisateur%?ID=">Fusako.Uchiha</a>
+            tournoi: vainqueur le <a href="%urlMessage%?ID=165196">5 Mai 2012</a>
+        winner8:
+            utilisateur: <a href="%urlUtilisateur%?ID=39080">Ninjamza</a>
+            tournoi: vainqueur le <a href="%urlMessage%?ID=160075">21 avril 2012</a>
+        winner7:
+            utilisateur: <a href="%urlUtilisateur%?ID=11650">kether</a>
+            tournoi: vainqueur le <a href="%urlMessage%?ID=142474">25 février 2012</a>
+        winner6:
+            utilisateur: <a href="%urlUtilisateur%?ID=35776">L-orbe-shuriken</a>
+            tournoi: vainqueur le <a href="%urlMessage%?ID=119260">13 novembre 2011</a>
+        winner5:
+            utilisateur: Yoyosam
+            tournoi: vainqueur le <a href="%urlMessage%?ID=109224">22 octobre 2011</a>
+        winner4:
+            utilisateur: <a href="%urlUtilisateur%?ID=46909">Rydax</a>
+            tournoi: vainqueur le <a href="%urlMessage%?ID=72948">16 juillet 2011</a>, <a href="%urlMessage%?ID=79127">13 août 2011</a>, et <a href="%urlMessage%?ID=93504">18 septembre 2011</a>
+        winner3:
+            utilisateur: <a href="%urlUtilisateur%?ID=37546">Gaara76</a>
+            tournoi: vainqueur le <a href="%urlMessage%?ID=68359">26 juin 2011</a>
+        winner2:
+            utilisateur: <a href="%urlUtilisateur%?ID=24921">Mistral</a>
+            tournoi: vainqueur le <a href="%urlMessage%?ID=60173"> 14 mai 2011</a>, <a href="%urlMessage%?ID=63228">29 mai 2011</a>, et <a href="%urlMessage%?ID=64492">5 juin 2011</a>
+        winner1:
+            utilisateur: Zanhkraft
+            tournoi: vainqueur le <a href="%urlMessage%?ID=33451">organisé le 13/14 novembre 2010</a>

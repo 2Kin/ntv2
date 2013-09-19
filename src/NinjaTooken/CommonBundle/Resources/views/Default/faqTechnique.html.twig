@@ -1,19 +1,19 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}NinjaTooken - FAQ Technique{% endblock %}
-{% block description %}Les réponses aux problèmes techniques les plus fréquents. Connexion à problème, chargement, lagues, mémoire, performances...{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, réponse, faq, technique, problème, question, fps, gratuit, online, free{% endblock %}
+{% block title %}NinjaTooken - {{ 'menu.technique'|trans({}, 'menu') }}{% endblock %}
+{% block description %}{{ 'description.meta.faq.technique'|trans }}{% endblock %}
+{% block keywords %}{{ 'keywords.meta.faq.technique'|trans }}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">F.A.Q.</span>
+								<span itemprop="title">{{ 'menu.faq'|trans({}, 'menu') }}</span>
 							</span>
 {% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_faq_technique') }}" itemprop="url">
-									<span itemprop="title">Problèmes techniques</span>
+									<span itemprop="title">{{ 'menu.technique'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}

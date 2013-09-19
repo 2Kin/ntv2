@@ -5,6 +5,7 @@ namespace NinjaTooken\GameBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use NinjaTooken\GameBundle\Utils\GameData;
+use NinjaTooken\UserBundle\Entity\User;
 
 class DefaultController extends Controller
 {
@@ -17,6 +18,8 @@ class DefaultController extends Controller
 
     public function calculateurAction()
     {
+        $translator = $this->get('translator');
+
         $gameData = $this->get('ninjatooken_game.gamedata');
 
         $level = 0;
@@ -40,178 +43,178 @@ class DefaultController extends Controller
 
         $capacites = array(
             'force' => array(
-                'nom' => 'Force',
+                'nom' => $translator->trans('game.force', array(), 'common'),
                 'current' => $ninja?$ninja->getAptitudeForce():0
             ),
             'vitesse' => array(
-                'nom' => 'Vitesse',
+                'nom' => $translator->trans('game.vitesse', array(), 'common'),
                 'current' => $ninja?$ninja->getAptitudeVitesse():0
             ),
             'vie' => array(
-                'nom' => 'Vie',
+                'nom' => $translator->trans('game.vie', array(), 'common'),
                 'current' => $ninja?$ninja->getAptitudeVie():0
             ),
             'chakra' => array(
-                'nom' => 'Chakra',
+                'nom' => $translator->trans('game.chakra', array(), 'common'),
                 'current' => $ninja?$ninja->getAptitudeChakra():0
             )
         );
         $aptitudes = array(
             'bouleElementaire' => array(
-                'nom' => 'Boule élémentaire',
+                'nom' => $translator->trans('game.bouleElementaire.nom', array(), 'common'),
                 'values' => array(
-                    'degat' => 'Inflige ## points de dégats',
-                    'rayon' => 'Grosseur de ##m.',
-                    'chakra' => 'Coute ## points de chakra'
+                    'degat' => $translator->trans('game.bouleElementaire.degat', array(), 'common'),
+                    'rayon' => $translator->trans('game.bouleElementaire.rayon', array(), 'common'),
+                    'chakra' => $translator->trans('game.bouleElementaire.chakra', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuBoule():0
             ),
-            'doubleSaut' => array(
-                'nom' => 'Double saut',
+            'doubleSaut'  => array(
+                'nom' => $translator->trans('game.doubleSaut.nom', array(), 'common'),
                 'values' => array(
-                    'saut1' => 'Portée du 1° saut augmenté de ##% par rapport à la hauteur de base',
-                    'saut2' => 'Portée du 2° saut augmenté de ##% par rapport à la hauteur de base'
+                    'saut1' => $translator->trans('game.doubleSaut.saut1', array(), 'common'),
+                    'saut2' => $translator->trans('game.doubleSaut.saut2', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuDoubleSaut():0
             ),
-            'bouclierElementaire' => array(
-                'nom' => 'Bouclier élémentaire',
+            'bouclierElementaire'  => array(
+                'nom' => $translator->trans('game.bouclierElementaire.nom', array(), 'common'),
                 'values' => array(
-                    'reduction' => 'Protège à ##%',
-                    'chakra' => 'Coute ## points de chakra',
-                    'last' => 'Dure ##s.'
+                    'reduction' => $translator->trans('game.bouclierElementaire.reduction', array(), 'common'),
+                    'chakra' => $translator->trans('game.bouclierElementaire.chakra', array(), 'common'),
+                    'last' => $translator->trans('game.bouclierElementaire.last', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuBouclier():0
             ),
-            'marcherMur' => array(
-                'nom' => 'Marcher sur les murs',
+            'marcherMur'  => array(
+                'nom' => $translator->trans('game.marcherMur.nom', array(), 'common'),
                 'values' => array(
-                    'chakra' => 'Coute ## points de chakra',
-                    'last' => 'Dure ##s.'
+                    'chakra' => $translator->trans('game.marcherMur.chakra', array(), 'common'),
+                    'last' => $translator->trans('game.marcherMur.last', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuMarcherMur():0
             ),
-            'acierRenforce' => array(
-                'nom' => 'Acier renforcé',
+            'acierRenforce'  => array(
+                'nom' => $translator->trans('game.acierRenforce.nom', array(), 'common'),
                 'values' => array(
-                    'degat' => 'Inflige ## points de dégats',
-                    'chakra' => 'Coute ## points de chakra',
-                    'last' => 'Dure ##s.'
+                    'degat' => $translator->trans('game.acierRenforce.degat', array(), 'common'),
+                    'chakra' => $translator->trans('game.acierRenforce.chakra', array(), 'common'),
+                    'last' => $translator->trans('game.acierRenforce.last', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuAcierRenforce():0
             ),
-            'deflagrationElementaire' => array(
-                'nom' => 'Déflagration élémentaire',
+            'deflagrationElementaire'  => array(
+                'nom' => $translator->trans('game.deflagrationElementaire.nom', array(), 'common'),
                 'values' => array(
-                    'degat' => 'Inflige ## points de dégats',
-                    'chakra' => 'Coute ## points de chakra',
-                    'rayon' => 'Couvre une sphère de ##m. de diamètre',
+                    'degat' => $translator->trans('game.deflagrationElementaire.degat', array(), 'common'),
+                    'chakra' => $translator->trans('game.deflagrationElementaire.chakra', array(), 'common'),
+                    'rayon' => $translator->trans('game.deflagrationElementaire.rayon', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuDeflagration():0
             ),
-            'chakraVie' => array(
-                'nom' => 'Chakra de vie',
+            'chakraVie'  => array(
+                'nom' => $translator->trans('game.chakraVie.nom', array(), 'common'),
                 'values' => array(
-                    'chakra' => 'Coute ## points de chakra',
-                    'last' => 'Dure ##s.'
+                    'chakra' => $translator->trans('game.chakraVie.chakra', array(), 'common'),
+                    'last' => $translator->trans('game.chakraVie.last', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuChakraVie():0
             ),
-            'resistanceExplosion' => array(
-                'nom' => 'Résistance aux explosions',
+            'resistanceExplosion'  => array(
+                'nom' => $translator->trans('game.resistanceExplosion.nom', array(), 'common'),
                 'values' => array(
-                    'reduction' => 'Protège à ##%',
-                    'last' => 'Dure ##s.'
+                    'reduction' => $translator->trans('game.resistanceExplosion.reduction', array(), 'common'),
+                    'last' => $translator->trans('game.resistanceExplosion.last', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuResistanceExplosion():0
             ),
-            'marcherViteEau' => array(
-                'nom' => 'Marcher sur l\'eau',
+            'marcherViteEau'  => array(
+                'nom' => $translator->trans('game.marcherViteEau.nom', array(), 'common'),
                 'values' => array(
-                    'last' => 'Dure ##s.'
+                    'last' => $translator->trans('game.marcherViteEau.last', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuMarcherEau():0
             ),
-            'changerObjet' => array(
-                'nom' => 'Métamorphose',
+            'changerObjet'  => array(
+                'nom' => $translator->trans('game.changerObjet.nom', array(), 'common'),
                 'values' => array(
-                    'last' => 'Dure ##s.'
+                    'last' => $translator->trans('game.changerObjet.last', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuMetamorphose():0
             ),
-            'multishoot' => array(
-                'nom' => 'Multishoot',
+            'multishoot'  => array(
+                'nom' => $translator->trans('game.multishoot.nom', array(), 'common'),
                 'values' => array(
-                    'speed' => 'Temps entre chaque tire diminué de ##s.',
-                    'chakra' => 'Coute ## points de chakra',
-                    'last' => 'Dure ##s.'
+                    'speed' => $translator->trans('game.multishoot.speed', array(), 'common'),
+                    'chakra' => $translator->trans('game.multishoot.chakra', array(), 'common'),
+                    'last' => $translator->trans('game.multishoot.last', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuMultishoot():0
             ),
-            'invisibleman' => array(
-                'nom' => 'Invisiblité',
+            'invisibleman'  => array(
+                'nom' => $translator->trans('game.invisibleman.nom', array(), 'common'),
                 'values' => array(
-                    'opacity' => 'Invisible à ##%',
-                    'last' => 'Dure ##s.'
+                    'opacity' => $translator->trans('game.invisibleman.opacity', array(), 'common'),
+                    'last' => $translator->trans('game.invisibleman.last', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuInvisibilite():0
             ),
-            'phoenix' => array(
-                'nom' => 'Phoenix',
+            'phoenix'  => array(
+                'nom' => $translator->trans('game.phoenix.nom', array(), 'common'),
                 'values' => array(
-                    'degat' => 'Inflige ## points de dégats',
-                    'rayon' => 'Couvre une sphère de ##m. de diamètre',
-                    'chakra' => 'Coute ## points de chakra',
-                    'distance' => 'Peut être lancé jusqu\'à ##m.'
+                    'degat' => $translator->trans('game.phoenix.degat', array(), 'common'),
+                    'rayon' => $translator->trans('game.phoenix.rayon', array(), 'common'),
+                    'chakra' => $translator->trans('game.phoenix.chakra', array(), 'common'),
+                    'distance' => $translator->trans('game.phoenix.distance', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuPhoenix():0
             ),
-            'vague' => array(
-                'nom' => 'Vague',
+            'vague'  => array(
+                'nom' => $translator->trans('game.vague.nom', array(), 'common'),
                 'values' => array(
-                    'degat' => 'Inflige ## points de dégats',
-                    'temps' => 'Dure ##s.',
-                    'chakra' => 'Coute ## points de chakra',
-                    'distance' => 'Peut être lancé jusqu\'à ##m.'
+                    'degat' => $translator->trans('game.vague.degat', array(), 'common'),
+                    'temps' => $translator->trans('game.vague.temps', array(), 'common'),
+                    'chakra' => $translator->trans('game.vague.chakra', array(), 'common'),
+                    'distance' => $translator->trans('game.vague.distance', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuVague():0
             ),
-            'pieux' => array(
-                'nom' => 'Pieux',
+            'pieux'  => array(
+                'nom' => $translator->trans('game.pieux.nom', array(), 'common'),
                 'values' => array(
-                    'degat' => 'Inflige ## points de dégats',
-                    'largeur' => 'Les pieux s\'étendent sur ##m. de largeur.',
-                    'longueur' => 'Les pieux s\'étendent sur ##m. de longueur',
-                    'chakra' => 'Coute ## points de chakra',
-                    'distance' => 'Peut être lancé jusqu\'à ##m.'
+                    'degat' => $translator->trans('game.pieux.degat', array(), 'common'),
+                    'largeur' => $translator->trans('game.pieux.largeur', array(), 'common'),
+                    'longueur' => $translator->trans('game.pieux.longueur', array(), 'common'),
+                    'chakra' => $translator->trans('game.pieux.chakra', array(), 'common'),
+                    'distance' => $translator->trans('game.pieux.distance', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuPieux():0
             ),
-            'teleportation' => array(
-                'nom' => 'Téléportation',
+            'teleportation'  => array(
+                'nom' => $translator->trans('game.teleportation.nom', array(), 'common'),
                 'values' => array(
-                    'vie' => 'Inflige ## points de dégats',
-                    'chakra' => 'Coute ## points de chakra',
-                    'distance' => 'Peut être lancé jusqu\'à ##m.'
+                    'vie' => $translator->trans('game.teleportation.vie', array(), 'common'),
+                    'chakra' => $translator->trans('game.teleportation.chakra', array(), 'common'),
+                    'distance' => $translator->trans('game.teleportation.distance', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuTeleportation():0
             ),
-            'tornade' => array(
-                'nom' => 'Tornade',
+            'tornade'  => array(
+                'nom' => $translator->trans('game.tornade.nom', array(), 'common'),
                 'values' => array(
-                    'degat' => 'Inflige ## points de dégats',
-                    'temps' => 'Dure ##s.',
-                    'chakra' => 'Coute ## points de chakra',
-                    'distance' => 'Peut être lancé jusqu\'à ##m.'
+                    'degat' => $translator->trans('game.tornade.degat', array(), 'common'),
+                    'temps' => $translator->trans('game.tornade.temps', array(), 'common'),
+                    'chakra' => $translator->trans('game.tornade.chakra', array(), 'common'),
+                    'distance' => $translator->trans('game.tornade.distance', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuTornade():0
             ),
-            'kusanagi' => array(
-                'nom' => 'Kusanagi',
+            'kusanagi'  => array(
+                'nom' => $translator->trans('game.kusanagi.nom', array(), 'common'),
                 'values' => array(
-                    'degat' => 'Inflige ## points de dégats',
-                    'last' => 'Dure ##s.',
-                    'chakra' => 'Coute ## points de chakra'
+                    'degat' => $translator->trans('game.kusanagi.degat', array(), 'common'),
+                    'last' => $translator->trans('game.kusanagi.last', array(), 'common'),
+                    'chakra' => $translator->trans('game.kusanagi.chakra', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuKusanagi():0
             )
@@ -320,7 +323,7 @@ class DefaultController extends Controller
         return $this->render('NinjaTookenGameBundle:Games:recentList.html.twig', array('games' => $games));
     }
 
-    public function signatureAction(\NinjaTooken\UserBundle\Entity\User $user)
+    public function signatureAction(User $user)
     {
         $ninja = $user->getNinja();
 

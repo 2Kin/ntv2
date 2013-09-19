@@ -1,15 +1,19 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}NinjaTooken - Calculateur{% endblock %}
-{% block description %}Le calculateur de jutsu permet de connaitre pour chaque jutsu et selon le nombre de points appliqués, les dégâts et effets.{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, calculateur, jutsu, compétence, fps, gratuit, online, free{% endblock %}
+{% block title %}NinjaTooken - {{ 'menu.calculateur'|trans({}, 'menu') }}{% endblock %}
+{% block description %}{{ 'description.meta.calculateur'|trans }}{% endblock %}
+{% block keywords %}{{ 'keywords.meta.calculateur'|trans }}{% endblock %}
 
-{% block breadcrumbs1 %}{% endblock %}
+{% block breadcrumbs1 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<span itemprop="title">{{ 'menu.manuel'|trans({}, 'menu') }}</span>
+							</span>
+{% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_game_calculateur') }}" itemprop="url">
-									<span itemprop="title">Calculateur de jutsus</span>
+									<span itemprop="title">{{ 'menu.calculateur'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -18,7 +22,7 @@
 				<section class="main">
                     <form class="full" name="calculateur" method="post" action="#">
                         <div class="row-fluid">
-                            <div class="span3"><label class="libelle">Classe</label></div>
+                            <div class="span3"><label class="libelle">{{ 'calculateur.classe'|trans }}</label></div>
                             <div class="span9">
                                 <label class="select">
                                     <select name="calculateurLimit">
@@ -30,7 +34,7 @@
                             </div>
                         </div>
                         <div class="row-fluid">
-                            <div class="span3"><label class="libelle">Niveau</label></div>
+                            <div class="span3"><label class="libelle">{{ 'calculateur.niveau'|trans }}</label></div>
                             <div class="span2">
                                 <label class="select">
                                     <select name="calculateurLevel" data-aptitude="{{ levelUp.aptitude }}" data-capacite="{{ levelUp.capacite }}">
@@ -41,8 +45,8 @@
                                 </label>
                             </div>
                             <div class="span7">
-                                Points de capacités disponibles : <strong><span class="result" data-id="ptsCapacite"></span></strong><br>
-                                Points de jutsus disponibles : <strong><span class="result" data-id="ptsAptitude"></span></strong>
+                                {{ 'calculateur.ptsCapacite'|trans }} <strong><span class="result" data-id="ptsCapacite"></span></strong><br>
+                                {{ 'calculateur.ptsAptitude'|trans }} <strong><span class="result" data-id="ptsAptitude"></span></strong>
                             </div>
                         </div>
                         
@@ -64,7 +68,7 @@
                         {% endfor %}
 
                         <div class="row-fluid">
-                            <div class="span9 offset3">Points restants : <strong><span class="result" data-id="total-capacites"></span></strong></div>
+                            <div class="span9 offset3">{{ 'calculateur.ptsRestants'|trans }} <strong><span class="result" data-id="total-capacites"></span></strong></div>
                         </div>
 
                         <h3>Jutsus</h3>
@@ -85,7 +89,7 @@
                         {% endfor %}
 
                         <div class="row-fluid">
-                            <div class="span9 offset3">Points restants : <strong><span class="result" data-id="total-aptitudes"></span></strong></div>
+                            <div class="span9 offset3">{{ 'calculateur.ptsRestants'|trans }} <strong><span class="result" data-id="total-aptitudes"></span></strong></div>
                         </div>
                     </form>
                 </section>

@@ -1,15 +1,19 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}NinjaTooken - Classement des ninjas{% endblock %}
-{% block description %}Les shinobis de NinjaTooken sont ici référencés dans un grand codex vous permettant de connaitre la position de chacun !{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, classement, codex, fps, gratuit, online, free{% endblock %}
+{% block title %}NinjaTooken - {{ 'menu.classement'|trans({}, 'menu') }}{% endblock %}
+{% block description %}{{ 'description.meta.classement'|trans }}{% endblock %}
+{% block keywords %}{{ 'keywords.meta.classement'|trans }}{% endblock %}
 
-{% block breadcrumbs1 %}{% endblock %}
+{% block breadcrumbs1 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<span itemprop="title">{{ 'menu.jeu'|trans({}, 'menu') }}</span>
+							</span>
+{% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_game_classement') }}" itemprop="url">
-									<span itemprop="title">Classement</span>
+									<span itemprop="title">{{ 'menu.classement'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -17,73 +21,34 @@
 {% block body %}
 				<div class="row-fluid">
 					<section class="span8 main">
-						<p>NinjaTooken c'est {{ nombreNinja|number_format(0, '', '.') }} joueurs ayant cumulés {{ experienceTotal|number_format(0, '', '.') }} points d'expériences !</p>
-						<h3>Les "NinjaTooken"</h3>
+						<p>{{ 'description.classement'|trans({'%nombreNinja%': nombreNinja|number_format(0, '', '.'), '%experienceTotal%': experienceTotal|number_format(0, '', '.')}) }}</p>
+						<h3>{{ 'titre.ninjatooken'|trans }}</h3>
+
 						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">Pein-rikoudu</a>, <a href="utilisateur.html">Horoshimaru</a> et <a href="utilisateur.html">Suikeii</a></span>
-							<span class="span6">vainqueurs le <a href="/fr/message.php?ID=245781">10 février 2013</a></span>
+							<span class="span6">{{ 'ninjatooken.winner.utilisateur'|trans({'%urlUtilisateur%': path('ninja_tooken_user_old')})|raw }}</span>
+							<span class="span6">{{ 'ninjatooken.winner.tournoi'|trans({'%urlMessage%': path('ninja_tooken_message_old')})|raw }}</span>
 						</div>
-						<p><br>Les anciens NinjaTooken :</p>
+
+						<p><br>{{ 'ninjatooken.ancien'|trans }}</p>
+                        {% for i in 12..1 %}
 						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">Rw_light</a></span>
-							<span class="span6">vainqueur le <a href="/fr/message.php?ID=235008">22 décembre 2012</a></span>
+							<span class="span6">{{ ('ninjatooken.ancienListe.winner' ~ i ~ '.utilisateur')|trans({'%urlUtilisateur%': path('ninja_tooken_user_old')})|raw }}</span>
+							<span class="span6">{{ ('ninjatooken.ancienListe.winner' ~ i ~ '.tournoi')|trans({'%urlMessage%': path('ninja_tooken_message_old')})|raw }}</span>
 						</div>
-						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">Pein-Rikoudu</a></span>
-							<span class="span6">vainqueur le <a href="/fr/message.php?ID=217944">20 octobre 2012</a></span>
-						</div>
-						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">Kether</a>, <a href="utilisateur.html">Blade-Inferno</a> et <a href="utilisateur.html">Strikesword</a></span>
-							<span class="span6">vainqueurs le <a href="/fr/message.php?ID=182447">8 juillet 2012</a></span>
-						</div>
-						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">Fusako.Uchiha</a></span>
-							<span class="span6">vainqueur le <a href="/fr/message.php?ID=165196">5 Mai 2012</a></span>
-						</div>
-						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">Ninjamza</a></span>
-							<span class="span6">vainqueur le <a href="/fr/message.php?ID=160075">21 avril 2012</a></span>
-						</div>
-						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">Kether</a></span>
-							<span class="span6">vainqueur le <a href="/fr/message.php?ID=142474">25 février 2012</a></span>
-						</div>
-						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">L-orbe-shuriken</a></span>
-							<span class="span6">vainqueur le <a href="/fr/message.php?ID=119260">13 novembre 2011</a></span>
-						</div>
-						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">Yoyosam</a></span>
-							<span class="span6">vainqueur le <a href="/fr/message.php?ID=109224">22 octobre 2011</a></span>
-						</div>
-						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">Rydax</a></span>
-							<span class="span6">vainqueur le <a href="/fr/message.php?ID=72948#message72948">16 juillet 2011</a>, <a href="/fr/message.php?ID=79127">13 août 2011</a>, et <a href="/fr/message.php?ID=93504">18 septembre 2011</a></span>
-						</div>
-						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">Gaara76</a></span>
-							<span class="span6">vainqueur le <a href="/fr/message.php?ID=68359#message68359">26 juin 2011</a></span>
-						</div>
-						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">Mistral</a></span>
-							<span class="span6">vainqueur le <a href="/fr/message.php?ID=60173#message60173"> 14 mai 2011</a>, <a href="/fr/message.php?ID=63228#message63228">29 mai 2011</a>, et <a href="/fr/message.php?ID=64492#message64492">5 juin 2011</a></span>
-						</div>
-						<div class="row-fluid">
-							<span class="span6"><a href="utilisateur.html">Zanhkraft</a></span>
-							<span class="span6">vainqueur le <a href="/fr/message.php?ID=33451#message33451">organisé le 13/14 novembre 2010</a></span>
-						</div>
+                        {% endfor %}
+
 						<p></p>
 
-						<h3 id="classement">Classement</h3>
+						<h3 id="classement">{{ 'menu.classement'|trans({}, 'menu') }}</h3>
 						{% if joueurs is not empty %}
 						<div class="row-fluid">
-							<span class="span2 offset4"><a href="{{ path('ninja_tooken_game_classement', {page:page}) }}?order=experience&filter={{ filter }}#classement">{% if order == "experience" %}<span class="icon-caret-down"></span> {% endif %}Expérience</a></span>
-							<span class="span2"><a href="{{ path('ninja_tooken_game_classement', {page:page}) }}?order=assassinnat&filter={{ filter }}#classement">{% if order == "assassinnat" %}<span class="icon-caret-down"></span> {% endif %}Assassinat</a></span>
-							<span class="span2"><a href="{{ path('ninja_tooken_game_classement', {page:page}) }}?order=course&filter={{ filter }}#classement">{% if order == "course" %}<span class="icon-caret-down"></span> {% endif %}Course</a></span>
+							<span class="span2 offset4"><a href="{{ path('ninja_tooken_game_classement', {page:page}) }}?order=experience&filter={{ filter }}#classement">{% if order == "experience" %}<span class="icon-caret-down"></span> {% endif %}{{ 'filtre.classement.experience'|trans }}</a></span>
+							<span class="span2"><a href="{{ path('ninja_tooken_game_classement', {page:page}) }}?order=assassinnat&filter={{ filter }}#classement">{% if order == "assassinnat" %}<span class="icon-caret-down"></span> {% endif %}{{ 'filtre.classement.assassinat'|trans }}</a></span>
+							<span class="span2"><a href="{{ path('ninja_tooken_game_classement', {page:page}) }}?order=course&filter={{ filter }}#classement">{% if order == "course" %}<span class="icon-caret-down"></span> {% endif %}{{ 'filtre.classement.course'|trans }}</a></span>
 							<span class="span2">
 								<label class="select">
 									<select name="classe">
-										<option value="">Tous</option>
+										<option value="">{{ 'filtre.classement.tous'|trans }}</option>
 										{% for n,v in class %}
 										<option value="{{ n }}" class="{{ v|lower }}"{% if filter == n %} selected{% endif %}>{{ v }}</option>
 										{% endfor %}
@@ -111,17 +76,17 @@
 						} only %}
 						{% endif %}
 
-						<h3>Répartitions par classe</h3>
+						<h3>{{ 'titre.repartition'|trans }}</h3>
 						<ul id="classe" class="pull-left">
 							{% for k,classe in classes %}
-							<li class="{{ class[k]|lower }}">{{ class[k] }} L'art de manipuler l'élément {{ k }} <span class="num">{{ (classe/nombreNinja*100)|number_format(0,'','') }}</span>%</li>
+							<li class="{{ class[k]|lower }}">{{ 'description.classe'|trans({'%classe%': class[k], '%element%': k}) }} <span class="num">{{ (classe/nombreNinja*100)|number_format(0,'','') }}</span>%</li>
 							{% endfor %}
 						</ul>
 					</section>
 					<aside class="span4">
 						<form action="{{ path('ninja_tooken_forum_search') }}" method="post" accept-charset="utf-8" class="row-fluid">
-							<input type="text" name="q" value="Chercher" class="span10">
-							<input type="submit" name="s" value="Ok !" class="span2">
+							<input type="text" name="q" value="{{ 'action.chercher'|trans({}, 'common') }}" class="span10">
+							<input type="submit" name="s" value="{{ 'action.ok'|trans({}, 'common') }}" class="span2">
 						</form>
 						
 						{{ render(controller('NinjaTookenForumBundle:Default:recentComments', {'max': 10, 'forum': 0})) }}

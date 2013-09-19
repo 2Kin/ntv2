@@ -31,3 +31,96 @@ action:
     verrouiller: Verrouiller
     deverrouiller: Déverouiller
     postit: Post-it
+game:
+    force: force
+    vitesse: vitesse
+    vie: vie
+    chakra: chakra
+    bouleElementaire:
+        nom: "Boule élémentaire"
+        degat: "Inflige ## points de dégats"
+        rayon: "Grosseur de ##m."
+        chakra: "Coute ## points de chakra"
+    doubleSaut:
+        nom: "Double saut"
+        saut1: "Portée du 1° saut augmenté de ##% par rapport à la hauteur de base"
+        saut2: "Portée du 2° saut augmenté de ##% par rapport à la hauteur de base"
+    bouclierElementaire:
+        nom: "Bouclier élémentaire"
+        reduction: "Protège à ##%"
+        chakra: "Coute ## points de chakra"
+        last: "Dure ##s."
+    marcherMur:
+        nom: "Marcher sur les murs"
+        chakra: "Coute ## points de chakra"
+        last: "Dure ##s."
+    acierRenforce:
+        nom: "Acier renforcé"
+        degat: "Inflige ##% de points de dégats supplémentaires sur les armes"
+        chakra: "Coute ## points de chakra"
+        last: "Dure ##s."
+    deflagrationElementaire:
+        nom: "Déflagration élémentaire"
+        degat: "Inflige ## points de dégats"
+        chakra: "Coute ## points de chakra"
+        rayon: "Couvre une sphère de ##m. de diamètre"
+    chakraVie:
+        nom: "Chakra de vie"
+        chakra: "Coute ## points de chakra"
+        last: "Dure ##s."
+    resistanceExplosion:
+        nom: "Résistance aux explosions"
+        reduction: "Protège à ##%"
+        last: "Dure ##s."
+    marcherViteEau:
+        nom: "Marcher sur l'eau"
+        last: "Dure ##s."
+    changerObjet:
+        nom: "Métamorphose"
+        last: "Dure ##s."
+    multishoot:
+        nom: "Multishoot"
+        speed: "Temps entre chaque tire diminué de ##s."
+        chakra: "Coute ## points de chakra"
+        last: "Dure ##s."
+    invisibleman:
+        nom: "Invisiblité"
+        opacity: "Invisible à ##%"
+        last: "Dure ##s."
+    phoenix:
+        nom: "Phoenix"
+        degat: "Inflige ## points de dégats"
+        rayon: "Couvre une sphère de ##m. de diamètre"
+        chakra: "Coute ## points de chakra"
+        distance: "Peut être lancé jusqu'à ##m."
+    vague:
+        nom: "Vague"
+        degat: "Inflige ## points de dégats"
+        temps: "Dure ##s."
+        chakra: "Coute ## points de chakra"
+        distance: "Peut être lancé jusqu'à ##m."
+    pieux:
+        nom: "Pieux"
+        degat: "Inflige ## points de dégats"
+        largeur: "Les pieux s'étendent sur ##m. de largeur."
+        longueur: "Les pieux s'étendent sur ##m. de longueur"
+        chakra: "Coute ## points de chakra"
+        distance: "Peut être lancé jusqu'à ##m."
+    teleportation:
+        nom: "Téléportation"
+        vie: "Inflige ## points de dégats"
+        chakra: "Coute ## points de chakra"
+        distance: "Peut être lancé jusqu'à ##m."
+    tornade:
+        nom: "Tornade"
+        degat: "Inflige ## points de dégats"
+        temps: "Dure ##s."
+        chakra: "Coute ## points de chakra"
+        distance: "Peut être lancé jusqu'à ##m."
+    kusanagi:
+        nom: "Kusanagi"
+        degat: "Inflige ## points de dégats"
+        last: "Dure ##s."
+        chakra: "Coute ## points de chakra"
+    course: course|]1,+Inf]courses
+    assassinat: assassinat|]1,+Inf]assassinats
