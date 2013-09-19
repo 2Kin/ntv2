@@ -1,20 +1,20 @@
 {% extends '::layout.html.twig' %}
 {% import "avatar.html.twig" as avatar %}
 
-{% block title %}NinjaTooken - Les amis{% endblock %}
+{% block title %}NinjaTooken - {{ 'menu.ami'|trans({}, 'menu') }}{% endblock %}
 {% block description %}{% endblock %}
 {% block keywords %}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">Mon compte</span>
+								<span itemprop="title">{{ 'menu.compte'|trans({}, 'menu') }}</span>
 							</span>
 {% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path(app.request.attributes.get('_route')) }}" itemprop="url">
-									<span itemprop="title">Amis</span>
+									<span itemprop="title">{{ 'menu.ami'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -22,9 +22,9 @@
 {% block body %}
 				<section class="main">
 					<h3>
-						<a href="{{ path('ninja_tooken_user_amis', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis' %} class="actif"{% endif %}><i class="icon-heart"></i> {{ numFriends }} amis</a> - 
-						<a href="{{ path('ninja_tooken_user_amis_demande', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis_demande' %} class="actif"{% endif %}><i class="icon-heart-empty"></i> {% if numDemande>1 %}{{ numDemande }}{% else %} Pas de{% endif %} demandes en cours</a> - 
-						<a href="{{ path('ninja_tooken_user_amis_blocked', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis_blocked' %} class="actif"{% endif %}><i class="icon-frown"></i> {% if numBlocked>1 %}{{ numBlocked }}{% else %} Pas de{% endif %} demandes bloqués</a>
+						<a href="{{ path('ninja_tooken_user_amis', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis' %} class="actif"{% endif %}><i class="icon-heart"></i> {{ 'ami.numFriend'|transchoice(numFriends) }}</a> - 
+						<a href="{{ path('ninja_tooken_user_amis_demande', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis_demande' %} class="actif"{% endif %}><i class="icon-heart-empty"></i> {{ 'ami.numDemande'|transchoice(numDemande) }} - 
+						<a href="{{ path('ninja_tooken_user_amis_blocked', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis_blocked' %} class="actif"{% endif %}><i class="icon-frown"></i> {{ 'ami.numBlock'|transchoice(numBlocked) }}</a>
 					</h3>
 					{% for flashMessage in app.session.flashbag.get('notice') %}
 					    <div class="flash-notice">
@@ -33,46 +33,46 @@
 					{% endfor %}
 
 					{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis' %}
-						<p><span class="legend online"> En ligne</span>
-						<span class="legend offline"> Hors ligne</span></p>
+						<p><span class="legend online"> {{ 'description.online'|trans({},'common') }}</span>
+						<span class="legend offline"> {{ 'description.offline'|trans({},'common') }}</span></p>
 
 						{% if friends is not empty %}
 						{% for friend in friends %}
 						<div class="membre offline pull-left">
 							<a href="{{ path('ninja_tooken_user_fiche', {user_nom:friend.friend.slug}) }}"><img src="{{ avatar.getUrl(friend.friend) }}">{{ friend.friend.username }}</a>
-							<a href="{{ path('ninja_tooken_user_amis_bloquer', {id:friend.id}) }}" class="button small">Bloquer</a>
+							<a href="{{ path('ninja_tooken_user_amis_bloquer', {id:friend.id}) }}" class="button small">{{ 'action.bloquer'|trans }}</a>
 						</div>
 						{% endfor %}
 						{% else %}
-						Pas encore d'amis.
+						{{ 'ami.noFriend'|trans }}
 						{% endif %}
 					{% elseif app.request.attributes.get('_route')=='ninja_tooken_user_amis_demande' %}
 						{% if demandes is not empty %}
-						<a href="{{ path('ninja_tooken_user_amis_demande_supprimer_tout') }}" class="button mini delete">Tout supprimer</a>
+						<a href="{{ path('ninja_tooken_user_amis_demande_supprimer_tout') }}" class="button mini delete">{{ 'action.deleteAll'|trans }}</a>
 						<br class="clear"><br>
 						{% for demande in demandes %}
 						<div class="membre pull-left">
 							<a href="{{ path('ninja_tooken_user_fiche', {user_nom:demande.friend.slug}) }}"><img src="{{ avatar.getUrl(demande.friend) }}">{{ demande.friend.username }}</a>
-							<a href="{{ path('ninja_tooken_user_amis_confirmer', {id:demande.id}) }}" class="button small">Confirmer</a>
+							<a href="{{ path('ninja_tooken_user_amis_confirmer', {id:demande.id}) }}" class="button small">{{ 'action.confirmer'|trans }}</a>
 						</div>
 						{% endfor %}
 						{% else %}
-						Pas de demandes pour l'instant.
+						{{ 'ami.noDemande'|trans }}
 						<br class="clear">
 						{% endif %}
 					{% elseif app.request.attributes.get('_route')=='ninja_tooken_user_amis_blocked' %}
 						{% if blocked is not empty %}
-						<a href="{{ path('ninja_tooken_user_amis_bloquer_supprimer_tout') }}" class="button mini delete">Tout supprimer</a>
+						<a href="{{ path('ninja_tooken_user_amis_bloquer_supprimer_tout') }}" class="button mini delete">{{ 'action.deleteAll'|trans }}</a>
 						<br class="clear"><br>
 						{% for block in blocked %}
 						<div class="membre pull-left">
 							<a href="{{ path('ninja_tooken_user_fiche', {user_nom:block.friend.slug}) }}"><img src="{{ avatar.getUrl(block.friend) }}">{{ block.friend.username }}</a>
-							<a href="{{ path('ninja_tooken_user_amis_debloquer', {id:block.id}) }}" class="button small">Débloquer</a>
-							<a href="{{ path('ninja_tooken_user_amis_supprimer', {id:block.id}) }}" class="button small delete">Supprimer</a>
+							<a href="{{ path('ninja_tooken_user_amis_debloquer', {id:block.id}) }}" class="button small">{{ 'action.debloquer'|trans }}</a>
+							<a href="{{ path('ninja_tooken_user_amis_supprimer', {id:block.id}) }}" class="button small delete">{{ 'action.supprimer'|trans }}</a>
 						</div>
 						{% endfor %}
 						{% else %}
-						Pas de demandes bloquées pour l'instant.
+						{{ 'ami.noBlock'|trans }}
 						<br class="clear">
 						{% endif %}
 					{% endif %}

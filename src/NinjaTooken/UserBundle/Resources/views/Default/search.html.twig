@@ -1,29 +1,29 @@
 {% extends '::layout.html.twig' %}
 
-{% block title %}NinjaTooken - Recherche de ninja{% endblock %}
-{% block description %}Rechercher un ninja simplement et rapidement !{% endblock %}
-{% block keywords %}NinjaTooken, shinobi, ninja, recherche, fps, gratuit, online, free{% endblock %}
+{% block title %}NinjaTooken - {{ 'action.chercher'|trans({}, 'common') }} ninja{% endblock %}
+{% block description %}{{ 'description.meta.chercher'|trans }}{% endblock %}
+{% block keywords %}{{ 'keywords.meta.chercher'|trans }}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">Communauté</span>
+								<span itemprop="title">{{ 'menu.communaute'|trans({}, 'menu') }}</span>
 							</span>
 {% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_user_search') }}" itemprop="url">
-									<span itemprop="title">Chercher</span>
+									<span itemprop="title">{{ 'action.chercher'|trans({}, 'common') }}</span>
 								</a>
 							</span>
 {% endblock %}
 
 {% block body %}
 				<section class="forum">
-					<h4>Résultat de la recherche</h4>
+					<h4>{{ 'action.chercherResult'|trans({}, 'common') }}</h4>
 					<br class="clear">
 					{% if users is not empty %}
-						<p>{{ users|length }} utilisateur{% if users|length > 1 %}s{% endif %} trouvé{% if users|length > 1 %}s{% endif %} pour "{{ app.request.get('q') }}".</p>
+						<p>{{ 'description.utilisateur.chercher'|transchoice(users|length, {'%q%': app.request.get('q')}) }}</p>
 						{% for user in users %}
 						<div class="row-fluid topic">
 							<div class="span6">
@@ -40,18 +40,18 @@
                             {% else %}
 							<div class="offset2 span4">
                             {% endif %}
-								 Inscrit depuis le {{ user.createdAt|localizeddate('full', 'none', app.request.locale) }}
+                                {{ 'fiche.dateInscrit'|trans({'%date%': user.createdAt|localizeddate('full', 'none', app.request.locale)}) }}
 							</div>
 						</div>
 						{% endfor %}
 					{% else %}
-					Aucun résultat trouvé.
+					{{ 'description.noResult'|trans({}, 'common') }}
 					{% endif %}
 					<br class="clear">
-					<h4>Faire une autre recherche</h4>
+					<h4>{{ 'action.chercherReset'|trans({}, 'common') }}</h4>
 					<form action="{{ path('ninja_tooken_user_search') }}" method="post" accept-charset="utf-8" class="row-fluid">
-						<input type="text" name="q" value="Chercher" class="span10">
-						<input type="submit" name="s" value="Ok !" class="span2">
+						<input type="text" name="q" value="{{ 'action.chercher'|trans({}, 'common') }}" class="span10">
+						<input type="submit" name="s" value="{{ 'action.ok'|trans({}, 'common') }}" class="span2">
 					</form>
 				</section>
 {% endblock %}

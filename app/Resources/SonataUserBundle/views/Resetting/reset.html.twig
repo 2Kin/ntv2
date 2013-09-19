@@ -1,16 +1,15 @@
 {% extends "::layout.html.twig" %}
 
-{% block title %}NinjaTooken - Créer mon ninja{% endblock %}
-{% block description %}NinjaTooken - Créer mon ninja{% endblock %}
-{% block keywords %}NinjaTooken - Créer mon ninja{% endblock %}
-
+{% block title %}NinjaTooken - {{ 'compte.reset.titre'|trans({}, 'common') }}{% endblock %}
+{% block description %}{{ 'compte.reset.meta.description'|trans({}, 'common') }}{% endblock %}
+{% block keywords %}{{ 'compte.reset.meta.keywords'|trans({}, 'common') }}{% endblock %}
 
 {% block breadcrumbs1 %}{% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('fos_user_resetting_request') }}" itemprop="url">
-									<span itemprop="title">reset</span>
+									<span itemprop="title">{{ 'compte.reset.titre'|trans({}, 'common') }}</span>
 								</a>
 							</span>
 {% endblock %}

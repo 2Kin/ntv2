@@ -1,5 +1,3 @@
-{# src/Ninjatooken/UserBundle/Resources/views/User/resetting.email.twig #}
-
 {% block subject %}Resetting your password{% endblock %}
 
 {% block body_text %}
@@ -9,7 +7,7 @@ Hello {{ user.username }} !
 You can reset your email by accessing {{ confirmationUrl }}
 
 Greetings,
-the Acme team
+the NinjaTooken team
 {% endautoescape %}
 {% endblock %}
 
@@ -19,5 +17,4 @@ the Acme team
     Including a template as done here allows keeping things DRY by using
     the template inheritance in it
 #}
-{% include 'NinjaTookenUserBundle:User:resetting_email.html.twig' %}
 {% endblock %}

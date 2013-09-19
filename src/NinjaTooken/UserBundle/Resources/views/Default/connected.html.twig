@@ -1,15 +1,15 @@
 			{% import "avatar.html.twig" as avatar %}
 			<div class="accountLogged">
-                            <div class="pseudo"><strong>{{ user.username }}</strong>{% if user.ninja is not empty %} {% if user.ninja.classe is not empty %}<span class="{{ class[user.ninja.classe]|lower }}">{{ class[user.ninja.classe] }}</span>{% endif %}{% if user.level is not empty %}, Nv {{ user.level }}{% endif %}{% endif %}</div>
+                            <div class="pseudo"><strong>{{ user.username }}</strong>{% if user.ninja is not empty %} {% if user.ninja.classe is not empty %}<span class="{{ class[user.ninja.classe]|lower }}">{{ class[user.ninja.classe] }}</span>{% endif %}{% if user.level is not empty %}, Lvl.{{ user.level }}{% endif %}{% endif %}</div>
                             <img src="{{ avatar.getUrl(user) }}" class="pull-left" alt="">
                             <nav>
                                 <ul>
-                                    <li><a href="{{ path('ninja_tooken_user_messagerie') }}" class="pull-left"><i class="icon-envelope-alt"></i> messagerie{% if user.numNewMessage>0 %} <sup>{{ user.numNewMessage }}</sup>{% endif %}</a></li>
-                                    <li><a href="{{ path('ninja_tooken_user_amis') }}" class="pull-left"><i class="icon-heart"></i> Amis{% if user.numDemandesFriends>0 %} <sup>{{ user.numDemandesFriends }}</sup>{% endif %}</a></li>
-                                    <li><a href="{% if user.clan %}{{ path('ninja_tooken_clan', {clan_nom:user.clan.clan.slug}) }}{% else %}{{ path('ninja_tooken_clans', {'page':1}) }}{% endif %}" class="pull-left"><i class="icon-ticket"></i> Clan</a></li>
-                                    <li><a href="{{ path('ninja_tooken_user_parametres') }}" class="pull-left"><i class="icon-cog"></i> Paramètres</a></li>
-                                    <li><a href="{{ path('ninja_tooken_user_captures') }}" class="pull-left"><i class="icon-picture"></i> Captures</a></li>
-                                    <li><a href="{{ path('fos_user_security_logout') }}" class="pull-left"><i class="icon-signout"></i> Déconnexion</a></li>
+                                    <li><a href="{{ path('ninja_tooken_user_messagerie') }}" class="pull-left"><i class="icon-envelope-alt"></i> {{ 'menu.messagerie'|trans({}, 'menu') }}{% if user.numNewMessage>0 %} <sup>{{ user.numNewMessage }}</sup>{% endif %}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_user_amis') }}" class="pull-left"><i class="icon-heart"></i> {{ 'menu.ami'|trans({}, 'menu') }}{% if user.numDemandesFriends>0 %} <sup>{{ user.numDemandesFriends }}</sup>{% endif %}</a></li>
+                                    <li><a href="{% if user.clan %}{{ path('ninja_tooken_clan', {clan_nom:user.clan.clan.slug}) }}{% else %}{{ path('ninja_tooken_clans', {'page':1}) }}{% endif %}" class="pull-left"><i class="icon-ticket"></i> {{ 'menu.clan'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_user_parametres') }}" class="pull-left"><i class="icon-cog"></i> {{ 'menu.parametre'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_user_captures') }}" class="pull-left"><i class="icon-picture"></i> {{ 'menu.capture'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('fos_user_security_logout') }}" class="pull-left"><i class="icon-signout"></i> {{ 'menu.deconnexion'|trans({}, 'menu') }}</a></li>
                                 </ul>
                             </nav>
                         </div>

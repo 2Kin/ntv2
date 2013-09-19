@@ -1,20 +1,20 @@
 {% extends '::layout.html.twig' %}
 {% import "avatar.html.twig" as avatar %}
 
-{% block title %}NinjaTooken - Paramètres{% endblock %}
+{% block title %}NinjaTooken - {{ 'menu.parametre'|trans({}, 'menu') }}{% endblock %}
 {% block description %}{% endblock %}
 {% block keywords %}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">Mon compte</span>
+								<span itemprop="title">{{ 'menu.compte'|trans({}, 'menu') }}</span>
 							</span>
 {% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_user_parametres') }}" itemprop="url">
-									<span itemprop="title">Paramètres</span>
+									<span itemprop="title">{{ 'menu.parametre'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -26,10 +26,10 @@
 				    </div>
 				{% endfor %}
 				<form action="{{ path('ninja_tooken_user_parametres_update') }}" method="post" name="editAccount" accept-charset="UTF-8" class="full">
-					<h3><i class="icon-user"></i> Informations personnelles</h3>
+					<h3><i class="icon-user"></i> {{ 'parametre.infoperso'|trans }}</h3>
 					<div class="row-fluid">
 						<div class="span3 offset1">
-							<label class="libelle required" for="pseudo">Pseudo</label>
+							<label class="libelle required" for="pseudo">{{ 'compte.register.pseudo'|trans({}, 'common') }}</label>
 						</div>
 						<div class="span8">
 							<input type="text" name="pseudo" id="pseudo" value="{{ app.user.username }}" required>
@@ -44,13 +44,12 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span3 offset1">
-							<label class="libelle" for="mail">Mail</label>
+							<label class="libelle" for="mail">{{ 'compte.register.mail'|trans({}, 'common') }}</label>
 						</div>
 						<div class="span8">
 							{% if app.user.confirmationToken is not empty %}
-							<p class="note">Ton adresse mail n’a pas été vérifiée.<br>
-							En cas d’oubli, tu ne pourras pas récupérer ton mot de passe, tu ne seras pas averti lors d’un nouveau message, et tu ne recevras pas de newsletter.<br>
-							<a href="{{ path('ninja_tooken_user_parametres_confirm_mail') }}">Envoyer un mail de confirmation</a>
+							<p class="note">{{ 'parametre.noMail.titre'|trans }}<br>{{ 'parametre.noMail.description'|trans }}<br>
+							<a href="{{ path('ninja_tooken_user_parametres_confirm_mail') }}">{{ 'parametre.noMail.envoyer'|trans }}</a>
 							</p>
 							{% endif %}
 							<input type="email" name="email" id="email" value="{{ app.user.email }}" required>
@@ -58,25 +57,25 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span3 offset1">
-							<label class="libelle required">Sexe</label>
+							<label class="libelle required">{{ 'compte.register.sexe'|trans({}, 'common') }}</label>
 						</div>
 						<div class="span8">
-							<input type="radio" name="gender" value="m" id="input_gender_m"{%if app.user.gender=="m" %} checked{% endif %}><label for="input_gender_m"> Homme</label>
-							<input type="radio" name="gender" value="f" id="input_gender_f"{%if app.user.gender=="f" %} checked{% endif %}><label for="input_gender_f"> Femme</label>
+							<input type="radio" name="gender" value="m" id="input_gender_m"{%if app.user.gender=="m" %} checked{% endif %}><label for="input_gender_m"> {{ 'compte.register.homme'|trans({}, 'common') }}</label>
+							<input type="radio" name="gender" value="f" id="input_gender_f"{%if app.user.gender=="f" %} checked{% endif %}><label for="input_gender_f"> {{ 'compte.register.femme'|trans({}, 'common') }}</label>
 						</div>
 					</div>
 					<div class="row-fluid">
 						<div class="span3 offset1">
-							<label class="libelle required">Langue</label>
+							<label class="libelle required">{{ 'compte.register.langue'|trans({}, 'common') }}</label>
 						</div>
 						<div class="span8">
-							<input type="radio" name="locale" value="fr" id="input_locale_fr"{%if app.user.locale=="fr" %} checked{% endif %}><label for="input_locale_fr"> Français</label>
-							<input type="radio" name="locale" value="en" id="input_locale_en"{%if app.user.locale=="en" %} checked{% endif %}><label for="input_locale_en"> English</label>
+							<input type="radio" name="locale" value="fr" id="input_locale_fr"{%if app.user.locale=="fr" %} checked{% endif %}><label for="input_locale_fr"> {{ 'compte.register.francais'|trans({}, 'common') }}</label>
+							<input type="radio" name="locale" value="en" id="input_locale_en"{%if app.user.locale=="en" %} checked{% endif %}><label for="input_locale_en"> {{ 'compte.register.anglais'|trans({}, 'common') }}</label>
 						</div>
 					</div>
 					<div class="row-fluid">
 						<div class="span3 offset1">
-							<label class="libelle">Date de naissance</label>
+							<label class="libelle">{{ 'parametre.dateNaissance'|trans }}</label>
 						</div>
 						<div class="span8">
 							<label class="select">
@@ -104,8 +103,8 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span3 offset1">
-							<label class="libelle">Description</label>
-							(affichée dans la <a href="{{ path('ninja_tooken_user_fiche', {'user_nom':app.user.slug}) }}">fiche ninja</a>)
+							<label class="libelle">{{ 'parametre.description'|trans }}</label>
+							{{ 'parametre.descriptionInfo'|trans({'%urlFiche%': path('ninja_tooken_user_fiche', {'user_nom':app.user.slug})})|raw }}
 						</div>
 						<div class="span8">
 							<div class="textarea" id="user_description" name="user_description">{{ app.user.description|raw|purify('full') }}</div>
@@ -113,76 +112,76 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span8 offset4">
-							<input type="checkbox" name="news" value="1" id="input_news"{% if app.user.receiveNewsletter %} checked{% endif %}><label for="input_news"> J'accepte de recevoir par mail les news du site</label>
+							<input type="checkbox" name="news" value="1" id="input_news"{% if app.user.receiveNewsletter %} checked{% endif %}><label for="input_news"> {{ 'compte.register.receiveNewsletter'|trans({}, 'common') }}</label>
 						</div>
 					</div>
 					<div class="row-fluid">
 						<div class="span8 offset4">
-							<input type="checkbox" name="mail" value="1" id="input_mail"{% if app.user.receiveAvertissement %} checked{% endif %}><label for="input_mail"> Je souhaite être averti par mail de l'arrivée de nouveaux messages</label>
+							<input type="checkbox" name="mail" value="1" id="input_mail"{% if app.user.receiveAvertissement %} checked{% endif %}><label for="input_mail"> {{ 'compte.register.receiveAvertissement'|trans({}, 'common') }}</label>
 						</div>
 					</div>
 					<div class="row-fluid">
 						<div class="span8 offset4">
 							<input type="hidden" name="editAccount" value="1">
-							<input type="submit" value="Enregistrer" class="button">
+							<input type="submit" value="{{ 'action.enregistrer'|trans }}" class="button">
 						</div>
 					</div>
 				</form>
 
 				<form action="{{ path('ninja_tooken_user_parametres_update') }}" enctype="multipart/form-data" method="post" name="editAvatar" accept-charset="UTF-8" class="full">
-				<h3><i class="icon-smile"></i> Avatar</h3>
+				<h3><i class="icon-smile"></i> {{ 'parametre.avatar'|trans }}</h3>
 					<div class="row-fluid">
 						<div class="span3 offset1">
-							<label class="libelle">Modifier ton avatar</label>
+							<label class="libelle">{{ 'parametre.modifierAvatar'|trans }}</label>
 						</div>
 						<div class="span8">
 							<img src="{{ avatar.getUrl(app.user) }}" class="pull-left" alt="">
 							{% if app.user.useGravatar %}
-							<a href="http://{{ app.request.locale }}.gravatar.com/" target="_blank" class="button small">Modifier</a>
+							<a href="http://{{ app.request.locale }}.gravatar.com/" target="_blank" class="button small">{{ 'action.modifier'|trans }}</a>
 							{% else %}
-							<input type="file" name="avatar"><a href="{{ path('ninja_tooken_user_parametres_update_avatar') }}" class="button small">Modifier</a>
+							<input type="file" name="avatar"><a href="{{ path('ninja_tooken_user_parametres_update_avatar') }}" class="button small">{{ 'action.modifier'|trans }}</a>
 							{% endif %}
 						</div>
 					</div>
 					<div class="row-fluid">
 						<div class="span3 offset1">
-							<label class="libelle">Hébergement</label>
+							<label class="libelle">{{ 'parametre.hebergement'|trans }}</label>
 						</div>
 						<div class="span3">
-							<input type="radio" name="avatar" value="ninjatooken" id="input_avatar_ninjatooken"{% if app.user.useGravatar == false %} checked{% endif %}><label for="input_avatar_ninjatooken"> Serveur NinjaTooken.</label>
+							<input type="radio" name="avatar" value="ninjatooken" id="input_avatar_ninjatooken"{% if app.user.useGravatar == false %} checked{% endif %}><label for="input_avatar_ninjatooken"> {{ 'parametre.serveur.nt'|trans }}</label>
 						</div>
 						<div class="span5">
-							<input type="radio" name="avatar" value="gravatar" id="input_avatar_gravatar"{% if app.user.useGravatar %} checked{% endif %}><label for="input_avatar_gravatar"> Service <a href="http://{{ app.request.locale }}.gravatar.com/" target="_blank">Gravatar</a>.</label>
+							<input type="radio" name="avatar" value="gravatar" id="input_avatar_gravatar"{% if app.user.useGravatar %} checked{% endif %}><label for="input_avatar_gravatar"> <a href="http://{{ app.request.locale }}.gravatar.com/" target="_blank">{{ 'parametre.serveur.gravatar'|trans }}</a>.</label>
 						</div>
 					</div>
 					<div class="row-fluid">
 						<div class="span8 offset4">
 							<input type="hidden" name="editAvatar" value="1">
-							<input type="submit" value="Enregistrer" class="button">
+							<input type="submit" value="{{ 'action.enregistrer'|trans }}" class="button">
 						</div>
 					</div>
 				</form>
 
 				<form action="{{ path('ninja_tooken_user_parametres_update_password') }}" {{ form_enctype(form) }} method="POST" name="editPassword" accept-charset="UTF-8" class="full">
-					<h3><i class="icon-key"></i> Mot de passe</h3>
+					<h3><i class="icon-key"></i> {{ 'compte.register.motPasse'|trans({}, 'common') }}</h3>
 					{{ form_widget(form) }}
 					<div class="row-fluid">
 						<div class="span8 offset4">
-							<input type="submit" value="Enregistrer" class="button">
+							<input type="submit" value="{{ 'action.enregistrer'|trans }}" class="button">
 						</div>
 					</div>
 				</form>
 
 				<form action="{{ path('ninja_tooken_user_parametres_delete_account') }}" method="post" name="deleteAccount" accept-charset="UTF-8" class="full">
-					<h3><i class="icon-trash"></i> Suppression</h3>
+					<h3><i class="icon-trash"></i> {{ 'action.suppression'|trans }}</h3>
 					<div class="row-fluid">
 						<div class="span8 offset4">
-							<p class="warning">La suppression de compte est définitive, les informations de ton ninja seront définitivement perdues.</p>
+							<p class="warning">{{ 'parametre.suppression'|trans }}</p>
 						</div>
 					</div>
 					<div class="row-fluid">
 						<div class="span8 offset4">
-							<input type="submit" value="Supprimer" class="button">
+							<input type="submit" value="{{ 'action.supprimer'|trans }}" class="button">
 						</div>
 					</div>
 				</form>

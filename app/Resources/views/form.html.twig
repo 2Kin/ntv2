@@ -14,7 +14,7 @@
     {% set type = type|default('text') %}
     <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
     {% if type == "file" %}
-        <a href="#" class="button mini">Choisir</a>
+        <a href="#" class="button mini">{{ 'action.choisir'|trans({}, 'common') }}</a>
     {% endif %}
 {% endspaceless %}
 {% endblock form_widget_simple %}

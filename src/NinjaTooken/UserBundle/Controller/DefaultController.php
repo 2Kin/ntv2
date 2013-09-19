@@ -24,7 +24,7 @@ class DefaultController extends Controller
         $user = $em->getRepository('NinjaTookenUserBundle:User')->findOneBy(array('old_id' => (int)$request->get('ID')));
 
         if(!$user){
-            throw new NotFoundHttpException('Cet utilisateur n\'existe pas !');
+            throw new NotFoundHttpException($this->get('translator')->trans('notice.utilisateur.error404'));
         }
 
         return $this->redirect($this->generateUrl('ninja_tooken_user_fiche', array(
@@ -147,7 +147,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            'Le message a bien été envoyé.'
+                            $this->get('translator')->trans('notice.messageEnvoiOk')
                         );
                         return $this->redirect($this->generateUrl($reception?'ninja_tooken_user_messagerie':'ninja_tooken_user_messagerie_envoi', array(
                             'page' => $page
@@ -180,7 +180,7 @@ class DefaultController extends Controller
 
                                     $this->get('session')->getFlashBag()->add(
                                         'notice',
-                                        'Le message a bien été supprimé.'
+                                        $this->get('translator')->trans('notice.messageSuppressionOk')
                                     );
                                     return $this->redirect($this->generateUrl('ninja_tooken_user_messagerie', array(
                                         'page' => $page
@@ -203,7 +203,7 @@ class DefaultController extends Controller
 
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            'Le message a bien été supprimé.'
+                            $this->get('translator')->trans('notice.messageSuppressionOk')
                         );
                         return $this->redirect($this->generateUrl('ninja_tooken_user_messagerie_envoi', array(
                             'page' => $page
@@ -295,6 +295,7 @@ class DefaultController extends Controller
         $security = $this->get('security.context');
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $translator = $this->get('translator');
             // post request
             if ($request->getMethod() === 'POST') {
                 $user = $security->getToken()->getUser();
@@ -320,20 +321,20 @@ class DefaultController extends Controller
                                 }else{
                                     $this->get('session')->getFlashBag()->add(
                                         'notice',
-                                        'Le pseudo demandé est déjà utilisé.'
+                                        $translator->trans('notice.pseudoUtilise')
                                     );
                                 }
                             }else{
                                 $this->get('session')->getFlashBag()->add(
                                     'notice',
-                                    'Le pseudo demandé est déjà utilisé.'
+                                    $translator->trans('notice.pseudoUtilise')
                                 );
                             }
                         }
                     }else{
                         $this->get('session')->getFlashBag()->add(
                             'notice',
-                            'Maximum de changement de pseudo atteint.'
+                            $translator->trans('notice.pseudoMax')
                         );
                     }
 
@@ -350,7 +351,7 @@ class DefaultController extends Controller
                             }else{
                                 $this->get('session')->getFlashBag()->add(
                                     'notice',
-                                    'Le mail demandé est déjà utilisé.'
+                                    $translator->trans('notice.mailModifierKo')
                                 );
                             }
                         }
@@ -368,7 +369,7 @@ class DefaultController extends Controller
 
                     $this->get('session')->getFlashBag()->add(
                         'notice',
-                        'Tes paramètres ont bien été mis à jour.'
+                        $translator->trans('notice.parametreModifierOk')
                     );
 
                     $update = true;
@@ -380,7 +381,7 @@ class DefaultController extends Controller
 
                     $this->get('session')->getFlashBag()->add(
                         'notice',
-                        'Le mode d\'hébergement de ton avatar a été modifié.'
+                        $translator->trans('notice.hebergementModifierOk')
                     );
 
                     $update = true;
@@ -427,7 +428,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Ton avatar a bien été mis à jour.'
+                    $this->get('translator')->trans('notice.avatarModifierOk')
                 );
             }
 
@@ -450,7 +451,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Un mail de confirmation vient d\'être envoyé.'
+                    $this->get('translator')->trans('notice.mailConfirmationOk')
                 );
             }
 
@@ -474,7 +475,7 @@ class DefaultController extends Controller
             if ($process) {
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Ton mot de passe a correctement été modifié.'
+                    $this->get('translator')->trans('notice.motPasseModifierOk')
                 );
             }
 /*
@@ -604,7 +605,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    $friend->getFriend()->getUsername().' fait désormais partie de tes amis.'
+                    $this->get('translator')->trans('notice.amiAjoutOk', array('%utilisateur%' => $friend->getFriend()->getUsername()))
                 );
             }
             return $this->redirect($this->generateUrl('ninja_tooken_user_amis'));
@@ -631,7 +632,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    $friend->getFriend()->getUsername().' est désormais bloqué.'
+                    $this->get('translator')->trans('notice.amiBlockOk', array('%utilisateur%' => $friend->getFriend()->getUsername()))
                 );
             }
             return $this->redirect($this->generateUrl('ninja_tooken_user_amis_blocked'));
@@ -658,7 +659,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    $friend->getFriend()->getUsername().' est débloqué.'
+                    $this->get('translator')->trans('notice.amiUnblockOk', array('%utilisateur%' => $friend->getFriend()->getUsername()))
                 );
             }
             return $this->redirect($this->generateUrl('ninja_tooken_user_amis'));
@@ -684,7 +685,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Suppression correctement effectuée.'
+                    $this->get('translator')->trans('notice.amiSupprimerOk')
                 );
             }
             return $this->redirect($this->generateUrl('ninja_tooken_user_amis_blocked'));
@@ -705,7 +706,7 @@ class DefaultController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'Suppressions correctement effectuées.'
+                $this->get('translator')->trans('notice.amiSupprimerAllOk')
             );
             return $this->redirect($this->generateUrl('ninja_tooken_user_amis_blocked'));
         }
@@ -725,7 +726,7 @@ class DefaultController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'notice',
-                'Suppressions correctement effectuées.'
+                $this->get('translator')->trans('notice.amiSupprimerAllOk')
             );
             return $this->redirect($this->generateUrl('ninja_tooken_user_amis_blocked'));
         }
@@ -782,7 +783,7 @@ class DefaultController extends Controller
                     $em->flush();
                     $this->get('session')->getFlashBag()->add(
                         'notice',
-                        'La capture a bien été supprimée.'
+                        $this->get('translator')->trans('notice.captureSupprimerOk')
                     );
                 }
             }

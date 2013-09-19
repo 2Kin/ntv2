@@ -1,8 +1,80 @@
+action:
+    bloquer: Bloquer
+    debloquer: Débloquer
+    deleteAll: Tout supprimer
+    confirmer: Confirmer
+    supprimer: Supprimer
+    envoyer: Envoyer
+    repondre: Répondre
+    enregistrer: Enregistrer
+    suppression: Suppression
+    modifier: Modifier
+notice:
+    utilisateur:
+        error404: Cet utilisateur n'existe pas !
+    messageEnvoiOk: Le message a bien été envoyé.
+    messageSuppressionOk: Le message a bien été supprimé.
+    pseudoUtilise: Le pseudo demandé est déjà utilisé.
+    pseudoMax: Maximum de changement de pseudo atteint.
+    mailModifierKo: Le mail demandé est déjà utilisé.
+    parametreModifierOk: Tes paramètres ont bien été mis à jour.
+    hebergementModifierOk: Le mode d'hébergement de ton avatar a été modifié.
+    avatarModifierOk: Ton avatar a bien été mis à jour.
+    mailConfirmationOk: Un mail de confirmation vient d\'être envoyé.
+    motPasseModifierOk: Ton mot de passe a correctement été modifié.
+    amiAjoutOk: %utilisateur% fait désormais partie de tes amis.
+    amiBlockOk: %utilisateur% est désormais bloqué.
+    amiUnblockOk: %utilisateur% est débloqué.
+    amiSupprimerOk: Suppression correctement effectuée.
+    amiSupprimerAllOk: Suppressions correctement effectuées.
+    captureSupprimerOk: La capture a bien été supprimée.
 keywords:
     meta:
-        calculateur: NinjaTooken, shinobi, ninja, calculateur, jutsu, compétence, fps, gratuit, online, free
+        fiche: NinjaTooken, shinobi, ninja, fps, gratuit, online, free
+        chercher: NinjaTooken, shinobi, ninja, recherche, fps, gratuit, online, free
 titre:
     partieActuelle: Parties en cours
 description:
     meta:
-        calculateur: Le calculateur de jutsu permet de connaitre pour chaque jutsu et selon le nombre de points appliqués, les dégâts et effets.
+        chercher: Rechercher un ninja simplement et rapidement !
+    utilisateur:
+        chercher: %count% utilisateur trouvé pour "%q%".|]1,+Inf]%count% utilisateurs trouvés pour "%q%".
+ami:
+    numFriend: %count% ami|]1,+Inf]%count% amis
+    numDemande: "{0} Pas de demandes en cours|{1} Une demande en cours|]1,+Inf]%count% demandes en cours"
+    numBlock: "{0} Pas de demandes bloquées|{1} Une demande bloquée|]1,+Inf]%count% demandes bloquées"
+    noFriend: Pas encore d'amis.
+    noDemande: Pas encore de demandes
+    noBlock: Pas de demandes bloquées pour l'instant.
+mail:
+    newMessage: Tu viens de recevoir un nouveau message de la part de %utilisateur% :
+capture:
+    noCapture: Pas de captures pour l'instant.
+fiche:
+    autrePseudo: Autre pseudo utilisé
+    dateInscrit: Inscrit depuis le %date%
+messagerie:
+    newMessage: Nouveau Message
+    reception: Réception
+    envoi: Envoie
+    aujourdhui: Aujourd'hui
+    hier: Hier
+    de: De
+    a: à
+    noSelect: Aucun message sélectionné.
+parametre:
+    infoperso: Informations personnelles
+    noMail:
+        titre: Ton adresse mail n’a pas été vérifiée.
+        description: En cas d’oubli, tu ne pourras pas récupérer ton mot de passe, tu ne seras pas averti lors d’un nouveau message, et tu ne recevras pas de newsletter.
+        envoyer: Envoyer un mail de confirmation
+    dateNaissance: Date de naissance
+    description: Description
+    descriptionInfo: (affichée dans la <a href="%urlFiche%">fiche ninja</a>)
+    avatar: Avatar
+    modifierAvatar: Modifier ton avatar
+    hebergement: Hébergement
+    serveur:
+        nt: Serveur NinjaTooken.
+        gravatar: Gravatar
+    suppression: La suppression de compte est définitive, les informations de ton ninja seront définitivement perdues.

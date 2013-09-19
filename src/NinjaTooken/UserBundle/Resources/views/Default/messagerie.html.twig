@@ -1,21 +1,21 @@
 {% extends '::layout.html.twig' %}
 {% import "avatar.html.twig" as avatar %}
 
-{% block title %}NinjaTooken - Messagerie{% endblock %}
+{% block title %}NinjaTooken - {{ 'menu.messagerie'|trans({}, 'menu') }}{% endblock %}
 {% block description %}{% endblock %}
 {% block keywords %}{% endblock %}
 
 {% block breadcrumbs1 %}
 
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">Mon compte</span>
+								<span itemprop="title">{{ 'menu.compte'|trans({}, 'menu') }}</span>
 							</span>
 {% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_user_messagerie') }}" itemprop="url">
-									<span itemprop="title">Messagerie</span>
+									<span itemprop="title">{{ 'menu.messagerie'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}
@@ -23,20 +23,20 @@
 {% block body %}
 				<div class="row-fluid">
 					<aside class="span4">
-						{% if app.request.get('add') != 1 %}<a href="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?add=1" class="button mini">Nouveau Message</a><br><br>{% endif %}
+						{% if app.request.get('add') != 1 %}<a href="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?add=1" class="button mini">{{ 'messagerie.newMessage'|trans }}</a><br><br>{% endif %}
 						<h3>
 							<i class="icon-inbox"></i>
-							Boîte <a href="{{ path('ninja_tooken_user_messagerie') }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_messagerie' %} class="actif"{% endif %}>Réception</a> - 
-							<a href="{{ path('ninja_tooken_user_messagerie_envoi') }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_messagerie_envoi' %} class="actif"{% endif %}><i class="icon-reply"></i> Envoie</a></h3>
+							Boîte <a href="{{ path('ninja_tooken_user_messagerie') }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_messagerie' %} class="actif"{% endif %}>{{ 'messagerie.reception'|trans }}</a> - 
+							<a href="{{ path('ninja_tooken_user_messagerie_envoi') }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_messagerie_envoi' %} class="actif"{% endif %}><i class="icon-reply"></i> {{ 'messagerie.envoi'|trans }}</a></h3>
 						{% if messages is not empty %}
 							{% set dateActu = '' %}
 							{% for message in messages %}
 								{% if dateActu is empty or dateActu|date("m/d/Y") != message.dateAjout|date("m/d/Y") %}
 									{% set dateActu = message.dateAjout %}
 									{% if dateActu|date("m/d/Y") == "now"|date("m/d/Y") %}
-								<h4>Aujourd'hui</h4>
+								<h4>{{ 'messagerie.aujourdhui'|trans }}</h4>
 									{% elseif dateActu|date("m/d/Y") == "yesterday"|date("m/d/Y") %}
-								<h4>Hier</h4>
+								<h4>{{ 'messagerie.hier'|trans }}</h4>
 									{% else %}
 								<h4>{{ dateActu|localizeddate('full', 'none', app.request.locale) }}</h4>
 									{% endif %}
@@ -48,8 +48,8 @@
 								<div class="messagerie">
 									<a href="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?id={{ message.id }}&del=1" class="pull-right"><i class="icon-trash"></i></a>
 									<p><a href="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?id={{ message.id }}"{% if id == message.id %} class="actif"{% endif %}>{% if new %}<i class="icon-eye-open"></i>{% endif %} {{ message.dateAjout|localizeddate('none', 'short', app.request.locale) }} <strong>{{ message.nom }}</strong></a></p>
-									<p>De <a href="{{ path('ninja_tooken_user_fiche', {user_nom:message.author.slug}) }}">{{ message.author.username }}</a>
-									à {% for receiver in message.receivers %}<a href="{{ path('ninja_tooken_user_fiche', {user_nom:receiver.destinataire.slug}) }}">{{ receiver.destinataire.username }}</a>{% if not loop.last %},{% endif %}{% endfor %}</p>
+									<p>{{ 'messagerie.de'|trans }} <a href="{{ path('ninja_tooken_user_fiche', {user_nom:message.author.slug}) }}">{{ message.author.username }}</a>
+									{{ 'messagerie.a'|trans }} {% for receiver in message.receivers %}<a href="{{ path('ninja_tooken_user_fiche', {user_nom:receiver.destinataire.slug}) }}">{{ receiver.destinataire.username }}</a>{% if not loop.last %},{% endif %}{% endfor %}</p>
 								</div>
 							{% endfor %}
 
@@ -84,7 +84,7 @@
 								{{ form_widget(form) }}
 								<div class="row-fluid">
 									<div class="span8 offset4">
-										<input type="submit" value="Envoyer" class="button">
+										<input type="submit" value="{{ 'action.envoyer'|trans }}" class="button">
 									</div>
 								</div>
 							</form>
@@ -99,8 +99,7 @@
 											<span itemprop="name">{{ currentmessage.author.username }}</span>
 										</a>
 									</span>
-									<time itemprop="datePublished" datetime="{{ currentmessage.dateAjout|date("Y-m-d\\TH:i:sP") }}">le {{ currentmessage.dateAjout|localizeddate('full', 'none', app.request.locale) }} à {{ currentmessage.dateAjout|localizeddate('none', 'short', app.request.locale) }}</time><br>
-									<h3 itemprop="headline">{{ currentmessage.nom }}</h3>
+									<time itemprop="datePublished" datetime="{{ currentmessage.dateAjout|date("Y-m-d\\TH:i:sP") }}">{{ 'description.datetime'|trans({'%date%': currentmessage.dateAjout|localizeddate('full', 'none', app.request.locale), '%time%': currentmessage.dateAjout|localizeddate('none', 'short', app.request.locale)}, 'common') }}</h3>
 								</header>
 								<div class="content" itemprop="articleBody">
 									{{ currentmessage.content|raw|purify('full') }}
@@ -124,12 +123,12 @@
 								{{ form_widget(form) }}
 								<div class="row-fluid">
 									<div class="span8 offset4">
-										<input type="submit" value="Répondre" class="button">
+										<input type="submit" value="{{ 'action.repondre'|trans }}" class="button">
 									</div>
 								</div>
 							</form>
 							{% else %}
-							<h5>Aucun message sélectionné.</h5>
+							<h5>{{ 'messagerie.noSelect'|trans }}</h5>
 							{% endif %}
 						{% endif %}
 					</section>

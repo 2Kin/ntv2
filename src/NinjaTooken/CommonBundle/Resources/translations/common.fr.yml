@@ -10,6 +10,50 @@ compte:
     inscrire: Crée ton Ninja
     inscrire2: Créer mon Ninja
     pasEncore: Pas encore inscrit ?
+    register:
+        meta:
+            description: NinjaTooken - Créer mon ninja
+            keywords: NinjaTooken - Créer mon ninja
+        titre: Crée ton ninja
+        resume: Créé ton compte pour sauvegarder ton expérience, intégrer un clan, ou participer aux tournois NinjaTooken.
+        pseudo: Pseudo
+        mail: Mail
+        sexe: Sexe
+        homme: Homme
+        femme: Femme
+        langue: Langue
+        francais: Français
+        anglais: English
+        motPasse: Mot de passe
+        motPasseRepeter: Répéter
+        receiveNewsletter: J'accepte de recevoir par mail les news du site
+        receiveAvertissement: Je souhaite être averti par mail de l'arrivée de nouveaux messages
+        captcha: Captcha
+        captchaInstruction: Pour pouvoir t'inscrire, reproduis la forme ci-dessous :
+        captchaError: Ton navigateur ne supporte pas les 'canvas'.
+    request:
+        meta:
+            description: NinjaTooken - Créer mon ninja
+            keywords: NinjaTooken - Créer mon ninja
+        titre: Mot de passe oublié
+        resume: Tu as oublié ton mot de passe ? Entre ton pseudo ou ton adresse email ci-dessous, et on t'enverra un mail te permettant de le réinitialiser.
+        reinitialiser: Réinitialiser
+        noCompte: Tu n'as pas encore de compte ?
+        inscrisToi: Inscrits toi
+    reset:
+        meta:
+            description: NinjaTooken - Créer mon ninja
+            keywords: NinjaTooken - Créer mon ninja
+        titre: Ré-initialiser
+    connect:
+        meta:
+            description: NinjaTooken - Créer mon ninja
+            keywords: NinjaTooken - Créer mon ninja
+        titre: Se connecter
+        remember: Se souvenir de moi
+        motPasseOubli: Mot de passe oublié ?
+        motPasseReset: Réinitialises-le
+        noCompte: Tu n'as pas encore de compte ?
 description:
     datetime: le %date% à %time%
     suite: Lire la suite
@@ -19,6 +63,8 @@ description:
         Découvre un univers démentiel où les Ninjas s'affrontent sans pitié. <strong>Suiton</strong>, <strong>Futon</strong>, <strong>Raiton</strong>, <strong>Doton</strong>, <strong>Katon</strong>... ils ont chacun leurs pouvoirs, à toi de décider à <strong>quelle classe tu appartiens</strong> !<br/><br/>
         Crée ton compte pour <strong>sauvegarder ton expérience</strong>, <strong>intégrer un clan</strong>, ou <strong>participer aux tournois</strong> NinjaTooken.
     noResult: Aucun résultat trouvé.
+    online: En ligne
+    offline: Hors ligne
 action:
     chercher: Chercher
     chercherResult: Résultat de la recherche
@@ -31,6 +77,7 @@ action:
     verrouiller: Verrouiller
     deverrouiller: Déverouiller
     postit: Post-it
+    choisir: Choisir
 game:
     force: force
     vitesse: vitesse

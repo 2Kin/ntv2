@@ -142,7 +142,7 @@ fos_user:
         mailer: fos_user.mailer.twig_swift
     resetting:
         email:
-            template: NinjaTookenUserBundle:User:resetting.email.twig
+            template: NinjaTookenUserBundle:Default:resetting.email.twig
     registration:
         form:
             type: ninjatooken_user_registration
