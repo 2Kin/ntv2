@@ -36,6 +36,9 @@ description:
         listeVide: You don't have recruitment.
         proposition: List of recruitment proposals
         propositionVide: You don't have recruitment proposals.
+        propositionRemove: The proposal has been canceled.
+        postulationAdd: I'm applying to enter in your clan.
+        postulationRemove: I withdraw my recruitment proposal from your clan.
 notice:
     clan:
         ajoutOk: Your clan is up and running.
@@ -45,6 +48,10 @@ notice:
         revokeKo: The player can't be revoked.
         promotionOk: The new Shisho has been correctly promoted.
         promotionKo: The player can't be promoted Shisho.
+        postulationOk: Your proposal has been sent.
+        postulationKo1: You've already applied for this clan.
+        postulationKo2: You must wait at least one day between each application in the same clan.
+        postulationSupprimeOk: Your recruitment proposal has been canceled.
     recrutement:
         cancelOk: Your recruitment proposal has been canceled.
         addOk: Your recruitment proposal has been proceeded.

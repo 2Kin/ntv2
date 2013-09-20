@@ -7,9 +7,16 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use NinjaTooken\ClanBundle\Entity\ClanProposition;
 use NinjaTooken\UserBundle\Entity\Message;
 use NinjaTooken\UserBundle\Entity\MessageUser;
+use Symfony\Component\Translation\TranslatorInterface;
  
 class ClanPropositionListener
 {
+    protected $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
 
     // met à jour la date de changement de l'état
     public function preUpdate(PreUpdateEventArgs $args)
@@ -43,8 +50,8 @@ class ClanPropositionListener
 
                 $message = new Message();
                 $message->setAuthor($entity->getRecruteur());
-                $message->setNom('Proposition de recrutement');
-                $message->setContent('La proposition a été annulée.');
+                $message->setNom($this->translator->trans('mail.recrutement.nouveau.sujet'));
+                $message->setContent($this->translator->trans('description.recrutement.propositionRemove'));
 
                 $messageuser = new MessageUser();
                 $messageuser->setDestinataire($entity->getPostulant());

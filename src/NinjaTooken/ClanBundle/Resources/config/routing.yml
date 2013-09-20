@@ -62,3 +62,11 @@ ninja_tooken_clan_recruter_accepter:
 ninja_tooken_clan_recruter_refuser:
     pattern:  /clan-recruter-refuser/{user_nom}/{recruteur_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterRefuser }
+
+ninja_tooken_clan_postuler:
+    pattern:  /clan-postuler/{clan_nom}
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurPostuler }
+
+ninja_tooken_clan_postuler_supprimer:
+    pattern:  /clan-postuler-supprimer/{clan_nom}
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurPostulerSupprimer }

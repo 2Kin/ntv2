@@ -10,6 +10,7 @@ use NinjaTooken\ClanBundle\Entity\Clan;
 use NinjaTooken\ClanBundle\Form\Type\ClanType;
 use NinjaTooken\ClanBundle\Entity\ClanUtilisateur;
 use NinjaTooken\ClanBundle\Entity\ClanProposition;
+use NinjaTooken\ClanBundle\Entity\ClanPostulation;
 use NinjaTooken\ForumBundle\Entity\Forum;
 use NinjaTooken\ForumBundle\Entity\Thread;
 use NinjaTooken\UserBundle\Entity\User;
@@ -579,6 +580,102 @@ class DefaultController extends Controller
                     $em->flush();
                 }
             }
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("clan", class="NinjaTookenClanBundle:Clan", options={"mapping": {"clan_nom":"slug"}})
+     */
+    public function clanUtilisateurPostulerAction(Clan $clan)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $em = $this->getDoctrine()->getManager();
+
+            // vérification des droits utilisateurs
+            $canPostule = true;
+            if($user->getClan()){
+                $clanUser = $user->getClan()->getClan();
+                if($clanUser == $clan)
+                    $canPostule = false;
+            }
+
+            // le clan recrute, on peut postuler
+            if($clan->getIsRecruting() && $canPostule){
+
+                $ok = false;
+
+                $postulation = $em->getRepository('NinjaTookenClanBundle:ClanPostulation')->getByClanUser($clan, $user);
+                if($postulation){
+                    // si on avait supprimé la proposition
+                    if($postulation->getEtat()==1){
+                        if($postulation->getDateChangementEtat() <= new \DateTime('-1 days')){
+                            $postulation->setEtat(0);
+                            $ok = true;
+                        }else
+                            $this->get('session')->getFlashBag()->add(
+                                'notice',
+                                $this->get('translator')->trans('notice.clan.postulationKo2')
+                            );
+                    }else
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            $this->get('translator')->trans('notice.clan.postulationKo1')
+                        );
+                }else{
+                    $postulation = new ClanPostulation();
+                    $postulation->setClan($clan);
+                    $postulation->setPostulant($user);
+                    $ok = true;
+                }
+
+                if($ok){
+                    $em->persist($postulation);
+                    $em->flush();
+
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        $this->get('translator')->trans('notice.clan.postulationOk')
+                    );
+                }
+
+            }
+
+            return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
+                'clan_nom' => $clan->getSlug()
+            )));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("clan", class="NinjaTookenClanBundle:Clan", options={"mapping": {"clan_nom":"slug"}})
+     */
+    public function clanUtilisateurPostulerSupprimerAction(Clan $clan)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+            $em = $this->getDoctrine()->getManager();
+
+            $postulation = $em->getRepository('NinjaTookenClanBundle:ClanPostulation')->getByClanUser($clan, $user);
+            if($postulation){
+                $postulation->setEtat(1);
+                $em->persist($postulation);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    $this->get('translator')->trans('notice.clan.postulationSupprimeOk')
+                );
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
+                'clan_nom' => $clan->getSlug()
+            )));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }

@@ -5,12 +5,12 @@ namespace NinjaTooken\ClanBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ClanProposition
+ * ClanPostulation
  *
- * @ORM\Table(name="nt_clanproposition")
- * @ORM\Entity(repositoryClass="NinjaTooken\ClanBundle\Entity\ClanPropositionRepository")
+ * @ORM\Table(name="nt_clanpostulation")
+ * @ORM\Entity(repositoryClass="NinjaTooken\ClanBundle\Entity\ClanPostulationRepository")
  */
-class ClanProposition
+class ClanPostulation
 {
     /**
      * @var integer
@@ -25,13 +25,12 @@ class ClanProposition
      * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
      * @var User
      */
-    private $recruteur;
+    private $postulant;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
-     * @var User
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan")
      */
-    private $postulant;
+    private $clan;
 
     /**
      * @var \DateTime
@@ -59,6 +58,7 @@ class ClanProposition
      */
     public function __construct()
     {
+        $this->setDateChangementEtat(new \DateTime());
         $this->setDateAjout(new \DateTime());
     }
 
@@ -76,7 +76,7 @@ class ClanProposition
      * Set dateAjout
      *
      * @param \DateTime $dateAjout
-     * @return ClanProposition
+     * @return ClanPostulation
      */
     public function setDateAjout($dateAjout)
     {
@@ -96,33 +96,10 @@ class ClanProposition
     }
 
     /**
-     * Set recruteur
-     *
-     * @param \NinjaTooken\UserBundle\Entity\User $recruteur
-     * @return ClanProposition
-     */
-    public function setRecruteur(\NinjaTooken\UserBundle\Entity\User $recruteur = null)
-    {
-        $this->recruteur = $recruteur;
-
-        return $this;
-    }
-
-    /**
-     * Get recruteur
-     *
-     * @return \NinjaTooken\UserBundle\Entity\User 
-     */
-    public function getRecruteur()
-    {
-        return $this->recruteur;
-    }
-
-    /**
      * Set postulant
      *
      * @param \NinjaTooken\UserBundle\Entity\User $postulant
-     * @return ClanProposition
+     * @return ClanPostulation
      */
     public function setPostulant(\NinjaTooken\UserBundle\Entity\User $postulant = null)
     {
@@ -142,10 +119,33 @@ class ClanProposition
     }
 
     /**
+     * Set clan
+     *
+     * @param \NinjaTooken\ClanBundle\Entity\Clan $clan
+     * @return ClanPostulation
+     */
+    public function setClan(\NinjaTooken\ClanBundle\Entity\Clan $clan = null)
+    {
+        $this->clan = $clan;
+
+        return $this;
+    }
+
+    /**
+     * Get clan
+     *
+     * @return \NinjaTooken\ClanBundle\Entity\Clan 
+     */
+    public function getClan()
+    {
+        return $this->clan;
+    }
+
+    /**
      * Set etat
      *
      * @param integer $etat
-     * @return ClanProposition
+     * @return ClanPostulation
      */
     public function setEtat($etat)
     {
@@ -168,7 +168,7 @@ class ClanProposition
      * Set dateChangementEtat
      *
      * @param \DateTime $dateChangementEtat
-     * @return ClanProposition
+     * @return ClanPostulation
      */
     public function setDateChangementEtat($dateChangementEtat)
     {

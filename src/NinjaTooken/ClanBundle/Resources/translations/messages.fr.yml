@@ -36,6 +36,9 @@ description:
         listeVide: Tu n'as actuellement pas de recrutement.
         proposition: Liste des propositions de recrutements
         propositionVide: Tu n'as actuellement pas de proposition de recrutement.
+        propositionRemove: La proposition a été annulée.
+        postulationAdd: Je postule pour entrer dans votre clan.
+        postulationRemove: Je retire ma proposition de recrutement pour entrer dans votre clan.
 notice:
     clan:
         ajoutOk: Le clan a bien été ajouté.
@@ -45,6 +48,10 @@ notice:
         revokeKo: Le joueur ne peut être révoqué dans les conditions actuelles.
         promotionOk: Le nouveau Shishou a correctement été nommé.
         promotionKo: Le joueur ne peut être promu Shishou dans les conditions actuelles.
+        postulationOk: Ta proposition a bien été transmise.
+        postulationKo1: Tu as déjà postulé pour ce clan.
+        postulationKo2: Tu dois attendre au moins un jour entre chaque postulation dans un même clan.
+        postulationSupprimeOk: Ta proposition de recrutement a bien été annulée.
     recrutement:
         cancelOk: Votre proposition de recrutement a bien été annulée.
         addOk: Votre proposition de recrutement a bien été faite.

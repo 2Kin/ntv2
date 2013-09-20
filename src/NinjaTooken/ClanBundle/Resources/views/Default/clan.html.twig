@@ -121,7 +121,7 @@
 							{% endfor %}
 							<br class="clear">
 							{% endif %}
-							{% if clan.isRecruting and ROLE_CLAN == false %}<a href="#" class="button mini">{{ 'action.postuler'|trans }}</a>{% endif %}<br/><br/>
+							{% if clan.isRecruting and ROLE_CLAN == false %}<a href="{{ path('ninja_tooken_clan_postuler', {'clan_nom': clan.slug}) }}" class="button mini">{{ 'action.postuler'|trans }}</a>{% endif %}<br/><br/>
 						</section>
 
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}

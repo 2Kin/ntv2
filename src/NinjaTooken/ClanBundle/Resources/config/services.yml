@@ -4,9 +4,17 @@ parameters:
 services:
     ninjatooken_clan.clan_proposition_listener:
         class: NinjaTooken\ClanBundle\Listener\ClanPropositionListener
+        arguments: ["@translator"]
         tags:
             - { name: doctrine.event_listener, event: preUpdate }
             - { name: doctrine.event_listener, event: postRemove }
+
+    ninjatooken_clan.clan_postulation_listener:
+        class: NinjaTooken\ClanBundle\Listener\ClanPostulationListener
+        arguments: ["@translator"]
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }
+            - { name: doctrine.event_listener, event: postPersist }
 
     ninjatooken_clan.clan_utilisateur_listener:
         class: NinjaTooken\ClanBundle\Listener\ClanUtilisateurListener

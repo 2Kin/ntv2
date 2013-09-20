@@ -327,7 +327,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -1689,18 +1689,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/lessphp.git",
-                "reference": "9cfa4728e186f2679394b903bc2340926062990a"
+                "reference": "887e3c3593122931647bd3e8fad78d932b7b80e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/lessphp/zipball/9cfa4728e186f2679394b903bc2340926062990a",
-                "reference": "9cfa4728e186f2679394b903bc2340926062990a",
+                "url": "https://api.github.com/repos/leafo/lessphp/zipball/887e3c3593122931647bd3e8fad78d932b7b80e0",
+                "reference": "887e3c3593122931647bd3e8fad78d932b7b80e0",
                 "shasum": ""
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.3-dev"
+                    "dev-master": "0.4.x-dev"
                 }
             },
             "autoload": {
@@ -1722,7 +1722,7 @@
             ],
             "description": "lessphp is a compiler for LESS written in PHP.",
             "homepage": "http://leafo.net/lessphp/",
-            "time": "2013-09-11 20:11:27"
+            "time": "2013-09-19 18:36:39"
         },
         {
             "name": "monolog/monolog",
