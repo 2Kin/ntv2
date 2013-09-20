@@ -1,0 +1,173 @@
+popup:
+    delete: This action is irreversible: are you sure?
+    confirm: Confirm
+    cancel: Cancel
+entete:
+    news: The latest news
+    ninja: What Ninja are you?
+compte:
+    compte: My account
+    inscrire: Create your Ninja
+    inscrire2: Create your Ninja
+    pasEncore: Not registered yet?
+    register:
+        meta:
+            description: NinjaTooken - Create my Ninja
+            keywords: NinjaTooken, register, create, ninja
+        titre: Create your Ninja
+        resume: Create an account to save your experience, join a clan, or participate in tournaments.
+        pseudo: Pseudo
+        mail: Mail
+        sexe: Sex
+        homme: Man
+        femme: Woman
+        langue: Language
+        francais: Français
+        anglais: English
+        motPasse: Password
+        motPasseRepeter: Repeat
+        receiveNewsletter: I agree to receive news by email
+        receiveAvertissement: I would like to be notified of new messages by mail
+        captcha: Captcha
+        captchaInstruction: To sign up, reproduce the form below:
+        captchaError: Your browser doesn't support the 'canvas'.
+    request:
+        meta:
+            description: NinjaTooken - Create my Ninja
+            keywords: NinjaTooken, register, create, ninja
+        titre: Forgot Password
+        resume: Forgot your password? Type-in your username or email below, and we'll send you an email to reset it.
+        reinitialiser: Reset
+        noCompte: You don't have an account yet?
+        inscrisToi: Register
+    reset:
+        meta:
+            description: NinjaTooken - Create my Ninja
+            keywords: NinjaTooken, register, create, ninja
+        titre: Reset
+    connect:
+        meta:
+            description: NinjaTooken - Create my Ninja
+            keywords: NinjaTooken, register, create, ninja
+        titre: Login
+        remember: Remember me
+        motPasseOubli: Forgot your password?
+        motPasseReset: Reset-it
+        noCompte: You don't have an account yet?
+description:
+    datetime: the %date% at %time%
+    suite: Read more
+    partenaire: Partners
+    ninja: |
+        Ninja Tooken is a <strong>free network game</strong>!<br/>
+         Discovers an insane world where Ninjas are mercilessly. <strong>Suiton</strong>, <strong>Futon</strong>, <strong>Raiton</strong>, <strong>Doton</strong>, <strong>Katon</strong>... they each have their powers, it's up to you to <strong>choose which class you belong to</strong>! <br/>
+         Create your account to save your <strong>experience</strong>, <strong>integrate a clan</strong>, or <strong>participate in tournaments</strong>.
+    noResult: No results.
+    online: Online
+    offline: Offline
+action:
+    chercher: Search
+    chercherResult: Search results
+    chercherReset: Make another search
+    ok: Ok !
+    supprimer: Remove
+    editer: Edit
+    ajouter: Add
+    repondre: Answer
+    verrouiller: Lock
+    deverrouiller: Unlock
+    postit: Post-it
+    choisir: Choose
+game:
+    force: Strenght
+    vitesse: Speed
+    vie: Life
+    chakra: chakra
+    bouleElementaire:
+        nom: "Chakra Ball"
+        degat: "Inflicts ## damage points"
+        rayon: "Size of ##m."
+        chakra: "Costs ## chakra points"
+    doubleSaut:
+        nom: "Double Jump"
+        saut1: "Reach of the 1° jump increased of ##% compared to the base height"
+        saut2: "Reach of the 2° jump increased of ##% compared to the base height"
+    bouclierElementaire:
+        nom: "Shield"
+        reduction: "Protect at ##%"
+        chakra: "Costs ## chakra points"
+        last: "Last ##s."
+    marcherMur:
+        nom: " Walk on walls"
+        chakra: "Costs ## chakra points"
+        last: "Last ##s."
+    acierRenforce:
+        nom: "Sharpened steel"
+        degat: "Weapons inflicts ##% of extra damage points"
+        chakra: "Costs ## chakra points"
+        last: "Last ##s."
+    deflagrationElementaire:
+        nom: "Explosion"
+        degat: "Inflicts ## damage points"
+        chakra: "Costs ## chakra points"
+        rayon: "Covers an area of ##m. diameter"
+    chakraVie:
+        nom: "Protective chakra"
+        chakra: "Costs ## chakra points"
+        last: "Last ##s."
+    resistanceExplosion:
+        nom: "Protection against the fire"
+        reduction: "Protect at ##%"
+        last: "Last ##s."
+    marcherViteEau:
+        nom: "Walk on water"
+        last: "Last ##s."
+    changerObjet:
+        nom: "Metamorphosis"
+        last: "Last ##s."
+    multishoot:
+        nom: "Multishot"
+        speed: "Time between each shots down by ##s."
+        chakra: "Costs ## chakra points"
+        last: "Last ##s."
+    invisibleman:
+        nom: "Invisibility"
+        opacity: "Invisible at ##%"
+        last: "Last ##s."
+    phoenix:
+        nom: "Phoenix"
+        degat: "Inflicts ## damage points"
+        rayon: "Covers a sphere of ##m. diameter"
+        chakra: "Costs ## chakra points"
+        distance: "Can be launched up to ##m."
+    vague:
+        nom: "Tsunami"
+        degat: "Inflicts ## damage points"
+        temps: "Last ##s."
+        chakra: "Costs ## chakra points"
+        distance: "Can be launched up to ##m."
+    pieux:
+        nom: "Thorns of rock"
+        degat: "Inflicts ## damage points"
+        largeur: "The thorns are spreading ##m. width"
+        longueur: "The thorns are spreading ##m. length"
+        chakra: "Costs ## chakra points"
+        distance: "Can be launched up to ##m."
+    teleportation:
+        nom: "Teleportation"
+        vie: "Inflicts ## damage points"
+        chakra: "Costs ## chakra points"
+        distance: "Can be launched up to ##m."
+    tornade:
+        nom: "Tornade"
+        degat: "Inflicts ## damage points"
+        temps: "Last ##s."
+        chakra: "Costs ## chakra points"
+        distance: "Can be launched up to ##m."
+    kusanagi:
+        nom: "Kusanagi"
+        degat: "Inflicts ## damage points"
+        last: "Last ##s."
+        chakra: "Costs ## chakra points"
+    course: race|]1,+Inf]races
+    assassinat: murder|]1,+Inf]murders

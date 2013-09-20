@@ -20,7 +20,7 @@ notice:
     parametreModifierOk: Tes paramètres ont bien été mis à jour.
     hebergementModifierOk: Le mode d'hébergement de ton avatar a été modifié.
     avatarModifierOk: Ton avatar a bien été mis à jour.
-    mailConfirmationOk: Un mail de confirmation vient d\'être envoyé.
+    mailConfirmationOk: Un mail de confirmation vient d'être envoyé.
     motPasseModifierOk: Ton mot de passe a correctement été modifié.
     amiAjoutOk: %utilisateur% fait désormais partie de tes amis.
     amiBlockOk: %utilisateur% est désormais bloqué.
@@ -75,6 +75,6 @@ parametre:
     modifierAvatar: Modifier ton avatar
     hebergement: Hébergement
     serveur:
-        nt: Serveur NinjaTooken.
+        nt: Serveur NinjaTooken
         gravatar: Gravatar
     suppression: La suppression de compte est définitive, les informations de ton ninja seront définitivement perdues.

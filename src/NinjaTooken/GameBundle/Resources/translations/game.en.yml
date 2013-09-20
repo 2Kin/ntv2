@@ -1,0 +1,38 @@
+clan:
+    rang0: Shishō
+    rang1: Taishō
+    rang2: Jōnin
+    rang3: Chūnin
+recrutement:
+    etat0: In progress
+    etat1: Accepted
+    etat2: Refused
+class:
+    eau: Suiton
+    vent: Futon
+    feu: Katon
+    foudre: Raiton
+    terre: Doton
+jeu:
+    type0: Free for all
+    type1: Team
+    type2: Timed
+    type3: Scroll
+    type4: Capture the sashimono
+carte:
+    type0: Base
+    type1: Island (day)
+    type2: Island (night)
+    type3: Waterfall
+    type4: Tutorial
+    type5: River (day)
+    type6: River (night)
+    type7: Dojo
+    type8: Fortress
+    type9: Shinto Temple
+    type10: Cavern (day)
+    type11: Cavern (night)
+    type12: Arena
+    type13: Fortified Town
+    type14: Mountain
+    type15: The Drunken Dragon

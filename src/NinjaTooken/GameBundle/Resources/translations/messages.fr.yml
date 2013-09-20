@@ -22,7 +22,7 @@ description:
         partie: Les parties actuellement jouées dans NinjaTooken sont directement accessible ici !
     noPartie: Pas de partie pour l'instant.
     classement: NinjaTooken c'est %nombreNinja% joueurs ayant cumulés %experienceTotal% points d'expériences !
-    classe: %classe% L'art de manipuler l'élément %element%
+    classe: %classe%, l'art de manipuler l'élément %element%
     partie: Partie "%type%", version %version%
     position: sur %count% ninjas
 notice:

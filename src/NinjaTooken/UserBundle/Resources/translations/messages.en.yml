@@ -1,0 +1,80 @@
+action:
+    bloquer: Block
+    debloquer: Unblock
+    deleteAll: Delete all
+    confirmer: Confirm
+    supprimer: Delete
+    envoyer: Send
+    repondre: Answer
+    enregistrer: Save
+    suppression: Deletion
+    modifier: Edition
+notice:
+    utilisateur:
+        error404: This user doesn't exist!
+    messageEnvoiOk: The message has been sent.
+    messageSuppressionOk: The message has been deleted.
+    pseudoUtilise: The pseudo requested is already in use.
+    pseudoMax: Maximum pseudo's changes reached.
+    mailModifierKo: The email requested is already in use.
+    parametreModifierOk: Your settings have been updated.
+    hebergementModifierOk: The hosting of your avatar has been updated.
+    avatarModifierOk: Your avatar has been updated.
+    mailConfirmationOk: A confirmation email has been sent.
+    motPasseModifierOk: Your password has been changed.
+    amiAjoutOk: %utilisateur% is now part of your friends.
+    amiBlockOk: %utilisateur% is now blocked.
+    amiUnblockOk: %utilisateur% is unblocked.
+    amiSupprimerOk: Deletion successfully done.
+    amiSupprimerAllOk: Deletion successfully done.
+    captureSupprimerOk: The screenshot has been removed
+keywords:
+    meta:
+        fiche: NinjaTooken, shinobi, ninja, fps, online, free
+        chercher: NinjaTooken, shinobi, ninja, search, fps, online, free
+titre:
+    partieActuelle: Running games
+description:
+    meta:
+        chercher: Search quickly and easily ninja!
+    utilisateur:
+        chercher: %count% user found for "%q%".|]1,+Inf]%count% users found for "%q%".
+ami:
+    numFriend: %count% friend|]1,+Inf]%count% friends
+    numDemande: "{0} No request yet|{1} One pending request|]1,+Inf]%count% pending requests"
+    numBlock: "{0} No blocked request|{1} One blocked request|]1,+Inf]%count% blocked requests"
+    noFriend: No friends yet.
+    noDemande: No requests yet.
+    noBlock: No blocked requests yet.
+mail:
+    newMessage: You just received a new message from %user%:
+capture:
+    noCapture: No screenshots yet.
+fiche:
+    autrePseudo: Other used pseudo
+    dateInscrit: Registered since %date%
+messagerie:
+    newMessage: New Message
+    reception: Inbox
+    envoi: Outbox
+    aujourdhui: Today
+    hier: Yesterday
+    de: From
+    a: to
+    noSelect: No message selected.
+parametre:
+    infoperso: Personals informations
+    noMail:
+        titre: Your email address has not been verified.
+        description: If you forget, you can't recover your password, you won't be notified when a new message, and you won't receive newsletters.
+        envoyer: Send a confirmation email
+    dateNaissance: Date of birth
+    description: Description
+    descriptionInfo: (displayed in your <a href="%urlFiche%">ninja index</a>)
+    avatar: Avatar
+    modifierAvatar: Edit your avatar
+    hebergement: Hosting
+    serveur:
+        nt: NinjaTooken server
+        gravatar: Gravatar
+    suppression: The deletion of your account can't be undone, all your ninja's information will be lost.

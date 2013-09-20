@@ -1,0 +1,43 @@
+action:
+    newEvent: New event
+    suite: Read more
+    editComment: Edit a comment
+    newThread: New topic
+    editTopic: Edit a topic
+    addTopic: Add a topic
+keywords:
+    meta:
+        event: Ninja Tooken, shinobi, ninja, event, stream, concour, tournament, event, as fps, online, free
+        forum: Ninja Tooken, shinobi, ninja, forum, discussion, fps, online, free
+    thread: Ninja Tooken, shinobi, ninja, topic, fps, online, free
+    threadList: Ninja Tooken, shinobi, ninja, topic, message, fps, online, free
+titre:
+    event: The NinjaTooken's events 
+    dernierMessage: Latest posts
+    topic: %count% topic|]1,+Inf]%count% topics
+    dernier: last
+description:
+    meta:
+        event: Tournament, stream, contests, for following all the events of Ninja Tooken and live the game at 200%, it's here!
+        forum: The  NinjaTooken's forum: exchange discoveries, challenge other players, organize a party, provide your improvements, announce a bug...
+    threadList: Topics of "%forum%", it's here for your free fps ninja game.
+    event: Tournaments, streams, competitions: this is where it happens!
+    noEvent: There are currently no events.
+    chercher0: %count% topic found for "%q%"|]1,+Inf]%count% topics found for "%q%"
+    chercher1: in "%forum%"
+    chercher2: '"%user%" as author'
+    error404:
+        message: This message doesn't exist!
+        forum: This forum doesn't exist!
+notice:
+    topic:
+        ajoutOk: The topic has been added.
+        editOk: The topic has been edited.
+        deverrouilleOk: The topic has been unlocked.
+        verrouilleOk: The topic has been locked.
+        postitOk: The topic has been tagged as "post-it".
+        unpostitOk: The topic has been untagged as "post-it".
+    comment:
+        ajoutOk: The comment has been added.
+        editOk: The comment has been edited.
+        deleteOk: The comment has been deleted.

@@ -18,6 +18,7 @@ jeu:
     type1: Equipe
     type2: Chrono
     type3: Parchemin
+    type4: Capture de Sashimono
 carte:
     type0: Base
     type1: Ile (jour)

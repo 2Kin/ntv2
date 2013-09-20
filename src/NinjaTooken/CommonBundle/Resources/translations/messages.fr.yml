@@ -287,8 +287,8 @@ guide:
             sousPartie9:
                 nom: Kusanagi
                 description: |
-                    Cette épée légendaire, pendant japonais d’Excalibur, est l'aboutissement des techniques de combat les plus évoluées, alliées à la plus grande maitrise spirituelle qui soit. À chaque activation de cette puissante relique, une onde de chakra comprimée sera projetée à très grande vitesse devant toi. Le résultat en est une très fine et arquée vague d'énergie totalement inarrêtable. Si un ennemi est touché par ce tranchant hors du commun, il sera repoussé par la puissance dévastatrice de l'attaque.<br>
-                    Amélioration en fonction des points de chakra affectés : Se propage plus loin (et donc devient plus grande), et inflige plus de dégâts mais consomme plus de chakra.<br><br><br>
+                    Cette épée légendaire, pendant japonais d’Excalibur, est l'aboutissement des techniques de combat les plus évoluées, alliées à la plus grande maitrise spirituelle qui soit. À chaque activation de cette puissante relique, une onde de chakra comprimée sera projetée à très grande vitesse devant toi. Le résultat en est une très fine et arquée vague d'énergie totalement inarrêtable.<br>
+                    Amélioration en fonction des points de jutsu affectés : Se propage plus loin (et donc devient plus grande), et inflige plus de dégâts mais consomme plus de chakra.<br><br><br>
                     Voyons maintenant les jutsus spécifiques à chaque classe...
         sousPartie6:
             nom: Jutsus par classes
@@ -300,12 +300,12 @@ guide:
                     nom: Protection contre le feu
                     description: |
                         Cette protection permet de diminuer les dégâts des boules de chakra, des déflagrations, du Phoenix, et des explosifs (tonneau, ou kunaï explosif). Ce jutsu ne consomme pas de chakra.<br>
-                        Amélioration en fonction des points de chakra affectés : La protection augmente.
+                        Amélioration en fonction des points de jutsu affectés : La protection augmente.
                 sousPartie2:
                     nom: Phoenix
                     description: |
                         Cette attaque permet à ton ninja d'envoyer l'esprit du feu sur une zone du terrain ciblée. Une fois l'esprit arrivé à destination, une énorme explosion s'ensuit brulant gravement les ennemis pris dans la fureur élémentale.<br>
-                        Amélioration en fonction des points de chakra affectés : Les dégâts, la distance cible, et le rayon finale d'action augmentent (ainsi que le cout en chakra).<br>
+                        Amélioration en fonction des points de jutsu affectés : Les dégâts, la distance cible, et le rayon finale d'action augmentent (ainsi que le cout en chakra).<br>
                         <strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
             sousPartie2:
                 nom: Suiton, l'eau
@@ -313,12 +313,12 @@ guide:
                     nom: Marcher sur l'eau
                     description: |
                         Ce jutsu permet de marcher sur l'eau, et d’augmenter sa vitesse de déplacement sur et sous cet élément. Marcher sur l'eau est un jutsu actif qui ne consomme pas de chakra.<br>
-                        Amélioration en fonction des points de chakra affectés : Augmente la durée de l'effet, et la vitesse de déplacement.
+                        Amélioration en fonction des points de jutsu affectés : Augmente la durée de l'effet, et la vitesse de déplacement.
                 sousPartie2:
                     nom: Vague
                     description: |
                         Invoque la puissance dévastatrice des esprits aqueux à partir d'une zone ciblée du terrain. Une fois invoquée, la vague suit le terrain sur une trajectoire rectiligne et inflige d'importants dégâts à tous les ennemis touchés.<br>
-                        Amélioration en fonction des points de chakra affectés : Augmente la durée du déplacement, la distance ciblée, les dégâts infligés et le coût en chakra.<br>
+                        Amélioration en fonction des points de jutsu affectés : Augmente la durée du déplacement, la distance ciblée, les dégâts infligés et le coût en chakra.<br>
                         <strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
             sousPartie3:
                 nom: Futon, l'air
@@ -326,12 +326,12 @@ guide:
                     nom: Transparence
                     description: |
                         Ce jutsu rend ton ninja translucide, et ne consomme pas de chakra !<br>
-                        Amélioration en fonction des points de chakra affectés : Le ninja devient de moins en moins visible. La distance nécessaire pour être visé avec le shuriken de l'ombre diminue d'autant !
+                        Amélioration en fonction des points de jutsu affectés : Le ninja devient de moins en moins visible. La distance nécessaire pour être visé avec le shuriken de l'ombre diminue d'autant !
                 sousPartie2:
                     nom: Tornade
                     description: |
                         Déclenche la puissance versatile du vent durant un temps limitée. A partir de ton ninja et vers une zone ciblée du terrain, la tornade se déplace en spirale et inflige d'importants dégâts à tous les ennemis touchés.<br>
-                        Amélioration en fonction des points de chakra affectés : Augmente la distance ciblée, le temps d'invocation, les dégâts infligés et le coût en chakra.<br>
+                        Amélioration en fonction des points de jutsu affectés : Augmente la distance ciblée, le temps d'invocation, les dégâts infligés et le coût en chakra.<br>
                         <strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
             sousPartie4:
                 nom: Doton, la terre
@@ -339,12 +339,12 @@ guide:
                     nom: Métamorphose
                     description: |
                         Ce jutsu de spécialité doton permet à ton ninja de se transformer en rocher pendant une certaine durée. Lorsque ton ninja est sous la forme d’un rocher, il regagnera de la vie. Pour se cacher et attaquer en fourbe, il n'y a pas mieux ! La métamorphose est un jutsu actif, qui s'annule dès que tu te déplaces.<br>
-                        Amélioration en fonction des points de chakra affectés : La transformation dure plus longtemps, et fait gagner plus de vie.
+                        Amélioration en fonction des points de jutsu affectés : La transformation dure plus longtemps, et fait gagner plus de vie.
                 sousPartie2:
                     nom: Pieux
                     description: |
                         Invoque la puissance de la terre, à partir d'une zone ciblée du terrain. Une fois invoqué, de nombreux pieux surgissent de la terre et viennent empaler les ennemis leur infligeant d'importants dégâts.<br>
-                        Amélioration en fonction des points de chakra affectés : Augmente la distance ciblée, le nombre de pieux, les dégâts infligés et le coût en chakra.<br>
+                        Amélioration en fonction des points de jutsu affectés : Augmente la distance ciblée, le nombre de pieux, les dégâts infligés et le coût en chakra.<br>
                         <strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
             sousPartie5:
                 nom: Raiton, la foudre
@@ -352,12 +352,12 @@ guide:
                     nom: Tirs multiples
                     description: |
                         Le multishoot est un jutsu permettant d'augmenter la cadence de tir de ton ninja. Il fonctionne pour toutes les <a href="#arme" title="armes">attaques physiques</a> (hormis le katana).<br>
-                        Amélioration en fonction des points de chakra affectés : La cadence de tir augmente de plus en plus (l'intervalle entre les attaques est malgré tout limitée à 150ms au minimum !).
+                        Amélioration en fonction des points de jutsu affectés : La cadence de tir augmente de plus en plus (l'intervalle entre les attaques est malgré tout limitée à 150ms au minimum !).
                 sousPartie2:
                     nom: Téléportation
                     description: |
                         Appel les pouvoirs de célérité de la foudre du ninja vers une zone ciblée. Une fois invoquée, les élémentaires de la foudre transporte le ninja vers une zone ciblée à une vitesse hallucinante en échange d'un don de vie.<br>
-                        Amélioration en fonction des points de chakra affectés : La distance de téléportation et le cout en chakra augmentent avec le nombre de points de vie exigés.
+                        Amélioration en fonction des points de jutsu affectés : La distance de téléportation et le cout en chakra augmentent avec le nombre de points de vie exigés.
         sousPartie7:
             nom: Armes
             description: |

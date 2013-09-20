@@ -1,0 +1,69 @@
+filtre:
+    composition: composition
+    experience: average of experience
+    nombre: number of ninja
+    date: date added
+action:
+    fonder: Found a clan
+    page: Clan page
+    recrutement: Recruitment
+    quitter: Quit the clan
+    postuler: Apply
+    destituer: Revoke
+    recruter: Recruit
+    refuser: Deny
+    accepter: Approve
+    annuler: Cancel
+    promouvoir: Promote Shisho and quit the clan
+keywords:
+    meta: Ninja Tooken, shinobi, ninja, clan, team, team, fps, free, online, free
+description:
+    meta: Who is the most powerful clan of NinjaTooken? Create a clan, recruit players, challenge the best and increase your fame!
+    entete: %count% ninja since the %date%|]1,+Inf]%count% ninjas since the %date%
+    chercher: %count% clan found for "%q%".|]1,+Inf]%count% clans found for "%q%".
+    creation: the %date%
+    fonde: Founded the %date%
+    perso: Perso page :
+    organisation: Clan organization
+    partenaire: Partners
+    dernier: Latest clans
+    error404 :
+        clan: This clan does not exist!
+    recrutement:
+        ouvert: recruitments open
+        ferme: recruitments closed
+        liste: List of your past, present, and future recruitment !
+        listeVide: You don't have recruitment.
+        proposition: List of recruitment proposals
+        propositionVide: You don't have recruitment proposals.
+notice:
+    clan:
+        ajoutOk: Your clan is up and running.
+        editOk: The clan has correctly been updated.
+        deleteOk: The clan no longer exists.
+        revokeOk: The player and his recruts have been revoked.
+        revokeKo: The player can't be revoked.
+        promotionOk: The new Shisho has been correctly promoted.
+        promotionKo: The player can't be promoted Shisho.
+    recrutement:
+        cancelOk: Your recruitment proposal has been canceled.
+        addOk: Your recruitment proposal has been proceeded.
+        addKo: A recruitment proposal has already been proceeded.
+        bienvenue: Welcome to your new clan!
+mail:
+    recrutement:
+        nouveau:
+            sujet: Recruitment proposal
+            contenu: |
+                <p>A recruitment proposal has been addressed by <a href="%userUrl%">%userPseudo%</a>.<br/>
+                <a href="%urlRefuser%" class="button small delete">Decline</a> or <a href="%urlAccepter%" class="button small delete">Accept</a></p>
+        refuser:
+            sujet: Re : Recruitment proposal
+            contenu: Declined :/
+        accepter:
+            sujet: Re : Recruitment proposal
+            contenu: Accepted !!
+forum:
+    numThread: %count% topic|]1,+Inf]%count% topics
+    newThread: New topic
+    noThread: No topic yet.
