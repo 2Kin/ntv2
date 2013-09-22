@@ -44,24 +44,25 @@ ninja_tooken_clan_destituer_shishou:
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurSupprimerShishou }
 
 ninja_tooken_clan_recruter:
-    pattern:  /clan-recruter
+    pattern:  /compte/clan
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruter }
 
-ninja_tooken_clan_recruter_supprimer:
-    pattern:  /clan-recruter/{user_nom}/supprimer
-    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterSupprimer }
-
-ninja_tooken_clan_recruter_ajouter:
-    pattern:  /clan-recruter/{user_nom}
-    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterAjouter }
-
 ninja_tooken_clan_recruter_accepter:
-    pattern:  /clan-recruter-accepter/{user_nom}/{recruteur_nom}
+    pattern:  /compte/clan/accepter/{user_nom}/{recruteur_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterAccepter }
 
 ninja_tooken_clan_recruter_refuser:
-    pattern:  /clan-recruter-refuser/{user_nom}/{recruteur_nom}
+    pattern:  /compte/clan/refuser/{user_nom}/{recruteur_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterRefuser }
+
+ninja_tooken_clan_recruter_supprimer:
+    pattern:  /compte/clan/{user_nom}/supprimer
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterSupprimer }
+
+ninja_tooken_clan_recruter_ajouter:
+    pattern:  /compte/clan/{user_nom}
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterAjouter }
+
 
 ninja_tooken_clan_postuler:
     pattern:  /clan-postuler/{clan_nom}

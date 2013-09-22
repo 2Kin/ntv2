@@ -1,30 +1,20 @@
 {% extends '::layout.html.twig' %}
 {% import "avatar.html.twig" as avatar %}
 
-{% block title %}NinjaTooken - {% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }} - recrutements{% endblock %}
+{% block title %}NinjaTooken - {{ 'menu.clan'|trans({}, 'menu') }}{% endblock %}
 {% block description %}{% endblock %}
 {% block keywords %}{% endblock %}
 
 {% block breadcrumbs1 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<span itemprop="title">{{ 'menu.communaute'|trans({}, 'menu') }}</span>
-							</span>  <i class="icon-angle-right"></i> 
-							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<a href="{{ path('ninja_tooken_clans') }}" itemprop="url">
-									<span itemprop="title">{{ 'menu.clan'|trans({}, 'menu') }}</span>
-								</a>
-							</span>  <i class="icon-angle-right"></i> 
-							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}" itemprop="url">
-									<span itemprop="title">{% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}</span>
-								</a>
+								<span itemprop="title">{{ 'menu.compte'|trans({}, 'menu') }}</span>
 							</span>
 {% endblock %}
 
 {% block breadcrumbs2 %}
 							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 								<a href="{{ path('ninja_tooken_clan_recruter') }}" itemprop="url">
-									<span itemprop="title">{{ 'action.recrutement'|trans }}</span>
+									<span itemprop="title">{{ 'menu.clan'|trans({}, 'menu') }}</span>
 								</a>
 							</span>
 {% endblock %}

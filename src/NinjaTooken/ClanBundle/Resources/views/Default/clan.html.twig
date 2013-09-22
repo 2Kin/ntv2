@@ -43,7 +43,6 @@
                                 {{ 'description.fonde'|trans({'%date%': clan.dateAjout|localizeddate('medium', 'none', app.request.locale)}) }}
 								{% if ROLE_SHISHOU %}<a href="{{ path('ninja_tooken_clan_supprimer', {clan_nom:clan.slug}) }}" class="button mini pull-right delete">{{ 'action.supprimer'|trans({}, 'common') }}</a>{% endif %}
 								{% if ROLE_ADMIN or ROLE_SHISHOU %}<a href="{{ path('ninja_tooken_clan_modifier', {clan_nom:clan.slug}) }}" class="button mini pull-right">{{ 'action.editer'|trans({}, 'common') }}</a>{% endif %}
-								{% if ROLE_CLAN %}<a href="{{ path('ninja_tooken_clan_recruter') }}" class="button mini pull-right">{{ 'action.recrutement'|trans }}</a>{% endif %}
 							</h3>
 							<img src="{{ kamon.getUrl(clan) }}" class="pull-left clan">
 							{{ clan.description|raw|purify('full') }}
