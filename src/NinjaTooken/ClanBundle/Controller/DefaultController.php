@@ -373,11 +373,12 @@ class DefaultController extends Controller
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
             if($user->getClan()){
-                $repo = $em->getRepository('NinjaTookenClanBundle:ClanProposition');
+                $repo_proposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition');
+                $repo_demande = $em->getRepository('NinjaTookenClanBundle:ClanPostulation');
                 return $this->render('NinjaTookenClanBundle:Default:clan.recrutement.html.twig', array(
-                    'recrutements' => $repo->getPropositionByRecruteur($user),
-                    'propositions' => $repo->getPropositionByPostulant($user),
-                    'clan' => $user->getClan()->getClan()
+                    'recrutements' => $repo_proposition->getPropositionByRecruteur($user),
+                    'propositions' => $repo_proposition->getPropositionByPostulant($user),
+                    'demandes' => $repo_demande->getByUser($user)
                 ));
             }
             return $this->redirect($this->generateUrl('ninja_tooken_clans'));
@@ -580,6 +581,7 @@ class DefaultController extends Controller
                     $em->flush();
                 }
             }
+            return $this->redirect($this->generateUrl('ninja_tooken_clan_recruter'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
@@ -673,9 +675,7 @@ class DefaultController extends Controller
                     $this->get('translator')->trans('notice.clan.postulationSupprimeOk')
                 );
             }
-            return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
-                'clan_nom' => $clan->getSlug()
-            )));
+            return $this->redirect($this->generateUrl('ninja_tooken_clan_recruter'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }

@@ -27,27 +27,32 @@
 							{{ flashMessage }}
 						    </div>
 						{% endfor %}
-						{% if app.user.clan.droit<3 %}
-							<h3>{{ 'description.recrutement.liste'|trans }}</h3>
-							{% if recrutements %}
-								{% for recrutement in recrutements %}
-									<div class="row-fluid">
-										<div class="span2">{% if recrutement.etat == 0 %}<i class="icon-time"></i>{% elseif recrutement.etat == 1 %}<i class="icon-thumbs-up"></i>{% elseif recrutement.etat==2 %}<i class="icon-thumbs-down"></i>{% endif %} {{ ('recrutement.etat' ~ recrutement.etat)|trans({}, 'game') }}</strong></div>
-										<div class="span3"><a href="{{ path('ninja_tooken_user_fiche', {'user_nom' : recrutement.postulant.slug}) }}">{{ recrutement.postulant.username }}</a></div>
-										<div class="span5">
-											{% if recrutement.etat == 0 %}
-											{{ recrutement.dateAjout|localizeddate('full', 'none', app.request.locale) }} à {{ recrutement.dateAjout|localizeddate('none', 'short', app.request.locale) }}
-											{% else %}
-											{{ recrutement.dateChangementEtat|localizeddate('full', 'none', app.request.locale) }} à {{ recrutement.dateChangementEtat|localizeddate('none', 'short', app.request.locale) }}
-											{% endif %}
+						{% if app.user.clan %}
+							<h4>{{ 'description.recrutement.clan'|trans({'%rang%': ('clan.rang' ~ app.user.clan.droit)|trans({}, 'game') , '%urlClan%': path('ninja_tooken_clan', {'clan_nom' : app.user.clan.clan.slug}), '%nomClan%': app.user.clan.clan.nom })|raw }}</h4><br>
+							{% if app.user.clan.droit<3 %}
+								{{ 'description.recrutement.recrutementPossible'|trans }}<br>
+								<h3>{{ 'description.recrutement.liste'|trans }}</h3>
+								{% if recrutements %}
+									{% for recrutement in recrutements %}
+										<div class="row-fluid">
+											<div class="span2">{% if recrutement.etat == 0 %}<i class="icon-time"></i>{% elseif recrutement.etat == 1 %}<i class="icon-thumbs-up"></i>{% elseif recrutement.etat==2 %}<i class="icon-thumbs-down"></i>{% endif %} {{ ('recrutement.etat' ~ recrutement.etat)|trans({}, 'game') }}</strong></div>
+											<div class="span3"><a href="{{ path('ninja_tooken_user_fiche', {'user_nom' : recrutement.postulant.slug}) }}">{{ recrutement.postulant.username }}</a></div>
+											<div class="span5">
+												{% if recrutement.etat == 0 %}
+												{{ recrutement.dateAjout|localizeddate('full', 'none', app.request.locale) }} à {{ recrutement.dateAjout|localizeddate('none', 'short', app.request.locale) }}
+												{% else %}
+												{{ recrutement.dateChangementEtat|localizeddate('full', 'none', app.request.locale) }} à {{ recrutement.dateChangementEtat|localizeddate('none', 'short', app.request.locale) }}
+												{% endif %}
+											</div>
+											<div class="span2"><a href="{{ path('ninja_tooken_clan_recruter_supprimer', {'user_nom' : recrutement.postulant.slug}) }}" class="button small{% if recrutement.etat==0 %} delete{% endif %}">{{ 'action.annuler'|trans }}</a></div>
 										</div>
-										<div class="span2"><a href="{{ path('ninja_tooken_clan_recruter_supprimer', {'user_nom' : recrutement.postulant.slug}) }}" class="button small{% if recrutement.etat==0 %} delete{% endif %}">{{ 'action.annuler'|trans }}</a></div>
-									</div>
-								{% endfor %}
-							{% else %}
-							{{ 'description.recrutement.listeVide'|trans }}<br><br>
+									{% endfor %}
+								{% else %}
+								{{ 'description.recrutement.listeVide'|trans }}<br><br>
+								{% endif %}
 							{% endif %}
 						{% endif %}
+
 						<h3>{{ 'description.recrutement.proposition'|trans }}</h3>
 						{% if propositions %}
 							{% for proposition in propositions %}
@@ -65,8 +70,24 @@
 								</div>
 							{% endfor %}
 						{% else %}
-							{{ 'description.recrutement.propositionVide'|trans }}
+							{{ 'description.recrutement.propositionVide'|trans }}<br><br>
 						{% endif %}
+
+						<h3>{{ 'description.recrutement.demande'|trans }}</h3>
+						{% if demandes %}
+							{% for demande in demandes %}
+								<div class="row-fluid">
+									<div class="span5"><a href="{{ path('ninja_tooken_clan', {'clan_nom' : demande.clan.slug}) }}">{% if demande.clan.tag is not empty %}[{{ demande.clan.tag }}] {% endif %}{{ demande.clan.nom }}</a></div>
+									<div class="span5">
+										{{ demande.dateAjout|localizeddate('full', 'none', app.request.locale) }} à {{ demande.dateAjout|localizeddate('none', 'short', app.request.locale) }}
+									</div>
+									<div class="span2"><a href="{{ path('ninja_tooken_clan_postuler_supprimer', {'clan_nom' : demande.clan}) }}" class="button small delete">{{ 'action.annuler'|trans }}</a></div>
+								</div>
+							{% endfor %}
+						{% else %}
+							{{ 'description.recrutement.demandeVide'|trans }}
+						{% endif %}
+
 					</section>
 
 					<aside class="span4">

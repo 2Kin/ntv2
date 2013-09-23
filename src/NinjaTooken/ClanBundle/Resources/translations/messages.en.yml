@@ -30,15 +30,19 @@ description:
     error404 :
         clan: This clan does not exist!
     recrutement:
+        clan: You are currently %rang% in <a href="%urlClan%">%nomClan%</a>.
+        recrutementPossible: As such, you can offer to other players to join the protectorate of your clan ...
         ouvert: recruitments open
         ferme: recruitments closed
-        liste: List of your past, present, and future recruitment !
-        listeVide: You don't have recruitment.
-        proposition: List of recruitment proposals
-        propositionVide: You don't have recruitment proposals.
+        liste: Recruitments you propose
+        listeVide: You've not made proposals yet.
+        proposition: Recruitments that are offered to you
+        propositionVide: You don't have proposals yet.
         propositionRemove: The proposal has been canceled.
         postulationAdd: I'm applying to enter in your clan.
         postulationRemove: I withdraw my recruitment proposal from your clan.
+        demande: Clans in which you applied
+        demandeVide: You have not yet applied.
 notice:
     clan:
         ajoutOk: Your clan is up and running.

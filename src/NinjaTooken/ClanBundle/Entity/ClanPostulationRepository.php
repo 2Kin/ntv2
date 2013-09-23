@@ -23,4 +23,16 @@ class ClanPostulationRepository extends EntityRepository
 
         return $query->getQuery()->getOneOrNullResult();
     }
+
+    public function getByUser(User $user=null)
+    {
+
+        if(isset($user)){
+            $query = $this->createQueryBuilder('cp');
+            $query->andWhere('cp.postulant = :user')
+                ->setParameter('user', $user);
+            return $query->getQuery()->getResult();
+        }
+        return null;
+    }
 }
