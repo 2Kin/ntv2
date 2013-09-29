@@ -5,6 +5,8 @@ action:
     newThread: New topic
     editTopic: Edit a topic
     addTopic: Add a topic
+    editEvent: Edit an event
+    addEvent: Add an event
 keywords:
     meta:
         event: Ninja Tooken, shinobi, ninja, event, stream, concour, tournament, event, as fps, online, free
@@ -33,6 +35,7 @@ notice:
     topic:
         ajoutOk: The topic has been added.
         editOk: The topic has been edited.
+        deleteOk: The topic has been deleted.
         deverrouilleOk: The topic has been unlocked.
         verrouilleOk: The topic has been locked.
         postitOk: The topic has been tagged as "post-it".

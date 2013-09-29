@@ -15,8 +15,10 @@ class ForumRepository extends EntityRepository
 
         if($clan){
             $query->where('f.clan = :clan')
-                ->setParameter('clan', $clan);
-        }
+            ->setParameter('clan', $clan);
+        }else
+            $query->where('f.clan is null');
+
         if(!empty($slug)){
             $query->andWhere('f.slug = :slug')
             ->setParameter('slug', $slug);

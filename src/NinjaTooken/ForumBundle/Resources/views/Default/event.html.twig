@@ -21,7 +21,7 @@
 {% block body %}
 				<div id="timeline"></div>
 				<section class="forum">
-					{% if is_granted("ROLE_ADMIN") %}<a href="#" class="button pull-right">{{ 'action.newEvent'|trans }}</a>{% endif %}
+					{% if is_granted("ROLE_ADMIN") %}<a href="{{ path('ninja_tooken_event_ajouter') }}" class="button pull-right">{{ 'action.newEvent'|trans }}</a><br class="clear">{% endif %}
 					{% if threads is not empty %}
 					{% set firstThread = threads|first %}
 					{% set firstDate = firstThread.dateAjout %}
@@ -29,6 +29,8 @@
 						{% set firstDate = firstThread.dateEventStart %}
 					{% endif %}
 					<script>
+					var _local = "{{ app.request.locale }}";
+					var embed_path = "{{ asset('bundles/ninjatookencommon/js/vendor/') }}";
 					var _timeline = {"timeline":{
 						"headline":"{{ 'titre.event'|trans|escape('js') }}",
 						"type":"default",

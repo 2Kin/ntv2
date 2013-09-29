@@ -10,6 +10,7 @@ use NinjaTooken\UserBundle\Entity\User;
 use NinjaTooken\ForumBundle\Entity\Forum;
 use NinjaTooken\ForumBundle\Entity\Thread;
 use NinjaTooken\ForumBundle\Form\Type\ThreadType;
+use NinjaTooken\ForumBundle\Form\Type\EventType;
 use NinjaTooken\ForumBundle\Entity\Comment;
 use NinjaTooken\ForumBundle\Form\Type\CommentType;
 
@@ -74,6 +75,122 @@ class DefaultController extends Controller
             'page' => $page,
             'nombrePage' => ceil(count($threads)/$num)
         ));
+    }
+
+    public function eventAjouterAction(Request $request)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if($security->isGranted('ROLE_ADMIN') !== false){
+                $thread = new Thread();
+                $thread->setAuthor($user);
+                $forum = $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Forum')->getForum('nouveautes')[0];
+                $thread->setForum($forum);
+                $thread->setIsEvent(true);
+                $form = $this->createForm(new EventType(), $thread);
+                if('POST' === $request->getMethod()) {
+                    // cas particulier du formulaire avec tinymce
+                    $request->request->set('thread', array_merge(
+                        $request->request->get('thread'),
+                        array('body' => $request->get('thread_body'))
+                    ));
+
+                    $form->bind($request);
+
+                    if ($form->isValid()) {
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($thread);
+                        $em->flush();
+
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            $this->get('translator')->trans('notice.topic.ajoutOk')
+                        );
+
+                        return $this->redirect($this->generateUrl('ninja_tooken_event'));
+                    }
+                }
+                return $this->render('NinjaTookenForumBundle:Default:event.form.html.twig', array(
+                    'form' => $form->createView()
+                ));
+            }
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"thread_nom":"slug"}})
+     */
+    public function eventModifierAction(Request $request, Thread $thread)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false){
+                $form = $this->createForm(new EventType(), $thread);
+                if('POST' === $request->getMethod()) {
+                    // cas particulier du formulaire avec tinymce
+                    $request->request->set('thread', array_merge(
+                        $request->request->get('thread'),
+                        array('body' => $request->get('thread_body'))
+                    ));
+
+                    $form->bind($request);
+
+                    if ($form->isValid()) {
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($thread);
+                        $em->flush();
+
+                        $this->get('session')->getFlashBag()->add(
+                            'notice',
+                            $this->get('translator')->trans('notice.topic.editOk')
+                        );
+
+                        return $this->redirect($this->generateUrl('ninja_tooken_thread', array(
+                            'forum_nom' => $thread->getForum()->getSlug(),
+                            'thread_nom' => $thread->getSlug()
+                        )));
+                    }
+                }
+                return $this->render('NinjaTookenForumBundle:Default:event.form.html.twig', array(
+                    'thread' => $thread,
+                    'form' => $form->createView()
+                ));
+            }
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
+     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"thread_nom":"slug"}})
+     */
+    public function eventSupprimerAction(Thread $thread)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            if($security->isGranted('ROLE_ADMIN') !== false){
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($thread);
+                $em->flush();
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    $this->get('translator')->trans('notice.topic.deleteOk')
+                );
+
+                return $this->redirect($this->generateUrl('ninja_tooken_event'));
+            }
+        }
+        return $this->redirect($this->generateUrl('ninja_tooken_event'));
     }
 
     public function forumAction()
@@ -253,7 +370,6 @@ class DefaultController extends Controller
                         array('body' => $request->get('thread_body'))
                     ));
 
-                    //$request->get('thread[body]') = $request->get('thread_body');
                     $form->bind($request);
 
                     if ($form->isValid()) {
@@ -362,7 +478,7 @@ class DefaultController extends Controller
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
-                    'Le topic a bien été supprimé.'
+                    $this->get('translator')->trans('notice.topic.deleteOk')
                 );
 
                 if(!$forum->getClan())

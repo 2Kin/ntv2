@@ -18,9 +18,10 @@ class FriendRepository extends EntityRepository
             ->setParameter('user', $user)
             ->addOrderBy('f.dateAjout', 'DESC')
             ->setFirstResult(($page-1) * $nombreParPage)
-            ->setMaxResults($nombreParPage);
+            ->setMaxResults($nombreParPage)
+            ->distinct(true);
 
-        return new Paginator($query);
+        return $query->getQuery()->getResult();
     }
 
     public function getDemandes(User $user, $nombreParPage=5, $page=1)

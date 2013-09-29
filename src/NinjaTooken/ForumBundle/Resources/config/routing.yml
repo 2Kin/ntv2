@@ -12,6 +12,18 @@ ninja_tooken_event:
     requirements:
         page:  \d*
 
+ninja_tooken_event_ajouter:
+    pattern:  /event/ajouter/
+    defaults: { _controller: NinjaTookenForumBundle:Default:eventAjouter }
+
+ninja_tooken_event_modifier:
+    pattern:  /event/{thread_nom}/modifier/
+    defaults: { _controller: NinjaTookenForumBundle:Default:eventModifier }
+
+ninja_tooken_event_supprimer:
+    pattern:  /event/{thread_nom}/supprimer/
+    defaults: { _controller: NinjaTookenForumBundle:Default:eventSupprimer }
+
 ninja_tooken_forum:
     pattern:  /forum
     defaults: { _controller: NinjaTookenForumBundle:Default:forum }

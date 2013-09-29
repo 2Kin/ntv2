@@ -38,7 +38,7 @@
 
 						{% if friends is not empty %}
 						{% for friend in friends %}
-						<div class="membre offline pull-left">
+						<div class="membre {{ render(controller('NinjaTookenUserBundle:Default:online', {'user':friend.friend})) }} pull-left">
 							<a href="{{ path('ninja_tooken_user_fiche', {user_nom:friend.friend.slug}) }}"><img src="{{ avatar.getUrl(friend.friend) }}">{{ friend.friend.username }}</a>
 							<a href="{{ path('ninja_tooken_user_amis_bloquer', {id:friend.id}) }}" class="button small">{{ 'action.bloquer'|trans }}</a>
 						</div>

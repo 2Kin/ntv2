@@ -462,7 +462,9 @@ $(document).ready(function(){
 			width: '100%',
 			height: '600',
 			source: _timeline,
-			embed_id: 'timeline'
+			lang: _local,
+			embed_id: 'timeline',
+			start_at_end: true
 		});
 	}
 

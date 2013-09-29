@@ -1,0 +1,52 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - {% if thread is not defined %}{{ 'action.addTopic'|trans }}{% else %}{{ 'action.editTopic'|trans }}{% endif %}{% endblock %}
+{% block description %}{% endblock %}
+{% block keywords %}{% endblock %}
+
+{% block breadcrumbs1 %}
+
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<span itemprop="title">{{ 'menu.jeu'|trans({}, 'menu') }}</span>
+							</span> <i class="icon-angle-right"></i>
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_event') }}" itemprop="url">
+									<span itemprop="title">{{ 'menu.evenement'|trans({}, 'menu') }}</span>
+								</a>
+							</span>
+                            {% if thread is defined %}
+							<i class="icon-angle-right"></i>
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+								<a href="{{ path('ninja_tooken_event_modifier', {thread_nom:thread.slug}) }}" itemprop="url">
+									<span itemprop="title">{% if thread.isCommentable == false %}<i class="icon-lock"></i> {% endif %}{% if thread.isPostit =='1' %}<i class="icon-pushpin"></i> {% endif %}{% if date(thread.lastCommentAt) > date('-1days') %}<i class="icon-eye-open"></i> {% endif %}{{ thread.nom }}</span>
+								</a>
+							</span>
+                            {% endif %}
+{% endblock %}
+
+{% block breadcrumbs2 %}
+							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                            {% if thread is not defined %}
+								<a href="{{ path('ninja_tooken_event_ajouter') }}" itemprop="url">
+									<span itemprop="title"><i class="icon-plus"></i> {{ 'action.addEvent'|trans }}</span>
+								</a>
+                            {% else %}
+								<a href="{{ path('ninja_tooken_event_modifier', {thread_nom:thread.slug}) }}" itemprop="url">
+									<span itemprop="title"><i class="icon-pencil"></i> {{ 'action.editEvent'|trans }}</span>
+								</a>
+                            {% endif %}
+							</span>
+{% endblock %}
+
+{% block body %}
+				<section class="forum">
+				    <form action="#" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full">
+					{{ form_widget(form) }}
+					<div class="row-fluid">
+					    <div class="span8 offset4">
+						<input type="submit" value="{% if thread is not defined %}{{ 'action.ajouter'|trans({}, 'common') }}{% else %}{{ 'action.editer'|trans({}, 'common') }}{% endif %}" class="button">
+					    </div>
+					</div>
+				    </form>
+				</section>
+{% endblock %}

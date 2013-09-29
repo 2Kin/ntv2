@@ -6,7 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\ORM\Query\ResultSetMapping;
 use NinjaTooken\UserBundle\Entity\User;
 use NinjaTooken\UserBundle\Entity\Friend;
 use NinjaTooken\UserBundle\Entity\Capture;
@@ -521,10 +523,11 @@ class DefaultController extends Controller
             $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Friend');
 
             $friends = $repo->getFriends($user, $num, $page);
+            $numFriends = $repo->getNumFriends($user);
 
             return $this->render('NinjaTookenUserBundle:Default:amis.html.twig', array(
                 'friends' => $friends,
-                'numFriends' => $repo->getNumFriends($user),
+                'numFriends' => $numFriends,
                 'numBlocked' => $repo->getNumBlocked($user),
                 'numDemande' => $repo->getNumDemandes($user),
                 'page' => $page,
@@ -790,5 +793,20 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('ninja_tooken_user_captures'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    public function onlineAction(User $user){
+        $conn = $this->container->get('database_connection');
+        //vérifie sur le chat
+        $statement  = $conn->executeQuery('SELECT userID FROM ajax_chat_online WHERE userID = ? AND  dateTime > DATE_SUB(NOW(), INTERVAL 10 MINUTE)', array($user->getId()));
+        if(!$statement->fetch()){
+            // vérifie en jeu
+            $statement  = $conn->executeQuery('SELECT user_id FROM nt_lobby_user WHERE user_id = ?', array($user->getId()));
+            if($statement->fetch()){
+                return new Response("online");
+            }
+            return new Response("offline");
+        }
+        return new Response("online");
     }
 }
