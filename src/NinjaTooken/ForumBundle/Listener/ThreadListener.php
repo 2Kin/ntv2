@@ -11,6 +11,7 @@ class ThreadListener
     public function postRemove(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
+        $em = $args->getEntityManager();
 
         if ($entity instanceof Thread)
         {

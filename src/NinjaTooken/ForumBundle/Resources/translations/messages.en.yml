@@ -15,6 +15,7 @@ keywords:
     threadList: Ninja Tooken, shinobi, ninja, topic, message, fps, online, free
 titre:
     event: The NinjaTooken's events 
+    eventDate: Event's date :
     dernierMessage: Latest posts
     topic: %count% topic|]1,+Inf]%count% topics
     dernier: last

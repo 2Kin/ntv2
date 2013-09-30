@@ -58,6 +58,16 @@
 							</header>
 							<div class="content clearfix" itemprop="articleBody">
 								{{ thread.body|raw|purify('full') }}
+								{% if thread.isEvent and (thread.dateEventStart is not null or thread.dateEventEnd is not null) %}
+								<p><br><strong>{{ 'titre.eventDate'|trans }}
+									{% if thread.dateEventStart is not null %}
+										{{ thread.dateEventStart|localizeddate('full', 'none', app.request.locale) }}
+									{% endif %}
+									{% if thread.dateEventEnd is not null %}
+										- {{ thread.dateEventEnd|localizeddate('full', 'none', app.request.locale) }}
+									{% endif %}
+								</strong></p>
+								{% endif %}
 							</div>
 							<p class="clearfix">
 							{% if thread.isCommentable == true or ROLE_ADMIN %}
@@ -66,7 +76,7 @@
 								{% endif %}
 								{% if ROLE_ADMIN or thread.author == app.user %}
 							<a href="{{ path('ninja_tooken_thread_supprimer', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right delete">{{ 'action.supprimer'|trans({}, 'common') }}</a>
-							<a href="{{ path('ninja_tooken_thread_modifier', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">{{ 'action.editer'|trans({}, 'common') }}</a>
+							<a href="{% if thread.isEvent %}{{ path('ninja_tooken_event_modifier', {thread_nom:thread.slug}) }}{% else %}{{ path('ninja_tooken_thread_modifier', {forum_nom:forum.slug, thread_nom:thread.slug}) }}{% endif %}" class="button mini pull-right">{{ 'action.editer'|trans({}, 'common') }}</a>
 								{% endif %}
 								{% if ROLE_ADMIN %}
 								<a href="{{ path('ninja_tooken_thread_verrouiller', {forum_nom:forum.slug, thread_nom:thread.slug}) }}" class="button mini pull-right">{% if thread.isCommentable %}{{ 'action.verrouiller'|trans({}, 'common') }}{% else %}{{ 'action.deverrouiller'|trans({}, 'common') }}{% endif %}</a>

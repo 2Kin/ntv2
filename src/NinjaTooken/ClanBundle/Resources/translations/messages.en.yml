@@ -19,7 +19,7 @@ keywords:
     meta: Ninja Tooken, shinobi, ninja, clan, team, team, fps, free, online, free
 description:
     meta: Who is the most powerful clan of NinjaTooken? Create a clan, recruit players, challenge the best and increase your fame!
-    entete: %count% ninja since the %date%|]1,+Inf]%count% ninjas since the %date%
+    entete: %count% ninja since %date%|]1,+Inf]%count% ninjas since %date%
     chercher: %count% clan found for "%q%".|]1,+Inf]%count% clans found for "%q%".
     creation: the %date%
     fonde: Founded the %date%

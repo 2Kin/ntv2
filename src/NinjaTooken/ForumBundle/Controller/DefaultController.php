@@ -93,9 +93,9 @@ class DefaultController extends Controller
                 $form = $this->createForm(new EventType(), $thread);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
-                    $request->request->set('thread', array_merge(
-                        $request->request->get('thread'),
-                        array('body' => $request->get('thread_body'))
+                    $request->request->set('event', array_merge(
+                        $request->request->get('event'),
+                        array('body' => $request->get('event_body'))
                     ));
 
                     $form->bind($request);
@@ -135,9 +135,9 @@ class DefaultController extends Controller
                 $form = $this->createForm(new EventType(), $thread);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
-                    $request->request->set('thread', array_merge(
-                        $request->request->get('thread'),
-                        array('body' => $request->get('thread_body'))
+                    $request->request->set('event', array_merge(
+                        $request->request->get('event'),
+                        array('body' => $request->get('event_body'))
                     ));
 
                     $form->bind($request);
@@ -165,32 +165,6 @@ class DefaultController extends Controller
             }
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
-    }
-
-    /**
-     * @ParamConverter("thread", class="NinjaTookenForumBundle:Thread", options={"mapping": {"thread_nom":"slug"}})
-     */
-    public function eventSupprimerAction(Thread $thread)
-    {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
-            $user = $security->getToken()->getUser();
-
-            if($security->isGranted('ROLE_ADMIN') !== false){
-                $em = $this->getDoctrine()->getManager();
-                $em->remove($thread);
-                $em->flush();
-
-                $this->get('session')->getFlashBag()->add(
-                    'notice',
-                    $this->get('translator')->trans('notice.topic.deleteOk')
-                );
-
-                return $this->redirect($this->generateUrl('ninja_tooken_event'));
-            }
-        }
-        return $this->redirect($this->generateUrl('ninja_tooken_event'));
     }
 
     public function forumAction()
@@ -472,6 +446,8 @@ class DefaultController extends Controller
             $user = $security->getToken()->getUser();
 
             if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false){
+                $isEvent = $thread->getIsEvent();
+
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($thread);
                 $em->flush();
@@ -481,11 +457,14 @@ class DefaultController extends Controller
                     $this->get('translator')->trans('notice.topic.deleteOk')
                 );
 
-                if(!$forum->getClan())
-                    return $this->redirect($this->generateUrl('ninja_tooken_topic', array(
-                        'forum_nom' => $forum->getSlug()
-                    )));
-                else
+                if(!$forum->getClan()){
+                    if($isEvent)
+                        return $this->redirect($this->generateUrl('ninja_tooken_event'));
+                    else
+                        return $this->redirect($this->generateUrl('ninja_tooken_topic', array(
+                            'forum_nom' => $forum->getSlug()
+                        )));
+                }else
                     return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
                         'clan_nom' => $forum->getClan()->getSlug()
                     )));

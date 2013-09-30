@@ -45,12 +45,31 @@
 {# kamon #}
 {% block choice_widget_collapsed %}
 {% spaceless %}
+    {% if id=='clan_kamon' %}
     <div class="kamon">
     {% for group_label, choice in choices %}
         <div{% if choice is selectedchoice(value) %} class="selected"{% endif %} data-val="{{ choice.value }}"><img src="{{ asset(choice.value) }}" class="clan" alt="{{ choice.label|trans({}, translation_domain) }}"></div>
     {% endfor %}
     <input type="hidden"{{ block('widget_attributes') }} value="{{ value }}">
     </div>
+    {% else %}
+    <label class="select">
+        <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+            {% if empty_value is not none %}
+                <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+            {% endif %}
+            {% if preferred_choices|length > 0 %}
+                {% set options = preferred_choices %}
+                {{ block('choice_widget_options') }}
+                {% if choices|length > 0 and separator is not none %}
+                    <option disabled="disabled">{{ separator }}</option>
+                {% endif %}
+            {% endif %}
+            {% set options = choices %}
+            {{ block('choice_widget_options') }}
+        </select>
+    </label>&nbsp;
+    {% endif %}
 {% endspaceless %}
 {% endblock choice_widget_collapsed %}
 
