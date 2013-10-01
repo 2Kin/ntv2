@@ -35,4 +35,17 @@ class ClanPostulationRepository extends EntityRepository
         }
         return null;
     }
+
+    public function getByClan(Clan $clan=null)
+    {
+
+        if(isset($clan)){
+            $query = $this->createQueryBuilder('cp');
+            $query->where('cp.clan = :clan')
+                ->setParameter('clan', $clan);
+
+            return $query->getQuery()->getResult();
+        }
+        return null;
+    }
 }

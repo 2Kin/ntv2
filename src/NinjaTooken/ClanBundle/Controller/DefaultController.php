@@ -371,17 +371,18 @@ class DefaultController extends Controller
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
+            $clan = $user->getClan();
             $em = $this->getDoctrine()->getManager();
-            if($user->getClan()){
-                $repo_proposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition');
-                $repo_demande = $em->getRepository('NinjaTookenClanBundle:ClanPostulation');
-                return $this->render('NinjaTookenClanBundle:Default:clan.recrutement.html.twig', array(
-                    'recrutements' => $repo_proposition->getPropositionByRecruteur($user),
-                    'propositions' => $repo_proposition->getPropositionByPostulant($user),
-                    'demandes' => $repo_demande->getByUser($user)
-                ));
-            }
-            return $this->redirect($this->generateUrl('ninja_tooken_clans'));
+
+            $repo_proposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition');
+            $repo_demande = $em->getRepository('NinjaTookenClanBundle:ClanPostulation');
+
+            return $this->render('NinjaTookenClanBundle:Default:clan.recrutement.html.twig', array(
+                'recrutements' => $repo_proposition->getPropositionByRecruteur($user),
+                'propositions' => $repo_proposition->getPropositionByPostulant($user),
+                'demandes' => $repo_demande->getByUser($user),
+                'demandesFrom' => $clan && $clan->getDroit()<3?$repo_demande->getByClan($clan->getClan()):null
+            ));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
@@ -428,18 +429,17 @@ class DefaultController extends Controller
 
             if($user->getClan()){
                 $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByUsers($user, $utilisateur);
+                $translator = $this->get('translator');
                 if(!$clanProposition){
-                    $translator = $this->get('translator');
 
                     $clanProposition = new ClanProposition();
                     $clanProposition->setRecruteur($user);
                     $clanProposition->setPostulant($utilisateur);
-
                     // ajoute le message
                     $message = new Message();
                     $message->setAuthor($user);
                     $message->setNom($translator->trans('mail.recrutement.nouveau.sujet'));
-                    $message->setContent($translator->trans('mail.recrutement.nouveau.content', array(
+                    $message->setContent($translator->trans('mail.recrutement.nouveau.contenu', array(
                         '%userUrl%' => $this->generateUrl('ninja_tooken_user_fiche', array(
                             'user_nom' => $user->getSlug()
                         )),
@@ -475,7 +475,7 @@ class DefaultController extends Controller
                 }
                 return $this->redirect($this->getRequest()->headers->get('referer'));
             }
-            return $this->redirect($this->generateUrl('ninja_tooken_homepage'));
+            return $this->redirect($this->generateUrl('ninja_tooken_clan_recruter'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }

@@ -78,7 +78,7 @@
 								<div class="row-fluid">
 									<div class="span3 offset1"><label class="libelle required">Destinataire(s)</label></div>
 									<div class="span8">
-										<ul id="destinations" class="fake-input" data-find="{{ path('ninja_tooken_user_find') }}"></ul>
+										<ul id="destinations" class="fake-input clearfix" data-find="{{ path('ninja_tooken_user_find') }}"></ul>
 									</div>
 								</div>
 								{{ form_widget(form) }}
@@ -110,7 +110,7 @@
 								<div class="row-fluid">
 									<div class="span3 offset1"><label class="libelle required">Destinataire(s)</label></div>
 									<div class="span8">
-										<ul id="destinations" class="fake-input" data-find="{{ path('ninja_tooken_user_find') }}">
+										<ul id="destinations" class="fake-input clearfix" data-find="{{ path('ninja_tooken_user_find') }}">
 											{# l'expéditeur du message #}
 											{% if currentmessage.author != app.user %}<li data-value="{{ currentmessage.author.id }}" data-libelle="{{ currentmessage.author.username }}">{{ currentmessage.author.username }}</li>{% endif %}
 											{# les destinataires du message #}

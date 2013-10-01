@@ -30,7 +30,7 @@ description:
     error404 :
         clan: Ce clan n'existe pas !
     recrutement:
-        clan: Tu es actuellement %rang% du clan <a href="%urlClan">%nomClan%</a>.
+        clan: Tu es actuellement %rang% du clan <a href="%urlClan%">%nomClan%</a>.
         recrutementPossible: A ce titre, tu peux proposer à d'autres joueurs d'intégrer le clan sous ton protectorat...
         ouvert: recrutements ouverts
         ferme: recrutements fermés
@@ -43,6 +43,8 @@ description:
         postulationRemove: Je retire ma proposition de recrutement pour entrer dans votre clan.
         demande: Les clans chez qui tu as postulé
         demandeVide: Tu n'as pas encore fait de demande.
+        demandeFrom: Les joueurs qui désirent rentrer dans ton clan.
+        demandeFromVide: Aucun joueur n'a fait de demande pour l'instant.
 notice:
     clan:
         ajoutOk: Le clan a bien été ajouté.
@@ -57,8 +59,8 @@ notice:
         postulationKo2: Tu dois attendre au moins un jour entre chaque postulation dans un même clan.
         postulationSupprimeOk: Ta proposition de recrutement a bien été annulée.
     recrutement:
-        cancelOk: Votre proposition de recrutement a bien été annulée.
-        addOk: Votre proposition de recrutement a bien été faite.
+        cancelOk: Ta proposition de recrutement a bien été annulée.
+        addOk: Ta proposition de recrutement a bien été faite.
         addKo: Une proposition de recrutement a déjà été faite.
         bienvenue: Bienvenue dans ton nouveau clan !
 mail:

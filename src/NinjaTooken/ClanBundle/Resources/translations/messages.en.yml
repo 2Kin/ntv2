@@ -43,6 +43,8 @@ description:
         postulationRemove: I withdraw my recruitment proposal from your clan.
         demande: Clans in which you applied
         demandeVide: You have not yet applied.
+        demandeFrom: Players who wish to enter in your clan.
+        demandeFromVide: No one have made ​​a request.
 notice:
     clan:
         ajoutOk: Your clan is up and running.
