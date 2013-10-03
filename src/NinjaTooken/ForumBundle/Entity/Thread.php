@@ -73,6 +73,7 @@ class Thread
      * @var Forum
      *
      * @ORM\ManyToOne(targetEntity="Forum")
+     * @ORM\JoinColumn(name="forum_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $forum;
 

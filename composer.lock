@@ -327,7 +327,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -2593,12 +2593,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stfalcon/TinymceBundle.git",
-                "reference": "cd00aa03c1d47067cf64216e3ecfa2605deab191"
+                "reference": "58f61296f6b141ad0a7d101ff1f160d3f7b4c946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/cd00aa03c1d47067cf64216e3ecfa2605deab191",
-                "reference": "cd00aa03c1d47067cf64216e3ecfa2605deab191",
+                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/58f61296f6b141ad0a7d101ff1f160d3f7b4c946",
+                "reference": "58f61296f6b141ad0a7d101ff1f160d3f7b4c946",
                 "shasum": ""
             },
             "require": {
@@ -2642,7 +2642,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2013-09-16 06:40:50"
+            "time": "2013-10-03 08:01:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -3079,16 +3079,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.13.2",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "v1.13.2"
+                "reference": "224fc55635d544a2ec8edb3592be18db5a093f59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/v1.13.2",
-                "reference": "v1.13.2",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/224fc55635d544a2ec8edb3592be18db5a093f59",
+                "reference": "224fc55635d544a2ec8edb3592be18db5a093f59",
                 "shasum": ""
             },
             "require": {
@@ -3097,7 +3097,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.13-dev"
+                    "dev-master": "1.14-dev"
                 }
             },
             "autoload": {
@@ -3124,7 +3124,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-08-03 15:35:31"
+            "time": "2013-10-03 06:41:20"
         }
     ],
     "packages-dev": [

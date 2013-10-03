@@ -27,7 +27,7 @@ class ClanUtilisateurRepository extends EntityRepository
                 ->setParameter('recruteur', $recruteur);
         }
 
-        $query->orderBy('cu.dateAjout', 'DESC')
+        $query->orderBy('cu.dateAjout', 'ASC')
             ->setFirstResult(($page-1) * $nombreParPage)
             ->setMaxResults($nombreParPage);
 

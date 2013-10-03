@@ -15,10 +15,6 @@ class ThreadListener
 
         if ($entity instanceof Thread)
         {
-            if($entity->getNumComments() > 0){
-                $em = $args->getEntityManager();
-                $em->getRepository('NinjaTookenForumBundle:Comment')->deleteCommentsByThread($entity);
-            }
             // retire du thread
             if($entity->getForum() !== null)
             {

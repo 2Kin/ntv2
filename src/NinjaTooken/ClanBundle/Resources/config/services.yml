@@ -2,6 +2,11 @@ parameters:
 #    ninja_tooken_clan.example.class: NinjaTooken\ClanBundle\Example
 
 services:
+    ninjatooken_clan.clan_listener:
+        class: NinjaTooken\ClanBundle\Listener\ClanListener
+        tags:
+            - { name: doctrine.event_listener, event: postRemove }
+
     ninjatooken_clan.clan_proposition_listener:
         class: NinjaTooken\ClanBundle\Listener\ClanPropositionListener
         arguments: ["@translator"]
@@ -20,3 +25,4 @@ services:
         class: NinjaTooken\ClanBundle\Listener\ClanUtilisateurListener
         tags:
             - { name: doctrine.event_listener, event: postRemove }
+            - { name: doctrine.event_listener, event: postPersist }

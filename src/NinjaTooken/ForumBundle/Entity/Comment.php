@@ -23,6 +23,7 @@ class Comment
      *
      * @var Thread
      * @ORM\ManyToOne(targetEntity="NinjaTooken\ForumBundle\Entity\Thread")
+     * @ORM\JoinColumn(name="thread_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $thread;
 

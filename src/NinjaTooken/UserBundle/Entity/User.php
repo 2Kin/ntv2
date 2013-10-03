@@ -585,6 +585,18 @@ class User extends BaseUser
     }
 
     /**
+     * Set recruts collection
+     *
+     * @return User
+     */
+    public function setRecruts(\Doctrine\Common\Collections\Collection $recruts)
+    {
+        $this->recruts = $recruts;
+
+        return $this;
+    }
+
+    /**
      * Add ips
      *
      * @param \NinjaTooken\UserBundle\Entity\Ip $ips

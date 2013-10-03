@@ -168,6 +168,49 @@ class DefaultController extends Controller
     }
 
     /**
+     * @ParamConverter("utilisateur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     */
+    public function clanEditerSwitchAction(User $utilisateur)
+    {
+        $security = $this->get('security.context');
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+            $user = $security->getToken()->getUser();
+
+            // vérification des droits utilisateurs
+            $isShisho = false;
+            if($user->getClan()){
+                if($user->getClan()->getDroit()==0)
+                    $isShisho = true;
+            }
+
+            if($isShisho || $security->isGranted('ROLE_ADMIN') !== false){
+
+                $clanutilisateur = $utilisateur->getClan();
+                $clan = $user->getClan()->getClan();
+                if($clanutilisateur && $clanutilisateur->getClan()==$clan){
+                    $em = $this->getDoctrine()->getManager();
+
+                    $clanutilisateur->setCanEditClan(!$clanutilisateur->getCanEditClan());
+                    $em->persist($clanutilisateur);
+
+                    $em->flush();
+
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        $this->get('translator')->trans('notice.clan.editOk')
+                    );
+                }
+                return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
+                    'clan_nom' => $clan->getSlug()
+                )));
+            }
+            return $this->redirect($this->generateUrl('ninja_tooken_clans'));
+        }
+        return $this->redirect($this->generateUrl('fos_user_security_login'));
+    }
+
+    /**
      * @ParamConverter("clan", class="NinjaTookenClanBundle:Clan", options={"mapping": {"clan_nom":"slug"}})
      */
     public function clanModifierAction(Request $request, Clan $clan)
@@ -248,14 +291,19 @@ class DefaultController extends Controller
 
             // vérification des droits utilisateurs
             $canDelete = false;
-            if($user->getClan()){
-                $clanUser = $user->getClan()->getClan();
-                if($clanUser == $clan && $user->getClan()->getDroit()==0)
+            $clanutilisateur = $user->getClan();
+            if($clanutilisateur){
+                if($clanutilisateur->getClan() == $clan && $clanutilisateur->getDroit()==0)
                     $canDelete = true;
             }
 
             if($canDelete || $security->isGranted('ROLE_ADMIN') !== false){
                 $em = $this->getDoctrine()->getManager();
+
+                // enlève les évènement sur clan_utilisateur
+                // on cherche à tous les supprimer et pas à ré-agencer la structure
+                $evm = $em->getEventManager();
+                $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_clan.clan_utilisateur_listener'));
 
                 $em->remove($clan);
                 $em->flush();
@@ -288,7 +336,13 @@ class DefaultController extends Controller
                 if( (!empty($userRecruts) && $userRecruts->contains($clanutilisateur)) || $user==$utilisateur ){
                     $clan = $clanutilisateur->getClan();
                     // pas un shishou !
-                    if($clanutilisateur->getEtat() > 0){
+                    if($clanutilisateur->getDroit() > 0){
+                        $utilisateur->setClan(null);
+                        $em->persist($utilisateur);
+
+                        $user->removeRecrut($clanutilisateur);
+                        $em->persist($user);
+
                         $em->remove($clanutilisateur);
                         $em->flush();
 
@@ -333,14 +387,33 @@ class DefaultController extends Controller
 
                     // on vérifie que le joueur visé fait parti du même clan
                     if($utilisateur->getClan()){
-                        $clanutilisateur_old = $utilisateur->getClan();
-                        if($clanutilisateur_old->getClan() == $clan){
-                            // supprime l'état de l'ancien joueur visé
-                            $em->remove($clanutilisateur_old);
+                        $clanutilisateur_promote = $utilisateur->getClan();
+                        if($clanutilisateur_promote->getClan() == $clan){
 
-                            // échange ses droits avec celui du shishou actuel
+                            // supprime l'ancienne liaison du joueur à promouvoir
+                            $utilisateur->setClan(null);
+                            $em->persist($utilisateur);
+
+                            $em->remove($clanutilisateur_promote);
+                            $em->flush();// permet de remplacer le ninja promu dans la hiérarchie via le listener
+
+                            // modifie la liaison du shisho pour pointer vers le nouveau !
                             $clanutilisateur->setMembre($utilisateur);
+
+                            // échange les recruts avec le shishou actuel
+                            $recruts = $user->getRecruts();
+                            foreach($recruts as $recrut){
+                                $recrut->setRecruteur($utilisateur);
+                                $user->removeRecrut($recrut);
+                                $utilisateur->addRecrut($recrut);
+                                $em->persist($recrut);
+                            }
+                            $em->persist($utilisateur);
                             $em->persist($clanutilisateur);
+
+                            // supprime l'état de l'ancien joueur visé
+                            $user->setClan(null);
+                            $em->persist($user);
 
                             $em->flush();
 
@@ -482,7 +555,7 @@ class DefaultController extends Controller
 
     /**
      * @ParamConverter("utilisateur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
-     * @ParamConverter("recruteur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     * @ParamConverter("recruteur", class="NinjaTookenUserBundle:User", options={"mapping": {"recruteur_nom":"slug"}})
      */
     public function clanUtilisateurRecruterAccepterAction(User $utilisateur, User $recruteur)
     {
@@ -505,17 +578,21 @@ class DefaultController extends Controller
                         $clanProposition->setEtat(1);
                         $em->persist($clanProposition);
 
-                        // on supprime une ancienne liaison
-                        if($utilisateur->getClan() !== null){
-                            $em->remove($utilisateur->getClan());
+                        // on modifie une ancienne liaison
+                        if($user->getClan() !== null){
+                            $cu = $user->getClan();
+                        // on ajoute la nouvelle liaison
+                        }else{
+                            $cu = new ClanUtilisateur();
                         }
 
-                        // on ajoute la nouvelle liaison
-                        $cu = new ClanUtilisateur();
                         $cu->setRecruteur($recruteur);
-                        $cu->setMembre($utilisateur);
+                        $cu->setMembre($user);
                         $cu->setClan($clanutilisateur->getClan());
                         $cu->setDroit($clanutilisateur->getDroit() + 1);
+                        $user->setClan($cu);
+
+                        $em->persist($user);
                         $em->persist($cu);
 
                         // on ajoute un message
@@ -548,7 +625,7 @@ class DefaultController extends Controller
 
     /**
      * @ParamConverter("utilisateur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
-     * @ParamConverter("recruteur", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
+     * @ParamConverter("recruteur", class="NinjaTookenUserBundle:User", options={"mapping": {"recruteur_nom":"slug"}})
      */
     public function clanUtilisateurRecruterRefuserAction(User $utilisateur, User $recruteur)
     {

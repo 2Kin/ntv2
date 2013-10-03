@@ -77,14 +77,16 @@
 								<div class="row-fluid">
 									<div class="span2">{% if proposition.etat == 0 %}<i class="icon-time"></i>{% elseif  proposition.etat == 1 %}<i class="icon-thumbs-up"></i>{% elseif proposition.etat==2 %}<i class="icon-thumbs-down"></i>{% endif %} {{ ('recrutement.etat' ~ proposition.etat)|trans({}, 'game') }}</strong></div>
 									<div class="span3"><a href="{{ path('ninja_tooken_user_fiche', {'user_nom' : proposition.recruteur.slug}) }}">{{ proposition.recruteur.username }}</a></div>
+									{% if proposition.etat == 0 %}
 									<div class="span4">
-										{% if proposition.etat == 0 %}
-											{{ 'description.datetime'|trans({'%date%':proposition.dateAjout|localizeddate('full', 'none', app.request.locale), '%time%':proposition.dateAjout|localizeddate('none', 'short', app.request.locale)}, 'common') }}
-										{% else %}
-											{{ 'description.datetime'|trans({'%date%':proposition.dateChangementEtat|localizeddate('full', 'none', app.request.locale), '%time%':proposition.dateChangementEtat|localizeddate('none', 'short', app.request.locale)}, 'common') }}
-										{% endif %}
+										{{ 'description.datetime'|trans({'%date%':proposition.dateAjout|localizeddate('full', 'none', app.request.locale), '%time%':proposition.dateAjout|localizeddate('none', 'short', app.request.locale)}, 'common') }}
 									</div>
 									<div class="span3"><a href="{{ path('ninja_tooken_clan_recruter_accepter', {'user_nom' : app.user.slug, 'recruteur_nom' : proposition.recruteur.slug}) }}" class="button small delete">{{ 'action.accepter'|trans }}</a> <a href="{{ path('ninja_tooken_clan_recruter_refuser', {'user_nom' : app.user.slug, 'recruteur_nom' : proposition.recruteur.slug}) }}" class="button small delete">{{ 'action.refuser'|trans }}</a></div>
+                                    {% else %}
+									<div class="span7">
+										{{ 'description.datetime'|trans({'%date%':proposition.dateChangementEtat|localizeddate('full', 'none', app.request.locale), '%time%':proposition.dateChangementEtat|localizeddate('none', 'short', app.request.locale)}, 'common') }}
+									</div>
+                                    {% endif %}
 								</div>
 							{% endfor %}
 						{% else %}

@@ -35,6 +35,10 @@ ninja_tooken_clan_supprimer:
     pattern:  /clan/{clan_nom}/supprimer
     defaults: { _controller: NinjaTookenClanBundle:Default:clanSupprimer }
 
+ninja_tooken_clan_editer_switch:
+    pattern:  /clan-editer-switch/{user_nom}
+    defaults: { _controller: NinjaTookenClanBundle:Default:clanEditerSwitch }
+
 ninja_tooken_clan_destituer:
     pattern:  /clan-destituer/{user_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurSupprimer }
