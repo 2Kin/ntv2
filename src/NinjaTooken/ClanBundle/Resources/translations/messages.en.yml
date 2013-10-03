@@ -15,6 +15,8 @@ action:
     accepter: Approve
     annuler: Cancel
     promouvoir: Promote Shisho and quit the clan
+    autoriserEdit: Allow to edit the Clan
+    interdireEdit: Disallow to edit the Clan
 keywords:
     meta: Ninja Tooken, shinobi, ninja, clan, team, team, fps, free, online, free
 description:

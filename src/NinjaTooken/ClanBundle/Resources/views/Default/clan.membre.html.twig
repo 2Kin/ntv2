@@ -11,7 +11,7 @@
         <a href="{{ path('ninja_tooken_clan_recruter_ajouter', {'user_nom':recruteur.membre.slug}) }}" class="button small pull-right">{{ 'action.recruter'|trans }}</a>
     {% endif %}
     {% if ROLE_SHISHOU %}
-	<a href="{{ path('ninja_tooken_clan_editer_switch', {'user_nom':recruteur.membre.slug}) }}" class="button small pull-left">{% if recruteur.canEditClan %}Interdire{% else %}Permettre{% endif %} l'édition du clan</a>
+	<a href="{{ path('ninja_tooken_clan_editer_switch', {'user_nom':recruteur.membre.slug}) }}" class="button small pull-left">{% if recruteur.canEditClan %}{{ 'action.interdireEdit'|trans }}{% else %}{{ 'action.autoriserEdit'|trans }}{% endif %}</a>
 	<br><a href="{{ path('ninja_tooken_clan_destituer_shishou', {'user_nom':recruteur.membre.slug}) }}" class="button small pull-left delete">{{ 'action.promouvoir'|trans }}</a>
     {% endif %}
 {% endif %}
