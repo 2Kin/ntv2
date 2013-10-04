@@ -18,6 +18,7 @@
 {% block body %}
 				<form action="#" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full" id="register">
 					<h3>{{ 'compte.register.resume'|trans({}, 'common') }}</h3>
+                    {{ form_errors(form) }}
 					<div class="row-fluid">
 						<div class="span3 offset1">
 							<label class="libelle required" for="pseudo">{{ 'compte.register.pseudo'|trans({}, 'common') }}</label>
@@ -55,8 +56,8 @@
 							<label class="libelle required">{{ 'compte.register.sexe'|trans({}, 'common') }}</label>
 						</div>
 						<div class="span8">
-							<input type="radio" name="fos_user_registration_form[sexe]" value="m" id="input_sexe_h" checked><label for="input_sexe_h"> {{ 'compte.register.homme'|trans({}, 'common') }}</label>
-							<input type="radio" name="fos_user_registration_form[sexe]" value="f" id="input_sexe_f"><label for="input_sexe_f"> {{ 'compte.register.femme'|trans({}, 'common') }}</label>
+							<input type="radio" name="fos_user_registration_form[gender]" value="m" id="input_sexe_h" checked><label for="input_sexe_h"> {{ 'compte.register.homme'|trans({}, 'common') }}</label>
+							<input type="radio" name="fos_user_registration_form[gender]" value="f" id="input_sexe_f"><label for="input_sexe_f"> {{ 'compte.register.femme'|trans({}, 'common') }}</label>
 						</div>
 					</div>
 					<div class="row-fluid">
@@ -64,8 +65,8 @@
 							<label class="libelle required">{{ 'compte.register.langue'|trans({}, 'common') }}</label>
 						</div>
 						<div class="span8">
-							<input type="radio" name="fos_user_registration_form[langue]" value="fr" id="input_langue_fr" checked><label for="input_langue_fr"> {{ 'compte.register.francais'|trans({}, 'common') }}</label>
-							<input type="radio" name="fos_user_registration_form[langue]" value="en" id="input_langue_en"><label for="input_langue_en"> {{ 'compte.register.anglais'|trans({}, 'common') }}</label>
+							<input type="radio" name="fos_user_registration_form[locale]" value="fr" id="input_langue_fr" checked><label for="input_langue_fr"> {{ 'compte.register.francais'|trans({}, 'common') }}</label>
+							<input type="radio" name="fos_user_registration_form[locale]" value="en" id="input_langue_en"><label for="input_langue_en"> {{ 'compte.register.anglais'|trans({}, 'common') }}</label>
 						</div>
 					</div>
 					<div class="row-fluid">

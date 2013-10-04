@@ -10,6 +10,7 @@ class RegistrationFormType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
             ->add('username', null, array(
                 'label' => 'compte.register.pseudo',
