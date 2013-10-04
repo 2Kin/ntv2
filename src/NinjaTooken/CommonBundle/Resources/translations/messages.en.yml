@@ -520,7 +520,7 @@ team:
     description: |
         Ninja Tooken, it's ninjas and shurikens, but also ...
     description1: |
-        For any questions, don't hesitate to <a href="%urlContact%" title="contact us>contact us</ a>!
+        For any questions, don't hesitate to <a href="%urlContact%" title="contact us">contact us</a>!
     partie1:
         nom: 3D graphics
     partie2:

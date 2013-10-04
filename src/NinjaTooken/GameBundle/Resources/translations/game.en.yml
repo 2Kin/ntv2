@@ -13,6 +13,12 @@ class:
     feu: Katon
     foudre: Raiton
     terre: Doton
+element:
+    eau: water
+    vent: wind
+    feu: fire
+    foudre: thunder
+    terre: earth
 jeu:
     type0: Free for all
     type1: Team

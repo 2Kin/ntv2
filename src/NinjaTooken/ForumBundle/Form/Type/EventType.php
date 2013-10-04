@@ -10,25 +10,41 @@ class EventType extends AbstractType
     {
         $builder
             ->add('nom', 'text', array(
-                'label' => 'Nom',
+                'label' => 'label.nom',
                 'label_attr' => array('class' => 'libelle')
             ))
             ->add('body', 'textarea', array(
-                'label' => 'Contenu',
+                'label' => 'label.body',
                 'label_attr' => array('class' => 'libelle')
             ))
             ->add('dateEventStart', 'date', array(
-                'label' => 'Début de l\'event',
+                'format' => 'dd MMMM yyyy',
+                'view_timezone' => "Europe/Paris",
+                'model_timezone' => "Europe/Paris",
+                'empty_value' => array(
+                    'day' => 'label.jour',
+                    'month' => 'label.mois',
+                    'year' => 'label.annee'
+                ),
+                'label' => 'label.dateEventStart',
                 'label_attr' => array('class' => 'libelle'),
                 'required' => false
             ))
             ->add('dateEventEnd', 'date', array(
-                'label' => 'Fin de l\'event',
+                'format' => 'dd MMMM yyyy',
+                'view_timezone' => "Europe/Paris",
+                'model_timezone' => "Europe/Paris",
+                'empty_value' => array(
+                    'day' => 'label.jour',
+                    'month' => 'label.mois',
+                    'year' => 'label.annee'
+                ),
+                'label' => 'label.dateEventEnd',
                 'label_attr' => array('class' => 'libelle'),
                 'required' => false
             ))
             ->add('url_video', 'text', array(
-                'label' => 'Url Vidéo',
+                'label' => 'label.url_video',
                 'label_attr' => array('class' => 'libelle'),
                 'required' => false
             ));

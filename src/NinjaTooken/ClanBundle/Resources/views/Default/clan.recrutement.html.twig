@@ -22,11 +22,6 @@
 {% block body %}
 				<div class="row-fluid main">
 					<section class="span8">
-						{% for flashMessage in app.session.flashbag.get('notice') %}
-						    <div class="flash-notice">
-							{{ flashMessage }}
-						    </div>
-						{% endfor %}
 						{% if app.user.clan %}
 							<h4>{{ 'description.recrutement.clan'|trans({'%rang%': ('clan.rang' ~ app.user.clan.droit)|trans({}, 'game') , '%urlClan%': path('ninja_tooken_clan', {'clan_nom' : app.user.clan.clan.slug}), '%nomClan%': app.user.clan.clan.nom })|raw }}</h4><br>
 							{% if app.user.clan.droit<3 %}
@@ -67,6 +62,8 @@
 							{% else %}
 								{{ 'description.recrutement.demandeFromVide'|trans }}<br>
 							{% endif %}
+                        {% else %}
+                            <p>{{ 'description.recrutement.noClan'|trans({'%urlClan%': path('ninja_tooken_clans'), '%urlClanCreer%': path('ninja_tooken_clan_ajouter')})|raw }}</p>
 
 							<hr>
 

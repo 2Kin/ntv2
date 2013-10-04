@@ -26,12 +26,6 @@
 						<a href="{{ path('ninja_tooken_user_amis_demande', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis_demande' %} class="actif"{% endif %}><i class="icon-heart-empty"></i> {{ 'ami.numDemande'|transchoice(numDemande) }} - 
 						<a href="{{ path('ninja_tooken_user_amis_blocked', {page:1}) }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis_blocked' %} class="actif"{% endif %}><i class="icon-frown"></i> {{ 'ami.numBlock'|transchoice(numBlocked) }}</a>
 					</h3>
-					{% for flashMessage in app.session.flashbag.get('notice') %}
-					    <div class="flash-notice">
-						{{ flashMessage }}
-					    </div>
-					{% endfor %}
-
 					{% if app.request.attributes.get('_route')=='ninja_tooken_user_amis' %}
 						<p><span class="legend online"> {{ 'description.online'|trans({},'common') }}</span>
 						<span class="legend offline"> {{ 'description.offline'|trans({},'common') }}</span></p>

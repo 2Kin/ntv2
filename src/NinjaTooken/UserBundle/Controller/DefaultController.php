@@ -40,8 +40,10 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo_message = $em->getRepository('NinjaTookenUserBundle:Message');
         $repo_friend = $em->getRepository('NinjaTookenUserBundle:Friend');
+        $repo_propo = $em->getRepository('NinjaTookenClanBundle:ClanProposition');
         $user->numNewMessage = $repo_message->getNumNewMessages($user);
         $user->numDemandesFriends = $repo_friend->getNumDemandes($user);
+        $user->numPropositionsRecrutement = $repo_propo->getNumPropositionsByPostulant($user);
 
         $ninja = $user->getNinja();
         if($ninja){

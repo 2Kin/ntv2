@@ -6,7 +6,7 @@
                                 <ul>
                                     <li><a href="{{ path('ninja_tooken_user_messagerie') }}" class="pull-left"><i class="icon-envelope-alt"></i> {{ 'menu.messagerie'|trans({}, 'menu') }}{% if user.numNewMessage>0 %} <sup>{{ user.numNewMessage }}</sup>{% endif %}</a></li>
                                     <li><a href="{{ path('ninja_tooken_user_amis') }}" class="pull-left"><i class="icon-heart"></i> {{ 'menu.ami'|trans({}, 'menu') }}{% if user.numDemandesFriends>0 %} <sup>{{ user.numDemandesFriends }}</sup>{% endif %}</a></li>
-                                    <li><a href="{{ path('ninja_tooken_clan_recruter') }}" class="pull-left"><i class="icon-ticket"></i> {{ 'menu.clan'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_clan_recruter') }}" class="pull-left"><i class="icon-ticket"></i> {{ 'menu.clan'|trans({}, 'menu') }}{% if user.numPropositionsRecrutement>0 %} <sup>{{ user.numPropositionsRecrutement }}</sup>{% endif %}</a></li>
                                     <li><a href="{{ path('ninja_tooken_user_parametres') }}" class="pull-left"><i class="icon-cog"></i> {{ 'menu.parametre'|trans({}, 'menu') }}</a></li>
                                     <li><a href="{{ path('ninja_tooken_user_captures') }}" class="pull-left"><i class="icon-picture"></i> {{ 'menu.capture'|trans({}, 'menu') }}</a></li>
                                     <li><a href="{{ path('fos_user_security_logout') }}" class="pull-left"><i class="icon-signout"></i> {{ 'menu.deconnexion'|trans({}, 'menu') }}</a></li>

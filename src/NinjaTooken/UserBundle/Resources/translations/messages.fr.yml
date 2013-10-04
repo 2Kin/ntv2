@@ -57,6 +57,7 @@ messagerie:
     newMessage: Nouveau Message
     reception: Réception
     envoi: Envoie
+    boite: Boîte
     aujourdhui: Aujourd'hui
     hier: Hier
     de: De
@@ -78,3 +79,7 @@ parametre:
         nt: Serveur NinjaTooken
         gravatar: Gravatar
     suppression: La suppression de compte est définitive, les informations de ton ninja seront définitivement perdues.
+label:
+    destinataire: Destinataire(s)
+    sujet: Sujet
+    message: Message

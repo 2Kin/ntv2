@@ -15,11 +15,6 @@
 {% endblock %}
 
 {% block body %}
-				{% for flashMessage in app.session.flashbag.get('notice') %}
-				    <div class="flash-notice">
-					{{ flashMessage }}
-				    </div>
-				{% endfor %}
 				<form action="#" method="post" accept-charset="UTF-8" class="full" id="contact">
 					<div class="row-fluid">
 						<div class="span3 offset1">

@@ -28,11 +28,6 @@
 {% block body %}
 				<div class="row-fluid">
 					<section class="span8">
-						{% for flashMessage in app.session.flashbag.get('notice') %}
-							<div class="flash-notice">
-							{{ flashMessage }}
-							</div>
-						{% endfor %}
 						{# permet de définir un administrateur local pour les clan, ou le global #}
 						{% set ROLE_CLAN = is_granted("ROLE_USER") and app.user.clan and app.user.clan.clan == clan %}
 						{% set ROLE_ADMIN = is_granted("ROLE_ADMIN") or (ROLE_CLAN and app.user.clan.canEditClan == true) %}
@@ -114,7 +109,7 @@
 					<aside class="span4">
 						<section>
 							{% if membresListe is not empty %}
-							<h3>Les membres</h3>
+							<h3>{{ 'description.membres'|trans }}</h3>
 							{% for membre in membresListe %}
 							<div class="membre pull-left">{% include "NinjaTookenClanBundle:Default:clan.membre.html.twig" with {'recruteur':membre, 'showAdmin':false} %}</div>
 							{% endfor %}

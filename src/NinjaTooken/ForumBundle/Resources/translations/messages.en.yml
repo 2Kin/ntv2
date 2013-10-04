@@ -18,6 +18,7 @@ titre:
     eventDate: Event's date :
     dernierMessage: Latest posts
     topic: %count% topic|]1,+Inf]%count% topics
+    comment: %count% comment|]1,+Inf]%count% comments
     dernier: last
 description:
     meta:
@@ -45,3 +46,12 @@ notice:
         ajoutOk: The comment has been added.
         editOk: The comment has been edited.
         deleteOk: The comment has been deleted.
+label:
+    nom: Name
+    body: Content
+    dateEventStart: Beginning of the event
+    dateEventEnd: Ending of the event
+    url_video: Link to a Video
+    jour: Day
+    mois: Month
+    annee: Year

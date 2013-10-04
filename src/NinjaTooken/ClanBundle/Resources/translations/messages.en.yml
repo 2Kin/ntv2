@@ -3,6 +3,7 @@ filtre:
     experience: average of experience
     nombre: number of ninja
     date: date added
+    classer: Order by
 action:
     fonder: Found a clan
     page: Clan page
@@ -14,9 +15,13 @@ action:
     refuser: Deny
     accepter: Approve
     annuler: Cancel
+    ajouter: Add
+    editer: Edit
     promouvoir: Promote Shisho and quit the clan
     autoriserEdit: Allow to edit the Clan
     interdireEdit: Disallow to edit the Clan
+    ajouterClan: Add a clan
+    editerClan: Edit a clan
 keywords:
     meta: Ninja Tooken, shinobi, ninja, clan, team, team, fps, free, online, free
 description:
@@ -28,12 +33,14 @@ description:
     perso: Perso page :
     organisation: Clan organization
     partenaire: Partners
+    membres: The members
     dernier: Latest clans
     error404 :
         clan: This clan does not exist!
     recrutement:
         clan: You are currently %rang% in <a href="%urlClan%">%nomClan%</a>.
         recrutementPossible: As such, you can offer to other players to join the protectorate of your clan ...
+        noClan: You're not part of a clan. You can apply in a <a href="%urlClan%">clan of your choice</a> and wait for recruitments proposal or you can <a href="%urlClanCreer%">create a clan</a>.
         ouvert: recruitments open
         ferme: recruitments closed
         liste: Recruitments you propose
@@ -82,3 +89,14 @@ forum:
     numThread: %count% topic|]1,+Inf]%count% topics
     newThread: New topic
     noThread: No topic yet.
+label:
+    nom: Name
+    tag: Tag of the clan
+    accroche: Catchphrase
+    description: Content
+    url: Perso page
+    kamon: Kamon
+    kamonUpload: Perso Kamon
+    isRecruting: Clan recruiting
+    oui: Yes
+    non: No

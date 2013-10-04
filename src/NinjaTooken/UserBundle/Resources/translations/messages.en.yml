@@ -57,6 +57,7 @@ messagerie:
     newMessage: New Message
     reception: Inbox
     envoi: Outbox
+    boite: ""
     aujourdhui: Today
     hier: Yesterday
     de: From
@@ -78,3 +79,7 @@ parametre:
         nt: NinjaTooken server
         gravatar: Gravatar
     suppression: The deletion of your account can't be undone, all your ninja's information will be lost.
+label:
+    destinataire: Receiver(s)
+    sujet: Subject
+    message: Message

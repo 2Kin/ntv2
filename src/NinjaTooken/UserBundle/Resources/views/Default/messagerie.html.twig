@@ -26,7 +26,7 @@
 						{% if app.request.get('add') != 1 %}<a href="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?add=1" class="button mini">{{ 'messagerie.newMessage'|trans }}</a><br><br>{% endif %}
 						<h3>
 							<i class="icon-inbox"></i>
-							Boîte <a href="{{ path('ninja_tooken_user_messagerie') }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_messagerie' %} class="actif"{% endif %}>{{ 'messagerie.reception'|trans }}</a> - 
+							{{ 'messagerie.boite'|trans }} <a href="{{ path('ninja_tooken_user_messagerie') }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_messagerie' %} class="actif"{% endif %}>{{ 'messagerie.reception'|trans }}</a> - 
 							<a href="{{ path('ninja_tooken_user_messagerie_envoi') }}"{% if app.request.attributes.get('_route')=='ninja_tooken_user_messagerie_envoi' %} class="actif"{% endif %}><i class="icon-reply"></i> {{ 'messagerie.envoi'|trans }}</a></h3>
 						{% if messages is not empty %}
 							{% set dateActu = '' %}
@@ -66,17 +66,12 @@
 						{% endif %}
 					</aside>
 					<section class="span8">
-                        {% for flashMessage in app.session.flashbag.get('notice') %}
-                            <div class="flash-notice">
-                            {{ flashMessage }}
-                            </div>
-                        {% endfor %}
 						{% if app.request.get('add') == 1 %}
 						<div class="main">
 							<h3>Nouveau message</h3>
 							<form action="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?add=1" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full">
 								<div class="row-fluid">
-									<div class="span3 offset1"><label class="libelle required">Destinataire(s)</label></div>
+									<div class="span3 offset1"><label class="libelle required">{{ 'label.destinataire'|trans }}</label></div>
 									<div class="span8">
 										<ul id="destinations" class="fake-input clearfix" data-find="{{ path('ninja_tooken_user_find') }}"></ul>
 									</div>
@@ -108,7 +103,7 @@
 							<hr>
 							<form action="{{ path(app.request.attributes.get('_route'), {'page':page}) }}?id={{ id }}&add=1" method="post" accept-charset="UTF-8" class="full">
 								<div class="row-fluid">
-									<div class="span3 offset1"><label class="libelle required">Destinataire(s)</label></div>
+									<div class="span3 offset1"><label class="libelle required">{{ 'label.destinataire'|trans }}</label></div>
 									<div class="span8">
 										<ul id="destinations" class="fake-input clearfix" data-find="{{ path('ninja_tooken_user_find') }}">
 											{# l'expéditeur du message #}

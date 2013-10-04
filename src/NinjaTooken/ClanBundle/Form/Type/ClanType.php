@@ -15,47 +15,47 @@ class ClanType extends AbstractType
         }
         $builder
             ->add('nom', 'text', array(
-                'label' => 'Nom',
+                'label' => 'label.nom',
                 'label_attr' => array('class' => 'libelle')
             ))
             ->add('tag', 'text', array(
-                'label' => 'Tag de clan',
+                'label' => 'label.tag',
                 'label_attr' => array('class' => 'libelle'),
                 'required' => false
             ))
             ->add('accroche', 'text', array(
-                'label' => 'Accroche',
+                'label' => 'label.accroche',
                 'label_attr' => array('class' => 'libelle'),
                 'required' => false
             ))
             ->add('description', 'textarea', array(
-                'label' => 'Contenu',
+                'label' => 'label.description',
                 'label_attr' => array('class' => 'libelle')
             ))
             ->add('url', 'url', array(
-                'label' => 'Page perso',
+                'label' => 'label.url',
                 'label_attr' => array('class' => 'libelle'),
                 'required' => false
             ))
             ->add('kamon', 'choice', array(
-                'label' => 'Kamon',
+                'label' => 'label.kamon',
                 'label_attr' => array('class' => 'libelle'),
                 'multiple' => false,
                 'choices'  => $kamonChoices,
                 'data' => (isset($options['data']) && $options['data']->getKamon() !== null) ? $options['data']->getKamon() : key($kamonChoices)
             ))
             ->add('kamonUpload', 'file', array(
-                'label' => 'Kamon perso',
+                'label' => 'label.kamonUpload',
                 'label_attr' => array('class' => 'libelle'),
                 'data_class' => null,
                 'required' => false
             ))
             ->add('isRecruting', 'choice', array(
-                'label' => 'Le clan recrute',
+                'label' => 'label.isRecruting',
                 'label_attr' => array('class' => 'libelle'),
                 'multiple' => false,
                 'expanded' => true,
-                'choices'  => array(true => 'Oui', false => 'Non')
+                'choices'  => array(true => 'label.oui', false => 'label.non')
             ));
     }
 

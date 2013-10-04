@@ -22,14 +22,8 @@
 {% block body %}
                 <div class="row-fluid">
 					<div class="span8">
-                        {% for flashMessage in app.session.flashbag.get('notice') %}
-                            <div class="flash-notice">
-                            {{ flashMessage }}
-                            </div>
-                        {% endfor %}
-
 						<p class="filtre">
-							Classer par
+							{{ 'filtre.classer'|trans }}
 							<label class="select">
 								<select name="clan">
 									<option value="composition"{% if order == "composition" %} selected{% endif %}>{{ 'filtre.composition'|trans }}</option>

@@ -20,11 +20,6 @@
 {% endblock %}
 
 {% block body %}
-				{% for flashMessage in app.session.flashbag.get('notice') %}
-				    <div class="flash-notice">
-					{{ flashMessage }}
-				    </div>
-				{% endfor %}
 				<form action="{{ path('ninja_tooken_user_parametres_update') }}" method="post" name="editAccount" accept-charset="UTF-8" class="full">
 					<h3><i class="icon-user"></i> {{ 'parametre.infoperso'|trans }}</h3>
 					<div class="row-fluid">

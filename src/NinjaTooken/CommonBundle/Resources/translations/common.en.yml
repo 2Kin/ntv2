@@ -65,6 +65,7 @@ description:
     noResult: No results.
     online: Online
     offline: Offline
+    navigateur: You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.
 action:
     chercher: Search
     chercherResult: Search results
@@ -169,5 +170,5 @@ game:
         degat: "Inflicts ## damage points"
         last: "Last ##s."
         chakra: "Costs ## chakra points"
-    course: race|]1,+Inf]races
-    assassinat: murder|]1,+Inf]murders
+    course: '{0,1}race|]1,+Inf]races'
+    assassinat: '{0,1}murder|]1,+Inf]murders'

@@ -44,11 +44,6 @@
 {% block body %}
 				<div class="row-fluid">
 					<div class="span8">
-						{% for flashMessage in app.session.flashbag.get('notice') %}
-						    <div class="flash-notice">
-							{{ flashMessage }}
-						    </div>
-						{% endfor %}
 						{# permet de définir un administrateur local pour les clan, ou le global #}
 						{% set ROLE_ADMIN = is_granted("ROLE_ADMIN") or (forum.clan and app.user and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true) %}
 						<article itemscope itemtype="http://schema.org/Article">
@@ -96,7 +91,7 @@
 							{% if thread.numComments > 0 %}
 							<hr>
 							<section>
-								<span class="comments">{{ thread.numComments }} commentaire{% if thread.numComments>1 %}s{% endif %}</span>
+								<span class="comments">{{ 'titre.comment'|transchoice(thread.numComments) }}</span>
 								{% include 'pagination.html.twig' with {
 									currentPage: page,
 									paginationPath: path('ninja_tooken_thread', {forum_nom: forum.slug, thread_nom:thread.slug, 'page': ''}),

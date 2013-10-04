@@ -47,4 +47,18 @@ class ClanPropositionRepository extends EntityRepository
         }
         return null;
     }
+
+    public function getNumPropositionsByPostulant(User $postulant=null)
+    {
+        if(isset($postulant)){
+            $query = $this->createQueryBuilder('cp')
+                ->select('COUNT(cp)')
+                ->where('cp.postulant = :postulant')
+                ->andWhere('cp.etat = 0')
+                ->setParameter('postulant', $postulant)
+                ->getQuery();
+            return $query->getSingleScalarResult();
+        }
+        return 0;
+    }
 }

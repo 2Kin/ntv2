@@ -3,6 +3,7 @@ filtre:
     experience: moyenne d'expérience
     nombre: nombre de ninja
     date: date d'ajout
+    classer: Classer par
 action:
     fonder: Fonder un clan
     page: Page du clan
@@ -14,9 +15,13 @@ action:
     refuser: Refuser
     accepter: Accepter
     annuler: Annuler
+    ajouter: Ajouter
+    editer: Éditer
     promouvoir: Promouvoir Shishou et Quitter le clan
     autoriserEdit: Permettre l'édition du clan
     interdireEdit: Interdire l'édition du clan
+    ajouterClan: Ajouter un clan
+    editerClan: Éditer un clan
 keywords:
     meta: NinjaTooken, shinobi, ninja, clan, team, équipe, fps, gratuit, online, free
 description:
@@ -28,11 +33,13 @@ description:
     perso: Page perso :
     organisation: Organisation du clan
     partenaire: Partenaires
+    membres: Les membres
     dernier: Derniers clans
     error404 :
         clan: Ce clan n'existe pas !
     recrutement:
         clan: Tu es actuellement %rang% du clan <a href="%urlClan%">%nomClan%</a>.
+        noClan: Tu n'es d'en aucun clan. Tu peux postuler dans le <a href="%urlClan%">clan de ton choix</a> et attendre des propositions de recrutement, ou <a href="%urlClanCreer%">créer ton clan</a>.
         recrutementPossible: A ce titre, tu peux proposer à d'autres joueurs d'intégrer le clan sous ton protectorat...
         ouvert: recrutements ouverts
         ferme: recrutements fermés
@@ -82,3 +89,14 @@ forum:
     numThread: %count% topic|]1,+Inf]%count% topics
     newThread: Nouveau topic
     noThread: Pas de topic pour le moment.
+label:
+    nom: Nom
+    tag: Tag de clan
+    accroche: Accroche
+    description: Contenu
+    url: Page perso
+    kamon: Kamon
+    kamonUpload: Kamon perso
+    isRecruting: Le clan recrute
+    oui: Oui
+    non: Non

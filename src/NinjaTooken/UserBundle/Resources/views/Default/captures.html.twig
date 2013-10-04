@@ -21,11 +21,6 @@
 
 {% block body %}
 				<section>
-				{% for flashMessage in app.session.flashbag.get('notice') %}
-				    <div class="flash-notice">
-					{{ flashMessage }}
-				    </div>
-				{% endfor %}
 				{% if captures is not empty %}
 					{% for capture in captures %}
 					<div class="capture pull-left">

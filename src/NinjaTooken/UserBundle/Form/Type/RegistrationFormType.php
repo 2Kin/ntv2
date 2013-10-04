@@ -12,17 +12,23 @@ class RegistrationFormType extends BaseType
     {
         $builder
             ->add('username', null, array(
-                'label' => 'Pseudo',
+                'label' => 'compte.register.pseudo',
                 'label_attr' => array('class' => 'libelle')
             ))
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
-                'first_options' => array('label' => 'Mot de passe', 'label_attr' => array('class' => 'libelle')),
-                'second_options' => array('label' => 'Répéter', 'label_attr' => array('class' => 'libelle')),
+                'first_options' => array(
+                    'label' => 'compte.register.motPasse',
+                    'label_attr' => array('class' => 'libelle')
+                ),
+                'second_options' => array(
+                    'label' => 'compte.register.motPasseRepeter',
+                    'label_attr' => array('class' => 'libelle')
+                ),
                 'invalid_message' => 'fos_user.password.mismatch'
             ))
             ->add('email', 'email', array(
-                'label' => 'Mail',
+                'label' => 'compte.register.mail',
                 'label_attr' => array('class' => 'libelle')
             ))
             ->add('gender', 'choice', array(
@@ -44,11 +50,11 @@ class RegistrationFormType extends BaseType
                 'label_attr' => array('class' => 'libelle')
             ))
             ->add('receive_newsletter', 'checkbox', array(
-                'label' => 'J\'accepte de recevoir par mail les news du site',
+                'label' => 'compte.register.receiveNewsletter',
                 'required' => false
             ))
             ->add('receive_avertissement', 'checkbox', array(
-                'label' => 'Je souhaite être averti par mail de l\'arrivée de nouveaux messages',
+                'label' => 'compte.register.receiveAvertissement',
                 'required' => false
             ))
         ;

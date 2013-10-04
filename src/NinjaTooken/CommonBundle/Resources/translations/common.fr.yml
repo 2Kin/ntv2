@@ -65,6 +65,7 @@ description:
     noResult: Aucun résultat trouvé.
     online: En ligne
     offline: Hors ligne
+    navigateur: Tu utilises un navigateur <strong>obsolète</strong>. S'il te plait <a href="http://browsehappy.com/">met à jour ton navigateur</a> ou <a href="http://www.google.com/chromeframe/?redirect=true">active Google Chrome Frame</a> pour améliorer ton expérience.
 action:
     chercher: Chercher
     chercherResult: Résultat de la recherche
@@ -169,5 +170,5 @@ game:
         degat: "Inflige ## points de dégats"
         last: "Dure ##s."
         chakra: "Coûte ## points de chakra"
-    course: course|]1,+Inf]courses
-    assassinat: assassinat|]1,+Inf]assassinats
+    course: '{0,1}course|]1,+Inf]courses'
+    assassinat: '{0,1}assassinat|]1,+Inf]assassinats'
