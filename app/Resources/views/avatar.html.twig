@@ -3,7 +3,7 @@
 	{{ gravatar(user.email) }}
 {% else %}
 	{% if user.avatar is empty %}
-		{% if user.gender == "H" %}
+		{% if user.gender == "m" %}
 			{{ asset('bundles/ninjatookenuser/images/boyz.jpg') }}
 		{% else %}
 			{{ asset('bundles/ninjatookenuser/images/girlz.jpg') }}

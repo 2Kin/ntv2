@@ -152,6 +152,8 @@ class User extends BaseUser
      */
     public function prePersist()
     {
+        parent::prePersist();
+
         if (null !== $this->file) {
             $this->setAvatar(uniqid(mt_rand(), true).".".$this->file->guessExtension());
         }
@@ -162,6 +164,7 @@ class User extends BaseUser
      */
     public function preUpdate()
     {
+        parent::preUpdate();
         if (null !== $this->file) {
             $file = $this->id.'.'.$this->file->guessExtension();
 
