@@ -6,7 +6,7 @@ use Sonata\UserBundle\Model\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use FOS\UserBundle\Util\Canonicalizer;
+use NinjaTooken\UserBundle\Util\CustomCanonicalizer;
 
 /**
  * @ORM\Entity
@@ -176,7 +176,7 @@ class User extends BaseUser
         }
 
         // met à jour les anciens pseudos
-        $canonicalizer = new Canonicalizer();
+        $canonicalizer = new CustomCanonicalizer();
         $oldUsernamesCanonical = '';
         $oldUsernames = $this->getOldUsernames();
         if(!empty($oldUsernames)){
