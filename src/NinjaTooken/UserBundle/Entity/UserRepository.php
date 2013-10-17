@@ -3,7 +3,7 @@ namespace NinjaTooken\UserBundle\Entity;
  
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
-use NinjaTooken\UserBundle\Util\CustomCanonicalizer;
+use FOS\UserBundle\Util\Canonicalizer;
  
 class UserRepository extends EntityRepository
 {
@@ -14,7 +14,7 @@ class UserRepository extends EntityRepository
             ->setParameter('enabled', true);
 
         if(!empty($pseudo)){
-            $canonicalizer = new CustomCanonicalizer();
+            $canonicalizer = new Canonicalizer();
             $pseudoCanonical = $canonicalizer->canonicalize($pseudo);
 
             $query->andWhere('u.oldUsernamesCanonical LIKE :pseudo')

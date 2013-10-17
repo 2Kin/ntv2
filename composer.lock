@@ -327,7 +327,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -1689,12 +1689,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leafo/lessphp.git",
-                "reference": "c6cd043c94ba2a94ae3eeedc7a4c925302b61252"
+                "reference": "6e8e724fc7edcedc83a52cd18acc5b72f7dd3c40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leafo/lessphp/zipball/c6cd043c94ba2a94ae3eeedc7a4c925302b61252",
-                "reference": "c6cd043c94ba2a94ae3eeedc7a4c925302b61252",
+                "url": "https://api.github.com/repos/leafo/lessphp/zipball/6e8e724fc7edcedc83a52cd18acc5b72f7dd3c40",
+                "reference": "6e8e724fc7edcedc83a52cd18acc5b72f7dd3c40",
                 "shasum": ""
             },
             "type": "library",
@@ -1722,7 +1722,7 @@
             ],
             "description": "lessphp is a compiler for LESS written in PHP.",
             "homepage": "http://leafo.net/lessphp/",
-            "time": "2013-10-04 15:40:57"
+            "time": "2013-09-27 06:40:48"
         },
         {
             "name": "monolog/monolog",
@@ -2593,12 +2593,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stfalcon/TinymceBundle.git",
-                "reference": "d3c620fe787ced536044c079b112dc93c1270c28"
+                "reference": "58f61296f6b141ad0a7d101ff1f160d3f7b4c946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/d3c620fe787ced536044c079b112dc93c1270c28",
-                "reference": "d3c620fe787ced536044c079b112dc93c1270c28",
+                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/58f61296f6b141ad0a7d101ff1f160d3f7b4c946",
+                "reference": "58f61296f6b141ad0a7d101ff1f160d3f7b4c946",
                 "shasum": ""
             },
             "require": {
@@ -2642,7 +2642,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2013-10-08 08:12:06"
+            "time": "2013-10-03 08:01:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -2651,12 +2651,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/stof/StofDoctrineExtensionsBundle.git",
-                "reference": "9da4489322c5442ff021c4cd3f28dd79b2a8df07"
+                "reference": "6e8dc798687963ffc4e4e0dfa687b361699855a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/9da4489322c5442ff021c4cd3f28dd79b2a8df07",
-                "reference": "9da4489322c5442ff021c4cd3f28dd79b2a8df07",
+                "url": "https://api.github.com/repos/stof/StofDoctrineExtensionsBundle/zipball/6e8dc798687963ffc4e4e0dfa687b361699855a9",
+                "reference": "6e8dc798687963ffc4e4e0dfa687b361699855a9",
                 "shasum": ""
             },
             "require": {
@@ -2704,7 +2704,7 @@
                 "translatable",
                 "tree"
             ],
-            "time": "2013-10-13 16:27:31"
+            "time": "2013-09-16 09:35:16"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2933,16 +2933,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.2.9",
+            "version": "v2.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "6a5c6c0d76014cd54cf8bd82a96b75d7589d8029"
+                "reference": "e80fc4aa253529fe0100ead61c41ae22bee5f030"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/6a5c6c0d76014cd54cf8bd82a96b75d7589d8029",
-                "reference": "6a5c6c0d76014cd54cf8bd82a96b75d7589d8029",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/e80fc4aa253529fe0100ead61c41ae22bee5f030",
+                "reference": "e80fc4aa253529fe0100ead61c41ae22bee5f030",
                 "shasum": ""
             },
             "require": {
@@ -3028,7 +3028,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-10-10 12:15:43"
+            "time": "2013-09-26 07:49:44"
         },
         {
             "name": "twig/extensions",
@@ -3079,16 +3079,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.14.1",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Twig.git",
-                "reference": "8873d7593ad7c120004f177c0fd01459b383c9cb"
+                "reference": "224fc55635d544a2ec8edb3592be18db5a093f59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Twig/zipball/8873d7593ad7c120004f177c0fd01459b383c9cb",
-                "reference": "8873d7593ad7c120004f177c0fd01459b383c9cb",
+                "url": "https://api.github.com/repos/fabpot/Twig/zipball/224fc55635d544a2ec8edb3592be18db5a093f59",
+                "reference": "224fc55635d544a2ec8edb3592be18db5a093f59",
                 "shasum": ""
             },
             "require": {
@@ -3124,7 +3124,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2013-10-15 19:17:38"
+            "time": "2013-10-03 06:41:20"
         }
     ],
     "packages-dev": [

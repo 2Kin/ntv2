@@ -42,9 +42,6 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
-    my_canonicalizer:
-        class: NinjaTooken\UserBundle\Util\CustomCanonicalizer
-        public: false
 
 # Twig Configuration
 twig:
@@ -139,8 +136,6 @@ fos_user:
         sender_name:    %mail_name%
     service:
         mailer: fos_user.mailer.twig_swift
-        email_canonicalizer:    my_canonicalizer
-        username_canonicalizer: my_canonicalizer
     resetting:
         email:
             template: NinjaTookenUserBundle:Default:resetting.email.twig

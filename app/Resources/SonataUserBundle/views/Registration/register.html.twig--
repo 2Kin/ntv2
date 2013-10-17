@@ -1,3 +1,44 @@
+{% form_theme form _self %}
+
+{% block form_widget_compound %}
+{% spaceless %}
+	{% if form.parent is empty %}
+	    {{ form_errors(form) }}
+	{% endif %}
+	{{ block('form_rows') }}
+	{{ form_rest(form) }}
+{% endspaceless %}
+{% endblock form_widget_compound %}
+
+{% block choice_widget_expanded %}
+{% spaceless %}
+    {% for child in form %}
+	{{ form_widget(child) }}
+	{{ form_label(child) }}
+    {% endfor %}
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+
+{% block checkbox_widget %}
+{% spaceless %}
+    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+    <label  for="{{ id }}">{{ label|trans }}</label>
+{% endspaceless %}
+{% endblock checkbox_widget %}
+
+{% block form_row %}
+    <div class="row-fluid">
+	<div class="span3 offset1">
+	{{ form_label(form) }}
+	</div>
+	<div class="span8">
+	{{ form_widget(form) }}
+	{{ form_errors(form) }}
+	</div>
+    </div>
+{% endblock form_row %}
+
 {% extends "::layout.html.twig" %}
 
 {% block title %}NinjaTooken - Créer mon ninja{% endblock %}
