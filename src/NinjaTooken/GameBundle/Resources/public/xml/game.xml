@@ -20,6 +20,7 @@
 			<m name="394" url="Map-Ville" ctf="1"><![CDATA[395]]></m>
 			<m name="405" url="Map-Montagne" ctf="1"><![CDATA[406]]></m>
 			<m name="428" url="Map-Auberge" ctf="0"><![CDATA[429]]></m>
+			<m name="432" url="Map-Horror" ctf="0"><![CDATA[433]]></m>
         </map>
         <classe>
             <x name="Katon" val="355" ennemy="359" />

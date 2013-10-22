@@ -25,8 +25,7 @@
 							</div>
 						</div>
 						<script>
-						var unityLoader = "{{ asset('bundles/ninjatookengame/loader.unity3d') }}";
-						var unityGame = "{{ asset('bundles/ninjatookengame/ninja-tooken-' ~ version ~ '.unity3d') }}";
+						var unityLoader = "{{ asset('bundles/ninjatookengame/loader.unity3d') }}?url={{ asset('bundles/ninjatookengame/ninja-tooken-' ~ version ~ '.unity3d') }}";
 						</script>
 					</section>
 					<aside class="span3 module">

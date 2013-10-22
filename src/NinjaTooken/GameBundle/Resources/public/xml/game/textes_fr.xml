@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<textes>
+		<t><![CDATA[Kunaï]]></t>
+		<t><![CDATA[Kunaï explosif]]></t>
+		<t><![CDATA[Shuriken]]></t>
+		<t><![CDATA[Shuriken Ombre]]></t>
+		<t><![CDATA[Boule Élémentaire]]></t>
+		<t><![CDATA[Déflagration Élémentaire]]></t>
+		<t><![CDATA[Pour utiliser ce jutsu, tu dois perdre 50% de ton total de vie !]]></t>
+		<t><![CDATA[Ce jutsu ne peut être lancé depuis les airs !]]></t>
+		<t><![CDATA[Pas de cible en vue pour le shuriken de l'ombre...]]></t>
+		<t><![CDATA[Tu n'as plus assez de munition !]]></t>
+		<t><![CDATA[Tu n'as plus assez de chakra pour lancer ce jutsu !]]></t>
+		<t><![CDATA[Encore ##TIME## seconde(s) avant de pouvoir réapparaitre dans la partie !]]></t>
+		<t><![CDATA[Appuie sur clic gauche pour réapparaitre dans la partie !]]></t>
+		<t><![CDATA[Téléportation]]></t>
+		<t><![CDATA[Tu n'as plus assez de vie pour lancer ce jutsu !]]></t>
+		<t><![CDATA[Bonjour ##LOGIN##]]></t>
+		<t><![CDATA[Tu n'as pas encore choisi quel élément ton ninja maitrisera.
+Chacun a son opposé, et par la suite tu ne pourras pas revenir sur ce don inné !]]></t>
+		<t><![CDATA[##CLASSE## - élément '##ELEMENT##', opposé à '##OPPOSE##']]></t>
+		<t><![CDATA[Valider cette classe]]></t>
+		<t><![CDATA[Enregistrement sur le serveur correctement effectué.]]></t>
+		<t><![CDATA[Enregistrement sur le serveur impossible pour le moment.]]></t>
+		<t><![CDATA[Echec de la récupération des données... entre les paramètres de ton compte pour pouvoir jouer !]]></t>
+		<t><![CDATA[Login]]></t>
+		<t><![CDATA[Mot de passe]]></t>
+		<t><![CDATA[Se connecter]]></t>
+		<t><![CDATA[Acces visiteur *]]></t>
+		<t><![CDATA[* ta progression ne sera pas sauvegardée !]]></t>
+		<t><![CDATA[Connection en cours...]]></t>
+		<t><![CDATA[Chargement des données en cours...]]></t>
+		<t><![CDATA[Dernière version chargée !]]></t>
+		<t><![CDATA[options]]></t>
+		<t><![CDATA[Controles]]></t>
+		<t><![CDATA[Audio]]></t>
+		<t><![CDATA[Graphiques]]></t>
+		<t><![CDATA[Systeme]]></t>
+		<t><![CDATA[Revenir au choix des options]]></t>
+		<t><![CDATA[Ces données sont informatives et non-modifiables]]></t>
+		<t><![CDATA[Version du player Unity3D]]></t>
+		<t><![CDATA[Carte graphique]]></t>
+		<t><![CDATA[Souris]]></t>
+		<t><![CDATA[Sensibilité]]></t>
+		<t><![CDATA[Comportement des Axes]]></t>
+		<t><![CDATA[Vertical]]></t>
+		<t><![CDATA[Horizontal]]></t>
+		<t><![CDATA[Touches]]></t>
+		<t><![CDATA[Avancer]]></t>
+		<t><![CDATA[Reculer]]></t>
+		<t><![CDATA[Gauche]]></t>
+		<t><![CDATA[Droite]]></t>
+		<t><![CDATA[Sauter]]></t>
+		<t><![CDATA[Epée]]></t>
+		<t><![CDATA[Normal]]></t>
+		<t><![CDATA[Inverse]]></t>
+		<t><![CDATA[Arme de contact seulement (avec des dégâts importants).]]></t>
+		<t><![CDATA[Arme de lancé standard.]]></t>
+		<t><![CDATA[Arme de lancé qui explose au contact d'un joueur ou au bout d'un certain temps.]]></t>
+		<t><![CDATA[Arme de lancé rapide, mais avec des dégâts et une distance moins importants que le kunaï.]]></t>
+		<t><![CDATA[Arme de lancé imposante qui poursuit automatiquement l'ennemi visé au lancé.]]></t>
+		<t><![CDATA[Boule]]></t>
+		<t><![CDATA[Envoie une attaque élémentaire suivant ta classe.]]></t>
+		<t><![CDATA[Bouclier]]></t>
+		<t><![CDATA[Génère un bouclier réduisant les dégâts subits.]]></t>
+		<t><![CDATA[Marcher/Mur]]></t>
+		<t><![CDATA[Permet d'activer et désactiver la marche sur les murs.]]></t>
+		<t><![CDATA[Déflagration]]></t>
+		<t><![CDATA[Créer une attaque dévastatrice dans un rayon proche.]]></t>
+		<t><![CDATA[Changer/Rocher]]></t>
+		<t><![CDATA[Se changer en objet est un jutsu spécifique à Doton.]]></t>
+		<t><![CDATA[Marcher/Eau]]></t>
+		<t><![CDATA[Marcher sur l'eau est un jutsu spécifique à Suiton.]]></t>
+		<t><![CDATA[Pieux]]></t>
+		<t><![CDATA[Pieux est un jutsu spécifique à Doton.]]></t>
+		<t><![CDATA[Phoenix]]></t>
+		<t><![CDATA[Phoenix est un jutsu spécifique à Katon.]]></t>
+		<t><![CDATA[Tsunami]]></t>
+		<t><![CDATA[Tsunami est un jutsu spécifique à Suiton.]]></t>
+		<t><![CDATA[Téléportation est un jutsu spécifique à Raiton.]]></t>
+		<t><![CDATA[Tornade]]></t>
+		<t><![CDATA[Tornade est un jutsu spécifique à Futon.]]></t>
+		<t><![CDATA[Tchat]]></t>
+		<t><![CDATA[Envoyer un message (une fois pour entrer le message, une autre pour l'envoyer).]]></t>
+		<t><![CDATA[Tchat-Histo.]]></t>
+		<t><![CDATA[L'historique des messages (une fois pour afficher l'historique, une autre pour le masquer).]]></t>
+		<t><![CDATA[Menu Jeu]]></t>
+		<t><![CDATA[Afficher le menu du jeu (met en pause lors du solo uniquement).]]></t>
+		<t><![CDATA[Scoreboard]]></t>
+		<t><![CDATA[Afficher le tableau des scores (maintenir appuyer puis relacher pour retourner au jeu).]]></t>
+		<t><![CDATA[Interface]]></t>
+		<t><![CDATA[Afficher ou masquer l'interface.]]></t>
+		<t><![CDATA[Modifier la qualité du rendu]]></t>
+		<t><![CDATA[Economique]]></t>
+		<t><![CDATA[Fantastique]]></t>
+		<t><![CDATA[Superbe]]></t>
+		<t><![CDATA[Beau]]></t>
+		<t><![CDATA[Simple]]></t>
+		<t><![CDATA[Rapide]]></t>
+		<t><![CDATA[Qualité actuelle : ##QUALITE##]]></t>
+		<t><![CDATA[Sélection automatique]]></t>
+		<t><![CDATA[Volume sonore]]></t>
+		<t><![CDATA[Volume musique]]></t>
+		<t><![CDATA[Credits]]></t>
+		<t><![CDATA[Infographie 3D]]></t>
+		<t><![CDATA[Musique et son]]></t>
+		<t><![CDATA[Infographie 2D]]></t>
+		<t><![CDATA[Contenus et gestion]]></t>
+		<t><![CDATA[Tests]]></t>
+		<t><![CDATA[Administration réseau]]></t>
+		<t><![CDATA[Programmation et intégration]]></t>
+		<t><![CDATA[Un grand merci à tous les joueurs pour leurs encouragements et leurs excellentes idées !]]></t>
+		<t><![CDATA[mon ninja]]></t>
+		<t><![CDATA[Niveau ##LEVEL## - ##NOM##]]></t>
+		<t><![CDATA[Prochain niveau dans ##XP##xp]]></t>
+		<t><![CDATA[Aptitudes]]></t>
+		<t><![CDATA[Jutsus]]></t>
+		<t><![CDATA[Apparence]]></t>
+		<t><![CDATA[Modifications sauvegardées]]></t>
+		<t><![CDATA[Sauvegarde impossible : visiteur ou serveur out ?!]]></t>
+		<t><![CDATA[Sauvegarder les modifications]]></t>
+		<t><![CDATA[Accomplissement]]></t>
+		<t><![CDATA[Recompense]]></t>
+		<t><![CDATA[##NUM## effectués sur ##TOTAL##]]></t>
+		<t><![CDATA[##NUMASSASSINNAT## assassinat(s) effectué(s).
+##NUMCOURSE## course(s) effectuée(s).]]></t>
+		<t><![CDATA[Récompense d'assassinats]]></t>
+		<t><![CDATA[Cape de Shinobi]]></t>
+		<t><![CDATA[Récompense pour avoir réussit 25 assassinats]]></t>
+		<t><![CDATA[+5 force]]></t>
+		<t><![CDATA[Cape noire]]></t>
+		<t><![CDATA[Récompense pour avoir réussit 10 assassinats]]></t>
+		<t><![CDATA[Cape trouée]]></t>
+		<t><![CDATA[Récompense pour avoir réussit 3 assassinats]]></t>
+		<t><![CDATA[Pas assez de mission assassinat effectuée pour être récompensé.]]></t>
+		<t><![CDATA[Récompense de courses]]></t>
+		<t><![CDATA[Chaussures avec Ashiko]]></t>
+		<t><![CDATA[Récompense pour avoir réussit 40 courses]]></t>
+		<t><![CDATA[+5 vitesse
++5 marcher sur les murs]]></t>
+		<t><![CDATA[Chaussures normales]]></t>
+		<t><![CDATA[Récompense pour avoir réussit 15 courses]]></t>
+		<t><![CDATA[Souliers pourris]]></t>
+		<t><![CDATA[Récompense pour avoir réussit 5 courses]]></t>
+		<t><![CDATA[Pas assez de mission course effectuée pour être récompensé.]]></t>
+		<t><![CDATA[Force]]></t>
+		<t><![CDATA[Augmente les dégâts des attaques (sauf jutsus et kunaï explosif) et la distance de tir]]></t>
+		<t><![CDATA[Bonus de 5 points en force grâce au manteau !]]></t>
+		<t><![CDATA[Vitesse]]></t>
+		<t><![CDATA[Augmente ta vitesse de déplacement.]]></t>
+		<t><![CDATA[Bonus de 5 points en vitesse grâce aux chaussures !]]></t>
+		<t><![CDATA[Vie]]></t>
+		<t><![CDATA[Augmente ta jauge de vie.]]></t>
+		<t><![CDATA[Chakra]]></t>
+		<t><![CDATA[Augmente ta jauge de chakra.]]></t>
+		<t><![CDATA[##RESTANT## point(s) d'aptitude(s) restant(s).]]></t>
+		<t><![CDATA[Boule Énergie]]></t>
+		<t><![CDATA[##TOUCHE## : envoie une attaque élémentaire suivant ta classe (lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Double Saut]]></t>
+		<t><![CDATA[##TOUCHE## : possibilité de sauter une deuxième fois pendant un saut (lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Bouclier Énergie]]></t>
+		<t><![CDATA[##TOUCHE## : génère un bouclier réduisant les dégâts subits (lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Marcher sur les Murs]]></t>
+		<t><![CDATA[##TOUCHE## : possibilité de marcher sur des parois verticales pendant une durée limitée (lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Bonus de 5 points grâce aux chaussures]]></t>
+		<t><![CDATA[Déflagration Énergie]]></t>
+		<t><![CDATA[##TOUCHE## : créé une attaque dévastatrice au sol dans un rayon proche (lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[MultiShoot]]></t>
+		<t><![CDATA[##TOUCHE## : augmente ta cadence de tir pendant une durée limitée (Raiton, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Invisibleman]]></t>
+		<t><![CDATA[##TOUCHE## : pour une meilleure discrétion, deviens partiellement transparent pendant une durée limitée (Futon, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Résistance au feu]]></t>
+		<t><![CDATA[##TOUCHE## : diminue les dégâts subits provenant d'un jutsu ou d'une explosion pendant une durée limitée (Katon, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Marcher sur l'eau]]></t>
+		<t><![CDATA[##TOUCHE## : possibilité de marcher sur l'eau pendant une durée limitée (Suiton, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Métamorphose]]></t>
+		<t><![CDATA[##TOUCHE## : possibilité de se changer en rocher pendant une durée limitée (Doton, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Phoenix]]></t>
+		<t><![CDATA[##TOUCHE## : déclenche une attaque de feu dévastatrice sur une zone ciblée (Katon, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Tsunami]]></t>
+		<t><![CDATA[##TOUCHE## : déclenche une vague déferlante sur tes ennemis  (Suiton, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Pieux]]></t>
+		<t><![CDATA[##TOUCHE## : empale tes adversaires grâce à de nombreux pieux surgissants du sol (Doton, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[##TOUCHE## : déplace toi à la vitesse de l'éclair vers un point ciblé (Raiton , lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Tornade]]></t>
+		<t><![CDATA[##TOUCHE## : déclenche la puissance tourbillonnante du vent sur une point ciblé (Futon, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[##RESTANT## point(s) de jutsu restant(s).]]></t>
+		<t><![CDATA[Zoom+]]></t>
+		<t><![CDATA[Zoom-]]></t>
+		<t><![CDATA[Masque (visage)]]></t>
+		<t><![CDATA[Vêtements (corps)]]></t>
+		<t><![CDATA[Undetermined NAT capabilities]]></t>
+		<t><![CDATA[Aucune erreur.]]></t>
+		<t><![CDATA[La clé RSA publique utilisée ne correspond pas à celle utilisée par le système.]]></t>
+		<t><![CDATA[Le serveur utilise un mot de passe, et le mot de passe présenté est incorrect.]]></t>
+		<t><![CDATA[La tentative de connection a échoué. Pour plus d'information, consulte la FAQ sur le site !]]></t>
+		<t><![CDATA[Le serveur est au maximum de sa capacité (trop de joueurs connectés).]]></t>
+		<t><![CDATA[Vous avez été banni du serveur auquel vous avez essayé de vous connecter.]]></t>
+		<t><![CDATA[Impossible de se connecter à deux serveurs à la fois !]]></t>
+		<t><![CDATA[Erreur interne lors de l'initialisation de l'interface réseau. Le couloir de connection est probablement déjà en train d'être utilisé. Pour plus d'information, consulte la FAQ sur le site !]]></t>
+		<t><![CDATA[Paramètres de connection incorrectes. Pour plus d'information, consulte la FAQ sur le site !]]></t>
+		<t><![CDATA[Le serveur n'existe plus, la connection a été annulée.]]></t>
+		<t><![CDATA[Le joueur ne peut se connecter à son propre serveur.]]></t>
+		<t><![CDATA[La 'cible NAT' n'est pas connectée au 'faciliteur'. Pour plus d'information, consulte la FAQ sur le site !]]></t>
+		<t><![CDATA[La connection a été perdue lors de la tentative de connection à la cible NAT. Pour plus d'information, consulte la FAQ sur le site !]]></t>
+		<t><![CDATA[Problème pour déterminer la traduction d'adresse réseau (NAT).]]></t>
+		<t><![CDATA[Traduction d'adresse réseau (NAT) indéterminée.]]></t>
+		<t><![CDATA[Adresse IP publique directement connectable.]]></t>
+		<t><![CDATA[Adresse IP publique non-connectable (port ##PORT## bloqué), lancement d'un serveur impossible.]]></t>
+		<t><![CDATA[Adresse IP publique mais serveur non-initialisé, il faut le lancer pour tester l'accessibilité. Redémarrez le test de connection lorsque vous êtes prêt.]]></t>
+		<t><![CDATA[Le NAT a un type de port restreint, il est possible de faire un punchthrough NAT pour tout le monde sauf symétrique : quelques connections peuvent échouer.]]></t>
+		<t><![CDATA[Le NAT est de type symétrique, il n'est pas possible de faire un punchthrough NAT vers d'autres types symétriques, ni vers les ports de type restreint : quelques connections peuvent échouer.]]></t>
+		<t><![CDATA[Le punchthrough NAT est entièrement pris en charge. Il est possible de se connecter à tous les serveurs.]]></t>
+		<t><![CDATA[Erreur suivante dans la routine du test : ##ERROR##]]></t>
+		<t><![CDATA[Base]]></t>
+		<t><![CDATA[Ile]]></t>
+		<t><![CDATA[Cascade]]></t>
+		<t><![CDATA[Tutoriel]]></t>
+		<t><![CDATA[La carte du mode solo]]></t>
+		<t><![CDATA[Une ville en bordure de côte tropicale]]></t>
+		<t><![CDATA[Un château en bordure d'une cascade]]></t>
+		<t><![CDATA[Le tutoriel !]]></t>
+		<t><![CDATA[Libre]]></t>
+		<t><![CDATA[Equipe]]></t>
+		<t><![CDATA[Chrono]]></t>
+		<t><![CDATA[Parchemin]]></t>
+		<t><![CDATA[Chacun pour soi, pas de règle particulière !]]></t>
+		<t><![CDATA[Partie par équipe, chaque nouveau connecté est assigné à l'équipe la moins nombreuse]]></t>
+		<t><![CDATA[Une partie chronométrée de dix minutes.]]></t>
+		<t><![CDATA[Le mode parchemin : récupère le parchemin et reste dans une zone pour gagner !]]></t>
+		<t><![CDATA[partie reseau]]></t>
+		<t><![CDATA[Créer une partie]]></t>
+		<t><![CDATA[Nombre de joueurs maxi.]]></t>
+		<t><![CDATA[Afficher les pseudos]]></t>
+		<t><![CDATA[Lorsque cette option est désactivée, les pseudos n'apparaissent pas au-dessus des ninjas]]></t>
+		<t><![CDATA[Choix de la carte]]></t>
+		<t><![CDATA[Type de partie]]></t>
+		<t><![CDATA[Mot de Passe]]></t>
+		<t><![CDATA[Laisse 'mot de passe' vide si tu ne veux pas restreindre l'accès !]]></t>
+		<t><![CDATA[Lancer la partie]]></t>
+		<t><![CDATA[Ouvert]]></t>
+		<t><![CDATA[lvl.]]></t>
+		<t><![CDATA[Annuler]]></t>
+		<t><![CDATA[Creer une partie]]></t>
+		<t><![CDATA[Se connecter à une partie]]></t>
+		<t><![CDATA[Encore ##RESTANT## place(s) disponibles(s)]]></t>
+		<t><![CDATA[Ce serveur nécessite un mot de passe. Si tu ne l'as pas, choisi un autre serveur !]]></t>
+		<t><![CDATA[GO!]]></t>
+		<t><![CDATA[Cette partie est protégée par un mot de passe !]]></t>
+		<t><![CDATA[Connection à cette partie impossible : tu n'as pas rentré de mot de passe !]]></t>
+		<t><![CDATA[Cette partie a été créée avec la version ##VERSION1##, tu as la version ##VERSION0## : connection impossible !]]></t>
+		<t><![CDATA[Connection à cette partie impossible : les versions utilisées ne sont pas identiques !]]></t>
+		<t><![CDATA[Cette partie a été créée avec une version antérieure à celle actuellement utilisée : connection impossible !]]></t>
+		<t><![CDATA[Connection à cette partie impossible : les versions utilisées ne sont pas identiques !]]></t>
+		<t><![CDATA[Pas de partie trouvée !
+Actualisation dans ##SECONDE## sec.]]></t>
+		<t><![CDATA[Il n'y a actuellement pas de partie.]]></t>
+		<t><![CDATA[Test de connection]]></t>
+		<t><![CDATA[Des problèmes de connection ont été détectés :
+##MESSAGE##
+Pour plus d'information, consulte la FAQ sur le site !]]></t>
+		<t><![CDATA[Initialisation de la connection... patience !!]]></t>
+		<t><![CDATA[Deconnection]]></t>
+		<t><![CDATA[menu]]></t>
+		<t><![CDATA[un point dans l'aptitude "vitesse" et deux dans l'aptitude "force"]]></t>
+		<t><![CDATA[un point dans l'aptitude "vitesse"]]></t>
+		<t><![CDATA[deux points dans l'aptitude "force"]]></t>
+		<t><![CDATA[Jouer]]></t>
+		<t><![CDATA[Mets au moins ##MESSAGE## depuis "MON NINJA" pour pouvoir commencer à jouer !]]></t>
+		<t><![CDATA[jouer]]></t>
+		<t><![CDATA[mon ninja]]></t>
+		<t><![CDATA[bonus]]></t>
+		<t><![CDATA[options]]></t>
+		<t><![CDATA[credits]]></t>
+		<t><![CDATA[Tutoriel]]></t>
+		<t><![CDATA[Partie solo]]></t>
+		<t><![CDATA[Partie reseau]]></t>
+		<t><![CDATA[Chargement du niveau en cours... plus que quelques secondes avant la recherche de ton nindou !]]></t>
+		<t><![CDATA[Trouve le parchemin avant qu'un autre ninja s'en empare !]]></t>
+		<t><![CDATA[Un ninja a trouvé le parchemin. Empêche-le d'accumuler l'énergie nécessaire pour devenir le Ninja Tooken !]]></t>
+		<t><![CDATA[Tu as trouvé le parchemin. Reste près de la zone indiquée pour devenir le Ninja Tooken !]]></t>
+		<t><![CDATA[L'interface est masquée. Appuie à nouveau sur "##TOUCHE##" pour afficher l'interface.]]></t>
+		<t><![CDATA[Nv.]]></t>
+		<t><![CDATA[##VICTIME## tué par ##TUEUR##]]></t>
+		<t><![CDATA[ScoreBoard]]></t>
+		<t><![CDATA[Login]]></t>
+		<t><![CDATA[Score]]></t>
+		<t><![CDATA[Mort]]></t>
+		<t><![CDATA[Équipe Rouge]]></t>
+		<t><![CDATA[Équipe Bleue]]></t>
+		<t><![CDATA[Partie chronométrée]]></t>
+		<t><![CDATA[Partie parchemin]]></t>
+		<t><![CDATA[Partie par équipe]]></t>
+		<t><![CDATA[Tu es dans l'##TEAM##]]></t>
+		<t><![CDATA[Assassinat]]></t>
+		<t><![CDATA[Course]]></t>
+		<t><![CDATA[Pièce d'or]]></t>
+		<t><![CDATA[Accepter]]></t>
+		<t><![CDATA[Refuser]]></t>
+		<t><![CDATA[Continuer]]></t>
+		<t><![CDATA[Quitter]]></t>
+		<t><![CDATA[Tous les 50 ans, depuis 20 siècles, l’île déserte de
+Yagishiri accueille le plus grand tournoi d’arts martiaux
+de la planète.
+Les plus grands shinobis du monde
+s’y affrontent dans des combats sanglants et sans pitié.
+
+Le plus fort d’entre eux deviendra le maître de
+tous les shinobis : le Ninja Tooken.
+
+Pour devenir le nouveau Ninja Tooken, il te faut
+acquérir une parfaite maîtrise de tes ressources
+physiques et spirituelles.
+
+Mais avant d’atteindre la gloire tu devras choisir ton camp.
+Et pour arriver à tes fins, toutes les stratégies sont permises :
+alliances, trahison, … Tout est possible dans]]></t>
+		<t><![CDATA[Appuie sur la '##TOUCHE##' pour lancer la mission ##TYPE##]]></t>
+		<t><![CDATA[La partie chronométré est terminée. Plus que 10 secondes avant le début d'une nouvelle partie !]]></t>
+		<t><![CDATA[##GAGNANT## remporte la partie et gagne ##XP## points d'expérience !  Plus que 10 secondes avant le début d'une nouvelle partie !]]></t>
+		<t><![CDATA[Le serveur a été coupé... tous les joueurs ont été déconnectés.]]></t>
+		<t><![CDATA[La connection au serveur a été perdue !]]></t>
+		<t><![CDATA[Correctement déconnecté du serveur : le serveur a été coupé ou tu t'es déconnecté.]]></t>
+		<t><![CDATA[Tu dois attendre que tous les joueurs d'une équipe meurent pour réapparaitre dans la partie !]]></t>
+		<t><![CDATA[##LOGIN## vient de se connecter]]></t>
+		<t><![CDATA[##LOGIN## vient de se déconnecter]]></t>
+		<t><![CDATA[Tonneau]]></t>
+		<t><![CDATA[Noyade]]></t>
+		<t><![CDATA[Poison]]></t>
+		<t><![CDATA[Utilises la ##TOUCHEAVANCER## pour avancer,
+la ##TOUCHERECULER## pour reculer,
+la ##TOUCHEGAUCHE## pour faire un pas sur la gauche,
+la ##TOUCHEDROITE## pour faire un pas sur la droite,
+et la souris pour tourner.]]></t>
+		<t><![CDATA[Appuie sur ##TOUCHESAUTER## pour sauter.]]></t>
+		<t><![CDATA[Pour sélectionner une arme ou un jutsu, appuie sur sa touche correspondante...
+Par exemple pour sélectionner les shurikens, appuie sur la touche ##TOUCHESHURIKEN##.
+Une fois l’attaque sélectionnée, appuie sur clic gauche pour l’utiliser.]]></t>
+		<t><![CDATA[Évidemment, toutes les touches sont personalisables à partir du menu (##TOUCHEMENU##), dans 'options' puis 'contrôles'.
+N’hésites pas à faire le tour des options, pour modifier la sensibilité de la souris, le volume des musiques, etc...]]></t>
+		<t><![CDATA[Au fur et à mesure de ton évolution dans le jeu, tu monteras en niveau.
+Tu débloqueras ainsi de nouveaux jutsus et obtiendra des points d’aptitudes et de jutsus.
+Maintenant voici de quoi t'entraîner: un petit groupe de ninjas rien que pour toi, à toi de tous les killer !]]></t>
+		<t><![CDATA[Ce petit tutoriel est terminé !
+Pour plus d’infos concernant les armes, jutsus, modes de jeu et Ninja Tooken en général,
+direction le Manuel du Ninja (menu du site) !"]]></t>
+		<t><![CDATA[plein ecran]]></t>
+		<t><![CDATA[passer]]></t>
+		<t><![CDATA[retour]]></t>
+		<t><![CDATA[Tu ne peux pas utiliser ce jutsu dans cette map]]></t>
+		<t><![CDATA[Fumigene]]></t>
+		<t><![CDATA[Makibishi]]></t>
+		<t><![CDATA[Fumigène qui ne fait pas de dégâts.]]></t>
+		<t><![CDATA[Clous de ninja faisant des dégâts au sol.]]></t>
+		<t><![CDATA[Social]]></t>
+		<t><![CDATA[Ajouter en ami]]></t>
+		<t><![CDATA[Signaler]]></t>
+		<t><![CDATA[Avec amis]]></t>
+		<t><![CDATA[Lorsque cette option est activée, seules les parties avec un amis sont affichées]]></t>
+		<t><![CDATA[Ninja ami]]></t>
+		<t><![CDATA[signalé]]></t>
+		<t><![CDATA[Capture d'écran]]></t>
+		<t><![CDATA[Faire une capture d'écran et l'ouvrir dans une nouvelle fenêtre.]]></t>
+		<t><![CDATA[Valider]]></t>
+		<t><![CDATA[Annuler]]></t>
+		<t><![CDATA[##LOGIN1## a été signalé par ##LOGIN2##]]></t>
+		<t><![CDATA[Capture d'écran enregistré dans les paramètres de ton compte.]]></t>
+		<t><![CDATA[Erreur lors de l'enregistrement de la capture d'écran.]]></t>
+		<t><![CDATA[Mode equipe]]></t>
+		<t><![CDATA[Changer de team]]></t>
+		<t><![CDATA[En changeant d'équipe, tes alliés actuels deviendront tes nouveaux ennemis !]]></t>
+		<t><![CDATA[Permet d'activer et désactiver la résistance au feu.]]></t>
+		<t><![CDATA[Permet d'activer et désactiver l'invisibilité.]]></t>
+		<t><![CDATA[Permet d'activer et désactiver le tire rapide.]]></t>
+		<t><![CDATA[Tir principal]]></t>
+		<t><![CDATA[Protection/feu]]></t>
+		<t><![CDATA[Transparence]]></t>
+		<t><![CDATA[Tirs multiples]]></t>
+		<t><![CDATA[Pour afficher le menu appuie sur ##TOUCHEMENU## !]]></t>
+		<t><![CDATA[Kusanagi]]></t>
+		<t><![CDATA[Envoie une onde de choc avec l'épée.]]></t>
+		<t><![CDATA[Acier renforcé]]></t>
+		<t><![CDATA[Envoie du chakra dans les armes et augmente leurs dégâts (n'affecte pas le jutsu Kusanagi).]]></t>
+		<t><![CDATA[Chakra de vie]]></t>
+		<t><![CDATA[Permet d'utiliser son chakra comme extension de vie (le chakra ne se régénère pas).]]></t>
+		<t><![CDATA[##TOUCHE## : Envoie une onde de choc avec l'épée. (lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[##TOUCHE## : Envoie du chakra dans les armes et augmente leurs dégâts (n'affecte pas le jutsu Kusanagi). (lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[##TOUCHE## : Permet d'utiliser son chakra comme extension de vie (le chakra ne se régénère pas). (lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Se connecter avec Facebook]]></t>
+        <t><![CDATA[feu]]></t>
+        <t><![CDATA[eau]]></t>
+        <t><![CDATA[terre]]></t>
+        <t><![CDATA[foudre]]></t>
+        <t><![CDATA[vent]]></t>
+        <t><![CDATA[Langue]]></t>
+        <t><![CDATA[Information]]></t>
+        <t><![CDATA[S'inscrire]]></t>
+        <t><![CDATA[Passer au dan supérieur n'enlève pas tes points d'expérience mais te fais recommencer le jeu au premier niveau.]]></t>
+        <t><![CDATA[Base]]></t>
+        <t><![CDATA[Ile (jour)]]></t>
+        <t><![CDATA[Ile (nuit)]]></t>
+        <t><![CDATA[Cascade]]></t>
+        <t><![CDATA[Tutoriel]]></t>
+        <t><![CDATA[Rivière (jour)]]></t>
+        <t><![CDATA[Rivière (nuit)]]></t>
+        <t><![CDATA[Dojo]]></t>
+        <t><![CDATA[Forteresse]]></t>
+        <t><![CDATA[La carte du mode solo]]></t>
+        <t><![CDATA[Une ville en bordure de côte tropicale]]></t>
+        <t><![CDATA[Une ville la nuit en bordure de côte tropicale]]></t>
+        <t><![CDATA[Un château en bordure d'une cascade]]></t>
+        <t><![CDATA[Le tutoriel !]]></t>
+        <t><![CDATA[Un chateau au bord d'une rivière de jour !]]></t>
+        <t><![CDATA[Un chateau au bord d'une rivière en pleine nuit]]></t>
+        <t><![CDATA[Intérieur d'un dojo, pour les duels ou affrontement en petits groupes (4 joueurs max conseillés par partie)]]></t>
+        <t><![CDATA[Un chateau sur une montagne.]]></t>
+        <t><![CDATA[Ce ninja est plus coriace que prévu !
+Pour le battre , tu peux esquiver ses projectiles,
+et même utiliser l'épée pour un kill rapproché (##TOUCHEEPEE##).]]></t>
+        <t><![CDATA[Temple Shinto]]></t>
+        <t><![CDATA[Un temple shinto dans une vallée enclavée de nuit.]]></t>
+        <t><![CDATA[Protection nouveau joueur]]></t>
+        <t><![CDATA[Limite les dégâts des niveaux 60 et plus jusqu'à ton niveau 46.]]></t>
+        <t><![CDATA[Caverne (jour)]]></t>
+        <t><![CDATA[Un camp caché dans une cavité souterraine.]]></t>
+        <t><![CDATA[Caverne (nuit)]]></t>
+        <t><![CDATA[Un camp caché dans une cavité souterraine de nuit.]]></t>
+        <t><![CDATA[Le parchemin empêche l'activation de ce jutsu.]]></t>
+        <t><![CDATA[Arène]]></t>
+        <t><![CDATA[Une arène dans la cour d'un château.]]></t>
+        <t><![CDATA[Ville fortifiée]]></t>
+        <t><![CDATA[L'enceinte principale d'une ville fortifiée, avec son chateau.]]></t>
+		<t><![CDATA[Capture de sashimono]]></t>
+		<t><![CDATA[Une capture de drapeau par équipe : ramener 5 drapeaux/sashimonos adverses pour gagner.]]></t>
+		<t><![CDATA[défends]]></t>
+		<t><![CDATA[ramène]]></t>
+		<t><![CDATA[prends]]></t>
+		<t><![CDATA[pris]]></t>
+		<t><![CDATA[volé]]></t>
+		<t><![CDATA[escorte]]></t>
+		<t><![CDATA[Ton équipe a pris ##NUM1## sashimono(s), et l'équipe adverse ##NUM2## (##TOTAL## à capturer)]]></t>
+		<t><![CDATA[Montagne]]></t>
+		<t><![CDATA[Une carte symétrique avec deux chateaux pour les parties de capture de sashimono]]></t>
+        <t><![CDATA[Le sashimono empêche l'activation de ce jutsu.]]></t>
+        <t><![CDATA[Tu as capturé le sashimono, ramène le à ta base pour marquer un point.]]></t>
+        <t><![CDATA[Le sashimono de l'##TEAM## a été ramené à la base.]]></t>
+        <t><![CDATA[Le sashimono de l'##TEAM## a été capturé.]]></t>
+        <t><![CDATA[L'##TEAM## remporte la partie !]]></t>
+        <t><![CDATA[Le sashimono de l'##TEAM## a été laché.]]></t>
+        <t><![CDATA[Chaque joueur de l'##TEAM## reçoit ##XP## points d'expériences.]]></t>
+        <t><![CDATA[Il n'est plus possible de changer.]]></t>
+        <t><![CDATA[L'##TEAM## a capturé et ramené un sashimono et marque un point.]]></t>
+        <t><![CDATA[La capture est impossible car il n'y a personne dans l'équipe adverse.]]></t>
+        <t><![CDATA[Capture]]></t>
+        <t><![CDATA[Le nombre de capture à réaliser pour qu'une équipe gagne.]]></t>
+		<t><![CDATA[En spectateur]]></t>
+		<t><![CDATA[Lorsque cette option est activée, tu te connecteras en tant que spectateur seulement (caméra libre).]]></t>
+		<t><![CDATA[Spectateur]]></t>
+		<t><![CDATA[Tu es spectateur]]></t>
+		<t><![CDATA[L'##TEAM1## a pris ##NUM1## sashimono(s), l'##TEAM2## ##NUM2## (##TOTAL## à capturer)]]></t>
+		<t><![CDATA[Tir secondaire]]></t>
+		<t><![CDATA[Lacher drapeau]]></t>
+		<t><![CDATA[Permet de lacher le sashimono (drapeau) dans une partie de capture de sashimono.]]></t>
+		<t><![CDATA[Activer le flou d'arrière plan]]></t>
+		<t><![CDATA[Au Dragon îvre]]></t>
+		<t><![CDATA[Cette auberge est réputée pour ses tartes pimentées à base de marrons et pralines.]]></t>
+		<t><![CDATA[
+Tu peux désormais utiliser ##JUTSUS##. L'activation ce fait depuis "Mon Ninja" (menu principal).]]></t>
+		<t><![CDATA[Tu viens de passer le niveau ##LEVEL##.]]></t>
+		<t><![CDATA[La forêt a des yeux]]></t>
+		<t><![CDATA[Ce cimetière abrite des artefacts dont l'origine et la source de leur pouvoir restent inconnues.]]></t>
+		<t><![CDATA[Accélération]]></t>
+		<t><![CDATA[On]]></t>
+		<t><![CDATA[Off]]></t>
+		<t><![CDATA[Champ de vision]]></t><!--437-->
+	</textes>
+	<accomplissements>
+		<ac name="Kitutu lvl 1"><![CDATA[Tuer 3 ninjas d'affilé]]></ac>
+		<ac name="Kitutu lvl 2"><![CDATA[Tuer 5 ninjas d'affilé]]></ac>
+		<ac name="Kitutu lvl 3"><![CDATA[Tuer 10 ninjas d'affilé]]></ac>
+		<ac name="Kitutu lvl 4"><![CDATA[Tuer 20 ninjas d'affilé]]></ac>
+		<ac name="Eninkou"><![CDATA[Tuer 3 ninjas avec une seule attaque]]></ac>
+		<ac name="Dodunkou"><![CDATA[Tuer 2 ninjas avec un kunaï explosif]]></ac>
+		<ac name="Kamikaze"><![CDATA[Tuer 1 ninja en ayant moins de 10 points de vie]]></ac>
+		<ac name="DuckHunt"><![CDATA[Tuer un ninja dans les air]]></ac>
+		<ac name="Kissoto"><![CDATA[Sauter plus de 20m de haut]]></ac>
+		<ac name="Banzai"><![CDATA[Se faire tuer par un tonneau explosif]]></ac>
+		<ac name="Tebon"><![CDATA[Avoir débloqué tous les jutsus]]></ac>
+		<ac name="Ekitab"><![CDATA[Avoir tué un ninja de chaque classe]]></ac>
+		<ac name="Ekitab+"><![CDATA[Avoir tué un ninja de chaque classe sans mourir]]></ac>
+		<ac name="SushiNinjato"><![CDATA[Avoir tué plus de 20 ninjas au katana]]></ac>
+		<ac name="Kageshuriken"><![CDATA[Avoir tué un ninja au shuriken de l’ombre]]></ac>
+		<ac name="Tetroho"><![CDATA[Être allé sur la tour la plus haute de la carte solo]]></ac>
+		<ac name="5Kage"><![CDATA[Avoir plus de 5 shuriken de l’ombre]]></ac>
+		<ac name="Fulolif"><![CDATA[Avoir plus de 400 de vie]]></ac>
+		<ac name="Thetooken"><![CDATA[Avoir gardé le parchemin pendant plus de 60 secondes]]></ac>
+		<ac name="Sushibishi"><![CDATA[Avoir tué 10 ninjas avec les clous de ninja]]></ac>
+		<ac name="KaBoum"><![CDATA[Avoir tué plus de 3 ninjas avec une seule déflagration]]></ac>
+		<ac name="MasterKiller"><![CDATA[Avoir fait plus de 10 fois la mission assassinat]]></ac>
+		<ac name="Bolt"><![CDATA[Avoir fait plus de 10 fois la mission course]]></ac>
+		<ac name="Chucknorris"><![CDATA[Rester vivant plus de 10 minutes]]></ac>
+		<ac name="BastonGenerale"><![CDATA[Avoir fait une partie avec 14 joueurs]]></ac>
+	</accomplissements>
+	<courses>
+		<c><![CDATA[Ohlala, des dizaine de pièces, y a qu’à se baisser pour les ramasser, fonce !]]></c>
+		<c><![CDATA[Toutes ces pièces par terre ! Elles doivent être en chocolat, et bah non ! Fonce, y a un paquet de thune à se faire là !]]></c>
+		<c><![CDATA[Félindra tête de tigre ! Ramasse moi toutes ces pièces avant qu’elles ne disparaissent !]]></c>
+		<c><![CDATA[Et voilà, Katashi encore bourré a pommé tout son fric, dépêche toi de lui ramener !]]></c>
+		<c><![CDATA[La banque Ninja s’est faite cambriolée, suis la trace des voleurs en récupérant les pièces!]]></c>
+	</courses>
+	<assassinat>
+		<a><![CDATA[Après une partie acharnée, ##NINJA## t’a volé ta meilleure carte pokémon. Il doit payer maintenant !]]></a>
+		<a><![CDATA[On a enfin retrouvé le ninja qui avait volé l’orange du marchand. Va lui faire la peau !]]></a>
+		<a><![CDATA[Tu connais certainement le voleur qui a mis toutes les étoiles du ciel pour les mettre dans les yeux de [insérez ici le prénom de la fille/mec que vous draguez]: il est tout près, montre lui qui est le maître ici!]]></a>
+		<a><![CDATA[Un ninja détrousse les villageois et les pécheurs, va faire la loi et montre lui qui gère le village ici !]]></a>
+		<a><![CDATA[Il y a clairement un ninja de trop entre toi et moi. Retrouve moi pour un duel sans merci!
+
+Signé : ##NINJA##]]></a>
+	</assassinat>
+</root>

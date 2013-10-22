@@ -225,7 +225,7 @@ class Team
      * @param \NinjaTooken\TournamentBundle\Entity\RoundTeam $round
      * @return Team
      */
-    public function addRound(\NinjaTooken\ClanBundle\Entity\RoundTeam $round)
+    public function addRound(\NinjaTooken\TournamentBundle\Entity\RoundTeam $round)
     {
         $this->rounds[] = $round;
 

@@ -2455,21 +2455,6 @@ $(document).ready(function(){
 				}
 			});
 			ntUnity.initPlugin(unityPlayer.get(0), unityLoader);
-
-			if(typeof unityGame != "undefined"){
-				ntUnityLoaded = window.setInterval(
-					function(){
-						var uO = ntUnity.getUnity();
-						if(uO != null){
-							window.clearInterval(ntUnityLoaded);
-							setTimeout(function(){
-								ntUnity.getUnity().SendMessage("loader", "initStream", unityGame);
-							},1000);
-						}
-					},
-					100
-				);
-			}
 		}
 	}
 

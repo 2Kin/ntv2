@@ -55,6 +55,13 @@ class User extends BaseUser
     private $old_id;
 
     /**
+    * @var string
+    *
+    * @ORM\Column(name="old_login", type="string", length=255, nullable=true)
+    */
+    private $old_login;
+
+    /**
      * @Gedmo\Slug(fields={"username"})
      * @ORM\Column(length=128, unique=true)
      */
@@ -465,6 +472,29 @@ class User extends BaseUser
     public function getOldId()
     {
         return $this->old_id;
+    }
+
+    /**
+     * Set old_login
+     *
+     * @param string $oldLogin
+     * @return User
+     */
+    public function setOldLogin($oldLogin)
+    {
+        $this->old_login = $oldLogin;
+
+        return $this;
+    }
+
+    /**
+     * Get old_login
+     *
+     * @return string 
+     */
+    public function getOldLogin()
+    {
+        return $this->old_login;
     }
 
 
