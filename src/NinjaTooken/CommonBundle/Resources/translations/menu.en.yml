@@ -1,12 +1,12 @@
 menu:
     menu: Menu
     jouer: Play
-    jeu: The Game
+    jeu: Game News
     classement: Ranking
-    partie: Running Games
+    partie: Ongoing Games
     evenement: Events
     manuel: Ninja Manual
-    guide: Beginner Guide
+    guide: Beginners Guide
     calculateur: Jutsus Calculator
     regle: Rules to consider
     communaute: Community
@@ -24,5 +24,5 @@ menu:
     compte: My account
     capture: Screenshots
     parametre: Settings
-    messagerie: Messaging
+    messagerie: Mailbox
     deconnexion: Logout

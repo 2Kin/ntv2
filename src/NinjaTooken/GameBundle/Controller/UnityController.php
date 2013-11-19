@@ -532,7 +532,7 @@ class UnityController extends Controller
                                         $lobby->setDateUpdate(new \DateTime());
                                         $em->persist($lobby);
                                     }else{
-                                        $lobby->remove();
+                                        $em->remove($lobby);
                                     }
                                     $em->flush();
                                 }elseif(count($users)>0){
@@ -580,7 +580,12 @@ class UnityController extends Controller
                             $lobbyRepository = $em->getRepository('NinjaTookenGameBundle:Lobby');
 
                             // fait le ménage dans les lobby
-                            $lobbyRepository->findBy( array('dateUpdate' => new \DateTime('-1 hour') ) )->remove();
+                            $oldLobbies = $lobbyRepository->findBy( array('dateUpdate' => new \DateTime('-1 hour') ) );
+                            if($oldLobbies){
+                                foreach($oldLobbies as $l)
+                                    $em->remove($l);
+                                $em->flush();
+                            }
 
                             // récupère les amis dans le lobby
                             $friends = $lobbyRepository->createQueryBuilder('l')
@@ -697,8 +702,11 @@ class UnityController extends Controller
                     ->setParameter('user', $user)
                     ->getQuery()
                     ->getResult();
-                if($lobbies)
-                    $lobbies->remove();
+                if($lobbies){
+                    foreach($lobbies as $l)
+                        $em->remove($l);
+                    $em->flush();
+                }
             }else{
                 // on créé l'entité "ninja"
                 $ninja = new Ninja();
