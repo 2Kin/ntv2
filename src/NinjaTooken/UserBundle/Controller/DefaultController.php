@@ -419,7 +419,7 @@ class DefaultController extends Controller
                     $extension = strtolower($file->guessExtension());
                     if(in_array($extension, array('jpeg','jpg','png','gif'))){
                         $user->file = $file;
-                        $cachedImage = dirname(__FILE__).'/../../../../www/cache/avatar/'.$user->getWebAvatar();
+                        $cachedImage = dirname(__FILE__).'/../../../../web/cache/avatar/'.$user->getWebAvatar();
                         if(file_exists($cachedImage)){
                             unlink($cachedImage);
                         }

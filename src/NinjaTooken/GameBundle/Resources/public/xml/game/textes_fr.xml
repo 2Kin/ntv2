@@ -355,7 +355,7 @@ direction le Manuel du Ninja (menu du site) !"]]></t>
 		<t><![CDATA[Clous de ninja faisant des dégâts au sol.]]></t>
 		<t><![CDATA[Social]]></t>
 		<t><![CDATA[Ajouter en ami]]></t>
-		<t><![CDATA[Signaler]]></t>
+		<t><![CDATA[Voter le kick]]></t>
 		<t><![CDATA[Avec amis]]></t>
 		<t><![CDATA[Lorsque cette option est activée, seules les parties avec un amis sont affichées]]></t>
 		<t><![CDATA[Ninja ami]]></t>
@@ -364,7 +364,7 @@ direction le Manuel du Ninja (menu du site) !"]]></t>
 		<t><![CDATA[Faire une capture d'écran et l'ouvrir dans une nouvelle fenêtre.]]></t>
 		<t><![CDATA[Valider]]></t>
 		<t><![CDATA[Annuler]]></t>
-		<t><![CDATA[##LOGIN1## a été signalé par ##LOGIN2##]]></t>
+		<t><![CDATA[##LOGIN2## a voté pour le kick de ##LOGIN1##.]]></t>
 		<t><![CDATA[Capture d'écran enregistré dans les paramètres de ton compte.]]></t>
 		<t><![CDATA[Erreur lors de l'enregistrement de la capture d'écran.]]></t>
 		<t><![CDATA[Mode equipe]]></t>

@@ -31,6 +31,7 @@ class MessageUserListener
                         ->setSubject('[NT] nouveau message de la part de '.$user->getUsername())
                         ->setFrom($emailContact)
                         ->setTo($email)
+                        ->setContentType("text/html")
                         ->setBody($this->renderView('NinjaTookenUserBundle:Default:avertissementEmail.html.twig', array(
                             'user' => $user,
                             'message' => $message->getContent()

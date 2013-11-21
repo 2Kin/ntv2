@@ -83,6 +83,7 @@ class DefaultController extends Controller
                     ->setSubject('[NT] Contact : '.$sujet)
                     ->setFrom($email)
                     ->setTo($emailContact)
+                    ->setContentType("text/html")
                     ->setBody($this->renderView('NinjaTookenCommonBundle:Default:contactEmail.html.twig', array(
                         'texte' => $texte,
                         'email' => $email

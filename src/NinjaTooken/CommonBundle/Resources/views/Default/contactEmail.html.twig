@@ -2,6 +2,6 @@
 
 {% block content %}
                 {{ email }}<br/>
-                {{ texte }}<br/>
+                {{ texte|raw|purify('full') }}<br/>
                 <a href="{{ app.request.basepath }}" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">{{ app.request.basepath }}</span></a>
 {% endblock %}

@@ -43,6 +43,15 @@ services:
         tags:
             - { name: twig.extension }
 
+# Monolog
+monolog:
+    handlers:
+        main:
+            type: rotating_file
+            max_files: 10
+            path: "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+
 # Twig Configuration
 twig:
     debug:            %kernel.debug%
@@ -56,7 +65,7 @@ assetic:
     debug:          %kernel.debug%
     use_controller: false
     bundles:        [ "NinjaTookenCommonBundle" ]
-    read_from: "%kernel.root_dir%/../www"
+    read_from: "%kernel.root_dir%/../web"
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -167,8 +176,8 @@ ornicar_gravatar:
 
 # resize avatar
 avalanche_imagine:
-    source_root:  %kernel.root_dir%/../www
-    web_root:     %kernel.root_dir%/../www
+    source_root:  %kernel.root_dir%/../web
+    web_root:     %kernel.root_dir%/../web
     cache_prefix: cache
     driver:       gd
     filters:
@@ -215,7 +224,7 @@ sonata_admin:
         admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
         object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
     title:      DaFuckingAdmin
-    title_logo: /ntv2/www/bundles/sonataadmin/logo_title.png
+    title_logo: /bundles/sonataadmin/logo_title.png
     options:
         html5_validate: false # does not use html5 validation
         confirm_exit:   false # disable confirmation when quitting with unsaved changes

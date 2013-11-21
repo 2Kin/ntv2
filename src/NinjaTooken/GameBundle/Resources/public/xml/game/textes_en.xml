@@ -355,7 +355,7 @@ go straight to the Ninja's manual (website homepage)!]]></t>
 		<t><![CDATA[Clous de ninja faisant des dégâts au sol.]]></t>
 		<t><![CDATA[Social]]></t>
 		<t><![CDATA[Add as a friend]]></t>
-		<t><![CDATA[Report]]></t>
+		<t><![CDATA[Vote for kick]]></t>
 		<t><![CDATA[With friend]]></t>
 		<t><![CDATA[If this option is checked, only games with friends are shown]]></t>
 		<t><![CDATA[Ninja's friend]]></t>
@@ -364,7 +364,7 @@ go straight to the Ninja's manual (website homepage)!]]></t>
 		<t><![CDATA[Make a print screen and open it in a new window.]]></t>
 		<t><![CDATA[Confirm]]></t>
 		<t><![CDATA[Cancel]]></t>
-		<t><![CDATA[##LOGIN1## was reported by ##LOGIN2##]]></t>
+		<t><![CDATA[##LOGIN2## wants ##LOGIN1## to be kicked.]]></t>
 		<t><![CDATA[Screenshot save in the parameters of your account.]]></t>
 		<t><![CDATA[Error during the saving of your screenshot.]]></t>
 		<t><![CDATA[Team mode]]></t>
