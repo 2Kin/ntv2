@@ -18,7 +18,7 @@ titre:
     eventDate: Date de l'event :
     dernierMessage: Derniers messages
     topic: %count% topic|]1,+Inf]%count% topics
-    comment: %count% commentaire|]1,+Inf]%count% commentaire
+    comment: %count% commentaire|]1,+Inf]%count% commentaires
     dernier: dernier
 description:
     meta:
