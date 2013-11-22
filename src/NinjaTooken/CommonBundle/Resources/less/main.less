@@ -50,8 +50,15 @@
 
 /* FONT PATH
  * -------------------------- */
-@font-face{
-    font-family:@headFontFamily;src:url(../font/Wonton.eot);src:local(@headFontFamily), url(../font/Wonton.ttf) format('opentype');
+@font-face {
+    font-family: '@headFontFamily';
+    src: url('../font/wonton.eot');
+    src: url('../font/wonton.eot?#iefix') format('embedded-opentype'),
+         url('../font/wonton.woff') format('woff'),
+         url('../font/wonton.ttf') format('truetype'),
+         url('../font/wonton.svg#wonton') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 @font-face {
   font-family: 'FontAwesome';
