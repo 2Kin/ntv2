@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Lobby
  *
  * @ORM\Table(name="nt_lobby")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="NinjaTooken\GameBundle\Entity\LobbyRepository")
  */
 class Lobby
 {

@@ -12,7 +12,7 @@ class DefaultController extends Controller
     public function partiesAction()
     {
         return $this->render('NinjaTookenGameBundle:Default:parties.html.twig', array(
-            'games' => $this->getDoctrine()->getManager()->getRepository('NinjaTookenGameBundle:Lobby')->findBy(array(), array('dateDebut' => 'DESC'))
+            'games' => $this->getDoctrine()->getManager()->getRepository('NinjaTookenGameBundle:Lobby')->getRecent(50)
         ));
     }
 
@@ -313,14 +313,9 @@ class DefaultController extends Controller
 
     public function recentGamesAction($max = 3)
     {
-        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenGameBundle:Lobby');
-
-        $q = $repo->createQueryBuilder('a')->orderBy('a.dateDebut', 'DESC')->getQuery();
-        $q->setFirstResult(0);
-        $q->setMaxResults($max);
-        $games = $q->getResult();
-
-        return $this->render('NinjaTookenGameBundle:Games:recentList.html.twig', array('games' => $games));
+        return $this->render('NinjaTookenGameBundle:Games:recentList.html.twig', array(
+            'games' => $this->getDoctrine()->getManager()->getRepository('NinjaTookenGameBundle:Lobby')->getRecent($max)
+        ));
     }
 
     public function signatureAction(User $user)

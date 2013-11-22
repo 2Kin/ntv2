@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
  * Ninja
  *
  * @ORM\Table(name="nt_ninja")
- * @ORM\Entity
  * @ORM\Entity(repositoryClass="NinjaTooken\GameBundle\Entity\NinjaRepository")
  */
 class Ninja
