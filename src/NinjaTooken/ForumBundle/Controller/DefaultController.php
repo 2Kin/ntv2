@@ -202,13 +202,11 @@ class DefaultController extends Controller
         }else
             $forum = null;
 
-        // recherche dans les commentaires
-        $comments = $em->getRepository('NinjaTookenForumBundle:Comment')->searchComments($user, $forum, $request->get('q'), $num, 1);
-
         // recherche dans les threads
         $threads = $em->getRepository('NinjaTookenForumBundle:Thread')->searchThreads($user, $forum, $request->get('q'), $num, 1);
 
-        // ajoute les commentaires trouvés
+        // recherche dans les commentaires
+        $comments = $em->getRepository('NinjaTookenForumBundle:Comment')->searchComments($user, $forum, $request->get('q'), $num, 1);
         foreach($comments as $comment){
             $thread = $comment->getThread();
             $finded = false;
