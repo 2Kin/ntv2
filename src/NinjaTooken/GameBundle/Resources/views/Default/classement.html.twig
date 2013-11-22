@@ -30,7 +30,7 @@
 						</div>
 
 						<p><br>{{ 'ninjatooken.ancien'|trans }}</p>
-                        {% for i in 12..1 %}
+                        {% for i in 13..1 %}
 						<div class="row-fluid">
 							<span class="span6">{{ ('ninjatooken.ancienListe.winner' ~ i ~ '.utilisateur')|trans({'%urlUtilisateur%': path('ninja_tooken_user_old')})|raw }}</span>
 							<span class="span6">{{ ('ninjatooken.ancienListe.winner' ~ i ~ '.tournoi')|trans({'%urlMessage%': path('ninja_tooken_message_old')})|raw }}</span>
