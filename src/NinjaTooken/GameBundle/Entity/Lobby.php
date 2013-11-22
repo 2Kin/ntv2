@@ -28,8 +28,8 @@ class Lobby
      *
      * @ORM\ManyToMany(targetEntity="NinjaTooken\UserBundle\Entity\User")
      * @ORM\JoinTable(name="nt_lobby_user",
-     *      joinColumns={@ORM\JoinColumn(name="lobby_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     *      joinColumns={@ORM\JoinColumn(name="lobby_id", referencedColumnName="id", onDelete="cascade")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="cascade")}
      * )
      */
     public $users;
