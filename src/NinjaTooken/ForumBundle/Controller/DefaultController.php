@@ -84,7 +84,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
 
-            if($security->isGranted('ROLE_ADMIN') !== false){
+            if($security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
                 $thread = new Thread();
                 $thread->setAuthor($user);
                 $forum = $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Forum')->getForum('nouveautes')[0];
@@ -131,7 +131,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
 
-            if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false){
+            if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
                 $form = $this->createForm(new EventType(), $thread);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
@@ -285,7 +285,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
 
-            if($forum->getCanUserCreateThread() || $security->isGranted('ROLE_ADMIN') !== false){
+            if($forum->getCanUserCreateThread() || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
                 $thread = new Thread();
                 $thread->setAuthor($user);
                 $thread->setForum($forum);
@@ -335,7 +335,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
 
-            if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false){
+            if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
                 $form = $this->createForm(new ThreadType(), $thread);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
@@ -383,7 +383,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
 
-            if($security->isGranted('ROLE_ADMIN') !== false){
+            if($security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
                 $em = $this->getDoctrine()->getManager();
                 $thread->setIsCommentable(
                     !$thread->getIsCommentable()
@@ -414,7 +414,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
 
-            if($security->isGranted('ROLE_ADMIN') !== false){
+            if($security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
                 $em = $this->getDoctrine()->getManager();
                 $thread->setIsPostit(
                     !$thread->getIsPostit()
@@ -445,7 +445,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
 
-            if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false){
+            if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
                 $isEvent = $thread->getIsEvent();
 
                 $em = $this->getDoctrine()->getManager();
@@ -488,7 +488,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
 
-            if($thread->getIsCommentable() || $security->isGranted('ROLE_ADMIN') !== false){
+            if($thread->getIsCommentable() || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
                 $comment = new Comment();
                 $comment->setAuthor($user);
                 $comment->setThread($thread);
@@ -536,7 +536,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
 
-            if( ($thread->getIsCommentable() && $comment->getAuthor() == $user) || $security->isGranted('ROLE_ADMIN') !== false){
+            if( ($thread->getIsCommentable() && $comment->getAuthor() == $user) || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
                 $form = $this->createForm(new CommentType(), $comment);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
@@ -593,7 +593,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
             $user = $security->getToken()->getUser();
 
-            if( ($thread->getIsCommentable() && $comment->getAuthor() == $user) || $security->isGranted('ROLE_ADMIN') !== false){
+            if( ($thread->getIsCommentable() && $comment->getAuthor() == $user) || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($comment);
                 $em->flush();

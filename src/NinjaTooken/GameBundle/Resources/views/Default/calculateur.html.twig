@@ -38,7 +38,7 @@
                             <div class="span2">
                                 <label class="select">
                                     <select name="calculateurLevel" data-aptitude="{{ levelUp.aptitude }}" data-capacite="{{ levelUp.capacite }}">
-                                    {% for i in 0..100 %}
+                                    {% for i in 1..100 %}
                                         <option value="{{ i }}"{% if i == level %} selected{% endif %}>{{ i }}</option>
                                     {% endfor %}
                                     </select>

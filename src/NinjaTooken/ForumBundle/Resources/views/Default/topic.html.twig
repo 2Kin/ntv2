@@ -38,7 +38,7 @@
 
 {% block body %}
 				<section class="forum">
-					{% if is_granted("ROLE_USER") and forum.clan is empty or (forum.clan and app.user and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true or is_granted("ROLE_ADMIN")) %}<h4><a href="{{ path('ninja_tooken_thread_ajouter', {forum_nom:forum.slug}) }}" class="button pull-right">{{ 'action.addTopic'|trans }}</a></h4>{% endif %}<br class="clear">
+					{% if is_granted("ROLE_USER") and forum.clan is empty or (forum.clan and app.user and app.user.clan and app.user.clan.clan == forum.clan and app.user.clan.canEditClan == true or is_granted("ROLE_ADMIN") or is_granted("ROLE_MODERATOR")) %}<h4><a href="{{ path('ninja_tooken_thread_ajouter', {forum_nom:forum.slug}) }}" class="button pull-right">{{ 'action.addTopic'|trans }}</a></h4>{% endif %}<br class="clear">
 					{% for thread in threads %}
 					{% include 'NinjaTookenForumBundle:Default:topicListe.html.twig' %}
 					{% endfor %}

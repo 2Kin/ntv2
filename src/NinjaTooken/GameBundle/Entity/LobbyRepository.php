@@ -26,7 +26,7 @@ class LobbyRepository extends EntityRepository
     {
         $query = $this->createQueryBuilder('a')
             ->delete('NinjaTookenGameBundle:Lobby', 'a')
-            ->where('a.dateUpdate>:date')
+            ->where('a.dateUpdate<=:date')
             ->setParameter('date', new \DateTime('-1 hour'))
             ->getQuery();
 

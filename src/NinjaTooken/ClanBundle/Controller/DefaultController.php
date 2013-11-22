@@ -184,7 +184,7 @@ class DefaultController extends Controller
                     $isShisho = true;
             }
 
-            if($isShisho || $security->isGranted('ROLE_ADMIN') !== false){
+            if($isShisho || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
 
                 $clanutilisateur = $utilisateur->getClan();
                 $clan = $user->getClan()->getClan();
@@ -228,7 +228,7 @@ class DefaultController extends Controller
                     $canEdit = true;
             }
 
-            if($canEdit || $security->isGranted('ROLE_ADMIN') !== false){
+            if($canEdit || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
                 $form = $this->createForm(new ClanType(), $clan);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
@@ -297,7 +297,7 @@ class DefaultController extends Controller
                     $canDelete = true;
             }
 
-            if($canDelete || $security->isGranted('ROLE_ADMIN') !== false){
+            if($canDelete || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
                 $em = $this->getDoctrine()->getManager();
 
                 // enlève les évènement sur clan_utilisateur
