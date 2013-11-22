@@ -510,16 +510,16 @@ header{
                 li{
                     display:inline;
                     a{
-                        display:inline-block;.size(16px, 16px);background:@grayDark;margin:@baseLineHeight;color:transparent;.border-radius(8px);.opacity(50);
+                        display:inline-block;.size(16px, 16px);background-color:@grayDark;margin:@baseLineHeight;color:transparent;.border-radius(8px);
                         @shadow:inset -2px -1px 0px fadeout(@black, 60%), inset 0px 1px 1px fadeout(@white, 70%);
                         .box-shadow(@shadow);
                         &:hover{
-                            .opacity(100);
+                            background-color:@black;
                         }
                     }
                     &.active-marker{
                         a{
-                            .opacity(100);
+                            background-color:@black;
                         }
                     }
                 }
