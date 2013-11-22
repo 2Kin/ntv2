@@ -99,6 +99,24 @@ hr{
     clear:both;float:none;.size(2px, 100%);margin:@baseLineHeight 0;background:@gray;border-top:1px solid @black;border-right:0 none;border-bottom:0 none;border-left:0 none;
 }
 
+// message pour mettre à jour son navigateur
+.chromeframe{
+    background-color:@white;padding:15px 20px;color:@black;font-size:120%;margin-bottom:30px;text-align:center;display:none;
+    a:hover{
+        color:@black;
+    }
+}
+html[data-useragent*='MSIE 5.'],
+html[data-useragent*='MSIE 6.'],
+html[data-useragent*='MSIE 7.'],
+html[data-useragent*='MSIE 8.'],
+html[data-useragent*='MSIE 9.'],
+html[data-useragent*='MSIE 10.']{
+    .chromeframe{
+        display:block;
+    }
+}
+
 // input text
 input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"]{
     border:0 none;.border-radius(@baseBorderRadius);background-color:@grayLight;height:30px;color:@gray;.transition(all 0.2s linear);padding:0 1%;

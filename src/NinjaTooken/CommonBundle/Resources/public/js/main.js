@@ -80,6 +80,8 @@ $(document).ready(function(){
 	/*var a=document.createElement("x");
 	a.style.cssText="pointer-events:auto";
 	if(a.style.pointerEvents!=="auto"){}*/
+	var doc = document.documentElement;
+	doc.setAttribute('data-useragent', navigator.userAgent);
 
 	// les paramètres passés via l'url
 	var prmstr = window.location.search.substr(1);
