@@ -76,6 +76,9 @@ function wheel(event) {
 }
 
 $(document).ready(function(){
+	// pointer-events:none dans IE
+	PointerEventsPolyfill.initialize({});
+
 	// les paramètres passés via l'url
 	var prmstr = window.location.search.substr(1);
 	var prmarr = prmstr.split ("&");
