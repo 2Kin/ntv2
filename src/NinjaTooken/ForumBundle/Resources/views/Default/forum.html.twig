@@ -23,7 +23,7 @@
 				{% for forum in forums %}
 					<h4 class="pull-left"><a href="{{ path('ninja_tooken_topic', {forum_nom:forum.slug}) }}">{{ forum.nom }}</a></h4>
 					<span class="numComments"><i class="icon-comment"></i> {{ 'titre.topic'|transchoice(forum.numThreads, {}) }}</span>
-					{% if is_granted("ROLE_USER") and (forum.canUserCreateThread or is_granted("ROLE_ADMIN")) %}
+					{% if is_granted("ROLE_USER") and (forum.canUserCreateThread or is_granted("ROLE_ADMIN") or is_granted("ROLE_MODERATOR")) %}
 						<a href="{{ path('ninja_tooken_thread_ajouter', {forum_nom:forum.slug}) }}" class="button pull-right">{{ 'action.newThread'|trans }}</a>
 					{% endif %}
 					<br class="clear">
