@@ -77,7 +77,9 @@ function wheel(event) {
 
 $(document).ready(function(){
 	// pointer-events:none dans IE
-	PointerEventsPolyfill.initialize({});
+	/*var a=document.createElement("x");
+	a.style.cssText="pointer-events:auto";
+	if(a.style.pointerEvents!=="auto"){}*/
 
 	// les paramètres passés via l'url
 	var prmstr = window.location.search.substr(1);
