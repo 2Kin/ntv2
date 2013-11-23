@@ -59,9 +59,9 @@ description:
     suite: Read more
     partenaire: Partners
     ninja: |
-        Ninja Tooken is a <strong>free network game</strong>!<br/>
-         Discover a world where ninjas are merciless. <strong>Suiton</strong>, <strong>Futon</strong>, <strong>Raiton</strong>, <strong>Doton</strong>, <strong>Katon</strong>... Each class have their specific powers, <strong>so choose yours carefully</strong>! <br/>
-         Create your account to save your <strong>experience</strong>, <strong>join a clan</strong>, or <strong>participate in tournaments</strong>.
+        Ninja Tooken is a <strong>free network game</strong>!<br><br>
+        Discover a world where ninjas are merciless. <strong>Suiton</strong>, <strong>Futon</strong>, <strong>Raiton</strong>, <strong>Doton</strong>, <strong>Katon</strong>... Each class have their specific powers, <strong>so choose yours carefully</strong>!<br><br>
+        Create your account to save your <strong>experience</strong>, <strong>join a clan</strong>, or <strong>participate in tournaments</strong>.
     noResult: No results.
     online: Online
     offline: Offline
