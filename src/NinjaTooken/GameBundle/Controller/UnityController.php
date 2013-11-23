@@ -29,7 +29,7 @@ class UnityController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -672,7 +672,7 @@ class UnityController extends Controller
             }
         }
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $this->idUtilisateur = $user->getId();
             // les données du joueur

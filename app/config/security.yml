@@ -16,17 +16,76 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_SONATA_READER:
-        ROLE_SONATA_EDITOR:
-        ROLE_SONATA_ADMIN:
-        ROLE_STAFF:       [ROLE_USER, ROLE_SONATA_READER]
-        ROLE_ADMIN:       [ROLE_STAFF, ROLE_SONATA_EDITOR, ROLE_SONATA_ADMIN]
-        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_SONATA_USER_ADMIN_USER_MODERATOR:
+            - ROLE_SONATA_USER_ADMIN_USER_LIST
+            - ROLE_SONATA_USER_ADMIN_USER_VIEW
+            - ROLE_SONATA_USER_ADMIN_USER_CREATE
+            - ROLE_SONATA_USER_ADMIN_USER_EDIT
+        ROLE_SONATA_USER_ADMIN_GROUP_MODERATOR:
+            - ROLE_SONATA_USER_ADMIN_GROUP_LIST
+            - ROLE_SONATA_USER_ADMIN_GROUP_VIEW
+            - ROLE_SONATA_USER_ADMIN_GROUP_CREATE
+            - ROLE_SONATA_USER_ADMIN_GROUP_EDIT
+        ROLE_NINJATOOKEN_CLAN_ADMIN_CLAN_MODERATOR:
+            - ROLE_NINJATOOKEN_CLAN_ADMIN_CLAN_LIST
+            - ROLE_NINJATOOKEN_CLAN_ADMIN_CLAN_VIEW
+            - ROLE_NINJATOOKEN_CLAN_ADMIN_CLAN_CREATE
+            - ROLE_NINJATOOKEN_CLAN_ADMIN_CLAN_EDIT
+        ROLE_NINJATOOKEN_FORUM_ADMIN_FORUM_MODERATOR:
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_FORUM_LIST
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_FORUM_VIEW
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_FORUM_CREATE
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_FORUM_EDIT
+        ROLE_NINJATOOKEN_FORUM_ADMIN_THREAD_MODERATOR:
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_THREAD_LIST
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_THREAD_VIEW
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_THREAD_CREATE
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_THREAD_EDIT
+        ROLE_NINJATOOKEN_FORUM_ADMIN_COMMENT_MODERATOR:
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_COMMENT_LIST
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_COMMENT_VIEW
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_COMMENT_CREATE
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_COMMENT_EDIT
+        ROLE_SONATA_USER_ADMIN_USER_ADMIN:
+            - ROLE_SONATA_USER_ADMIN_USER_DELETE
+            - ROLE_SONATA_USER_ADMIN_USER_EXPORT
+        ROLE_SONATA_USER_ADMIN_GROUP_ADMIN:
+            - ROLE_SONATA_USER_ADMIN_GROUP_DELETE
+            - ROLE_SONATA_USER_ADMIN_GROUP_EXPORT
+        ROLE_NINJATOOKEN_CLAN_ADMIN_CLAN_ADMIN:
+            - ROLE_NINJATOOKEN_CLAN_ADMIN_CLAN_DELETE
+            - ROLE_NINJATOOKEN_CLAN_ADMIN_CLAN_EXPORT
+        ROLE_NINJATOOKEN_FORUM_ADMIN_FORUM_ADMIN:
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_FORUM_DELETE
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_FORUM_EXPORT
+        ROLE_NINJATOOKEN_FORUM_ADMIN_THREAD_ADMIN:
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_THREAD_DELETE
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_THREAD_EXPORT
+        ROLE_NINJATOOKEN_FORUM_ADMIN_COMMENT_ADMIN:
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_COMMENT_DELETE
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_COMMENT_EXPORT
+        # les roles qui seront utilisés
+        ROLE_MODERATOR:
+            - ROLE_USER
+            - ROLE_SONATA_USER_ADMIN_USER_MODERATOR
+            - ROLE_SONATA_USER_ADMIN_GROUP_MODERATOR
+            - ROLE_NINJATOOKEN_CLAN_ADMIN_CLAN_MODERATOR
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_FORUM_MODERATOR
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_THREAD_MODERATOR
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_COMMENT_MODERATOR
+        ROLE_ADMIN:
+            - ROLE_MODERATOR
+            - ROLE_SONATA_USER_ADMIN_USER_ADMIN
+            - ROLE_SONATA_USER_ADMIN_GROUP_ADMIN
+            - ROLE_NINJATOOKEN_CLAN_ADMIN_CLAN_ADMIN
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_FORUM_ADMIN
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_THREAD_ADMIN
+            - ROLE_NINJATOOKEN_FORUM_ADMIN_COMMENT_ADMIN
+        ROLE_SUPER_ADMIN:
+            - ROLE_ADMIN
+            - ROLE_ALLOWED_TO_SWITCH
         SONATA:
             - ROLE_SONATA_PAGE_ADMIN_PAGE_EDIT
-    # set access_strategy to unanimous, else you may have unexpected behaviors
-    access_decision_manager:
-        strategy: unanimous
 
     providers:
         fos_userbundle:
@@ -39,6 +98,8 @@ security:
 
     firewalls:
         admin:
+            switch_user:        true
+            context:            user
             pattern:      /daFuckingAdmin(.*)
             form_login:
                 provider:       fos_userbundle
@@ -51,14 +112,9 @@ security:
             anonymous:    true
 
         main:
+            switch_user:        true
+            context:            user
             pattern: .*
-            fos_facebook:
-                app_url: ""
-                server_url: "http://www.ninjatooken.com"
-                login_path: fos_user_security_login
-                check_path: /facebook/login_check
-                provider: fos_facebook_provider
-                default_target_path: ninja_tooken_user_messagerie
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
@@ -66,14 +122,24 @@ security:
                 login_path: fos_user_security_login
                 always_use_default_target_path: false
                 default_target_path:            ninja_tooken_user_messagerie
-                use_referer:                    false
+                use_referer:                    true
+                use_forward:			false
+            fos_facebook:
+                app_url: ""
+                server_url: "http://www.ninjatooken.com"
+                login_path: fos_user_security_login
+                check_path: /facebook/login_check
+                provider: fos_facebook_provider
+                default_target_path: ninja_tooken_user_messagerie
             logout:
                 path:   fos_user_security_logout
                 target: ninja_tooken_homepage
             anonymous:    true
             remember_me:
                 key:    %secret%
-            provider:   fos_userbundle
+                lifetime: 31536000 # 365 days in seconds
+                path:     /
+                domain:   ~ # Defaults to the current domain from $_SERVER
 
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
@@ -97,7 +163,7 @@ security:
         - { path: ^/daFuckingAdmin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/daFuckingAdmin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/daFuckingAdmin, role: [ROLE_STAFF, ROLE_ADMIN] }
+        - { path: ^/daFuckingAdmin, role: [ROLE_MODERATOR, ROLE_ADMIN] }
 
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
 

@@ -102,7 +102,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if(!$user->getClan()){
@@ -119,6 +119,20 @@ class DefaultController extends Controller
 
                     if ($form->isValid()) {
                         $em = $this->getDoctrine()->getManager();
+
+                        // permet de générer le fichier
+                        $file = $request->files->get('clan')['kamonUpload'];
+                        if($file !== null){
+                            $extension = strtolower($file->guessExtension());
+                            if(in_array($extension, array('jpeg','jpg','png','gif'))){
+                                $clan->file = $file;
+                                $cachedImage = dirname(__FILE__).'/../../../../web/cache/kamon/'.$clan->getWebKamonUpload();
+                                if(file_exists($cachedImage)){
+                                    unlink($cachedImage);
+                                }
+                                $clan->setKamonUpload('');
+                            }
+                        }
 
                         $clanutilisateur = new ClanUtilisateur();
                         $clanutilisateur->setCanEditClan(true);
@@ -174,7 +188,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             // vérification des droits utilisateurs
@@ -217,7 +231,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             // vérification des droits utilisateurs
@@ -248,7 +262,7 @@ class DefaultController extends Controller
                             $extension = strtolower($file->guessExtension());
                             if(in_array($extension, array('jpeg','jpg','png','gif'))){
                                 $clan->file = $file;
-                                $cachedImage = dirname(__FILE__).'/../../../../www/cache/kamon/'.$clan->getWebKamonUpload();
+                                $cachedImage = dirname(__FILE__).'/../../../../web/cache/kamon/'.$clan->getWebKamonUpload();
                                 if(file_exists($cachedImage)){
                                     unlink($cachedImage);
                                 }
@@ -286,7 +300,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             // vérification des droits utilisateurs
@@ -325,7 +339,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -375,7 +389,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -442,7 +456,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $clan = $user->getClan();
             $em = $this->getDoctrine()->getManager();
@@ -467,7 +481,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -496,7 +510,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -561,7 +575,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -631,7 +645,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -670,7 +684,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -737,7 +751,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 

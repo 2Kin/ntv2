@@ -64,11 +64,11 @@ class DefaultController extends Controller
         // utilisateur à passer
         $userData = array();
         $securityContext = $this->container->get('security.context');
-        if($securityContext->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($securityContext->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $securityContext->getToken()->getUser();
             $userData = array(
                 'userID' => $user->getId(),
-                'userName' => $user->getUsernameCanonical(),
+                'userName' => $user->getUsername(),
                 'userRole' => $user->getRoles()
             );
         }

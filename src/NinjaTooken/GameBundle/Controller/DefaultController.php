@@ -27,7 +27,7 @@ class DefaultController extends Controller
         // les données du joueur connecté
         $security = $this->get('security.context');
         $ninja = null;
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $ninja = $user->getNinja();
 

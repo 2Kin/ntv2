@@ -216,16 +216,7 @@ sonata_user:
 
 sonata_admin:
     security:
-        handler: sonata.admin.security.handler.acl
-        acl_user_manager: fos_user.user_manager
-        # acl security information
-        information:
-            GUEST:    [VIEW, LIST]
-            STAFF:    [EDIT, LIST, CREATE]
-            EDITOR:   [OPERATOR, EXPORT]
-            ADMIN:    [MASTER]
-        admin_permissions: [CREATE, LIST, DELETE, UNDELETE, EXPORT, OPERATOR, MASTER]
-        object_permissions: [VIEW, EDIT, DELETE, UNDELETE, OPERATOR, MASTER, OWNER]
+        handler: sonata.admin.security.handler.role
     title:      DaFuckingAdmin
     title_logo: /bundles/sonataadmin/logo_title.png
     options:
@@ -241,8 +232,7 @@ sonata_admin:
     dashboard:
         blocks:
             - { position: left, type: sonata.admin.block.admin_list }
-            - { position: right, type: sonata.block.service.text, settings: { content: "<h2>Welcome to the Sonata Admin</h2> <p>This is a <code>sonata.block.service.text</code> from the Block Bundle, you can create and add new block in these area by configuring the <code>sonata_admin</code> section.</p> <br /> For instance, here a RSS feed parser (<code>sonata.block.service.rss</code>):"} }
-            - { position: right, type: sonata.block.service.rss, settings: { title: Sonata Project's Feeds, url: http://sonata-project.org/blog/archive.rss }}
+            - { position: right, type: sonata.block.service.text, settings: { content: "<h2>Sonata Admin</h2> <p>Reste à inclure principalement la recherche d'utilisateurs par IP.</p>"} }
 
         groups:
             user:
