@@ -83,6 +83,10 @@ class Forum
         $this->setDateAjout(new \DateTime());
     }
 
+    public function __toString(){
+        return $this->nom;
+    }
+
     /**
      * Get id
      *

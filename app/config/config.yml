@@ -222,6 +222,7 @@ sonata_admin:
     options:
         html5_validate: false # does not use html5 validation
         confirm_exit:   false # disable confirmation when quitting with unsaved changes
+        use_select2: false
     templates:
         layout:  SonataAdminBundle::standard_layout.html.twig
         ajax:    SonataAdminBundle::ajax_layout.html.twig
@@ -291,6 +292,8 @@ sonata_doctrine_orm_admin:
                 decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig
 
 stfalcon_tinymce:
+    include_jquery: false
+    tinymce_jquery: true
     selector: ".tinymce"
     language: %locale%
     theme:
@@ -313,7 +316,3 @@ stfalcon_tinymce:
             statusbar: false
             tab_focus: ':prev,:next'
             valid_elements: "@[id|class|title|style],span[data-mce-type|data-mce-style|align],a[href|target],legend,fieldset,img[src|alt|align|height|width],object[classid|width|height|codebase|*],param[name|value|_value],embed[type|width|height|src|*],ul,li,ol,p[align],font[face|size|color],strong/b,em/i,u,strike,br"
-
-genemu_form:
-    select2:
-         enabled: true

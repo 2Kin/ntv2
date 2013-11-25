@@ -8,6 +8,11 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class ForumAdmin extends Admin
 {
+    protected $datagridValues = array(
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'dateAjout'
+    );
+
     //Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -15,13 +20,12 @@ class ForumAdmin extends Admin
             ->add('nom', 'text', array(
                 'label' => 'Nom'
             ))
-            ->add('clan', 'genemu_jqueryselect2_entity', array(
-                'label' => 'Clan',
-                'class' => 'NinjaTookenClanBundle:Clan',
-                'property' => 'nom',
-                'configs' => array(
-                    'placeholder' => 'Sélectionnez un clan'
-                )
+            ->add('clan', 'sonata_type_model_list', array(
+                'btn_add'       => 'Add Clan',
+                'btn_list'      => 'List',
+                'btn_delete'    => false,
+            ), array(
+                'placeholder' => 'No clan selected'
             ))
             ->add('old_id', 'integer', array(
                 'label' => 'Ancien identifiant',

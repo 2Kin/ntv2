@@ -148,6 +148,10 @@ class Clan
         $this->setDateAjout(new \DateTime());
     }
 
+    public function __toString(){
+        return $this->nom;
+    }
+
     public function getAbsoluteKamonUpload()
     {
         return null === $this->kamonUpload || "" === $this->kamonUpload ? null : $this->getUploadRootDir().'/'.$this->kamonUpload;

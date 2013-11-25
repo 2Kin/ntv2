@@ -27,7 +27,6 @@ class AppKernel extends Kernel
 			new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
-            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
 
