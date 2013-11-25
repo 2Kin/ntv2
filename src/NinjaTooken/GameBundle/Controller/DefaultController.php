@@ -27,10 +27,10 @@ class DefaultController extends Controller
         // les données du joueur connecté
         $security = $this->get('security.context');
         $ninja = null;
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $ninja = $user->getNinja();
-
             if($ninja){
                 // l'expérience (et données associées)
                 $gameData->setExperience($ninja->getExperience(), $ninja->getGrade());

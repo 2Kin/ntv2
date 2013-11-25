@@ -102,7 +102,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if(!$user->getClan()){
@@ -188,7 +188,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             // vérification des droits utilisateurs
@@ -231,7 +231,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             // vérification des droits utilisateurs
@@ -300,7 +300,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             // vérification des droits utilisateurs
@@ -339,7 +339,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -389,7 +389,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -456,7 +456,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $clan = $user->getClan();
             $em = $this->getDoctrine()->getManager();
@@ -481,7 +481,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -510,7 +510,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -575,7 +575,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -645,7 +645,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -684,7 +684,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
@@ -751,7 +751,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 

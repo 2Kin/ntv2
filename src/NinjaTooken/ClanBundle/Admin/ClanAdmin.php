@@ -9,6 +9,11 @@ use Doctrine\ORM\EntityRepository;
 
 class ClanAdmin extends Admin
 {
+    protected $datagridValues = array(
+        '_sort_order' => 'DESC',
+        '_sort_by' => 'dateAjout'
+    );
+
     //Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {

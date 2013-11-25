@@ -286,7 +286,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig', array(
                 'form' => $this->container->get('fos_user.change_password.form')->createView()
             ));
@@ -298,7 +298,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $translator = $this->get('translator');
             // post request
             if ($request->getMethod() === 'POST') {
@@ -407,7 +407,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             // post request
             if ($request->getMethod() === 'POST') {
                 $user = $security->getToken()->getUser();
@@ -445,7 +445,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             $confirmation = $user->getConfirmationToken();
@@ -468,7 +468,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
 
@@ -503,7 +503,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $this->container->get('fos_user.user_manager')->deleteUser($user);
 
@@ -516,7 +516,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
 
@@ -543,7 +543,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
 
@@ -569,7 +569,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
 
@@ -598,7 +598,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if($friend->getUser() == $user){
@@ -625,7 +625,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if($friend->getUser() == $user){
@@ -652,7 +652,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if($friend->getUser() == $user){
@@ -679,7 +679,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if($friend->getUser() == $user){
@@ -702,7 +702,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
             $repo = $em->getRepository('NinjaTookenUserBundle:Friend');
@@ -722,7 +722,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
             $repo = $em->getRepository('NinjaTookenUserBundle:Friend');
@@ -742,7 +742,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
 
@@ -766,7 +766,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             if($capture->getUser() == $user){
                 // supprime d'imgur

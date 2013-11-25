@@ -81,7 +81,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if($security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
@@ -128,7 +128,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
@@ -280,7 +280,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if($forum->getCanUserCreateThread() || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
@@ -330,7 +330,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
@@ -378,7 +378,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if($security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
@@ -409,7 +409,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if($security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
@@ -440,7 +440,7 @@ class DefaultController extends Controller
     {
         $security = $this->get('security.context');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
@@ -483,7 +483,7 @@ class DefaultController extends Controller
         $security = $this->get('security.context');
         $page = max(1, $page);
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if($thread->getIsCommentable() || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
@@ -531,7 +531,7 @@ class DefaultController extends Controller
         $security = $this->get('security.context');
         $page = max(1, $page);
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if( ($thread->getIsCommentable() && $comment->getAuthor() == $user) || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
@@ -588,7 +588,7 @@ class DefaultController extends Controller
         $security = $this->get('security.context');
         $page = max(1, $page);
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
             if( ($thread->getIsCommentable() && $comment->getAuthor() == $user) || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
