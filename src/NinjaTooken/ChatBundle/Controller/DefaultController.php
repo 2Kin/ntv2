@@ -55,7 +55,7 @@ class DefaultController extends Controller
             'defaultBanTime' => 10,
             'contentType' => 'text/html',
             'styleAvailable' => array('NinjaTooken','beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Uranium','Plum','prosilver','subblack2','subSilver','Core','MyBB','vBulletin'),
-            'logoutData' => $this->generateUrl('fos_user_security_logout'),
+            'logoutData' => $this->generateUrl('ninja_tooken_homepage'),
             'loginData' => $this->generateUrl('fos_user_security_login'),
             'logsPurgeLogs' => true,
             'logsPurgeTimeDiff' => 60

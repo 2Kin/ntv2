@@ -23,6 +23,7 @@
                 {% endif %}
 				<form action="{{ path("fos_user_security_check") }}" method="post" accept-charset="UTF-8" class="full">
 					<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+					<input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}"/>
 					<div class="row-fluid">
 						<div class="span3 offset1">
 							<label class="libelle required" for="pseudo">{{ 'compte.register.pseudo'|trans({}, 'common') }}</label>

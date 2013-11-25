@@ -101,6 +101,7 @@ security:
             pattern:      /daFuckingAdmin(.*)
             form_login:
                 provider:       fos_userbundle
+                remember_me:    true
                 login_path:     /daFuckingAdmin/login
                 use_forward:    false
                 check_path:     /daFuckingAdmin/login_check
@@ -115,13 +116,13 @@ security:
             pattern: .*
             form_login:
                 provider: fos_userbundle
+                remember_me: true
                 csrf_provider: form.csrf_provider
                 check_path: fos_user_security_check
                 login_path: fos_user_security_login
                 always_use_default_target_path: false
-                default_target_path:            ninja_tooken_user_messagerie
-                use_referer:                    true
-                use_forward:			false
+                default_target_path:            ninja_tooken_homepage
+                target_path_parameter:          _target_path
             fos_facebook:
                 app_url: ""
                 server_url: "http://www.ninjatooken.com"
@@ -137,7 +138,7 @@ security:
                 key:    %secret%
                 lifetime: 31536000 # 365 days in seconds
                 path:     /
-                domain:   ~ # Defaults to the current domain from $_SERVER
+                domain:   ~
 
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
