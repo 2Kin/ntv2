@@ -87,3 +87,7 @@ ninja_tooken_contact:
     pattern:  /nous-contacter
     defaults: { _controller: NinjaTookenCommonBundle:Default:contact }
 
+ninja_tooken_search:
+    pattern:  /search
+    defaults: { _controller: NinjaTookenCommonBundle:Default:search }
+

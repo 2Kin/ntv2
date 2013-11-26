@@ -10,7 +10,7 @@
 {% endfor %}
 <div class="signature{% if is_admin %} admin{% elseif is_moderator %} moderateur{% endif %}" itemprop="creator" itemscope itemtype="http://schema.org/Person">
 	<div class="row-fluid">
-		<div class="resume span4">
+		<div class="resume span5">
 			<img src="{{ avatar.getUrl(user) }}" itemprop="image" class="pull-left" alt="">
 			<a href="{{ path('ninja_tooken_user_fiche', {user_nom:user.slug}) }}" rel="author" itemprop="url"><span itemprop="name">{{ user.username }}</span></a><br>
 		{% if user.ninja is not empty and user.ninja is defined %}
@@ -18,7 +18,7 @@
 		{% endif %}
 		</div>
 		{% if user.ninja is not empty and user.ninja is defined %}
-		<div class="span8">
+		<div class="span7">
 			<div class="row-fluid">
 				<div class="experience span7">
 					<div class="xp">
@@ -54,18 +54,16 @@
 	</div>
 	{% if user.ninja is not empty and user.ninja is defined %}
 	<div class="row-fluid">
+		<div class="nfo span6" itemprop="memberOf" itemtype="http://schema.org/Organization">
 		{% if user.clan is not empty %}
-		<div class="nfo span6" itemprop="memberOf" itemtype="http://schema.org/Organization">
 			 <a href="{{ path('ninja_tooken_clan', {clan_nom:user.clan.clan.slug}) }}" itemprop="url"><span itemprop="name">{{ user.clan.clan.nom }}</span></a> - <strong itemprop="jobTitle">{{ ('clan.rang' ~ user.clan.droit)|trans({}, 'game') }}</strong>
-		</div>
 		{% else %}
-		<div class="nfo span6" itemprop="memberOf" itemtype="http://schema.org/Organization">
 			<strong itemprop="jobTitle">Rōnin</strong>
-			{% if app.user and app.user.clan and app.user.clan.droit<3 %}
-			<a href="{{ path('ninja_tooken_clan_recruter_ajouter', {'user_nom':user.slug}) }}" class="button small pull-left">{{ 'action.recruter'|trans }}</a>
-			{% endif %}
-		</div>
 		{% endif %}
+		{% if app.user and app.user.clan %}
+			<a href="{{ path('ninja_tooken_clan_recruter_ajouter', {'user_nom':user.slug}) }}" class="button small pull-left">{{ 'action.recruter'|trans }}</a>
+		{% endif %}
+		</div>
 		<div class="nfo right span6" itemprop="award">
 			<strong>{{ user.ninja.missionCourse }}</strong> {{ 'game.course'|transchoice(user.ninja.missionCourse, {}, 'common') }}<strong> / {{ user.ninja.missionAssassinnat }}</strong> {{ 'game.assassinat'|transchoice(user.ninja.missionAssassinnat, {}, 'common') }}
 		</div>

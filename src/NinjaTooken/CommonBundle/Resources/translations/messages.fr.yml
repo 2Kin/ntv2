@@ -10,6 +10,7 @@ keywords:
         mention: NinjaTooken, shinobi, ninja, mentions, légales, fps, gratuit, online, free
         reglement: NinjaTooken, shinobi, ninja, règlement, fairplay, fps, gratuit, online, free
         team: NinjaTooken, shinobi, ninja, équipe, team, développeur, fairplay, fps, gratuit, online, free
+        chercher: NinjaTooken, shinobi, ninja, recherche, fps, gratuit, online, free
 description:
     meta:
         index: Ninja Tooken, jeu FPS 3D gratuit jouable dans le navigateur avec un mode réseau et solo. Personnalise ton shinobi, et fais évoluer ton avatar.
@@ -22,7 +23,11 @@ description:
         mention: Les mentions légales de Ninja Tooken, le FPS 3D gratuit. Ce jeu indépendant et gratuit est sans engagements !
         reglement: Le règlement de Ninja Tooken : pour des parties fun et sans prises de tête !
         team: Ninja Tooken c'est un jeu en 3D gratuit, mais c'est aussi des infographistes 2D et 3D, des développeurs, des administateurs réseaux, des bêta testeurs...
+        chercher: Rechercher simplement et rapidement !
     canvas: Ton navigateur ne supporte pas les &lt;canvas&gt;.
+    chercherTopic: %count% topic trouvé pour "%q%"|]1,+Inf]%count% topics trouvés pour "%q%"
+    chercherUtilisateur: %count% utilisateur trouvé pour "%q%".|]1,+Inf]%count% utilisateurs trouvés pour "%q%".
+    chercherClan: %count% clan trouvé pour "%q%".|]1,+Inf]%count% clans trouvés pour "%q%".
 notice:
     contact: Ton message a bien été envoyé, tu recevras une réponse au plus vite
 action:

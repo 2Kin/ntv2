@@ -100,4 +100,36 @@ class DefaultController extends Controller
 
         return $this->render('NinjaTookenCommonBundle:Default:contact.html.twig');
     }
+
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $num = $this->container->getParameter('numReponse');
+        $q = (string)$request->get('q');
+
+        // recherche dans les threads
+        $threads = $em->getRepository('NinjaTookenForumBundle:Thread')->searchThreads(null, null, $q, $num, 1);
+
+        // recherche dans les commentaires
+        $comments = $em->getRepository('NinjaTookenForumBundle:Comment')->searchComments(null, null, $q, $num, 1);
+        foreach($comments as $comment){
+            $thread = $comment->getThread();
+            $finded = false;
+            foreach($threads as $t){
+                if($thread == $t){
+                    $finded = true;
+                    break;
+                }
+            }
+            if(!$finded)
+                $threads[] = $thread;
+        }
+
+        return $this->render('NinjaTookenCommonBundle:Default:search.html.twig', array(
+            'clans' => $em->getRepository('NinjaTookenClanBundle:Clan')->searchClans($q, $num, 1),
+            'users' => $em->getRepository('NinjaTookenUserBundle:User')->searchUser($q, $num),
+            'threads' => $threads,
+            'forum' => null
+        ));
+    }
 }

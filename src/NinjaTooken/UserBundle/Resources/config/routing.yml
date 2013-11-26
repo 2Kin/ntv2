@@ -2,10 +2,6 @@ ninja_tooken_user_old:
     pattern:  /utilisateur.php
     defaults: { _controller: NinjaTookenUserBundle:Default:oldUser }
 
-ninja_tooken_user_search:
-    pattern:  /fiche/search
-    defaults: { _controller: NinjaTookenUserBundle:Default:userSearch }
-
 ninja_tooken_user_find:
     pattern:  /compte/messagerie/user/find
     defaults: { _controller: NinjaTookenUserBundle:Default:userFind }

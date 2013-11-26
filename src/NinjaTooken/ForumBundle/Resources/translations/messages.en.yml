@@ -27,9 +27,6 @@ description:
     threadList: Topics of "%forum%", it's here for your free fps ninja game.
     event: Tournaments, streams, competitions: this is where it happens!
     noEvent: There are currently no events.
-    chercher0: %count% topic found for "%q%"|]1,+Inf]%count% topics found for "%q%"
-    chercher1: in "%forum%"
-    chercher2: '"%user%" as author'
     error404:
         message: This message doesn't exist!
         forum: This forum doesn't exist!

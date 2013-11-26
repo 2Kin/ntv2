@@ -27,9 +27,6 @@ description:
     threadList: Les topics de "%forum%", c'est ici pour votre jeu fps de ninja gratuit.
     event: Tournoi, streams, concours : c'est ici que ça se passe !
     noEvent: Il n'y a pas encore d'évènements.
-    chercher0: %count% topic trouvé pour "%q%"|]1,+Inf]%count% topics trouvés pour "%q%"
-    chercher1: dans le forum "%forum%"
-    chercher2: comme auteur "%user%"
     error404:
         message: Ce message n'existe pas !
         forum: Ce forum n'existe pas !

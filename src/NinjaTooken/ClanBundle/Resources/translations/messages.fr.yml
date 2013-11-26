@@ -27,7 +27,6 @@ keywords:
 description:
     meta: Quel est le clan de ninja le plus puissant de Ninjatooken ? Créé un clan, recrute des joueurs, défies les meilleurs et augmente ta renommée!
     entete: %count% ninja depuis le %date%|]1,+Inf]%count% ninjas depuis le %date%
-    chercher: %count% clan trouvé pour "%q%".|]1,+Inf]%count% clans trouvés pour "%q%".
     creation: le %date%
     fonde: Fondé le %date%
     perso: Page perso :

@@ -31,14 +31,8 @@ notice:
 keywords:
     meta:
         fiche: NinjaTooken, shinobi, ninja, fps, gratuit, online, free
-        chercher: NinjaTooken, shinobi, ninja, recherche, fps, gratuit, online, free
 titre:
     partieActuelle: Parties en cours
-description:
-    meta:
-        chercher: Rechercher un ninja simplement et rapidement !
-    utilisateur:
-        chercher: %count% utilisateur trouvé pour "%q%".|]1,+Inf]%count% utilisateurs trouvés pour "%q%".
 ami:
     numFriend: %count% ami|]1,+Inf]%count% amis
     numDemande: "{0} Pas de demandes en cours|{1} Une demande en cours|]1,+Inf]%count% demandes en cours"

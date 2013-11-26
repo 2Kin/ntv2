@@ -51,6 +51,9 @@ ninja_tooken_user:
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    prefix:   /{_locale}/
+    requirements:
+        _locale: en|fr
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"

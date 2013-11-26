@@ -771,18 +771,6 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
-    public function clanSearchAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $num = $this->container->getParameter('numReponse');
-
-        $clans = $em->getRepository('NinjaTookenClanBundle:Clan')->searchClans($request->get('q'), $num, 1);
-
-        return $this->render('NinjaTookenClanBundle:Default:search.html.twig', array(
-            'clans' => $clans
-        ));
-    }
-
     function getRecruteur($list=array()){
         $membre = array();
         $membre[] = $list['recruteur'];

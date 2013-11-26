@@ -1,0 +1,85 @@
+{% extends '::layout.html.twig' %}
+
+{% block title %}NinjaTooken - {{ 'action.chercher'|trans({}, 'common') }}{% endblock %}
+{% block description %}{{ 'description.meta.chercher'|trans }}{% endblock %}
+{% block keywords %}{{ 'keywords.meta.chercher'|trans }}{% endblock %}
+
+{% block breadcrumbs1 %}{% endblock %}
+
+{% block breadcrumbs2 %}
+                            <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                                <a href="{{ path('ninja_tooken_search') }}" itemprop="url">
+                                    <span itemprop="title">{{ 'action.chercher'|trans({}, 'common') }}</span>
+                                </a>
+                            </span>
+{% endblock %}
+
+{% block body %}
+                <section class="forum">
+                    <h4>{{ 'action.chercherResult'|trans({}, 'common') }}</h4>
+
+					{% if threads is not empty %}
+					    <br class="clear">
+						<p>{{ 'description.chercherTopic'|transchoice(threads|length, {'%q%': app.request.get('q')}) }}</p>
+						{% for thread in threads %}
+						{% include 'NinjaTookenForumBundle:Default:topicListe.html.twig' %}
+						{% endfor %}
+					{% endif %}
+
+                    {% if users is not empty %}
+                        <br class="clear">
+                        <p>{{ 'description.chercherUtilisateur'|transchoice(users|length, {'%q%': app.request.get('q')}) }}</p>
+                        {% for user in users %}
+                        <div class="row-fluid topic">
+                            <div class="span6">
+                                <h5><a href="{{ path('ninja_tooken_user_fiche', {user_nom:user.slug}) }}">{{ user.username }}</a></h5>
+                            </div>
+                            {% if user.ninja %}
+                                <div class="span1">
+                                    {% if user.ninja.classe is not empty %}<span class="{{ ('class.' ~ user.ninja.classe)|trans({}, 'game')|lower }}">{{ ('class.' ~ user.ninja.classe)|trans({}, 'game') }}</span>{% endif %}
+                                </div>
+                                <div class="span1">
+                                    {% if user.ninja.grade>0 %}{{ user.ninja.grade }}° dan{% endif %}
+                                </div>
+                                <div class="span4">
+                            {% else %}
+                            <div class="offset2 span4">
+                            {% endif %}
+                                {{ 'fiche.dateInscrit'|trans({'%date%': user.createdAt|localizeddate('full', 'none', app.request.locale)}) }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+
+					{% if clans is not empty %}
+                        <br class="clear">
+					    <p>{{ 'description.chercherClan'|transchoice(clans|length, {'%q%': app.request.get('q')}) }}</p>
+						{% for clan in clans %}
+						<div class="row-fluid topic">
+							<div class="span6">
+								<h5><a href="{{ path('ninja_tooken_clan', {clan_nom:clan.slug}) }}">{% if clan.tag is not empty %}[{{ clan.tag }}] {% endif %}{{ clan.nom }}</a></h5>
+							</div>
+							<div class="span3">
+								<span>{{ 'description.entete'|transchoice(clan.membres.count, {'%date%': clan.dateAjout|localizeddate('medium', 'none', app.request.locale)}) }}</span>
+							</div>
+							<div class="span3">
+								{% if clan.isRecruting %}<span class="actif">{{ 'description.recrutement.ouvert'|trans }}</span>{% else %}<span>{{ 'description.recrutement.ferme'|trans }}</span>{% endif %}
+							</div>
+						</div>
+						{% endfor %}
+					{% endif %}
+
+                    {% if users is empty and threads is empty and clans is empty%}
+                        <br class="clear">
+                        {{ 'description.noResult'|trans({}, 'common') }}
+                    {% endif %}
+
+                    <br class="clear">
+                    <h4>{{ 'action.chercherReset'|trans({}, 'common') }}</h4>
+                    <form action="{{ path('ninja_tooken_search') }}" method="post" accept-charset="utf-8" class="row-fluid">
+                        <input type="text" name="q" value="{{ 'action.chercher'|trans({}, 'common') }}" class="span10">
+                        <input type="submit" name="s" value="{{ 'action.ok'|trans({}, 'common') }}" class="span2">
+                    </form>
+
+                </section>
+{% endblock %}

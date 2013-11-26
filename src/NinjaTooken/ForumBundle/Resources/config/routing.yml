@@ -24,10 +24,6 @@ ninja_tooken_forum:
     pattern:  /forum
     defaults: { _controller: NinjaTookenForumBundle:Default:forum }
 
-ninja_tooken_forum_search:
-    pattern:  /forum/search
-    defaults: { _controller: NinjaTookenForumBundle:Default:forumSearch }
-
 ninja_tooken_topic:
     pattern:  /forum/{forum_nom}/{page}
     defaults: { _controller: NinjaTookenForumBundle:Default:topic, page:1 }

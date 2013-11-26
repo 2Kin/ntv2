@@ -184,50 +184,6 @@ class DefaultController extends Controller
         return $this->render('NinjaTookenForumBundle:Default:forum.html.twig', array('forums' => $forums));
     }
 
-    public function forumSearchAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $num = $this->container->getParameter('numReponse');
-
-        $user = $request->get('user');
-        if(!empty($user)){
-            $user = $em->getRepository('NinjaTookenUserBundle:User')->findOneBy(array('slug' => $user));
-        }else
-            $user = null;
-
-        $forum = $request->get('forum');
-        if(!empty($forum)){
-            // recherche dans les messages
-            $forum = $em->getRepository('NinjaTookenForumBundle:Forum')->findOneBy(array('slug' => $forum));
-        }else
-            $forum = null;
-
-        // recherche dans les threads
-        $threads = $em->getRepository('NinjaTookenForumBundle:Thread')->searchThreads($user, $forum, $request->get('q'), $num, 1);
-
-        // recherche dans les commentaires
-        $comments = $em->getRepository('NinjaTookenForumBundle:Comment')->searchComments($user, $forum, $request->get('q'), $num, 1);
-        foreach($comments as $comment){
-            $thread = $comment->getThread();
-            $finded = false;
-            foreach($threads as $t){
-                if($thread == $t){
-                    $finded = true;
-                    break;
-                }
-            }
-            if(!$finded){
-                $threads[] = $thread;
-            }
-        }
-
-        return $this->render('NinjaTookenForumBundle:Default:search.html.twig', array(
-            'threads' => $threads,
-            'forum' => $forum,
-            'user' => $user
-        ));
-    }
-
     /**
      * @ParamConverter("forum", class="NinjaTookenForumBundle:Forum", options={"mapping": {"forum_nom":"slug"}})
      */

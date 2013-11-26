@@ -265,23 +265,6 @@ class DefaultController extends Controller
         return $response;
     }
 
-    public function userSearchAction(Request $request)
-    {
-        $users = array();
-
-        $user = (string)$request->get('q');
-        if(!empty($user)){
-            $users = $this->getDoctrine()
-                ->getEntityManager()
-                ->getRepository('NinjaTookenUserBundle:User')
-                ->searchUser($user, $this->container->getParameter('numReponse'));
-        }
-
-        return $this->render('NinjaTookenUserBundle:Default:search.html.twig', array(
-            'users' => $users
-        ));
-    }
-
     public function parametresAction()
     {
         $security = $this->get('security.context');

@@ -19,10 +19,6 @@ ninja_tooken_clan:
     pattern:  /clan/{clan_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clan }
 
-ninja_tooken_clan_search:
-    pattern:  /clan-search
-    defaults: { _controller: NinjaTookenClanBundle:Default:clanSearch }
-
 ninja_tooken_clan_ajouter:
     pattern:  /clan-ajouter
     defaults: { _controller: NinjaTookenClanBundle:Default:clanAjouter }
