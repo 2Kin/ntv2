@@ -172,7 +172,7 @@ $(document).ready(function(){
 			menubar : false,
 			statusbar : false,
 			tab_focus : ':prev,:next',
-			valid_elements : "@[id|class|title|style],span[data-mce-type|data-mce-style|align],a[href|target],legend,fieldset,img[src|alt|align|height|width],object[classid|width|height|codebase|*],param[name|value|_value],embed[type|width|height|src|*],iframe[type|width|height|src|frameborder|scrolling|marginheight|marginwidth|name|align],ul,li,ol,p[align],font[face|size|color],strong/b,em/i,u,strike,br",
+			valid_elements : "@[id|class|title|style],span[data-mce-type|data-mce-style|align],a[href|target],legend,fieldset,img[src|alt|align|height|width],object[classid|width|height|codebase|*],param[name|value|_value],embed[type|width|height|src|*],iframe[type|width|height|src|frameborder|scrolling|marginheight|marginwidth|name|align],ul,li,ol,h3,h4,h5,h6,p[align],font[face|size|color],strong/b,em/i,u,strike,br",
 			language : 'fr_FR',
 			style_formats: [
 				{title: 'entête 1', block : 'h3'},
@@ -318,6 +318,11 @@ $(document).ready(function(){
 		_answer.hide();
 		_answers.each(function(){
 			var _this = $(this);
+			var _article = _this.closest('article');
+			if(_article.length>0){
+				var _content = _article.find('.content[itemprop="commentText"]');
+				var _author = _article.find('.signature a[rel="author"] span');
+			}
 			_this.click(function(e){
 				e.preventDefault();
 				e.stopImmediatePropagation();
@@ -325,6 +330,8 @@ $(document).ready(function(){
 				_answers.show();
 				// déplace le formulaire de réponse
 				_this.parent().after(_answer);
+				// ajoute la référence du message
+				tinymce.activeEditor.setContent(_article.length>0?'<fieldset><legend>'+_author.text()+'</legend>'+_content.html()+'</fieldset><p></p>':'');
 				// affiche le formulaire de réponse
 				_answer.show();
 				// cache le bouton de réponse

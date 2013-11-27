@@ -170,7 +170,7 @@ textarea{
 .textarea{
     min-height:150px;.border-radius(@baseBorderRadius);background-color:@grayLight;padding:1%;color:@black;.transition(all 0.2s linear);
     &:focus{
-        color:inherit;background-color:inherit;.transition(all 0.2s linear);.box-shadow(inset 0 0 1px 1px @black);
+        color:inherit;background-color:@grayDark;.transition(all 0.2s linear);.box-shadow(inset 0 0 1px 1px @black);
     }
 }
 // l'icône sur le plugin "nt_media" dans tinymce
@@ -604,6 +604,9 @@ header{
         &:nth-child(even){
             background-color:@gray;
         }
+        &:nth-child(odd){
+            background-color:fadeout(@grayDark, 30%);
+        }
         p{
             .text-overflow();width:calc(100% e(-) 30px);display:inline-block;
         }
@@ -625,6 +628,9 @@ header{
         padding:10px;margin-bottom:(@baseLineHeight*2);
         &:nth-child(even){
             background-color:@gray;
+        }
+        &:nth-child(odd){
+            background-color:fadeout(@grayDark, 30%);
         }
         header{
             h3, h4, time{
@@ -821,6 +827,9 @@ header{
             }
             &:nth-child(even){
                 background-color:@gray;
+            }
+            &:nth-child(odd){
+                background-color:fadeout(@grayDark, 30%);
             }
             h5{
                 margin-left:10px;.text-overflow();
