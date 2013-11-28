@@ -255,7 +255,7 @@ class DefaultController extends Controller
 
             if(!empty($user)){
                 $users = $this->getDoctrine()
-                    ->getEntityManager()
+                    ->getManager()
                     ->getRepository('NinjaTookenUserBundle:User')
                     ->searchUser($user, 10, false);
             }

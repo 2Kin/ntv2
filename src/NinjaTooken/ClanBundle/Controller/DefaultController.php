@@ -580,29 +580,34 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByUsers($recruteur, $utilisateur);
-            if($clanProposition){
-                if($user == $utilisateur && $recruteur->getClan()!==null){
+            if($clanProposition && $clanProposition->getEtat()==0){
+                if($user == $utilisateur && $recruteur->getClan() !== null){
                     $clanutilisateur = $recruteur->getClan();
                     if($clanutilisateur->getDroit()<3){
                         $translator = $this->get('translator');
 
+                        // on supprime l'ancienne liaison
+                        $cu = $user->getClan();
+                        if($cu !== null){
+                            $user->setClan(null);
+                            $em->persist($user);
+                            $em->remove($cu);
+                            $em->flush();
+                        }
+
+                        // le nouveau clan
                         $clan = $clanutilisateur->getClan();
 
                         // on met à jour la proposition
                         $clanProposition->setEtat(1);
                         $em->persist($clanProposition);
 
-                        // on modifie une ancienne liaison
-                        if($user->getClan() !== null){
-                            $cu = $user->getClan();
                         // on ajoute la nouvelle liaison
-                        }else{
-                            $cu = new ClanUtilisateur();
-                        }
+                        $cu = new ClanUtilisateur();
 
                         $cu->setRecruteur($recruteur);
                         $cu->setMembre($user);
-                        $cu->setClan($clanutilisateur->getClan());
+                        $cu->setClan($clan);
                         $cu->setDroit($clanutilisateur->getDroit() + 1);
                         $user->setClan($cu);
 
@@ -633,6 +638,7 @@ class DefaultController extends Controller
                     }
                 }
             }
+            return $this->redirect($this->generateUrl('ninja_tooken_clan_recruter'));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
@@ -650,7 +656,7 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByUsers($recruteur, $utilisateur);
-            if($clanProposition){
+            if($clanProposition && $clanProposition->getEtat()==0){
                 if($user == $utilisateur){
                     $translator = $this->get('translator');
 
@@ -756,7 +762,7 @@ class DefaultController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $postulation = $em->getRepository('NinjaTookenClanBundle:ClanPostulation')->getByClanUser($clan, $user);
-            if($postulation){
+            if($postulation && $postulation->getEtat()==0){
                 $postulation->setEtat(1);
                 $em->persist($postulation);
                 $em->flush();
