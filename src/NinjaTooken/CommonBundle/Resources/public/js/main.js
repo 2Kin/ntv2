@@ -83,6 +83,19 @@ $(document).ready(function(){
 	var doc = document.documentElement;
 	doc.setAttribute('data-useragent', navigator.userAgent);
 
+	var hasAddblocker = function(){
+	  $('.informationframe').show();
+	};
+	if(typeof _af != 'undefined' && typeof _am != 'undefined'){
+	  if(document.getElementById('_amd').style.display.indexOf('none') > -1 ||
+		document.getElementById('_afd').style.visibility == 'hidden' ||
+		document.getElementById('_afd').clientHeight == 0)
+		hasAddblocker();
+	  _af.parentNode.removeChild(_af);
+	  _am.parentNode.removeChild(_am);
+	}else
+		hasAddblocker();
+
 	// les paramètres passés via l'url
 	var prmstr = window.location.search.substr(1);
 	var prmarr = prmstr.split ("&");

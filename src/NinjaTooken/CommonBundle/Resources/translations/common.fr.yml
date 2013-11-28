@@ -66,6 +66,7 @@ description:
     online: En ligne
     offline: Hors ligne
     navigateur: Tu utilises un navigateur <strong>obsolète</strong>. S'il te plait <a href="http://browsehappy.com/">mets ton navigateur à jour </a> ou <a href="http://www.google.com/chromeframe/?redirect=true">active Google Chrome Frame</a> pour améliorer ton expérience.
+    addBlockeur: Le jeu est uniquement financé par la publicité, ce serait sympa de désactiver ton bloqueur de pub ;)
 action:
     chercher: Chercher
     chercherResult: Résultat de la recherche
