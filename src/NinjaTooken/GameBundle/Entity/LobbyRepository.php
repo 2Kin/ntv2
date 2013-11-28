@@ -13,7 +13,7 @@ class LobbyRepository extends EntityRepository
 
         $query = $this->createQueryBuilder('a')
             ->where('a.dateUpdate>:date')
-            ->setParameter('date', new \DateTime('-1 hour'))
+            ->setParameter('date', new \DateTime('-10 minutes'))
             ->orderBy('a.dateDebut', 'DESC');
 
         $query->setFirstResult(($page-1) * $nombre)
@@ -27,7 +27,7 @@ class LobbyRepository extends EntityRepository
         $query = $this->createQueryBuilder('a')
             ->delete('NinjaTookenGameBundle:Lobby', 'a')
             ->where('a.dateUpdate<=:date')
-            ->setParameter('date', new \DateTime('-1 hour'))
+            ->setParameter('date', new \DateTime('-10 minutes'))
             ->getQuery();
 
         return 1 === $query->getScalarResult();

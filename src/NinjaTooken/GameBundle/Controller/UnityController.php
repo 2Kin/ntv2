@@ -531,9 +531,8 @@ class UnityController extends Controller
                                         }
                                         $lobby->setDateUpdate(new \DateTime());
                                         $em->persist($lobby);
-                                    }else{
+                                    }else
                                         $em->remove($lobby);
-                                    }
                                     $em->flush();
                                 }elseif(count($users)>0){
                                     $lobby = new Lobby();
@@ -568,7 +567,10 @@ class UnityController extends Controller
                                 $lobby->setDateUpdate(new \DateTime());
                                 $lobby->removeUser($user);
 
-                                $em->persist($lobby);
+                                if(count($lobby->getUsers())==0)
+                                    $em->remove($lobby);
+                                else
+                                    $em->persist($lobby);
                                 $em->flush();
                             }
                             $data	= '1';
@@ -580,12 +582,7 @@ class UnityController extends Controller
                             $lobbyRepository = $em->getRepository('NinjaTookenGameBundle:Lobby');
 
                             // fait le ménage dans les lobby
-                            $oldLobbies = $lobbyRepository->findBy( array('dateUpdate' => new \DateTime('-1 hour') ) );
-                            if($oldLobbies){
-                                foreach($oldLobbies as $l)
-                                    $em->remove($l);
-                                $em->flush();
-                            }
+                            $lobbyRepository->deleteOld();
 
                             // récupère les amis dans le lobby
                             $friends = $lobbyRepository->createQueryBuilder('l')
