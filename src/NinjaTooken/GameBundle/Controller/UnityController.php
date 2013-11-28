@@ -562,7 +562,7 @@ class UnityController extends Controller
                                 ->where(':user MEMBER OF l.users')
                                 ->setParameter('user', $user)
                                 ->getQuery()
-                                ->getResult();
+                                ->getOneOrNullResult();
                             if($lobby){
                                 $lobby->setDateUpdate(new \DateTime());
                                 $lobby->removeUser($user);
@@ -586,7 +586,7 @@ class UnityController extends Controller
 
                             // récupère les amis dans le lobby
                             $friends = $lobbyRepository->createQueryBuilder('l')
-                                ->select('l.partie as partie, f.friend as friend')
+                                ->select('l, f')
                                 ->innerJoin('NinjaTookenUserBundle:Friend', 'f', 'WITH', 'f.friend MEMBER OF l.users')
                                 ->andWhere('f.user = :user')
                                 ->andWhere('f.isConfirmed = true')
