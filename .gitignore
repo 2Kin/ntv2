@@ -14,3 +14,4 @@
 /web/js/*
 /web/cache/*
 /app/config/parameters.yml
+install.bat
