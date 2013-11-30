@@ -525,14 +525,15 @@ class User extends BaseUser
     {
         if (isset($fbdata['id'])) {
             $this->setFacebookUid($fbdata['id']);
-            $this->addRole('ROLE_FACEBOOK');
+            $this->addRole('ROLE_USER');
         }
         if (isset($fbdata['first_name'])) {
             $this->setFirstname($fbdata['first_name']);
         }
         if (isset($fbdata['last_name'])) {
-            $this->setSurname($fbdata['last_name']);
+            $this->setLastname($fbdata['last_name']);
         }
+        $this->setUsername($this->getFullName());
         if (isset($fbdata['email'])) {
             $this->setEmail($fbdata['email']);
         }

@@ -12,7 +12,7 @@ class UserController extends Controller
         $fbService = $this->get('fos_facebook.user.login');
         //todo: check if service is successfully connected.
         $fbService->connectExistingAccount();
-        return $this->redirect($this->generateUrl('fos_user_profile_edit'));
+        return $this->redirect($this->generateUrl('ninja_tooken_homepage'));
     }
 
     public function loginFbAction() {

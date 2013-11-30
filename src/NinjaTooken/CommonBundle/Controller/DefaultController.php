@@ -4,11 +4,17 @@ namespace NinjaTooken\CommonBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 use NinjaTooken\GameBundle\NinjaTookenGameBundle;
 
 class DefaultController extends Controller
 {
+    public function addBlockerAction()
+    {
+        return new Response('<html><body>add</body></html>');
+    }
+
     public function indexAction()
     {
         $num = $this->container->getParameter('numReponse');

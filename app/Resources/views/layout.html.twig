@@ -1,7 +1,7 @@
 {% if form is defined and form is not empty %}{% form_theme form 'form.html.twig' %}{% endif %}
 {% if form_comment is defined and form_comment is not empty %}{% form_theme form_comment 'form.comment.html.twig' %}{% endif %}
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ app.request.locale }}">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">

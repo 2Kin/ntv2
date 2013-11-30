@@ -88,6 +88,9 @@ p{
 body{
     margin:0;font-size:@baseFontSize;line-height:@baseLineHeight;font-family:@baseFontFamily;color:@textColor;background-color:@grayDark;
 }
+html, body{
+    height:100%;
+}
 a{
     color:@linkColor;text-decoration:none;.transition(all 0.1s linear);
     &:hover,
@@ -557,6 +560,7 @@ header{
 }
 // contenu principal de la page
 .content{
+    min-height:calc(100% e('-') 412px);
     .pull-left{
         margin-right:10px;
     }
