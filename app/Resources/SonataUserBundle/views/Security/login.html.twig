@@ -62,8 +62,6 @@
                                     setTimeout(function(){
                                         window.location.href = "{{ path('_security_check_facebook') }}";
                                     }, 500);
-                                } else {
-                                    window.location.href = "{{ path('_security_facebook_logout') }}";
                                 }
                             });
                         }

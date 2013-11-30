@@ -533,9 +533,22 @@ class User extends BaseUser
         if (isset($fbdata['last_name'])) {
             $this->setLastname($fbdata['last_name']);
         }
-        $this->setUsername($this->getFullName());
+        if (isset($fbdata['username'])) {
+            $this->setUsername($fbdata['username']);
+        }elseif (isset($fbdata['name'])) {
+            $this->setUsername($fbdata['name']);
+        }
         if (isset($fbdata['email'])) {
             $this->setEmail($fbdata['email']);
+        }
+        if (isset($fbdata['gender'])) {
+            $this->setGender($fbdata['gender']=="male"?UserInterface::GENDER_MAN:UserInterface::GENDER_FEMALE);
+        }
+        if(isset($fbdata["birthday"])){
+            $this->setDateOfBirth(\DateTime::createFromFormat('m/d/Y', $fbdata["birthday"]));
+        }
+		if(isset($fbdata['locale'])){
+            $this->setLocale($fbdata['locale']=="fr_FR"?"fr":"en");
         }
     }
 

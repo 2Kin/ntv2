@@ -55,7 +55,7 @@ class FacebookProvider implements UserProviderInterface
             if (empty($user)) {
                 $user = $this->userManager->createUser();
                 $user->setEnabled(true);
-                $user->setPassword('');
+                $user->setPassword(rand(100000,999999));
             }
 
             // TODO use http://developers.facebook.com/docs/api/realtime
