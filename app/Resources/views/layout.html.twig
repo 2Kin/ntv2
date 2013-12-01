@@ -21,7 +21,7 @@
     </head>
     <body>
         <p class="chromeframe">{{ 'description.navigateur'|trans({}, 'common')|raw }}</p>
-        <p class="informationframe">{{ 'description.addBlockeur'|trans({}, 'common')|raw }}</p>
+        <p class="informationframe">{{ 'description.addBlockeur'|trans({}, 'common') }}</p>
 
         <div class="top">
             <div class="container">
@@ -34,6 +34,15 @@
                         <a href="http://fr.twitch.tv/ninjatooken" target="_blank" class="twitch"></a>
                         <a href="http://www.youtube.com/user/ArbitreNT" target="_blank" class="youtube"></a>
                         <a href="http://society6.com/NinjaTooken/" target="_blank" class="society6"></a>
+			{% if paypalDonate %}
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" name="donate">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----{{ paypalCode }}-----END PKCS7-----
+			">
+			<input type="image" src="https://www.paypalobjects.com/{{ app.request.locale }}_{% if app.request.locale == "en" %}US{% else %}FR{% endif %}/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="{{ 'description.paypal'|trans({}, 'common') }}">
+			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+			</form>
+			{% endif %}
                     </div>
                     <div class="span3 gameResume visible-desktop">
 		    {{ render(controller('NinjaTookenGameBundle:Default:recentGames', {'max': 3})) }}

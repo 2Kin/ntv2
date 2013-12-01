@@ -482,12 +482,14 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('fos_user_security_login'));
     }
 
-    public function parametresDeleteAccount()
+    public function parametresDeleteAccountAction()
     {
         $security = $this->get('security.context');
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
+
+            // supprime l'utilisateur
             $this->container->get('fos_user.user_manager')->deleteUser($user);
 
             return $this->redirect($this->generateUrl('ninja_tooken_homepage'));

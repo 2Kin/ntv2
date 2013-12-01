@@ -26,6 +26,11 @@ framework:
     fragments:       ~
 
 services:
+    kernel.listener.ninjatooken_exception_listener:
+        class: NinjaTooken\CommonBundle\Listener\NinjaTookenExceptionListener
+        arguments: [@templating]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
     markup.exercise_html_purifier:
         class: FOS\CommentBundle\Markup\HtmlPurifier
         arguments: [ @exercise_html_purifier.full ]
@@ -65,6 +70,8 @@ twig:
     globals:
         class: %class%
         version: %unity.version%
+        paypalDonate: %paypal.donate%
+        paypalCode: %paypal.code%
 
 # Assetic Configuration
 assetic:

@@ -333,8 +333,8 @@ $(document).ready(function(){
 			var _this = $(this);
 			var _article = _this.closest('article');
 			if(_article.length>0){
-				var _content = _article.find('.content[itemprop="commentText"]');
-				var _author = _article.find('.signature a[rel="author"] span');
+				var _content = _article.find('.content').eq(0);
+				var _author = _article.find('.signature a[rel="author"] span').eq(0);
 			}
 			_this.click(function(e){
 				e.preventDefault();

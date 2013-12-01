@@ -132,6 +132,11 @@ class User extends BaseUser
         $this->setGender(UserInterface::GENDER_MAN);
         $this->oldUsernames = array();
         $this->oldUsernamesCanonical = "";
+        $this->roles = array('ROLE_USER');
+        $this->setConfirmationToken('');
+        $this->setTimezone('Europe/Paris');
+        $this->setDescription('');
+        $this->setAvatar('');
     }
 
     public function getAbsoluteAvatar()
@@ -525,7 +530,6 @@ class User extends BaseUser
     {
         if (isset($fbdata['id'])) {
             $this->setFacebookUid($fbdata['id']);
-            $this->addRole('ROLE_USER');
         }
         if (isset($fbdata['first_name'])) {
             $this->setFirstname($fbdata['first_name']);

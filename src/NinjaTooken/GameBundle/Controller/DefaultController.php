@@ -339,7 +339,7 @@ class DefaultController extends Controller
             // total de joueurs
             $user->total = $repo->getNumNinjas();
 
-            return $this->render('NinjaTookenGameBundle:Default:signature.html.twig', array('user' => $user));
         }
+        return $this->render('NinjaTookenGameBundle:Default:signature.html.twig', array('user' => $user));
     }
 }

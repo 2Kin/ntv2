@@ -61,9 +61,14 @@ class FacebookProvider implements UserProviderInterface
             // TODO use http://developers.facebook.com/docs/api/realtime
             $user->setFBData($fbdata);
 
-            if (count($this->validator->validate($user, 'Facebook'))) {
-                // TODO: the user was found obviously, but doesnt match our expectations, do something smart
-                throw new UsernameNotFoundException('The facebook user could not be stored');
+            $errors = $this->validator->validate($user, 'Profile');
+            if (count($errors)>0) {
+                // the user was found obviously, but doesnt match our expectations, do something smart
+                $data = "";
+                foreach ($errors as $key => $error) {
+                    $data .= $error->getMessage();
+                }
+                throw new UsernameNotFoundException($data);
             }
             $this->userManager->updateUser($user);
         }

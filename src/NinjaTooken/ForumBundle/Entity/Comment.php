@@ -48,6 +48,7 @@ class Comment
     * Author of the comment
     *
     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+    * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
     * @var User
     */
     private $author;
