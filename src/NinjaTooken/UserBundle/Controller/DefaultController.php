@@ -489,8 +489,60 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
+            $em = $this->getDoctrine()->getManager();
+            $conn = $em->getConnection();
+            $evm = $em->getEventManager();
+
+            // enlève les évènement sur clan_proposition
+            // on évite d'envoyer des messages qui seront supprimés
+            $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_clan.clan_proposition_listener'));
+
+            // l'utilisateur était dans un clan
+            $clanutilisateur = $user->getClan();
+            if($clanutilisateur){
+                // un membre
+                if($clanutilisateur->getDroit() > 0){
+                    $user->setClan(null);
+                    $em->persist($user);
+
+                    $utilisateur = $clanutilisateur->getRecruteur();
+                    if($utilisateur){
+                        $utilisateur->removeRecrut($clanutilisateur);
+                        $em->persist($utilisateur);
+                    }
+
+                    $em->remove($clanutilisateur);
+                // le shishou
+                }else{
+                    // enlève les évènements sur clan_utilisateur
+                    // on cherche à tous les supprimer et pas à ré-agencer la structure
+                    $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_clan.clan_utilisateur_listener'));
+
+                    // enlève les évènements sur clan
+                    // les propositions de recrutement seront de toute façon supprimées
+                    $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_clan.clan_listener'));
+
+                    $em->remove($clanutilisateur->getClan());
+                }
+                $em->flush();
+            }
+
+            // enlève les évènement sur thread et comment
+            // tout sera remis à plat à la fin
+            $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_forum.thread_listener'));
+            $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_forum.comment_listener'));
+
             // supprime l'utilisateur
             $this->container->get('fos_user.user_manager')->deleteUser($user);
+
+            // recalcul les nombres de réponses d'un thread
+            $conn->executeUpdate("UPDATE nt_thread as t LEFT JOIN (SELECT COUNT(nt_comment.id) as num, thread_id FROM nt_comment GROUP BY thread_id) c ON c.thread_id=t.id SET t.num_comments = c.num");
+            // recalcul les nombres de réponses d'un forum
+            $conn->executeUpdate("UPDATE nt_forum as f LEFT JOIN (SELECT COUNT(nt_thread.id) as num, forum_id FROM nt_thread GROUP BY forum_id) t ON t.forum_id=f.id SET f.num_threads = t.num");
+
+            // ré-affecte les derniers commentaires
+            $conn->executeUpdate("UPDATE nt_thread as t LEFT JOIN (SELECT MAX(date_ajout) as lastAt, thread_id FROM nt_comment GROUP BY thread_id) c ON c.thread_id=t.id SET t.last_comment_at = c.lastAt");
+            $conn->executeUpdate("UPDATE nt_thread as t LEFT JOIN (SELECT author_id as lastBy, thread_id, date_ajout FROM nt_comment as ct) c ON c.thread_id=t.id and c.date_ajout=t.last_comment_at SET t.lastCommentBy_id = c.lastBy");
 
             return $this->redirect($this->generateUrl('ninja_tooken_homepage'));
         }
