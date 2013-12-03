@@ -16,24 +16,31 @@
 {% endblock %}
 
 {% block body %}
-				<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" accept-charset="UTF-8" class="full">
-                    {% if invalid_username is defined %}
-                        <p class="flash-notice">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
-                    {% endif %}
-					<div class="row-fluid">
-						<div class="span3 offset1">
-							<label class="libelle required" for="username">{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}</label>
-						</div>
-						<div class="span8">
-							<p class="note">{{ 'compte.request.resume'|trans({}, 'common') }}</p>
-							<input type="text" id="username" name="username" required="required" />
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span8 offset4">
-							<input type="submit" value="{{ 'compte.request.reinitialiser'|trans({}, 'common') }}" class="button">
-							<p>{{ 'compte.request.noCompte'|trans({}, 'common') }} <a href="{{ path('fos_user_registration_register') }}">{{ 'compte.request.inscrisToi'|trans({}, 'common') }}</a> !</p>
-						</div>
-					</div>
-				</form>
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="flash-notice">
+                    {{ message|trans({}, 'FOSUserBundle') }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+	<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" accept-charset="UTF-8" class="full">
+		{% if invalid_username is defined %}
+		<p class="flash-notice">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</p>
+		{% endif %}
+		<div class="row-fluid">
+			<div class="span3 offset1">
+				<label class="libelle required" for="username">{{ 'resetting.request.username'|trans({}, 'FOSUserBundle') }}</label>
+			</div>
+			<div class="span8">
+				<p class="note">{{ 'compte.request.resume'|trans({}, 'common') }}</p>
+				<input type="text" id="username" name="username" required="required" />
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span8 offset4">
+				<input type="submit" value="{{ 'compte.request.reinitialiser'|trans({}, 'common') }}" class="button">
+				<p>{{ 'compte.request.noCompte'|trans({}, 'common') }} <a href="{{ path('fos_user_registration_register') }}">{{ 'compte.request.inscrisToi'|trans({}, 'common') }}</a> !</p>
+			</div>
+		</div>
+	</form>
 {% endblock %}

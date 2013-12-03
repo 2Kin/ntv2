@@ -18,7 +18,7 @@
 {% block body %}
 				<form action="#" {{ form_enctype(form) }} method="POST" accept-charset="UTF-8" class="full" id="register">
 					<h3>{{ 'compte.register.resume'|trans({}, 'common') }}</h3>
-                    {{ form_errors(form) }}
+					{{ form_errors(form) }}
 					<div class="row-fluid">
 						<div class="span3 offset1">
 							<label class="libelle required" for="pseudo">{{ 'compte.register.pseudo'|trans({}, 'common') }}</label>

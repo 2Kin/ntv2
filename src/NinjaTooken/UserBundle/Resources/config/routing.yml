@@ -30,6 +30,10 @@ ninja_tooken_user_parametres:
     pattern:  /compte/parametres
     defaults: { _controller: NinjaTookenUserBundle:Default:parametres }
 
+fos_user_profile_show:
+    pattern:  /compte/parametres
+    defaults: { _controller: NinjaTookenUserBundle:Default:parametres }
+
 ninja_tooken_user_parametres_update:
     pattern:  /compte/parametres/update
     defaults: { _controller: NinjaTookenUserBundle:Default:parametresUpdate }

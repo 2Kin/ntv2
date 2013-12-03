@@ -1,5 +1,7 @@
 {% extends "::layout.html.twig" %}
 
+{% block breadcrumbs1 %}{% endblock %}
+{% block breadcrumbs2 %}&nbsp;{% endblock %}
 {% block body %}
     <div class="flash-notice"><p>{{ 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle') }}</p></div>
     {% if app.session is not empty %}

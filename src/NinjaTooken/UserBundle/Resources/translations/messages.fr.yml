@@ -34,7 +34,7 @@ registration:
         message: |
             Salut %username% !<br>
             <br>
-            Pour valider ton compte utilisateur, merci de te rendre sur <a href="%confirmationUrl%" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">%confirmationUrl%</span></a><br>
+            Pour valider ton adresse email, merci de te rendre sur <a href="%confirmationUrl%" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">%confirmationUrl%</span></a><br>
             <br>
             Bon jeu !<br>
             L'équipe NinjaTooken.

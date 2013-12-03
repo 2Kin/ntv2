@@ -10,5 +10,5 @@
                 </div>
             {% endfor %}
         {% endfor %}
-	<div class="flash-notice"><p>{{ 'resetting.password_already_requested'|trans({}, 'FOSUserBundle') }}</p></div>
+	<div class="flash-notice"><p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p></div>
 {% endblock %}

@@ -11,7 +11,6 @@ class ResettingFormType extends BaseType
     {
         $builder->add('new', 'repeated', array(
             'type' => 'password',
-            'options' => array('translation_domain' => 'NinjaTookenUserBundle'),
             'first_options' => array(
                 'label' => 'resetting.new_password',
                 'label_attr' => array('class' => 'libelle')
