@@ -3,20 +3,36 @@
 namespace NinjaTooken\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class UserController extends Controller
 {
-
-    public function connectFacebookWithAccountAction()
+    /*
+     * Dummy controller for FB login
+     */
+    public function loginCheckFbAction() 
     {
-        $fbService = $this->get('fos_facebook.user.login');
-        //todo: check if service is successfully connected.
-        $fbService->connectExistingAccount();
-        return $this->redirect($this->generateUrl('fos_user_profile_edit'));
+        //intercepted by user provider
     }
 
-    public function loginFbAction() {
-        return $this->redirect($this->generateUrl("ninja_tooken_homepage"));
+    /*
+     * Dummy controller for FB login
+     */
+    public function logoutFbAction() 
+    {
+        //intercepted by user provider
+    }
+
+    public function loginFbAction(Request $request) {
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = $request->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
+        }
+
+        return new Response($error);
     }
 
 }

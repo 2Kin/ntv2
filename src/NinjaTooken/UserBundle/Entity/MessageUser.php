@@ -25,6 +25,7 @@ class MessageUser
      * @var Message
      *
      * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\Message", inversedBy="receivers")
+     * @ORM\JoinColumn(name="message_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $message;
 
@@ -32,6 +33,7 @@ class MessageUser
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="destinataire_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $destinataire;
 

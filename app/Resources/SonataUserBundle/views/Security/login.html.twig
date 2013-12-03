@@ -8,11 +8,11 @@
 {% block breadcrumbs1 %}{% endblock %}
 
 {% block breadcrumbs2 %}
-							<span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-								<a href="{{ path('fos_user_security_login') }}" itemprop="url">
-									<span itemprop="title">{{ 'compte.connect.titre'|trans({}, 'common') }}</span>
-								</a>
-							</span>
+                            <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                                <a href="{{ path('fos_user_security_login') }}" itemprop="url">
+                                    <span itemprop="title">{{ 'compte.connect.titre'|trans({}, 'common') }}</span>
+                                </a>
+                            </span>
 {% endblock %}
 
 {% block body %}
@@ -21,51 +21,50 @@
                 {% if error %}
                     <div class="flash-notice">{{ error|trans({}, 'FOSUserBundle') }}</div>
                 {% endif %}
-				<form action="{{ path("fos_user_security_check") }}" method="post" accept-charset="UTF-8" class="full">
-					<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-					<input type="hidden" name="_target_path" value="{% if app.request.headers.get('referer') == url(app.request.get('_route')) %}{{ path('ninja_tooken_homepage') }}{% else %}{{ app.request.headers.get('referer') }}{% endif %}"/>
-					<div class="row-fluid">
-						<div class="span3 offset1">
-							<label class="libelle required" for="pseudo">{{ 'compte.register.pseudo'|trans({}, 'common') }}</label>
-						</div>
-						<div class="span8">
-							<input type="text" id="pseudo" name="_username" value="{{ last_username }}" required>
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span3 offset1">
-							<label class="libelle required" for="pwd">{{ 'compte.register.motPasse'|trans({}, 'common') }}</label>
-						</div>
-						<div class="span8">
-							<input type="password" name="_password" id="pwd" value="" required>
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span8 offset4">
-							<input type="checkbox" name="_remember_me" value="on" id="remember"><label for="remember"> {{ 'compte.connect.remember'|trans({}, 'common') }}</label>
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span8 offset4">
-							<input type="submit" value="{{ 'compte.connect.titre'|trans({}, 'common') }}" class="button">
-							{{ facebook_login_button() }}
-							<p>{{ 'compte.connect.motPasseOubli'|trans({}, 'common') }} <a href="{{ path('fos_user_resetting_request') }}">{{ 'compte.connect.motPasseReset'|trans({}, 'common') }}</a> !</p>
-							<p>{{ 'compte.connect.noCompte'|trans({}, 'common') }} <a href="{{ path('fos_user_registration_register') }}">{{ 'compte.request.inscrisToi'|trans({}, 'common') }}</a> !</p>
-						</div>
-					</div>
-				</form>
-<script type="text/javascript">
-var authurl = '{{ path('_security_check_facebook') }}';
-function goLogIn(){
-    window.location = authurl;
-}
-
-function onFbInit() {
-    if (typeof(FB) != 'undefined' && FB != null ) {
-	FB.Event.subscribe('auth.statusChange', function(response) {
-	    setTimeout(goLogIn, 500);
-	});
-    }
-}
-</script>
+                <form action="{{ path("fos_user_security_check") }}" method="post" accept-charset="UTF-8" class="full">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    <input type="hidden" name="_target_path" value="{% if app.request.headers.get('referer') == url(app.request.get('_route')) %}{{ path('ninja_tooken_homepage') }}{% else %}{{ app.request.headers.get('referer') }}{% endif %}"/>
+                    <div class="row-fluid">
+                        <div class="span3 offset1">
+                            <label class="libelle required" for="pseudo">{{ 'compte.register.pseudo'|trans({}, 'common') }}</label>
+                        </div>
+                        <div class="span8">
+                            <input type="text" id="pseudo" name="_username" value="{{ last_username }}" required>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span3 offset1">
+                            <label class="libelle required" for="pwd">{{ 'compte.register.motPasse'|trans({}, 'common') }}</label>
+                        </div>
+                        <div class="span8">
+                            <input type="password" name="_password" id="pwd" value="" required>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span8 offset4">
+                            <input type="checkbox" name="_remember_me" value="on" id="remember"><label for="remember"> {{ 'compte.connect.remember'|trans({}, 'common') }}</label>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span8 offset4">
+                            <input type="submit" value="{{ 'compte.connect.titre'|trans({}, 'common') }}" class="button">
+                            {{ facebook_login_button() }}
+                            <p>{{ 'compte.connect.motPasseOubli'|trans({}, 'common') }} <a href="{{ path('fos_user_resetting_request') }}">{{ 'compte.connect.motPasseReset'|trans({}, 'common') }}</a> !</p>
+                            <p>{{ 'compte.connect.noCompte'|trans({}, 'common') }} <a href="{{ path('fos_user_registration_register') }}">{{ 'compte.request.inscrisToi'|trans({}, 'common') }}</a> !</p>
+                        </div>
+                    </div>
+                </form>
+                <script type="text/javascript">
+                    function onFbInit() {
+                        if (typeof(FB) != 'undefined' && FB != null ) {              
+                            FB.Event.subscribe('auth.statusChange', function(response) {
+                                if (response.session || response.authResponse) {
+                                    setTimeout(function(){
+                                        window.location.href = "{{ path('_security_check_facebook') }}";
+                                    }, 500);
+                                }
+                            });
+                        }
+                    }
+                </script>
 {% endblock %}

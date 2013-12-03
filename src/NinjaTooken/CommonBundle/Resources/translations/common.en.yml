@@ -66,6 +66,8 @@ description:
     online: Online
     offline: Offline
     navigateur: You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.
+    addBlockeur: This 100% free game has been developped thanks to advertisement only, so it would be cool to disabled your add blocker ;)
+    paypal: PayPal - The safer, easier way to pay online!
 action:
     chercher: Search
     chercherResult: Search results

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>NinjaTooken {{ status_code }} {{ status_text }}</title>
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="{{ asset('bundles/ninjatookencommon/css/main.css') }}" />
+
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+        <link rel="apple-touch-icon" href="{{ asset('touch-icon-iphone.png') }}" />
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('touch-icon-ipad.png') }}" />
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('touch-icon-iphone-retina.png') }}" />
+        <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('touch-icon-ipad-retina.png') }}" />
+        <meta name="msapplication-TileImage" content="{{ asset('windows8.png') }}"/>
+        <meta name="msapplication-TileColor" content="#ff3b00"/>
+    </head>
+    <body>
+        <div class="top">
+            <div class="container">
+                <section class="row-fluid">
+                    <div class="span12 flagSocial clearfix">
+                        <a href="https://www.facebook.com/NinjaTooken" target="_blank" class="facebook"></a>
+                        <a href="http://fr.twitch.tv/ninjatooken" target="_blank" class="twitch"></a>
+                        <a href="http://www.youtube.com/user/ArbitreNT" target="_blank" class="youtube"></a>
+                        <a href="http://society6.com/NinjaTooken/" target="_blank" class="society6"></a>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <div class="banniere">
+            <div class="container">
+                <header class="row-fluid">
+                    <div class="span4">
+                        <a href="{{ path('ninja_tooken_homepage') }}" rel="home"><img src="{{ asset('bundles/ninjatookencommon/images/logo.png') }}"></a>
+                    </div>
+                    <nav class="span8" role="navigation" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement">
+                        <a class="visible-phone" id="menuMobile" href="#">{{ 'menu.menu'|trans({}, 'menu') }}</a>
+                        <ul class="hidden-phone menu">
+                            <li class="hidden-phone">
+                                <a href="{{ path('ninja_tooken_jouer') }}" class="play">{{ 'menu.jouer'|trans({}, 'menu') }}</a>
+                            </li>
+                            <li>
+                                <a>{{ 'menu.jeu'|trans({}, 'menu') }}</a>
+                                <ul>
+                                    <li><a href="{{ path('ninja_tooken_game_classement') }}">{{ 'menu.classement'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_game_parties') }}">{{ 'menu.partie'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_event') }}">{{ 'menu.evenement'|trans({}, 'menu') }}</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a>{{ 'menu.manuel'|trans({}, 'menu') }}</a>
+                                <ul>
+                                    <li><a href="{{ path('ninja_tooken_manuel') }}">{{ 'menu.guide'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_game_calculateur') }}">{{ 'menu.calculateur'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_reglement') }}">{{ 'menu.regle'|trans({}, 'menu') }}</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a>{{ 'menu.communaute'|trans({}, 'menu') }}</a>
+                                <ul>
+                                    <li><a href="{{ path('ninja_tooken_forum') }}">{{ 'menu.forum'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_clans') }}">{{ 'menu.clan'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_chat') }}">{{ 'menu.chat'|trans({}, 'menu') }}</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a>{{ 'menu.faq'|trans({}, 'menu') }}</a>
+                                <ul>
+                                    <li><a href="{{ path('ninja_tooken_faq_generale') }}">{{ 'menu.generale'|trans({}, 'menu') }}</a></li>
+                                    <li><a href="{{ path('ninja_tooken_faq_technique') }}">{{ 'menu.technique'|trans({}, 'menu') }}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </header>
+            </div>
+        </div>
+
+        <div class="breadcrumb">
+            <div class="container">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <h2></h2>
+                        <h1>&nbsp;</h1>
+		    </div>
+		</div>
+	    </div>
+	</div>
+
+        <div class="content">
+            <div class="container">
+                <div class="pub">
+                        <script type="text/javascript"><!--
+                        google_ad_client = "ca-pub-3085034269626140";
+                        /* Top Ban */
+                        google_ad_slot = "7441735399";
+                        google_ad_width = 728;
+                        google_ad_height = 90;
+                        //--></script>
+                        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+                </div>
+		<h1>Oops! An Error Occurred</h1>
+		<h2>The server returned a "{{ status_code }} {{ status_text }}".</h2>
+
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                    <div class="flash-notice">
+                    {{ flashMessage }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="footer">
+            <footer class="container">
+                <ul>
+                    <li><a href="{{ path('ninja_tooken_team') }}">{{ 'menu.team'|trans({}, 'menu') }}</a></li>
+                    <li><a href="{{ path('ninja_tooken_reglement') }}">{{ 'menu.reglement'|trans({}, 'menu') }}</a></li>
+                    <li><a href="{{ path('ninja_tooken_mentions_legales') }}">{{ 'menu.mention'|trans({}, 'menu') }}</a></li>
+                    <li><a href="{{ path('ninja_tooken_contact') }}">{{ 'menu.contact'|trans({}, 'menu') }}</a></li>
+                </ul>
+            </footer>
+        </div>
+
+        <script>
+            var _gaq=[['_setAccount','UA-2980301-2'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

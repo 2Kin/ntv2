@@ -57,6 +57,7 @@ class Message
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $author;
 

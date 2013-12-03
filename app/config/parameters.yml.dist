@@ -30,6 +30,8 @@ parameters:
     akismet.key: 
     akismet.url: http://www.site.com
     numReponse: 20
+    paypal.donate: false
+    paypal.code: 
     class:
         eau: Suiton
         vent: Futon

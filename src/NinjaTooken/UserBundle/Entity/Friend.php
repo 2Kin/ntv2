@@ -25,6 +25,7 @@ class Friend
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
 
@@ -32,6 +33,7 @@ class Friend
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="friend_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $friend;
 

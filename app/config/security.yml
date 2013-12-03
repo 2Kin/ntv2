@@ -88,11 +88,11 @@ security:
     providers:
         fos_userbundle:
             id: fos_user.user_manager
+        my_fos_facebook_provider:
+            id: my.facebook.user
         chainprovider:
             chain:
-                providers: [fos_userbundle, fos_facebook_provider]
-        fos_facebook_provider:
-            id: fos_facebook.user.login
+                providers: [fos_userbundle, my_fos_facebook_provider]
 
     firewalls:
         admin:
@@ -126,10 +126,10 @@ security:
             fos_facebook:
                 app_url: ""
                 server_url: "http://www.ninjatooken.com"
-                login_path: fos_user_security_login
-                check_path: /facebook/login_check
-                provider: fos_facebook_provider
-                default_target_path: ninja_tooken_user_messagerie
+                login_path: _security_login_facebook
+                check_path: _security_check_facebook
+                provider: my_fos_facebook_provider
+                default_target_path: /
             logout:
                 path:   fos_user_security_logout
                 target: ninja_tooken_homepage
@@ -157,6 +157,8 @@ security:
         - { path: ^/(fr|en)/user/send-resetting-email$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(fr|en)/user/check-resetting-email$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(fr|en)/user/reset-password/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { path: ^/(fr|en)/compte, role: ROLE_USER }
 
         - { path: ^/daFuckingAdmin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/daFuckingAdmin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }

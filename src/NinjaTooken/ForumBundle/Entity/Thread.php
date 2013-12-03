@@ -118,6 +118,7 @@ class Thread
     * Author of the comment
     *
     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
     * @var User
     */
     private $author;
@@ -144,6 +145,7 @@ class Thread
      * Denormalized author of the last comment
      *
      * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="lastCommentBy_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      * @var User
      */
     private $lastCommentBy;

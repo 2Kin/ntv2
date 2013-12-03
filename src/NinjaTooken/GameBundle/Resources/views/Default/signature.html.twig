@@ -60,7 +60,7 @@
 		{% else %}
 			<strong itemprop="jobTitle">Rōnin</strong>
 		{% endif %}
-		{% if app.user and app.user.clan %}
+		{% if app.user and app.user.clan and (user.clan is empty or (user.clan and app.user.clan.droit<user.clan.droit)) %}
 			<a href="{{ path('ninja_tooken_clan_recruter_ajouter', {'user_nom':user.slug}) }}" class="button small pull-left">{{ 'action.recruter'|trans }}</a>
 		{% endif %}
 		</div>

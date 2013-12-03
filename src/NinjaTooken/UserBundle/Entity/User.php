@@ -132,6 +132,11 @@ class User extends BaseUser
         $this->setGender(UserInterface::GENDER_MAN);
         $this->oldUsernames = array();
         $this->oldUsernamesCanonical = "";
+        $this->roles = array('ROLE_USER');
+        $this->setConfirmationToken('');
+        $this->setTimezone('Europe/Paris');
+        $this->setDescription('');
+        $this->setAvatar('');
     }
 
     public function getAbsoluteAvatar()
@@ -525,16 +530,29 @@ class User extends BaseUser
     {
         if (isset($fbdata['id'])) {
             $this->setFacebookUid($fbdata['id']);
-            $this->addRole('ROLE_FACEBOOK');
         }
         if (isset($fbdata['first_name'])) {
             $this->setFirstname($fbdata['first_name']);
         }
         if (isset($fbdata['last_name'])) {
-            $this->setSurname($fbdata['last_name']);
+            $this->setLastname($fbdata['last_name']);
+        }
+        if (isset($fbdata['username'])) {
+            $this->setUsername($fbdata['username']);
+        }elseif (isset($fbdata['name'])) {
+            $this->setUsername($fbdata['name']);
         }
         if (isset($fbdata['email'])) {
             $this->setEmail($fbdata['email']);
+        }
+        if (isset($fbdata['gender'])) {
+            $this->setGender($fbdata['gender']=="male"?UserInterface::GENDER_MAN:UserInterface::GENDER_FEMALE);
+        }
+        if(isset($fbdata["birthday"])){
+            $this->setDateOfBirth(\DateTime::createFromFormat('m/d/Y', $fbdata["birthday"]));
+        }
+		if(isset($fbdata['locale'])){
+            $this->setLocale($fbdata['locale']=="fr_FR"?"fr":"en");
         }
     }
 

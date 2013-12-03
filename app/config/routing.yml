@@ -9,6 +9,10 @@ root:
         path: /%locale%/
         permanent: true
 
+add_blocker:
+    pattern: /adimages/
+    defaults: { _controller: NinjaTookenCommonBundle:Default:addBlocker }
+
 ninja_tooken_chat:
     resource: "@NinjaTookenChatBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/

@@ -88,6 +88,9 @@ p{
 body{
     margin:0;font-size:@baseFontSize;line-height:@baseLineHeight;font-family:@baseFontFamily;color:@textColor;background-color:@grayDark;
 }
+html, body{
+    height:100%;
+}
 a{
     color:@linkColor;text-decoration:none;.transition(all 0.1s linear);
     &:hover,
@@ -99,8 +102,9 @@ hr{
     clear:both;float:none;.size(2px, 100%);margin:@baseLineHeight 0;background:@gray;border-top:1px solid @black;border-right:0 none;border-bottom:0 none;border-left:0 none;
 }
 
-// message pour mettre à jour son navigateur
-.chromeframe{
+// message en haut de page
+.chromeframe,
+.informationframe{
     background-color:@white;padding:15px 20px;color:@black;font-size:120%;margin-bottom:30px;text-align:center;display:none;
     a:hover{
         color:@black;
@@ -352,6 +356,9 @@ nav, .footer footer{
         .society6{
             background-position:-125px 0;
         }
+        form[name="donate"]{
+            clear:both;display:block;padding:6px 0 0 63px;
+        }
     }
     .gameResume{
         padding-top:(@baseLineHeight/4);
@@ -556,6 +563,7 @@ header{
 }
 // contenu principal de la page
 .content{
+    min-height:calc(100% e('-') 412px);
     .pull-left{
         margin-right:10px;
     }
@@ -648,6 +656,9 @@ header{
         }
         .content{
             display:block;color:@grayLight;clear:both;margin:@baseLineHeight 0;clear:both;
+	    iframe{
+		max-width:100%;
+	    }
         }
         footer{
             clear:both;margin-bottom:(@baseLineHeight/2);min-height:@baseLineHeight;

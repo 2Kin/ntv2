@@ -23,12 +23,14 @@ class ClanProposition
 
     /**
      * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="recruteur_id", referencedColumnName="id", onDelete="CASCADE")
      * @var User
      */
     private $recruteur;
 
     /**
      * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="postulant_id", referencedColumnName="id", onDelete="CASCADE")
      * @var User
      */
     private $postulant;

@@ -83,6 +83,19 @@ $(document).ready(function(){
 	var doc = document.documentElement;
 	doc.setAttribute('data-useragent', navigator.userAgent);
 
+	var hasAddblocker = function(){
+	  $('.informationframe').show();
+	};
+	if(typeof _af != 'undefined' && typeof _am != 'undefined'){
+	  if(document.getElementById('_amd').style.display.indexOf('none') > -1 ||
+		document.getElementById('_afd').style.visibility == 'hidden' ||
+		document.getElementById('_afd').clientHeight == 0)
+		hasAddblocker();
+	  _af.parentNode.removeChild(_af);
+	  _am.parentNode.removeChild(_am);
+	}else
+		hasAddblocker();
+
 	// les paramètres passés via l'url
 	var prmstr = window.location.search.substr(1);
 	var prmarr = prmstr.split ("&");
@@ -320,8 +333,8 @@ $(document).ready(function(){
 			var _this = $(this);
 			var _article = _this.closest('article');
 			if(_article.length>0){
-				var _content = _article.find('.content[itemprop="commentText"]');
-				var _author = _article.find('.signature a[rel="author"] span');
+				var _content = _article.find('.content').eq(0);
+				var _author = _article.find('.signature a[rel="author"] span').eq(0);
 			}
 			_this.click(function(e){
 				e.preventDefault();
@@ -391,32 +404,31 @@ $(document).ready(function(){
 	}
 
 	// upload de fichier
-	var _upload = $('form[name="editAvatar"] input[type="file"]');
-	if(_upload.length>0){
-		var _form = _upload.closest('form');
-		var _btn = _upload.next();
+	var _uploadAvatar = $('form[name="editAvatar"] input[type="file"]');
+	if(_uploadAvatar.length>0){
+		var _form = _uploadAvatar.closest('form');
+		var _btn = _uploadAvatar.next();
 		_btn.on('click', function(){
-			_upload.trigger('click');
+			_uploadAvatar.trigger('click');
 			return false;
 		});
-		_upload.on('change', function(e){
-			var file = _upload.val().split("\\");
+		_uploadAvatar.on('change', function(e){
+			var file = _uploadAvatar.val().split("\\");
 		    _btn.html(file[file.length-1]);
 			_form.attr('action', _btn.attr('href'));
-			_form.trigger('submit');
 			e.preventDefault();
 		});
 	}
-	var _upload = $('form[name="clan"] input[type="file"]');
-	if(_upload.length>0){
-		var _form = _upload.closest('form');
-		var _btn = _upload.next();
+	var _uploadKamon = $('form[name="clan"] input[type="file"]');
+	if(_uploadKamon.length>0){
+		var _form = _uploadKamon.closest('form');
+		var _btn = _uploadKamon.next();
 		_btn.on('click', function(){
-			_upload.trigger('click');
+			_uploadKamon.trigger('click');
 			return false;
 		});
-		_upload.on('change', function(e){
-			var file = _upload.val().split("\\");
+		_uploadKamon.on('change', function(e){
+			var file = _uploadKamon.val().split("\\");
 		    _btn.html(file[file.length-1]);
 			e.preventDefault();
 		});

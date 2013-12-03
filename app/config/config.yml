@@ -26,6 +26,11 @@ framework:
     fragments:       ~
 
 services:
+    kernel.listener.ninjatooken_exception_listener:
+        class: NinjaTooken\CommonBundle\Listener\NinjaTookenExceptionListener
+        arguments: [@templating]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
     markup.exercise_html_purifier:
         class: FOS\CommentBundle\Markup\HtmlPurifier
         arguments: [ @exercise_html_purifier.full ]
@@ -42,6 +47,12 @@ services:
         class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
+    my.facebook.user:
+        class: NinjaTooken\UserBundle\Security\User\Provider\FacebookProvider
+        arguments:
+            facebook: "@fos_facebook.api"
+            userManager: "@fos_user.user_manager"
+            validator: "@validator"
 
 # Monolog
 monolog:
@@ -59,6 +70,8 @@ twig:
     globals:
         class: %class%
         version: %unity.version%
+        paypalDonate: %paypal.donate%
+        paypalCode: %paypal.code%
 
 # Assetic Configuration
 assetic:
@@ -171,6 +184,7 @@ fos_facebook:
     secret: %facebook_secret%
     cookie: true
     permissions: [email]
+    culture: fr_FR
 
 #gravatar
 ornicar_gravatar:
