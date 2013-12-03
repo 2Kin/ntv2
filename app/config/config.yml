@@ -150,13 +150,14 @@ fos_user:
         mailer: fos_user.mailer.twig_swift
     resetting:
         email:
-            template: NinjaTookenUserBundle:Default:resetting.email.twig
+            template: NinjaTookenUserBundle:Default:resetting.email.html.twig
     registration:
         form:
             type: ninjatooken_user_registration
             handler: ninjatooken_user.form.handler.registration
         confirmation:
-            enabled:    false
+            template: NinjaTookenUserBundle:Default:confirmation.email.html.twig
+            enabled: false
 
 # Stof\DoctrineExtensionBundle configuration
 stof_doctrine_extensions:

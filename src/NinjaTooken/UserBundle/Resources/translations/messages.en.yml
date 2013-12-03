@@ -28,6 +28,26 @@ notice:
     amiSupprimerOk: Deletion successfully done.
     amiSupprimerAllOk: Deletion successfully done.
     captureSupprimerOk: The screenshot has been removed
+registration:
+    email:
+        subject: Welcome %username% !
+        message: |
+            Hi %username% !<br>
+            <br>
+            To finish activating your account - please visit <a href="%confirmationUrl%" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">%confirmationUrl%</span></a><br>
+            <br>
+            Good game !<br>
+            The NinjaTooken's Team
+resetting:
+    email:
+        subject: Reset Password
+        message: |
+            Hi %username% !<br>
+            <br>
+            To reset your password - please visit <a href="%confirmationUrl%" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">%confirmationUrl%</span></a><br>
+            <br>
+            Good game !<br>
+            The NinjaTooken's Team
 keywords:
     meta:
         fiche: NinjaTooken, shinobi, ninja, fps, online, free

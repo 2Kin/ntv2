@@ -1,0 +1,19 @@
+{% block subject %}
+{% autoescape false %}
+{{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+{% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+{{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl})|striptags }}
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+{% embed "::mail.html.twig" %}
+    {% block content %}
+    {{ 'registration.email.message'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl})|raw }}
+    {% endblock %}
+{% endembed %}
+{% endblock %}

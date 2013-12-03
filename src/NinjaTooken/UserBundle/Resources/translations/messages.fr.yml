@@ -28,6 +28,26 @@ notice:
     amiSupprimerOk: Suppression correctement effectuée.
     amiSupprimerAllOk: Suppressions correctement effectuées.
     captureSupprimerOk: La capture a bien été supprimée.
+registration:
+    email:
+        subject: Bienvenue %username% !
+        message: |
+            Salut %username% !<br>
+            <br>
+            Pour valider ton compte utilisateur, merci de te rendre sur <a href="%confirmationUrl%" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">%confirmationUrl%</span></a><br>
+            <br>
+            Bon jeu !<br>
+            L'équipe NinjaTooken.
+resetting:
+    email:
+        subject: Réinitialisation de ton mot de passe
+        message: |
+            Salut %username% !<br>
+            <br>
+            Pour réinitialiser ton mot de passe, merci de te rendre sur <a href="%confirmationUrl%" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">%confirmationUrl%</span></a><br>
+            <br>
+            Bon jeu !<br>
+            L'équipe NinjaTooken.
 keywords:
     meta:
         fiche: NinjaTooken, shinobi, ninja, fps, gratuit, online, free
