@@ -133,7 +133,7 @@ class User extends BaseUser
         $this->oldUsernames = array();
         $this->oldUsernamesCanonical = "";
         $this->roles = array('ROLE_USER');
-        $this->setConfirmationToken('');
+        $this->setConfirmationToken(null);
         $this->setTimezone('Europe/Paris');
         $this->setDescription('');
         $this->setAvatar('');
