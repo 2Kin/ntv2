@@ -39,6 +39,9 @@ registration:
             Good game !<br>
             The NinjaTooken's Team
 resetting:
+    new_password: New password
+    new_password_confirmation: Verification
+    mismatch: The entered passwords don't match
     email:
         subject: Reset Password
         message: |

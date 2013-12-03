@@ -39,6 +39,9 @@ registration:
             Bon jeu !<br>
             L'équipe NinjaTooken.
 resetting:
+    new_password: Nouveau mot de passe
+    new_password_confirmation: Vérification
+    mismatch: Les deux mots de passe ne sont pas identiques
     email:
         subject: Réinitialisation de ton mot de passe
         message: |
