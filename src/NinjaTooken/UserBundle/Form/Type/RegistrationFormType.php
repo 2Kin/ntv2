@@ -14,7 +14,8 @@ class RegistrationFormType extends BaseType
         $builder
             ->add('username', null, array(
                 'label' => 'compte.register.pseudo',
-                'label_attr' => array('class' => 'libelle')
+                'label_attr' => array('class' => 'libelle'),
+                'error_bubbling' => true
             ))
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
@@ -26,11 +27,13 @@ class RegistrationFormType extends BaseType
                     'label' => 'compte.register.motPasseRepeter',
                     'label_attr' => array('class' => 'libelle')
                 ),
-                'invalid_message' => 'fos_user.password.mismatch'
+                'invalid_message' => 'fos_user.password.mismatch',
+                'error_bubbling' => true
             ))
             ->add('email', 'email', array(
                 'label' => 'compte.register.mail',
-                'label_attr' => array('class' => 'libelle')
+                'label_attr' => array('class' => 'libelle'),
+                'error_bubbling' => true
             ))
             ->add('gender', 'choice', array(
                 'choices' => array(
