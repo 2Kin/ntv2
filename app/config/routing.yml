@@ -18,24 +18,32 @@ ninja_tooken_chat:
     prefix:   /{_locale}/
     requirements:
         _locale: en|fr
+    defaults:
+        _locale: fr
 
 ninja_tooken_common:
     resource: "@NinjaTookenCommonBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/
     requirements:
         _locale: en|fr
+    defaults:
+        _locale: fr
 
 ninja_tooken_clan:
     resource: "@NinjaTookenClanBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/
     requirements:
         _locale: en|fr
+    defaults:
+        _locale: fr
 
 ninja_tooken_game:
     resource: "@NinjaTookenGameBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/
     requirements:
         _locale: en|fr
+    defaults:
+        _locale: fr
 
 ninja_tooken_game_unity:
     resource: "@NinjaTookenGameBundle/Resources/config/routingUnity.yml"
@@ -46,34 +54,48 @@ ninja_tooken_forum:
     prefix:   /{_locale}/
     requirements:
         _locale: en|fr
+    defaults:
+        _locale: fr
 
 ninja_tooken_user:
     resource: "@NinjaTookenUserBundle/Resources/config/routing.yml"
     prefix:   /{_locale}/
     requirements:
         _locale: en|fr
+    defaults:
+        _locale: fr
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
     prefix:   /{_locale}/
     requirements:
         _locale: en|fr
+    defaults:
+        _locale: fr
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
     prefix: /{_locale}/register
     requirements:
         _locale: en|fr
+    defaults:
+        _locale: fr
 
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
     prefix: /{_locale}/resetting
     requirements:
         _locale: en|fr
+    defaults:
+        _locale: fr
 
 soanata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
-    prefix: /daFuckingAdmin
+    prefix: /{_locale}/daFuckingAdmin
+    requirements:
+        _locale: en|fr
+    defaults:
+        _locale: fr
 
 admin:
     resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'

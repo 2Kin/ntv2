@@ -21,21 +21,21 @@ class NinjaTookenExceptionListener{
 
         $exception =  $event->getException();
 
+        $code = $exception->getStatusCode();
+
         // personnalise notre objet réponse pour afficher les détails de notre exception
-        $response = new Response();
-        $response->setContent(
-            $this->templating->render('::exception.html.twig',
-                array('exception' => $exception->getMessage())
-            )
+        $response = new Response($this->templating->render('::exception.html.twig',array(
+                'status_code' => $code,
+                'status_text' => isset(Response::$statusTexts[$code]) ? Response::$statusTexts[$code] : '',
+                'exception' => $exception,
+            ))
         );
+        $response->setStatusCode($code);
 
         // HttpExceptionInterface est un type d'exception spécial qui
         // contient le code statut et les détails de l'entête
         if ($exception instanceof HttpExceptionInterface) {
-            $response->setStatusCode($exception->getStatusCode());
             $response->headers->replace($exception->getHeaders());
-        } else {
-            $response->setStatusCode(500);
         }
 
         $response->headers->set('Content-Type', 'text/html');

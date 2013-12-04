@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>NinjaTooken</title>
+        <title>NinjaTooken : {{ status_code }} {{ status_text }}</title>
         <meta name="description" content="">
         <meta name="keywords" content="">
         <meta name="viewport" content="width=device-width">
@@ -22,6 +22,9 @@
             <div class="container">
                 <section class="row-fluid">
                     <div class="span12 flagSocial clearfix">
+                        {% for locale in ['fr', 'en'] %}
+                        <a href="{{ path('ninja_tooken_homepage', {'_locale' : locale}) }}" class="{{ locale }}{% if locale == app.request.locale %} active{% endif %}"></a>
+                        {% endfor %}
                         <a href="https://www.facebook.com/NinjaTooken" target="_blank" class="facebook"></a>
                         <a href="http://fr.twitch.tv/ninjatooken" target="_blank" class="twitch"></a>
                         <a href="http://www.youtube.com/user/ArbitreNT" target="_blank" class="youtube"></a>
@@ -103,8 +106,9 @@
                         //--></script>
                         <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
                 </div>
-		<h1>Oops! An Error Occurred</h1>
-		<div class="flash-notice">{{ exception }}</div>
+                <h1>{{ exception.message|nl2br|format_file_from_text }}</h1>
+                <div class="flash-notice">
+                <strong>{{ status_code }}</strong> {{ status_text }}</div>
 
                 {% for flashMessage in app.session.flashbag.get('notice') %}
                     <div class="flash-notice">
