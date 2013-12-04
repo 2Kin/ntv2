@@ -2,7 +2,6 @@
 
 namespace NinjaTooken\UserBundle\Security\User\Provider;
 
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Facebook;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -68,13 +67,13 @@ class FacebookProvider implements UserProviderInterface
                 foreach ($errors as $key => $error) {
                     $data .= $error->getMessage();
                 }
-                throw new UsernameNotFoundException($data);
+                throw new \Exception($data);
             }
             $this->userManager->updateUser($user);
         }
 
         if (empty($user)) {
-            throw new UsernameNotFoundException('The user is not authenticated on facebook');
+            throw new \Exception('The user is not authenticated on facebook');
         }
 
         return $user;
