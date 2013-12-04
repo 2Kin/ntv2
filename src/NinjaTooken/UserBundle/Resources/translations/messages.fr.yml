@@ -9,6 +9,7 @@ action:
     enregistrer: Enregistrer
     suppression: Suppression
     modifier: Modifier
+    facebook: ... je préfère ma %bouton% Facebook !
 notice:
     utilisateur:
         error404: Cet utilisateur n'existe pas !

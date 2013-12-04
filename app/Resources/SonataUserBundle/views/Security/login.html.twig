@@ -16,8 +16,6 @@
 {% endblock %}
 
 {% block body %}
-                {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();'}) }}
-
                 {% if error %}
                     <div class="flash-notice">{{ error|trans({}, 'FOSUserBundle') }}</div>
                 {% endif %}
@@ -48,23 +46,28 @@
                     <div class="row-fluid">
                         <div class="span8 offset4">
                             <input type="submit" value="{{ 'compte.connect.titre'|trans({}, 'common') }}" class="button">
-                            {{ facebook_login_button() }}
                             <p>{{ 'compte.connect.motPasseOubli'|trans({}, 'common') }} <a href="{{ path('fos_user_resetting_request') }}">{{ 'compte.connect.motPasseReset'|trans({}, 'common') }}</a> !</p>
                             <p>{{ 'compte.connect.noCompte'|trans({}, 'common') }} <a href="{{ path('fos_user_registration_register') }}">{{ 'compte.request.inscrisToi'|trans({}, 'common') }}</a> !</p>
                         </div>
                     </div>
-                </form>
-                <script type="text/javascript">
-                    function onFbInit() {
-                        if (typeof(FB) != 'undefined' && FB != null ) {              
-                            FB.Event.subscribe('auth.statusChange', function(response) {
-                                if (response.session || response.authResponse) {
-                                    setTimeout(function(){
-                                        window.location.href = "{{ path('_security_check_facebook') }}";
-                                    }, 500);
+					<div class="row-fluid">
+						<div class="span11 offset1">
+                            {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();', 'culture': app.request.locale=='fr'?'fr_FR':'en_US'}) }}
+							<h3>{{ 'action.facebook'|trans({"%bouton%":facebook_login_button({"size":"large"})})|raw }}</h3>
+                            <script type="text/javascript">
+                                function onFbInit() {
+                                    if (typeof(FB) != 'undefined' && FB != null ) {              
+                                        FB.Event.subscribe('auth.statusChange', function(response) {
+                                            if (response.session || response.authResponse) {
+                                                setTimeout(function(){
+                                                    window.location.href = "{{ path('_security_check_facebook') }}";
+                                                }, 500);
+                                            }
+                                        });
+                                    }
                                 }
-                            });
-                        }
-                    }
-                </script>
+                            </script>
+						</div>
+					</div>
+                </form>
 {% endblock %}

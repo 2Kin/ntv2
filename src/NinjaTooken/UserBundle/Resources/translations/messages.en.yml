@@ -9,6 +9,7 @@ action:
     enregistrer: Save
     suppression: Deletion
     modifier: Edition
+    facebook: ... %bouton% with Facebook is good for me!
 notice:
     utilisateur:
         error404: This user doesn't exist!

@@ -95,5 +95,24 @@
 							<input type="submit" value="{{ 'menu.jouer'|trans({}, 'menu') }}" class="button" disabled>
 						</div>
 					</div>
+					<div class="row-fluid">
+						<div class="span11 offset1">
+                            {{ facebook_initialize({'xfbml': true, 'fbAsyncInit': 'onFbInit();', 'culture': app.request.locale=='fr'?'fr_FR':'en_US'}) }}
+							<h3>{{ 'action.facebook'|trans({"%bouton%":facebook_login_button({"size":"large"})})|raw }}</h3>
+                            <script type="text/javascript">
+                                function onFbInit() {
+                                    if (typeof(FB) != 'undefined' && FB != null ) {              
+                                        FB.Event.subscribe('auth.statusChange', function(response) {
+                                            if (response.session || response.authResponse) {
+                                                setTimeout(function(){
+                                                    window.location.href = "{{ path('_security_check_facebook') }}";
+                                                }, 500);
+                                            }
+                                        });
+                                    }
+                                }
+                            </script>
+						</div>
+					</div>
 				</form>
 {% endblock %}
