@@ -715,7 +715,7 @@ class UnityController extends Controller
             // calcul l'age
             $age	= "10";
             $dateBirth = $user->getDateOfBirth();
-            if($dateBirth)
+            if($dateBirth && $dateBirth!=new \DateTime('0000-00-00 00:00:00'))
                 $age = $dateBirth->diff(new \DateTime())->format('%y');
             // les données du ninja
             $clan = "";

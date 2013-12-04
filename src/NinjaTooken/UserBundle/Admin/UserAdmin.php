@@ -110,8 +110,9 @@ class UserAdmin extends Admin
                 ->add('lastname', null, array('required' => false))
                 ->add('website', 'url', array('required' => false))
                 ->add('biography', 'text', array('required' => false))
-                ->add('gender', 'sonata_user_gender', array(
-                    'required' => true,
+                ->add('gender', 'choice', array(
+                    'choices' => array('m' => 'male', 'f' => 'female'),
+                    'required' => false,
                     'translation_domain' => $this->getTranslationDomain()
                 ))
                 ->add('locale', 'locale', array('required' => false))

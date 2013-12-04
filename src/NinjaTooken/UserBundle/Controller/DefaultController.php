@@ -270,6 +270,11 @@ class DefaultController extends Controller
         $security = $this->get('security.context');
 
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $security->getToken()->getUser();
+
+            if($user->getDateOfBirth()==new \DateTime('0000-00-00 00:00:00'))
+                $user->setDateOfBirth(null);
+
             return $this->render('NinjaTookenUserBundle:Default:parametres.html.twig', array(
                 'form' => $this->container->get('fos_user.change_password.form')->createView()
             ));

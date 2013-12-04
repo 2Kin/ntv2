@@ -21,7 +21,9 @@ class NinjaTookenExceptionListener{
 
         $exception =  $event->getException();
 
-        $code = $exception->getStatusCode();
+        $code = 500;
+        if (method_exists($exception, 'getStatusCode'))
+            $code = $exception->getStatusCode();
 
         // personnalise notre objet réponse pour afficher les détails de notre exception
         $response = new Response($this->templating->render('::exception.html.twig',array(
