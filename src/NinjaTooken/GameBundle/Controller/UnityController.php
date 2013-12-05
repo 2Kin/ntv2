@@ -36,6 +36,9 @@ class UnityController extends Controller
             $this->time = preg_replace('/[^0-9]/i','',(string)$request->get('time'));
             $this->crypt = $request->headers->get('X-COMMON');
             $this->phpsessid = $request->cookies->get('PHPSESSID');
+
+            $this->container->get('session')->setId($this->phpsessid);
+
             $this->gameversion = $this->container->getParameter('unity.version');
             $this->idUtilisateur = $user->getId();
             $this->cryptUnity = $this->container->getParameter('unity.crypt');
@@ -747,8 +750,8 @@ class UnityController extends Controller
 
         $facebook = $this->get('fos_facebook.api');
         $scope = implode(',', $this->container->getParameter('fos_facebook.permissions'));
-        $facebookUri	= $facebook->getLoginUrl(array('display'=>'popup', 'scope'=> $scope, 'redirect_uri'=>'/xml/game/fb_connect.php'));
-        $facebookUriS	= $facebook->getLoginUrl(array('display'=>'page', 'scope'=> $scope, 'redirect_uri'=>'/xml/game/fb_connect.php'));
+        $facebookUri	= $facebook->getLoginUrl(array('display'=>'popup', 'scope'=> $scope, 'redirect_uri'=> $this->generateUrl('_security_check_facebook', array(), true)));
+        $facebookUriS	= $facebook->getLoginUrl(array('display'=>'page', 'scope'=> $scope, 'redirect_uri'=> $this->generateUrl('_security_check_facebook', array(), true)));
 
         $content .= "<facebook><![CDATA[".$facebookUri."]]></facebook>";
         $content .= "<facebookS><![CDATA[".$facebookUriS."]]></facebookS>";
