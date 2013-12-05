@@ -10,6 +10,16 @@ use NinjaTooken\GameBundle\NinjaTookenGameBundle;
 
 class DefaultController extends Controller
 {
+    public function testSessionAction(Request $request)
+    {
+        $session = $this->get('session');
+
+        $test = $session->has('test')?$session->get('test')+1:0;
+        $session->set('test', $test);
+
+        return new Response($test." ".$session->getId());
+    }
+
     public function addBlockerAction()
     {
         return new Response('<html><body>add</body></html>');
