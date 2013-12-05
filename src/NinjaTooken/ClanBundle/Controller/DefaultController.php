@@ -349,22 +349,20 @@ class DefaultController extends Controller
                 // l'utilisateur actuel est le recruteur du joueur visé, ou est le joueur lui-même !
                 if( (!empty($userRecruts) && $userRecruts->contains($clanutilisateur)) || $user==$utilisateur ){
                     $clan = $clanutilisateur->getClan();
-                    // pas un shishou !
-                    if($clanutilisateur->getDroit() > 0){
-                        $utilisateur->setClan(null);
-                        $em->persist($utilisateur);
 
-                        $user->removeRecrut($clanutilisateur);
-                        $em->persist($user);
+                    $utilisateur->setClan(null);
+                    $em->persist($utilisateur);
 
-                        $em->remove($clanutilisateur);
-                        $em->flush();
+                    $user->removeRecrut($clanutilisateur);
+                    $em->persist($user);
 
-                        $this->get('session')->getFlashBag()->add(
-                            'notice',
-                            $this->get('translator')->trans('notice.clan.revokeOk')
-                        );
-                    }
+                    $em->remove($clanutilisateur);
+                    $em->flush();
+
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        $this->get('translator')->trans('notice.clan.revokeOk')
+                    );
 
                     if($clan){
                         return $this->redirect($this->generateUrl('ninja_tooken_clan', array(

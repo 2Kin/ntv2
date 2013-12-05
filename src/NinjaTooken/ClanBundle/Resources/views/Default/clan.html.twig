@@ -47,7 +47,7 @@
 
 						<div class="grade clearfix">
 							<h3>{{ 'description.organisation'|trans }}
-								{% if ROLE_CLAN and ROLE_SHISHOU == false %}<a href="{{ path('ninja_tooken_clan_destituer', {user_nom:app.user.slug}) }}" class="button mini pull-right delete">{{ 'action.quitter'|trans }}</a>{% endif %}
+								{% if ROLE_CLAN %}<a href="{{ path('ninja_tooken_clan_destituer', {user_nom:app.user.slug}) }}" class="button mini pull-right delete">{{ 'action.quitter'|trans }}</a>{% endif %}
 							</h3>
 							{% if membres is not empty %}
 							<ul class="tree">

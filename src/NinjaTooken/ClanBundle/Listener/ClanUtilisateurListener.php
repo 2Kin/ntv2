@@ -8,7 +8,7 @@ use NinjaTooken\ClanBundle\Entity\ClanUtilisateur;
 class ClanUtilisateurListener
 {
 
-    // supprime les recruts
+    // met à jour les recruts et supprime les propositions
     public function postRemove(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
@@ -17,45 +17,48 @@ class ClanUtilisateurListener
             $em = $args->getEntityManager();
 
             $user = $entity->getMembre();
+
+            // réaffectation des recruts
             $recruts = $user->getRecruts();
             if($recruts){
-                // cherche le remplaçant
-                // par défaut le recruteur
-                $newRecruteur = $entity->getRecruteur();
-                if($newRecruteur){
-                    if($newRecruteur->getClan()){
-                        $newDroit = $newRecruteur->getClan()->getDroit()+2;
-                        $dateAjout = new \DateTime();
-                        // sinon le plus ancien membre
-                        foreach($recruts as $recrut){
-                            if($recrut->getDateAjout()<$dateAjout){
-                                $newRecruteur = $recrut->getMembre();
-                                $newDroit = $recrut->getDroit();
-                                $dateAjout = $recrut->getDateAjout();
-                            }
-                        }
 
-                        // ré-affecte les liaisons
-                        if($newRecruteur){
-                            foreach($recruts as $recrut){
-                                if($recrut->getMembre() != $newRecruteur){
-                                    $recrut->setRecruteur($newRecruteur);
-                                    $recrut->setDroit($newDroit);
-                                }else{
-                                    $recrut->setRecruteur($entity->getRecruteur());
-                                    $recrut->setDroit($newDroit-1);
-                                }
-                                $em->persist($recrut);
-                            }
-                        // supprime les liaisons
+                // le supérieur du membre supprimé
+                $newRecruteur = $entity->getRecruteur();
+                // les droits du membre supprimé
+                $newDroit = $entity->getDroit();
+
+                // le plus ancien membre des recruts prend la place
+                $dateAjout = new \DateTime();
+                $newSubstitute = null;
+                foreach($recruts as $recrut){
+                    if($recrut->getDateAjout()<$dateAjout){
+                        $newSubstitute = $recrut->getMembre();
+                        $dateAjout = $recrut->getDateAjout();
+                    }
+                }
+
+                // ré-affecte les liaisons
+                if($newSubstitute){
+                    // si l'ancien utilisateur était son propre chef
+                    if(!$newRecruteur || $newRecruteur==$user)
+                        $newRecruteur = $newSubstitute;
+
+                    // parcourt les recruts de l'ancien utilisateur
+                    foreach($recruts as $recrut){
+                        // les nouvelles recruts
+                        if($recrut->getMembre() != $newSubstitute){
+                            $recrut->setRecruteur($newSubstitute);
+                            $recrut->setDroit($newDroit+1);
+                        // le remplaçant
                         }else{
-                            foreach($recruts as $recrut){
-                                $em->remove($recrut);
-                            }
+                            $recrut->setRecruteur($newRecruteur);
+                            $recrut->setDroit($newDroit);
                         }
+                        $em->persist($recrut);
                     }
                 }
             }
+
             // supprime les propositions de recrutement
             $propositions = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByRecruteur($user);
             if($propositions){
