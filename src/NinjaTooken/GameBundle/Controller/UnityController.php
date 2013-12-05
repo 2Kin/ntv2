@@ -35,9 +35,9 @@ class UnityController extends Controller
 
             $this->time = preg_replace('/[^0-9]/i','',(string)$request->get('time'));
             $this->crypt = $request->headers->get('X-COMMON');
-            $this->phpsessid = $request->cookies->get('PHPSESSID');
 
-            $this->container->get('session')->setId($this->phpsessid);
+            $session = $this->get('session');
+            $this->phpsessid = $session->getName()."=".$session->getId();
 
             $this->gameversion = $this->container->getParameter('unity.version');
             $this->idUtilisateur = $user->getId();
@@ -609,7 +609,6 @@ class UnityController extends Controller
                                 }
                             }
                             $content .= '</games>';
-                            $content .= '<sessid>'.$this->phpsessid.'</sessid>';
                             $content .= '</root>';
 
                             return new Response($content, 200, array('Content-Type' => 'text/xml'));
@@ -617,9 +616,9 @@ class UnityController extends Controller
                         break;
                 }
             }
-            return new Response($data."|".$this->phpsessid, 200, array('Content-Type' => 'text/plain'));
+            return new Response($data, 200, array('Content-Type' => 'text/plain'));
         }
-        return new Response("0|".$this->phpsessid, 200, array('Content-Type' => 'text/plain'));
+        return new Response("0", 200, array('Content-Type' => 'text/plain'));
     }
 
     public function connectAction(Request $request)
@@ -632,7 +631,10 @@ class UnityController extends Controller
         // données récupérées
         $this->time = preg_replace('/[^0-9]/i','',(string)$request->get('time'));
         $this->crypt = $request->headers->get('X-COMMON');
-        $this->phpsessid = $request->cookies->get('PHPSESSID');
+
+        $session = $this->get('session');
+        $this->phpsessid = $session->getName()."=".$session->getId();
+
         $this->gameversion = $this->container->getParameter('unity.version');
         $this->cryptUnity = $this->container->getParameter('unity.crypt');
         $this->idUtilisateur = 0;
@@ -755,7 +757,6 @@ class UnityController extends Controller
 
         $content .= "<facebook><![CDATA[".$facebookUri."]]></facebook>";
         $content .= "<facebookS><![CDATA[".$facebookUriS."]]></facebookS>";
-        $content .= "<sessid><![CDATA[".$this->phpsessid."]]></sessid>";
         $content .= "<retour>".$retour."</retour>";
         $content .= "</root>";
 
