@@ -5,6 +5,7 @@ namespace NinjaTooken\CommonBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
 
 use NinjaTooken\GameBundle\NinjaTookenGameBundle;
 
@@ -17,7 +18,12 @@ class DefaultController extends Controller
         $test = $session->has('test')?$session->get('test')+1:0;
         $session->set('test', $test);
 
-        return new Response($test." ".$session->getId());
+        $cookie = new Cookie($session->getName(), $session->getId());
+
+        $response = new Response($test." ".$session->getId());
+        $response->headers->setCookie($cookie);
+
+        return $response;
     }
 
     public function addBlockerAction()
