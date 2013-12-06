@@ -246,6 +246,15 @@ $(document).ready(function(){
 			});
 			ntUnity.initPlugin(unityPlayer.get(0), unityLoader);
 		}
+		$('.ninjas').hide();
+	}else{
+		// la neige sur le site en décembre, le reste du temps les ninjas en parallax
+		var currentDate = new Date();
+		if(currentDate.getMonth()==11 && currentDate.getDate()>20){
+			$('.ninjas').hide();
+			snowStorm.start();
+		}else
+			$('.ninjas').parallax();
 	}
 
 	// classements
@@ -487,7 +496,4 @@ $(document).ready(function(){
 
 	// calculateur de jutsus
 	var _calculateur = new Calculateur();
-
-	// parallax
-	$('.ninjas').parallax();
 });

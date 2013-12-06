@@ -105,7 +105,7 @@ hr{
 // message en haut de page
 .chromeframe,
 .informationframe{
-    background-color:@white;padding:15px 20px;color:@black;font-size:120%;margin-bottom:30px;text-align:center;display:none;
+    background-color:@white;padding:15px 20px;color:@black;font-size:120%;margin-bottom:5px;text-align:center;display:none;
     a:hover{
         color:@black;
     }
@@ -177,6 +177,11 @@ textarea{
         color:inherit;background-color:@grayDark;.transition(all 0.2s linear);.box-shadow(inset 0 0 1px 1px @black);
     }
 }
+
+.snow{
+    position:fixed;width:16px;height:16px;z-index:1000;color:@white;cursor:default;font-weight:normal;overflow:hidden;font-family:arial,verdana;line-height:18px;text-align:center;vertical-align:baseline;padding:0;margin:0;pointer-events:none;
+}
+
 // l'icône sur le plugin "nt_media" dans tinymce
 .mce-i-nt_media:before{
     content:"\e015"
