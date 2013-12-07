@@ -21,7 +21,7 @@
 							<label class="libelle required" for="email">{{ 'form.mail'|trans }}</label>
 						</div>
 						<div class="span8">
-							<input type="email" name="email" id="email" value="" required>
+							<input type="email" name="email" id="email" value="{% if app.user %}{{ app.user.email }}{% endif %}" required>
 						</div>
 					</div>
 					<div class="row-fluid">

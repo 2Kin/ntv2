@@ -22,9 +22,18 @@
 {% block body %}
 				<section class="main">
 				{% if games is not empty %}
+				{% set is_admin = false %}
+					{% set showPassword = false %}
+					{% if app.user %}
+					{% for role in app.user.getRoles() %} 
+						{% if role == 'ROLE_ADMIN' or role == 'ROLE_SUPER_ADMIN' or role == 'ROLE_MODERATOR' %}
+							{% set showPassword = true %}
+						{% endif %}
+					{% endfor %}
+					{% endif %}
 					{% for game in games %}
 					<h3>{{ ('carte.type' ~ game.carte)|trans({}, 'game') }} #{{ game.partie }}</h3>
-					<p>{% if game.privee %}<i class="icon-lock"></i> {% endif %}{{ 'description.partie'|trans({'%type%': ('jeu.type' ~ game.jeu)|trans({}, 'game'), '%version%': game.version}) }}</p>
+					<p>{% if game.privee %}{% if showPassword %}<em>{{ game.privee }}</em> {% endif %}<i class="icon-lock"></i> {% endif %}{{ 'description.partie'|trans({'%type%': ('jeu.type' ~ game.jeu)|trans({}, 'game'), '%version%': game.version}) }}</p>
 
 					{% for user in game.users %}
 					<div class="membre pull-left">

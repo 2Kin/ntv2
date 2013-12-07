@@ -15,6 +15,7 @@ use Symfony\Component\Security\Core\Util\StringUtils;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class UnityController extends Controller
 {
@@ -760,7 +761,13 @@ class UnityController extends Controller
         $content .= "<retour>".$retour."</retour>";
         $content .= "</root>";
 
-        return new Response($content, 200, array('Content-Type' => 'text/xml'));
+
+        $session = $this->get('session');
+        $cookie = new Cookie($session->getName(), $session->getId());
+        $response = new Response($content, 200, array('Content-Type' => 'text/xml'));
+        $response->headers->setCookie($cookie);
+
+        return $response;
     }
 
 	// fonction de cryptage
