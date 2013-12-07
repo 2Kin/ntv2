@@ -56,6 +56,13 @@ class ClanUtilisateurListener
                         }
                         $em->persist($recrut);
                     }
+
+                    // parcourt les recruts du remplaçant
+                    $recruts = $newSubstitute->getRecruts();
+                    foreach($recruts as $recrut){
+                        $recrut->setDroit($newDroit+1);
+                        $em->persist($recrut);
+                    }
                 }
             }
 
