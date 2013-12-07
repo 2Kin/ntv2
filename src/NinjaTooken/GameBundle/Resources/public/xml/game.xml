@@ -333,13 +333,13 @@
                 <x niveau="100" degat="0" largeur="0a0" longueur="0a0" distance="0a0" chakra="0" />
             </pieux>
             <teleportation niveau="45" limit="358">
-                <x niveau="0" chakra="80" distance="80a0" vie="0" />
-                <x niveau="1" chakra="12" distance="10a0" vie="0" />
-                <x niveau="8" chakra="7" distance="5a0" vie="1" />
-                <x niveau="12" chakra="4" distance="2a5" vie="2" />
-                <x niveau="16" chakra="3" distance="2a0" vie="3" />
-                <x niveau="30" chakra="2" distance="5a0" vie="4" />
-                <x niveau="100" chakra="0" distance="0a0" vie="0" />
+				<x niveau="0" chakra="70" distance="70a0" vie="0"/>
+				<x niveau="1" chakra="10" distance="10a0" vie="1"/>
+				<x niveau="8" chakra="7" distance="7a5" vie="1"/>
+				<x niveau="12" chakra="3" distance="5a5" vie="2"/>
+				<x niveau="16" chakra="1" distance="3a5" vie="2"/>
+				<x niveau="30" chakra="0" distance="2a0" vie="3"/>
+				<x niveau="100" chakra="0" distance="0a0" vie="0"/>
             </teleportation>
             <tornade niveau="45" limit="359">
                 <x niveau="0" degat="82" temps="1a0" distance="15a0" chakra="85" />
