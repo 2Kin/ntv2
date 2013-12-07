@@ -350,12 +350,6 @@ class DefaultController extends Controller
                 if( (!empty($userRecruts) && $userRecruts->contains($clanutilisateur)) || $user==$utilisateur ){
                     $clan = $clanutilisateur->getClan();
 
-                    $utilisateur->setClan(null);
-                    $em->persist($utilisateur);
-
-                    $user->removeRecrut($clanutilisateur);
-                    $em->persist($user);
-
                     $em->remove($clanutilisateur);
                     $em->flush();
 
@@ -401,32 +395,24 @@ class DefaultController extends Controller
                     if($utilisateur->getClan()){
                         $clanutilisateur_promote = $utilisateur->getClan();
                         if($clanutilisateur_promote->getClan() == $clan){
-
-                            // supprime l'ancienne liaison du joueur à promouvoir
-                            $utilisateur->setClan(null);
-                            $em->persist($utilisateur);
-
+                            
+                            // permet de remplacer le ninja promu dans la hiérarchie via le listener
                             $em->remove($clanutilisateur_promote);
-                            $em->flush();// permet de remplacer le ninja promu dans la hiérarchie via le listener
+                            $em->flush();
+
+                            // permet de rafraichir les liaisons
+                            $em->refresh($user);
 
                             // modifie la liaison du shisho pour pointer vers le nouveau !
                             $clanutilisateur->setMembre($utilisateur);
+                            $em->persist($clanutilisateur);
 
                             // échange les recruts avec le shishou actuel
                             $recruts = $user->getRecruts();
                             foreach($recruts as $recrut){
                                 $recrut->setRecruteur($utilisateur);
-                                $user->removeRecrut($recrut);
-                                $utilisateur->addRecrut($recrut);
                                 $em->persist($recrut);
                             }
-                            $em->persist($utilisateur);
-                            $em->persist($clanutilisateur);
-
-                            // supprime l'état de l'ancien joueur visé
-                            $user->setClan(null);
-                            $em->persist($user);
-
                             $em->flush();
 
                             $this->get('session')->getFlashBag()->add(

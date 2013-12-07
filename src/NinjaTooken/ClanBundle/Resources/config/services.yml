@@ -25,4 +25,5 @@ services:
         class: NinjaTooken\ClanBundle\Listener\ClanUtilisateurListener
         tags:
             - { name: doctrine.event_listener, event: postRemove }
+            - { name: doctrine.event_listener, event: preRemove }
             - { name: doctrine.event_listener, event: postPersist }
