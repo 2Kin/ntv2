@@ -11,21 +11,6 @@ use NinjaTooken\GameBundle\NinjaTookenGameBundle;
 
 class DefaultController extends Controller
 {
-    public function testSessionAction(Request $request)
-    {
-        $session = $this->get('session');
-
-        $test = $session->has('test')?$session->get('test')+1:0;
-        $session->set('test', $test);
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-
-        $response = new Response($test." ".$session->getId());
-        $response->headers->setCookie($cookie);
-
-        return $response;
-    }
-
     public function addBlockerAction()
     {
         return new Response('<html><body>add</body></html>');

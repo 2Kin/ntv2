@@ -1,7 +1,3 @@
-ninja_tooken_test:
-    pattern:  /session
-    defaults: { _controller: NinjaTookenCommonBundle:Default:testSession }
-
 ninja_tooken_homepage:
     pattern:  /
     defaults: { _controller: NinjaTookenCommonBundle:Default:index }
