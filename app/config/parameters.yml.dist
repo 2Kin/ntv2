@@ -38,3 +38,6 @@ parameters:
         feu: Katon
         foudre: Raiton
         terre: Doton
+    router.request_context.host: test.ninjatooken.com
+    router.request_context.scheme: http
+    router.request_context.base_url: 
