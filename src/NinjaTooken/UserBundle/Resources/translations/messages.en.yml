@@ -29,6 +29,7 @@ notice:
     amiSupprimerOk: Deletion successfully done.
     amiSupprimerAllOk: Deletion successfully done.
     captureSupprimerOk: The screenshot has been removed
+    autologinKO: The provided URL doesn't match a registered user.
 registration:
     email:
         subject: Welcome %username% !

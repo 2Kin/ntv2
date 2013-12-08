@@ -8,6 +8,12 @@ ninja_tooken_user_find:
     requirements:
         _method:  GET
 
+ninja_tooken_user_autologin:
+    pattern:  /auto/{autologin}
+    defaults: { _controller: NinjaTookenUserBundle:Default:autologin }
+    requirements:
+        _method:  GET|POST
+
 ninja_tooken_user_fiche:
     pattern:  /fiche/{user_nom}/{page}
     defaults: { _controller: NinjaTookenUserBundle:Default:fiche, page:1 }

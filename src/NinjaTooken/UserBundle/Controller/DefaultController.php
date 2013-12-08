@@ -5,6 +5,9 @@ namespace NinjaTooken\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Http\SecurityEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -56,6 +59,37 @@ class DefaultController extends Controller
         }
 
         return $this->render('NinjaTookenUserBundle:Default:connected.html.twig', array('user' => $user));
+    }
+
+    public function autologinAction(Request $request, $autologin)
+    {
+        if(!empty($autologin)){
+            $security = $this->get('security.context');
+            // pas encore connecté
+            if(!$security->isGranted('IS_AUTHENTICATED_FULLY') && !$security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+                $em = $this->getDoctrine()->getManager();
+                $user = $em->getRepository('NinjaTookenUserBundle:User')->findOneBy(array('autoLogin' => $autologin));
+
+                if (null !== $user) {
+                    // si l'utilisateur a déjà été connecté avant le dernier garbage collector
+                    if($user->getUpdatedAt()===null || (new \DateTime())->getTimestamp() - $user->getUpdatedAt()->getTimestamp() > ini_get('session.gc_maxlifetime')){
+                        // lance la connexion
+                        $token = new UsernamePasswordToken($user, $user->getPassword(), $this->container->getParameter('fos_user.firewall_name'), $user->getRoles());
+                        $security->setToken($token);
+                        $event = new InteractiveLoginEvent($request, $token);
+                        $this->get("event_dispatcher")->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $event);
+                    }
+                }else{
+                    $this->get('session')->getFlashBag()->add(
+                        'notice',
+                        $this->get('translator')->trans('notice.autologinKO')
+                    );
+                }
+            }
+        }
+
+        // redirige sur l'accueil
+        return $this->redirect($this->generateUrl('ninja_tooken_homepage'));
     }
 
     /**

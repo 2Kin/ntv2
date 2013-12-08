@@ -29,6 +29,7 @@ notice:
     amiSupprimerOk: Suppression correctement effectuée.
     amiSupprimerAllOk: Suppressions correctement effectuées.
     captureSupprimerOk: La capture a bien été supprimée.
+    autologinKO: L'url fournie ne correspond à aucun utilisateur enregistré.
 registration:
     email:
         subject: Bienvenue %username% !

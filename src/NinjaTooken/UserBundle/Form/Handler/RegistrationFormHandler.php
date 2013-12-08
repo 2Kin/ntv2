@@ -16,6 +16,9 @@ class RegistrationFormHandler extends BaseHandler
         if (null === $user->getConfirmationToken()) {
             $user->setConfirmationToken($this->tokenGenerator->generateToken());
         }
+        if (null === $user->getAutoLogin()) {
+            $user->setAutoLogin($this->tokenGenerator->generateToken());
+        }
         $this->mailer->sendConfirmationEmailMessage($user);
 
         $this->userManager->updateUser($user);

@@ -879,6 +879,14 @@ header{
         &.admin{
             border-color:multiply(@linkColor, #cc0000);
         }
+        &.locked{
+            a[rel="author"] span[itemprop="name"]{
+                text-decoration:line-through;
+            }
+            .resume:before{
+                position:absolute;margin-left:-47px;margin-top:15px;font-size:40px;.icon(@lock);color:@grayDark
+            }
+        }
         span{
             color:@white;
         }
@@ -886,9 +894,9 @@ header{
             span{
                 color:@linkColor;.transition(all 0.2s linear);
             }
-	    &[rel="author"]{
-		font-size:140%;
-	    }
+            &[rel="author"]{
+                font-size:140%;
+            }
             &:hover span{
                 color:@white;.transition(all 0.2s linear);
             }

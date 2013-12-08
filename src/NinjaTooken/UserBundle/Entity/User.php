@@ -121,6 +121,13 @@ class User extends BaseUser
     private $oldUsernamesCanonical;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="auto_login", type="string", length=255, nullable=true)
+     */
+    private $autoLogin;
+
+    /**
      * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\Ip", mappedBy="user", cascade={"persist", "remove"})
      */
     private $ips;
@@ -134,6 +141,7 @@ class User extends BaseUser
         $this->oldUsernamesCanonical = "";
         $this->roles = array('ROLE_USER');
         $this->setConfirmationToken(null);
+        $this->setAutoLogin(null);
         $this->setTimezone('Europe/Paris');
         $this->setDescription('');
         $this->setAvatar('');
@@ -385,6 +393,29 @@ class User extends BaseUser
     public function getOldUsernamesCanonical()
     {
         return $this->oldUsernamesCanonical;
+    }
+
+    /**
+     * Set autoLogin
+     *
+     * @param string $autoLogin
+     * @return User
+     */
+    public function setAutoLogin($autoLogin)
+    {
+        $this->autoLogin = $autoLogin;
+
+        return $this;
+    }
+
+    /**
+     * Get autoLogin
+     *
+     * @return string 
+     */
+    public function getAutoLogin()
+    {
+        return $this->autoLogin;
     }
 
     /**
