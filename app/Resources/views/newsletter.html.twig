@@ -1,7 +1,6 @@
 {% extends '::mail.html.twig' %}
 
 {% block content %}
-                {{ 'mail.newMessage'|trans({'%utilisateur%': user.username}) }} :<hr/>
-                {{ message.content }}<hr/>
+                yeah!
                 <a href="{{ asset_absolute('') }}" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">{{ asset_absolute('') }}</span></a>
 {% endblock %}

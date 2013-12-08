@@ -21,16 +21,13 @@ class MessageUserListener
 
                 // envoyer un message d'avertissement par mail
                 if($destinataire->getReceiveAvertissement() && $destinataire->getConfirmationToken()===null){
-                    $email = $destinataire->getEmail();
-                    $emailContact = $this->container->getParameter('mail_admin');
-
                     $message = $entity->getMessage();
                     $user = $message->getAuthor();
 
                     $swiftMessage = \Swift_Message::newInstance()
                         ->setSubject('[NT] nouveau message de la part de '.$user->getUsername())
-                        ->setFrom($emailContact)
-                        ->setTo($email)
+                        ->setFrom(array($container->getParameter('mail_contact') => $container->getParameter('mail_name')))
+                        ->setTo($destinataire->getEmail())
                         ->setContentType("text/html")
                         ->setBody($this->renderView('NinjaTookenUserBundle:Default:avertissementEmail.html.twig', array(
                             'user' => $user,
