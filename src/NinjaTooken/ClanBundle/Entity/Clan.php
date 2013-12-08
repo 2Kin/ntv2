@@ -52,7 +52,7 @@ class Clan
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
-     * @Assert\MaxLength(255)
+     * @Assert\Length(max=255)
      * @Assert\NotBlank()
      */
     private $nom;
@@ -61,7 +61,7 @@ class Clan
      * @var string
      *
      * @ORM\Column(name="tag", type="string", length=5, nullable=true)
-     * @Assert\MaxLength(5)
+     * @Assert\Length(max=5)
      */
     private $tag;
 
@@ -69,7 +69,7 @@ class Clan
      * @var string
      *
      * @ORM\Column(name="accroche", type="string", length=255, nullable=true)
-     * @Assert\MaxLength(255)
+     * @Assert\Length(max=255)
      */
     private $accroche;
 
@@ -85,7 +85,7 @@ class Clan
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=255, nullable=true)
-     * @Assert\MaxLength(255)
+     * @Assert\Length(max=255)
      * @Assert\Url()
      */
     private $url;
@@ -94,7 +94,7 @@ class Clan
      * @var string
      *
      * @ORM\Column(name="kamon", type="string", length=255)
-     * @Assert\MaxLength(255)
+     * @Assert\Length(max=255)
      */
     private $kamon;
 

@@ -102,12 +102,13 @@ security:
             form_login:
                 provider:       fos_userbundle
                 remember_me:    true
-                login_path:     /daFuckingAdmin/login
+                login_path:     sonata_user_admin_security_login
                 use_forward:    false
-                check_path:     /daFuckingAdmin/login_check
+                check_path:     sonata_user_admin_security_check
                 failure_path:   null
             logout:
-                path:   /daFuckingAdmin/logout
+                path:   sonata_user_admin_security_logout
+                target: ninja_tooken_homepage
             anonymous:    true
 
         main:
@@ -160,11 +161,11 @@ security:
 
         - { path: ^/(fr|en)/compte, role: ROLE_USER }
 
+        - { path: ^/daFuckingAdmin, role: [ROLE_MODERATOR, ROLE_ADMIN] }
+
         - { path: ^/daFuckingAdmin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/daFuckingAdmin/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/daFuckingAdmin/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-
-        - { path: ^/daFuckingAdmin, role: [ROLE_MODERATOR, ROLE_ADMIN] }
 
         - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
 

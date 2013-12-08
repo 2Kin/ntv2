@@ -55,7 +55,7 @@ compte:
         motPasseReset: Reset your password
         noCompte: You don't have an account yet?
 description:
-    datetime: the %date% at %time%
+    datetime: %date% at %time%
     suite: Read more
     partenaire: Partners
     ninja: |

@@ -15,3 +15,5 @@
 /web/cache/*
 /app/config/parameters.yml
 install.bat
+web/pack-webmaster/*
+web/standalone/*

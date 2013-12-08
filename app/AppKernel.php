@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
 
+			new Sonata\CoreBundle\SonataCoreBundle(),
 			new Sonata\BlockBundle\SonataBlockBundle(),
 			new Sonata\jQueryBundle\SonatajQueryBundle(),
 			new Sonata\AdminBundle\SonataAdminBundle(),

@@ -81,7 +81,7 @@ class Thread
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
-     * @Assert\MaxLength(255)
+     * @Assert\Length(max=255)
      * @Assert\NotBlank()
      */
     private $nom;
