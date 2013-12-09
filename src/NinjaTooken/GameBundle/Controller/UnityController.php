@@ -763,9 +763,8 @@ class UnityController extends Controller
 
 
         $session = $this->get('session');
-        $cookie = new Cookie($session->getName(), $session->getId());
         $response = new Response($content, 200, array('Content-Type' => 'text/xml'));
-        $response->headers->setCookie($cookie);
+        $response->headers->set('Notice', $session->getName()."=".$session->getId());
 
         return $response;
     }
