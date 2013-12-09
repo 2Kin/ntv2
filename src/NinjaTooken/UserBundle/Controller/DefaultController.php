@@ -93,6 +93,28 @@ class DefaultController extends Controller
     }
 
     /**
+     * @ParamConverter("user", class="NinjaTookenUserBundle:User", options={"mapping": {"email":"email"}})
+     */
+    public function desinscriptionAction(User $user)
+    {
+        if (null !== $user) {
+            $em = $this->getDoctrine()->getManager();
+            $user->setReceiveNewsletter(false);
+            $user->setReceiveAvertissement(false);
+            $em->persist($user);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                'notice',
+                $this->get('translator')->trans('notice.desinscriptionOK')
+            );
+        }
+
+        // redirige sur l'accueil
+        return $this->redirect($this->generateUrl('ninja_tooken_homepage'));
+    }
+
+    /**
      * @ParamConverter("user", class="NinjaTookenUserBundle:User", options={"mapping": {"user_nom":"slug"}})
      */
     public function ficheAction(User $user, $page = 1)

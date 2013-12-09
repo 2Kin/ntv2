@@ -1,3 +1,11 @@
+newsletter:
+    newsite: |
+        Hi %username%,<br><br>
+        Ninja Tooken just made a big step in its history, with the new version of his site!<br>
+        An improved management of the clans with hierarchical rank, total visibility of the impact of skilling with "calculate jutsu" , the ability to have up to 5 different logins, improved display of all pages for your viewing comfort on pc, tablet and smartphone, and much more! And for even more performance, everything is hosted on a dedicated server.<br><br>
+        But the game is not in rest with a completely redesigned physics, the come back of jumping above the water for all ninjas, and still more optimizations on the network.
+        <br><br>
+        To benefit now from all of those improvements, <a href="%autologin%" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">follow this personal link</span></a> to login directly to your account.
 popup:
     delete: Are you sure?
     confirm: Confirm

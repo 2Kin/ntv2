@@ -6,6 +6,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class NewsletterCommand extends ContainerAwareCommand
 {
@@ -20,6 +21,7 @@ class NewsletterCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getContainer();
+        $session = $container->get('session');
         $template = $container->get('twig')->loadTemplate('::newsletter.html.twig');
         $translator = $container->get('translator');
         $route = $container->get('router');
@@ -31,7 +33,7 @@ class NewsletterCommand extends ContainerAwareCommand
         $output->writeln('---start');
 
         // boucle sur les différents utilisateurs
-        $request = 'SELECT id, username, email FROM nt_user WHERE enabled=1 AND locked=0 AND receive_newsletter=1 AND confirmation_token IS NULL ORDER BY id ASC LIMIT ';
+        $request = 'SELECT id, username, email, auto_login, locale FROM nt_user WHERE enabled=1 AND locked=0 AND receive_newsletter=1 AND confirmation_token IS NULL ORDER BY id ASC LIMIT ';
         $start = 0;
         $num = 100;
         $i = 1;
@@ -42,20 +44,40 @@ class NewsletterCommand extends ContainerAwareCommand
             foreach($users as $user){
                 $username = $user['username'];
                 $email = $user['email'];
+                $locale = $user['locale'];
+                if(empty($locale))
+                    $locale = 'fr';
+                $auto_login = $user['auto_login'];
+                if(empty($auto_login))
+                    $auto_login = null;
+
                 // construit le contenu
+                $translator->setLocale($locale);
                 $body = $template->render(array(
-                    'user' => $user,
-                    'message' => $route->generate('ninja_tooken_homepage', array(), true)
+                    'email' => $email,
+                    'username' => $username,
+                    'message' => $translator->trans('newsletter.newsite', array(
+                        '%username%' => $username,
+                        '%autologin%' => $auto_login?$route->generate('ninja_tooken_user_autologin', array(
+                            'autologin' => $auto_login,
+                            '_locale' => $locale
+                        ), true):$route->generate('ninja_tooken_homepage', array(
+                            '_locale' => $locale
+                        ), true)
+                    ), 'common'),
+                    'locale' => $locale
                 ));
 
                 // envoi les messages
-                /*$message = \Swift_Message::newInstance()
+                /*
+                $message = \Swift_Message::newInstance()
                     ->setSubject('[Ninjatooken] nouveau message de la part de '.$username)
                     ->setFrom($from)
                     ->setTo($email)
                     ->setContentType("text/html")
                     ->setBody($body);
-                $mailer->send($message);*/
+                $mailer->send($message);
+                */
 
                 $output->writeln($i." ".$username.' ('.$email.')');
                 $i++;

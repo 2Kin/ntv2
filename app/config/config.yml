@@ -74,6 +74,7 @@ twig:
         version: %unity.version%
         paypalDonate: %paypal.donate%
         paypalCode: %paypal.code%
+        siteDomaine: %router.request_context.host%
 
 # Assetic Configuration
 assetic:

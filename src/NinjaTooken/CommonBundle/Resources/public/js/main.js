@@ -489,10 +489,27 @@ $(document).ready(function(){
 	}
 
 	// captcha sur formulaire de contact
-	$('#contact, #register').motionCaptcha({
-		errorMsg: 'Ré-essayes...',
-		successMsg: 'Captcha réussi'
-	});
+	var _forms = $('#contact, #register');
+	if(_forms.length>0){
+		var _createCaptcha = function(){
+			_forms.motionCaptcha({
+				errorMsg: 'Ré-essayes...',
+				successMsg: 'Captcha réussi'
+			});
+			return $('#mc-canvas');
+		};
+		var _canvas = _createCaptcha();
+		var _refresh = $('<a href="#" class="refresh"><i class="icon-refresh"></i></a>');
+		_canvas.after(_refresh);
+		_refresh.on('click', function(event){
+			if(_canvas.length>0){
+				_canvas.before('<canvas id="mc-canvas"></canvas>');
+				_canvas.remove();
+				_canvas = _createCaptcha();
+			}
+			event.preventDefault();
+		});
+	}
 
 	// calculateur de jutsus
 	var _calculateur = new Calculateur();

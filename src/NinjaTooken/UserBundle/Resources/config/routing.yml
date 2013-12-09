@@ -14,6 +14,12 @@ ninja_tooken_user_autologin:
     requirements:
         _method:  GET|POST
 
+ninja_tooken_user_desinscription:
+    pattern:  /desinscription/{email}
+    defaults: { _controller: NinjaTookenUserBundle:Default:desinscription }
+    requirements:
+        _method:  GET|POST
+
 ninja_tooken_user_fiche:
     pattern:  /fiche/{user_nom}/{page}
     defaults: { _controller: NinjaTookenUserBundle:Default:fiche, page:1 }

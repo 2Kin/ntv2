@@ -31,7 +31,8 @@ class MessageUserListener
                         ->setContentType("text/html")
                         ->setBody($this->renderView('NinjaTookenUserBundle:Default:avertissementEmail.html.twig', array(
                             'user' => $user,
-                            'message' => $message->getContent()
+                            'message' => $message->getContent(),
+                            'locale' => $destinataire->getLocale()
                         )));
 
                     $this->get('mailer')->send($swiftMessage);

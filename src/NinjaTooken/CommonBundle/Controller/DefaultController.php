@@ -93,7 +93,8 @@ class DefaultController extends Controller
                     ->setContentType("text/html")
                     ->setBody($this->renderView('NinjaTookenCommonBundle:Default:contactEmail.html.twig', array(
                         'texte' => $texte,
-                        'email' => $email
+                        'email' => $email,
+                        'locale' => 'fr'
                     )));
 
                 $this->get('mailer')->send($message);

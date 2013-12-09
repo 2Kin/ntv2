@@ -30,6 +30,7 @@ notice:
     amiSupprimerAllOk: Deletion successfully done.
     captureSupprimerOk: The screenshot has been removed
     autologinKO: The provided URL doesn't match a registered user.
+    desinscriptionOK: You have been successfully unsubscribed from the newsletter.
 registration:
     email:
         subject: Welcome %username% !

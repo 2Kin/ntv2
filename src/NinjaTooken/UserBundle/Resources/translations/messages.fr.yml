@@ -30,6 +30,7 @@ notice:
     amiSupprimerAllOk: Suppressions correctement effectuées.
     captureSupprimerOk: La capture a bien été supprimée.
     autologinKO: L'url fournie ne correspond à aucun utilisateur enregistré.
+    desinscriptionOK: Tu as correctement été désinscrit de la newsletter.
 registration:
     email:
         subject: Bienvenue %username% !
