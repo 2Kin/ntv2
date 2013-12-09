@@ -52,7 +52,7 @@
                 <a href="{{ url('ninja_tooken_homepage', {_locale:locale}) }}" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">{{ siteDomaine }}</span></a>
             </td>
         </tr>
-        {% if email is not empty %}
+        {% if email is defined and email is not empty %}
         <tr>
             <td width="600">
                 <br/><br/><br/><br/>{{ 'mail.desinscription.message'|trans }}<a href="{{ url('ninja_tooken_user_desinscription', {email:email, _locale:locale}) }}" target="_blank" title="desinscription" style="color:blue; text-decoration: none;"><span style="color:blue;">{{ 'action.clique'|trans }}</span></a>.

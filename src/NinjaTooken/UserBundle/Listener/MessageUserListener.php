@@ -3,10 +3,18 @@
 namespace NinjaTooken\UserBundle\Listener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use NinjaTooken\UserBundle\Entity\MessageUser;
  
 class MessageUserListener
 {
+    protected $container;
+
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
     // message d'avertissement
     public function postPersist(LifecycleEventArgs $args)
     {
@@ -26,16 +34,16 @@ class MessageUserListener
 
                     $swiftMessage = \Swift_Message::newInstance()
                         ->setSubject('[NT] nouveau message de la part de '.$user->getUsername())
-                        ->setFrom(array($container->getParameter('mail_contact') => $container->getParameter('mail_name')))
+                        ->setFrom(array($this->container->getParameter('mail_contact') => $this->container->getParameter('mail_name')))
                         ->setTo($destinataire->getEmail())
                         ->setContentType("text/html")
-                        ->setBody($this->renderView('NinjaTookenUserBundle:Default:avertissementEmail.html.twig', array(
+                        ->setBody($this->container->get('twig')->render('NinjaTookenUserBundle:Default:avertissementEmail.html.twig', array(
                             'user' => $user,
-                            'message' => $message->getContent(),
+                            'message' => $message,
                             'locale' => $destinataire->getLocale()
                         )));
 
-                    $this->get('mailer')->send($swiftMessage);
+                    $this->container->get('mailer')->send($swiftMessage);
                 }
             }
         }

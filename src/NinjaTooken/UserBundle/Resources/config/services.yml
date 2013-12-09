@@ -43,5 +43,6 @@ services:
 
     ninjatooken_user.message_user_listener:
         class: NinjaTooken\UserBundle\Listener\MessageUserListener
+        arguments:  ["@service_container"]
         tags:
             - { name: doctrine.event_listener, event: postPersist }
