@@ -403,12 +403,14 @@ class DefaultController extends Controller
                             // modifie la liaison du shisho pour pointer vers le nouveau !
                             $clanutilisateur->setMembre($utilisateur);
                             $em->persist($clanutilisateur);
+                            $em->persist($utilisateur);
 
                             // échange les recruts avec le shishou actuel
                             $recruts = $user->getRecruts();
                             foreach($recruts as $recrut){
                                 $recrut->setRecruteur($utilisateur);
                                 $em->persist($recrut);
+                                $em->persist($utilisateur);
                             }
                             $em->flush();
 

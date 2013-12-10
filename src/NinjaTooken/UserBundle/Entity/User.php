@@ -44,6 +44,7 @@ class User extends BaseUser
 
     /**
      * @ORM\OneToMany(targetEntity="NinjaTooken\ClanBundle\Entity\ClanUtilisateur", mappedBy="recruteur", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"dateAjout" = "ASC"})
      */
     private $recruts;
 
@@ -145,6 +146,8 @@ class User extends BaseUser
         $this->setTimezone('Europe/Paris');
         $this->setDescription('');
         $this->setAvatar('');
+        $this->recruts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ips = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getAbsoluteAvatar()
@@ -687,6 +690,7 @@ class User extends BaseUser
     public function addIp(\NinjaTooken\UserBundle\Entity\Ip $ips)
     {
         $this->ips[] = $ips;
+        $ips->setUser($this);
 
         return $this;
     }

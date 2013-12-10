@@ -17,65 +17,70 @@ class ClanUtilisateurListener
         {
             $em = $args->getEntityManager();
 
-            // réagence les liaisons
-            $previousUser = $entity->getMembre();
-
             // réaffectation des recruts
-            $previousRecruts = $previousUser->getRecruts();//ClanUtilisateur[]
+            $previousUser = $entity->getMembre(); // User
+            $previousRecruts = $previousUser->getRecruts(); // ClanUtilisateur[]
             if(count($previousRecruts)>0){
-                // les droits du membre supprimé
-                $previousDroit = $entity->getDroit();
 
+                // le remplaçant (la plus ancienne recrut)
+                $substitute = $this->getOldest($previousRecruts, $previousUser); // User
 
-                // le plus ancien membre prend la place
-                $substitute = $this->getOldest($previousRecruts);
-
-                // ré-affecte les liaisons
+                // ré-affecte les liaisons des recruts
                 if($substitute){
-                    // le supérieur du membre supprimé
-                    $previousRecruteur = $entity->getRecruteur();//User
-                    if(!$previousRecruteur || $previousRecruteur==$previousUser)
-                        $previousRecruteur = $substitute;
 
-                    // les recruts du remplaçant
-                    $substituteRecruts = $substitute->getRecruts();
+                    // les droits du membre supprimé
+                    $previousDroit = $entity->getDroit();
 
-                    // redéfini le remplaçant
-                    $substitute_cu = $substitute->getClan();
-                    $substitute_cu->setRecruteur($previousRecruteur);
-                    $substitute_cu->setDroit($previousDroit);
-                    $em->persist($substitute_cu);
+                    // parcourt les recruts du remplaçant et met à jour les droits
+                    $substituteRecruts = $substitute->getRecruts(); // ClanUtilisateur[]
+                    if(count($substituteRecruts)>0){
+                        // parcourt les recruts du remplaçant et les ré-assigne
+                        foreach($substituteRecruts as $substituteRecrut){
+                            $substituteRecrutMembre = $substituteRecrut->getMembre();
+                            if($substituteRecrutMembre != $substitute){
+                                $substituteRecrut->setDroit($previousDroit+1);
+
+                                // met à jour si avait des recruts
+                                $substituteRecrutRecruts = $substituteRecrutMembre->getRecruts();
+                                foreach($substituteRecrutRecruts as $substituteRecrutRecrut){
+                                    $substituteRecrutRecrut->setDroit($previousDroit+2);
+                                    $em->persist($substituteRecrutRecrut);
+                                }
+
+                                $em->persist($substituteRecrut);
+                            }
+                        }
+                    }
 
                     // parcourt les recruts de l'ancien utilisateur et les ré-assigne au remplaçant
                     foreach($previousRecruts as $previousRecrut){
-                        // les nouvelles recruts
-                        if($previousRecrut->getMembre() != $substitute && $previousRecrut->getMembre()!=$previousUser){
+                        $previousRecrutMembre = $previousRecrut->getMembre();
+                        if($previousRecrutMembre != $substitute && $previousRecrutMembre!=$previousUser){
                             $previousRecrut->setRecruteur($substitute);
                             $previousRecrut->setDroit($previousDroit+1);
+
+                            // met à jour si avait des recruts
+                            $previousRecrutRecruts = $previousRecrutMembre->getRecruts();
+                            foreach($previousRecrutRecruts as $previousRecrutRecrut){
+                                $previousRecrutRecrut->setDroit($previousDroit+2);
+                                $em->persist($previousRecrutRecrut);
+                            }
+
                             $em->persist($previousRecrut);
                         }
                     }
 
-                    // parcourt les recruts du remplaçant et les réassigne
-                    if(count($substituteRecruts)>0){
-                        // le plus ancien membre prend la place
-                        $substitute_ = $this->getOldest($substituteRecruts);
-                        // ré-affecte les liaisons
-                        if($substitute_){
-                            // redéfini le remplaçant
-                            $substitute_cu_ = $substitute_->getClan();
-                            $substitute_cu_->setDroit($previousDroit+1);
-                            $em->persist($substitute_cu_);
-                            // parcourt les recruts du remplaçant et les ré-assigne
-                            foreach($substituteRecruts as $substituteRecrut){
-                                if($substituteRecrut->getMembre() != $substitute_){
-                                    $substituteRecrut->setRecruteur($substitute_);
-                                    $substituteRecrut->setDroit($previousDroit+2);
-                                    $em->persist($substituteRecrut);
-                                }
-                            }
-                        }
-                    }
+                    // le recruteur du membre supprimé
+                    $previousRecruteur = $entity->getRecruteur();//User
+                    if(!$previousRecruteur || $previousRecruteur==$previousUser)
+                        $previousRecruteur = $substitute;
+
+                    // redéfini le remplaçant
+                    $substitute_cu = $substitute->getClan(); // ClanUtilisateur
+                    $substitute_cu->setRecruteur($previousRecruteur);
+                    $substitute_cu->setDroit($previousDroit);
+
+                    $em->persist($substitute_cu);
 
                     $em->flush();
                 }
@@ -83,16 +88,13 @@ class ClanUtilisateurListener
         }
     }
 
-    public function getOldest(Collection $recruts){
-        $dateAjout = new \DateTime();
-        $oldest = null;
+    public function getOldest(Collection $recruts, \NinjaTooken\UserBundle\Entity\User $recruteur){
         foreach($recruts as $recrut){
-            if($recrut->getDateAjout()<$dateAjout){
-                $oldest = $recrut->getMembre();//User
-                $dateAjout = $recrut->getDateAjout();
-            }
+            $membre = $recrut->getMembre();
+            if($membre != $recruteur)
+                return $membre;
         }
-        return $oldest;
+        return null;
     }
 
     // met à jour les recruts et supprime les propositions
@@ -109,8 +111,8 @@ class ClanUtilisateurListener
                 foreach($propositions as $proposition){
                     $em->remove($proposition);
                 }
+                $em->flush();
             }
-            $em->flush();
         }
     }
 

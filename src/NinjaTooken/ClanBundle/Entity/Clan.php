@@ -33,12 +33,13 @@ class Clan
     private $old_id;
 
     /**
-     * @ORM\OneToMany(targetEntity="NinjaTooken\ClanBundle\Entity\ClanUtilisateur", mappedBy="clan", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="NinjaTooken\ClanBundle\Entity\ClanUtilisateur", mappedBy="clan", cascade={"remove"})
+     * @ORM\OrderBy({"dateAjout" = "ASC"})
      */
     private $membres;
 
     /**
-     * @ORM\OneToMany(targetEntity="NinjaTooken\ForumBundle\Entity\Forum", mappedBy="clan", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="NinjaTooken\ForumBundle\Entity\Forum", mappedBy="clan", cascade={"remove"})
      */
     private $forums;
 
@@ -537,6 +538,7 @@ class Clan
     public function addForum(\NinjaTooken\ForumBundle\Entity\Forum $forums)
     {
         $this->forums[] = $forums;
+        $forums->setClan($this);
 
         return $this;
     }
