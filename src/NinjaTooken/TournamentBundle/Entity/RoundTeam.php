@@ -22,13 +22,13 @@ class RoundTeam
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Team", cascade={"persist"}, inversedBy="rounds")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Team", inversedBy="rounds")
      * @var Team
      */
     private $team;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Round", cascade={"persist"}, inversedBy="teams")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Round", inversedBy="teams")
      * @var Round
      */
     private $round;

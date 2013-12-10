@@ -25,6 +25,7 @@ class Ninja
     * user of the ninja
     *
     * @ORM\OneToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", inversedBy="ninja")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
     * @var User
     */
     private $user;

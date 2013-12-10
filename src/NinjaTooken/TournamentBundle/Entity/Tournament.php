@@ -63,13 +63,13 @@ class Tournament
     private $thread;
 
     /**
-    * @ORM\OneToMany(targetEntity="NinjaTooken\TournamentBundle\Entity\Round", mappedBy="tournament", cascade={"persist", "remove"})
+    * @ORM\OneToMany(targetEntity="NinjaTooken\TournamentBundle\Entity\Round", mappedBy="tournament", cascade={"remove"})
     * @ORM\OrderBy({"tour" = "ASC"})
     */
     private $rounds;
 
     /**
-    * @ORM\OneToMany(targetEntity="NinjaTooken\TournamentBundle\Entity\Team", mappedBy="tournament", cascade={"persist", "remove"})
+    * @ORM\OneToMany(targetEntity="NinjaTooken\TournamentBundle\Entity\Team", mappedBy="tournament", cascade={"remove"})
     * @ORM\OrderBy({"dateInscription" = "ASC"})
     */
     private $teams;

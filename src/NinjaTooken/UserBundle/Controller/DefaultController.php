@@ -558,36 +558,6 @@ class DefaultController extends Controller
             // on évite d'envoyer des messages qui seront supprimés
             $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_clan.clan_proposition_listener'));
 
-            // l'utilisateur était dans un clan
-            $clanutilisateur = $user->getClan();
-            if($clanutilisateur){
-                // un membre
-                if($clanutilisateur->getDroit() > 0){
-                    $user->setClan(null);
-                    $em->persist($user);
-
-                    $utilisateur = $clanutilisateur->getRecruteur();
-                    if($utilisateur){
-                        $utilisateur->removeRecrut($clanutilisateur);
-                        $em->persist($utilisateur);
-                    }
-
-                    $em->remove($clanutilisateur);
-                // le shishou
-                }else{
-                    // enlève les évènements sur clan_utilisateur
-                    // on cherche à tous les supprimer et pas à ré-agencer la structure
-                    $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_clan.clan_utilisateur_listener'));
-
-                    // enlève les évènements sur clan
-                    // les propositions de recrutement seront de toute façon supprimées
-                    $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_clan.clan_listener'));
-
-                    $em->remove($clanutilisateur->getClan());
-                }
-                $em->flush();
-            }
-
             // enlève les évènement sur thread et comment
             // tout sera remis à plat à la fin
             $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_forum.thread_listener'));

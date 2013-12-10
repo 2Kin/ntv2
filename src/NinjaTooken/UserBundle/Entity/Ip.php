@@ -41,7 +41,7 @@ class Ip
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", cascade={"persist"}, inversedBy="ips")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", inversedBy="ips")
      * @var User
      */
     private $user;

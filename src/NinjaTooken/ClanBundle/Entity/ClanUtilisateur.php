@@ -22,19 +22,19 @@ class ClanUtilisateur
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", cascade={"persist"}, inversedBy="clan")
+     * @ORM\OneToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", inversedBy="clan", cascade={"persist"})
      * @var User
      */
     private $membre;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", cascade={"persist"}, inversedBy="recruts")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", inversedBy="recruts", cascade={"persist"})
      * @var User
      */
     private $recruteur;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan", cascade={"persist"}, inversedBy="membres")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan", inversedBy="membres", cascade={"persist"})
      */
     private $clan;
 
@@ -154,6 +154,10 @@ class ClanUtilisateur
      */
     public function setMembre(\NinjaTooken\UserBundle\Entity\User $membre = null)
     {
+        if($this->membre)
+            $this->membre->setClan(null);
+        if($membre)
+            $membre->setClan($this);
         $this->membre = $membre;
 
         return $this;
@@ -177,6 +181,11 @@ class ClanUtilisateur
      */
     public function setRecruteur(\NinjaTooken\UserBundle\Entity\User $recruteur = null)
     {
+        if($this->recruteur)
+            $this->recruteur->removeRecrut($this);
+        if($recruteur)
+            $recruteur->addRecrut($this);
+
         $this->recruteur = $recruteur;
 
         return $this;

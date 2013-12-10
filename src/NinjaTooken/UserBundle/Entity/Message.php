@@ -69,7 +69,7 @@ class Message
     private $hasDeleted = false;
 
     /**
-     * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\MessageUser", mappedBy="message", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\MessageUser", mappedBy="message", cascade={"remove"})
      */
     private $receivers;
 

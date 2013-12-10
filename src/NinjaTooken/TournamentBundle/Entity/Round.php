@@ -85,13 +85,13 @@ class Round
     private $dateFin;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Tournament", inversedBy="rounds", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Tournament", inversedBy="rounds")
      * @var Tournament
      */
     private $tournament;
 
     /**
-     * @ORM\OneToMany(targetEntity="NinjaTooken\TournamentBundle\Entity\RoundTeam", mappedBy="round", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="NinjaTooken\TournamentBundle\Entity\RoundTeam", mappedBy="round", cascade={"remove"})
      * @var RoundTeam
      */
     private $teams;

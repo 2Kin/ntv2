@@ -395,13 +395,10 @@ class DefaultController extends Controller
                     if($utilisateur->getClan()){
                         $clanutilisateur_promote = $utilisateur->getClan();
                         if($clanutilisateur_promote->getClan() == $clan){
-                            
+
                             // permet de remplacer le ninja promu dans la hiérarchie via le listener
                             $em->remove($clanutilisateur_promote);
                             $em->flush();
-
-                            // permet de rafraichir les liaisons
-                            $em->refresh($user);
 
                             // modifie la liaison du shisho pour pointer vers le nouveau !
                             $clanutilisateur->setMembre($utilisateur);
@@ -763,9 +760,11 @@ class DefaultController extends Controller
 
     function getRecruteur($list=array()){
         $membre = array();
-        $membre[] = $list['recruteur'];
-        foreach($list['recruts'] as $recrut){
-            $membre = array_merge($membre, $this->getRecruteur($recrut));
+        if(isset($list['recruteur'])){
+            $membre[] = $list['recruteur'];
+            foreach($list['recruts'] as $recrut){
+                $membre = array_merge($membre, $this->getRecruteur($recrut));
+            }
         }
         return $membre;
     }

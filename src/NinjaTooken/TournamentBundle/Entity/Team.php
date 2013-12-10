@@ -63,13 +63,13 @@ class Team
     private $membres;
 
     /**
-     * @ORM\OneToMany(targetEntity="NinjaTooken\TournamentBundle\Entity\RoundTeam", mappedBy="team", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="NinjaTooken\TournamentBundle\Entity\RoundTeam", mappedBy="team", cascade={"remove"})
      * @var RoundTeam
      */
     private $rounds;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Tournament", inversedBy="teams", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\TournamentBundle\Entity\Tournament", inversedBy="teams")
      * @var Tournament
      */
     private $tournament;
