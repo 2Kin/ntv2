@@ -2,5 +2,5 @@
 
 {% block content %}
 {{ 'mail.newMessage'|trans({'%utilisateur%': user.username}) }} :<hr/>
-{{ message.content }}
+{{ message.content|raw|purify('min') }}
 {% endblock %}
