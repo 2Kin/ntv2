@@ -229,6 +229,19 @@ nav, .footer footer{
     }
 }
 
+// messages d'erreur
+.exception{
+    .code{
+        font-size:1300%;line-height:100%;text-align:right;padding:0 30px 50px 0;.box-shadow(20px 0 6px -14px fadeout(@black, 80%));
+    }
+    .status{
+        font-size:300%;line-height:100%;padding-top:20px;color:@grayLight;
+    }
+    .flash-notice{
+        padding:0 5px;font-size:80%;text-shadow:inherit;background-color:@grayLight;.box-shadow(inherit);
+    }
+}
+
 // le player
 #unityPlayer{
     .size(600px, 800px);margin-bottom:(@baseLineHeight*5);
@@ -568,7 +581,7 @@ header{
 }
 // contenu principal de la page
 .content{
-    min-height:calc(100% e('-') 412px);
+    min-height:calc(100% e('-') 420px);
     .pull-left{
         margin-right:10px;
     }

@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    # On ne redirige pas la page maintenance sur elle même pour éviter les boucles
+    RewriteCond %{REQUEST_URI} !maintenance.html
+
+    # On n'effectue pas la redirection pour l'adresse IP de la personne procédant à la maintenance
+    RewriteCond %{REMOTE_ADDR} !^111\.111\.111\.111$
+
+    # On redirige avec une erreur 503 (SEO)
+    RewriteRule (.*) - [R=503,L]
+</IfModule>
+
+# réponse 503 personnalisée
+ErrorDocument 503 http://www.ninjatooken.com/maintenance.html
+
+# trois heures pour recommencer à parser
+<IfModule mod_headers.c>
+    Header always set Retry-After "10800"
+</IfModule>

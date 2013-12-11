@@ -1,0 +1,3 @@
+# /etc/crontab
+# toutes les deux minutes avec une limite de 110 secondes
+*/2 * * * * root php /path/to/project/app/console swiftmailer:spool:send --time-limit=110 --env=prod

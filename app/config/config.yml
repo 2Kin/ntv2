@@ -74,7 +74,7 @@ twig:
         version: %unity.version%
         paypalDonate: %paypal.donate%
         paypalCode: %paypal.code%
-        siteDomaine: %router.request_context.host%
+        siteDomaine: NinjaTooken.com
 
 # Assetic Configuration
 assetic:
@@ -120,7 +120,9 @@ swiftmailer:
     host:      %mailer_host%
     username:  %mailer_user%
     password:  %mailer_password%
-    spool:     { type: memory }
+    spool:
+        type:   file
+        path:   %kernel.root_dir%/../spool
 
 exercise_html_purifier:
     default:

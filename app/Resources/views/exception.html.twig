@@ -106,15 +106,19 @@
                         //--></script>
                         <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
                 </div>
-                <h1>{{ exception.message|nl2br|format_file_from_text }}</h1>
-                <div class="flash-notice">
-                <strong>{{ status_code }}</strong> {{ status_text }}</div>
+                <div class="row-fluid exception">
+                    <div class="span6 code">{{ status_code }}</div>
+                    <div class="span6">
+                        <div class="status">{{ status_text }}</div>
+                        <div class="flash-notice">{{ exception.message|nl2br|format_file_from_text }}</div>
 
-                {% for flashMessage in app.session.flashbag.get('notice') %}
-                    <div class="flash-notice">
-                    {{ flashMessage }}
+                        {% for flashMessage in app.session.flashbag.get('notice') %}
+                            <div class="flash-notice">
+                            {{ flashMessage }}
+                            </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
+                </div>
             </div>
         </div>
 
