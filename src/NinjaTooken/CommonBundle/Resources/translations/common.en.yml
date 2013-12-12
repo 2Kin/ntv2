@@ -1,11 +1,16 @@
 newsletter:
     newsite: |
         Hi %username%,<br><br>
-        Ninja Tooken just made a big step in its history, with the new version of his site!<br>
-        An improved management of the clans with hierarchical rank, total visibility of the impact of skilling with "calculate jutsu" , the ability to have up to 5 different logins, improved display of all pages for your viewing comfort on pc, tablet and smartphone, and much more! And for even more performance, everything is hosted on a dedicated server.<br><br>
-        But the game is not in rest with a completely redesigned physics, the come back of jumping above the water for all ninjas, and still more optimizations on the network.
+        Ninja Tooken just made the one giant leap of its history and is happy to announce the new version of its website!<br>
+        In this brand new gem, you'll find, amongst other wicked things :<br> 
+        &bull; a new clan management system with more display features and a cool ranking system,<br>
+        &bull; a jutsu calculator that will give you more info on your powers, the impact of your raids and will help you master your ninja's skills,<br>
+        &bull; the chance to own 5 different logins,<br>
+        &bull; an improved display : wether you want to visit us on your pc, tablet or smartphone, the whole website will adjust to your device !<br>
+        Also, just so you can benefit from an even better performance, we decided to host the website on a dedicated server.<br><br>
+        Now, don't think we forgot the gameplay : you'll find completely redesigned physics too, and maybe you'll be happy to know that every ninja can jump on water again. We hope you'll notice the many optimizations on network games.
         <br><br>
-        To benefit now from all of those improvements, <a href="%autologin%" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">follow this personal link</span></a> to login directly to your account.
+        To play now and discover all these improvements, <a href="%autologin%" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">follow this personal link</span></a> that will log you directly to your account.
 popup:
     delete: Are you sure?
     confirm: Confirm

@@ -2,8 +2,13 @@ newsletter:
     newsite: |
         Salut %username%,<br><br>
         NinjaTooken vient de faire un grand pas dans son histoire, avec la nouvelle version de son site !<br>
-        Une gestion enrichie des clans avec des grades hiérarchisés, une visibilité totale de l'effet des capacités et autres aptitudes grâce au "calculateur de jutsus", la possibilité d'avoir jusqu'à 5 pseudos différents, un affichage amélioré de l'intégralité des pages pour un confort de visionnage optimal sur pc mais aussi tablette et smartphone, et biens plus encore ! Et pour toujours plus de performances le tout est hébergé sur un serveur dédié.<br><br>
-        Mais le jeu n'est pas en reste avec une physique entièrement repensée, le grand retour du saut sur l'eau pour tous les ninjas, et toujours plus d'optimisations en réseau.<br><br>
+        Sur cette merveille toute neuve, tu trouveras, entre autres :<br>
+        &bull; un nouveau système de gestion des clans avec plus d'options d'affichage et des supers grades,<br>
+        &bull; un calculateur de jutsu pour mieux connaître tes pouvoirs, l'impact de tes attaques et apprendre à mieux maîtriser ton ninja,<br>
+        &bull; la possibilité d'avoir jusqu'à 5 pseudos différents,<br>
+        &bull; un affichage amélioré de l'intégralité des pages pour un confort de visionnage optimal sur pc mais aussi tablette et smartphone, et bien plus encore !<br>
+        Et pour toujours plus de performances, le tout est hébergé sur un serveur dédié.<br><br>
+        Côté jeu, on a entièrement repensé la physique, et tu seras peut-être content d'apprendre que tous les ninjas peuvent à nouveau sauter sur l'eau. Il y a aussi plein d'optimisations en réseau.<br><br>
         Pour profiter dès maintenant de toutes ces améliorations, <a href="%autologin%" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">suis ce lien personnel</span></a> pour te connecter directement sur ton compte.
 popup:
     delete: Cette action est irréversible : es-tu sûr ?
