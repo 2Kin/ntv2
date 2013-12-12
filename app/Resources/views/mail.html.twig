@@ -48,14 +48,14 @@
         </tr>
         <tr>
             <td width="600">
-                {% block content %}{% endblock %}<br/>
+                {% block content %}{% endblock %}<br/><br/>
                 <a href="{{ url('ninja_tooken_homepage', {_locale:locale}) }}" target="_blank" style="color:blue; text-decoration: none;"><span style="color:blue;">{{ siteDomaine }}</span></a>
             </td>
         </tr>
         {% if email is defined and email is not empty %}
         <tr>
             <td width="600">
-                <br/><br/><br/><br/>{{ 'mail.desinscription.message'|trans }}<a href="{{ url('ninja_tooken_user_desinscription', {email:email, _locale:locale}) }}" target="_blank" title="desinscription" style="color:blue; text-decoration: none;"><span style="color:blue;">{{ 'action.clique'|trans }}</span></a>.
+                <br/><br/><span style="font-size:0.75em;color:grey">{{ 'mail.desinscription.message'|trans }}<a href="{{ url('ninja_tooken_user_desinscription', {email:email, _locale:locale}) }}" target="_blank" title="desinscription" style="color:blue; text-decoration: none;"><span style="color:blue;">{{ 'action.clique'|trans }}</span></a>.</span>
             </td>
         </tr>
         {% endif %}

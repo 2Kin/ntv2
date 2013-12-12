@@ -15,6 +15,12 @@ class NewsletterCommand extends ContainerAwareCommand
         $this
             ->setName('newsletter:send')
             ->setDescription('Envoi de la newsletter')
+			->addOption(
+				'all',
+				null,
+				InputOption::VALUE_NONE,
+				'Envoi à tous les inscrits ?'
+			)
         ;
     }
 
@@ -33,7 +39,11 @@ class NewsletterCommand extends ContainerAwareCommand
         $output->writeln('---start');
 
         // boucle sur les différents utilisateurs
-        $request = 'SELECT id, username, email, auto_login, locale FROM nt_user WHERE enabled=1 AND locked=0 AND receive_newsletter=1 AND confirmation_token IS NULL ORDER BY id ASC LIMIT ';
+		$restrict = " old_id=641 AND";
+		if ($input->getOption('all'))
+			$restrict = "";
+
+        $request = 'SELECT id, username, email, auto_login, locale FROM nt_user WHERE'.$restrict.' enabled=1 AND locked=0 AND receive_newsletter=1 AND confirmation_token IS NULL ORDER BY id ASC LIMIT ';
         $start = 0;
         $num = 100;
         $i = 1;
@@ -69,7 +79,6 @@ class NewsletterCommand extends ContainerAwareCommand
                 ));
 
                 // envoi les messages
-                /*
                 $message = \Swift_Message::newInstance()
                     ->setSubject('[Ninjatooken] nouveau message de la part de '.$username)
                     ->setFrom($from)
@@ -77,7 +86,6 @@ class NewsletterCommand extends ContainerAwareCommand
                     ->setContentType("text/html")
                     ->setBody($body);
                 $mailer->send($message);
-                */
 
                 $output->writeln($i." ".$username.' ('.$email.')');
                 $i++;

@@ -74,7 +74,7 @@ twig:
         version: %unity.version%
         paypalDonate: %paypal.donate%
         paypalCode: %paypal.code%
-        siteDomaine: NinjaTooken.com
+        siteDomaine: www.ninjatooken.com
 
 # Assetic Configuration
 assetic:
