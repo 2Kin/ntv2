@@ -1,5 +1,7 @@
 {% if form is defined and form is not empty %}{% form_theme form 'form.html.twig' %}{% endif %}
 {% if form_comment is defined and form_comment is not empty %}{% form_theme form_comment 'form.comment.html.twig' %}{% endif %}
+{% set home = false %}
+{% if app.request.get('_route') == 'ninja_tooken_homepage' %}{% set home = true %}{% endif %}
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
     <head>
@@ -7,10 +9,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>{% block title %}NinjaTooken{% endblock %}</title>
         <meta name="description" content="{% block description %}NinjaTooken{% endblock %}">
+        <meta name="abstract" content="{{ block('description') }}"/>
         <meta name="keywords" content="{% block keywords %}NinjaTooken{% endblock %}">
+        <meta name="dc.keywords" content="{{ block('keywords') }}"/>
+        <meta name="author" content="NinjaTooken"/>
+        {% if home %}<meta name="identifier-url" content="http://www.ninjatooken.com/"/>
+{% endif %}
+        <meta name="robots" content="index,follow"/>
+        <meta name="language" content="{{ app.request.locale }}"/>
+        <meta name="location" content="France, FRANCE"/>
+        <meta name="google-site-verification" content="Koo4GUrqK-A1viOII_xEtApsXYCTJ8QJdBiVCEiDsuY" />
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="{{ asset('bundles/ninjatookencommon/css/main.css') }}" />
-
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
         <link rel="apple-touch-icon" href="{{ asset('touch-icon-iphone.png') }}" />
         <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('touch-icon-ipad.png') }}" />
@@ -60,10 +70,6 @@
             </div>
         </div>
 
-	{% set home = false %}
-        {% if app.request.get('_route') == 'ninja_tooken_homepage' %}
-		{% set home = true %}
-	{% endif %}
         <div class="banniere{% if home %} home{% endif %}">
             <div class="container">
                 <header class="row-fluid">
