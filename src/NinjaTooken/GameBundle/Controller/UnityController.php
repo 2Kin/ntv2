@@ -296,6 +296,8 @@ class UnityController extends Controller
                         break;
                     // check le cheat
                     case"t":
+                        $data = 1;
+                    /*
                         $t = $request->get('t');
                         $l = $request->get('l');
 						if($this->isCryptingOk($a.$t.$l)){
@@ -403,7 +405,7 @@ class UnityController extends Controller
                                     }
                                 }
                             }
-                        }
+                        }*/
                         break;
                     // apparition du yokai
                     case"y":
