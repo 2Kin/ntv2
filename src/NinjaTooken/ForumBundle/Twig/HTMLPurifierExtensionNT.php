@@ -50,6 +50,18 @@ class HTMLPurifierExtensionNT extends HTMLPurifierExtension
                     )
                 );
                 $def->addElement(
+                    'span', 'Inline', 'Flow', 'Common',
+                    array(
+                        'align' => 'Enum#left,right,center,justify',
+                    )
+                );
+                $def->addElement(
+                    'li', 'Inline', 'Flow', 'Common',
+                    array(
+                        'align' => 'Enum#left,right,center,justify',
+                    )
+                );
+                $def->addElement(
                     'fieldset',
                     'Block',
                     'Flow',
