@@ -243,6 +243,10 @@ sonata_user:
             handler:            sonata.user.profile.form.handler.default
             name:               sonata_user_profile_form
             validation_groups:  [Profile]
+        register:
+            confirm:
+                redirect:
+                    route: false
 
 sonata_admin:
     security:

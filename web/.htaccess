@@ -9,8 +9,8 @@ DirectoryIndex app.php
     RewriteEngine On
 
     # redirection vers le nom de domaine principal
-    RewriteCond %{HTTP_HOST}  !www.ninjatooken.com
-    RewriteRule (.*) http://www.ninjatooken.com/$1 [R=301,L]
+    #RewriteCond %{HTTP_HOST}  !www.ninjatooken.com
+    #RewriteRule (.*) http://www.ninjatooken.com/$1 [R=301,L]
 
     # Determine the RewriteBase automatically and set it as environment variable.
     # If you are using Apache aliases to do mass virtual hosting or installed the
