@@ -30,25 +30,25 @@
 					<strong>{{ user.classement }}°</strong> {{ 'description.position'|trans({'%count%': user.total}) }}
 				</div>
 			</div>
+			{% if user.level<=45 %}<i class="jutsu protection"></i>{% endif %}
+			{% if user.ninja.jutsuBoule>0 %}<i class="jutsu boule"></i>{% endif %}
+			{% if user.ninja.jutsuDoubleSaut>0 %}<i class="jutsu doubleSaut"></i>{% endif %}
+			{% if user.ninja.jutsuBouclier>0 %}<i class="jutsu bouclier"></i>{% endif %}
+			{% if user.ninja.jutsuMarcherMur>0 %}<i class="jutsu marcherMur"></i>{% endif %}
 			{% if user.ninja.jutsuAcierRenforce>0 %}<i class="jutsu acierRenforce"></i>{% endif %}
+			{% if user.ninja.jutsuDeflagration>0 %}<i class="jutsu deflagration"></i>{% endif %}
 			{% if user.ninja.jutsuChakraVie>0 %}<i class="jutsu chakraVie"></i>{% endif %}
 			{% if user.ninja.jutsuMarcherEau>0 %}<i class="jutsu marcherEau"></i>{% endif %}
-			{% if user.ninja.jutsuPhoenix>0 %}<i class="jutsu phoenix"></i>{% endif %}
+			{% if user.ninja.jutsuInvisibilite>0 %}<i class="jutsu transparence"></i>{% endif %}
 			{% if user.ninja.jutsuResistanceExplosion>0 %}<i class="jutsu resistanceExplosion"></i>{% endif %}
+			{% if user.ninja.jutsuMultishoot>0 %}<i class="jutsu multishoot"></i>{% endif %}
+			{% if user.ninja.jutsuPhoenix>0 %}<i class="jutsu phoenix"></i>{% endif %}
 			{% if user.ninja.jutsuTeleportation>0 %}<i class="jutsu teleportation"></i>{% endif %}
 			{% if user.ninja.jutsuVague>0 %}<i class="jutsu vague"></i>{% endif %}
-			{% if user.ninja.jutsuBouclier>0 %}<i class="jutsu bouclier"></i>{% endif %}
-			{% if user.ninja.jutsuDeflagration>0 %}<i class="jutsu deflagration"></i>{% endif %}
-			{% if user.ninja.jutsuMultishoot>0 %}<i class="jutsu multishoot"></i>{% endif %}
 			{% if user.ninja.jutsuPieux>0 %}<i class="jutsu pieux"></i>{% endif %}
 			{% if user.ninja.jutsuMetamorphose>0 %}<i class="jutsu metamorphose"></i>{% endif %}
 			{% if user.ninja.jutsuTornade>0 %}<i class="jutsu tornade"></i>{% endif %}
-			{% if user.ninja.jutsuBoule>0 %}<i class="jutsu boule"></i>{% endif %}
 			{% if user.ninja.jutsuKusanagi>0 %}<i class="jutsu kusanagi"></i>{% endif %}
-			{% if user.ninja.jutsuMarcherMur>0 %}<i class="jutsu marcherMur"></i>{% endif %}
-			{% if user.ninja.jutsuAcierRenforce>0 %}<i class="jutsu protection"></i>{% endif %}
-			{% if user.ninja.jutsuDoubleSaut>0 %}<i class="jutsu doubleSaut"></i>{% endif %}
-			{% if user.ninja.jutsuInvisibilite>0 %}<i class="jutsu transparence"></i>{% endif %}
 		</div>
 		{% endif %}
 	</div>
