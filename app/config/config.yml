@@ -136,7 +136,6 @@ exercise_html_purifier:
         HTML.TargetBlank: true
         AutoFormat.Linkify: true
         CSS.AllowedProperties:  'text-decoration,text-align,color,font,font-family,font-size,font-style,font-weight,float,clear'
-        HTML.AllowedAttributes: 'id,align,src,href,width,height,title,name,value,type,target,face,size,color,alt,frameborder,marginheight,marginwidth,scrolling,src'
         HTML.SafeObject: true
         HTML.SafeEmbed: true
         Output.FlashCompat: true

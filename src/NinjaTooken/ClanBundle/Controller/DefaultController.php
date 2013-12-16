@@ -236,9 +236,9 @@ class DefaultController extends Controller
 
             // vérification des droits utilisateurs
             $canEdit = false;
-            if($user->getClan()){
-                $clanUser = $user->getClan()->getClan();
-                if($clanUser == $clan && $user->getClan()->getCanEditClan())
+            $clanutilisateur = $user->getClan();
+            if($clanutilisateur){
+                if($clanutilisateur->getClan() == $clan && ($clanutilisateur->getCanEditClan() || $clanutilisateur->getDroit()==0))
                     $canEdit = true;
             }
 
