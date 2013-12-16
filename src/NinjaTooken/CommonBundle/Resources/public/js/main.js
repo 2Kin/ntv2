@@ -329,7 +329,9 @@ $(document).ready(function(){
 		_answers.each(function(){
 			var _this = $(this);
 			var _article = _this.closest('article');
+			var isFirst = true;
 			if(_article.length>0){
+				isFirst = _article.find('.content').length>1;
 				var _content = _article.find('.content').eq(0);
 				var _author = _article.find('.signature a[rel="author"] span').eq(0);
 			}
@@ -341,7 +343,7 @@ $(document).ready(function(){
 				// déplace le formulaire de réponse
 				_this.parent().after(_answer);
 				// ajoute la référence du message
-				tinymce.activeEditor.setContent(_article.length>0?'<fieldset><legend>'+_author.text()+'</legend>'+$.truncate(_content.html(), {length: 200, words: true, noFieldset:true, ellipsis: ' [..]'})+'</fieldset><p></p>':'');
+				tinymce.activeEditor.setContent(_article.length>0 && !isFirst?'<fieldset><legend>'+_author.text()+'</legend>'+$.truncate(_content.html(), {length: 200, words: true, noFieldset:true, ellipsis: ' [..]'})+'</fieldset><p></p>':'');
 				// affiche le formulaire de réponse
 				_answer.show();
 				// cache le bouton de réponse
