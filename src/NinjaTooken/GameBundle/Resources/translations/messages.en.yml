@@ -7,7 +7,7 @@ filtre:
 nouvelAmi:
     title: New friend !
     description: |
-    I really appreciate facing you, and I would be happy to renew the experience!
+        I really appreciate facing you, and I would be happy to renew the experience!
 action:
     partieToute: All the games
 keywords:
