@@ -296,8 +296,6 @@ class UnityController extends Controller
                         break;
                     // check le cheat
                     case"t":
-                        $data = 1;
-                    /*
                         $t = $request->get('t');
                         $l = $request->get('l');
 						if($this->isCryptingOk($a.$t.$l)){
@@ -327,21 +325,25 @@ class UnityController extends Controller
                                         }
                                         $niveau		= $xpXML->item($k>0?$k-1:0)->getAttribute('niveau');
 
+                                        // évite d'enregistrer la valeur en bdd
+                                        $force      = $ninjaCheck->getAptitudeForce();
+                                        $marcherMur = $ninjaCheck->getJutsuMarcherMur();
+                                        $vitesse    = $ninjaCheck->getAptitudeVitesse();
                                         if($ninjaCheck->getMissionAssassinnat()>=25)
-                                            $ninjaCheck->setAptitudeForce($ninjaCheck->getAptitudeForce() + 5);
+                                            $force += 5;
                                         if($ninjaCheck->getMissionCourse()>=40){
-                                            $ninjaCheck->setAptitudeVitesse($ninjaCheck->getAptitudeVitesse() + 5);
-                                            $ninjaCheck->setJutsuMarcherMur($ninjaCheck->getJutsuMarcherMur() + 5);
+                                            $marcherMur += 5;
+                                            $vitesse += 5;
                                         }
 
-                                        if( $ninjaCheck->getAptitudeForce() == $levels[0] &&
-                                            $ninjaCheck->getAptitudeVitesse() == $levels[1] &&
+                                        if( $force == $levels[0] &&
+                                            $vitesse == $levels[1] &&
                                             $ninjaCheck->getAptitudeVie() == $levels[2] &&
                                             $ninjaCheck->getAptitudeChakra() == $levels[3] &&
                                             $ninjaCheck->getJutsuBoule() == $levels[4] &&
                                             $ninjaCheck->getJutsuDoubleSaut() == $levels[5] &&
                                             $ninjaCheck->getJutsuBouclier() == $levels[6] &&
-                                            $ninjaCheck->getJutsuMarcherMur() == $levels[7] &&
+                                            $marcherMur == $levels[7] &&
                                             $ninjaCheck->getJutsuDeflagration() == $levels[8] &&
                                             $ninjaCheck->getJutsuMarcherEau() == $levels[9] &&
                                             $ninjaCheck->getJutsuMetamorphose() == $levels[10] &&
@@ -405,7 +407,23 @@ class UnityController extends Controller
                                     }
                                 }
                             }
-                        }*/
+                        }
+
+                        // enregistre dans le lobby
+                        if($data=='1'){
+                            $lobby = $em->getRepository('NinjaTookenGameBundle:Lobby')
+                                ->createQueryBuilder('l')
+                                ->where(':user MEMBER OF l.users')
+                                ->setParameter('user', $user)
+                                ->getQuery()
+                                ->getOneOrNullResult();
+                            if($lobby){
+                                $lobby->setDateUpdate(new \DateTime());
+                                $lobby->addUser($userCheck);
+                                $em->persist($lobby);
+                                $em->flush();
+                            }
+                        }
                         break;
                     // apparition du yokai
                     case"y":
@@ -614,12 +632,16 @@ class UnityController extends Controller
                             $content .= '</games>';
                             $content .= '</root>';
 
-                            return new Response($content, 200, array('Content-Type' => 'text/xml'));
+                            $response = new Response($content, 200, array('Content-Type' => 'text/xml'));
+                            $response->headers->set('Notice', $session->getName()."=".$session->getId());
+                            return $response;
                         }
                         break;
                 }
             }
-            return new Response($data, 200, array('Content-Type' => 'text/plain'));
+            $response = new Response($data, 200, array('Content-Type' => 'text/plain'));
+            $response->headers->set('Notice', $session->getName()."=".$session->getId());
+            return $response;
         }
         return new Response("0", 200, array('Content-Type' => 'text/plain'));
     }
@@ -763,8 +785,6 @@ class UnityController extends Controller
         $content .= "<retour>".$retour."</retour>";
         $content .= "</root>";
 
-
-        $session = $this->get('session');
         $response = new Response($content, 200, array('Content-Type' => 'text/xml'));
         $response->headers->set('Notice', $session->getName()."=".$session->getId());
 
