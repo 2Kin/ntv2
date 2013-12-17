@@ -11,6 +11,7 @@ use NinjaTooken\UserBundle\Entity\MessageUser;
 use NinjaTooken\UserBundle\Entity\Capture;
 use NinjaTooken\UserBundle\Entity\Ip;
 use NinjaTooken\GameBundle\Entity\Lobby;
+use NinjaTooken\GameBundle\Entity\Ninja;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
@@ -453,14 +454,15 @@ class UnityController extends Controller
                                     $em->persist($friend);
 
                                     // créé le message
+                                    $translator = $this->get('translator');
                                     $message = new Message();
-                                    $message->setUser($user);
-                                    $message->setNom("nouvel ami");
-                                    $message->setContent("nouvel ami");
+                                    $message->setAuthor($user);
+                                    $message->setNom($translator->trans('nouvelAmi.title'));
+                                    $message->setContent($translator->trans('nouvelAmi.description'));
 
                                     // envoi au destinataire
                                     $messageUser = new MessageUser();
-                                    $messageUser->setUser($userFriend);
+                                    $messageUser->setDestinataire($userFriend);
                                     $messageUser->setMessage($message);
 
                                     $em->persist($message);
@@ -626,7 +628,7 @@ class UnityController extends Controller
                             $content .= '<games>';
                             if($friends){
                                 foreach($friends as $friend){
-                                    $content .= '<t game="'.addslashes($friend->partie).'"><![CDATA['.$friend->friend->getUsername().']]></t>';
+                                    $content .= '<t game="'.addslashes($friend->getPartie()).'"><![CDATA['.$friend->friend->getUsername().']]></t>';
                                 }
                             }
                             $content .= '</games>';

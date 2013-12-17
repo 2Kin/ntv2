@@ -4,6 +4,10 @@ filtre:
         assassinat: Assassinat
         course: Course
         tous: Tous
+nouvelAmi:
+    title: Nouvel ami !
+    description: |
+    J'ai bien aimé t'affronter, et je ne serais pas contre renouveller l'expérience !
 action:
     partieToute: Toutes les parties
 keywords:
