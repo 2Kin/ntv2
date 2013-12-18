@@ -299,6 +299,7 @@ class UnityController extends Controller
                     case"t":
                         $t = $request->get('t');
                         $l = $request->get('l');
+                        $userCheck = null;
 						if($this->isCryptingOk($a.$t.$l)){
                             $levels	= explode(":", $t);
                             if(count($levels)==23){
@@ -374,55 +375,57 @@ class UnityController extends Controller
                             }
                         }
 
-                        // check qu'un joueur avec multi-compte n'est pas déjà connecté dans une partie
-                        if($data=='1' && $this->idUtilisateur!=(int)$l){
-                            $ips = $userCheck->getIps();
-                            if(!empty($ips)){
-                                // la liste des ips connues de l'utilisateur à vérifier
-                                $ipsCompare = array();
-                                foreach($ips as $ip){
-                                    $ipsCompare[] = $ip->getIp();
-                                }
-                                // boucle sur les parties
-                                $lobbies = $em->getRepository('NinjaTookenGameBundle:Lobby')->findAll();
-                                if($lobbies){
-                                    foreach($lobbies as $lobby){
-                                        // les utilisateurs des parties
-                                        $users = $lobby->getUsers();
-                                        if($users){
-                                            foreach($users as $user){
-                                                // les ips des utilisateurs
-                                                $userIps = $user->getIps();
-                                                if($userIps){
-                                                    foreach($userIps as $ip){
-                                                        if(in_array($ip->getIp(), $ipsCompare)){
-                                                            $data = '0';
-                                                            break;
+                        if($userCheck){
+                            // check qu'un joueur avec multi-compte n'est pas déjà connecté dans une partie
+                            if($data=='1' && $this->idUtilisateur!=(int)$l){
+                                $ips = $userCheck->getIps();
+                                if(!empty($ips)){
+                                    // la liste des ips connues de l'utilisateur à vérifier
+                                    $ipsCompare = array();
+                                    foreach($ips as $ip){
+                                        $ipsCompare[] = $ip->getIp();
+                                    }
+                                    // boucle sur les parties
+                                    $lobbies = $em->getRepository('NinjaTookenGameBundle:Lobby')->findAll();
+                                    if($lobbies){
+                                        foreach($lobbies as $lobby){
+                                            // les utilisateurs des parties
+                                            $users = $lobby->getUsers();
+                                            if($users){
+                                                foreach($users as $user){
+                                                    // les ips des utilisateurs
+                                                    $userIps = $user->getIps();
+                                                    if($userIps){
+                                                        foreach($userIps as $ip){
+                                                            if(in_array($ip->getIp(), $ipsCompare)){
+                                                                $data = '0';
+                                                                break;
+                                                            }
                                                         }
                                                     }
+                                                    if($data=='0')break;
                                                 }
-                                                if($data=='0')break;
                                             }
+                                            if($data=='0')break;
                                         }
-                                        if($data=='0')break;
                                     }
                                 }
                             }
-                        }
 
-                        // enregistre dans le lobby
-                        if($data=='1'){
-                            $lobby = $em->getRepository('NinjaTookenGameBundle:Lobby')
-                                ->createQueryBuilder('l')
-                                ->where(':user MEMBER OF l.users')
-                                ->setParameter('user', $user)
-                                ->getQuery()
-                                ->getOneOrNullResult();
-                            if($lobby){
-                                $lobby->setDateUpdate(new \DateTime());
-                                $lobby->addUser($userCheck);
-                                $em->persist($lobby);
-                                $em->flush();
+                            // enregistre dans le lobby
+                            if($data=='1'){
+                                $lobby = $em->getRepository('NinjaTookenGameBundle:Lobby')
+                                    ->createQueryBuilder('l')
+                                    ->where(':user MEMBER OF l.users')
+                                    ->setParameter('user', $user)
+                                    ->getQuery()
+                                    ->getOneOrNullResult();
+                                if($lobby){
+                                    $lobby->setDateUpdate(new \DateTime());
+                                    $lobby->addUser($userCheck);
+                                    $em->persist($lobby);
+                                    $em->flush();
+                                }
                             }
                         }
                         break;
