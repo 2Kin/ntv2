@@ -140,6 +140,7 @@ security:
                 lifetime: 31536000 # 365 days in seconds
                 path:     /
                 domain:   ~
+                user_provider: fos_userbundle
 
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
