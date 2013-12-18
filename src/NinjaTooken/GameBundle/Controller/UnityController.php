@@ -708,9 +708,9 @@ class UnityController extends Controller
 
             // l'avatar
             $avatar = $user->getAvatar();
-            if($user->getUseGravatar())
+            /*if($user->getUseGravatar())
                 $avatar = $this->get('gravatar.api')->getUrl($user->getEmail());
-            else{
+            else{*/
                 if(empty($avatar)){
                     if($user->getGender()=='m')
                         $avatar = $this->get('templating.helper.assets')->getUrl('bundles/ninjatookenuser/images/boyz.jpg');
@@ -718,7 +718,7 @@ class UnityController extends Controller
                         $avatar = $this->get('templating.helper.assets')->getUrl('bundles/ninjatookenuser/images/girlz.jpg');
                 }else
                     $avatar = $this->get('imagine.cache.path.resolver')->getBrowserPath('avatar/'.$avatar, 'avatar');
-            }
+            //}
 
             $content .= '<login avatar="'.$avatar.'" id="'.$user->getId().'" maxid="'.$maxid.'"><![CDATA['.$user->getUsername()."]]></login>";
 
