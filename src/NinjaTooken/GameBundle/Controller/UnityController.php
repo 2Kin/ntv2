@@ -451,8 +451,8 @@ class UnityController extends Controller
 								if(!$already){
                                     // créé la liaison
                                     $friend = new Friend();
-                                    $friend->setUser($user);
-                                    $friend->setFriend($userFriend);
+                                    $friend->setUser($userFriend);
+                                    $friend->setFriend($user);
 
                                     $em->persist($friend);
 
@@ -472,10 +472,6 @@ class UnityController extends Controller
                                     $em->persist($messageUser);
 
                                     $em->flush();
-
-                                    if($userFriend->getReceiveAvertissement()){
-                                        // TODO :: envoi un mail d'avertissement
-                                    }
 								}
 								$data	= "1";
 							}
