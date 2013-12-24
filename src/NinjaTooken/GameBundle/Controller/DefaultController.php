@@ -31,13 +31,16 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $ninja = $user->getNinja();
-            if($ninja && !empty($ninja->getClasse())){
-                // l'expérience (et données associées)
-                $gameData->setExperience($ninja->getExperience(), $ninja->getGrade());
-                $level = $gameData->getLevelActuel();
+            if($ninja){
+                $c = $ninja->getClasse();
+                if(!empty($c)){
+                    // l'expérience (et données associées)
+                    $gameData->setExperience($ninja->getExperience(), $ninja->getGrade());
+                    $level = $gameData->getLevelActuel();
 
-                $classeP = $this->container->getParameter('class');
-                $classe = strtolower($classeP[$ninja->getClasse()]);
+                    $classeP = $this->container->getParameter('class');
+                    $classe = strtolower($classeP[$c]);
+                }
             }
         }
 
