@@ -377,7 +377,7 @@ class UnityController extends Controller
 
                         if($userCheck){
                             // check qu'un joueur avec multi-compte n'est pas déjà connecté dans une partie
-                            if($data=='1' && $this->idUtilisateur!=(int)$l){
+                            /*if($data=='1' && $this->idUtilisateur!=(int)$l){
                                 $ips = $userCheck->getIps();
                                 if(!empty($ips)){
                                     // la liste des ips connues de l'utilisateur à vérifier
@@ -410,7 +410,7 @@ class UnityController extends Controller
                                         }
                                     }
                                 }
-                            }
+                            }*/
 
                             // enregistre dans le lobby
                             if($data=='1'){
@@ -611,23 +611,23 @@ class UnityController extends Controller
 
                             // récupère les amis dans le lobby
                             $friends = $lobbyRepository->createQueryBuilder('l')
-                                ->select('l, f')
+                                ->select('l.partie', 'u.username')
                                 ->innerJoin('NinjaTookenUserBundle:Friend', 'f', 'WITH', 'f.friend MEMBER OF l.users')
+                                ->leftJoin('NinjaTookenUserBundle:User', 'u', 'WITH', 'f.friend = u')
                                 ->andWhere('f.user = :user')
                                 ->andWhere('f.isConfirmed = true')
                                 ->andWhere('f.isBlocked = false')
                                 ->setParameter('user', $user)
                                 ->setFirstResult(0)
                                 ->setMaxResults(100)
-                                ->getQuery()
-                                ->getResult();
-
+                                ->getQuery();
                             $content = '<'.'?xml version="1.0" encoding="UTF-8"?'.'>';
                             $content .= '<root>';
                             $content .= '<games>';
+                            $friends = $friends->getScalarResult();
                             if($friends){
                                 foreach($friends as $friend){
-                                    $content .= '<t game="'.addslashes($friend->getPartie()).'"><![CDATA['.$friend->friend->getUsername().']]></t>';
+                                    $content .= '<t game="'.addslashes($friend['partie']).'"><![CDATA['.$friend['username'].']]></t>';
                                 }
                             }
                             $content .= '</games>';
