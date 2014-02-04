@@ -567,8 +567,37 @@ class DefaultController extends Controller
 
     public function recentCommentsAction($max = 10, Forum $forum = null, User $user = null)
     {
+        $em = $this->getDoctrine()->getManager();
+        $lastComments = $em->getRepository('NinjaTookenForumBundle:Comment')->getRecentComments($forum, $user, $max);
         return $this->render('NinjaTookenForumBundle:Comments:recentList.html.twig', array(
-            'comments' => $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Comment')->getRecentComments($forum, $user, $max)
+            'comments' => $lastComments
+        ));
+    }
+
+    public function recentThreadsAction($max = 10)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $conn = $em->getConnection();
+        $threadRepo = $em->getRepository('NinjaTookenForumBundle:Thread');
+        $commentRepo = $em->getRepository('NinjaTookenForumBundle:Comment');
+
+        $request = "(SELECT id, 'thread' as type, date_ajout FROM nt_thread ORDER BY date_ajout DESC LIMIT 0,10)".
+                   " UNION ".
+                   "(SELECT id, 'comment' as type, date_ajout FROM nt_comment ORDER BY date_ajout DESC LIMIT 0,10)".
+                   "ORDER BY date_ajout DESC LIMIT 0,10";
+        $stmt = $conn->prepare($request);
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+        $data = array();
+        foreach($results as $result){
+            if($result['type']=='thread')
+                $data[] = $threadRepo->findOneById($result['id']);
+            else
+                $data[] = $commentRepo->findOneById($result['id']);
+        }
+
+        return $this->render('NinjaTookenForumBundle:Lasts:recentList.html.twig', array(
+            'lasts' => $data
         ));
     }
 

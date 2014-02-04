@@ -53,7 +53,7 @@
 							<input type="submit" name="s" value="{{ 'action.ok'|trans({}, 'common') }}" class="span2">
 						</form>
 
-						{{ render(controller('NinjaTookenForumBundle:Default:recentComments', {'max': 10, 'forum': 0, 'user': 0})) }}
+						{{ render(controller('NinjaTookenForumBundle:Default:recentThreads', {'max': 10})) }}
 
 						{% include 'NinjaTookenCommonBundle:Default:pubAside.html.twig' %}
 
