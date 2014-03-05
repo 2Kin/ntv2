@@ -51,7 +51,7 @@
                         </div>
                         
                         <h3>Capacités</h3>
-			            {% for key, capacite in capacites %}
+			{% for key, capacite in capacites %}
                         <div class="row-fluid calculateur-capacite">
                             <div class="span3"><label class="libelle">{{ capacite.nom }}</label></div>
                             <div class="span2">
@@ -72,7 +72,7 @@
                         </div>
 
                         <h3>Jutsus</h3>
-			            {% for key, aptitude in aptitudes %}
+			{% for key, aptitude in aptitudes %}
                         <div class="row-fluid calculateur-jutsu" data-limit="{{ aptitude.limit }}" data-niveau="{{ aptitude.niveau }}">
                             <div class="span3"><label class="libelle {{ aptitude.limit }}">{{ aptitude.nom }}</label></div>
                             <div class="span2">

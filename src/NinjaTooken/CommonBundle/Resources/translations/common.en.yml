@@ -180,10 +180,39 @@ game:
         temps: "Last ##s."
         chakra: "Costs ## chakra points"
         distance: "Can be launched up to ##m."
-    kusanagi:
-        nom: "Kusanagi"
-        degat: "Inflicts ## damage points"
-        last: "Last ##s."
+    kamiRaijin:
+        nom: "Raijin's Drum"
+        effect: "Speed increased by ##%"
+        rayon: "Covers an area of ##m. diameter"
+        temps: "Last ##s."
+        distance: "Can be launched up to ##m."
+        chakra: "Costs ## chakra points"
+    kamiSarutahiko:
+        nom: "Sarutahiko's Mockery"
+        effect: "Speed lowered by ##%"
+        rayon: "Covers an area of ##m. diameter"
+        temps: "Last ##s."
+        distance: "Can be launched up to ##m."
+        chakra: "Costs ## chakra points"
+    kamiFujin:
+        nom: "Fujin's Sigh"
+        rayon: "Covers an area of ##m. diameter"
+        temps: "Last ##s."
+        distance: "Can be launched up to ##m."
+        chakra: "Costs ## chakra points"
+    kamiSusanoo:
+        nom: "Susanoo's Compassion"
+        effect: "Add ## life's points"
+        rayon: "Covers an area of ##m. diameter"
+        temps: "Last ##s."
+        distance: "Can be launched up to ##m."
+        chakra: "Costs ## chakra points"
+    kamiKagutsuchi:
+        nom: "Kagutsuchi's Anger"
+        effect: "Damages increased by ##% over 20s."
+        rayon: "Covers an area of ##m. diameter"
+        temps: "Last ##s."
+        distance: "Can be launched up to ##m."
         chakra: "Costs ## chakra points"
     course: '{0,1}race|]1,+Inf]races'
     assassinat: '{0,1}murder|]1,+Inf]murders'

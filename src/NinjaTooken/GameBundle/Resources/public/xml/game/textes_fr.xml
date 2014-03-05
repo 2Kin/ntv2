@@ -473,7 +473,27 @@ Tu peux désormais utiliser ##JUTSUS##. L'activation ce fait depuis "Mon Ninja" 
 		<t><![CDATA[Accélération]]></t>
 		<t><![CDATA[On]]></t>
 		<t><![CDATA[Off]]></t>
-		<t><![CDATA[Champ de vision]]></t><!--437-->
+		<t><![CDATA[Champ de vision]]></t>
+		<t><![CDATA[Tambour de Raijin]]></t>
+		<t><![CDATA[Moquerie de Sarutahiko]]></t>
+		<t><![CDATA[Soupir de Fujin]]></t>
+		<t><![CDATA[Compassion de Susanoo]]></t>
+		<t><![CDATA[Colère de Kagutsuchi]]></t>
+		<t><![CDATA[Augmente la vitesse de déplacement du lanceur et des alliés.]]></t>
+		<t><![CDATA[Diminue la vitesse de déplacement des ennemis.]]></t>
+		<t><![CDATA[Créé une zone embrumée pour se cacher (lanceur et alliés voient à travers).]]></t>
+		<t><![CDATA[Se soigne ainsi que les alliés.]]></t>
+		<t><![CDATA[Enflamme les armes du lanceur et des alliés (dégâts prolongés dans le temps).]]></t>
+		<t><![CDATA[##TOUCHE## : augmente la vitesse de déplacement du lanceur et des alliés (Raiton, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[##TOUCHE## : diminue la vitesse de déplacement des ennemis (Doton, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[##TOUCHE## : créé une zone embrumée pour se cacher, lanceur et alliés voient à travers (Futon, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[##TOUCHE## : se soigne ainsi que les alliés (Suiton, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[##TOUCHE## : enflamme les armes du lanceur et des alliés (Katon, lvl. min.##LEVEL##).]]></t>
+		<t><![CDATA[Raijin]]></t>
+		<t><![CDATA[Sarutahiko]]></t>
+		<t><![CDATA[Fujin]]></t>
+		<t><![CDATA[Susanoo]]></t>
+		<t><![CDATA[Kagutsuchi]]></t><!--457-->
 	</textes>
 	<accomplissements>
 		<ac name="Kitutu lvl 1"><![CDATA[Tuer 3 ninjas d'affilé]]></ac>

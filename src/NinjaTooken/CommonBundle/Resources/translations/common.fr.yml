@@ -184,5 +184,39 @@ game:
         degat: "Inflige ## points de dégats"
         last: "Dure ##s."
         chakra: "Coûte ## points de chakra"
+    kamiRaijin:
+        nom: "Tambour de Raijin"
+        effect: "Accélère de ##%"
+        rayon: "Couvre une sphère de ##m. de diamètre"
+        temps: "Dure ##s."
+        distance: "Peut être lancé jusqu'à ##m."
+        chakra: "Coûte ## points de chakra"
+    kamiSarutahiko:
+        nom: "Moquerie de Sarutahiko"
+        effect: "Ralentie de ##%"
+        rayon: "Couvre une sphère de ##m. de diamètre"
+        temps: "Dure ##s."
+        distance: "Peut être lancé jusqu'à ##m."
+        chakra: "Coûte ## points de chakra"
+    kamiFujin:
+        nom: "Soupir de Fujin"
+        rayon: "Couvre une sphère de ##m. de diamètre"
+        temps: "Dure ##s."
+        distance: "Peut être lancé jusqu'à ##m."
+        chakra: "Coûte ## points de chakra"
+    kamiSusanoo:
+        nom: "Compassion de Susanoo"
+        effect: "Ajout de ## points de vie"
+        rayon: "Couvre une sphère de ##m. de diamètre"
+        temps: "Dure ##s."
+        distance: "Peut être lancé jusqu'à ##m."
+        chakra: "Coûte ## points de chakra"
+    kamiKagutsuchi:
+        nom: "Colère de Kagutsuchi"
+        effect: "Dégâts augmentés de ##% sur 20s."
+        rayon: "Couvre une sphère de ##m. de diamètre"
+        temps: "Dure ##s."
+        distance: "Peut être lancé jusqu'à ##m."
+        chakra: "Coûte ## points de chakra"
     course: '{0,1}course|]1,+Inf]courses'
     assassinat: '{0,1}assassinat|]1,+Inf]assassinats'

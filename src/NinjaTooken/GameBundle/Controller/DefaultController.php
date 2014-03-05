@@ -220,9 +220,62 @@ class DefaultController extends Controller
                     'chakra' => $translator->trans('game.kusanagi.chakra', array(), 'common')
                 ),
                 'current' => $ninja?$ninja->getJutsuKusanagi():0
+            ),
+            'kamiRaijin'  => array(
+                'nom' => $translator->trans('game.kamiRaijin.nom', array(), 'common'),
+                'values' => array(
+                    'effect' => $translator->trans('game.kamiRaijin.effect', array(), 'common'),
+                    'rayon' => $translator->trans('game.kamiRaijin.rayon', array(), 'common'),
+                    'temps' => $translator->trans('game.kamiRaijin.temps', array(), 'common'),
+                    'distance' => $translator->trans('game.kamiRaijin.distance', array(), 'common'),
+                    'chakra' => $translator->trans('game.kamiRaijin.chakra', array(), 'common')
+                ),
+                'current' => $ninja?$ninja->getJutsuRaijin():0
+            ),
+            'kamiSarutahiko'  => array(
+                'nom' => $translator->trans('game.kamiSarutahiko.nom', array(), 'common'),
+                'values' => array(
+                    'effect' => $translator->trans('game.kamiSarutahiko.effect', array(), 'common'),
+                    'rayon' => $translator->trans('game.kamiSarutahiko.rayon', array(), 'common'),
+                    'temps' => $translator->trans('game.kamiSarutahiko.temps', array(), 'common'),
+                    'distance' => $translator->trans('game.kamiSarutahiko.distance', array(), 'common'),
+                    'chakra' => $translator->trans('game.kamiSarutahiko.chakra', array(), 'common')
+                ),
+                'current' => $ninja?$ninja->getJutsuSarutahiko():0
+            ),
+            'kamiFujin'  => array(
+                'nom' => $translator->trans('game.kamiFujin.nom', array(), 'common'),
+                'values' => array(
+                    'rayon' => $translator->trans('game.kamiFujin.rayon', array(), 'common'),
+                    'temps' => $translator->trans('game.kamiFujin.temps', array(), 'common'),
+                    'distance' => $translator->trans('game.kamiFujin.distance', array(), 'common'),
+                    'chakra' => $translator->trans('game.kamiFujin.chakra', array(), 'common')
+                ),
+                'current' => $ninja?$ninja->getJutsuFujin():0
+            ),
+            'kamiSusanoo'  => array(
+                'nom' => $translator->trans('game.kamiSusanoo.nom', array(), 'common'),
+                'values' => array(
+                    'effect' => $translator->trans('game.kamiSusanoo.effect', array(), 'common'),
+                    'rayon' => $translator->trans('game.kamiSusanoo.rayon', array(), 'common'),
+                    'temps' => $translator->trans('game.kamiSusanoo.temps', array(), 'common'),
+                    'distance' => $translator->trans('game.kamiSusanoo.distance', array(), 'common'),
+                    'chakra' => $translator->trans('game.kamiSusanoo.chakra', array(), 'common')
+                ),
+                'current' => $ninja?$ninja->getJutsuSusanoo():0
+            ),
+            'kamiKagutsuchi'  => array(
+                'nom' => $translator->trans('game.kamiKagutsuchi.nom', array(), 'common'),
+                'values' => array(
+                    'effect' => $translator->trans('game.kamiKagutsuchi.effect', array(), 'common'),
+                    'rayon' => $translator->trans('game.kamiKagutsuchi.rayon', array(), 'common'),
+                    'temps' => $translator->trans('game.kamiKagutsuchi.temps', array(), 'common'),
+                    'distance' => $translator->trans('game.kamiKagutsuchi.distance', array(), 'common'),
+                    'chakra' => $translator->trans('game.kamiKagutsuchi.chakra', array(), 'common')
+                ),
+                'current' => $ninja?$ninja->getJutsuKagutsuchi():0
             )
         );
-
         $dom = $gameData->getDocument();
 
         $levelUp = array();
