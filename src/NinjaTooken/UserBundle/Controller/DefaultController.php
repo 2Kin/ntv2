@@ -123,14 +123,15 @@ class DefaultController extends Controller
         $num = $this->container->getParameter('numReponse');
         $page = max(1, $page);
 
-        $friends = $this->getDoctrine()->getManager()
-            ->getRepository('NinjaTookenUserBundle:Friend')
-            ->getFriends($user, $num, $page);
+        
+        $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Friend');
+
+        $friends = $repo->getFriends($user, $num, $page);
 
         return $this->render('NinjaTookenUserBundle:Default:fiche.html.twig', array(
             'friends' => $friends,
             'page' => $page,
-            'nombrePage' => ceil(count($friends)/$num),
+            'nombrePage' => ceil($repo->getNumFriends($user)/$num),
             'user' => $user
         ));
     }
@@ -601,7 +602,7 @@ class DefaultController extends Controller
                 'numBlocked' => $repo->getNumBlocked($user),
                 'numDemande' => $repo->getNumDemandes($user),
                 'page' => $page,
-                'nombrePage' => ceil(count($friends)/$num)
+                'nombrePage' => ceil($numFriends/$num)
             ));
         }
         return $this->redirect($this->generateUrl('fos_user_security_login'));

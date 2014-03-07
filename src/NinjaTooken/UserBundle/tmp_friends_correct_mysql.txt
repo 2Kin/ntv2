@@ -1,0 +1,8 @@
+INSERT INTO nt_friend (user_id, friend_id, is_blocked, is_confirmed, date_ajout)
+SELECT nf.friend_id as user_id, nf.user_id as friend_id, nf.is_blocked, nf.is_confirmed, nf.date_ajout
+FROM nt_friend as nf 
+WHERE nf.is_confirmed=1 AND NOT EXISTS (select 1 from nt_friend as nft where nft.friend_id = nf.user_id AND nft.user_id = nf.friend_id);
+
+CREATE TABLE nt_friend_d AS SELECT * FROM nt_friend GROUP BY user_id, friend_id;
+DROP TABLE nt_friend;
+RENAME TABLE nt_friend_d TO nt_friend;
