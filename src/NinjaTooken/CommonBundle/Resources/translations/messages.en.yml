@@ -279,7 +279,7 @@ guide:
                 nom: Explosion
                 description: |
                     The explosion is the most powerful common jutsu. To call the elemental forces, a short incantation time is necessary, allowing your targets to escape the effect area. If it’s not the case, they will be caught in a sphere of chakra coming from your ninja. It’s highly inadvisable to stay in the effect area of an explosion! If you plan to use it, you must foresee a good dose of chakra because if the explosion is very powerful, it also consumes a high amount of chakra.<br>
-                    Improvement according to the jutsu points affected: higher damages and diameter, but increased chakra consumption.
+                    Improvement according to the jutsu points affected: higher damages, diameter, last longer, but increased chakra consumption.
             sousPartie8:
                 nom: Protective chakra
                 description: |
@@ -314,7 +314,8 @@ guide:
                 sousPartie3:
                     nom: Kagutsuchi's Anger
                     description: |
-                        text.
+                        Invoke the power of the kami Kagutsuchi. On a given area and during several seconds, the Katon's users and allies of the launcher, have their weapons ignite.<br>
+                        Improvement according to the jutsu points affected:: higher radius, distance from launch, duration, and damages inflicted by fire increase, accordingly to the chakra consumption.
             sousPartie2:
                 nom: Suiton, the water
                 sousPartie1:
@@ -331,7 +332,8 @@ guide:
                 sousPartie3:
                     nom: Susanoo's Compassion
                     description: |
-                        text.
+                        Invoke the power of the kami Susanoo. On a given area and during several seconds, the Suiton's users and allies of the launcher, gain life.<br>
+                        Improvement according to the jutsu points affected:: higher radius, distance from launch, duration, and life gained, but increased chakra consumption.
             sousPartie3:
                 nom: Futon, the wind
                 sousPartie1:
@@ -348,7 +350,8 @@ guide:
                 sousPartie3:
                     nom: Fujin's Sigh
                     description: |
-                        text.
+                        Invoke the power of the kami Fujin. On a given area and during several seconds, the Futon's non-users and ennemies of the launcher, have their sight obscured by a thick cloud of smoke.<br>
+                        Improvement according to the jutsu points affected:: higher radius, distance from launch, and duration but increased chakra consumption.
             sousPartie4:
                 nom: Doton, the earth
                 sousPartie1:
@@ -365,7 +368,8 @@ guide:
                 sousPartie3:
                     nom: Sarutahiko's Mockery
                     description: |
-                        text.
+                        Invoke the power of the kami Sarutahiko. On a given area and during several seconds, the Doton's non-users and ennemies of the launcher, have their movement speed decreased. <br>
+                        Improvement according to the jutsu points affected:: higher radius, distance from launch, duration, and speed malus but increased chakra consumption.
             sousPartie5:
                 nom: Raiton, the lightning
                 sousPartie1:
@@ -381,7 +385,8 @@ guide:
                 sousPartie3:
                     nom: Raijin's Drum
                     description: |
-                        text.
+                        Invoke the power of the kami Raijin. On a given area and during several seconds, the Raiton's users and allies of the launcher, have their movement speed increased. <br>
+                        Improvement according to the jutsu points affected:: higher radius, distance from launch, duration, and speed bonus but increased chakra consumption.
         sousPartie7:
             nom: Weapons
             description: |

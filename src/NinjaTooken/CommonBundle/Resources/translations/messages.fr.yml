@@ -281,7 +281,7 @@ guide:
                 nom: Déflagration
                 description: |
                     La déflagration est un jutsu à la fois défensif et hostile. En plus d’infliger des dégâts importants aux ennemis se trouvant dans l’air d’effet, elle les repousse, annule les armes de jets, et ralenti les boules d’énergie. Mais si tu comptes l'utiliser, il te faux prévoir une bonne dose de chakra... car si la déflagration est très puissante, elle consomme également énormément de chakra.<br>
-                    Amélioration en fonction des points de chakra affectés : Les dégâts, la portée et la consommation de chakra augmentent.
+                    Amélioration en fonction des points de chakra affectés : Les dégâts, la portée, la durée, et la consommation de chakra augmentent.
             sousPartie8:
                 nom: Chakra de vie
                 description: |
@@ -315,7 +315,8 @@ guide:
                 sousPartie3:
                     nom: Colère de Kagutsuchi
                     description: |
-                        Enflamme les armes du lanceur et des alliés (dégâts prolongés dans le temps).
+                        Invoque la puissance du kami Kagutsuchi. Sur une zone donnée et pendant un certain temps, les utilisateurs Katon et les alliés du lanceur, ont leurs armes qui s'enflamment. Les dégâts infligés seront ainsi prolongés dans le temps.<br>
+                        Amélioration en fonction des points de jutsu affectés : Le rayon, la distance de lancement, la durée d'apparition, et les dégâts de brulure augmentent, ainsi que le coût en chakra.
             sousPartie2:
                 nom: Suiton, l'eau
                 sousPartie1:
@@ -332,7 +333,8 @@ guide:
                 sousPartie3:
                     nom: Compassion de Susanoo
                     description: |
-                        Se soigne ainsi que les alliés.
+                        Invoque la puissance du kami Susanoo. Sur une zone donnée et pendant un certain temps, les utilisateurs Suiton et les alliés du lanceur, récupèrent de la vie.<br>
+                        Amélioration en fonction des points de jutsu affectés : Le rayon, la distance de lancement, la durée d'apparition, et les points de vie récupérés augmentent, ainsi que le coût en chakra.
             sousPartie3:
                 nom: Futon, l'air
                 sousPartie1:
@@ -349,7 +351,8 @@ guide:
                 sousPartie3:
                     nom: Soupir de Fujin
                     description: |
-                        Créé une zone embrumée pour se cacher (lanceur et alliés voient à travers).
+                        Invoque la puissance du kami Fujin. Sur une zone donnée et pendant un certain temps, les non-utilisateurs Futon et les ennemis du lanceur, ont leur vue masquée par un épais nuage de fumée.<br>
+                        Amélioration en fonction des points de jutsu affectés : Le rayon, la distance de lancement, et la durée d'apparition augmentent, ainsi que le coût en chakra.
             sousPartie4:
                 nom: Doton, la terre
                 sousPartie1:
@@ -366,7 +369,8 @@ guide:
                 sousPartie3:
                     nom: Moquerie de Sarutahiko
                     description: |
-                        Diminue la vitesse de déplacement des ennemis.
+                        Invoque la puissance du kami Sarutahiko. Sur une zone donnée et pendant un certain temps, les non-utilisateurs Doton et les ennemis du lanceur, ont leur vitesse de déplacement réduite.<br>
+                        Amélioration en fonction des points de jutsu affectés : Le rayon, la distance de lancement, la durée d'apparition, et le malus de vitesse augmentent, ainsi que le coût en chakra.
             sousPartie5:
                 nom: Raiton, la foudre
                 sousPartie1:
@@ -382,7 +386,8 @@ guide:
                 sousPartie3:
                     nom: Tambour de Raijin
                     description: |
-                        Texte
+                        Invoque la puissance du kami Raijin. Sur une zone donnée et pendant un certain temps, les utilisateurs Raiton et les alliés du lanceur, ont leur vitesse de déplacement augmentée.<br>
+                        Amélioration en fonction des points de jutsu affectés : Le rayon, la distance de lancement, la durée d'apparition, et le bonus de vitesse augmentent, ainsi que le coût en chakra.
         sousPartie7:
             nom: Armes
             description: |
