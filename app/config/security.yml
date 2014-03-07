@@ -140,7 +140,9 @@ security:
                 lifetime: 31536000 # 365 days in seconds
                 path:     /
                 domain:   ~
-
+                user_providers: [fos_userbundle]
+                always_remember_me: false
+                remember_me_parameter: _remember_me
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false

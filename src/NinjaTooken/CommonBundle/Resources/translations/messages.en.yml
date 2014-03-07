@@ -279,7 +279,7 @@ guide:
                 nom: Explosion
                 description: |
                     The explosion is the most powerful common jutsu. To call the elemental forces, a short incantation time is necessary, allowing your targets to escape the effect area. If it’s not the case, they will be caught in a sphere of chakra coming from your ninja. It’s highly inadvisable to stay in the effect area of an explosion! If you plan to use it, you must foresee a good dose of chakra because if the explosion is very powerful, it also consumes a high amount of chakra.<br>
-                    Improvement according to the jutsu points affected: higher damages and diameter, but increased chakra consumption.
+                    Improvement according to the jutsu points affected: higher damages, diameter, last longer, but increased chakra consumption.
             sousPartie8:
                 nom: Protective chakra
                 description: |
@@ -311,6 +311,11 @@ guide:
                         This attack allows your ninja to send the spirit of fire in front of him. Once the spirit hits the ground, an enormous explosion occurs, seriously burning the enemies taken in the elemental fury.<br>
                         Improvement according to the jutsu points affected: bigger effect area and higher damages and range, but increased chakra consumption.<br>
                         <strong>To use this jutsu, your ninja must be going berserk. It occurs when you’ve lost 50% of your maximum health points !</strong>
+                sousPartie3:
+                    nom: Kagutsuchi's Anger
+                    description: |
+                        Invoke the power of the kami Kagutsuchi. On a given area and during several seconds, the Katon's users and allies of the launcher, have their weapons ignite.<br>
+                        Improvement according to the jutsu points affected:: higher radius, distance from launch, duration, and damages inflicted by fire increase, accordingly to the chakra consumption.
             sousPartie2:
                 nom: Suiton, the water
                 sousPartie1:
@@ -324,6 +329,11 @@ guide:
                         Call upon the devastating power of the aqueous spirits from a zone on the ground. Once invocated, the wave follows the ground on a linear trajectory and deals important damages to all the wet enemies.<br>
                         Improvement according to the jutsu points affected: bigger effect area and higher damages and range, but increased chakra consumption.<br>
                         <strong>To use this jutsu, your ninja must be going berserk. It occurs when you’ve lost 50% of your maximum health points !</strong>
+                sousPartie3:
+                    nom: Susanoo's Compassion
+                    description: |
+                        Invoke the power of the kami Susanoo. On a given area and during several seconds, the Suiton's users and allies of the launcher, gain life.<br>
+                        Improvement according to the jutsu points affected:: higher radius, distance from launch, duration, and life gained, but increased chakra consumption.
             sousPartie3:
                 nom: Futon, the wind
                 sousPartie1:
@@ -337,6 +347,11 @@ guide:
                         Release the power of the wind during a limited moment. From your ninja to the targeted zone, the tornado moves in spiral and deals big damages to all the enemies nearby.<br>
                         Improvement according to the jutsu points affected: bigger effect area and higher damages and range, but increased chakra consumption and invocation time.<br>
                         <strong>To use this jutsu, your ninja must be going berserk. It occurs when you’ve lost 50% of your maximum health points !</strong>
+                sousPartie3:
+                    nom: Fujin's Sigh
+                    description: |
+                        Invoke the power of the kami Fujin. On a given area and during several seconds, the Futon's non-users and ennemies of the launcher, have their sight obscured by a thick cloud of smoke.<br>
+                        Improvement according to the jutsu points affected:: higher radius, distance from launch, and duration but increased chakra consumption.
             sousPartie4:
                 nom: Doton, the earth
                 sousPartie1:
@@ -350,6 +365,11 @@ guide:
                         Call upon the power of the earth from a zone. Once called, thorns appear from the earth and come to impale the enemies dealing them important damages.<br>
                         Improvement according to the jutsu points affected: higher damages, range and thorns number, but increased chakra consumption.<br>
                         <strong>To use this jutsu, your ninja must be going berserk. It occurs when you’ve lost 50% of your maximum health points !</strong>
+                sousPartie3:
+                    nom: Sarutahiko's Mockery
+                    description: |
+                        Invoke the power of the kami Sarutahiko. On a given area and during several seconds, the Doton's non-users and ennemies of the launcher, have their movement speed decreased. <br>
+                        Improvement according to the jutsu points affected:: higher radius, distance from launch, duration, and speed malus but increased chakra consumption.
             sousPartie5:
                 nom: Raiton, the lightning
                 sousPartie1:
@@ -362,6 +382,11 @@ guide:
                     description: |
                         Call the powers of celerity. Once called, the lightning transports the ninja towards this area with a surprising speed in exchange for a few health points.<br>
                         Improvement according to the jutsu points affected: higher teleportation distance, but also higher health points required.
+                sousPartie3:
+                    nom: Raijin's Drum
+                    description: |
+                        Invoke the power of the kami Raijin. On a given area and during several seconds, the Raiton's users and allies of the launcher, have their movement speed increased. <br>
+                        Improvement according to the jutsu points affected:: higher radius, distance from launch, duration, and speed bonus but increased chakra consumption.
         sousPartie7:
             nom: Weapons
             description: |
@@ -412,17 +437,17 @@ guide:
                 nom: Principle of the oppositions of classes
                 description: |
                     Each classes is dominant on another one. It means that a ninja will deal more damages to an opposite class ninja.<br>
-                    For example a Suiton ninja will deal 10% more damage to a Katon ninja. But the ninja Katon will also make that rate of damage to a Futon ninja. Here is a graph illustrating the ascendancies :<br>
+                    For example a Suiton ninja will deal 20% more damage to a Katon ninja. But the ninja Katon will also make that rate of damage to a Futon ninja. Here is a graph illustrating the ascendancies :<br>
                     <br>
                     Do not forget that you can see the percentages of ninja of every class at the homepage bottom. Choose wisely your class according to the classes already present in the game. If there is 50% of Doton ninjas, you’d rather choose Raiton !<br>
                     <br><br>
                     As said in the introduction, each class have two specific jutsus. These jutsus are probably going to determine your class choice.
                 description2: |
-                    <strong>Suiton</strong> : Walk on water, Tsunami<br>
-                    <strong>Futon</strong> : Invisibility, Tornado<br>
-                    <strong>Katon</strong> : Fire defence, Phoenix<br>
-                    <strong>Raiton</strong> : Multishot, Teleportation<br>
-                    <strong>Doton</strong> : Metamorphosis, Thorns of rock<br>
+                    <strong>Suiton</strong> : Walk on water, Tsunami, Susanoo's Compassion<br>
+                    <strong>Futon</strong> : Invisibility, Tornado, Fujin's Sigh<br>
+                    <strong>Katon</strong> : Fire defence, Phoenix, Kagutsuchi's Anger<br>
+                    <strong>Raiton</strong> : Multishot, Teleportation, Raijin's Drum<br>
+                    <strong>Doton</strong> : Metamorphosis, Thorns of rock, Sarutahiko's Mockery<br>
                     <br>
                     Go to the <a href="#jutsu" title="Jutsus">jutsus</a> part of the manual, to learn more.
     partie3:

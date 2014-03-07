@@ -47,7 +47,7 @@ class Comment
     /**
     * Author of the comment
     *
-    * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+    * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", fetch="EAGER")
     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
     * @var User
     */

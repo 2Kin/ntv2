@@ -17,3 +17,5 @@
 install.bat
 web/pack-webmaster/*
 web/standalone/*
+spool/*
+app/Resources/node_modules/*

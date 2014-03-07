@@ -85,7 +85,7 @@ mail:
             sujet: Re : Proposition de recrutement
             contenu: Acceptée !!
 forum:
-    numThread: %count% topic|]1,+Inf]%count% topics
+    numThread: %count% topic|%count% topics
     newThread: Nouveau topic
     noThread: Pas de topic pour le moment.
 label:

@@ -1,6 +1,7 @@
 {% extends '::mail.html.twig' %}
 
 {% block content %}
-{{ 'mail.newMessage'|trans({'%utilisateur%': user.username}) }} :<hr/>
-{{ message.content|raw|purify('medium') }}
+<em>{{ 'mail.newMessage'|trans({'%utilisateur%': user.username}) }}</em><br>
+<strong>{{ message.nom|raw|purify('min') }}<strong><br><br>
+{{ message.content|raw|purify('full') }}
 {% endblock %}

@@ -94,6 +94,8 @@ assetic:
 #            jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
 #        yui_js:
 #            jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
+#        uglifyjs2:
+#            bin: %kernel.root_dir%/Resources/node_modules/uglify-js/bin/uglifyjs
 
 # Doctrine Configuration
 doctrine:
@@ -132,11 +134,10 @@ exercise_html_purifier:
         HTML.Doctype: 'XHTML 1.0 Transitional'
         HTML.DefinitionID: 'enduser-customize.html ninjatooken'
         HTML.DefinitionRev: 1
-        HTML.Allowed: 'h3[style|align],h4[style|align],h5[style|align],h6[style|align],p[style|align],span[style|align],ul,li[style|align],a[href|target],strong,b,em,i,u,strike,br,img[src|width|height|alt|align],legend,fieldset,object[width|height|codebase|classid],param[name|value],embed[type|width|height|src],iframe[frameborder|marginheight|marginwidth|scrolling|src|height|width|type],font[face|size|color]'
+        HTML.Allowed: 'h3[style|align],h4[style|align],h5[style|align],h6[style|align],p[style|align],span[style|align],ul,li[style|align],a[href|target],strong,b,em,i,u,strike,br,img[src|width|height|alt|align],legend,fieldset,object[width|height|codebase|classid],param[name|value],embed[type|width|height|src],iframe[frameborder|marginheight|marginwidth|scrolling|src|height|width],font[face|size|color]'
         HTML.TargetBlank: true
         AutoFormat.Linkify: true
         CSS.AllowedProperties:  'text-decoration,text-align,color,font,font-family,font-size,font-style,font-weight,float,clear'
-        HTML.AllowedAttributes: 'id,align,src,href,width,height,title,name,value,type,target,face,size,color,alt,frameborder,marginheight,marginwidth,scrolling,src'
         HTML.SafeObject: true
         HTML.SafeEmbed: true
         Output.FlashCompat: true
@@ -243,6 +244,10 @@ sonata_user:
             handler:            sonata.user.profile.form.handler.default
             name:               sonata_user_profile_form
             validation_groups:  [Profile]
+        register:
+            confirm:
+                redirect:
+                    route: false
 
 sonata_admin:
     security:

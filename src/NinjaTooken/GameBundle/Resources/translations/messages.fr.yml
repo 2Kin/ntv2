@@ -4,6 +4,10 @@ filtre:
         assassinat: Assassinat
         course: Course
         tous: Tous
+nouvelAmi:
+    title: Nouvel ami !
+    description: |
+        J'ai bien aimé t'affronter, et je ne serais pas contre renouveller l'expérience !
 action:
     partieToute: Toutes les parties
 keywords:
@@ -39,6 +43,9 @@ ninjatooken:
         tournoi: vainqueur le <a href="%urlMessage%?ID=302936">27 octobre 2013</a>
     ancien: Les anciens NinjaTooken :
     ancienListe:
+        winner14:
+            utilisateur: <a href="/fr/fiche/delton">-Delton-</a>
+            tournoi: vainqueur le <a href="%urlMessage%?ID=272352">12 mai 2013</a>, et <a href="%urlMessage%?ID=290784">18 août 2013</a></span>
         winner13:
             utilisateur: <a href="%urlUtilisateur%?ID=36758">Pein-rikoudu</a>, <a href="%urlUtilisateur%?ID=66114">Horoshimaru</a> et <a href="%urlUtilisateur%?ID=107657">Suikeii</a>
             tournoi: vainqueurs le <a href="%urlMessage%?ID=245781">10 février 2013</a>

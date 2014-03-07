@@ -1,0 +1,22 @@
+{% import "avatar.html.twig" as avatar %}
+			{% if lasts is not empty %}
+						<section>
+							<h4>{{ 'titre.dernierMessage'|trans }}</h4>
+			{% for last in lasts %}
+							<div class="dernier" itemscope itemtype="http://schema.org/UserComments">
+								<span itemprop="creator" itemscope itemtype="http://schema.org/Person">
+									<img src="{{ avatar.getUrl(last.author) }}" itemprop="image" class="pull-left" alt="">
+									<a href="{{ path('ninja_tooken_user_fiche', {user_nom:last.author.slug}) }}" rel="author" itemprop="url">
+										<span itemprop="name">{{ last.author.username }}</span>
+									</a>
+								</span>
+								<time itemprop="startDate" datetime="{{ last.dateAjout|date("Y-m-d\\TH:i:sP") }}">{{ 'description.datetime'|trans({'%date%': last.dateAjout|localizeddate('medium', 'none', app.request.locale), '%time%': last.dateAjout|localizeddate('none', 'short', app.request.locale)}, 'common') }}</time><br>
+								{% if last.slug is defined %}
+								<h5><a href="{{ path('ninja_tooken_thread', {forum_nom:last.forum.slug, thread_nom:last.slug}) }}" itemprop="replyToUrl"><span itemprop="name">{{ last.nom }}</span></a></h5>
+								{% else %}
+								<h5><a href="{{ path('ninja_tooken_thread', {forum_nom:last.thread.forum.slug, thread_nom:last.thread.slug}) }}" itemprop="replyToUrl"><span itemprop="name">{{ last.thread.nom }}</span></a></h5>
+								{% endif %}
+							</div>
+			{% endfor %}
+						</section>
+			{% endif %}

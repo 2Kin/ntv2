@@ -108,7 +108,7 @@
 										<time itemprop="commentTime" datetime="{{ comment.dateAjout|date("Y-m-d\\TH:i:sP") }}">{{ 'description.datetime'|trans({'%date%': comment.dateAjout|localizeddate('full', 'none', app.request.locale), '%time%': comment.dateAjout|localizeddate('none', 'short', app.request.locale)}, 'common') }}</time>
 									</header>
 									<div class="content clearfix" itemprop="commentText">
-										<p>{{ comment.body|raw|purify('full') }}</p>
+										{{ comment.body|raw|purify('full') }}
 									</div>
 									{% if thread.isCommentable == true or ROLE_ADMIN %}
 										<p class="clearfix">

@@ -239,7 +239,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
-            if($forum->getCanUserCreateThread() || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($this->globalRight($security, $user, $forum) || $forum->getCanUserCreateThread()){
                 $thread = new Thread();
                 $thread->setAuthor($user);
                 $thread->setForum($forum);
@@ -289,7 +289,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
-            if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($this->globalRight($security, $user, $forum) || $thread->getAuthor() == $user){
                 $form = $this->createForm(new ThreadType(), $thread);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
@@ -337,7 +337,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
-            if($security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($this->globalRight($security, $user, $forum)){
                 $em = $this->getDoctrine()->getManager();
                 $thread->setIsCommentable(
                     !$thread->getIsCommentable()
@@ -368,7 +368,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
-            if($security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($this->globalRight($security, $user, $forum)){
                 $em = $this->getDoctrine()->getManager();
                 $thread->setIsPostit(
                     !$thread->getIsPostit()
@@ -399,7 +399,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
-            if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($this->globalRight($security, $user, $forum) || $thread->getAuthor() == $user){
                 $isEvent = $thread->getIsEvent();
 
                 $em = $this->getDoctrine()->getManager();
@@ -442,7 +442,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
-            if($thread->getIsCommentable() || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($this->globalRight($security, $user, $forum) || $thread->getIsCommentable()){
                 $comment = new Comment();
                 $comment->setAuthor($user);
                 $comment->setThread($thread);
@@ -490,7 +490,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
-            if( ($thread->getIsCommentable() && $comment->getAuthor() == $user) || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($this->globalRight($security, $user, $forum) || ($thread->getIsCommentable() && $comment->getAuthor() == $user)){
                 $form = $this->createForm(new CommentType(), $comment);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
@@ -547,7 +547,7 @@ class DefaultController extends Controller
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
 
-            if( ($thread->getIsCommentable() && $comment->getAuthor() == $user) || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($this->globalRight($security, $user, $forum) || ($thread->getIsCommentable() && $comment->getAuthor() == $user)){
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($comment);
                 $em->flush();
@@ -567,8 +567,53 @@ class DefaultController extends Controller
 
     public function recentCommentsAction($max = 10, Forum $forum = null, User $user = null)
     {
+        $em = $this->getDoctrine()->getManager();
+        $lastComments = $em->getRepository('NinjaTookenForumBundle:Comment')->getRecentComments($forum, $user, $max);
         return $this->render('NinjaTookenForumBundle:Comments:recentList.html.twig', array(
-            'comments' => $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Comment')->getRecentComments($forum, $user, $max)
+            'comments' => $lastComments
         ));
+    }
+
+    public function recentThreadsAction($max = 10)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $conn = $em->getConnection();
+        $threadRepo = $em->getRepository('NinjaTookenForumBundle:Thread');
+        $commentRepo = $em->getRepository('NinjaTookenForumBundle:Comment');
+
+        $request = "(SELECT id, 'thread' as type, date_ajout FROM nt_thread ORDER BY date_ajout DESC LIMIT 0,10)".
+                   " UNION ".
+                   "(SELECT id, 'comment' as type, date_ajout FROM nt_comment ORDER BY date_ajout DESC LIMIT 0,10)".
+                   "ORDER BY date_ajout DESC LIMIT 0,10";
+        $stmt = $conn->prepare($request);
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+        $data = array();
+        foreach($results as $result){
+            if($result['type']=='thread')
+                $data[] = $threadRepo->findOneById($result['id']);
+            else
+                $data[] = $commentRepo->findOneById($result['id']);
+        }
+
+        return $this->render('NinjaTookenForumBundle:Lasts:recentList.html.twig', array(
+            'lasts' => $data
+        ));
+    }
+
+    public function globalRight($security=null, User $user=null, Forum $forum=null){
+        if($user && $security){
+            if($security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false)
+                return true;
+            if($forum){
+                $clan = $forum->getClan();
+                if($clan){
+                    $clanutilisateur = $user->getClan();
+                    if($clanutilisateur)
+                        return $clanutilisateur->getClan()==$clan && ($clanutilisateur->getCanEditClan() || $clanutilisateur->getDroit()==0);
+                }
+            }
+        }
+        return false;
     }
 }

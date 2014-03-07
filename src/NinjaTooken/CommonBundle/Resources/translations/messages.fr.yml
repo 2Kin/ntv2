@@ -281,7 +281,7 @@ guide:
                 nom: Déflagration
                 description: |
                     La déflagration est un jutsu à la fois défensif et hostile. En plus d’infliger des dégâts importants aux ennemis se trouvant dans l’air d’effet, elle les repousse, annule les armes de jets, et ralenti les boules d’énergie. Mais si tu comptes l'utiliser, il te faux prévoir une bonne dose de chakra... car si la déflagration est très puissante, elle consomme également énormément de chakra.<br>
-                    Amélioration en fonction des points de chakra affectés : Les dégâts, la portée et la consommation de chakra augmentent.
+                    Amélioration en fonction des points de chakra affectés : Les dégâts, la portée, la durée, et la consommation de chakra augmentent.
             sousPartie8:
                 nom: Chakra de vie
                 description: |
@@ -312,6 +312,11 @@ guide:
                         Cette attaque permet à ton ninja d'envoyer l'esprit du feu sur une zone du terrain ciblée. Une fois l'esprit arrivé à destination, une énorme explosion s'ensuit brulant gravement les ennemis pris dans la fureur élémentale.<br>
                         Amélioration en fonction des points de jutsu affectés : Les dégâts, la distance cible, et le rayon finale d'action augmentent (ainsi que le cout en chakra).<br>
                         <strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
+                sousPartie3:
+                    nom: Colère de Kagutsuchi
+                    description: |
+                        Invoque la puissance du kami Kagutsuchi. Sur une zone donnée et pendant un certain temps, les utilisateurs Katon et les alliés du lanceur, ont leurs armes qui s'enflamment. Les dégâts infligés seront ainsi prolongés dans le temps.<br>
+                        Amélioration en fonction des points de jutsu affectés : Le rayon, la distance de lancement, la durée d'apparition, et les dégâts de brulure augmentent, ainsi que le coût en chakra.
             sousPartie2:
                 nom: Suiton, l'eau
                 sousPartie1:
@@ -325,6 +330,11 @@ guide:
                         Invoque la puissance dévastatrice des esprits aqueux à partir d'une zone ciblée du terrain. Une fois invoquée, la vague suit le terrain sur une trajectoire rectiligne et inflige d'importants dégâts à tous les ennemis touchés.<br>
                         Amélioration en fonction des points de jutsu affectés : Augmente la durée du déplacement, la distance ciblée, les dégâts infligés et le coût en chakra.<br>
                         <strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
+                sousPartie3:
+                    nom: Compassion de Susanoo
+                    description: |
+                        Invoque la puissance du kami Susanoo. Sur une zone donnée et pendant un certain temps, les utilisateurs Suiton et les alliés du lanceur, récupèrent de la vie.<br>
+                        Amélioration en fonction des points de jutsu affectés : Le rayon, la distance de lancement, la durée d'apparition, et les points de vie récupérés augmentent, ainsi que le coût en chakra.
             sousPartie3:
                 nom: Futon, l'air
                 sousPartie1:
@@ -338,6 +348,11 @@ guide:
                         Déclenche la puissance versatile du vent durant un temps limitée. A partir de ton ninja et vers une zone ciblée du terrain, la tornade se déplace en spirale et inflige d'importants dégâts à tous les ennemis touchés.<br>
                         Amélioration en fonction des points de jutsu affectés : Augmente la distance ciblée, le temps d'invocation, les dégâts infligés et le coût en chakra.<br>
                         <strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
+                sousPartie3:
+                    nom: Soupir de Fujin
+                    description: |
+                        Invoque la puissance du kami Fujin. Sur une zone donnée et pendant un certain temps, les non-utilisateurs Futon et les ennemis du lanceur, ont leur vue masquée par un épais nuage de fumée.<br>
+                        Amélioration en fonction des points de jutsu affectés : Le rayon, la distance de lancement, et la durée d'apparition augmentent, ainsi que le coût en chakra.
             sousPartie4:
                 nom: Doton, la terre
                 sousPartie1:
@@ -351,6 +366,11 @@ guide:
                         Invoque la puissance de la terre, à partir d'une zone ciblée du terrain. Une fois invoqué, de nombreux pieux surgissent de la terre et viennent empaler les ennemis leur infligeant d'importants dégâts.<br>
                         Amélioration en fonction des points de jutsu affectés : Augmente la distance ciblée, le nombre de pieux, les dégâts infligés et le coût en chakra.<br>
                         <strong>Pour utiliser ce jutsu, il te faut rentrer dans une rage meurtrière. Cette rage se produit après avoir perdu 50% de ton total de vie !</strong>
+                sousPartie3:
+                    nom: Moquerie de Sarutahiko
+                    description: |
+                        Invoque la puissance du kami Sarutahiko. Sur une zone donnée et pendant un certain temps, les non-utilisateurs Doton et les ennemis du lanceur, ont leur vitesse de déplacement réduite.<br>
+                        Amélioration en fonction des points de jutsu affectés : Le rayon, la distance de lancement, la durée d'apparition, et le malus de vitesse augmentent, ainsi que le coût en chakra.
             sousPartie5:
                 nom: Raiton, la foudre
                 sousPartie1:
@@ -363,6 +383,11 @@ guide:
                     description: |
                         Appel les pouvoirs de célérité de la foudre du ninja vers une zone ciblée. Une fois invoquée, les élémentaires de la foudre transporte le ninja vers une zone ciblée à une vitesse hallucinante en échange d'un don de vie.<br>
                         Amélioration en fonction des points de jutsu affectés : La distance de téléportation et le cout en chakra augmentent avec le nombre de points de vie exigés.
+                sousPartie3:
+                    nom: Tambour de Raijin
+                    description: |
+                        Invoque la puissance du kami Raijin. Sur une zone donnée et pendant un certain temps, les utilisateurs Raiton et les alliés du lanceur, ont leur vitesse de déplacement augmentée.<br>
+                        Amélioration en fonction des points de jutsu affectés : Le rayon, la distance de lancement, la durée d'apparition, et le bonus de vitesse augmentent, ainsi que le coût en chakra.
         sousPartie7:
             nom: Armes
             description: |
@@ -412,18 +437,18 @@ guide:
                 nom: Principe des oppositions de classe
                 description: |
                     Chacune des 5 cinqs classes est prédominante sur une autre. Cela signifie qu'un ninja d'une classe prédominante sur une autre infligera plus de dégât à un ninja de cette classe.<br>
-                    Par exemple un ninja Suiton infligera 10% de dégâts de plus des dommages habituels à un ninja Katon. Mais le ninja Katon fera de même sur un ninja Futon. Voici un graphique illustrant la boucle des prédominances :<br>
+                    Par exemple un ninja Suiton infligera 20% de dégâts de plus des dommages habituels à un ninja Katon. Mais le ninja Katon fera de même sur un ninja Futon. Voici un graphique illustrant la boucle des prédominances :<br>
                     <br>
                     N'oublie pas que tu peux voir les pourcentages de ninja de chaque classe en bas de la <a href="{{ path('ninja_tooken_game_classement') }}">page classement</a>. Choisis intelligemment ta classe en fonction des classes présentes dans le jeu (si il y a 50% de ninjas dotons, choisis plutôt raiton !)<br>
                     <br>
                     <br>
                     Comme dit en introduction, chaque classe possède deux jutsus qui lui sont propres. Ces jutsus vont probablement déterminer ton choix de classe.
                 description2: |
-                    <strong>Suiton</strong> : Marcher sur l'eau, Vague<br>
-                    <strong>Futon</strong> : Transparence, Tornade<br>
-                    <strong>Katon</strong> : Protection contre le feu, Phoenix<br>
-                    <strong>Raiton</strong> : Multishoot, Téléportation<br>
-                    <strong>Doton</strong> : Métamorphose, Pics de roche<br>
+                    <strong>Suiton</strong> : Marcher sur l'eau, Vague, Compassion de Susanoo<br>
+                    <strong>Futon</strong> : Transparence, Tornade, Soupir de Fujin<br>
+                    <strong>Katon</strong> : Protection contre le feu, Phoenix, Colère de Kagutsuchi<br>
+                    <strong>Raiton</strong> : Multishoot, Téléportation, Tambour de Raijin<br>
+                    <strong>Doton</strong> : Métamorphose, Pics de roche, Moquerie de Sarutahiko<br>
                     <br>
                     Rendez-vous dans la partie <a href="#jutsu" alt="Jutsus" title="Jutsus">jutsus</a> pour en savoir plus.
     partie3:

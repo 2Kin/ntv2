@@ -181,24 +181,12 @@ $(document).ready(function(){
 			auto_focus : false,
 			inline: true,
 			// Theme options
-			toolbar : "styleselect | bold italic underline strikethrough forecolor | link unlink | alignleft aligncenter alignright alignjustify bullist | emoticons image nt_media",
+			toolbar : "bold italic underline strikethrough forecolor | link unlink | alignleft aligncenter alignright alignjustify bullist | emoticons image nt_media",
 			menubar : false,
 			statusbar : false,
 			tab_focus : ':prev,:next',
 			valid_elements : "@[id|class|title|style],span[data-mce-type|data-mce-style|align],a[href|target],legend,fieldset,img[src|alt|align|height|width],object[classid|width|height|codebase|*],param[name|value|_value],embed[type|width|height|src|*],iframe[type|width|height|src|frameborder|scrolling|marginheight|marginwidth|name|align],ul,li,ol,h3,h4,h5,h6,p[align],font[face|size|color],strong/b,em/i,u,strike,br",
-			language : 'fr_FR',
-			style_formats: [
-				{title: 'entête 1', block : 'h3'},
-				{title: 'entête 2', block : 'h4'},
-				{title: 'entête 3', block : 'h5'},
-				{title: 'entête 4', block : 'h6'}
-			],
-			formats : {
-				alignleft : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', attributes: {"align":  'left'}},
-				aligncenter : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', attributes: {"align":  'center'}},
-				alignright : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', attributes: {"align":  'right'}},
-				alignfull : {selector : 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table,img', attributes: {"align":  'justify'}}
-			}
+			language : 'fr_FR'
 		});
 	}
 
@@ -341,7 +329,9 @@ $(document).ready(function(){
 		_answers.each(function(){
 			var _this = $(this);
 			var _article = _this.closest('article');
+			var isFirst = true;
 			if(_article.length>0){
+				isFirst = _article.find('.content').length>1;
 				var _content = _article.find('.content').eq(0);
 				var _author = _article.find('.signature a[rel="author"] span').eq(0);
 			}
@@ -353,7 +343,7 @@ $(document).ready(function(){
 				// déplace le formulaire de réponse
 				_this.parent().after(_answer);
 				// ajoute la référence du message
-				tinymce.activeEditor.setContent(_article.length>0?'<fieldset><legend>'+_author.text()+'</legend>'+_content.html()+'</fieldset><p></p>':'');
+				tinymce.activeEditor.setContent(_article.length>0 && !isFirst?'<fieldset><legend>'+_author.text()+'</legend>'+$.truncate(_content.html(), {length: 200, words: true, noFieldset:true, ellipsis: ' [..]'})+'</fieldset><p></p>':'');
 				// affiche le formulaire de réponse
 				_answer.show();
 				// cache le bouton de réponse

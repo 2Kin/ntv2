@@ -330,6 +330,21 @@ nav, .footer footer{
 .transparence{
     background-image:url(../images/jutsus/transparence.png);
 }
+.fujin{
+    background-image:url(../images/jutsus/KamiFujin.png);
+}
+.raijin{
+    background-image:url(../images/jutsus/KamiRaijin.png);
+}
+.sarutahiko{
+    background-image:url(../images/jutsus/KamiSarutahiko.png);
+}
+.susanoo{
+    background-image:url(../images/jutsus/KamiSusanoo.png);
+}
+.kagutsuchi{
+    background-image:url(../images/jutsus/KamiKagutsuchi.png);
+}
 
 // le bandeau en haut de page
 .top{
@@ -956,7 +971,7 @@ header{
         &>div{
             margin-bottom:@baseLineHeight;
         }
-        h3{
+        &:not(#answer) h3{
             background-color:@gray;font-size:@fontSizeLarge;line-height:@fontSizeLarge;font-family:@headFontFamily;padding:6px 0 11px 20px;margin:0 0 20px;
         }
         .note, .warning{
@@ -1109,7 +1124,7 @@ header{
                     .box-sizing(border-box);.box-shadow(none);border:none;outline:none;background:none;padding:0;width:inherit;.transition(none);margin:-5px;
                 }
                 ul{
-                    position:absolute;left:0;top:28px;background:@white;color:@linkColor;display:none;width:auto;padding:0;
+                    position:absolute;left:0;top:28px;background:@white;color:@linkColor;display:none;width:auto;padding:0;z-index:10;
                     &.open{
                         display:block;
                         li.selected,

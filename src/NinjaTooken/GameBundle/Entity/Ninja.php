@@ -187,6 +187,41 @@ class Ninja
     /**
      * @var integer
      *
+     * @ORM\Column(name="jutsu_fujin", type="smallint")
+     */
+    private $jutsuFujin = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="jutsu_raijin", type="smallint")
+     */
+    private $jutsuRaijin = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="jutsu_sarutahiko", type="smallint")
+     */
+    private $jutsuSarutahiko = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="jutsu_susanoo", type="smallint")
+     */
+    private $jutsuSusanoo = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="jutsu_kagutsuchi", type="smallint")
+     */
+    private $jutsuKagutsuchi = 0;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="grade", type="smallint")
      */
     private $grade = 0;
@@ -1082,5 +1117,120 @@ class Ninja
     public function getAccomplissement()
     {
         return $this->accomplissement;
+    }
+
+    /**
+     * Set jutsuFujin
+     *
+     * @param integer $jutsuFujin
+     * @return Ninja
+     */
+    public function setJutsuFujin($jutsuFujin)
+    {
+        $this->jutsuFujin = $jutsuFujin;
+    
+        return $this;
+    }
+
+    /**
+     * Get jutsuFujin
+     *
+     * @return integer 
+     */
+    public function getJutsuFujin()
+    {
+        return $this->jutsuFujin;
+    }
+
+    /**
+     * Set jutsuRaijin
+     *
+     * @param integer $jutsuRaijin
+     * @return Ninja
+     */
+    public function setJutsuRaijin($jutsuRaijin)
+    {
+        $this->jutsuRaijin = $jutsuRaijin;
+    
+        return $this;
+    }
+
+    /**
+     * Get jutsuRaijin
+     *
+     * @return integer 
+     */
+    public function getJutsuRaijin()
+    {
+        return $this->jutsuRaijin;
+    }
+
+    /**
+     * Set jutsuSarutahiko
+     *
+     * @param integer $jutsuSarutahiko
+     * @return Ninja
+     */
+    public function setJutsuSarutahiko($jutsuSarutahiko)
+    {
+        $this->jutsuSarutahiko = $jutsuSarutahiko;
+    
+        return $this;
+    }
+
+    /**
+     * Get jutsuSarutahiko
+     *
+     * @return integer 
+     */
+    public function getJutsuSarutahiko()
+    {
+        return $this->jutsuSarutahiko;
+    }
+
+    /**
+     * Set jutsuSusanoo
+     *
+     * @param integer $jutsuSusanoo
+     * @return Ninja
+     */
+    public function setJutsuSusanoo($jutsuSusanoo)
+    {
+        $this->jutsuSusanoo = $jutsuSusanoo;
+    
+        return $this;
+    }
+
+    /**
+     * Get jutsuSusanoo
+     *
+     * @return integer 
+     */
+    public function getJutsuSusanoo()
+    {
+        return $this->jutsuSusanoo;
+    }
+
+    /**
+     * Set jutsuKagutsuchi
+     *
+     * @param integer $jutsuKagutsuchi
+     * @return Ninja
+     */
+    public function setJutsuKagutsuchi($jutsuKagutsuchi)
+    {
+        $this->jutsuKagutsuchi = $jutsuKagutsuchi;
+    
+        return $this;
+    }
+
+    /**
+     * Get jutsuKagutsuchi
+     *
+     * @return integer 
+     */
+    public function getJutsuKagutsuchi()
+    {
+        return $this->jutsuKagutsuchi;
     }
 }

@@ -11,6 +11,7 @@ use NinjaTooken\UserBundle\Entity\MessageUser;
 use NinjaTooken\UserBundle\Entity\Capture;
 use NinjaTooken\UserBundle\Entity\Ip;
 use NinjaTooken\GameBundle\Entity\Lobby;
+use NinjaTooken\GameBundle\Entity\Ninja;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
@@ -91,6 +92,11 @@ class UnityController extends Controller
                                         $ninja->setJutsuKusanagi(0);
                                         $ninja->setJutsuAcierRenforce(0);
                                         $ninja->setJutsuChakraVie(0);
+                                        $ninja->setJutsuFujin(0);
+                                        $ninja->setJutsuRaijin(0);
+                                        $ninja->setJutsuSarutahiko(0);
+                                        $ninja->setJutsuSusanoo(0);
+                                        $ninja->setJutsuKagutsuchi(0);
 
                                         $em->persist($ninja);
                                         $em->flush();
@@ -194,7 +200,7 @@ class UnityController extends Controller
                         $l = $request->get('l');
 						if($this->isCryptingOk($a.$l)){
 							$levels	= explode(":", $l);
-							if(count($levels)==22){
+							if(count($levels)==27){
                                 $gameData = $this->get('ninjatooken_game.gamedata');
                                 $doc = $gameData->getDocument();
 								$levelUp	= $doc->getElementsByTagName('levelUp')->item(0);
@@ -227,6 +233,10 @@ class UnityController extends Controller
 										$levels[15]	= 0;
 										$levels[17]	= 0;
 										$levels[18]	= 0;
+										$levels[22]	= 0;
+										$levels[23]	= 0;
+										$levels[25]	= 0;
+										$levels[26]	= 0;
 									}elseif($classe=="eau"){
 										$levels[10]	= 0;
 										$levels[11]	= 0;
@@ -236,6 +246,10 @@ class UnityController extends Controller
 										$levels[16]	= 0;
 										$levels[17]	= 0;
 										$levels[18]	= 0;
+										$levels[22]	= 0;
+										$levels[23]	= 0;
+										$levels[24]	= 0;
+										$levels[26]	= 0;
 									}elseif($classe=="feu"){
 										$levels[9]	= 0;
 										$levels[10]	= 0;
@@ -245,6 +259,10 @@ class UnityController extends Controller
 										$levels[16]	= 0;
 										$levels[17]	= 0;
 										$levels[18]	= 0;
+										$levels[22]	= 0;
+										$levels[23]	= 0;
+										$levels[24]	= 0;
+										$levels[25]	= 0;
 									}elseif($classe=="foudre"){
 										$levels[9]	= 0;
 										$levels[10]	= 0;
@@ -254,6 +272,10 @@ class UnityController extends Controller
 										$levels[15]	= 0;
 										$levels[16]	= 0;
 										$levels[18]	= 0;
+										$levels[22]	= 0;
+										$levels[24]	= 0;
+										$levels[25]	= 0;
+										$levels[26]	= 0;
 									}elseif($classe=="vent"){
 										$levels[9]	= 0;
 										$levels[10]	= 0;
@@ -263,6 +285,10 @@ class UnityController extends Controller
 										$levels[15]	= 0;
 										$levels[16]	= 0;
 										$levels[17]	= 0;
+										$levels[23]	= 0;
+										$levels[24]	= 0;
+										$levels[25]	= 0;
+										$levels[26]	= 0;
 									}
                                     $ninja->setAptitudeForce($levels[0]);
                                     $ninja->setAptitudeVitesse($levels[1]);
@@ -286,6 +312,11 @@ class UnityController extends Controller
                                     $ninja->setJutsuKusanagi(min(30, $levels[19]));
                                     $ninja->setJutsuAcierRenforce(min(30, $levels[20]));
                                     $ninja->setJutsuChakraVie(min(30, $levels[21]));
+                                    $ninja->setJutsuFujin(min(30, $levels[22]));
+                                    $ninja->setJutsuRaijin(min(30, $levels[23]));
+                                    $ninja->setJutsuSarutahiko(min(30, $levels[24]));
+                                    $ninja->setJutsuSusanoo(min(30, $levels[25]));
+                                    $ninja->setJutsuKagutsuchi(min(30, $levels[26]));
 
                                     $em->persist($ninja);
                                     $em->flush();
@@ -298,9 +329,10 @@ class UnityController extends Controller
                     case"t":
                         $t = $request->get('t');
                         $l = $request->get('l');
+                        $userCheck = null;
 						if($this->isCryptingOk($a.$t.$l)){
                             $levels	= explode(":", $t);
-                            if(count($levels)==23){
+                            if(count($levels)==28){
                                 $userCheck = $em->getRepository('NinjaTookenUserBundle:User')->findOneBy(array('id' => (int)$l));
                                 if($userCheck){
                                     $ninjaCheck = $userCheck->getNinja();
@@ -325,21 +357,25 @@ class UnityController extends Controller
                                         }
                                         $niveau		= $xpXML->item($k>0?$k-1:0)->getAttribute('niveau');
 
+                                        // évite d'enregistrer la valeur en bdd
+                                        $force      = $ninjaCheck->getAptitudeForce();
+                                        $marcherMur = $ninjaCheck->getJutsuMarcherMur();
+                                        $vitesse    = $ninjaCheck->getAptitudeVitesse();
                                         if($ninjaCheck->getMissionAssassinnat()>=25)
-                                            $ninjaCheck->setAptitudeForce($ninjaCheck->getAptitudeForce() + 5);
+                                            $force += 5;
                                         if($ninjaCheck->getMissionCourse()>=40){
-                                            $ninjaCheck->setAptitudeVitesse($ninjaCheck->getAptitudeVitesse() + 5);
-                                            $ninjaCheck->setJutsuMarcherMur($ninjaCheck->getJutsuMarcherMur() + 5);
+                                            $marcherMur += 5;
+                                            $vitesse += 5;
                                         }
 
-                                        if( $ninjaCheck->getAptitudeForce() == $levels[0] &&
-                                            $ninjaCheck->getAptitudeVitesse() == $levels[1] &&
+                                        if( $force == $levels[0] &&
+                                            $vitesse == $levels[1] &&
                                             $ninjaCheck->getAptitudeVie() == $levels[2] &&
                                             $ninjaCheck->getAptitudeChakra() == $levels[3] &&
                                             $ninjaCheck->getJutsuBoule() == $levels[4] &&
                                             $ninjaCheck->getJutsuDoubleSaut() == $levels[5] &&
                                             $ninjaCheck->getJutsuBouclier() == $levels[6] &&
-                                            $ninjaCheck->getJutsuMarcherMur() == $levels[7] &&
+                                            $marcherMur == $levels[7] &&
                                             $ninjaCheck->getJutsuDeflagration() == $levels[8] &&
                                             $ninjaCheck->getJutsuMarcherEau() == $levels[9] &&
                                             $ninjaCheck->getJutsuMetamorphose() == $levels[10] &&
@@ -354,7 +390,12 @@ class UnityController extends Controller
                                             $ninjaCheck->getJutsuKusanagi() == $levels[19] &&
                                             $ninjaCheck->getJutsuAcierRenforce() == $levels[20] &&
                                             $ninjaCheck->getJutsuChakraVie() == $levels[21] &&
-                                            $niveau == $levels[22]
+                                            $ninjaCheck->getJutsuFujin() == $levels[22] &&
+                                            $ninjaCheck->getJutsuRaijin() == $levels[23] &&
+                                            $ninjaCheck->getJutsuSarutahiko() == $levels[24] &&
+                                            $ninjaCheck->getJutsuSusanoo() == $levels[25] &&
+                                            $ninjaCheck->getJutsuKagutsuchi() == $levels[26] &&
+                                            $niveau == $levels[27]
                                         )
                                             $data	= '1';
                                     }
@@ -369,38 +410,56 @@ class UnityController extends Controller
                             }
                         }
 
-                        // check qu'un joueur avec multi-compte n'est pas déjà connecté dans une partie
-                        if($data=='1' && $this->idUtilisateur!=(int)$l){
-                            $ips = $userCheck->getIps();
-                            if(!empty($ips)){
-                                // la liste des ips connues de l'utilisateur à vérifier
-                                $ipsCompare = array();
-                                foreach($ips as $ip){
-                                    $ipsCompare[] = $ip->getIp();
-                                }
-                                // boucle sur les parties
-                                $lobbies = $em->getRepository('NinjaTookenGameBundle:Lobby')->findAll();
-                                if($lobbies){
-                                    foreach($lobbies as $lobby){
-                                        // les utilisateurs des parties
-                                        $users = $lobby->getUsers();
-                                        if($users){
-                                            foreach($users as $user){
-                                                // les ips des utilisateurs
-                                                $userIps = $user->getIps();
-                                                if($userIps){
-                                                    foreach($userIps as $ip){
-                                                        if(in_array($ip->getIp(), $ipsCompare)){
-                                                            $data = '0';
-                                                            break;
+                        if($userCheck){
+                            // check qu'un joueur avec multi-compte n'est pas déjà connecté dans une partie
+                            /*if($data=='1' && $this->idUtilisateur!=(int)$l){
+                                $ips = $userCheck->getIps();
+                                if(!empty($ips)){
+                                    // la liste des ips connues de l'utilisateur à vérifier
+                                    $ipsCompare = array();
+                                    foreach($ips as $ip){
+                                        $ipsCompare[] = $ip->getIp();
+                                    }
+                                    // boucle sur les parties
+                                    $lobbies = $em->getRepository('NinjaTookenGameBundle:Lobby')->findAll();
+                                    if($lobbies){
+                                        foreach($lobbies as $lobby){
+                                            // les utilisateurs des parties
+                                            $users = $lobby->getUsers();
+                                            if($users){
+                                                foreach($users as $user){
+                                                    // les ips des utilisateurs
+                                                    $userIps = $user->getIps();
+                                                    if($userIps){
+                                                        foreach($userIps as $ip){
+                                                            if(in_array($ip->getIp(), $ipsCompare)){
+                                                                $data = '0';
+                                                                break;
+                                                            }
                                                         }
                                                     }
+                                                    if($data=='0')break;
                                                 }
-                                                if($data=='0')break;
                                             }
+                                            if($data=='0')break;
                                         }
-                                        if($data=='0')break;
                                     }
+                                }
+                            }*/
+
+                            // enregistre dans le lobby
+                            if($data=='1'){
+                                $lobby = $em->getRepository('NinjaTookenGameBundle:Lobby')
+                                    ->createQueryBuilder('l')
+                                    ->where(':user MEMBER OF l.users')
+                                    ->setParameter('user', $user)
+                                    ->getQuery()
+                                    ->getOneOrNullResult();
+                                if($lobby){
+                                    $lobby->setDateUpdate(new \DateTime());
+                                    $lobby->addUser($userCheck);
+                                    $em->persist($lobby);
+                                    $em->flush();
                                 }
                             }
                         }
@@ -427,30 +486,27 @@ class UnityController extends Controller
 								if(!$already){
                                     // créé la liaison
                                     $friend = new Friend();
-                                    $friend->setUser($user);
-                                    $friend->setFriend($userFriend);
+                                    $friend->setUser($userFriend);
+                                    $friend->setFriend($user);
 
                                     $em->persist($friend);
 
                                     // créé le message
+                                    $translator = $this->get('translator');
                                     $message = new Message();
-                                    $message->setUser($user);
-                                    $message->setNom("nouvel ami");
-                                    $message->setContent("nouvel ami");
+                                    $message->setAuthor($user);
+                                    $message->setNom($translator->trans('nouvelAmi.title'));
+                                    $message->setContent($translator->trans('nouvelAmi.description'));
 
                                     // envoi au destinataire
                                     $messageUser = new MessageUser();
-                                    $messageUser->setUser($userFriend);
+                                    $messageUser->setDestinataire($userFriend);
                                     $messageUser->setMessage($message);
 
                                     $em->persist($message);
                                     $em->persist($messageUser);
 
                                     $em->flush();
-
-                                    if($userFriend->getReceiveAvertissement()){
-                                        // TODO :: envoi un mail d'avertissement
-                                    }
 								}
 								$data	= "1";
 							}
@@ -590,34 +646,38 @@ class UnityController extends Controller
 
                             // récupère les amis dans le lobby
                             $friends = $lobbyRepository->createQueryBuilder('l')
-                                ->select('l, f')
+                                ->select('l.partie', 'u.username')
                                 ->innerJoin('NinjaTookenUserBundle:Friend', 'f', 'WITH', 'f.friend MEMBER OF l.users')
+                                ->leftJoin('NinjaTookenUserBundle:User', 'u', 'WITH', 'f.friend = u')
                                 ->andWhere('f.user = :user')
                                 ->andWhere('f.isConfirmed = true')
                                 ->andWhere('f.isBlocked = false')
                                 ->setParameter('user', $user)
                                 ->setFirstResult(0)
                                 ->setMaxResults(100)
-                                ->getQuery()
-                                ->getResult();
-
+                                ->getQuery();
                             $content = '<'.'?xml version="1.0" encoding="UTF-8"?'.'>';
                             $content .= '<root>';
                             $content .= '<games>';
+                            $friends = $friends->getScalarResult();
                             if($friends){
                                 foreach($friends as $friend){
-                                    $content .= '<t game="'.addslashes($friend->partie).'"><![CDATA['.$friend->friend->getUsername().']]></t>';
+                                    $content .= '<t game="'.addslashes($friend['partie']).'"><![CDATA['.$friend['username'].']]></t>';
                                 }
                             }
                             $content .= '</games>';
                             $content .= '</root>';
 
-                            return new Response($content, 200, array('Content-Type' => 'text/xml'));
+                            $response = new Response($content, 200, array('Content-Type' => 'text/xml'));
+                            $response->headers->set('Notice', $session->getName()."=".$session->getId());
+                            return $response;
                         }
                         break;
                 }
             }
-            return new Response($data, 200, array('Content-Type' => 'text/plain'));
+            $response = new Response($data, 200, array('Content-Type' => 'text/plain'));
+            $response->headers->set('Notice', $session->getName()."=".$session->getId());
+            return $response;
         }
         return new Response("0", 200, array('Content-Type' => 'text/plain'));
     }
@@ -682,9 +742,9 @@ class UnityController extends Controller
 
             // l'avatar
             $avatar = $user->getAvatar();
-            if($user->getUseGravatar())
+            /*if($user->getUseGravatar())
                 $avatar = $this->get('gravatar.api')->getUrl($user->getEmail());
-            else{
+            else{*/
                 if(empty($avatar)){
                     if($user->getGender()=='m')
                         $avatar = $this->get('templating.helper.assets')->getUrl('bundles/ninjatookenuser/images/boyz.jpg');
@@ -692,7 +752,7 @@ class UnityController extends Controller
                         $avatar = $this->get('templating.helper.assets')->getUrl('bundles/ninjatookenuser/images/girlz.jpg');
                 }else
                     $avatar = $this->get('imagine.cache.path.resolver')->getBrowserPath('avatar/'.$avatar, 'avatar');
-            }
+            //}
 
             $content .= '<login avatar="'.$avatar.'" id="'.$user->getId().'" maxid="'.$maxid.'"><![CDATA['.$user->getUsername()."]]></login>";
 
@@ -728,7 +788,7 @@ class UnityController extends Controller
             if($user->getClan() !== null){
                 $clan = $user->getClan()->getClan()->getTag();
             }
-            $content .= '<params force="'.$ninja->getAptitudeForce().'" vitesse="'.$ninja->getAptitudeVitesse().'" vie="'.$ninja->getAptitudeVie().'" chakra="'.$ninja->getAptitudeChakra().'" experience="'.$ninja->getExperience().'" grade="'.$ninja->getGrade().'" bouleElementaire="'.$ninja->getJutsuBoule().'" doubleSaut="'.$ninja->getJutsuDoubleSaut().'" bouclierElementaire="'.$ninja->getJutsuBouclier().'" marcherMur="'.$ninja->getJutsuMarcherMur().'" deflagrationElementaire="'.$ninja->getJutsuDeflagration().'" marcherViteEau="'.$ninja->getJutsuMarcherEau().'" changerObjet="'.$ninja->getJutsuMetamorphose().'" multishoot="'.$ninja->getJutsuMultishoot().'" invisibleman="'.$ninja->getJutsuInvisibilite().'" resistanceExplosion="'.$ninja->getJutsuResistanceExplosion().'" phoenix="'.$ninja->getJutsuPhoenix().'" vague="'.$ninja->getJutsuVague().'" pieux="'.$ninja->getJutsuPieux().'" tornade="'.$ninja->getJutsuTornade().'" teleportation="'.$ninja->getJutsuTeleportation().'" kusanagi="'.$ninja->getJutsuKusanagi().'" acierRenforce="'.$ninja->getJutsuAcierRenforce().'" chakraVie="'.$ninja->getJutsuChakraVie().'" classe="'.$ninja->getClasse().'" masque="'.$ninja->getMasque().'" couleurMasque="'.$ninja->getMasqueCouleur().'" detailMasque="'.$ninja->getMasqueDetail().'" costume="'.$ninja->getCostume().'" couleurCostume="'.$ninja->getCostumeCouleur().'" detailCostume="'.$ninja->getCostumeDetail().'" assassinnat="'.$ninja->getMissionAssassinnat().'" course="'.$ninja->getMissionCourse().'" langue="'.$request->getLocale().'" accomplissement="'.$ninja->getAccomplissement().'" age="'.$age.'" sexe="'.($user->getGender()=='f'?'F':"H").'" roles="'.implode('-', $user->getRoles()).'" clan="'.$clan.'"/>';
+            $content .= '<params force="'.$ninja->getAptitudeForce().'" vitesse="'.$ninja->getAptitudeVitesse().'" vie="'.$ninja->getAptitudeVie().'" chakra="'.$ninja->getAptitudeChakra().'" experience="'.$ninja->getExperience().'" grade="'.$ninja->getGrade().'" bouleElementaire="'.$ninja->getJutsuBoule().'" doubleSaut="'.$ninja->getJutsuDoubleSaut().'" bouclierElementaire="'.$ninja->getJutsuBouclier().'" marcherMur="'.$ninja->getJutsuMarcherMur().'" deflagrationElementaire="'.$ninja->getJutsuDeflagration().'" marcherViteEau="'.$ninja->getJutsuMarcherEau().'" changerObjet="'.$ninja->getJutsuMetamorphose().'" multishoot="'.$ninja->getJutsuMultishoot().'" invisibleman="'.$ninja->getJutsuInvisibilite().'" resistanceExplosion="'.$ninja->getJutsuResistanceExplosion().'" phoenix="'.$ninja->getJutsuPhoenix().'" vague="'.$ninja->getJutsuVague().'" pieux="'.$ninja->getJutsuPieux().'" tornade="'.$ninja->getJutsuTornade().'" teleportation="'.$ninja->getJutsuTeleportation().'" kusanagi="'.$ninja->getJutsuKusanagi().'" acierRenforce="'.$ninja->getJutsuAcierRenforce().'" chakraVie="'.$ninja->getJutsuChakraVie().'" kamiRaijin="'.$ninja->getJutsuRaijin().'" kamiSarutahiko="'.$ninja->getJutsuSarutahiko().'" kamiFujin="'.$ninja->getJutsuFujin().'" kamiSusanoo="'.$ninja->getJutsuSusanoo().'" kamiKagutsuchi="'.$ninja->getJutsuKagutsuchi().'" classe="'.$ninja->getClasse().'" masque="'.$ninja->getMasque().'" couleurMasque="'.$ninja->getMasqueCouleur().'" detailMasque="'.$ninja->getMasqueDetail().'" costume="'.$ninja->getCostume().'" couleurCostume="'.$ninja->getCostumeCouleur().'" detailCostume="'.$ninja->getCostumeDetail().'" assassinnat="'.$ninja->getMissionAssassinnat().'" course="'.$ninja->getMissionCourse().'" langue="'.$request->getLocale().'" accomplissement="'.$ninja->getAccomplissement().'" age="'.$age.'" sexe="'.($user->getGender()=='f'?'F':"H").'" roles="'.implode('-', $user->getRoles()).'" clan="'.$clan.'"/>';
 
             // liste d'amis
             $friends = $em->getRepository('NinjaTookenUserBundle:Friend')->getFriends($user, 100, 0);
@@ -741,7 +801,7 @@ class UnityController extends Controller
         }else{
             if(!empty($visiteur)){
                 $content .= '<login avatar="" id="'.($maxid+date("Hms")).'" maxid="'.$maxid.'"><![CDATA[Visiteur_'.date("Hms").']]></login>';
-                $content .= '<params force="4" vitesse="3" vie="0" chakra="0" experience="0" grade="0" bouleElementaire="0" doubleSaut="0" bouclierElementaire="0" marcherMur="0" deflagrationElementaire="0" marcherViteEau="0" changerObjet="0" multishoot="0" invisibleman="0" resistanceExplosion="0" phoenix="0" vague="0" pieux="0" tornade="0" teleportation="0" kusanagi="0" acierRenforce="0" chakraVie="0" classe="" masque="0" couleurMasque="0" detailMasque="0" costume="0" couleurCostume="0" detailCostume="0" assassinnat="0" course="0" langue="'.$request->getLocale().'" accomplissement="0000000000000000000000000" age="10" sexe="H" roles="ROLE_USER" clan=""/>';
+                $content .= '<params force="4" vitesse="3" vie="0" chakra="0" experience="0" grade="0" bouleElementaire="0" doubleSaut="0" bouclierElementaire="0" marcherMur="0" deflagrationElementaire="0" marcherViteEau="0" changerObjet="0" multishoot="0" invisibleman="0" resistanceExplosion="0" phoenix="0" vague="0" pieux="0" tornade="0" teleportation="0" kusanagi="0" acierRenforce="0" chakraVie="0" kamiRaijin="0" kamiSarutahiko="0" kamiFujin="0" kamiSusanoo="0" kamiKagutsuchi="0" classe="" masque="0" couleurMasque="0" detailMasque="0" costume="0" couleurCostume="0" detailCostume="0" assassinnat="0" course="0" langue="'.$request->getLocale().'" accomplissement="0000000000000000000000000" age="10" sexe="H" roles="ROLE_USER" clan=""/>';
                 $retour	= '1';
             }
         }
@@ -761,8 +821,6 @@ class UnityController extends Controller
         $content .= "<retour>".$retour."</retour>";
         $content .= "</root>";
 
-
-        $session = $this->get('session');
         $response = new Response($content, 200, array('Content-Type' => 'text/xml'));
         $response->headers->set('Notice', $session->getName()."=".$session->getId());
 

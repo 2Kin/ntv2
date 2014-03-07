@@ -464,9 +464,12 @@ class DefaultController extends Controller
                     $extension = strtolower($file->guessExtension());
                     if(in_array($extension, array('jpeg','jpg','png','gif'))){
                         $user->file = $file;
-                        $cachedImage = dirname(__FILE__).'/../../../../web/cache/avatar/'.$user->getWebAvatar();
-                        if(file_exists($cachedImage)){
-                            unlink($cachedImage);
+                        $userWebAvatar = $user->getWebAvatar();
+                        if(isset($userWebAvatar) && !empty($userWebAvatar)){
+                            $cachedImage = dirname(__FILE__).'/../../../../web/cache/avatar/'.$userWebAvatar;
+                            if(file_exists($cachedImage)){
+                                unlink($cachedImage);
+                            }
                         }
                         $user->setAvatar('');
                     }
@@ -575,6 +578,7 @@ class DefaultController extends Controller
             // ré-affecte les derniers commentaires
             $conn->executeUpdate("UPDATE nt_thread as t LEFT JOIN (SELECT MAX(date_ajout) as lastAt, thread_id FROM nt_comment GROUP BY thread_id) c ON c.thread_id=t.id SET t.last_comment_at = c.lastAt");
             $conn->executeUpdate("UPDATE nt_thread as t LEFT JOIN (SELECT author_id as lastBy, thread_id, date_ajout FROM nt_comment as ct) c ON c.thread_id=t.id and c.date_ajout=t.last_comment_at SET t.lastCommentBy_id = c.lastBy");
+            $conn->executeUpdate("UPDATE nt_thread as t SET t.last_comment_at=t.date_ajout WHERE t.last_comment_at IS NULL");
 
             return $this->redirect($this->generateUrl('ninja_tooken_homepage'));
         }

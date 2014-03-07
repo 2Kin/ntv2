@@ -72,7 +72,7 @@ class Thread
      *
      * @var Forum
      *
-     * @ORM\ManyToOne(targetEntity="Forum")
+     * @ORM\ManyToOne(targetEntity="Forum", fetch="EAGER")
      * @ORM\JoinColumn(name="forum_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $forum;
@@ -117,7 +117,7 @@ class Thread
     /**
     * Author of the comment
     *
-    * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+    * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", fetch="EAGER")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
     * @var User
     */

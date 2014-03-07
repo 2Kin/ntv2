@@ -39,11 +39,11 @@ class CustomAJAXChat extends AJAXChat {
                 $userRole				= AJAX_CHAT_USER;
                 if(in_array('ROLE_ADMIN', $this->userData['userRole']) || in_array('ROLE_SUPER_ADMIN', $this->userData['userRole']))
                     $userRole	= AJAX_CHAT_ADMIN;
-                elseif(in_array('ROLE_MODERATOR', $this->userData['userRole']) || $userData['userID']==46909 || $userData['userID']==107657)
+                elseif(in_array('ROLE_MODERATOR', $this->userData['userRole']) || $userData['userID']==22405)
                     $userRole	= AJAX_CHAT_MODERATOR;
 
                 // SOXSOXSOX VEUT PAS ÊTRE MODO SUR LE CHAT
-                if($userData['userID']==9895)
+                if($userData['userID']==425)
                     $userRole				= AJAX_CHAT_USER;
 
                 $userData['userRole']	= $userRole;
