@@ -298,7 +298,7 @@ guide:
         sousPartie6:
             nom: Jutsus par classes
             description: |
-                Chacune des <a href="#classes">cinq classes</a> possède deux jutsus spéciaux.
+                Chacune des <a href="#classes">cinq classes</a> possède trois jutsus spéciaux.
             sousPartie1:
                 nom: Katon, le feu
                 sousPartie1:
