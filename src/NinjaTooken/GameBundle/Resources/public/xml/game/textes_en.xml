@@ -474,16 +474,16 @@ You can now use ##JUTSUS##. Enabling from "My Ninja" (main menu).]]></t>
 		<t><![CDATA[On]]></t>
 		<t><![CDATA[Off]]></t>
 		<t><![CDATA[Field Of View]]></t>
-		<t><![CDATA[Tambour de Raijin]]></t>
-		<t><![CDATA[Moquerie de Sarutahiko]]></t>
-		<t><![CDATA[Soupir de Fujin]]></t>
-		<t><![CDATA[Compassion de Susanoo]]></t>
-		<t><![CDATA[Colère de Kagutsuchi]]></t>
-		<t><![CDATA[Augmente la vitesse de déplacement du lanceur et des alliés.]]></t>
-		<t><![CDATA[Diminue la vitesse de déplacement des ennemis.]]></t>
-		<t><![CDATA[Créé une zone embrumée pour se cacher (lanceur et alliés voient à travers).]]></t>
-		<t><![CDATA[Se soigne ainsi que les alliés.]]></t>
-		<t><![CDATA[Enflamme les armes du lanceur et des alliés (dégâts prolongés dans le temps).]]></t>
+		<t><![CDATA[Raijin's Drum]]></t>
+		<t><![CDATA[Sarutahiko's Mockery]]></t>
+		<t><![CDATA[Fujin's Sigh]]></t>
+		<t><![CDATA[Susanoo's Compassion]]></t>
+		<t><![CDATA[Kagutsuchi's Anger]]></t>
+		<t><![CDATA[On a given area and during several seconds, the Raiton's users and allies of the launcher, have their movement speed increased.]]></t>
+		<t><![CDATA[On a given area and during several seconds, the Doton's non-users and ennemies of the launcher, have their movement speed decreased. ]]></t>
+		<t><![CDATA[On a given area and during several seconds, the Futon's non-users and ennemies of the launcher, have their sight obscured by a thick cloud of smoke.]]></t>
+		<t><![CDATA[On a given area and during several seconds, the Suiton's users and allies of the launcher, gain life.]]></t>
+		<t><![CDATA[On a given area and during several seconds, the Katon's users and allies of the launcher, have their weapons ignite.]]></t>
 		<t><![CDATA[##TOUCHE## : augmente la vitesse de déplacement du lanceur et des alliés (Raiton, lvl. min.##LEVEL##).]]></t>
 		<t><![CDATA[##TOUCHE## : diminue la vitesse de déplacement des ennemis (Doton, lvl. min.##LEVEL##).]]></t>
 		<t><![CDATA[##TOUCHE## : créé une zone embrumée pour se cacher, lanceur et alliés voient à travers (Futon, lvl. min.##LEVEL##).]]></t>
