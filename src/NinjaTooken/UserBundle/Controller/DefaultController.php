@@ -471,7 +471,7 @@ class DefaultController extends Controller
                                 unlink($cachedImage);
                             }
                         }
-                        $user->setAvatar('');
+                        $user->setAvatar('update');
                     }
                 }
 
