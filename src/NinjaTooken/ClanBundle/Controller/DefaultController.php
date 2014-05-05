@@ -125,12 +125,12 @@ class DefaultController extends Controller
                         if($file !== null){
                             $extension = strtolower($file->guessExtension());
                             if(in_array($extension, array('jpeg','jpg','png','gif'))){
-                                $clan->file = $file;
+                                $clan->setFile($file);
                                 $cachedImage = dirname(__FILE__).'/../../../../web/cache/kamon/'.$clan->getWebKamonUpload();
                                 if(file_exists($cachedImage)){
                                     unlink($cachedImage);
                                 }
-                                $clan->setKamonUpload('');
+                                $clan->setKamonUpload('upload');
                             }
                         }
 
@@ -251,6 +251,8 @@ class DefaultController extends Controller
                         array('description' => $request->get('clan_description'))
                     ));
 
+                    $clanWebKamon = $clan->getWebKamonUpload();
+
                     $form->bind($request);
 
                     if ($form->isValid()) {
@@ -261,12 +263,14 @@ class DefaultController extends Controller
                         if($file !== null){
                             $extension = strtolower($file->guessExtension());
                             if(in_array($extension, array('jpeg','jpg','png','gif'))){
-                                $clan->file = $file;
-                                $cachedImage = dirname(__FILE__).'/../../../../web/cache/kamon/'.$clan->getWebKamonUpload();
-                                if(file_exists($cachedImage)){
-                                    unlink($cachedImage);
+                                $clan->setFile($file);
+                                if(isset($clanWebKamon) && !empty($clanWebKamon)){
+                                    $cachedImage = dirname(__FILE__).'/../../../../web/cache/kamon/'.$clanWebKamon;
+                                    if(file_exists($cachedImage)){
+                                        unlink($cachedImage);
+                                    }
                                 }
-                                $clan->setKamonUpload('');
+                                $clan->setKamonUpload('upload');
                             }
                         }
 
@@ -350,7 +354,17 @@ class DefaultController extends Controller
                 if( (!empty($userRecruts) && $userRecruts->contains($clanutilisateur)) || $user==$utilisateur ){
                     $clan = $clanutilisateur->getClan();
 
-                    $em->remove($clanutilisateur);
+                    $evm = $em->getEventManager();
+
+                    $membres = $clan->getMembres()->count() - 1;
+                    if($membres==0){
+                        $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_clan.clan_utilisateur_listener'));
+                        $em->remove($clan);
+                    }else{
+                        // enlève les évènement sur clan_proposition
+                        $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_clan.clan_proposition_listener'));
+                        $em->remove($clanutilisateur);
+                    }
                     $em->flush();
 
                     $this->get('session')->getFlashBag()->add(
@@ -358,11 +372,12 @@ class DefaultController extends Controller
                         $this->get('translator')->trans('notice.clan.revokeOk')
                     );
 
-                    if($clan){
+                    if($clan && $membres>0)
                         return $this->redirect($this->generateUrl('ninja_tooken_clan', array(
                             'clan_nom' => $clan->getSlug()
                         )));
-                    }
+                    else
+                        return $this->redirect($this->generateUrl('ninja_tooken_clans'));
                 }
             }
             $this->get('session')->getFlashBag()->add(

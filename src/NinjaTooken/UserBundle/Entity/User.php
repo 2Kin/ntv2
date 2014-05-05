@@ -84,7 +84,7 @@ class User extends BaseUser
 
     // propriété utilisé temporairement pour la suppression
     private $tempAvatar;
-    public $file;
+    private $file;
 
     /**
      * @var boolean
@@ -224,6 +224,26 @@ class User extends BaseUser
         $this->file->move($this->getUploadRootDir(), $this->getAvatar());
 
         unset($this->file);
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**

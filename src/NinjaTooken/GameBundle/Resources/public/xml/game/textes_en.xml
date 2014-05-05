@@ -493,7 +493,9 @@ You can now use ##JUTSUS##. Enabling from "My Ninja" (main menu).]]></t>
 		<t><![CDATA[Sarutahiko]]></t>
 		<t><![CDATA[Fujin]]></t>
 		<t><![CDATA[Susanoo]]></t>
-		<t><![CDATA[Kagutsuchi]]></t><!--457-->
+		<t><![CDATA[Kagutsuchi]]></t>
+		<t><![CDATA[Up, divines Kami]]></t>
+		<t><![CDATA[At the ends of the world, a sacred land is well-known to hide the passage to the Kami's realm.]]></t><!--459-->
 	</textes>
 	<accomplissements>
 		<ac name="Woyukil lvl 1"><![CDATA[3 ninjas killed in a row]]></ac>

@@ -17,7 +17,7 @@
 <div class="pagination">
 	<ul>
 		{% if begin > 1 %}
-			{% for i in range(1, extremePagesLimit) if ( i < currentPage - nearbyPagesLimit ) %}
+			{% for i in range(1, extremePagesLimit) if ( i < currentPage - nearbyPagesLimit and i!=begin ) %}
 		<li><a href="{{ paginationPath }}{{ i }}{{ paginationAfter }}">{{ i }}</a></li>
 			{% endfor %}
 			{% if extremePagesLimit + 1 < begin %}
@@ -30,10 +30,10 @@
 		{% endfor %}
 
 		{% if end < lastPage %}
-			{% if  (lastPage - extremePagesLimit) > (currentPage + nearbyPagesLimit) %}
+			{% if  lastPage - extremePagesLimit > end %}
 		<li class="disabled"><a href="#">...</a></li>
 			{% endif %}
-			{% for i in range(lastPage - extremePagesLimit+1, lastPage) if ( i > currentPage + nearbyPagesLimit ) %}
+			{% for i in range(lastPage - extremePagesLimit+1, lastPage) if ( i > currentPage + nearbyPagesLimit and i!=end ) %}
 		<li><a href="{{ paginationPath }}{{ i }}{{ paginationAfter }}">{{ i }}</a></li>
 			{% endfor %}
 		{% endif %}

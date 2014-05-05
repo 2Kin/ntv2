@@ -32,7 +32,7 @@ class Lobby
      *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="cascade")}
      * )
      */
-    public $users;
+    private $users;
 
     /**
      * @var integer

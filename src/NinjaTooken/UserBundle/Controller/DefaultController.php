@@ -463,7 +463,7 @@ class DefaultController extends Controller
                 if($file !== null){
                     $extension = strtolower($file->guessExtension());
                     if(in_array($extension, array('jpeg','jpg','png','gif'))){
-                        $user->file = $file;
+                        $user->setFile($file);
                         $userWebAvatar = $user->getWebAvatar();
                         if(isset($userWebAvatar) && !empty($userWebAvatar)){
                             $cachedImage = dirname(__FILE__).'/../../../../web/cache/avatar/'.$userWebAvatar;

@@ -115,7 +115,7 @@ class Clan
 
     // propriété utilisé temporairement pour la suppression
     private $tempKamon;
-    public $file;
+    private $file;
 
     /**
      * @var \DateTime
@@ -230,6 +230,26 @@ class Clan
         if($this->tempKamon && file_exists($this->tempKamon)) {
             unlink($this->tempKamon);
         }
+    }
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
     }
 
     /**

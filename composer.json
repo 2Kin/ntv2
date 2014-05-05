@@ -50,14 +50,13 @@
         "jms/di-extra-bundle": "1.4.0",
 	"incenteev/composer-parameter-handler": "~2.0",
 
-        "sonata-project/admin-bundle": "2.2.*@dev",
-        "sonata-project/core-bundle": "2.2.*@dev",
-	"sonata-project/cache-bundle": "2.1.*@dev",
+        "sonata-project/admin-bundle": "~2.2",
+        "sonata-project/user-bundle": "2.2.2",
+        "sonata-project/cache-bundle": "2.1.*@dev",
+        "sonata-project/intl-bundle": "2.2.*@dev",
         "sonata-project/doctrine-orm-admin-bundle": "2.2.*@dev",
-        "sonata-project/user-bundle": "2.2.*@dev",
-	"sonata-project/block-bundle": "2.2.*@dev",
-        "sonata-project/doctrine-extensions": "1.0.0",
-	"sonata-project/intl-bundle": "2.2.*@dev",
+	"sonata-project/block-bundle": "2.2.8",
+
         "stof/doctrine-extensions-bundle": "dev-master",
         "stfalcon/tinymce-bundle": "dev-master",
 
