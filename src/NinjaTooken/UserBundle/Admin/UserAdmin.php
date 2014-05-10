@@ -22,12 +22,11 @@ class UserAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('username')
-            ->add('email')
-            ->add('groups')
-            ->add('enabled', null, array('editable' => true))
-            ->add('locked', null, array('editable' => true))
-            ->add('createdAt')
+            ->addIdentifier('username', null, array('label' => 'Login'))
+            ->add('email', null, array('label' => 'Email'))
+            ->add('enabled', null, array('editable' => true, 'label' => 'Activé'))
+            ->add('locked', null, array('editable' => true, 'label' => 'Verrouillé'))
+            ->add('createdAt', null, array('label' => 'Créé le'))
         ;
 
         if ($this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
@@ -43,11 +42,9 @@ class UserAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $filterMapper)
     {
         $filterMapper
-            ->add('id')
-            ->add('username')
-            ->add('locked')
-            ->add('email')
-            ->add('groups')
+            ->add('username', null, array('label' => 'Login'))
+            ->add('locked', null, array('label' => 'Verrouillé'))
+            ->add('email', null, array('label' => 'Email'))
         ;
     }
 
@@ -60,32 +57,19 @@ class UserAdmin extends Admin
             ->with('General')
                 ->add('username')
                 ->add('email')
-            ->end()
-            ->with('Groups')
-                ->add('groups')
-            ->end()
-            ->with('Profile')
                 ->add('dateOfBirth')
-                ->add('firstname')
-                ->add('lastname')
-                ->add('website')
                 ->add('biography')
                 ->add('gender')
                 ->add('locale')
                 ->add('timezone')
-                ->add('phone')
-            ->end()
-            ->with('Social')
                 ->add('facebookUid')
-                ->add('facebookName')
-                ->add('twitterUid')
-                ->add('twitterName')
-                ->add('gplusUid')
-                ->add('gplusName')
+            ->end()
+            ->with('Ninja')
+                ->add('ninja')
             ->end()
             ->with('Security')
                 ->add('token')
-                ->add('twoStepVerificationCode')
+                ->add('autologin')
             ->end()
         ;
     }
@@ -97,35 +81,77 @@ class UserAdmin extends Admin
     {
         $formMapper
             ->with('General')
-                ->add('username')
-                ->add('email')
-                ->add('plainPassword', 'text', array('required' => false))
-            ->end()
-            ->with('Groups')
-                ->add('groups', 'sonata_type_model', array('required' => false, 'expanded' => true, 'multiple' => true))
-            ->end()
-            ->with('Profile')
-                ->add('dateOfBirth', 'birthday', array('required' => false))
-                ->add('firstname', null, array('required' => false))
-                ->add('lastname', null, array('required' => false))
-                ->add('website', 'url', array('required' => false))
-                ->add('biography', 'text', array('required' => false))
+                ->add('username', 'text', array(
+                    'label' => 'Login'
+                ))
+                ->add('email', 'email', array(
+                    'label' => 'Email'
+                ))
+                ->add('receiveNewsletter', 'choice', array(
+                    'label' => 'Newsletter',
+                    'multiple' => false,
+                    'expanded' => true,
+                    'choices'  => array(true => 'Oui', false => 'Non')
+                ))
+                ->setHelps(array(
+                    'receiveNewsletter' => 'L\'utilisateur accepte de recevoir des newsletter',
+                ))
+                ->add('receiveAvertissement', 'choice', array(
+                    'label' => 'Avertissements',
+                    'multiple' => false,
+                    'expanded' => true,
+                    'choices'  => array(true => 'Oui', false => 'Non')
+                ))
+                ->setHelps(array(
+                    'receiveAvertissement' => 'L\'utilisateur accepte de recevoir des avertissements par mail à chaque nouveau message qu\'il reçoit',
+                ))
+                ->add('plainPassword', 'text', array(
+                    'required' => false,
+                    'label' => 'Mot de passe'
+                ))
+                ->add('dateOfBirth', 'birthday', array(
+                    'required' => false,
+                    'label' => 'Date de naissance'
+                 ))
+                ->add('description', 'textarea', array(
+                    'required' => false,
+                    'label' => 'Description',
+                    'attr' => array(
+                        'class' => 'tinymce',
+                        'tinymce'=>'{"theme":"simple"}'
+                    )
+                ))
                 ->add('gender', 'choice', array(
                     'choices' => array('m' => 'male', 'f' => 'female'),
                     'required' => false,
-                    'translation_domain' => $this->getTranslationDomain()
+                    'translation_domain' => $this->getTranslationDomain(),
+                    'label' => 'Sexe'
                 ))
-                ->add('locale', 'locale', array('required' => false))
-                ->add('timezone', 'timezone', array('required' => false))
-                ->add('phone', null, array('required' => false))
+                ->add('locale', 'locale', array(
+                    'required' => false,
+                    'label' => 'Langue'
+                 ))
+                ->add('timezone', 'timezone', array(
+                    'required' => false,
+                    'label' => 'Fuseau horaire'
+                 ))
+                ->add('facebookUid', 'text', array(
+                    'required' => false,
+                    'label' => 'Id Facebook'
+                ))
             ->end()
-            ->with('Social')
-                ->add('facebookUid', null, array('required' => false))
-                ->add('facebookName', null, array('required' => false))
-                ->add('twitterUid', null, array('required' => false))
-                ->add('twitterName', null, array('required' => false))
-                ->add('gplusUid', null, array('required' => false))
-                ->add('gplusName', null, array('required' => false))
+            ->with('Ninja')
+                ->add('ninja', 'sonata_type_admin', array('label' => false), array('edit' => 'inline'))
+            ->end()
+            ->with('IP')
+                ->add('ips', 'sonata_type_collection', array(
+                    'type_options' => array('delete' => false, 'read_only' => true),
+                    'by_reference' => false,
+                    'label' => false
+                ), array(
+                    'edit' => 'inline',
+                    'inline' => 'table'
+                ))
             ->end()
         ;
 
@@ -146,9 +172,9 @@ class UserAdmin extends Admin
         }
 
         $formMapper
-            ->with('Security')
-                ->add('token', null, array('required' => false))
-                ->add('twoStepVerificationCode', null, array('required' => false))
+            ->with('Sécurité')
+                ->add('token', 'text', array('required' => false))
+                ->add('autologin', 'text', array('required' => false))
             ->end()
         ;
     }
@@ -162,6 +188,43 @@ class UserAdmin extends Admin
             return;
         $this->getUserManager()->updateCanonicalFields($user);
         $this->getUserManager()->updatePassword($user);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function preRemove($object=null)
+    {
+        if(!isset($this->userManager))
+            return;
+        $em = $this->userManager->getManager();
+        $conn = $em->getConnection();
+        $evm = $em->getEventManager();
+
+        // enlève les évènement sur clan_proposition
+        // on évite d'envoyer des messages qui seront supprimés
+        $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_clan.clan_proposition_listener'));
+
+        // enlève les évènement sur thread et comment
+        // tout sera remis à plat à la fin
+        $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_forum.thread_listener'));
+        $evm->removeEventListener(array('postRemove'), $this->get('ninjatooken_forum.comment_listener'));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function postRemove($object=null)
+    {
+        // recalcul les nombres de réponses d'un thread
+        $conn->executeUpdate("UPDATE nt_thread as t LEFT JOIN (SELECT COUNT(nt_comment.id) as num, thread_id FROM nt_comment GROUP BY thread_id) c ON c.thread_id=t.id SET t.num_comments = c.num");
+        // recalcul les nombres de réponses d'un forum
+        $conn->executeUpdate("UPDATE nt_forum as f LEFT JOIN (SELECT COUNT(nt_thread.id) as num, forum_id FROM nt_thread GROUP BY forum_id) t ON t.forum_id=f.id SET f.num_threads = t.num");
+
+        // ré-affecte les derniers commentaires
+        $conn->executeUpdate("UPDATE nt_thread as t LEFT JOIN (SELECT MAX(date_ajout) as lastAt, thread_id FROM nt_comment GROUP BY thread_id) c ON c.thread_id=t.id SET t.last_comment_at = c.lastAt");
+        $conn->executeUpdate("UPDATE nt_thread as t LEFT JOIN (SELECT author_id as lastBy, thread_id, date_ajout FROM nt_comment as ct) c ON c.thread_id=t.id and c.date_ajout=t.last_comment_at SET t.lastCommentBy_id = c.lastBy");
+        $conn->executeUpdate("UPDATE nt_thread as t SET t.last_comment_at=t.date_ajout WHERE t.last_comment_at IS NULL");
     }
 
     /**

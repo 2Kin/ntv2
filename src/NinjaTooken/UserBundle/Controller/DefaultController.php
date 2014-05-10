@@ -69,8 +69,7 @@ class DefaultController extends Controller
             if(!$security->isGranted('IS_AUTHENTICATED_FULLY') && !$security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
                 $em = $this->getDoctrine()->getManager();
                 $user = $em->getRepository('NinjaTookenUserBundle:User')->findOneBy(array('autoLogin' => $autologin));
-
-                if (null !== $user) {
+                if (null !== $user && $user->isAccountNonLocked()) {
                     // si l'utilisateur a déjà été connecté avant le dernier garbage collector
                     if($user->getUpdatedAt()===null || (new \DateTime())->getTimestamp() - $user->getUpdatedAt()->getTimestamp() > ini_get('session.gc_maxlifetime')){
                         // lance la connexion

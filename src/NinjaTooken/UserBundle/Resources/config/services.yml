@@ -46,3 +46,21 @@ services:
         arguments:  ["@service_container"]
         tags:
             - { name: doctrine.event_listener, event: postPersist }
+
+    ninjatooken_user.type.ip:
+        class: NinjaTooken\UserBundle\Form\Type\IpType
+        tags:
+            - { name: form.type, alias: ip }
+
+    sonata.user.admin.group:
+        class: Sonata\UserBundle\Admin\Entity\GroupAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Group }
+        arguments: [null, NinjaTooken\UserBundle\Entity\Group, null]
+
+    sonata.user.admin.ip:
+        class: NinjaTooken\UserBundle\Admin\IpAdmin
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Ip}
+
+        arguments: [~, NinjaTooken\UserBundle\Entity\Ip, SonataAdminBundle:CRUD]
