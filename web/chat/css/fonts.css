@@ -90,11 +90,11 @@
 	font-size:0.9em;
 }
 #content #helpContainer #helpList td {
-	font-size:0.9em;
+	font-size:0.7em;color:white;
 }
 #content #helpContainer #helpList td.code {
 	font-style:italic;
 }
 #content #settingsContainer #settingsList td {
-	font-size:0.9em;
+	font-size:0.7em;color:white;
 }

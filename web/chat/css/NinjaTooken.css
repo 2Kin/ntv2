@@ -76,7 +76,7 @@
 		background-color:#383838;
 		color:#D4D4D4;
 	}
-	#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer, #content #emoticonsContainer {
+	#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer {
 		border: 0;
 		background-color:#383838;
 	}

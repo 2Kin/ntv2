@@ -503,4 +503,24 @@ $(document).ready(function(){
 
 	// calculateur de jutsus
 	var _calculateur = new Calculateur();
+
+  // twitch full-width
+  var _twitch = $('#live_embed_player_flash');
+  if(_twitch.length>0){
+    var callVideoUpdate = function(){
+      // récupère le ratio si pas déjà fait
+      var _ratio = parseFloat(_twitch.attr('data-ratio'));
+      // annule les hauteurs et largeurs précédentes
+      _twitch.width(0).height(0).removeAttr('height').removeAttr('width');
+      // recalcule par rapport au parent
+      var newWidth = _twitch.parent().width();
+      if(newWidth>0)
+        _twitch.width(newWidth).height(newWidth * _ratio);
+      else
+        _twitch.width('100%').height('auto');
+    };
+    // lorsqu'on resize et au chargement de la page
+    $(window).on('resize', callVideoUpdate);
+    callVideoUpdate();
+  }
 });

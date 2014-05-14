@@ -9,7 +9,25 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('NinjaTookenChatBundle:Default:chat.html.twig');
+        $channelName = 'ninjatooken';
+
+        $json_array = json_decode(@file_get_contents('https://api.twitch.tv/kraken/streams/'.$channelName, true), true);
+
+        $twitchOnline = false;
+        $channelTitle = '';
+        $streamTitle = '';
+        if ($json_array['stream'] != NULL) {
+            $channelTitle = $json_array['stream']['channel']['display_name'];
+            $streamTitle = $json_array['stream']['channel']['status'];
+            $twitchOnline = true;
+        }
+
+        return $this->render('NinjaTookenChatBundle:Default:chat.html.twig', array(
+            'twitchOnline' => $twitchOnline,
+            'channelTitle' => $channelTitle,
+            'streamTitle' => $streamTitle,
+            'channelName' => $channelName
+        ));
     }
 
     public function ajaxAction()
