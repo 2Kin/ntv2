@@ -581,9 +581,9 @@ class DefaultController extends Controller
         $threadRepo = $em->getRepository('NinjaTookenForumBundle:Thread');
         $commentRepo = $em->getRepository('NinjaTookenForumBundle:Comment');
 
-        $request = "(SELECT id, 'thread' as type, date_ajout FROM nt_thread ORDER BY date_ajout DESC LIMIT 0,10)".
+        $request = "(SELECT nt_thread.id, 'thread' as type, nt_thread.date_ajout FROM nt_thread JOIN nt_forum ON nt_forum.id=nt_thread.forum_id AND nt_forum.clan_id IS NULL ORDER BY nt_thread.date_ajout DESC LIMIT 0,10)".
                    " UNION ".
-                   "(SELECT id, 'comment' as type, date_ajout FROM nt_comment ORDER BY date_ajout DESC LIMIT 0,10)".
+                   "(SELECT nt_comment.id, 'comment' as type, nt_comment.date_ajout FROM nt_comment JOIN nt_thread ON nt_thread.id=nt_comment.thread_id JOIN nt_forum ON nt_forum.id=nt_thread.forum_id AND nt_forum.clan_id IS NULL ORDER BY nt_comment.date_ajout DESC LIMIT 0,10)".
                    "ORDER BY date_ajout DESC LIMIT 0,10";
         $stmt = $conn->prepare($request);
         $stmt->execute();
