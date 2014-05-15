@@ -268,7 +268,7 @@ sonata_admin:
     dashboard:
         blocks:
             - { position: left, type: sonata.admin.block.admin_list }
-            - { position: right, type: sonata.block.service.text, settings: { content: "<h2>Sonata Admin</h2> <p>Reste à inclure principalement la recherche d'utilisateurs par IP.</p>"} }
+            - { position: right, type: sonata.block.service.text, settings: { content: "<div class='alert alert-block'><h4>Sonata Admin</h4> <p>Attentions : toutes les actions de suppressions et de modifications sont définitives.</p></div>"} }
 
         groups:
             user:

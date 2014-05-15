@@ -32,7 +32,7 @@ class MessageUser
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", fetch="EAGER")
      * @ORM\JoinColumn(name="destinataire_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $destinataire;
@@ -50,6 +50,15 @@ class MessageUser
      * @ORM\Column(name="has_deleted", type="boolean")
      */
     private $hasDeleted = false;
+
+    public function __toString()
+    {
+		return ' - ';
+        $destination = $this->getDestinataire();
+        if(null !== $destination)
+            return $destination->getUsername();
+		return ' - ';
+    }
 
     /**
      * Get id

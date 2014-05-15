@@ -1,0 +1,51 @@
+{% extends base_template %}
+
+{% block sonata_admin_content %}
+<p>
+  <h3>Recherche des utilisateurs en multi-compte</h3>
+  <h4>Recherche basée sur l'ip de connexion</h4>
+  <br><br>
+</p>
+<form novalidate="novalidate" method="POST" action="{{ admin.generateUrl('list') }}" class="form-horizontal">
+  <div class="sonata-ba-collapsed-fields">
+    <div class="control-group">
+      <label class="control-label">Adresse IP</label>
+      <div class="controls sonata-ba-field sonata-ba-field-standard-natural">
+        <input type="text" class="span5" name="ip" id="ip" value="{% if app.request.get("ip") is not empty %}{{ app.request.get("ip") }}{% endif %}">
+      </div>
+    </div>
+  </div>
+  <div class="sonata-ba-collapsed-fields">
+    <div class="control-group">
+      <label class="control-label">Pseudo</label>
+      <div class="controls sonata-ba-field sonata-ba-field-standard-natural">
+        <input type="text" class="span5" name="username" id="username" value="{% if app.request.get("username") is not empty %}{{ app.request.get("username") }}{% endif %}">
+      </div>
+    </div>
+  </div>
+  <div class="well well-small form-actions">
+    <input type="submit" value="Chercher comptes associés" class="btn btn-primary">
+  </div>
+</form>
+{% if app.request is not empty %}
+  <h3>Recherche par ip {% if app.request.get("username") is not empty %}sur le pseudo "{{ app.request.get("username") }}"{% endif %}{% if app.request.get("ip") is not empty %} sur l'ip "{{ app.request.get("ip") }}"{% endif %}</h3>
+  {% if users is not empty %}
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr class="sonata-ba-list-field-header">
+        <th class="sonata-ba-list-field-header-text">Utilisateur(s) trouvé(s) - max. 20</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+      <tr>
+        <td><a class="sonata-link-identifier" href="{{ url('admin_ninjatooken_user_user_edit', { 'id': user.id }) }}">{{ user.username }}</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="alert alert-info">Pas d'utilisateur trouvé.</div>
+  {% endif %}
+{% endif %}
+{% endblock %}

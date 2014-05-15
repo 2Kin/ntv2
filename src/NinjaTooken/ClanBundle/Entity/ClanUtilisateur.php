@@ -22,19 +22,19 @@ class ClanUtilisateur
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", inversedBy="clan", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", inversedBy="clan", cascade={"persist"}, fetch="EAGER")
      * @var User
      */
     private $membre;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", inversedBy="recruts", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", inversedBy="recruts", cascade={"persist"}, fetch="EAGER")
      * @var User
      */
     private $recruteur;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan", inversedBy="membres", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan", inversedBy="membres", cascade={"persist"}, fetch="EAGER")
      */
     private $clan;
 

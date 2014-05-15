@@ -7,6 +7,9 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\UserBundle\Model\UserInterface;
+use Doctrine\ORM\EntityRepository;
+use Sonata\AdminBundle\Admin\AdminInterface;
+use Knp\Menu\ItemInterface as MenuItemInterface;
 
 use FOS\UserBundle\Model\UserManagerInterface;
 
@@ -241,5 +244,49 @@ class UserAdmin extends Admin
     public function getUserManager()
     {
         return $this->userManager;
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    {
+        if (!$childAdmin && !in_array($action, array('edit'))) {
+            return;
+        }
+
+        $admin = $this->isChild() ? $this->getParent() : $this;
+
+        $id = $admin->getRequest()->get('id');
+        $menu->addChild(
+            'Utilisateur',
+            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            'Messages (messagerie)',
+            array('uri' => $admin->generateUrl('ninja_tooken_user.admin.message.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            'Messages (forum)',
+            array('uri' => $admin->generateUrl('ninjatooken.forum.admin.comment_user.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            'Amis',
+            array('uri' => $admin->generateUrl('ninja_tooken_user.admin.friend.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            'Captures',
+            array('uri' => $admin->generateUrl('ninja_tooken_user.admin.capture.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            'Recrutements',
+            array('uri' => $admin->generateUrl('ninja_tooken_clan.admin.clan_proposition.list', array('id' => $id)))
+        );
+
     }
 }

@@ -5,9 +5,15 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
+use Doctrine\ORM\EntityRepository;
+use Sonata\AdminBundle\Admin\AdminInterface;
+use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class ForumAdmin extends Admin
 {
+    protected $parentAssociationMapping = 'clan';
+
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
         '_sort_by' => 'dateAjout'
@@ -57,5 +63,29 @@ class ForumAdmin extends Admin
             ->add('ordre')
             ->add('dateAjout')
         ;
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    {
+        if (!$childAdmin && !in_array($action, array('edit'))) {
+            return;
+        }
+
+        $admin = $this->isChild() ? $this->getParent() : $this;
+
+        $id = $admin->getRequest()->get('id');
+        $menu->addChild(
+            'Forum',
+            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            'Topics',
+            array('uri' => $admin->generateUrl('ninjatooken.forum.admin.thread.list', array('id' => $id)))
+        );
+
     }
 }

@@ -22,7 +22,7 @@ class Comment
      * Thread of this comment
      *
      * @var Thread
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\ForumBundle\Entity\Thread")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\ForumBundle\Entity\Thread", fetch="EAGER")
      * @ORM\JoinColumn(name="thread_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $thread;

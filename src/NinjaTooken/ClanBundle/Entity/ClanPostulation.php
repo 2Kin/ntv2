@@ -29,7 +29,7 @@ class ClanPostulation
     private $postulant;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan", fetch="EAGER")
      * @ORM\JoinColumn(name="clan_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $clan;

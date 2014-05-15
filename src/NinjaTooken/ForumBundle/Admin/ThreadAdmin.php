@@ -6,9 +6,14 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Doctrine\ORM\EntityRepository;
+use Sonata\AdminBundle\Admin\AdminInterface;
+use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class ThreadAdmin extends Admin
 {
+
+    protected $parentAssociationMapping = 'forum';
+
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
         '_sort_by' => 'dateAjout'
@@ -24,14 +29,18 @@ class ThreadAdmin extends Admin
             ->with('General')
                 ->add('nom', 'text', array(
                     'label' => 'Nom'
-                ))
-                ->add('forum', 'sonata_type_model_list', array(
+                ));
+
+        if(!$this->isChild())
+            $formMapper->add('forum', 'sonata_type_model_list', array(
                     'btn_add'       => 'Add forum',
                     'btn_list'      => 'List',
                     'btn_delete'    => false,
                 ), array(
                     'placeholder' => 'No forum selected'
-                ))
+                ));
+
+        $formMapper
                 ->add('author', 'sonata_type_model_list', array(
                     'btn_add'       => 'Add author',
                     'btn_list'      => 'List',
@@ -99,12 +108,40 @@ class ThreadAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('nom')
-            ->add('author.username')
-            ->add('forum.nom')
+            ->add('author.username');
+
+        if(!$this->isChild())
+            $listMapper->add('forum.nom');
+
+        $listMapper
             ->add('isCommentable', null, array('editable' => true))
             ->add('isPostit', null, array('editable' => true))
             ->add('isEvent', null, array('editable' => true))
             ->add('dateAjout')
         ;
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    {
+        if (!$childAdmin && !in_array($action, array('edit'))) {
+            return;
+        }
+
+        $admin = $this->isChild() ? $this->getParent() : $this;
+
+        $id = $admin->getRequest()->get('id');
+        $menu->addChild(
+            'Topic',
+            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            'Messages',
+            array('uri' => $admin->generateUrl('ninjatooken.forum.admin.comment.list', array('id' => $id)))
+        );
+
     }
 }

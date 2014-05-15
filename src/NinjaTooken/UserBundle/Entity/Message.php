@@ -56,7 +56,7 @@ class Message
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\UserBundle\Entity\User", inversedBy="messages", fetch="EAGER")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $author;
@@ -69,7 +69,7 @@ class Message
     private $hasDeleted = false;
 
     /**
-     * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\MessageUser", mappedBy="message", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\MessageUser", mappedBy="message", cascade={"remove"}, fetch="EAGER")
      */
     private $receivers;
 

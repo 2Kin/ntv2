@@ -1,22 +1,34 @@
 services:
     ninjatooken.forum.admin.forum:
         class: NinjaTooken\ForumBundle\Admin\ForumAdmin
+        arguments: [ null, NinjaTooken\ForumBundle\Entity\Forum, SonataAdminBundle:CRUD]
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "forum", label: "Forum" }
-        arguments: [ null, NinjaTooken\ForumBundle\Entity\Forum, null]
+            - { name: sonata.admin, manager_type: orm, group: forum, label: Forum }
         calls:
             - [ setTranslationDomain, [NinjaTookenForumBundle]]
+            - [ addChild, [ @ninjatooken.forum.admin.thread ] ]
+
     ninjatooken.forum.admin.thread:
         class: NinjaTooken\ForumBundle\Admin\ThreadAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "forum", label: "Topic" }
+            - { name: sonata.admin, manager_type: orm, group: forum, label: Topic }
         arguments: [ null, NinjaTooken\ForumBundle\Entity\Thread, null]
         calls:
             - [ setTranslationDomain, [NinjaTookenForumBundle]]
+            - [ addChild, [ @ninjatooken.forum.admin.comment ] ]
+
     ninjatooken.forum.admin.comment:
         class: NinjaTooken\ForumBundle\Admin\CommentAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "forum", label: "Commentaire" }
+            - { name: sonata.admin, manager_type: orm, group: forum, label: Commentaire }
+        arguments: [ null, NinjaTooken\ForumBundle\Entity\Comment, null]
+        calls:
+            - [ setTranslationDomain, [NinjaTookenForumBundle]]
+
+    ninjatooken.forum.admin.comment_user:
+        class: NinjaTooken\ForumBundle\Admin\CommentUserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: Commentaire }
         arguments: [ null, NinjaTooken\ForumBundle\Entity\Comment, null]
         calls:
             - [ setTranslationDomain, [NinjaTookenForumBundle]]

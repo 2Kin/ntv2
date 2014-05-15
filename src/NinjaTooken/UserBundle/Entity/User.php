@@ -133,6 +133,11 @@ class User extends BaseUser
      */
     private $ips;
 
+    /**
+     * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\Message", mappedBy="author")
+     */
+    private $messages;
+
     public function __construct()
     {
         parent::__construct();
@@ -148,6 +153,7 @@ class User extends BaseUser
         $this->setAvatar('');
         $this->recruts = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ips = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getAbsoluteAvatar()
@@ -733,5 +739,39 @@ class User extends BaseUser
     public function getIps()
     {
         return $this->ips;
+    }
+
+    /**
+     * Add messages
+     *
+     * @param \NinjaTooken\UserBundle\Entity\Message $messages
+     * @return User
+     */
+    public function addMessage(\NinjaTooken\UserBundle\Entity\Message $message)
+    {
+        $this->messages[] = $message;
+        $message->setAuthor($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove messages
+     *
+     * @param \NinjaTooken\UserBundle\Entity\Message $messages
+     */
+    public function removeMessage(\NinjaTooken\UserBundle\Entity\Message $messages)
+    {
+        $this->messages->removeElement($messages);
+    }
+
+    /**
+     * Get messages
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMessages()
+    {
+        return $this->messages;
     }
 }

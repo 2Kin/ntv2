@@ -2,10 +2,13 @@
 namespace NinjaTooken\ClanBundle\Admin;
 
 use Sonata\AdminBundle\Admin\Admin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Doctrine\ORM\EntityRepository;
+use Sonata\AdminBundle\Admin\AdminInterface;
+use Knp\Menu\ItemInterface as MenuItemInterface;
 
 class ClanAdmin extends Admin
 {
@@ -31,18 +34,6 @@ class ClanAdmin extends Admin
             ->add('old_id', 'integer', array(
                 'label' => 'Ancien identifiant',
                 'required' => false
-            ))
-            ->add('membres', 'entity', array(
-                'label' => 'Membres',
-                'multiple' => true,
-                'expanded' => true,
-                'class' => 'NinjaTookenClanBundle:ClanUtilisateur',
-                'query_builder' => function(EntityRepository $er) use ($current) {
-                    return $er->createQueryBuilder('cu')
-                        ->where('cu.clan = :clan')
-                        ->setParameter('clan', $current->getId());
-                },
-                'property' => 'membre'
             ))
             ->add('accroche', 'text', array(
                 'label' => 'Accroche',
@@ -99,5 +90,39 @@ class ClanAdmin extends Admin
             ->add('online', null, array('editable' => true))
             ->add('dateAjout')
         ;
+    }
+
+    /**
+    * {@inheritdoc}
+    */
+    protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+    {
+        if (!$childAdmin && !in_array($action, array('edit'))) {
+            return;
+        }
+
+        $admin = $this->isChild() ? $this->getParent() : $this;
+
+        $id = $admin->getRequest()->get('id');
+        $menu->addChild(
+            'Clan',
+            array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            'Forums',
+            array('uri' => $admin->generateUrl('ninjatooken.forum.admin.forum.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            'Membres',
+            array('uri' => $admin->generateUrl('ninja_tooken_clan.admin.clan_utilisateur.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            'Postulations',
+            array('uri' => $admin->generateUrl('ninja_tooken_clan.admin.clan_postulation.list', array('id' => $id)))
+        );
+
     }
 }
