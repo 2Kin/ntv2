@@ -269,6 +269,7 @@ sonata_admin:
         blocks:
             - { position: left, type: sonata.admin.block.admin_list }
             - { position: right, type: sonata.block.service.text, settings: { content: "<div class='alert alert-block'><h4>Sonata Admin</h4> <p>Attentions : toutes les actions de suppressions et de modifications sont définitives.</p></div>"} }
+            - { position: right, type: ninjatooken.forum.block.recent_comments, settings: { title: Commentaires récents, number: 10, mode: admin }}
 
         groups:
             user:
@@ -286,6 +287,7 @@ sonata_block:
         sonata.block.service.text:
         sonata.block.service.action:
         sonata.block.service.rss:
+        ninjatooken.forum.block.recent_comments:
 
 sonata_doctrine_orm_admin:
     # default value is null, so doctrine uses the value defined in the configuration

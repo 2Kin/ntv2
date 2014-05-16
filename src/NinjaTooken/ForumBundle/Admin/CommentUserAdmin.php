@@ -12,12 +12,52 @@ class CommentUserAdmin extends Admin
 {
     protected $parentAssociationMapping = 'author';
 
-    protected $baseRoutePattern = 'comment-user';
-
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
         '_sort_by' => 'dateAjout'
     );
+
+    public function getBaseRouteName()
+    {
+        $matches = array('ninjatooken', 'user', 'comment');
+
+        if ($this->isChild()) { // the admin class is a child, prefix it with the parent route name
+            $this->baseRouteName = sprintf('%s_%s',
+                $this->getParent()->getBaseRouteName(),
+                $this->urlize($matches[2])
+            );
+        } else {
+
+            $this->baseRouteName = sprintf('admin_%s_%s_%s',
+                $this->urlize($matches[0]),
+                $this->urlize($matches[1]),
+                $this->urlize($matches[2])
+            );
+        }
+
+        return $this->baseRouteName;
+    }
+
+    public function getBaseRoutePattern()
+    {
+        $matches = array('ninjatooken', 'user', 'comment');
+
+        if ($this->isChild()) { // the admin class is a child, prefix it with the parent route name
+            $this->baseRoutePattern = sprintf('%s/{id}/%s',
+                $this->getParent()->getBaseRoutePattern(),
+                $this->urlize($matches[2], '-')
+            );
+        } else {
+
+            $this->baseRoutePattern = sprintf('/%s/%s/%s',
+                $this->urlize($matches[0], '-'),
+                $this->urlize($matches[1], '-'),
+                $this->urlize($matches[2], '-')
+            );
+        }
+
+        return $this->baseRoutePattern;
+    }
 
     //Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)

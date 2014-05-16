@@ -24,7 +24,7 @@ class User extends BaseUser
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="NinjaTooken\UserBundle\Entity\Group")
+     * @ORM\ManyToMany(targetEntity="NinjaTooken\UserBundle\Entity\Group", fetch="LAZY")
      * @ORM\JoinTable(name="nt_user_group",
      *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
@@ -33,17 +33,17 @@ class User extends BaseUser
     protected $groups;
 
     /**
-     * @ORM\OneToOne(targetEntity="NinjaTooken\GameBundle\Entity\Ninja", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="NinjaTooken\GameBundle\Entity\Ninja", mappedBy="user", cascade={"persist", "remove"}, fetch="EAGER")
      */
     private $ninja;
 
     /**
-     * @ORM\OneToOne(targetEntity="NinjaTooken\ClanBundle\Entity\ClanUtilisateur", mappedBy="membre", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="NinjaTooken\ClanBundle\Entity\ClanUtilisateur", mappedBy="membre", cascade={"persist", "remove"}, fetch="EAGER")
      */
     private $clan;
 
     /**
-     * @ORM\OneToMany(targetEntity="NinjaTooken\ClanBundle\Entity\ClanUtilisateur", mappedBy="recruteur", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="NinjaTooken\ClanBundle\Entity\ClanUtilisateur", mappedBy="recruteur", cascade={"persist", "remove"}, fetch="LAZY")
      * @ORM\OrderBy({"dateAjout" = "ASC"})
      */
     private $recruts;
@@ -129,12 +129,12 @@ class User extends BaseUser
     private $autoLogin;
 
     /**
-     * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\Ip", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\Ip", mappedBy="user", cascade={"persist", "remove"}, fetch="LAZY")
      */
     private $ips;
 
     /**
-     * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\Message", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="NinjaTooken\UserBundle\Entity\Message", mappedBy="author", fetch="LAZY")
      */
     private $messages;
 

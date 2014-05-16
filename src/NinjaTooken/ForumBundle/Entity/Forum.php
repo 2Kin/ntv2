@@ -71,7 +71,7 @@ class Forum
     private $dateAjout;
 
     /**
-     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan", inversedBy="forums")
+     * @ORM\ManyToOne(targetEntity="NinjaTooken\ClanBundle\Entity\Clan", inversedBy="forums", fetch="EAGER")
      */
     private $clan;
 

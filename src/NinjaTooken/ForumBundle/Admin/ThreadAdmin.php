@@ -139,7 +139,7 @@ class ThreadAdmin extends Admin
         );
 
         $menu->addChild(
-            'Messages',
+            'Commentaires',
             array('uri' => $admin->generateUrl('ninjatooken.forum.admin.comment.list', array('id' => $id)))
         );
 

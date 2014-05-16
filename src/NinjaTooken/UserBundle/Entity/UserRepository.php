@@ -92,4 +92,32 @@ class UserRepository extends EntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    public function getMultiAccountByUser($user = null){
+
+        if(isset($user)){
+            $query = $this
+                ->createQueryBuilder('u')
+                ->select('ip.ip')
+                ->join('u.ips', 'ip')
+                ->andWhere('u = :user')
+                ->setParameter('user', $user);
+
+            $ips = $query->getQuery()->getResult();
+            if(!empty($ips)){
+                $ips = array_values($ips[0]);
+
+                $query = $this->createQueryBuilder('u')
+                    ->join('u.ips', 'ip')
+                    ->where('ip.ip IN(:ips)')
+                    ->setParameter('ips', $ips)
+                    ->orderBy('u.username', 'ASC')
+                    ->setFirstResult(0)
+                    ->setMaxResults(20);
+
+                return $query->getQuery()->getResult();
+            }
+        }
+        return array();
+    }
 }

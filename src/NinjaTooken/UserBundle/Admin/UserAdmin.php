@@ -264,12 +264,17 @@ class UserAdmin extends Admin
         );
 
         $menu->addChild(
-            'Messages (messagerie)',
+            'Détection multi-compte par ip',
+            array('uri' => $admin->generateUrl('ninja_tooken_user.admin.detection.list', array('id' => $id)))
+        );
+
+        $menu->addChild(
+            'Messages - messagerie',
             array('uri' => $admin->generateUrl('ninja_tooken_user.admin.message.list', array('id' => $id)))
         );
 
         $menu->addChild(
-            'Messages (forum)',
+            'Commentaires - forum',
             array('uri' => $admin->generateUrl('ninjatooken.forum.admin.comment_user.list', array('id' => $id)))
         );
 

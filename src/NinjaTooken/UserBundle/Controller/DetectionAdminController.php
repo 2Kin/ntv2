@@ -18,25 +18,34 @@ class DetectionAdminController extends Controller
         }
 
         $request = $this->getRequest();
+        $em = $this->getDoctrine()->getManager();
+        $userRepository = $em->getRepository('NinjaTookenUserBundle:User');
+
+        $showForm = true;
 
         $users = array();
-        if ($this->getRestMethod() == 'POST') {
-            $ip = $request->get('ip');
-            if(!empty($ip))
-                $ip = ip2long($ip);
+        if ($this->admin->isChild()){
+            $user = $this->admin->getParent()->getObject($request->get($this->admin->getParent()->getIdParameter()));
+            $users = $userRepository->getMultiAccountByUser($user);
+            $showForm = false;
+        }else{
+            if ($this->getRestMethod() == 'POST') {
 
-            $username = $request->get('username');
+                $ip = $request->get('ip');
+                if(!empty($ip))
+                    $ip = ip2long($ip);
 
-            $em = $this->getDoctrine()->getManager();
+                $username = $request->get('username');
 
-            $userRepository = $em->getRepository('NinjaTookenUserBundle:User');
-            $users = $userRepository->getMultiAccount($ip, $username);
-
+                $users = $userRepository->getMultiAccount($ip, $username);
+            }
         }
 
         return $this->render('NinjaTookenUserBundle:DetectionAdmin:detection.html.twig', array(
+            'action'     => 'list',
             'locale' => $request->getLocale(),
-            'users' => $users
+            'users' => $users,
+            'showForm' => $showForm
         ));
     }
 }

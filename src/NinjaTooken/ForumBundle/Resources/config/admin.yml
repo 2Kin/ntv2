@@ -32,3 +32,9 @@ services:
         arguments: [ null, NinjaTooken\ForumBundle\Entity\Comment, null]
         calls:
             - [ setTranslationDomain, [NinjaTookenForumBundle]]
+
+    ninjatooken.forum.block.recent_comments:
+        class: NinjaTooken\ForumBundle\Block\RecentCommentsBlockService
+        tags:
+            - { name: sonata.block }
+        arguments: ["ninjatooken.forum.block.recent_comments", @templating, @doctrine.orm.entity_manager]

@@ -1,0 +1,22 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+    {% if settings.title %}
+        <h4>{{ settings.title }}</h4>
+    {% endif %}
+    <div class="well">
+        {% set comments = pager.getResults() %}
+        {% for comment in comments %}
+        <blockquote>
+            <a href="{{ url('admin_ninjatooken_forum_comment_edit', { 'id': comment.id }) }}" class="btn btn-default pull-right"><i class="icon-edit"></i> Éditer</a>
+            <p>{{ comment.body | striptags | truncate(150) | nl2br  }}</p>
+            <small><a href="{{ url('admin_ninjatooken_user_user_edit', { 'id': comment.author.id }) }}">{{ comment.author.username }}</a> - {{ comment.dateAjout|localizeddate('long', 'short') }}</small>
+        </blockquote>
+        {% else %}
+            <strong>Pas de commentaires</strong>
+        {% endfor %}
+        {% if comments|length > 0 %}
+        <a href="{{ path('admin_ninjatooken_forum_comment_list') }}" class="btn btn-default btn-large"><i class="icon-list"></i> Tous les commentaires</a>
+        {% endif %}
+    </div>
+{% endblock %}

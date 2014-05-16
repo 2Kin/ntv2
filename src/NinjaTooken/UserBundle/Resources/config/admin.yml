@@ -5,6 +5,7 @@ services:
             - { name: sonata.admin, manager_type: orm, group: user, label: Utilisateur }
         arguments: [null, NinjaTooken\UserBundle\Entity\User, SonataAdminBundle:CRUD]
         calls:
+            - [ addChild, [ @ninja_tooken_user.admin.detection ] ]
             - [ addChild, [ @ninja_tooken_user.admin.message ] ]
             - [ addChild, [ @ninjatooken.forum.admin.comment_user ] ]
             - [ addChild, [ @ninja_tooken_user.admin.friend ] ]
