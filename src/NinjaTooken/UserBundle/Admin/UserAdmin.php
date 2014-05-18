@@ -26,6 +26,7 @@ class UserAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('username', null, array('label' => 'Login'))
+            ->add('oldUsernames', null, array('label' => 'Autres logins'))
             ->add('email', null, array('label' => 'Email'))
             ->add('enabled', null, array('editable' => true, 'label' => 'Activé'))
             ->add('locked', null, array('editable' => true, 'label' => 'Verrouillé'))
@@ -59,6 +60,7 @@ class UserAdmin extends Admin
         $showMapper
             ->with('General')
                 ->add('username')
+                ->add('oldUsernames')
                 ->add('email')
                 ->add('dateOfBirth')
                 ->add('biography')
@@ -86,6 +88,13 @@ class UserAdmin extends Admin
             ->with('General')
                 ->add('username', 'text', array(
                     'label' => 'Login'
+                ))
+                ->add('oldUsernames', 'collection', array(
+                    'required' => false,
+                    'type'   => 'text',
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'label' => 'Autres logins'
                 ))
                 ->add('email', 'email', array(
                     'label' => 'Email'
@@ -145,16 +154,6 @@ class UserAdmin extends Admin
             ->end()
             ->with('Ninja')
                 ->add('ninja', 'sonata_type_admin', array('label' => false), array('edit' => 'inline'))
-            ->end()
-            ->with('IP')
-                ->add('ips', 'sonata_type_collection', array(
-                    'type_options' => array('delete' => false, 'read_only' => true),
-                    'by_reference' => false,
-                    'label' => false
-                ), array(
-                    'edit' => 'inline',
-                    'inline' => 'table'
-                ))
             ->end()
         ;
 
@@ -219,6 +218,8 @@ class UserAdmin extends Admin
      */
     public function postRemove($object=null)
     {
+        $conn = $this->modelManager->getEntityManager()->getConnection();
+
         // recalcul les nombres de réponses d'un thread
         $conn->executeUpdate("UPDATE nt_thread as t LEFT JOIN (SELECT COUNT(nt_comment.id) as num, thread_id FROM nt_comment GROUP BY thread_id) c ON c.thread_id=t.id SET t.num_comments = c.num");
         // recalcul les nombres de réponses d'un forum
@@ -265,12 +266,12 @@ class UserAdmin extends Admin
 
         $menu->addChild(
             'Détection multi-compte par ip',
-            array('uri' => $admin->generateUrl('ninja_tooken_user.admin.detection.list', array('id' => $id)))
+            array('uri' => $admin->generateUrl('ninjatooken_user.admin.detection.list', array('id' => $id)))
         );
 
         $menu->addChild(
             'Messages - messagerie',
-            array('uri' => $admin->generateUrl('ninja_tooken_user.admin.message.list', array('id' => $id)))
+            array('uri' => $admin->generateUrl('ninjatooken_user.admin.message.list', array('id' => $id)))
         );
 
         $menu->addChild(
@@ -280,17 +281,17 @@ class UserAdmin extends Admin
 
         $menu->addChild(
             'Amis',
-            array('uri' => $admin->generateUrl('ninja_tooken_user.admin.friend.list', array('id' => $id)))
+            array('uri' => $admin->generateUrl('ninjatooken_user.admin.friend.list', array('id' => $id)))
         );
 
         $menu->addChild(
             'Captures',
-            array('uri' => $admin->generateUrl('ninja_tooken_user.admin.capture.list', array('id' => $id)))
+            array('uri' => $admin->generateUrl('ninjatooken_user.admin.capture.list', array('id' => $id)))
         );
 
         $menu->addChild(
             'Recrutements',
-            array('uri' => $admin->generateUrl('ninja_tooken_clan.admin.clan_proposition.list', array('id' => $id)))
+            array('uri' => $admin->generateUrl('ninjatooken_clan.admin.clan_proposition.list', array('id' => $id)))
         );
 
     }

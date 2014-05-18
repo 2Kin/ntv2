@@ -585,7 +585,7 @@ class UnityController extends Controller
                                 if($lobby){
                                     // met à jour
 								    if(count($users)>0){
-                                        $lobby->users->clear();
+                                        $lobby->clearUsers();
                                         foreach($users as $userPlayer){
                                             $lobby->addUser($userPlayer);
                                         }

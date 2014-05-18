@@ -327,4 +327,13 @@ class Lobby
     {
         return $this->users;
     }
+
+    /**
+     * Clear users
+     *
+     */
+    public function clearUsers()
+    {
+        $this->users->clear();
+    }
 }

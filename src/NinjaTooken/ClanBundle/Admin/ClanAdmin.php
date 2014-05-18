@@ -116,12 +116,12 @@ class ClanAdmin extends Admin
 
         $menu->addChild(
             'Membres',
-            array('uri' => $admin->generateUrl('ninja_tooken_clan.admin.clan_utilisateur.list', array('id' => $id)))
+            array('uri' => $admin->generateUrl('ninjatooken_clan.admin.clan_utilisateur.list', array('id' => $id)))
         );
 
         $menu->addChild(
             'Postulations',
-            array('uri' => $admin->generateUrl('ninja_tooken_clan.admin.clan_postulation.list', array('id' => $id)))
+            array('uri' => $admin->generateUrl('ninjatooken_clan.admin.clan_postulation.list', array('id' => $id)))
         );
 
     }

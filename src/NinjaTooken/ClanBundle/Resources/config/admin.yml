@@ -7,22 +7,22 @@ services:
         calls:
             - [ setTranslationDomain, [NinjaTookenClanBundle]]
             - [ addChild, [ @ninjatooken.forum.admin.forum ] ]
-            - [ addChild, [ @ninja_tooken_clan.admin.clan_utilisateur ] ]
-            - [ addChild, [ @ninja_tooken_clan.admin.clan_postulation ] ]
+            - [ addChild, [ @ninjatooken_clan.admin.clan_utilisateur ] ]
+            - [ addChild, [ @ninjatooken_clan.admin.clan_postulation ] ]
 
-    ninja_tooken_clan.admin.clan_utilisateur:
+    ninjatooken_clan.admin.clan_utilisateur:
         class: NinjaTooken\ClanBundle\Admin\ClanUtilisateurAdmin
         arguments: [~, NinjaTooken\ClanBundle\Entity\ClanUtilisateur, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: clan, label: Membre}
 
-    ninja_tooken_clan.admin.clan_postulation:
+    ninjatooken_clan.admin.clan_postulation:
         class: NinjaTooken\ClanBundle\Admin\ClanPostulationAdmin
         arguments: [~, NinjaTooken\ClanBundle\Entity\ClanPostulation, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: clan, label: Postulation}
 
-    ninja_tooken_clan.admin.clan_proposition:
+    ninjatooken_clan.admin.clan_proposition:
         class: NinjaTooken\ClanBundle\Admin\ClanPropositionAdmin
         arguments: [~, NinjaTooken\ClanBundle\Entity\ClanProposition, SonataAdminBundle:CRUD]
         tags:

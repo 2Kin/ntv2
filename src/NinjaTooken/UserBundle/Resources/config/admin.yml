@@ -5,38 +5,38 @@ services:
             - { name: sonata.admin, manager_type: orm, group: user, label: Utilisateur }
         arguments: [null, NinjaTooken\UserBundle\Entity\User, SonataAdminBundle:CRUD]
         calls:
-            - [ addChild, [ @ninja_tooken_user.admin.detection ] ]
-            - [ addChild, [ @ninja_tooken_user.admin.message ] ]
+            - [ addChild, [ @ninjatooken_user.admin.detection ] ]
+            - [ addChild, [ @ninjatooken_user.admin.message ] ]
             - [ addChild, [ @ninjatooken.forum.admin.comment_user ] ]
-            - [ addChild, [ @ninja_tooken_user.admin.friend ] ]
-            - [ addChild, [ @ninja_tooken_user.admin.capture ] ]
-            - [ addChild, [ @ninja_tooken_clan.admin.clan_proposition ] ]
+            - [ addChild, [ @ninjatooken_user.admin.friend ] ]
+            - [ addChild, [ @ninjatooken_user.admin.capture ] ]
+            - [ addChild, [ @ninjatooken_clan.admin.clan_proposition ] ]
 
-    ninja_tooken_user.admin.message:
+    ninjatooken_user.admin.message:
         class: NinjaTooken\UserBundle\Admin\MessageAdmin
         arguments: [~, NinjaTooken\UserBundle\Entity\Message, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: user, label: Messagerie}
 
-    ninja_tooken_user.admin.message_user:
+    ninjatooken_user.admin.message_user:
         class: NinjaTooken\UserBundle\Admin\MessageUserAdmin
         arguments: [~, NinjaTooken\UserBundle\Entity\MessageUser, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: admin, label: MessageUser}
 
-    ninja_tooken_user.admin.friend:
+    ninjatooken_user.admin.friend:
         class: NinjaTooken\UserBundle\Admin\FriendAdmin
         arguments: [~, NinjaTooken\UserBundle\Entity\Friend, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: user, label: Ami}
 
-    ninja_tooken_user.admin.capture:
+    ninjatooken_user.admin.capture:
         class: NinjaTooken\UserBundle\Admin\CaptureAdmin
         arguments: [~, NinjaTooken\UserBundle\Entity\Capture, SonataAdminBundle:CRUD]
         tags:
             - {name: sonata.admin, manager_type: orm, group: user, label: Capture d'écran}
 
-    ninja_tooken_user.admin.detection:
+    ninjatooken_user.admin.detection:
         class: NinjaTooken\UserBundle\Admin\DetectionAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: user, label: Détection multi-compte par ip }

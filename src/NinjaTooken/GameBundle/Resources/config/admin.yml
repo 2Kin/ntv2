@@ -1,5 +1,5 @@
 services:
-    ninja_tooken_game.admin.ninja:
+    ninjatooken_game.admin.ninja:
         class: NinjaTooken\GameBundle\Admin\NinjaAdmin
         arguments: [~, NinjaTooken\GameBundle\Entity\Ninja, SonataAdminBundle:CRUD]
         tags:
