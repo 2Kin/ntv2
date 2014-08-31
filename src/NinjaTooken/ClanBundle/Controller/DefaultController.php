@@ -577,8 +577,8 @@ class DefaultController extends Controller
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
-            $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByUsers($recruteur, $utilisateur);
-            if($clanProposition && $clanProposition->getEtat()==0){
+            $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getWaitingPropositionByUsers($recruteur, $utilisateur);
+            if($clanProposition){
                 if($user == $utilisateur && $recruteur->getClan() !== null){
                     $clanutilisateur = $recruteur->getClan();
                     if($clanutilisateur->getDroit()<3){
@@ -648,13 +648,11 @@ class DefaultController extends Controller
     public function clanUtilisateurRecruterRefuserAction(User $utilisateur, User $recruteur)
     {
         $security = $this->get('security.context');
-
         if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $user = $security->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
-
-            $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getPropositionByUsers($recruteur, $utilisateur);
-            if($clanProposition && $clanProposition->getEtat()==0){
+            $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getWaitingPropositionByUsers($recruteur, $utilisateur);
+            if($clanProposition){
                 if($user == $utilisateur){
                     $translator = $this->get('translator');
 

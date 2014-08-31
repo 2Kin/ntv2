@@ -20,6 +20,7 @@ class ClanPostulationRepository extends EntityRepository
             $query->andWhere('cp.postulant = :user')
                 ->setParameter('user', $user);
         }
+        $query->setMaxResults(1);
 
         return $query->getQuery()->getOneOrNullResult();
     }

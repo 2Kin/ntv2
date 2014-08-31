@@ -46,6 +46,7 @@ class ClanUtilisateurRepository extends EntityRepository
             $query->andWhere('cu.membre = :user')
                 ->setParameter('user', $user);
         }
+        $query->setMaxResults(1);
 
         return $query->getQuery()->getOneOrNullResult();
     }

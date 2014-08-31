@@ -25,6 +25,7 @@ class UserRepository extends EntityRepository
             $query->andWhere('u.id <> :id')
                 ->setParameter('id', $id);
         }
+        $query->setMaxResults(1);
 
         return $query->getQuery()->getOneOrNullResult();
     }
@@ -76,7 +77,10 @@ class UserRepository extends EntityRepository
             }
 
             $ips = $query->getQuery()->getResult();
-            $ips = array_values($ips[0]);
+            if(count($ips)>0)
+                $ips = array_values($ips[0]);
+            else
+                $ips = array($ip);
         }else
             $ips = array($ip);
 

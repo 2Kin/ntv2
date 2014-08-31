@@ -75,4 +75,30 @@
 		<compo type="detail" value="Raiton" folder="raiton"/>
 		<compo type="detail" value="Suiton" folder="suiton"/>
 	</skin>
+	<skin value="FootDoBrasil" folder="football" sexe="H">
+		<compo type="couleur" value="Algérie" folder="algerie"/>
+		<compo type="couleur" value="Allemagne" folder="allemagne"/>
+		<compo type="couleur" value="Angleterre" folder="angleterre"/>
+		<compo type="couleur" value="Argentine" folder="argentine"/>
+		<compo type="couleur" value="Belgique" folder="belgique"/>
+		<compo type="couleur" value="Brésil" folder="bresil"/>
+		<compo type="couleur" value="Espagne" folder="espagne"/>
+		<compo type="couleur" value="France" folder="france"/>
+		<compo type="couleur" value="Hollande" folder="hollande"/>
+		<compo type="couleur" value="Italie" folder="italie"/>
+		<compo type="detail" value="-" folder="clean"/>
+	</skin>
+	<skin value="FootDoBrasil" folder="football" sexe="F">
+		<compo type="couleur" value="Algérie" folder="algerie"/>
+		<compo type="couleur" value="Allemagne" folder="allemagne"/>
+		<compo type="couleur" value="Angleterre" folder="angleterre"/>
+		<compo type="couleur" value="Argentine" folder="argentine"/>
+		<compo type="couleur" value="Belgique" folder="belgique"/>
+		<compo type="couleur" value="Brésil" folder="bresil"/>
+		<compo type="couleur" value="Espagne" folder="espagne"/>
+		<compo type="couleur" value="France" folder="france"/>
+		<compo type="couleur" value="Hollande" folder="hollande"/>
+		<compo type="couleur" value="Italie" folder="italie"/>
+		<compo type="detail" value="-" folder="clean"/>
+	</skin>
 </skins>

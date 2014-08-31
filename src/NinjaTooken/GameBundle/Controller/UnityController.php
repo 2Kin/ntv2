@@ -167,7 +167,7 @@ class UnityController extends Controller
                         $c = $request->get('c');
                         $classe = $ninja->getClasse();
                         if(empty($classe)){
-						    if($this->isCryptingOk($a.$c)){
+						    //if($this->isCryptingOk($a.$c)){
                                 $convert	= array(
                                     "355"	=> "feu",
                                     "356"	=> "eau",
@@ -180,7 +180,7 @@ class UnityController extends Controller
                                 $em->persist($ninja);
                                 $em->flush();
                                 $data	= '1';
-                            }
+                            //}
                         }
                         break;
                     // mise à jour de l'expérience
@@ -453,6 +453,7 @@ class UnityController extends Controller
                                     ->createQueryBuilder('l')
                                     ->where(':user MEMBER OF l.users')
                                     ->setParameter('user', $user)
+                                    ->setMaxResults(1)
                                     ->getQuery()
                                     ->getOneOrNullResult();
                                 if($lobby){
@@ -621,6 +622,7 @@ class UnityController extends Controller
                                 ->createQueryBuilder('l')
                                 ->where(':user MEMBER OF l.users')
                                 ->setParameter('user', $user)
+                                ->setMaxResults(1)
                                 ->getQuery()
                                 ->getOneOrNullResult();
                             if($lobby){

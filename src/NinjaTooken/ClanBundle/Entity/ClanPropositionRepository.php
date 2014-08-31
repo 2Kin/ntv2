@@ -20,6 +20,25 @@ class ClanPropositionRepository extends EntityRepository
             $query->andWhere('cp.postulant = :postulant')
                 ->setParameter('postulant', $postulant);
         }
+        $query->setMaxResults(1);
+
+        return $query->getQuery()->getOneOrNullResult();
+    }
+
+    public function getWaitingPropositionByUsers(User $recruteur=null, User $postulant=null)
+    {
+        $query = $this->createQueryBuilder('cp')
+            ->where('cp.etat = 0');
+
+        if(isset($recruteur)){
+            $query->andWhere('cp.recruteur = :recruteur')
+                ->setParameter('recruteur', $recruteur);
+        }
+        if(isset($postulant)){
+            $query->andWhere('cp.postulant = :postulant')
+                ->setParameter('postulant', $postulant);
+        }
+        $query->setMaxResults(1);
 
         return $query->getQuery()->getOneOrNullResult();
     }
