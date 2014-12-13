@@ -115,7 +115,7 @@ class Clan
 
     // propriété utilisé temporairement pour la suppression
     private $tempKamon;
-    private $file;
+    public $file;
 
     /**
      * @var \DateTime

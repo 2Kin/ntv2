@@ -39,10 +39,13 @@ calculateur:
     ptsRestants: Points restants :
 ninjatooken:
     winner:
-        utilisateur: <a href="%urlUtilisateur%?ID=128628">Ryaxta</a>
-        tournoi: vainqueur le <a href="%urlMessage%?ID=302936">27 octobre 2013</a>
+        utilisateur: <a href="/fr/fiche/delton">-Delton-</a>
+        tournoi: vainqueur le <a href="/fr/forum/nouveautes/tournoi-annuel-2014">1° novembre 2014</a>
     ancien: Les anciens NinjaTooken :
     ancienListe:
+        winner15:
+            utilisateur: <a href="%urlUtilisateur%?ID=128628">Ryaxta</a>
+            tournoi: vainqueur le <a href="%urlMessage%?ID=302936">27 octobre 2013</a>
         winner14:
             utilisateur: <a href="/fr/fiche/delton">-Delton-</a>
             tournoi: vainqueur le <a href="%urlMessage%?ID=272352">12 mai 2013</a>, et <a href="%urlMessage%?ID=290784">18 août 2013</a></span>

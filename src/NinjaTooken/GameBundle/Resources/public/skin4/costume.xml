@@ -44,11 +44,15 @@
 		<compo type="detail" value="skin" folder="raizen"/>
 	</skin>
 	<skin value="Halloween" folder="halloween" sexe="H">
-		<compo type="couleur" value="-" folder="halloween"/>
+		<compo type="couleur" value="squelette" folder="squelette"/>
+		<compo type="couleur" value="citrouille" folder="citrouille"/>
+		<compo type="couleur" value="zombie" folder="zombie"/>
 		<compo type="detail" value="-" folder="clean"/>
 	</skin>
 	<skin value="Halloween" folder="halloween" sexe="F">
-		<compo type="couleur" value="-" folder="halloween"/>
+		<compo type="couleur" value="squelette" folder="squelette"/>
+		<compo type="couleur" value="citrouille" folder="citrouille"/>
+		<compo type="couleur" value="zombie" folder="zombie"/>
 		<compo type="detail" value="-" folder="clean"/>
 	</skin>
 	<skin value="Kuma" folder="kuma" sexe="F">
@@ -75,7 +79,13 @@
 		<compo type="detail" value="Raiton" folder="raiton"/>
 		<compo type="detail" value="Suiton" folder="suiton"/>
 	</skin>
-	<skin value="FootDoBrasil" folder="football" sexe="H">
+	<skin value="Idirinho back" folder="idirinho-back" sexe="H">
+		<compo type="couleur" value="utakata" folder="utakata"/>
+		<compo type="detail" value="style1" folder="part1"/>
+		<compo type="detail" value="style2" folder="part2"/>
+		<compo type="detail" value="style3" folder="part3"/>
+	</skin>
+	<skin value="FootDoBrazil" folder="football" sexe="H">
 		<compo type="couleur" value="Algérie" folder="algerie"/>
 		<compo type="couleur" value="Allemagne" folder="allemagne"/>
 		<compo type="couleur" value="Angleterre" folder="angleterre"/>
@@ -88,7 +98,7 @@
 		<compo type="couleur" value="Italie" folder="italie"/>
 		<compo type="detail" value="-" folder="clean"/>
 	</skin>
-	<skin value="FootDoBrasil" folder="football" sexe="F">
+	<skin value="FootDoBrazil" folder="football" sexe="F">
 		<compo type="couleur" value="Algérie" folder="algerie"/>
 		<compo type="couleur" value="Allemagne" folder="allemagne"/>
 		<compo type="couleur" value="Angleterre" folder="angleterre"/>
@@ -100,5 +110,10 @@
 		<compo type="couleur" value="Hollande" folder="hollande"/>
 		<compo type="couleur" value="Italie" folder="italie"/>
 		<compo type="detail" value="-" folder="clean"/>
+	</skin>
+	<skin value="Isho" folder="isho" sexe="H">
+		<compo type="couleur" value="-" folder="isho"/>
+		<compo type="detail" value="rouge" folder="red"/>
+		<compo type="detail" value="jaune" folder="yellow"/>
 	</skin>
 </skins>

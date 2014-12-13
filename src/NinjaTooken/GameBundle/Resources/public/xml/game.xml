@@ -22,6 +22,7 @@
 			<m name="428" url="Map-Auberge" ctf="0"><![CDATA[429]]></m>
 			<m name="432" url="Map-Horror" ctf="0"><![CDATA[433]]></m>
 			<m name="458" url="Map-Kami" ctf="1"><![CDATA[459]]></m>
+			<m name="464" url="Map-Cascade-hd" ctf="1"><![CDATA[465]]></m>
         </map>
         <classe>
             <x name="Katon" val="355" ennemy="359" />
@@ -187,12 +188,12 @@
         </capacite>
         <aptitude>
             <bouleElementaire niveau="2" limit="">
-                <x niveau="0" degat="35" rayon="0a75" chakra="7" />
-                <x niveau="1" degat="15" rayon="0a35" chakra="2" />
-                <x niveau="4" degat="7" rayon="0a25" chakra="1" />
-                <x niveau="8" degat="5" rayon="0a15" chakra="1" />
-                <x niveau="12" degat="3" rayon="0a08" chakra="1" />
-                <x niveau="16" degat="2" rayon="0a02" chakra="1" />
+                <x niveau="0" degat="35" rayon="0a73" chakra="7" />
+                <x niveau="1" degat="15" rayon="0a33" chakra="2" />
+                <x niveau="4" degat="7" rayon="0a23" chakra="1" />
+                <x niveau="8" degat="5" rayon="0a13" chakra="1" />
+                <x niveau="12" degat="3" rayon="0a07" chakra="1" />
+                <x niveau="16" degat="2" rayon="0a016" chakra="1" />
                 <x niveau="30" degat="1" rayon="0a0" chakra="0" />
                 <x niveau="100" degat="0" rayon="0a0" chakra="0" />
             </bouleElementaire>

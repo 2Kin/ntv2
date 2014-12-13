@@ -5,6 +5,7 @@ namespace NinjaTooken\UserBundle\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 use Sonata\UserBundle\Model\UserInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class RegistrationFormType extends BaseType
 {
@@ -59,6 +60,14 @@ class RegistrationFormType extends BaseType
                 'required' => false
             ))
         ;
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            "data_class" => "NinjaTooken\UserBundle\Entity\User",
+            "validation_groups" => array("Registration")
+        ));
     }
 
     public function getName()
