@@ -81,9 +81,9 @@ class DefaultController extends Controller
 
         // utilisateur à passer
         $userData = array();
-        $securityContext = $this->container->get('security.context');
-        if($securityContext->isGranted('IS_AUTHENTICATED_FULLY') || $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $securityContext->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $userData = array(
                 'userID' => $user->getId(),
                 'userName' => $user->getUsername(),

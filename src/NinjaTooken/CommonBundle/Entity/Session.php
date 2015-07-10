@@ -35,6 +35,13 @@ class Session
     private $sessionTime;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="session_lifetime", type="integer")
+     */
+    private $sessionLifetime;
+
+    /**
      * Set sessionId
      *
      * @param string $sessionId
@@ -101,5 +108,28 @@ class Session
     public function getSessionTime()
     {
         return $this->sessionTime;
+    }
+
+    /**
+     * Set sessionLifetime
+     *
+     * @param integer $sessionLifetime
+     * @return Session
+     */
+    public function setSessionLifetime($sessionLifetime)
+    {
+        $this->sessionLifetime = $sessionLifetime;
+
+        return $this;
+    }
+
+    /**
+     * Get sessionLifetime
+     *
+     * @return integer 
+     */
+    public function getSessionLifetime()
+    {
+        return $this->sessionLifetime;
     }
 }

@@ -100,10 +100,10 @@ class DefaultController extends Controller
 
     public function clanAjouterAction(Request $request)
     {
-        $security = $this->get('security.context');
+        $authorizationChecker = $this->get('security.authorization_checker');
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             if(!$user->getClan()){
                 $clan = new Clan();
@@ -186,10 +186,9 @@ class DefaultController extends Controller
      */
     public function clanEditerSwitchAction(User $utilisateur)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $this->get('security.token_storage')->getToken()->getUser();
 
             // vérification des droits utilisateurs
             $isShisho = false;
@@ -198,7 +197,7 @@ class DefaultController extends Controller
                     $isShisho = true;
             }
 
-            if($isShisho || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($isShisho || $authorizationChecker->isGranted('ROLE_ADMIN') !== false || $authorizationChecker->isGranted('ROLE_MODERATOR') !== false){
 
                 $clanutilisateur = $utilisateur->getClan();
                 $clan = $user->getClan()->getClan();
@@ -229,10 +228,9 @@ class DefaultController extends Controller
      */
     public function clanModifierAction(Request $request, Clan $clan)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             // vérification des droits utilisateurs
             $canEdit = false;
@@ -242,7 +240,7 @@ class DefaultController extends Controller
                     $canEdit = true;
             }
 
-            if($canEdit || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($canEdit || $authorizationChecker->isGranted('ROLE_ADMIN') !== false || $authorizationChecker->isGranted('ROLE_MODERATOR') !== false){
                 $form = $this->createForm(new ClanType(), $clan);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
@@ -302,10 +300,9 @@ class DefaultController extends Controller
      */
     public function clanSupprimerAction(Clan $clan)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             // vérification des droits utilisateurs
             $canDelete = false;
@@ -315,7 +312,7 @@ class DefaultController extends Controller
                     $canDelete = true;
             }
 
-            if($canDelete || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($canDelete || $authorizationChecker->isGranted('ROLE_ADMIN') !== false || $authorizationChecker->isGranted('ROLE_MODERATOR') !== false){
                 $em = $this->getDoctrine()->getManager();
 
                 // enlève les évènement sur clan_utilisateur
@@ -341,10 +338,9 @@ class DefaultController extends Controller
      */
     public function clanUtilisateurSupprimerAction(User $utilisateur)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
             $userRecruts = $user->getRecruts();
@@ -394,10 +390,9 @@ class DefaultController extends Controller
      */
     public function clanUtilisateurSupprimerShishouAction(User $utilisateur)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
             if($user->getClan()){
@@ -452,10 +447,9 @@ class DefaultController extends Controller
 
     public function clanUtilisateurRecruterAction()
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $clan = $user->getClan();
             $em = $this->getDoctrine()->getManager();
 
@@ -477,10 +471,9 @@ class DefaultController extends Controller
      */
     public function clanUtilisateurRecruterSupprimerAction(User $utilisateur)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
             if($user->getClan()){
@@ -506,10 +499,9 @@ class DefaultController extends Controller
      */
     public function clanUtilisateurRecruterAjouterAction(User $utilisateur)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
             if($user->getClan()){
@@ -571,10 +563,9 @@ class DefaultController extends Controller
      */
     public function clanUtilisateurRecruterAccepterAction(User $utilisateur, User $recruteur)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
             $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getWaitingPropositionByUsers($recruteur, $utilisateur);
@@ -647,9 +638,9 @@ class DefaultController extends Controller
      */
     public function clanUtilisateurRecruterRefuserAction(User $utilisateur, User $recruteur)
     {
-        $security = $this->get('security.context');
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
             $clanProposition = $em->getRepository('NinjaTookenClanBundle:ClanProposition')->getWaitingPropositionByUsers($recruteur, $utilisateur);
             if($clanProposition){
@@ -684,10 +675,9 @@ class DefaultController extends Controller
      */
     public function clanUtilisateurPostulerAction(Clan $clan)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
             // vérification des droits utilisateurs
@@ -751,10 +741,9 @@ class DefaultController extends Controller
      */
     public function clanUtilisateurPostulerSupprimerAction(Clan $clan)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
             $postulation = $em->getRepository('NinjaTookenClanBundle:ClanPostulation')->getByClanUser($clan, $user);

@@ -103,7 +103,11 @@ class UserAdmin extends Admin
                     'label' => 'Newsletter',
                     'multiple' => false,
                     'expanded' => true,
-                    'choices'  => array(true => 'Oui', false => 'Non')
+                    'choices'  => array('Oui' => true, 'Non' => false),
+                    'choice_value' => function($choice){
+                        return $choice;
+                    },
+                    'choices_as_values' => true
                 ))
                 ->setHelps(array(
                     'receiveNewsletter' => 'L\'utilisateur accepte de recevoir des newsletter',
@@ -112,7 +116,11 @@ class UserAdmin extends Admin
                     'label' => 'Avertissements',
                     'multiple' => false,
                     'expanded' => true,
-                    'choices'  => array(true => 'Oui', false => 'Non')
+                    'choices'  => array('Oui' => true, 'Non' => false),
+                    'choice_value' => function($choice){
+                        return $choice;
+                    },
+                    'choices_as_values' => true
                 ))
                 ->setHelps(array(
                     'receiveAvertissement' => 'L\'utilisateur accepte de recevoir des avertissements par mail à chaque nouveau message qu\'il reçoit',
@@ -134,7 +142,8 @@ class UserAdmin extends Admin
                     )
                 ))
                 ->add('gender', 'choice', array(
-                    'choices' => array('m' => 'male', 'f' => 'female'),
+                    'choices' => array('male' => 'm', 'female' => 'f'),
+                    'choices_as_values' => true,
                     'required' => false,
                     'translation_domain' => $this->getTranslationDomain(),
                     'label' => 'Sexe'

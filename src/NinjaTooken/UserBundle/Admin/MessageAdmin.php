@@ -84,7 +84,11 @@ class MessageAdmin extends Admin
                 'label' => 'Supprimé ?',
                 'multiple' => false,
                 'expanded' => true,
-                'choices'  => array(true => 'Oui', false => 'Non')
+                'choices'  => array('Oui' => true, 'Non' => false),
+                'choice_value' => function($choice){
+                    return $choice;
+                },
+                'choices_as_values' => true
             ))
             ->add('receivers', 'sonata_type_collection', array(
                 'type_options' => array('delete' => false, 'read_only' => true),

@@ -90,7 +90,11 @@ class ClanUtilisateurAdmin extends Admin
                 'label' => 'Peut éditer le clan',
                 'multiple' => false,
                 'expanded' => true,
-                'choices'  => array(true => 'Oui', false => 'Non')
+                'choices'  => array('Oui' => true, 'Non' => false),
+                'choice_value' => function($choice){
+                    return $choice;
+                },
+                'choices_as_values' => true
             ))
             ->add('dateAjout', 'datetime', array(
                 'label' => 'Date de recrutement'

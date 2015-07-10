@@ -63,19 +63,31 @@ class ThreadAdmin extends Admin
                     'label' => 'Afficher en postit',
                     'multiple' => false,
                     'expanded' => true,
-                    'choices'  => array(true => 'Oui', false => 'Non')
+                    'choices'  => array('Oui' => true, 'Non' => false),
+                    'choice_value' => function($choice){
+                        return $choice;
+                    },
+                    'choices_as_values' => true
                 ))
                 ->add('isCommentable', 'choice', array(
                     'label' => 'Verrouillé',
                     'multiple' => false,
                     'expanded' => true,
-                    'choices'  => array(true => 'Oui', false => 'Non')
+                    'choices'  => array('Oui' => true, 'Non' => false),
+                    'choice_value' => function($choice){
+                        return $choice;
+                    },
+                    'choices_as_values' => true
                 ))
                 ->add('isEvent', 'choice', array(
                     'label' => 'Event',
                     'multiple' => false,
                     'expanded' => true,
-                    'choices'  => array(true => 'Oui', false => 'Non')
+                    'choices'  => array('Oui' => true, 'Non' => false),
+                    'choice_value' => function($choice){
+                        return $choice;
+                    },
+                    'choices_as_values' => true
                 ))
                 ->add('dateEventStart', 'datetime', array(
                     'label' => 'Début de l\'event',

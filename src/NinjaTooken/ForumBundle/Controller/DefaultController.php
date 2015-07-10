@@ -79,12 +79,11 @@ class DefaultController extends Controller
 
     public function eventAjouterAction(Request $request)
     {
-        $security = $this->get('security.context');
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
-
-            if($security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($authorizationChecker->isGranted('ROLE_ADMIN') !== false || $authorizationChecker->isGranted('ROLE_MODERATOR') !== false){
                 $thread = new Thread();
                 $thread->setAuthor($user);
                 $forum = $this->getDoctrine()->getManager()->getRepository('NinjaTookenForumBundle:Forum')->getForum('nouveautes')[0];
@@ -126,12 +125,11 @@ class DefaultController extends Controller
      */
     public function eventModifierAction(Request $request, Thread $thread)
     {
-        $security = $this->get('security.context');
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
-
-            if($thread->getAuthor() == $user || $security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false){
+            if($thread->getAuthor() == $user || $authorizationChecker->isGranted('ROLE_ADMIN') !== false || $authorizationChecker->isGranted('ROLE_MODERATOR') !== false){
                 $form = $this->createForm(new EventType(), $thread);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
@@ -212,7 +210,6 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $num = $this->container->getParameter('numReponse');
-        $security = $this->get('security.context');
         $page = max(1, $page);
 
         $comments = $em->getRepository('NinjaTookenForumBundle:Comment')->getCommentsByThread($thread, $num, $page);
@@ -234,12 +231,11 @@ class DefaultController extends Controller
      */
     public function threadAjouterAction(Request $request, Forum $forum)
     {
-        $security = $this->get('security.context');
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
-
-            if($this->globalRight($security, $user, $forum) || $forum->getCanUserCreateThread()){
+            if($this->globalRight($authorizationChecker, $user, $forum) || $forum->getCanUserCreateThread()){
                 $thread = new Thread();
                 $thread->setAuthor($user);
                 $thread->setForum($forum);
@@ -284,12 +280,11 @@ class DefaultController extends Controller
      */
     public function threadModifierAction(Request $request, Forum $forum, Thread $thread)
     {
-        $security = $this->get('security.context');
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
-
-            if($this->globalRight($security, $user, $forum) || $thread->getAuthor() == $user){
+            if($this->globalRight($authorizationChecker, $user, $forum) || $thread->getAuthor() == $user){
                 $form = $this->createForm(new ThreadType(), $thread);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
@@ -332,12 +327,11 @@ class DefaultController extends Controller
      */
     public function threadVerrouillerAction(Forum $forum, Thread $thread)
     {
-        $security = $this->get('security.context');
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
-
-            if($this->globalRight($security, $user, $forum)){
+            if($this->globalRight($authorizationChecker, $user, $forum)){
                 $em = $this->getDoctrine()->getManager();
                 $thread->setIsCommentable(
                     !$thread->getIsCommentable()
@@ -363,12 +357,11 @@ class DefaultController extends Controller
      */
     public function threadPostitAction(Forum $forum, Thread $thread)
     {
-        $security = $this->get('security.context');
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
-
-            if($this->globalRight($security, $user, $forum)){
+            if($this->globalRight($authorizationChecker, $user, $forum)){
                 $em = $this->getDoctrine()->getManager();
                 $thread->setIsPostit(
                     !$thread->getIsPostit()
@@ -394,12 +387,11 @@ class DefaultController extends Controller
      */
     public function threadSupprimerAction(Forum $forum, Thread $thread)
     {
-        $security = $this->get('security.context');
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
-
-            if($this->globalRight($security, $user, $forum) || $thread->getAuthor() == $user){
+            if($this->globalRight($authorizationChecker, $user, $forum) || $thread->getAuthor() == $user){
                 $isEvent = $thread->getIsEvent();
 
                 $em = $this->getDoctrine()->getManager();
@@ -436,13 +428,12 @@ class DefaultController extends Controller
      */
     public function commentAjouterAction(Request $request, Forum $forum, Thread $thread, $page)
     {
-        $security = $this->get('security.context');
+        $authorizationChecker = $this->get('security.authorization_checker');
         $page = max(1, $page);
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
-
-            if($this->globalRight($security, $user, $forum) || $thread->getIsCommentable()){
+            if($this->globalRight($authorizationChecker, $user, $forum) || $thread->getIsCommentable()){
                 $comment = new Comment();
                 $comment->setAuthor($user);
                 $comment->setThread($thread);
@@ -484,13 +475,12 @@ class DefaultController extends Controller
      */
     public function commentModifierAction(Request $request, Forum $forum, Thread $thread, Comment $comment, $page)
     {
-        $security = $this->get('security.context');
+        $authorizationChecker = $this->get('security.authorization_checker');
         $page = max(1, $page);
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
-
-            if($this->globalRight($security, $user, $forum) || ($thread->getIsCommentable() && $comment->getAuthor() == $user)){
+            if($this->globalRight($authorizationChecker, $user, $forum) || ($thread->getIsCommentable() && $comment->getAuthor() == $user)){
                 $form = $this->createForm(new CommentType(), $comment);
                 if('POST' === $request->getMethod()) {
                     // cas particulier du formulaire avec tinymce
@@ -541,13 +531,12 @@ class DefaultController extends Controller
      */
     public function commentSupprimerAction(Request $request, Forum $forum, Thread $thread, Comment $comment, $page)
     {
-        $security = $this->get('security.context');
+        $authorizationChecker = $this->get('security.authorization_checker');
         $page = max(1, $page);
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
-
-            if($this->globalRight($security, $user, $forum) || ($thread->getIsCommentable() && $comment->getAuthor() == $user)){
+            if($this->globalRight($authorizationChecker, $user, $forum) || ($thread->getIsCommentable() && $comment->getAuthor() == $user)){
                 $em = $this->getDoctrine()->getManager();
                 $em->remove($comment);
                 $em->flush();
@@ -601,9 +590,9 @@ class DefaultController extends Controller
         ));
     }
 
-    public function globalRight($security=null, User $user=null, Forum $forum=null){
-        if($user && $security){
-            if($security->isGranted('ROLE_ADMIN') !== false || $security->isGranted('ROLE_MODERATOR') !== false)
+    public function globalRight($authorizationChecker=null, User $user=null, Forum $forum=null){
+        if($user && $authorizationChecker){
+            if($authorizationChecker->isGranted('ROLE_ADMIN') !== false || $authorizationChecker->isGranted('ROLE_MODERATOR') !== false)
                 return true;
             if($forum){
                 $clan = $forum->getClan();

@@ -11,7 +11,7 @@ class ClanType extends AbstractType
         $kamonChoices = array();
         for($i=1;$i<135;$i++){
             $num = substr('0000'.$i,-4);
-            $kamonChoices['bundles/ninjatookenclan/kamon/kamon'.$num.'.png'] = 'kamon'.$num;
+            $kamonChoices['kamon'.$num] = 'bundles/ninjatookenclan/kamon/kamon'.$num.'.png';
         }
         $builder
             ->add('nom', 'text', array(
@@ -42,6 +42,7 @@ class ClanType extends AbstractType
                 'label_attr' => array('class' => 'libelle'),
                 'multiple' => false,
                 'choices'  => $kamonChoices,
+                'choices_as_values' => true,
                 'data' => (isset($options['data']) && $options['data']->getKamon() !== null) ? $options['data']->getKamon() : key($kamonChoices)
             ))
             ->add('kamonUpload', 'file', array(

@@ -3,25 +3,25 @@
 namespace NinjaTooken\UserBundle\Listener;
 
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Doctrine\Bundle\DoctrineBundle\Registry as Doctrine;
 use NinjaTooken\UserBundle\Entity\Ip;
 use NinjaTooken\UserBundle\Entity\User;
 
 class LoginListener
 {
-    private $securityContext;
+    private $authorizationChecker;
     private $em;
 
     /**
     * Constructor
     * 
-    * @param SecurityContext $context
+    * @param securityChecker $context
     * @param Doctrine        $doctrine
     */
-    public function __construct( SecurityContext $securityContext , Doctrine $doctrine )
+    public function __construct( AuthorizationCheckerInterface $authorizationChecker , Doctrine $doctrine )
     {
-        $this->securityContext = $securityContext;
+        $this->authorizationChecker = $authorizationChecker;
         $this->em = $doctrine->getManager();
     }
 
@@ -32,7 +32,7 @@ class LoginListener
     */
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
-        if ($this->securityContext->isGranted('IS_AUTHENTICATED_FULLY') || $this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $user = $event->getAuthenticationToken()->getUser();
             $request = $event->getRequest();
 

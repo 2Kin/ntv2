@@ -21,7 +21,11 @@
                 {% endif %}
                 <form action="{{ path("fos_user_security_check") }}" method="post" accept-charset="UTF-8" class="full">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                    <input type="hidden" name="_target_path" value="{% if app.request.headers.get('referer') == url(app.request.get('_route')) %}{{ path('ninja_tooken_homepage') }}{% else %}{{ app.request.headers.get('referer') }}{% endif %}"/>
+                    <input type="hidden" name="_target_path" value="{% spaceless %}
+                      {% if app.request.headers.get('referer') != url(app.request.get('_route')) %}
+                        {{ app.request.headers.get('referer') }}
+                      {% endif %}
+                    {% endspaceless %}"/>
                     <div class="row-fluid">
                         <div class="span3 offset1">
                             <label class="libelle required" for="pseudo">{{ 'compte.register.pseudo'|trans({}, 'common') }}</label>

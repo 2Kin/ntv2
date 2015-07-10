@@ -38,15 +38,17 @@ class RegistrationFormType extends BaseType
             ))
             ->add('gender', 'choice', array(
                 'choices' => array(
-                    UserInterface::GENDER_MAN     => 'gender_male',
-                    UserInterface::GENDER_FEMALE  => 'gender_female'
+                    'gender_male'   => UserInterface::GENDER_MAN,
+                    'gender_female' => UserInterface::GENDER_FEMALE
                 ),
+                'choices_as_values' => true,
                 'data' => UserInterface::GENDER_MAN,
                 'expanded' => true,
                 'label_attr' => array('class' => 'libelle')
             ))
             ->add('locale', 'choice', array(
-                'choices' => array('fr' => 'Français', 'en' => 'English'),
+                'choices' => array('Français' => 'fr', 'English' => 'en'),
+                'choices_as_values' => true,
                 'data' => 'fr',
                 'expanded' => true,
                 'label_attr' => array('class' => 'libelle')

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DetectionAdminController extends Controller
 {
 
-    public function listAction()
+    public function listAction(Request $request = null)
     {
         if (false === $this->admin->isGranted('LIST')) {
             throw new AccessDeniedException();

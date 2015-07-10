@@ -64,9 +64,8 @@ class DefaultController extends Controller
     public function autologinAction(Request $request, $autologin)
     {
         if(!empty($autologin)){
-            $security = $this->get('security.context');
-            // pas encore connecté
-            if(!$security->isGranted('IS_AUTHENTICATED_FULLY') && !$security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $authorizationChecker = $this->get('security.authorization_checker');
+            if(!$authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') && !$authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
                 $em = $this->getDoctrine()->getManager();
                 $user = $em->getRepository('NinjaTookenUserBundle:User')->findOneBy(array('autoLogin' => $autologin));
                 if (null !== $user && $user->isAccountNonLocked()) {
@@ -74,7 +73,7 @@ class DefaultController extends Controller
                     if($user->getUpdatedAt()===null || (new \DateTime())->getTimestamp() - $user->getUpdatedAt()->getTimestamp() > ini_get('session.gc_maxlifetime')){
                         // lance la connexion
                         $token = new UsernamePasswordToken($user, $user->getPassword(), $this->container->getParameter('fos_user.firewall_name'), $user->getRoles());
-                        $security->setToken($token);
+                        $this->get('security.token_storage')->setToken($token);
                         $event = new InteractiveLoginEvent($request, $token);
                         $this->get("event_dispatcher")->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $event);
                     }
@@ -147,10 +146,9 @@ class DefaultController extends Controller
 
     public function messagerie(Request $request, $page=1, $reception=true)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('ROLE_USER') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('ROLE_USER') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
@@ -323,10 +321,9 @@ class DefaultController extends Controller
 
     public function parametresAction()
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             if($user->getDateOfBirth()==new \DateTime('0000-00-00 00:00:00'))
                 $user->setDateOfBirth(null);
@@ -340,13 +337,12 @@ class DefaultController extends Controller
 
     public function parametresUpdateAction(Request $request)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $translator = $this->get('translator');
             // post request
             if ($request->getMethod() === 'POST') {
-                $user = $security->getToken()->getUser();
+                $user = $this->get('security.token_storage')->getToken()->getUser();
                 $em = $this->getDoctrine()->getManager();
 
                 $update = false;
@@ -449,12 +445,11 @@ class DefaultController extends Controller
 
     public function parametresUpdateAvatarAction(Request $request)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             // post request
             if ($request->getMethod() === 'POST') {
-                $user = $security->getToken()->getUser();
+                $user = $this->get('security.token_storage')->getToken()->getUser();
                 $em = $this->getDoctrine()->getManager();
 
                 // permet de générer le fichier
@@ -490,10 +485,9 @@ class DefaultController extends Controller
 
     public function parametresConfirmMailAction()
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             $confirmation = $user->getConfirmationToken();
             if(isset($confirmation) && !empty($confirmation)){
@@ -513,10 +507,9 @@ class DefaultController extends Controller
 
     public function parametresUpdatePasswordAction(Request $request)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
 
             $form = $this->container->get('fos_user.change_password.form');
@@ -548,10 +541,9 @@ class DefaultController extends Controller
 
     public function parametresDeleteAccountAction()
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             $em = $this->getDoctrine()->getManager();
             $conn = $em->getConnection();
@@ -586,13 +578,12 @@ class DefaultController extends Controller
 
     public function amisAction($page)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
 
-            $user = $security->getToken()->getUser();
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Friend');
 
@@ -613,13 +604,12 @@ class DefaultController extends Controller
 
     public function amisDemandeAction($page)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
 
-            $user = $security->getToken()->getUser();
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Friend');
 
@@ -639,13 +629,12 @@ class DefaultController extends Controller
 
     public function amisBlockedAction($page)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
 
-            $user = $security->getToken()->getUser();
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             $repo = $this->getDoctrine()->getManager()->getRepository('NinjaTookenUserBundle:Friend');
 
@@ -668,10 +657,9 @@ class DefaultController extends Controller
      */
     public function amisConfirmerAction(Friend $friend)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             if($friend->getUser() == $user){
                 $em = $this->getDoctrine()->getManager();
@@ -695,10 +683,9 @@ class DefaultController extends Controller
      */
     public function amisBloquerAction(Friend $friend)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             if($friend->getUser() == $user){
                 $em = $this->getDoctrine()->getManager();
@@ -722,10 +709,9 @@ class DefaultController extends Controller
      */
     public function amisDebloquerAction(Friend $friend)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             if($friend->getUser() == $user){
                 $em = $this->getDoctrine()->getManager();
@@ -749,10 +735,9 @@ class DefaultController extends Controller
      */
     public function amisSupprimerAction(Friend $friend)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
 
             if($friend->getUser() == $user){
                 $em = $this->getDoctrine()->getManager();
@@ -772,10 +757,9 @@ class DefaultController extends Controller
 
     public function amisBlockedSupprimerAction()
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
             $repo = $em->getRepository('NinjaTookenUserBundle:Friend');
 
@@ -792,10 +776,9 @@ class DefaultController extends Controller
 
     public function amisDemandeSupprimerAction()
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
             $repo = $em->getRepository('NinjaTookenUserBundle:Friend');
 
@@ -812,15 +795,14 @@ class DefaultController extends Controller
 
     public function capturesAction($page)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
             $num = $this->container->getParameter('numReponse');
             $page = max(1, $page);
 
             $captures = $this->getDoctrine()->getManager()
                 ->getRepository('NinjaTookenUserBundle:Capture')
-                ->getCaptures($security->getToken()->getUser(), $num, $page);
+                ->getCaptures($this->get('security.token_storage')->getToken()->getUser(), $num, $page);
 
             return $this->render('NinjaTookenUserBundle:Default:captures.html.twig', array(
                 'captures' => $captures,
@@ -836,10 +818,9 @@ class DefaultController extends Controller
      */
     public function capturesSupprimerAction(Capture $capture)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             if($capture->getUser() == $user){
                 // supprime d'imgur
                 $imgur = $this->container->getParameter('imgur');

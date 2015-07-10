@@ -61,13 +61,21 @@ class ClanAdmin extends Admin
                 'label' => 'Afficher le clan',
                 'multiple' => false,
                 'expanded' => true,
-                'choices'  => array(true => 'Oui', false => 'Non')
+                'choices'  => array('Oui' => true, 'Non' => false),
+                'choice_value' => function($choice){
+                    return $choice;
+                },
+                'choices_as_values' => true
             ))
             ->add('isRecruting', 'choice', array(
                 'label' => 'Le clan recrute',
                 'multiple' => false,
                 'expanded' => true,
-                'choices'  => array(true => 'Oui', false => 'Non')
+                'choices'  => array('Oui' => true, 'Non' => false),
+                'choice_value' => function($choice){
+                    return $choice;
+                },
+                'choices_as_values' => true
             ))
         ;
     }

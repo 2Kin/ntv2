@@ -29,10 +29,9 @@ class UnityController extends Controller
 
     public function updateAction(Request $request)
     {
-        $security = $this->get('security.context');
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $em = $this->getDoctrine()->getManager();
 
             $this->time = preg_replace('/[^0-9]/i','',(string)$request->get('time'));
@@ -715,7 +714,7 @@ class UnityController extends Controller
             ->getQuery()
             ->getSingleScalarResult();
 
-        $security = $this->get('security.context');
+        $authorizationChecker = $this->get('security.authorization_checker');
         // tentative de connexion
         if(!empty($login) && !empty($pwd)){
 		    if($this->isCryptingOk($login.$pwd.$visiteur)){
@@ -729,7 +728,7 @@ class UnityController extends Controller
                     if(StringUtils::equals($password, $user->getPassword() )){
                         // lance la connexion
                         $token = new UsernamePasswordToken($user, $user->getPassword(), $this->container->getParameter('fos_user.firewall_name'), $user->getRoles());
-                        $security->setToken($token);
+                        $this->get('security.token_storage')->setToken($token);
                         $event = new InteractiveLoginEvent($request, $token);
                         $this->get("event_dispatcher")->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $event);
                     }
@@ -737,8 +736,14 @@ class UnityController extends Controller
             }
         }
 
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        // chargement du xml des données du jeu
+        $gameData = $this->get('ninjatooken_game.gamedata');
+        $doc = $gameData->getDocument();
+        $xpXML = $doc->getElementsByTagName('experience')->item(0)->getElementsByTagName('x');
+        $XP_LEVEL_100 = $xpXML->item($xpXML->length-2)->getAttribute('val');
+
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $this->idUtilisateur = $user->getId();
             // les données du joueur
 
@@ -790,6 +795,14 @@ class UnityController extends Controller
             if($user->getClan() !== null){
                 $clan = $user->getClan()->getClan()->getTag();
             }
+
+            // permet de définir le niveau du ninja à minimum 100
+            if($ninja->getExperience() < $XP_LEVEL_100){
+                $ninja->setExperience($XP_LEVEL_100);
+                $em->persist($ninja);
+                $em->flush();
+            }
+
             $content .= '<params force="'.$ninja->getAptitudeForce().'" vitesse="'.$ninja->getAptitudeVitesse().'" vie="'.$ninja->getAptitudeVie().'" chakra="'.$ninja->getAptitudeChakra().'" experience="'.$ninja->getExperience().'" grade="'.$ninja->getGrade().'" bouleElementaire="'.$ninja->getJutsuBoule().'" doubleSaut="'.$ninja->getJutsuDoubleSaut().'" bouclierElementaire="'.$ninja->getJutsuBouclier().'" marcherMur="'.$ninja->getJutsuMarcherMur().'" deflagrationElementaire="'.$ninja->getJutsuDeflagration().'" marcherViteEau="'.$ninja->getJutsuMarcherEau().'" changerObjet="'.$ninja->getJutsuMetamorphose().'" multishoot="'.$ninja->getJutsuMultishoot().'" invisibleman="'.$ninja->getJutsuInvisibilite().'" resistanceExplosion="'.$ninja->getJutsuResistanceExplosion().'" phoenix="'.$ninja->getJutsuPhoenix().'" vague="'.$ninja->getJutsuVague().'" pieux="'.$ninja->getJutsuPieux().'" tornade="'.$ninja->getJutsuTornade().'" teleportation="'.$ninja->getJutsuTeleportation().'" kusanagi="'.$ninja->getJutsuKusanagi().'" acierRenforce="'.$ninja->getJutsuAcierRenforce().'" chakraVie="'.$ninja->getJutsuChakraVie().'" kamiRaijin="'.$ninja->getJutsuRaijin().'" kamiSarutahiko="'.$ninja->getJutsuSarutahiko().'" kamiFujin="'.$ninja->getJutsuFujin().'" kamiSusanoo="'.$ninja->getJutsuSusanoo().'" kamiKagutsuchi="'.$ninja->getJutsuKagutsuchi().'" classe="'.$ninja->getClasse().'" masque="'.$ninja->getMasque().'" couleurMasque="'.$ninja->getMasqueCouleur().'" detailMasque="'.$ninja->getMasqueDetail().'" costume="'.$ninja->getCostume().'" couleurCostume="'.$ninja->getCostumeCouleur().'" detailCostume="'.$ninja->getCostumeDetail().'" assassinnat="'.$ninja->getMissionAssassinnat().'" course="'.$ninja->getMissionCourse().'" langue="'.$request->getLocale().'" accomplissement="'.$ninja->getAccomplissement().'" age="'.$age.'" sexe="'.($user->getGender()=='f'?'F':"H").'" roles="'.implode('-', $user->getRoles()).'" clan="'.$clan.'"/>';
 
             // liste d'amis
@@ -803,14 +816,13 @@ class UnityController extends Controller
         }else{
             if(!empty($visiteur)){
                 $content .= '<login avatar="" id="'.($maxid+date("Hms")).'" maxid="'.$maxid.'"><![CDATA[Visiteur_'.date("Hms").']]></login>';
-                $content .= '<params force="4" vitesse="3" vie="0" chakra="0" experience="0" grade="0" bouleElementaire="0" doubleSaut="0" bouclierElementaire="0" marcherMur="0" deflagrationElementaire="0" marcherViteEau="0" changerObjet="0" multishoot="0" invisibleman="0" resistanceExplosion="0" phoenix="0" vague="0" pieux="0" tornade="0" teleportation="0" kusanagi="0" acierRenforce="0" chakraVie="0" kamiRaijin="0" kamiSarutahiko="0" kamiFujin="0" kamiSusanoo="0" kamiKagutsuchi="0" classe="" masque="0" couleurMasque="0" detailMasque="0" costume="0" couleurCostume="0" detailCostume="0" assassinnat="0" course="0" langue="'.$request->getLocale().'" accomplissement="0000000000000000000000000" age="10" sexe="H" roles="ROLE_USER" clan=""/>';
+                $content .= '<params force="4" vitesse="3" vie="0" chakra="0" experience="'.$XP_LEVEL_100.'" grade="0" bouleElementaire="0" doubleSaut="0" bouclierElementaire="0" marcherMur="0" deflagrationElementaire="0" marcherViteEau="0" changerObjet="0" multishoot="0" invisibleman="0" resistanceExplosion="0" phoenix="0" vague="0" pieux="0" tornade="0" teleportation="0" kusanagi="0" acierRenforce="0" chakraVie="0" kamiRaijin="0" kamiSarutahiko="0" kamiFujin="0" kamiSusanoo="0" kamiKagutsuchi="0" classe="" masque="0" couleurMasque="0" detailMasque="0" costume="0" couleurCostume="0" detailCostume="0" assassinnat="0" course="0" langue="'.$request->getLocale().'" accomplissement="0000000000000000000000000" age="10" sexe="H" roles="ROLE_USER" clan=""/>';
                 $retour	= '1';
             }
         }
         $content .= '<friends>';
         $content .= implode("", $friendsUsername);
         $content .= '</friends>';
-        $gameData = $this->get('ninjatooken_game.gamedata');
         $content .= preg_replace('/\r\n|\r|\n|\t|\s\s+/m','',$gameData->getRaw());
 
         $facebook = $this->get('fos_facebook.api');

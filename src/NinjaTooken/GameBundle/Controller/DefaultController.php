@@ -25,11 +25,10 @@ class DefaultController extends Controller
         $level = 0;
         $classe = "suiton";
         // les données du joueur connecté
-        $security = $this->get('security.context');
         $ninja = null;
-
-        if($security->isGranted('IS_AUTHENTICATED_FULLY') || $security->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
-            $user = $security->getToken()->getUser();
+        $authorizationChecker = $this->get('security.authorization_checker');
+        if($authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY') || $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') ){
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $ninja = $user->getNinja();
             if($ninja){
                 $c = $ninja->getClasse();

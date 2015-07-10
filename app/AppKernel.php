@@ -17,13 +17,17 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
+			new FOS\UserBundle\FOSUserBundle(),
+            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+            new FOS\FacebookBundle\FOSFacebookBundle(),
+
 			new Sonata\CoreBundle\SonataCoreBundle(),
 			new Sonata\BlockBundle\SonataBlockBundle(),
-			new Sonata\jQueryBundle\SonatajQueryBundle(),
-			new Sonata\AdminBundle\SonataAdminBundle(),
-            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
 			new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
+            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+			new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\IntlBundle\SonataIntlBundle(),
+
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
@@ -36,12 +40,11 @@ class AppKernel extends Kernel
             new NinjaTooken\CommonBundle\NinjaTookenCommonBundle(),
             new NinjaTooken\ChatBundle\NinjaTookenChatBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-			new FOS\UserBundle\FOSUserBundle(),
-            new FOS\FacebookBundle\FOSFacebookBundle(),
             new NinjaTooken\TournamentBundle\NinjaTookenTournamentBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+            $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
