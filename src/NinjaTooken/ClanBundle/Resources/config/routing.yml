@@ -1,73 +1,73 @@
 ninja_tooken_clans_old:
-    pattern:  /clan-ninja.php
+    path:  /clan-ninja.php
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
         route: ninja_tooken_clans
         permanent: true
 
 ninja_tooken_clans:
-    pattern:  /clan/{page}
+    path:  /clan/{page}
     defaults: { _controller: NinjaTookenClanBundle:Default:liste, page:1 }
     requirements:
         page:  \d*
 
 ninja_tooken_clan_old:
-    pattern:  /clan.php
+    path:  /clan.php
     defaults: { _controller: NinjaTookenClanBundle:Default:oldClan }
 
 ninja_tooken_clan:
-    pattern:  /clan/{clan_nom}
+    path:  /clan/{clan_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clan }
 
 ninja_tooken_clan_ajouter:
-    pattern:  /clan-ajouter
+    path:  /clan-ajouter
     defaults: { _controller: NinjaTookenClanBundle:Default:clanAjouter }
 
 ninja_tooken_clan_modifier:
-    pattern:  /clan/{clan_nom}/modifier
+    path:  /clan/{clan_nom}/modifier
     defaults: { _controller: NinjaTookenClanBundle:Default:clanModifier }
 
 ninja_tooken_clan_supprimer:
-    pattern:  /clan/{clan_nom}/supprimer
+    path:  /clan/{clan_nom}/supprimer
     defaults: { _controller: NinjaTookenClanBundle:Default:clanSupprimer }
 
 ninja_tooken_clan_editer_switch:
-    pattern:  /clan-editer-switch/{user_nom}
+    path:  /clan-editer-switch/{user_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanEditerSwitch }
 
 ninja_tooken_clan_destituer:
-    pattern:  /clan-destituer/{user_nom}
+    path:  /clan-destituer/{user_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurSupprimer }
 
 ninja_tooken_clan_destituer_shishou:
-    pattern:  /clan-destituer-shishou/{user_nom}
+    path:  /clan-destituer-shishou/{user_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurSupprimerShishou }
 
 ninja_tooken_clan_recruter:
-    pattern:  /compte/clan
+    path:  /compte/clan
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruter }
 
 ninja_tooken_clan_recruter_accepter:
-    pattern:  /compte/clan/accepter/{user_nom}/{recruteur_nom}
+    path:  /compte/clan/accepter/{user_nom}/{recruteur_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterAccepter }
 
 ninja_tooken_clan_recruter_refuser:
-    pattern:  /compte/clan/refuser/{user_nom}/{recruteur_nom}
+    path:  /compte/clan/refuser/{user_nom}/{recruteur_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterRefuser }
 
 ninja_tooken_clan_recruter_supprimer:
-    pattern:  /compte/clan/{user_nom}/supprimer
+    path:  /compte/clan/{user_nom}/supprimer
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterSupprimer }
 
 ninja_tooken_clan_recruter_ajouter:
-    pattern:  /compte/clan/{user_nom}
+    path:  /compte/clan/{user_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurRecruterAjouter }
 
 
 ninja_tooken_clan_postuler:
-    pattern:  /clan-postuler/{clan_nom}
+    path:  /clan-postuler/{clan_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurPostuler }
 
 ninja_tooken_clan_postuler_supprimer:
-    pattern:  /clan-postuler-supprimer/{clan_nom}
+    path:  /clan-postuler-supprimer/{clan_nom}
     defaults: { _controller: NinjaTookenClanBundle:Default:clanUtilisateurPostulerSupprimer }

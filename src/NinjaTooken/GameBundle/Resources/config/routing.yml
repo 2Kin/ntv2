@@ -1,13 +1,13 @@
 ninja_tooken_game_parties:
-    pattern:  /parties-en-cours
+    path:  /parties-en-cours
     defaults: { _controller: NinjaTookenGameBundle:Default:parties }
 
 ninja_tooken_game_calculateur:
-    pattern:  /calculateur-jutsus
+    path:  /calculateur-jutsus
     defaults: { _controller: NinjaTookenGameBundle:Default:calculateur }
 
 ninja_tooken_game_classement:
-    pattern:  /classement/{page}
+    path:  /classement/{page}
     defaults: { _controller: NinjaTookenGameBundle:Default:classement, page:1 }
     requirements:
         page:  \d*

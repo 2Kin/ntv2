@@ -1,7 +1,7 @@
 ninja_tooken_game_unity_update:
-    pattern:  /bundles/ninjatookengame/xml/game/update.php
+    path:  /bundles/ninjatookengame/xml/game/update.php
     defaults: { _controller: NinjaTookenGameBundle:Unity:update }
 
 ninja_tooken_game_unity_connect:
-    pattern:  /bundles/ninjatookengame/xml/game/connect.php
+    path:  /bundles/ninjatookengame/xml/game/connect.php
     defaults: { _controller: NinjaTookenGameBundle:Unity:connect }

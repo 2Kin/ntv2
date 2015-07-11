@@ -5,7 +5,7 @@ namespace NinjaTooken\UserBundle\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 use Sonata\UserBundle\Model\UserInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RegistrationFormType extends BaseType
 {
@@ -38,17 +38,15 @@ class RegistrationFormType extends BaseType
             ))
             ->add('gender', 'choice', array(
                 'choices' => array(
-                    'gender_male'   => UserInterface::GENDER_MAN,
-                    'gender_female' => UserInterface::GENDER_FEMALE
+                    UserInterface::GENDER_MAN => 'gender_male',
+                    UserInterface::GENDER_FEMALE => 'gender_female'
                 ),
-                'choices_as_values' => true,
                 'data' => UserInterface::GENDER_MAN,
                 'expanded' => true,
                 'label_attr' => array('class' => 'libelle')
             ))
             ->add('locale', 'choice', array(
-                'choices' => array('Français' => 'fr', 'English' => 'en'),
-                'choices_as_values' => true,
+                'choices' => array('fr' => 'Français', 'en' => 'English'),
                 'data' => 'fr',
                 'expanded' => true,
                 'label_attr' => array('class' => 'libelle')
@@ -64,7 +62,7 @@ class RegistrationFormType extends BaseType
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             "data_class" => "NinjaTooken\UserBundle\Entity\User",

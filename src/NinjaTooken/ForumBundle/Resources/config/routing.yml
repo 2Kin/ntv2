@@ -1,75 +1,75 @@
 ninja_tooken_message_old:
-    pattern:  /message.php
+    path:  /message.php
     defaults: { _controller: NinjaTookenForumBundle:Default:oldMessage }
 
 ninja_tooken_forum_old:
-    pattern:  /forum.php
+    path:  /forum.php
     defaults: { _controller: NinjaTookenForumBundle:Default:oldForum }
 
 ninja_tooken_event:
-    pattern:  /event/{page}
+    path:  /event/{page}
     defaults: { _controller: NinjaTookenForumBundle:Default:event, page:1 }
     requirements:
         page:  \d*
 
 ninja_tooken_event_ajouter:
-    pattern:  /event/ajouter/
+    path:  /event/ajouter/
     defaults: { _controller: NinjaTookenForumBundle:Default:eventAjouter }
 
 ninja_tooken_event_modifier:
-    pattern:  /event/{thread_nom}/modifier/
+    path:  /event/{thread_nom}/modifier/
     defaults: { _controller: NinjaTookenForumBundle:Default:eventModifier }
 
 ninja_tooken_forum:
-    pattern:  /forum
+    path:  /forum
     defaults: { _controller: NinjaTookenForumBundle:Default:forum }
 
 ninja_tooken_topic:
-    pattern:  /forum/{forum_nom}/{page}
+    path:  /forum/{forum_nom}/{page}
     defaults: { _controller: NinjaTookenForumBundle:Default:topic, page:1 }
     requirements:
         page:  \d*
 
 ninja_tooken_thread_ajouter:
-    pattern:  /forum/{forum_nom}/ajouter/
+    path:  /forum/{forum_nom}/ajouter/
     defaults: { _controller: NinjaTookenForumBundle:Default:threadAjouter }
 
 ninja_tooken_thread:
-    pattern:  /forum/{forum_nom}/{thread_nom}/{page}
+    path:  /forum/{forum_nom}/{thread_nom}/{page}
     defaults: { _controller: NinjaTookenForumBundle:Default:thread, page:1 }
     requirements:
         page:  \d*
 
 ninja_tooken_thread_modifier:
-    pattern:  /forum/{forum_nom}/{thread_nom}/modifier/
+    path:  /forum/{forum_nom}/{thread_nom}/modifier/
     defaults: { _controller: NinjaTookenForumBundle:Default:threadModifier }
 
 ninja_tooken_thread_supprimer:
-    pattern:  /forum/{forum_nom}/{thread_nom}/supprimer/
+    path:  /forum/{forum_nom}/{thread_nom}/supprimer/
     defaults: { _controller: NinjaTookenForumBundle:Default:threadSupprimer }
 
 ninja_tooken_thread_verrouiller:
-    pattern:  /forum/{forum_nom}/{thread_nom}/lock/
+    path:  /forum/{forum_nom}/{thread_nom}/lock/
     defaults: { _controller: NinjaTookenForumBundle:Default:threadVerrouiller }
 
 ninja_tooken_thread_postit:
-    pattern:  /forum/{forum_nom}/{thread_nom}/postit/
+    path:  /forum/{forum_nom}/{thread_nom}/postit/
     defaults: { _controller: NinjaTookenForumBundle:Default:threadPostit }
 
 ninja_tooken_comment_ajouter:
-    pattern:  /forum/{forum_nom}/{thread_nom}/ajouter/{page}
+    path:  /forum/{forum_nom}/{thread_nom}/ajouter/{page}
     defaults: { _controller: NinjaTookenForumBundle:Default:commentAjouter }
     requirements:
         page:  \d*
 
 ninja_tooken_comment_modifier:
-    pattern:  /forum/{forum_nom}/{thread_nom}/{comment_id}/modifier/{page}
+    path:  /forum/{forum_nom}/{thread_nom}/{comment_id}/modifier/{page}
     defaults: { _controller: NinjaTookenForumBundle:Default:commentModifier }
     requirements:
         page:  \d*
 
 ninja_tooken_comment_supprimer:
-    pattern:  /forum/{forum_nom}/{thread_nom}/{comment_id}/supprimer/{page}
+    path:  /forum/{forum_nom}/{thread_nom}/{comment_id}/supprimer/{page}
     defaults: { _controller: NinjaTookenForumBundle:Default:commentSupprimer }
     requirements:
         page:  \d*

@@ -3,14 +3,14 @@ ninja_tooken_tournament:
     prefix:   /
 
 root:
-    pattern: /
+    path: /
     defaults:
         _controller: FrameworkBundle:Redirect:urlRedirect
         path: /%locale%/
         permanent: true
 
 add_blocker:
-    pattern: /adimages/
+    path: /adimages/
     defaults: { _controller: NinjaTookenCommonBundle:Default:addBlocker }
 
 ninja_tooken_chat:
@@ -82,7 +82,7 @@ fos_user_register:
         _locale: fr
 
 nt_inscription:
-    pattern: /{_locale}/inscription.php
+    path: /{_locale}/inscription.php
     defaults:
         _controller: FrameworkBundle:Redirect:urlRedirect
         path: /%locale%/register
